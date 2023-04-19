@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.Stronghold;
+
 public class EntryMenuController {
-    public boolean isStayLoggedIn() {
-        return false;
+    public static boolean isStayLoggedIn() {
+        return Stronghold.isStayLoggedIn();
     }
 }

@@ -8,11 +8,15 @@ public class Stronghold {
     private final static ArrayList<User> users = new ArrayList<>();
     private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<Map> maps = new ArrayList<>();
+    private final static ArrayList<String> emails = new ArrayList<>();
+    private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
     private static User currentUser;
     private static Governance currentGovernance;
     private static boolean stayLoggedIn;
 
-    public static boolean isRepeatedEmail(String email) {
+    public static boolean emailExist(String currentEmail) {
+        for (String email : emails)
+            if (email.equals(currentEmail)) return true;
         return false;
     }
 
@@ -61,7 +65,34 @@ public class Stronghold {
         trades.add(trade);
     }
 
+    public static void addUser(User user) {
+        users.add(user);
+    }
+
+    public static void addEmail(String email) {
+        emails.add(email);
+    }
+
+    private static void addRecoveryQuestions() {
+        recoveryQuestions.add("What is my father’s name?");
+        recoveryQuestions.add("What was my first pet’s name?");
+        recoveryQuestions.add("What is my mother’s last name?");
+        recoveryQuestions.add("What is my best friend's name");
+    }
+
+    public static ArrayList<String> getRecoveryQuestions() {
+        return recoveryQuestions;
+    }
+
     public static String printTrades() {
         return null;
+    }
+
+    public static String printRecoveryQuestions() {
+        StringBuilder output = new StringBuilder();
+        int i = 1;
+        for (String recoveryQuestion : recoveryQuestions)
+            output.append(i++).append(recoveryQuestion).append("\n");
+        return output.toString();
     }
 }

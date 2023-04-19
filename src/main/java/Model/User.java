@@ -14,20 +14,20 @@ public class User {
     private final String recoveryAnswer;
     private String slogan;
 
-    public User(String username, String password, String nickname, String email, String recoveryQuestion, String recoveryAnswer) {
+    public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer) {
         this.username = username;
         this.password = password;
-        this.nickname = nickname;
         this.email = email;
+        this.nickname = nickname;
         this.recoveryQuestion = recoveryQuestion;
         this.recoveryAnswer = recoveryAnswer;
     }
 
-    public User(String username, String password, String nickname, String email, String recoveryQuestion, String recoveryAnswer, String slogan) {
+    public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer, String slogan) {
         this.username = username;
         this.password = password;
-        this.nickname = nickname;
         this.email = email;
+        this.nickname = nickname;
         this.recoveryQuestion = recoveryQuestion;
         this.recoveryAnswer = recoveryAnswer;
         this.slogan = slogan;
@@ -96,6 +96,7 @@ public class User {
     public void addTrade(Trade trade) {
         previousTrades.add(trade);
     }
+
     public static String printTrades() {
         return null;
     }

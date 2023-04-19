@@ -4,7 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum SignupMenuCommands {
-    COMMAND(""),
+    REGISTER("user create -u (?<username>\\S*) -p (?<password>\\S*) (?<passwordConfirmation>\\S*)" +
+            " –email (?<email>\\S*) -n (?<nickname>\\S*)( -s (?<slogan>\\S*))?"), //TODO: how to handle quotation
+    PICK_QUESTION(""),
+
     ;
 
     private final String regex;
