@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class Tile {
     private Texture texture = Texture.SAND;
-    private Building building;
+    private Building building = null;
     private ArrayList<Units> units = new ArrayList<>();
-    private AllResource resource;
-    private Tree tree;
+    private ArrayList<AllResource> resources = new ArrayList<>();
+    private Tree tree = null;
 
     public Texture getTexture() {
         return texture;
@@ -37,12 +37,12 @@ public class Tile {
         this.units = units;
     }
 
-    public AllResource getResource() {
-        return resource;
+    public ArrayList<AllResource> getResource() {
+        return resources;
     }
 
-    public void setResource(AllResource resource) {
-        this.resource = resource;
+    public void addResource(AllResource resource) {
+        this.resources.add(resource);
     }
 
     public Tree getTree() {
@@ -51,5 +51,16 @@ public class Tile {
 
     public void setTree(Tree tree) {
         this.tree = tree;
+    }
+
+    public void addUnit(Units unit) {
+        this.units.add(unit);
+    }
+
+    public void clear() {
+        this.building = null;
+        this.tree = null;
+        this.units = new ArrayList<>();
+        this.resources = new ArrayList<>();
     }
 }

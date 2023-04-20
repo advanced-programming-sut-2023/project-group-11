@@ -12,7 +12,12 @@ public enum Texture {
     GRASSLAND("grassland"),  // Unbuildable
     OIL("oil"),
     MARSH("marsh"),      // Jolge
-    WATER("water"),
+    SHALLOW_WATER("shallow water"),
+    RIVER("river"),
+    SMALL_LAKE("small lake"),
+    BIG_LAKE("big lake"),
+    SEA("sea"),
+    BEACH("beach"),
     ;
 
     private final String name;
@@ -21,7 +26,9 @@ public enum Texture {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    public static Texture getTextureByName(String name) {
+        for (Texture value : Texture.values())
+            if (value.name.equals(name)) return value;
+        return null;
     }
 }

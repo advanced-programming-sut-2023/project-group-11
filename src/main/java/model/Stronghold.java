@@ -95,4 +95,11 @@ public class Stronghold {
             output.append(i++).append(recoveryQuestion).append("\n");
         return output.toString();
     }
+
+    public static Map getMapByName(String name) {
+        for (Map map : maps)
+            if (map.getName().equals(name))
+                    return map;
+        return null;
+    }
 }
