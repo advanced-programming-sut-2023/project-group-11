@@ -5,22 +5,34 @@ import model.map.Map;
 import java.util.ArrayList;
 
 public class Stronghold {
+    private final static ArrayList<String> randomSlogans = new ArrayList<>();
     private final static ArrayList<User> users = new ArrayList<>();
     private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<Map> maps = new ArrayList<>();
-    private final static ArrayList<String> emails = new ArrayList<>();
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
     private static User currentUser;
     private static Governance currentGovernance;
     private static boolean stayLoggedIn;
 
-    public static boolean emailExist(String currentEmail) {
-        for (String email : emails)
-            if (email.equals(currentEmail)) return true;
+    static {
+        recoveryQuestions.add("What is my father's name?");
+        recoveryQuestions.add("What was my first pet's name?");
+        recoveryQuestions.add("What is my mother's last name?");
+        recoveryQuestions.add("What is my best friend's name?");
+        randomSlogans.add("I shall have my revenge, in this life or the next");
+        randomSlogans.add("You are clearly no match for my forces! Give in now, my friend!");
+        randomSlogans.add("A soldier's death... is a noble death.");
+    }
+
+    public static boolean emailExist(String email) {
+        for (User user : users)
+            if (user.getEmail().equals(email)) return true;
         return false;
     }
 
     public static User getUserByUsername(String username) {
+        for (User user : users)
+            if (user.getUsername().equals(username)) return user;
         return null;
     }
 
@@ -69,31 +81,28 @@ public class Stronghold {
         users.add(user);
     }
 
-    public static void addEmail(String email) {
-        emails.add(email);
-    }
-
-    private static void addRecoveryQuestions() {
-        recoveryQuestions.add("What is my father’s name?");
-        recoveryQuestions.add("What was my first pet’s name?");
-        recoveryQuestions.add("What is my mother’s last name?");
-        recoveryQuestions.add("What is my best friend's name");
-    }
-
     public static ArrayList<String> getRecoveryQuestions() {
         return recoveryQuestions;
     }
 
+    public static ArrayList<String> getRandomSlogans() {
+        return randomSlogans;
+    }
+
     public static String printTrades() {
-        return null;
+        String output = "";
+        int i = 1;
+        for (Trade trade : trades)
+            output += (i++) + "- " + trade.resourceType() + trade.resourceAmount() + trade.price() + trade.message() + "\n";
+        return output;
     }
 
     public static String printRecoveryQuestions() {
-        StringBuilder output = new StringBuilder();
+        String output = "";
         int i = 1;
         for (String recoveryQuestion : recoveryQuestions)
-            output.append(i++).append(recoveryQuestion).append("\n");
-        return output.toString();
+            output += (i++) + "- " + recoveryQuestion + "\n";
+        return output;
     }
 
     public static Map getMapByName(String name) {
@@ -102,4 +111,13 @@ public class Stronghold {
                     return map;
         return null;
     }
+
+    public static String printRandomSlogans() {
+        String output = "";
+        int i = 1;
+        for (String randomSlogan : randomSlogans)
+            output += (i++) + "- " + randomSlogan + "\n";
+        return output;
+    }
+
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import model.Stronghold;
+import model.User;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
@@ -8,40 +9,51 @@ import org.passay.PasswordGenerator;
 import view.Enums.Messages.SignupMenuMessages;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.regex.Matcher;
 
 public class SignupMenuController {
     public static SignupMenuMessages checkRegister(Matcher registerMatcher, String username) {
         String password = registerMatcher.group("password");
-        String passwordConfirmation = registerMatcher.group("passwordConfirmation");
-        String email = registerMatcher.group("email");
+        String passwordConfirmation = null;
+        if (!password.equals("random")) {
+            passwordConfirmation = Arrays.asList(password.split(" ")).get(1);
+            password = Arrays.asList(password.split(" ")).get(0);
+        }
+        String email = registerMatcher.group("email").toLowerCase();
         String nickname = registerMatcher.group("nickname");
         String slogan = registerMatcher.group("slogan");
         boolean hasSlogan = slogan != null;
         if (Controller.checkEmptyField(username, password, email, nickname, slogan, hasSlogan))
             return SignupMenuMessages.EMPTY_FIELD;
-        if (!Controller.isValidUsernameFormat(username)) return SignupMenuMessages.INVALID_USERNAME_FORMAT;
+        if (!Controller.isValidUsernameFormat(username))
+            return SignupMenuMessages.INVALID_USERNAME_FORMAT;
         if (Controller.usernameExist(username)) return SignupMenuMessages.USERNAME_EXIST;
-        if (!Controller.isStrongPassword(password) && !password.equals("random")) return findWeakPartOfPassword(password);
-        if (!Controller.correctPasswordConfirmation(password, passwordConfirmation))
-            return SignupMenuMessages.WRONG_PASSWORD_CONFIRMATION;
+        if (!Controller.isStrongPassword(password) && !password.equals("random"))
+            return findWeakPartOfPassword(password);
+        if (!password.equals("random"))
+            if (!Controller.correctPasswordConfirmation(password, passwordConfirmation))
+                return SignupMenuMessages.WRONG_PASSWORD_CONFIRMATION;
         if (Stronghold.emailExist(email)) return SignupMenuMessages.EMAIL_EXIST;
         if (!Controller.isValidEmailFormat(email)) return SignupMenuMessages.INVALID_EMAIL_FORMAT;
-        if (password.equals("random")) return null;//TODO
-//        if (hasSlogan)
-//            new User(username, password, email, nickname, );
-//        else new User(username,password,email,nickname,)
         return SignupMenuMessages.SUCCESS;
     }
 
-    public static SignupMenuMessages checkPickQuestion(Matcher pickQuestionMatcher, Matcher registerMatcher, String randomSlogan, String randomPassword) {
-        int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
-        String answer = pickQuestionMatcher.group("answer");
-        String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
+    public static SignupMenuMessages checkPickQuestion(Matcher pickQuestionMatcher, Matcher registerMatcher, String username, String password, String slogan) {
+        String email = registerMatcher.group("email").toLowerCase();
+        String nickname = registerMatcher.group("nickname");
         ArrayList<String> recoveryQuestions = Stronghold.getRecoveryQuestions();
+        int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
+        String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
+        String recoveryAnswer = pickQuestionMatcher.group("answer");
+        String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
         if (questionNumber > recoveryQuestions.size()) return SignupMenuMessages.INVALID_QUESTION_NUMBER;
-        if (!answer.equals(answerConfirmation)) return SignupMenuMessages.WRONG_ANSWER_CONFIRMATION;
+        if (!recoveryAnswer.equals(answerConfirmation)) return SignupMenuMessages.WRONG_ANSWER_CONFIRMATION;
+        if (slogan == null)
+            new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer);
+        else
+            new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
         return SignupMenuMessages.SUCCESS;
     }
 
@@ -49,8 +61,14 @@ public class SignupMenuController {
         return Stronghold.printRecoveryQuestions();
     }
 
-    public static String pickRandomSlogan() {
-        return null;
+    public static String printRandomSlogans() {
+        return Stronghold.printRandomSlogans();
+    }
+
+    public static String pickRandomSlogan(String number) {
+        ArrayList<String> randomSlogans = Stronghold.getRandomSlogans();
+        if (!number.matches("\\d+") || Integer.parseInt(number) > randomSlogans.size()) return null;
+        return randomSlogans.get(Integer.parseInt(number) - 1);
     }
 
     public static String generateRandomPassword() {
@@ -104,8 +122,5 @@ public class SignupMenuController {
         if (!password.matches("(?=.*[0-9]).*")) return SignupMenuMessages.NO_NUMBER;
         if (!password.matches("(?=.*[^A-Za-z0-9]).*")) return SignupMenuMessages.NO_SPECIAL;
         return null;
-    }
-    public static void createUser(){
-        //TODO
     }
 }

@@ -4,174 +4,101 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="People completed &amp; Packages' names corrected">
+    <list default="true" id="3c92baac-7779-4800-aa58-872070d87c47" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/EntryMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/EntryMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SignupMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SignupMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
-  <component name="ProjectId" id="2OT1PI8Q02cnKX6wIVxdqs3bExz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2OgtDSGjnFnTCOIKiqEzL2R3REx" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Sadegh/Documents/Codes/Java/Intellij/first",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
+}</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="project-group-11-fixed" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="" />
-      <created>1681569733616</created>
+      <changelist id="3c92baac-7779-4800-aa58-872070d87c47" name="Changes" comment="" />
+      <created>1681993932713</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1681569733616</updated>
-      <workItem from="1681569734978" duration="699000" />
-      <workItem from="1681570459059" duration="755000" />
-      <workItem from="1681589815991" duration="283000" />
-      <workItem from="1681590109649" duration="638000" />
-      <workItem from="1681673161965" duration="13000" />
-      <workItem from="1681762373421" duration="108000" />
-      <workItem from="1681762493580" duration="430000" />
-      <workItem from="1681817173483" duration="308000" />
-      <workItem from="1681827636254" duration="173000" />
-      <workItem from="1681827821204" duration="2159000" />
-      <workItem from="1681834134313" duration="2082000" />
-      <workItem from="1681917069446" duration="178000" />
-      <workItem from="1681917262169" duration="77000" />
-      <workItem from="1681926104153" duration="1298000" />
-      <workItem from="1681927439246" duration="682000" />
-      <workItem from="1681928598366" duration="95000" />
-      <workItem from="1681929503222" duration="14129000" />
-      <workItem from="1681999734987" duration="18626000" />
+      <updated>1681993932713</updated>
+      <workItem from="1681993937273" duration="23755000" />
     </task>
-    <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
-      <created>1681570516912</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1681570516912</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Replacing Phase 0's Files second try">
-      <created>1681570555346</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1681570555346</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Add test Folder">
-      <created>1681590276999</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1681590276999</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Solve plugins problems">
-      <created>1681832494809</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1681832494809</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Add Gson Lib">
-      <created>1681852319346</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1681852319346</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Add JArgs lib &amp; change JUnit jupiter">
-      <created>1681932295836</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1681932295837</updated>
-    </task>
-    <task id="LOCAL-00007" summary="People completed &amp; Packages' names corrected">
-      <created>1681941438123</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1681941438123</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Map edited &amp; Map edit menu completed upto drop cliff(rock)">
-      <created>1682026744751</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1682026744752</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Replacing Phase 0's Files" />
-    <MESSAGE value="Replacing Phase 0's Files second try" />
-    <MESSAGE value="Add test Folder" />
-    <MESSAGE value="Solve plugins problems" />
-    <MESSAGE value="Add Gson Lib" />
-    <MESSAGE value="Add JArgs lib &amp; change JUnit jupiter" />
-    <MESSAGE value="People completed &amp; Packages' names corrected" />
-    <MESSAGE value="Map edited &amp; Map edit menu completed upto drop cliff(rock)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Map edited &amp; Map edit menu completed upto drop cliff(rock)" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/view/SignupMenu.java</url>
+          <line>133</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

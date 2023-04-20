@@ -4,10 +4,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum SignupMenuCommands {
-    REGISTER("user create -u (?<username>\\S*) -p (?<password>\\S*) (?<passwordConfirmation>\\S*)" +
-            " –email (?<email>\\S*) -n (?<nickname>\\S*)( -s (?<slogan>\\S*))?"), //TODO: how to handle quotation
-    PICK_QUESTION(""),
-
+    REGISTER("user create" +
+            "(?:( (?<usernameTag>-u) (?<username>\".*?[^\\\\]\"|(\\\"|[^\" ])*))" +
+            "|( (?<passwordTag>-p) (?<password>random|\\S* \\S*))" +
+            "|( (?<emailTag>-e) (?<email>\\S*))" +
+            "|( (?<nicknameTag>-n) (?<nickname>\".*?[^\\\\]\"|(\\\"|[^\" ])*))" +
+            "|( (?<sloganTag>-s) (?<slogan>\".*?[^\\\\]\"|(\\\"|[^\" ])*))?){4,5}"),
+    PICK_QUESTION("question pick( " +
+            "(?<questionNumberTag>-q) (?<questionNumber>\\d+)" +
+            "|( (?<answerTag>-a) (?<answer>\".*?[^\\\\]\"|(\\\"|[^\" ])*))" +
+            "|( (?<confirmationTag>-c) (?<answerConfirmation>\".*?[^\\\\]\"|(\\\"|[^\" ])*))){3}"),
     ;
 
     private final String regex;

@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 
 public class User {
-    private final static ArrayList<String> randomSlogans = new ArrayList<>();
     private final ArrayList<Trade> previousTrades = new ArrayList<>();
     private int highScore;
     private String username;
@@ -21,6 +20,7 @@ public class User {
         this.nickname = nickname;
         this.recoveryQuestion = recoveryQuestion;
         this.recoveryAnswer = recoveryAnswer;
+        Stronghold.addUser(this);
     }
 
     public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer, String slogan) {
@@ -31,6 +31,7 @@ public class User {
         this.recoveryQuestion = recoveryQuestion;
         this.recoveryAnswer = recoveryAnswer;
         this.slogan = slogan;
+        Stronghold.addUser(this);
     }
 
     public String getNickname() {
@@ -71,10 +72,6 @@ public class User {
 
     public void setSlogan(String slogan) {
         this.slogan = slogan;
-    }
-
-    public static ArrayList<String> getRandomSlogans() {
-        return randomSlogans;
     }
 
     public int getHighScore() {

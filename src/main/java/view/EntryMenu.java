@@ -13,19 +13,19 @@ public class EntryMenu {
         if (EntryMenuController.isStayLoggedIn())
             MainMenu.run();
         else {
-            //TODO: welcome, wherever you want to exit print end
-            System.out.println("Enter 1 or 2 to choose the menu you want or \"end\" to quit");
-            System.out.println("1. Signup menu");
-            System.out.println("2. login menu");
+            System.out.println("Welcome to Stronghold Crusader game!");
+            System.out.println("wherever you want to exit print end!");
             while (true) {
+                System.out.println("Enter 1 or 2 to choose the menu you want or \"end\" to quit");
+                System.out.println("1. Signup menu");
+                System.out.println("2. login menu");
                 String menuNumber = scanner.nextLine();
-                if (menuNumber.matches("[1-2]"))
-                    switch (Integer.parseInt(menuNumber)) {
-                        case 1 -> SignupMenu.run();
-                        case 2 -> LoginMenu.run();
-                    }
-                else if (menuNumber.equals("end")) break;
-                else System.out.println("only 1 and 2 is acceptable!");
+                switch (menuNumber) {
+                    case "end" -> System.exit(0);
+                    case "1" -> SignupMenu.run();
+                    case "2" -> LoginMenu.run();
+                    default -> System.out.println("only 1 and 2 is acceptable!");
+                }
             }
         }
     }
