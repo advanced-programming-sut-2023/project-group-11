@@ -39,7 +39,7 @@ public class MapEditMenu {
                 else if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.CLEAR)) != null)
                     clear(matcher);
                 else if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.DROP_CLIFF)) != null)
-                    checkDropRock(matcher);
+                    checkDropCliff(matcher);
                 else if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.DROP_TREE)) != null)
                     checkDropTree(matcher);
                 else if (input.matches("save")) {
@@ -57,6 +57,7 @@ public class MapEditMenu {
         switch (mapEditMenuMessage) {
             case SUCCESS -> System.out.println("Tile with x=" + matcher.group("x") +
                     " and y=" + matcher.group("y") + " successfully cleared!");
+            case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinate!");
         }
     }
@@ -77,14 +78,15 @@ public class MapEditMenu {
         }
     }
 
-    private static void checkDropRock(Matcher matcher) {
-        mapEditMenuMessage = MapEditMenuController.checkDropRock(matcher);
+    private static void checkDropCliff(Matcher matcher) {
+        mapEditMenuMessage = MapEditMenuController.checkDropCliff(matcher);
 
         switch (mapEditMenuMessage) {
             case SUCCESS -> System.out.println("Rock successfully placed in x=" + matcher.group("x") +
                     " and y=" + matcher.group("y") + "!");
             case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INVALID_COORDINATE -> System.out.println("Invalid coordinates!");
+            case INVALID_PLACE_TO_DEPLOY -> System.out.println("Invalid place to deploy!");
             case INVALID_DIRECTION -> System.out.println("Invalid direction!");
         }
     }

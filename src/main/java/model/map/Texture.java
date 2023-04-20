@@ -31,4 +31,13 @@ public enum Texture {
             if (value.name.equals(name)) return value;
         return null;
     }
+
+    public boolean isWater() {
+        return this.equals(OIL) || this.equals(MARSH) || this.equals(SMALL_LAKE) || this.equals(BIG_LAKE) ||
+                this.equals(SEA) || this.equals(SHALLOW_WATER) || this.equals(RIVER) || this.equals(BEACH);
+    }
+
+    public boolean isStone() {
+        return this.equals(ROCK) || this.equals(STONE) || this.equals(CLIFF);
+    }
 }

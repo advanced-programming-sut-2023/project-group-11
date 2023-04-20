@@ -15,7 +15,9 @@ public enum Tree {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    public static Tree getTreeByName(String name) {
+        for (Tree value : Tree.values())
+            if (value.name.equals(name)) return value;
+        return null;
     }
 }

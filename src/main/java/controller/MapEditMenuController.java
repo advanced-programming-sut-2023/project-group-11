@@ -3,12 +3,28 @@ package controller;
 import model.Stronghold;
 import model.map.Map;
 import model.map.Texture;
+import model.map.Tree;
 import view.Enums.Messages.MapEditMenuMessages;
 
+import java.util.Random;
 import java.util.regex.Matcher;
 
 public class MapEditMenuController {
     private static Map currentMap;
+
+    public static MapEditMenuMessages clear(Matcher matcher) {
+        if (matcher.group("x") == null || matcher.group("y") == null)
+            return MapEditMenuMessages.INVALID_COMMAND;
+
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+
+        if (x >= currentMap.getSize() || x < 0 || y >= currentMap.getSize() || y < 0)
+            return MapEditMenuMessages.INVALID_COORDINATE;
+
+        currentMap.getTile(x, y).clear();
+        return MapEditMenuMessages.SUCCESS;
+    }
 
     public static MapEditMenuMessages checkSetTexture(Matcher matcher) {
         if (matcher.group("x") != null && matcher.group("y") != null && matcher.group("type") != null) {
@@ -18,6 +34,46 @@ public class MapEditMenuController {
                 matcher.group("type1") != null) {
             return setTextureSecondType(matcher);
         } else return MapEditMenuMessages.INVALID_COMMAND;
+    }
+
+    public static MapEditMenuMessages checkDropCliff(Matcher matcher) {
+        String direction = matcher.group("direction");
+
+        if (matcher.group("x") == null || matcher.group("y") == null || direction == null)
+            return MapEditMenuMessages.INVALID_COMMAND;
+
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+
+        if (x >= currentMap.getSize() || x < 0 || y >= currentMap.getSize() || y < 0)
+            return MapEditMenuMessages.INVALID_COORDINATE;
+        else if (x >= currentMap.getSize() - 4 || y >= currentMap.getSize() - 4 || isSthInArea(x, y) || notSuitableLand(x, y))
+            return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+        else if (!(direction.equals("r") || direction.equals("u") || direction.equals("l") || direction.equals("d") || direction.equals("random")))
+            return MapEditMenuMessages.INVALID_DIRECTION;
+
+        dropCliff(x, y, direction);
+
+        return MapEditMenuMessages.SUCCESS;
+    }
+
+    public static MapEditMenuMessages checkDropTree(Matcher matcher) {
+        Tree tree = Tree.getTreeByName(matcher.group("name"));
+
+        if (matcher.group("x") == null || matcher.group("y") == null || tree == null)
+            return MapEditMenuMessages.INVALID_COMMAND;
+
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+
+        if (x >= currentMap.getSize() || x < 0 || y >= currentMap.getSize() || y < 0)
+            return MapEditMenuMessages.INVALID_COORDINATE;
+        else if (currentMap.getTile(x, y).isFull() || currentMap.getTile(x, y).getTexture().isWater() ||
+                currentMap.getTile(x, y).getTexture().isStone() || currentMap.getTile(x, y).getTexture().equals(Texture.IRON))
+            return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+
+        currentMap.getTile(x, y).setTree(tree);
+        return MapEditMenuMessages.SUCCESS;
     }
 
     private static MapEditMenuMessages setTextureSecondType(Matcher matcher) {
@@ -81,23 +137,50 @@ public class MapEditMenuController {
         return MapEditMenuMessages.SUCCESS;
     }
 
-    public static MapEditMenuMessages clear(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
+    private static void dropCliff(int x, int y, String direction) {
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 5; j++)
+                currentMap.getTile(x +i, y +j).setTexture(Texture.CLIFF);
 
-        if (x >= currentMap.getSize() || x < 0 || y >= currentMap.getSize() || y < 0)
-            return MapEditMenuMessages.INVALID_COORDINATE;
+        if (direction.equals("random")) {
+            String[] directions = {"r", "u", "l", "d"};
+            direction = directions[new Random().nextInt(directions.length)];
+        }
 
-        currentMap.getTile(x, y).clear();
-        return MapEditMenuMessages.SUCCESS;
+        switch (direction) {
+            case "r" -> {
+                currentMap.getTile(x +4, y +1).setTexture(Texture.SAND);
+                currentMap.getTile(x +4, y +3).setTexture(Texture.SAND);
+            }
+            case "u" -> {
+                currentMap.getTile(x +1, y).setTexture(Texture.SAND);
+                currentMap.getTile(x +3, y).setTexture(Texture.SAND);
+
+            }
+            case "l" -> {
+                currentMap.getTile(x, y +1).setTexture(Texture.SAND);
+                currentMap.getTile(x, y +3).setTexture(Texture.SAND);
+            }
+            case "d" -> {
+                currentMap.getTile(x +1, y +4).setTexture(Texture.SAND);
+                currentMap.getTile(x +3, y +4).setTexture(Texture.SAND);
+            }
+        }
     }
 
-    public static MapEditMenuMessages checkDropRock(Matcher matcher) {
-        return null;
+    private static boolean notSuitableLand(int x, int y) {
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 5; j++)
+                if (currentMap.getTile(x+i, y+j).getTexture().isWater() ||
+                        currentMap.getTile(x+i, y+j).getTexture().equals(Texture.CLIFF)) return true;
+        return false;
     }
 
-    public static MapEditMenuMessages checkDropTree(Matcher matcher) {
-        return null;
+    private static boolean isSthInArea(int x, int y) {
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 5; j++)
+                if (currentMap.getTile(x+i, y+j).isFull()) return true;
+        return false;
     }
 
     public static String getMapsList() {

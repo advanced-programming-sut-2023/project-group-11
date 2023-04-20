@@ -63,4 +63,8 @@ public class Tile {
         this.units = new ArrayList<>();
         this.resources = new ArrayList<>();
     }
+
+    public boolean isFull() {
+        return building != null || units.size() != 0 || tree != null;
+    }
 }
