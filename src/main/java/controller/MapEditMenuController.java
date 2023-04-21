@@ -197,8 +197,7 @@ public class MapEditMenuController {
     }
 
     public static void saveMap() {
-        //TODO: save map in dataBase
-
+        Utils.updateDatabase(Utils.makeJsonArrayFromArraylist(Stronghold.getMaps()), "maps");
     }
 
     public static void setCurrentMap(String mapName) {
@@ -211,6 +210,6 @@ public class MapEditMenuController {
 
     public static void setNewMapAsCurrentMap(String mapName, int size) {
         currentMap = new Map(mapName, size);
-        Utils.addToDatabase(currentMap, Stronghold.getJsonMapList(), "maps");
+        Utils.updateDatabase(Utils.makeJsonArrayFromArraylist(Stronghold.getMaps()), "maps");
     }
 }

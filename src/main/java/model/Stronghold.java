@@ -16,7 +16,6 @@ public class Stronghold {
     private static Governance currentGovernance;
     private static boolean stayLoggedIn;
     private final static JSONArray JSON_USER_LIST = new JSONArray();
-    private final static JSONArray JSON_MAP_LIST = new JSONArray();
 
 
     static {
@@ -85,10 +84,6 @@ public class Stronghold {
         maps.add(map);
     }
 
-    public static void addMapToMapList(JSONObject map) {
-        JSON_MAP_LIST.add(map);
-    }
-
     public static void addTrade(Trade trade) {
         trades.add(trade);
     }
@@ -142,9 +137,5 @@ public class Stronghold {
 
     public static void addUserToUserList(JSONObject user) {
         JSON_USER_LIST.add(user);
-    }
-
-    public static JSONArray getJsonMapList() {
-        return JSON_USER_LIST;
     }
 }

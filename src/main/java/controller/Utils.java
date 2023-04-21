@@ -5,6 +5,7 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Stronghold;
+import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.simple.JSONArray;
 
@@ -12,6 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Utils {
@@ -79,8 +81,7 @@ public class Utils {
         return captcha.toString();
     }
 
-    public static void addToDatabase(Object object, JSONArray jsonArray, String field) {
-        jsonArray.add(object);
+    public static void updateDatabase(JSONArray jsonArray, String field) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         try (FileWriter usersDatabase = new FileWriter("src/main/resources/" + field + ".json")) {
             gson.toJson(jsonArray, usersDatabase);
@@ -90,4 +91,9 @@ public class Utils {
     }
 
 
+    public static JSONArray makeJsonArrayFromArraylist(ArrayList<Map> maps) {
+        JSONArray JsonArray = new JSONArray();
+        JsonArray.addAll(Stronghold.getMaps());
+        return JsonArray;
+    }
 }

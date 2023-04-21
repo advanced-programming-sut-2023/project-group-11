@@ -130,6 +130,6 @@ public class SignupMenuController {
         String recoveryAnswer = pickQuestionMatcher.group("answer");
         String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
         JSONArray jsonUserList = Stronghold.getJsonUserList();
-        Utils.addToDatabase(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan), jsonUserList, "users");
+        Utils.updateDatabase(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan), jsonUserList, "users");
     }
 }
