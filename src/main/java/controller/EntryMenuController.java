@@ -2,6 +2,8 @@ package controller;
 
 import model.Stronghold;
 import model.User;
+import model.map.Map;
+import model.map.Tile;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,7 +15,7 @@ import java.io.IOException;
 public class EntryMenuController {
     public static void fillAllFieldsWithPreviousData() {
         initializeFields("users");
-
+        initializeFields("maps");
     }
 
     private static void initializeFields(String field) {
@@ -38,7 +40,16 @@ public class EntryMenuController {
         String recoveryAnswer = (String) user.get("recoveryAnswer");
         String slogan = (String) user.get("slogan");
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
-        Stronghold.addUsersToUserList(user);
+        Stronghold.addUserToUserList(user);
+    }
+
+    private static void parseMapObject(JSONObject map) {
+        String name = (String) map.get("name");
+        int size = (Integer) map.get("size");
+        Tile[][] mapTiles = (Tile[][]) map.get("map");
+
+        new Map(name, mapTiles, size);
+        Stronghold.addMapToMapList(map);
     }
 
     public static boolean isStayLoggedIn() {

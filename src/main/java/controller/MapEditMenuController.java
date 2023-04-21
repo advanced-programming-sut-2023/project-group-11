@@ -198,9 +198,19 @@ public class MapEditMenuController {
 
     public static void saveMap() {
         //TODO: save map in dataBase
+
     }
 
     public static void setCurrentMap(String mapName) {
-        MapEditMenuController.currentMap = Stronghold.getMapByName(mapName);
+        currentMap = Stronghold.getMapByName(mapName);
+    }
+
+    public static Map getCurrentMap() {
+        return currentMap;
+    }
+
+    public static void setNewMapAsCurrentMap(String mapName, int size) {
+        currentMap = new Map(mapName, size);
+        Utils.addToDatabase(currentMap, Stronghold.getJsonMapList(), "maps");
     }
 }

@@ -16,17 +16,32 @@ public class MapEditMenu {
         String input;
         Matcher matcher;
 
-        while (true){
+        while (true) {
             System.out.println("Maps:");
             System.out.println(MapEditMenuController.getMapsList());
-            System.out.println("Please choose your menu name (type \"exit\" for going back to main menu):");
+            System.out.println("Please choose your menu name:");
+            System.out.println("(Type \"exit\" for going back to main menu)");
+            System.out.println("(Type \"new map\" for making a new map)");
 
             input = scanner.nextLine();
 
-            if(input.matches("exit")) return;
+            if (input.matches("exit")) return;
             else if (MapEditMenuController.isMapName(input))
                 MapEditMenuController.setCurrentMap(input);
-            else {
+            else if (input.matches("new map")) {
+                System.out.println("Enter the map's name:");
+                String mapName = scanner.nextLine();
+                if (MapEditMenuController.isMapName(mapName)) {
+                    System.out.println("Repeated map name! Try again!");
+                    continue;
+                }
+                int size = Integer.parseInt(scanner.nextLine());
+                if (size <= 10 || size >= 500) {
+                    System.out.println("Invalid size! Try again!");
+                    continue;
+                }
+                MapEditMenuController.setNewMapAsCurrentMap(mapName, size);
+            } else {
                 System.out.println("Invalid input! Try again!");
                 continue;
             }

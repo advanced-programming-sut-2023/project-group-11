@@ -79,13 +79,15 @@ public class Utils {
         return captcha.toString();
     }
 
-    public static void addToDatabase(Object object, JSONArray jsonArray, String path) {
+    public static void addToDatabase(Object object, JSONArray jsonArray, String field) {
         jsonArray.add(object);
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        try (FileWriter usersDatabase = new FileWriter("src/main/resources/" + path + ".json")) {
+        try (FileWriter usersDatabase = new FileWriter("src/main/resources/" + field + ".json")) {
             gson.toJson(jsonArray, usersDatabase);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 }
