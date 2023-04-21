@@ -78,6 +78,9 @@ public class Utils {
         return captcha.toString();
     }
 
+    public static boolean checkCaptchaConfirmation(int enteredCaptcha, int captchaNumber) {
+        return captchaNumber == enteredCaptcha;
+    }
     public static void updateDatabase(String field) {
         JSONArray jsonArray = makeJsonArrayFromArraylist(field);
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();

@@ -18,11 +18,11 @@ public class User {
 
     public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer, String slogan) {
         this.username = username;
-        this.password = Utils.encryptField(password);
+        this.password = password;
         this.email = email;
         this.nickname = nickname;
         this.recoveryQuestion = recoveryQuestion;
-        this.recoveryAnswer = Utils.encryptField(recoveryAnswer);
+        this.recoveryAnswer = recoveryAnswer;
         this.slogan = slogan;
         Stronghold.addUser(this);
     }

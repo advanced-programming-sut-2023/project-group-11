@@ -165,15 +165,15 @@ public class SignupMenu {
     private static boolean checkCaptchaConfirmation() {
         Scanner scanner = EntryMenu.getScanner();
         while (true) {
+            System.out.println("Enter the captcha below!");
             int captchaNumber = new Random().nextInt(1000, 100000000);
-            System.out.println("Enter the captcha below to complete your registration!");
             System.out.println(Utils.generateCaptcha(captchaNumber));
             String enteredCaptcha = scanner.nextLine();
-            if (SignupMenuCommands.getMatcher(enteredCaptcha, SignupMenuCommands.END) != null) System.exit(0);
-            else if (SignupMenuCommands.getMatcher(enteredCaptcha, SignupMenuCommands.BACK) != null) return false;
+            if (enteredCaptcha.equals("end")) System.exit(0);
+            else if (enteredCaptcha.equals("back")) return false;
             else if (enteredCaptcha.equals("generate another captcha")) continue;
             else if (enteredCaptcha.matches("\\d+")) {
-                if (SignupMenuController.checkCaptchaConfirmation(Integer.parseInt(enteredCaptcha), captchaNumber))
+                if (Utils.checkCaptchaConfirmation(Integer.parseInt(enteredCaptcha), captchaNumber))
                     return true;
                 else System.out.println("Wrong captcha confirmation!");
             } else System.out.println("Wrong captcha confirmation!");
