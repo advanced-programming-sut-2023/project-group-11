@@ -12,31 +12,31 @@ import java.io.IOException;
 
 public class EntryMenuController {
     public static void fillAllFieldsWithPreviousData() {
-        initializeUsers();
+        initializeFields("users");
 
     }
 
-    private static void initializeUsers() {
+    private static void initializeFields(String field) {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("src/main/resources/users.json")) {
-            JSONArray userList = (JSONArray) jsonParser.parse(reader);
-            userList.forEach(user -> parseUserObject((JSONObject) user));
+        try (FileReader reader = new FileReader("src/main/resources/" + field + ".json")) {
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+            switch (field) {
+                case "users" -> jsonArray.forEach(user -> parseUserObject((JSONObject) user));
+                case "maps" -> jsonArray.forEach(map -> parseMapObject((JSONObject) map));
+            }
         } catch (IOException | ParseException ignored) {
         }
-
     }
 
     private static void parseUserObject(JSONObject user) {
-        //Get user object within list
-        JSONObject userObject = (JSONObject) user.get("user");
-
-        String username = (String) userObject.get("username");
-        String password = (String) userObject.get("password");
-        String nickname = (String) userObject.get("nickname");
-        String email = (String) userObject.get("email");
-        String recoveryQuestion = (String) userObject.get("recoveryQuestion");
-        String recoveryAnswer = (String) userObject.get("recoveryAnswer");
-        String slogan = (String) userObject.get("slogan");
+        //Get user fields
+        String username = (String) user.get("username");
+        String password = (String) user.get("password");
+        String nickname = (String) user.get("nickname");
+        String email = (String) user.get("email");
+        String recoveryQuestion = (String) user.get("recoveryQuestion");
+        String recoveryAnswer = (String) user.get("recoveryAnswer");
+        String slogan = (String) user.get("slogan");
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
         Stronghold.addUsersToUserList(user);
     }

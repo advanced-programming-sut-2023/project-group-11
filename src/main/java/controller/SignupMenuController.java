@@ -1,19 +1,14 @@
 package controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import model.Stronghold;
 import model.User;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
 import view.enums.messages.SignupMenuMessages;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -123,19 +118,6 @@ public class SignupMenuController {
         return null;
     }
 
-    public static void addToDatabase(User user) {
-        JSONObject userObject = new JSONObject();
-        JSONArray jsonUserList = Stronghold.getJsonUserList();
-        userObject.put("user", user);
-        jsonUserList.add(userObject);
-        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        try (FileWriter usersDatabase = new FileWriter("src/main/resources/users.json")) {
-            gson.toJson(jsonUserList, usersDatabase);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static boolean checkCaptchaConfirmation(int enteredCaptcha, int captchaNumber) {
         return captchaNumber == enteredCaptcha;
     }
@@ -147,6 +129,7 @@ public class SignupMenuController {
         int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
         String recoveryAnswer = pickQuestionMatcher.group("answer");
         String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
-        addToDatabase(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan));
+        JSONArray jsonUserList = Stronghold.getJsonUserList();
+        Utils.addToDatabase(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan), jsonUserList, "users");
     }
 }
