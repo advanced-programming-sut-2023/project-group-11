@@ -1,6 +1,6 @@
 package model.buildings;
 
-import model.buildings.Enums.FillerType;
+import model.buildings.enums.FillerType;
 
 public class Filler extends Building{
 // wall stair tent ...

@@ -1,13 +1,9 @@
 package model;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import model.map.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Stronghold {
@@ -19,7 +15,7 @@ public class Stronghold {
     private static User currentUser;
     private static Governance currentGovernance;
     private static boolean stayLoggedIn;
-    private final static JSONArray userList = new JSONArray();
+    private final static JSONArray JSON_USER_LIST = new JSONArray();
 
     static {
         recoveryQuestions.add("What is my father's name?");
@@ -91,18 +87,6 @@ public class Stronghold {
         users.add(user);
     }
 
-    public static void registerUser(User user) {
-        JSONObject userObject = new JSONObject();
-        userObject.put("user", user);
-        userList.add(userObject);
-        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        try (FileWriter usersDatabase = new FileWriter("users.json")) {
-            gson.toJson(userList, usersDatabase);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static ArrayList<String> getRecoveryQuestions() {
         return recoveryQuestions;
     }
@@ -140,5 +124,13 @@ public class Stronghold {
         for (String randomSlogan : randomSlogans)
             output += (i++) + "- " + randomSlogan + "\n";
         return output;
+    }
+
+    public static JSONArray getJsonUserList() {
+        return JSON_USER_LIST;
+    }
+
+    public static void addUsersToUserList(JSONObject user) {
+        JSON_USER_LIST.add(user);
     }
 }

@@ -1,7 +1,7 @@
 package model.people;
 
 import model.Stronghold;
-import model.people.Enums.MeleeTroops;
+import model.people.enums.MeleeTroops;
 
 public class MeleeTroop extends Troops{
     private final MeleeTroops type;

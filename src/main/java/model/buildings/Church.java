@@ -1,6 +1,6 @@
 package model.buildings;
 
-import model.buildings.Enums.ChurchType;
+import model.buildings.enums.ChurchType;
 
 public class Church extends Building{
 

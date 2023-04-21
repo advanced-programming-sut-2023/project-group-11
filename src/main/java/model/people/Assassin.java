@@ -1,9 +1,9 @@
 package model.people;
 
 import model.Stronghold;
-import model.people.Enums.Damage;
-import model.people.Enums.Hp;
-import model.people.Enums.Speed;
+import model.people.enums.Damage;
+import model.people.enums.Hp;
+import model.people.enums.Speed;
 
 public class Assassin extends Troops {
     private boolean revealed = false;

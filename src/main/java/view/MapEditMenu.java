@@ -1,8 +1,8 @@
 package view;
 
 import controller.MapEditMenuController;
-import view.Enums.Commands.MapEditMenuCommands;
-import view.Enums.Messages.MapEditMenuMessages;
+import view.enums.commands.MapEditMenuCommands;
+import view.enums.messages.MapEditMenuMessages;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

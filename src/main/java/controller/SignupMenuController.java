@@ -1,13 +1,19 @@
 package controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.Stronghold;
 import model.User;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
-import view.Enums.Messages.SignupMenuMessages;
+import view.enums.messages.SignupMenuMessages;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -25,18 +31,18 @@ public class SignupMenuController {
         String nickname = registerMatcher.group("nickname");
         String slogan = registerMatcher.group("slogan");
         boolean hasSlogan = slogan != null;
-        if (Controller.checkEmptyField(username, password, email, nickname, slogan, hasSlogan))
+        if (Utils.checkEmptyField(username, password, email, nickname, slogan, hasSlogan))
             return SignupMenuMessages.EMPTY_FIELD;
-        if (!Controller.isValidUsernameFormat(username))
+        if (!Utils.isValidUsernameFormat(username))
             return SignupMenuMessages.INVALID_USERNAME_FORMAT;
-        if (Controller.usernameExist(username)) return SignupMenuMessages.USERNAME_EXIST;
-        if (!Controller.isStrongPassword(password) && !password.equals("random"))
+        if (Utils.usernameExist(username)) return SignupMenuMessages.USERNAME_EXIST;
+        if (!Utils.isStrongPassword(password) && !password.equals("random"))
             return findWeakPartOfPassword(password);
         if (!password.equals("random"))
-            if (!Controller.correctPasswordConfirmation(password, passwordConfirmation))
+            if (!Utils.correctPasswordConfirmation(password, passwordConfirmation))
                 return SignupMenuMessages.WRONG_PASSWORD_CONFIRMATION;
         if (Stronghold.emailExist(email)) return SignupMenuMessages.EMAIL_EXIST;
-        if (!Controller.isValidEmailFormat(email)) return SignupMenuMessages.INVALID_EMAIL_FORMAT;
+        if (!Utils.isValidEmailFormat(email)) return SignupMenuMessages.INVALID_EMAIL_FORMAT;
         return SignupMenuMessages.SUCCESS;
     }
 
@@ -50,7 +56,7 @@ public class SignupMenuController {
         String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
         if (questionNumber > recoveryQuestions.size()) return SignupMenuMessages.INVALID_QUESTION_NUMBER;
         if (!recoveryAnswer.equals(answerConfirmation)) return SignupMenuMessages.WRONG_ANSWER_CONFIRMATION;
-        Stronghold.registerUser(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan));
+        registerUser(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan));
         return SignupMenuMessages.SUCCESS;
     }
 
@@ -108,7 +114,7 @@ public class SignupMenuController {
 
     public static String generateRandomUsername(String username) {
         Random random = new Random();
-        while (Controller.usernameExist(username)) username += random.nextInt(10);
+        while (Utils.usernameExist(username)) username += random.nextInt(10);
         return username;
     }
 
@@ -119,5 +125,21 @@ public class SignupMenuController {
         if (!password.matches("(?=.*[0-9]).*")) return SignupMenuMessages.NO_NUMBER;
         if (!password.matches("(?=.*[^A-Za-z0-9]).*")) return SignupMenuMessages.NO_SPECIAL;
         return null;
+    }
+
+    public static void registerUser(User user) {
+        JSONObject userObject = new JSONObject();
+        JSONArray jsonUserList = Stronghold.getJsonUserList();
+        userObject.put("user", user);
+        jsonUserList.add(userObject);
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        try (FileWriter usersDatabase = new FileWriter("users.json")) {
+            gson.toJson(jsonUserList, usersDatabase);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static boolean checkCaptchaConfirmation(int enteredCaptcha, int captchaNumber) {
+        return captchaNumber == enteredCaptcha;
     }
 }

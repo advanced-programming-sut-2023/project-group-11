@@ -1,6 +1,6 @@
 package controller;
 
-import view.Enums.Messages.MarketMenuMessages;
+import view.enums.messages.MarketMenuMessages;
 
 import java.util.regex.Matcher;
 

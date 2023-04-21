@@ -4,13 +4,79 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c92baac-7779-4800-aa58-872070d87c47" name="Changes" comment="">
+    <list default="true" id="3c92baac-7779-4800-aa58-872070d87c47" name="Changes" comment="captcha incomplete and some packages name changed">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/EntryMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/EntryMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SignupMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SignupMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Church.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Church.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/ChurchType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ChurchType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/FillerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/FillerType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/GateHouseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/GateHouseType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/MachineType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/MachineType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/ProductiveBuildingType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ProductiveBuildingType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/RangedMachineType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/RangedMachineType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/StorageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/StorageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/TowerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TowerType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/TrapType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TrapType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/UnitMakerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/UnitMakerType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Machine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/RangedMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/RangedMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/UnitMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/UnitMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Assassin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Assassin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/Damage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Damage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/Hp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Hp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/MeleeTroops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/MeleeTroops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/RangedTroops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/RangedTroops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/Speed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Speed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/UnitState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/UnitState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Ladderman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Ladderman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/MeleeTroop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/MeleeTroop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/RangedTroop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/RangedTroop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Units.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Units.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/resources/AllResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/resources/AllResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/resources/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/resources/TroopEquipment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/EntryMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/EntryMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/GameMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/LoginMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/LoginMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/MainMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MainMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/MapEditMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MapEditMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/MarketMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MarketMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/ProfileMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/ProfileMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SelectBuildingMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectBuildingMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SelectUnitMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectUnitMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/ShowMapMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/ShowMapMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SignupMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/SignupMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/TradeMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/TradeMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/GameMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/GameMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/LoginMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/LoginMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/MainMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MainMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/MapEditMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MapEditMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/MarketMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MarketMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/ProfileMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/ProfileMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/SelectBuildingMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectBuildingMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/SelectUnitMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/ShowMapMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/ShowMapMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/SignupMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SignupMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/TradeMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/TradeMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +101,9 @@
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2OgtDSGjnFnTCOIKiqEzL2R3REx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -72,8 +141,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1681993932713</updated>
-      <workItem from="1681993937273" duration="23755000" />
+      <workItem from="1681993937273" duration="32444000" />
+      <workItem from="1682046454813" duration="323000" />
+      <workItem from="1682072540567" duration="15441000" />
     </task>
+    <task id="LOCAL-00001" summary="SignupMenu without captcha and json">
+      <created>1682031516669</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682031516670</updated>
+    </task>
+    <task id="LOCAL-00002" summary="users database added">
+      <created>1682077401275</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682077401429</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,15 +176,18 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="SignupMenu without captcha and json" />
+    <MESSAGE value="users database added" />
+    <MESSAGE value="captcha incomplete and some packages name changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="captcha incomplete and some packages name changed" />
+  </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/SignupMenu.java</url>
-          <line>133</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="userObject.entrySet().toArray()[0]" />
+        <watch expression="Stronghold.userList" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

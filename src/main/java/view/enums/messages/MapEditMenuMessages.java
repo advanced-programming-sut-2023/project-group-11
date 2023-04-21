@@ -1,0 +1,11 @@
+package view.enums.messages;
+
+public enum MapEditMenuMessages {
+    SUCCESS,
+    INVALID_COMMAND,
+    INVALID_TEXTURE_TYPE,
+    INVALID_COORDINATE,
+    INVALID_DIRECTION,
+    INVALID_PLACE_TO_DEPLOY,
+    INVALID_COMMAND_FOR_CONSTANT_SIZE;
+}

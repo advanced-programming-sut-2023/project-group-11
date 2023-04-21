@@ -4,7 +4,7 @@ import model.Stronghold;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tree;
-import view.Enums.Messages.MapEditMenuMessages;
+import view.enums.messages.MapEditMenuMessages;
 
 import java.util.Random;
 import java.util.regex.Matcher;

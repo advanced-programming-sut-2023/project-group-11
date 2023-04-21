@@ -18,16 +18,15 @@ public class EntryMenuController {
 
     private static void initializeUsers() {
         JSONParser jsonParser = new JSONParser();
-
         try (FileReader reader = new FileReader("users.json")) {
-            Object obj = jsonParser.parse(reader);
-            JSONArray employeeList = (JSONArray) obj;
-            employeeList.forEach(user -> parseEmployeeObject((JSONObject) user));
+            JSONArray userList = (JSONArray) jsonParser.parse(reader);
+            userList.forEach(user -> parseUserObject((JSONObject) user));
         } catch (IOException | ParseException ignored) {
         }
+
     }
 
-    private static void parseEmployeeObject(JSONObject user) {
+    private static void parseUserObject(JSONObject user) {
         //Get user object within list
         JSONObject userObject = (JSONObject) user.get("user");
 
@@ -38,7 +37,8 @@ public class EntryMenuController {
         String recoveryQuestion = (String) userObject.get("recoveryQuestion");
         String recoveryAnswer = (String) userObject.get("recoveryAnswer");
         String slogan = (String) userObject.get("slogan");
-        new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
+        User newUser = new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
+        Stronghold.addUsersToUserList(user);
     }
 
     public static boolean isStayLoggedIn() {

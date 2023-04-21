@@ -1,6 +1,6 @@
 package model.buildings;
 
-import model.buildings.Enums.RangedMachineType;
+import model.buildings.enums.RangedMachineType;
 
 public class RangedMachine extends Machine{
 

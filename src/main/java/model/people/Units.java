@@ -1,8 +1,8 @@
 package model.people;
 
 import model.Governance;
-import model.people.Enums.UnitState;
-import model.people.Enums.Speed;
+import model.people.enums.Speed;
+import model.people.enums.UnitState;
 
 public abstract class Units {
     protected int hp;

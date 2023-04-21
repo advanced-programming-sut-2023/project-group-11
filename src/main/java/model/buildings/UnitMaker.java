@@ -1,12 +1,12 @@
 package model.buildings;
 
-import model.resources.Utils;
+import model.resources.TroopEquipment;
 import model.people.Units;
 
 public class UnitMaker extends Building {
 
     private int unitCost;
-    private Utils unitUtilType;
+    private TroopEquipment unitUtilType;
     private int unitUtilNumber;
     private Units MadeUnit;
 
@@ -18,7 +18,7 @@ public class UnitMaker extends Building {
         return unitUtilNumber;
     }
 
-    public Utils getUnitUtilType() {
+    public TroopEquipment getUnitUtilType() {
         return unitUtilType;
     }
 

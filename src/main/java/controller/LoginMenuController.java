@@ -1,6 +1,6 @@
 package controller;
 
-import view.Enums.Messages.LoginMenuMessages;
+import view.enums.messages.LoginMenuMessages;
 
 import java.util.regex.Matcher;
 

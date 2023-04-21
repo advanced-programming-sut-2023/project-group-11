@@ -1,6 +1,6 @@
 package model.buildings;
 
-import model.buildings.Enums.GateHouseType;
+import model.buildings.enums.GateHouseType;
 import model.Governance;
 
 public class GateHouse extends Building{

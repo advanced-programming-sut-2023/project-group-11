@@ -1,6 +1,6 @@
 package model;
 
-import org.apache.commons.codec.digest.DigestUtils;
+import controller.Utils;
 
 import java.util.ArrayList;
 
@@ -17,11 +17,11 @@ public class User {
 
     public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer, String slogan) {
         this.username = username;
-        this.password = encryptField(password);
+        this.password = Utils.encryptField(password);
         this.email = email;
         this.nickname = nickname;
         this.recoveryQuestion = recoveryQuestion;
-        this.recoveryAnswer = encryptField(recoveryAnswer);
+        this.recoveryAnswer = Utils.encryptField(recoveryAnswer);
         this.slogan = slogan;
         Stronghold.addUser(this);
     }
@@ -95,7 +95,4 @@ public class User {
         return output;
     }
 
-    private String encryptField(String field) {
-        return new DigestUtils("SHA3-256").digestAsHex(field);
-    }
 }

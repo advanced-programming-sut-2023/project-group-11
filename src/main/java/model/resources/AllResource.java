@@ -2,14 +2,14 @@ package model.resources;
 
 public enum AllResource {
 
-    BOW("bow", Utils.BOW, 31),
-    CROSSBOW("crossbow", Utils.CROSSBOW, 58),
-    SPEAR("spear", Utils.SPEAR, 20),
-    PIKE("pike", Utils.PIKE, 36),
-    MACE("mace", Utils.MACE, 58),
-    SWORD("sword", Utils.SWORD, 58),
-    LEATHER_ARMOR("leather", Utils.LEATHER_ARMOR, 25),
-    METAL_ARMOR("metal", Utils.METAL_ARMOR, 58),
+    BOW("bow", TroopEquipment.BOW, 31),
+    CROSSBOW("crossbow", TroopEquipment.CROSSBOW, 58),
+    SPEAR("spear", TroopEquipment.SPEAR, 20),
+    PIKE("pike", TroopEquipment.PIKE, 36),
+    MACE("mace", TroopEquipment.MACE, 58),
+    SWORD("sword", TroopEquipment.SWORD, 58),
+    LEATHER_ARMOR("leather", TroopEquipment.LEATHER_ARMOR, 25),
+    METAL_ARMOR("metal", TroopEquipment.METAL_ARMOR, 58),
     HOP("hop", Resource.HOP, 15),
     ALE("ale", Resource.ALE, 20),
     WHEAT("wheat", Resource.WHEAT, 23),
@@ -36,7 +36,7 @@ public enum AllResource {
         this.price = price;
     }
 
-    AllResource(String name, Utils utils, int price) {
+    AllResource(String name, TroopEquipment troopEquipment, int price) {
         this.name = name;
         this.price = price;
     }

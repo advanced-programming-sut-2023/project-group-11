@@ -1,7 +1,7 @@
 package model.buildings;
 
-import model.buildings.Enums.MachineType;
-import model.people.Enums.Speed;
+import model.buildings.enums.MachineType;
+import model.people.enums.Speed;
 
 public class Machine extends Building{
 

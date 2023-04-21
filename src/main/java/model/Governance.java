@@ -2,7 +2,7 @@ package model;
 
 import model.resources.Food;
 import model.resources.Resource;
-import model.resources.Utils;
+import model.resources.TroopEquipment;
 
 import java.util.HashMap;
 
@@ -22,7 +22,7 @@ public class Governance {
     //popularity = taxFactor + fearFactor + foodFactor + religiousFactor
     private final HashMap<Resource, Integer> resources = new HashMap<>();
     private final HashMap<Food, Integer> foods = new HashMap<>();
-    private final HashMap<Utils, Integer> utils = new HashMap<>();
+    private final HashMap<TroopEquipment, Integer> utils = new HashMap<>();
 
     {
         resources.put(Resource.WOOD, 100);
@@ -37,14 +37,14 @@ public class Governance {
         foods.put(Food.APPLE, 0);
         foods.put(Food.MEAT, 0);
         foods.put(Food.CHEESE, 0);
-        utils.put(Utils.CROSSBOW, 0);
-        utils.put(Utils.SPEAR, 0);
-        utils.put(Utils.BOW, 0);
-        utils.put(Utils.MACE, 0);
-        utils.put(Utils.PIKE, 0);
-        utils.put(Utils.LEATHER_ARMOR, 0);
-        utils.put(Utils.METAL_ARMOR, 0);
-        utils.put(Utils.SWORD, 0);
+        utils.put(TroopEquipment.CROSSBOW, 0);
+        utils.put(TroopEquipment.SPEAR, 0);
+        utils.put(TroopEquipment.BOW, 0);
+        utils.put(TroopEquipment.MACE, 0);
+        utils.put(TroopEquipment.PIKE, 0);
+        utils.put(TroopEquipment.LEATHER_ARMOR, 0);
+        utils.put(TroopEquipment.METAL_ARMOR, 0);
+        utils.put(TroopEquipment.SWORD, 0);
     }
 
     public User getOwner() {
@@ -147,7 +147,7 @@ public class Governance {
         foods.put(food, count);
     }
 
-    public void addResource(Utils util, int count) {
+    public void addResource(TroopEquipment util, int count) {
         utils.put(util, count);
     }
 
@@ -159,7 +159,7 @@ public class Governance {
         return 0;
     }
 
-    public int getUtilCount(Utils util) {
+    public int getUtilCount(TroopEquipment util) {
         return 0;
     }
 

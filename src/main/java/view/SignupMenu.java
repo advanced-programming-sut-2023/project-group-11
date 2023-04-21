@@ -1,10 +1,12 @@
 package view;
 
+import controller.Utils;
 import controller.SignupMenuController;
-import view.Enums.Commands.SignupMenuCommands;
-import view.Enums.Messages.SignupMenuMessages;
+import view.enums.commands.SignupMenuCommands;
+import view.enums.messages.SignupMenuMessages;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -122,6 +124,7 @@ public class SignupMenu {
         while ((pickQuestionMatcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.PICK_QUESTION)) == null) {
             if (command.equals("end")) System.exit(0);
             System.out.println("Invalid command");
+            command = scanner.nextLine();
         }
         if (checkTags(pickQuestionMatcher, SignupMenuCommands.PICK_QUESTION))
             message = SignupMenuController.checkPickQuestion(pickQuestionMatcher, registerMatcher, username, password, slogan);
@@ -132,7 +135,30 @@ public class SignupMenu {
         switch (message) {
             case INVALID_QUESTION_NUMBER -> System.out.println("Invalid number!");
             case WRONG_ANSWER_CONFIRMATION -> System.out.println("answer and its confirmation doesn't match!");
-            case SUCCESS -> System.out.println("User created successfully!");
+            case SUCCESS -> {
+//                if (checkCaptchaConfirmation()) System.out.println("User created successfully!");
+//                else System.out.println("User created successfully!");
+                System.out.println("User created successfully!");
+            }
         }
+    }
+
+    private static boolean checkCaptchaConfirmation() {
+        Scanner scanner = EntryMenu.getScanner();
+        int captchaNumber = new Random().nextInt();
+        System.out.println("Enter the captcha below to complete your registration!");
+        System.out.println(Utils.generateCaptcha(captchaNumber));
+        String enteredCaptcha = scanner.nextLine();
+        while (enteredCaptcha.equals("generate another captcha")) {
+            captchaNumber = new Random().nextInt();
+            System.out.println("Enter the captcha below to complete your registration!");
+            System.out.println(Utils.generateCaptcha(captchaNumber));
+            enteredCaptcha = scanner.nextLine();
+        }
+        while (!enteredCaptcha.matches("\\d+")) {
+            System.out.println("Invalid command");
+            enteredCaptcha = scanner.nextLine();
+        }
+        return SignupMenuController.checkCaptchaConfirmation(Integer.parseInt(enteredCaptcha), captchaNumber);
     }
 }
