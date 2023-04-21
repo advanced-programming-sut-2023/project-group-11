@@ -18,7 +18,7 @@ public class EntryMenuController {
 
     private static void initializeUsers() {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("users.json")) {
+        try (FileReader reader = new FileReader("src/main/resources/users.json")) {
             JSONArray userList = (JSONArray) jsonParser.parse(reader);
             userList.forEach(user -> parseUserObject((JSONObject) user));
         } catch (IOException | ParseException ignored) {
@@ -37,7 +37,7 @@ public class EntryMenuController {
         String recoveryQuestion = (String) userObject.get("recoveryQuestion");
         String recoveryAnswer = (String) userObject.get("recoveryAnswer");
         String slogan = (String) userObject.get("slogan");
-        User newUser = new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
+        new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
         Stronghold.addUsersToUserList(user);
     }
 

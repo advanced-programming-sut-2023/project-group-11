@@ -46,17 +46,13 @@ public class SignupMenuController {
         return SignupMenuMessages.SUCCESS;
     }
 
-    public static SignupMenuMessages checkPickQuestion(Matcher pickQuestionMatcher, Matcher registerMatcher, String username, String password, String slogan) {
-        String email = registerMatcher.group("email").toLowerCase();
-        String nickname = registerMatcher.group("nickname");
+    public static SignupMenuMessages checkPickQuestion(Matcher pickQuestionMatcher) {
         ArrayList<String> recoveryQuestions = Stronghold.getRecoveryQuestions();
         int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
-        String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
         String recoveryAnswer = pickQuestionMatcher.group("answer");
         String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
         if (questionNumber > recoveryQuestions.size()) return SignupMenuMessages.INVALID_QUESTION_NUMBER;
         if (!recoveryAnswer.equals(answerConfirmation)) return SignupMenuMessages.WRONG_ANSWER_CONFIRMATION;
-        registerUser(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan));
         return SignupMenuMessages.SUCCESS;
     }
 
@@ -127,19 +123,30 @@ public class SignupMenuController {
         return null;
     }
 
-    public static void registerUser(User user) {
+    public static void addToDatabase(User user) {
         JSONObject userObject = new JSONObject();
         JSONArray jsonUserList = Stronghold.getJsonUserList();
         userObject.put("user", user);
         jsonUserList.add(userObject);
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        try (FileWriter usersDatabase = new FileWriter("users.json")) {
+        try (FileWriter usersDatabase = new FileWriter("src/main/resources/users.json")) {
             gson.toJson(jsonUserList, usersDatabase);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
     public static boolean checkCaptchaConfirmation(int enteredCaptcha, int captchaNumber) {
         return captchaNumber == enteredCaptcha;
+    }
+
+    public static void createUser(Matcher pickQuestionMatcher, Matcher registerMatcher, String username, String password, String slogan) {
+        String email = registerMatcher.group("email").toLowerCase();
+        String nickname = registerMatcher.group("nickname");
+        ArrayList<String> recoveryQuestions = Stronghold.getRecoveryQuestions();
+        int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
+        String recoveryAnswer = pickQuestionMatcher.group("answer");
+        String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
+        addToDatabase(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan));
     }
 }

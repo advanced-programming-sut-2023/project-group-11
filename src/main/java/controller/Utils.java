@@ -43,7 +43,7 @@ public class Utils {
     }
     public static String generateCaptcha(int captchaNumber) {
         Random random = new Random();
-        int width = 100;
+        int width = 150;
         int height = 30;
 
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -55,7 +55,7 @@ public class Utils {
 
 
         StringBuilder captcha = new StringBuilder();
-        graphics.drawString(Integer.toString(captchaNumber), 10, 25);
+        graphics.drawString(Integer.toString(captchaNumber), 15, 25);
 
         for (int y = 0; y < height; y++) {
             StringBuilder captchaLine = new StringBuilder();
