@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum LoginMenuCommands {
-    COMMAND(""),
+    LOGIN("user login" +
+            "(( (?<usernameTag>-u) (?<username>\".*?[^\\\\]\"|(\\\"|[^\" ])*))" +
+            "|( (?<passwordTag>-p) (?<password>\\S*))){2}"),
     ;
 
     private final String regex;

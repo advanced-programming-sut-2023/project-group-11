@@ -2,11 +2,16 @@
 
 package controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.Stronghold;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.json.simple.JSONArray;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public class Utils {
@@ -41,6 +46,7 @@ public class Utils {
     public static String encryptField(String field) {
         return new DigestUtils("SHA3-256").digestAsHex(field);
     }
+
     public static String generateCaptcha(int captchaNumber) {
         Random random = new Random();
         int width = 150;
@@ -71,5 +77,15 @@ public class Utils {
             captcha.append(captchaLine).append("\n");
         }
         return captcha.toString();
+    }
+
+    public static void addToDatabase(Object object, JSONArray jsonArray, String path) {
+        jsonArray.add(object);
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        try (FileWriter usersDatabase = new FileWriter("src/main/resources/" + path + ".json")) {
+            gson.toJson(jsonArray, usersDatabase);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
