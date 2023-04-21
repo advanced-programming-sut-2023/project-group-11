@@ -9,13 +9,15 @@ import java.util.ArrayList;
 public class Stronghold {
     private final static ArrayList<String> randomSlogans = new ArrayList<>();
     private final static ArrayList<User> users = new ArrayList<>();
-    private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<Map> maps = new ArrayList<>();
+    private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
     private static User currentUser;
     private static Governance currentGovernance;
     private static boolean stayLoggedIn;
     private final static JSONArray JSON_USER_LIST = new JSONArray();
+    private final static JSONArray JSON_MAP_LIST = new JSONArray();
+
 
     static {
         recoveryQuestions.add("What is my father's name?");
@@ -79,6 +81,14 @@ public class Stronghold {
         return maps;
     }
 
+    public static void addMap(Map map) {
+        maps.add(map);
+    }
+
+    public static void addMapToMapList(JSONObject map) {
+        JSON_MAP_LIST.add(map);
+    }
+
     public static void addTrade(Trade trade) {
         trades.add(trade);
     }
@@ -130,7 +140,11 @@ public class Stronghold {
         return JSON_USER_LIST;
     }
 
-    public static void addUsersToUserList(JSONObject user) {
+    public static void addUserToUserList(JSONObject user) {
         JSON_USER_LIST.add(user);
+    }
+
+    public static JSONArray getJsonMapList() {
+        return JSON_USER_LIST;
     }
 }

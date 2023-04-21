@@ -1,5 +1,7 @@
 package model.map;
 
+import model.Stronghold;
+
 public class Map {
     private final String name;
     private final Tile[][] map;
@@ -13,6 +15,14 @@ public class Map {
         for (Tile[] tiles : map)
             for (Tile tile : tiles)
                 tile = new Tile();
+        Stronghold.addMap(this);
+    }
+
+    public Map(String name, Tile[][] map, int size) {
+        this.name = name;
+        this.map = map;
+        this.size = size;
+        Stronghold.addMap(this);
     }
 
     public String getName() {
