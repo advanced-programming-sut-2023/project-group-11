@@ -2,7 +2,6 @@ package controller;
 
 import model.Stronghold;
 import model.User;
-import org.json.simple.JSONArray;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
@@ -129,7 +128,7 @@ public class SignupMenuController {
         int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
         String recoveryAnswer = pickQuestionMatcher.group("answer");
         String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
-        JSONArray jsonUserList = Stronghold.getJsonUserList();
-        Utils.updateDatabase(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan), jsonUserList, "users");
+        new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
+        Utils.updateDatabase(Utils.makeJsonArrayFromArraylist("users"), "users");
     }
 }

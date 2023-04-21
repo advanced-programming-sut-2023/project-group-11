@@ -39,8 +39,8 @@ public class EntryMenuController {
         String recoveryQuestion = (String) user.get("recoveryQuestion");
         String recoveryAnswer = (String) user.get("recoveryAnswer");
         String slogan = (String) user.get("slogan");
+
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
-        Stronghold.addUserToUserList(user);
     }
 
     private static void parseMapObject(JSONObject map) {
@@ -49,7 +49,6 @@ public class EntryMenuController {
         Tile[][] mapTiles = (Tile[][]) map.get("map");
 
         new Map(name, mapTiles, size);
-        Stronghold.addMapToMapList(map);
     }
 
     public static boolean isStayLoggedIn() {

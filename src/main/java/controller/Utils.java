@@ -5,7 +5,6 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Stronghold;
-import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.simple.JSONArray;
 
@@ -13,7 +12,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Utils {
@@ -91,9 +89,12 @@ public class Utils {
     }
 
 
-    public static JSONArray makeJsonArrayFromArraylist(ArrayList<Map> maps) {
-        JSONArray JsonArray = new JSONArray();
-        JsonArray.addAll(Stronghold.getMaps());
-        return JsonArray;
+    public static JSONArray makeJsonArrayFromArraylist(String field) {
+        JSONArray jsonArray = new JSONArray();
+        switch (field) {
+            case "users" -> jsonArray.addAll(Stronghold.getUsers());
+            case "maps" -> jsonArray.addAll(Stronghold.getMaps());
+        }
+        return jsonArray;
     }
 }
