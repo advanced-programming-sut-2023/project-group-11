@@ -50,10 +50,7 @@ public class SignupMenuController {
         String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
         if (questionNumber > recoveryQuestions.size()) return SignupMenuMessages.INVALID_QUESTION_NUMBER;
         if (!recoveryAnswer.equals(answerConfirmation)) return SignupMenuMessages.WRONG_ANSWER_CONFIRMATION;
-        if (slogan == null)
-            new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer);
-        else
-            new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
+        Stronghold.registerUser(new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan));
         return SignupMenuMessages.SUCCESS;
     }
 

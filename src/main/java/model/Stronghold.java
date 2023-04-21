@@ -1,7 +1,13 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.map.Map;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Stronghold {
@@ -13,6 +19,7 @@ public class Stronghold {
     private static User currentUser;
     private static Governance currentGovernance;
     private static boolean stayLoggedIn;
+    private final static JSONArray userList = new JSONArray();
 
     static {
         recoveryQuestions.add("What is my father's name?");
@@ -22,6 +29,9 @@ public class Stronghold {
         randomSlogans.add("I shall have my revenge, in this life or the next");
         randomSlogans.add("You are clearly no match for my forces! Give in now, my friend!");
         randomSlogans.add("A soldier's death... is a noble death.");
+        randomSlogans.add("I am, indeed, a king, because I know how to rule myself.");
+        randomSlogans.add("A king without power is an absurdity.");
+        randomSlogans.add("In the kingdom of the blind, the one-eyed man is king");
     }
 
     public static boolean emailExist(String email) {
@@ -81,6 +91,18 @@ public class Stronghold {
         users.add(user);
     }
 
+    public static void registerUser(User user) {
+        JSONObject userObject = new JSONObject();
+        userObject.put("user", user);
+        userList.add(userObject);
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+        try (FileWriter usersDatabase = new FileWriter("users.json")) {
+            gson.toJson(userList, usersDatabase);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static ArrayList<String> getRecoveryQuestions() {
         return recoveryQuestions;
     }
@@ -108,7 +130,7 @@ public class Stronghold {
     public static Map getMapByName(String name) {
         for (Map map : maps)
             if (map.getName().equals(name))
-                    return map;
+                return map;
         return null;
     }
 
@@ -119,5 +141,4 @@ public class Stronghold {
             output += (i++) + "- " + randomSlogan + "\n";
         return output;
     }
-
 }

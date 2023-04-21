@@ -1,35 +1,27 @@
 package model;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.util.ArrayList;
 
 public class User {
-    private final ArrayList<Trade> previousTrades = new ArrayList<>();
-    private int highScore;
     private String username;
     private String password;
     private String nickname;
     private String email;
+    private String slogan;
     private final String recoveryQuestion;
     private final String recoveryAnswer;
-    private String slogan;
-
-    public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.nickname = nickname;
-        this.recoveryQuestion = recoveryQuestion;
-        this.recoveryAnswer = recoveryAnswer;
-        Stronghold.addUser(this);
-    }
+    private final ArrayList<Trade> previousTrades = new ArrayList<>();
+    private int highScore;
 
     public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer, String slogan) {
         this.username = username;
-        this.password = password;
+        this.password = encryptField(password);
         this.email = email;
         this.nickname = nickname;
         this.recoveryQuestion = recoveryQuestion;
-        this.recoveryAnswer = recoveryAnswer;
+        this.recoveryAnswer = encryptField(recoveryAnswer);
         this.slogan = slogan;
         Stronghold.addUser(this);
     }
@@ -94,7 +86,16 @@ public class User {
         previousTrades.add(trade);
     }
 
-    public static String printTrades() {
-        return null;
+    public String printTrades() {
+        String output = "";
+        int i = 1;
+        for (Trade previousTrade : previousTrades)
+            output += (i++) + "- " + previousTrade.resourceType() + previousTrade.resourceAmount()
+                    + previousTrade.price() + previousTrade.message() + "\n";
+        return output;
+    }
+
+    private String encryptField(String field) {
+        return new DigestUtils("SHA3-256").digestAsHex(field);
     }
 }

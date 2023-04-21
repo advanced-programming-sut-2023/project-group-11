@@ -38,10 +38,8 @@ public class SignupMenu {
                         matcher.group("answerTag") != null &&
                         matcher.group("confirmationTag") != null;
             }
-            default -> {
-                return false;
-            }
         }
+        return false;
     }
 
     private static void checkRegister(Matcher registerMatcher) {
