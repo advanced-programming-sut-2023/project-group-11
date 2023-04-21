@@ -79,7 +79,8 @@ public class Utils {
         return captcha.toString();
     }
 
-    public static void updateDatabase(JSONArray jsonArray, String field) {
+    public static void updateDatabase(String field) {
+        JSONArray jsonArray = makeJsonArrayFromArraylist(field);
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         try (FileWriter usersDatabase = new FileWriter("src/main/resources/" + field + ".json")) {
             gson.toJson(jsonArray, usersDatabase);

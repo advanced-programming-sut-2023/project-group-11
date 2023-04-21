@@ -118,17 +118,17 @@ public class MapEditMenuController {
 
         switch (type) {
             case SMALL_LAKE -> {
-                if (x < currentMap.getSize() - 1 && y < currentMap.getSize() - 1 ) {
+                if (x < currentMap.getSize() - 1 && y < currentMap.getSize() - 1) {
                     for (int i = 0; i < 2; i++)
                         for (int j = 0; j < 2; j++)
-                            currentMap.getTile(x+i, y+j).setTexture(type);
+                            currentMap.getTile(x + i, y + j).setTexture(type);
                 } else return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
             }
             case BIG_LAKE -> {
-                if (x < currentMap.getSize() - 3 && y < currentMap.getSize() - 3 ) {
+                if (x < currentMap.getSize() - 3 && y < currentMap.getSize() - 3) {
                     for (int i = 0; i < 4; i++)
                         for (int j = 0; j < 4; j++)
-                            currentMap.getTile(x+i, y+j).setTexture(type);
+                            currentMap.getTile(x + i, y + j).setTexture(type);
                 } else return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
             }
             default -> currentMap.getTile(x, y).setTexture(type);
@@ -140,7 +140,7 @@ public class MapEditMenuController {
     private static void dropCliff(int x, int y, String direction) {
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 5; j++)
-                currentMap.getTile(x +i, y +j).setTexture(Texture.CLIFF);
+                currentMap.getTile(x + i, y + j).setTexture(Texture.CLIFF);
 
         if (direction.equals("random")) {
             String[] directions = {"r", "u", "l", "d"};
@@ -149,21 +149,21 @@ public class MapEditMenuController {
 
         switch (direction) {
             case "r" -> {
-                currentMap.getTile(x +4, y +1).setTexture(Texture.SAND);
-                currentMap.getTile(x +4, y +3).setTexture(Texture.SAND);
+                currentMap.getTile(x + 4, y + 1).setTexture(Texture.SAND);
+                currentMap.getTile(x + 4, y + 3).setTexture(Texture.SAND);
             }
             case "u" -> {
-                currentMap.getTile(x +1, y).setTexture(Texture.SAND);
-                currentMap.getTile(x +3, y).setTexture(Texture.SAND);
+                currentMap.getTile(x + 1, y).setTexture(Texture.SAND);
+                currentMap.getTile(x + 3, y).setTexture(Texture.SAND);
 
             }
             case "l" -> {
-                currentMap.getTile(x, y +1).setTexture(Texture.SAND);
-                currentMap.getTile(x, y +3).setTexture(Texture.SAND);
+                currentMap.getTile(x, y + 1).setTexture(Texture.SAND);
+                currentMap.getTile(x, y + 3).setTexture(Texture.SAND);
             }
             case "d" -> {
-                currentMap.getTile(x +1, y +4).setTexture(Texture.SAND);
-                currentMap.getTile(x +3, y +4).setTexture(Texture.SAND);
+                currentMap.getTile(x + 1, y + 4).setTexture(Texture.SAND);
+                currentMap.getTile(x + 3, y + 4).setTexture(Texture.SAND);
             }
         }
     }
@@ -171,15 +171,15 @@ public class MapEditMenuController {
     private static boolean notSuitableLand(int x, int y) {
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 5; j++)
-                if (currentMap.getTile(x+i, y+j).getTexture().isWater() ||
-                        currentMap.getTile(x+i, y+j).getTexture().equals(Texture.CLIFF)) return true;
+                if (currentMap.getTile(x + i, y + j).getTexture().isWater() ||
+                        currentMap.getTile(x + i, y + j).getTexture().equals(Texture.CLIFF)) return true;
         return false;
     }
 
     private static boolean isSthInArea(int x, int y) {
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 5; j++)
-                if (currentMap.getTile(x+i, y+j).isFull()) return true;
+                if (currentMap.getTile(x + i, y + j).isFull()) return true;
         return false;
     }
 
@@ -197,7 +197,7 @@ public class MapEditMenuController {
     }
 
     public static void saveMap() {
-        Utils.updateDatabase(Utils.makeJsonArrayFromArraylist("maps"), "maps");
+        Utils.updateDatabase("maps");
     }
 
     public static void setCurrentMap(String mapName) {
@@ -210,6 +210,6 @@ public class MapEditMenuController {
 
     public static void setNewMapAsCurrentMap(String mapName, int size) {
         currentMap = new Map(mapName, size);
-        Utils.updateDatabase(Utils.makeJsonArrayFromArraylist("maps"), "maps");
+        Utils.updateDatabase("maps");
     }
 }

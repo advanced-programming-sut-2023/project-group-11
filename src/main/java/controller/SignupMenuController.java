@@ -129,6 +129,6 @@ public class SignupMenuController {
         String recoveryAnswer = pickQuestionMatcher.group("answer");
         String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
-        Utils.updateDatabase(Utils.makeJsonArrayFromArraylist("users"), "users");
+        Utils.updateDatabase("users");
     }
 }
