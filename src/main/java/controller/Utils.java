@@ -59,7 +59,6 @@ public class Utils {
         graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-
         StringBuilder captcha = new StringBuilder();
         graphics.drawString(Integer.toString(captchaNumber), 15, 25);
 
@@ -88,7 +87,6 @@ public class Utils {
             throw new RuntimeException(e);
         }
     }
-
 
     public static JSONArray makeJsonArrayFromArraylist(String field) {
         JSONArray jsonArray = new JSONArray();

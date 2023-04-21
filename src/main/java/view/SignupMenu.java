@@ -17,12 +17,14 @@ public class SignupMenu {
         Matcher matcher;
         String command = scanner.nextLine();
         while (true) {
-            if ((matcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.REGISTER)) != null) {
+            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) System.exit(0);
+            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) return;
+            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.SHOW_CURRENT_MENU) != null)
+                System.out.println("Signup Menu");
+            else if ((matcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.REGISTER)) != null) {
                 if (checkTags(matcher, SignupMenuCommands.REGISTER)) checkRegister(matcher);
                 else System.out.println("Invalid command!");
-            } else if (command.equals("end")) System.exit(0);
-            else if (command.equals("back")) EntryMenu.run();
-            else System.out.println("Invalid command!");
+            } else System.out.println("Invalid command!");
             command = scanner.nextLine();
         }
     }
@@ -72,11 +74,13 @@ public class SignupMenu {
             case SUCCESS -> {
                 if (slogan != null && slogan.equals("random")) {
                     slogan = checkRandomSlogan();
+                    if (slogan == null) return;
                     System.out.println("Your slogan is: " + slogan);
                 }
                 if (password.equals("random"))
                     password = checkRandomPassword();
-                checkPickQuestion(registerMatcher, username, password, slogan);
+                if (password != null)
+                    checkPickQuestion(registerMatcher, username, password, slogan);
             }
         }
     }
@@ -88,8 +92,15 @@ public class SignupMenu {
         username = SignupMenuController.generateRandomUsername(username);
         System.out.println(username);
         System.out.println("If the username is acceptable to you enter 1 else enter 2");
-        if (scanner.nextLine().equals("1")) return username;
-        else return null;
+        String userAnswer = scanner.nextLine();
+        while (true) {
+            if (userAnswer.equals("1")) return username;
+            else if (userAnswer.equals("2") || SignupMenuCommands.getMatcher(userAnswer, SignupMenuCommands.BACK) != null)
+                return null;
+            else if (SignupMenuCommands.getMatcher(userAnswer, SignupMenuCommands.END) != null) System.exit(0);
+            else System.out.println("Invalid command: only 1 and 2 is acceptable!");
+            userAnswer = scanner.nextLine();
+        }
     }
 
     private static String checkRandomSlogan() {
@@ -97,7 +108,12 @@ public class SignupMenu {
         System.out.println("Please choose a slogan from below list:");
         System.out.print(SignupMenuController.printRandomSlogans());
         String sloganNumber = scanner.nextLine();
-        return SignupMenuController.pickRandomSlogan(sloganNumber);
+        String randomSlogan;
+        while (true) {
+            if (SignupMenuCommands.getMatcher(sloganNumber, SignupMenuCommands.BACK) != null) return null;
+            if ((randomSlogan = SignupMenuController.pickRandomSlogan(sloganNumber)) != null) return randomSlogan;
+            sloganNumber = scanner.nextLine();
+        }
     }
 
     private static String checkRandomPassword() {
@@ -107,7 +123,8 @@ public class SignupMenu {
         System.out.println("Please re-enter your password here:");
         String confirmation = scanner.nextLine();
         while (!password.equals(confirmation)) {
-            if (confirmation.equals("end")) System.exit(0);
+            if (SignupMenuCommands.getMatcher(confirmation, SignupMenuCommands.END) != null) System.exit(0);
+            else if (SignupMenuCommands.getMatcher(confirmation, SignupMenuCommands.BACK) != null) return null;
             System.out.println("password and its confirmation doesn't match");
             confirmation = EntryMenu.getScanner().nextLine();
         }
@@ -122,7 +139,8 @@ public class SignupMenu {
         String command = scanner.nextLine();
         SignupMenuMessages message;
         while ((pickQuestionMatcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.PICK_QUESTION)) == null) {
-            if (command.equals("end")) System.exit(0);
+            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) System.exit(0);
+            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) return;
             System.out.println("Invalid command");
             command = scanner.nextLine();
         }
@@ -136,25 +154,27 @@ public class SignupMenu {
             case INVALID_QUESTION_NUMBER -> System.out.println("Invalid number!");
             case WRONG_ANSWER_CONFIRMATION -> System.out.println("answer and its confirmation doesn't match!");
             case SUCCESS -> {
-                checkCaptchaConfirmation();
-                System.out.println("User created successfully!");
-                SignupMenuController.createUser(pickQuestionMatcher, registerMatcher, username, password, slogan);
+                if (checkCaptchaConfirmation()) {
+                    System.out.println("User created successfully!");
+                    SignupMenuController.createUser(pickQuestionMatcher, registerMatcher, username, password, slogan);
+                }
             }
         }
     }
 
-    private static void checkCaptchaConfirmation() {
+    private static boolean checkCaptchaConfirmation() {
         Scanner scanner = EntryMenu.getScanner();
         while (true) {
             int captchaNumber = new Random().nextInt(1000, 100000000);
             System.out.println("Enter the captcha below to complete your registration!");
             System.out.println(Utils.generateCaptcha(captchaNumber));
             String enteredCaptcha = scanner.nextLine();
-            if (enteredCaptcha.equals("end")) System.exit(0);
+            if (SignupMenuCommands.getMatcher(enteredCaptcha, SignupMenuCommands.END) != null) System.exit(0);
+            else if (SignupMenuCommands.getMatcher(enteredCaptcha, SignupMenuCommands.BACK) != null) return false;
             else if (enteredCaptcha.equals("generate another captcha")) continue;
             else if (enteredCaptcha.matches("\\d+")) {
                 if (SignupMenuController.checkCaptchaConfirmation(Integer.parseInt(enteredCaptcha), captchaNumber))
-                    break;
+                    return true;
                 else System.out.println("Wrong captcha confirmation!");
             } else System.out.println("Wrong captcha confirmation!");
         }

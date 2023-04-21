@@ -10,7 +10,7 @@ public class EntryMenu {
 
     public static void run() {
         EntryMenuController.fillAllFieldsWithPreviousData();
-        if (EntryMenuController.isStayLoggedIn())
+        if (EntryMenuController.getStayLoggedIn() != null)
             MainMenu.run();
         else {
             System.out.println("Welcome to Stronghold Crusader game!");

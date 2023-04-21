@@ -4,6 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum SignupMenuCommands {
+    END("end"),
+    BACK("back"),
+    SHOW_CURRENT_MENU("show current menu"),
     REGISTER("user create" +
             "(?:( (?<usernameTag>-u) (?<username>\".*?[^\\\\]\"|(\\\"|[^\" ])*))" +
             "|( (?<passwordTag>-p) (?<password>random|\\S* \\S*))" +
