@@ -40,4 +40,8 @@ public enum Texture {
     public boolean isStone() {
         return this.equals(ROCK) || this.equals(STONE) || this.equals(CLIFF);
     }
+
+    public String getName() {
+        return name;
+    }
 }

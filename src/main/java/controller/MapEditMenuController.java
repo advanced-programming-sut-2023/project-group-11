@@ -58,11 +58,11 @@ public class MapEditMenuController {
     }
 
     public static MapEditMenuMessages checkDropTree(Matcher matcher) {
-        Tree tree = Tree.getTreeByName(matcher.group("name"));
-
-        if (matcher.group("x") == null || matcher.group("y") == null || tree == null)
+        if (matcher.group("x") == null || matcher.group("y") == null ||
+                !Tree.isTreeName(matcher.group("type")))
             return MapEditMenuMessages.INVALID_COMMAND;
 
+        Tree tree = new Tree(matcher.group("type"));
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
 

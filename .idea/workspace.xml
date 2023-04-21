@@ -4,162 +4,164 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c92baac-7779-4800-aa58-872070d87c47" name="Changes" comment="captcha incomplete and some packages name changed">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/users.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Church.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Church.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/ChurchType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ChurchType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/FillerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/FillerType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/GateHouseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/GateHouseType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/MachineType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/MachineType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/ProductiveBuildingType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ProductiveBuildingType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/RangedMachineType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/RangedMachineType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/StorageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/StorageType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/TowerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TowerType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/TrapType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TrapType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Enums/UnitMakerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/UnitMakerType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Machine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/RangedMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/RangedMachine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/UnitMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/UnitMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Assassin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Assassin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/Damage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Damage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/Hp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Hp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/MeleeTroops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/MeleeTroops.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/RangedTroops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/RangedTroops.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/Speed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Speed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Enums/UnitState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/UnitState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Ladderman.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Ladderman.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/MeleeTroop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/MeleeTroop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/RangedTroop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/RangedTroop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Units.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Units.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/resources/AllResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/resources/AllResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/resources/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/resources/TroopEquipment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/EntryMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/EntryMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/GameMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/LoginMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/LoginMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/MainMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MainMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/MapEditMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MapEditMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/MarketMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MarketMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/ProfileMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/ProfileMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SelectBuildingMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectBuildingMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SelectUnitMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectUnitMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/ShowMapMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/ShowMapMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/SignupMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/SignupMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Commands/TradeMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/TradeMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/GameMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/GameMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/LoginMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/LoginMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/MainMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MainMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/MapEditMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MapEditMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/MarketMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MarketMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/ProfileMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/ProfileMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/SelectBuildingMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectBuildingMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/SelectUnitMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/ShowMapMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/ShowMapMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/SignupMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SignupMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Enums/Messages/TradeMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/TradeMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
     </option>
+  </component>
+  <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectId" id="2OgtDSGjnFnTCOIKiqEzL2R3REx" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2OT1PI8Q02cnKX6wIVxdqs3bExz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Sadegh/Documents/Codes/Java/Intellij/first",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
   }
-}</component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="project-group-11-fixed" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3c92baac-7779-4800-aa58-872070d87c47" name="Changes" comment="" />
-      <created>1681993932713</created>
+      <changelist id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="" />
+      <created>1681569733616</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1681993932713</updated>
-      <workItem from="1681993937273" duration="32444000" />
-      <workItem from="1682046454813" duration="323000" />
-      <workItem from="1682072540567" duration="15441000" />
+      <updated>1681569733616</updated>
+      <workItem from="1681569734978" duration="699000" />
+      <workItem from="1681570459059" duration="755000" />
+      <workItem from="1681589815991" duration="283000" />
+      <workItem from="1681590109649" duration="638000" />
+      <workItem from="1681673161965" duration="13000" />
+      <workItem from="1681762373421" duration="108000" />
+      <workItem from="1681762493580" duration="430000" />
+      <workItem from="1681817173483" duration="308000" />
+      <workItem from="1681827636254" duration="173000" />
+      <workItem from="1681827821204" duration="2159000" />
+      <workItem from="1681834134313" duration="2082000" />
+      <workItem from="1681917069446" duration="178000" />
+      <workItem from="1681917262169" duration="77000" />
+      <workItem from="1681926104153" duration="1298000" />
+      <workItem from="1681927439246" duration="682000" />
+      <workItem from="1681928598366" duration="95000" />
+      <workItem from="1681929503222" duration="14129000" />
+      <workItem from="1681999734987" duration="18694000" />
+      <workItem from="1682033678428" duration="163000" />
+      <workItem from="1682082803153" duration="2166000" />
     </task>
-    <task id="LOCAL-00001" summary="SignupMenu without captcha and json">
-      <created>1682031516669</created>
+    <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
+      <created>1681570516912</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1682031516670</updated>
+      <updated>1681570516912</updated>
     </task>
-    <task id="LOCAL-00002" summary="users database added">
-      <created>1682077401275</created>
+    <task id="LOCAL-00002" summary="Replacing Phase 0's Files second try">
+      <created>1681570555346</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1682077401429</updated>
+      <updated>1681570555346</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add test Folder">
+      <created>1681590276999</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1681590276999</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Solve plugins problems">
+      <created>1681832494809</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681832494809</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add Gson Lib">
+      <created>1681852319346</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681852319346</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add JArgs lib &amp; change JUnit jupiter">
+      <created>1681932295836</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681932295837</updated>
+    </task>
+    <task id="LOCAL-00007" summary="People completed &amp; Packages' names corrected">
+      <created>1681941438123</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681941438123</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Map edited &amp; Map edit menu completed upto drop cliff(rock)">
+      <created>1682026744751</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682026744752</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Map edit menu ended without saving in database">
+      <created>1682029951979</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682029951979</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,24 +172,39 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="SignupMenu without captcha and json" />
-    <MESSAGE value="users database added" />
-    <MESSAGE value="captcha incomplete and some packages name changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="captcha incomplete and some packages name changed" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Replacing Phase 0's Files" />
+    <MESSAGE value="Replacing Phase 0's Files second try" />
+    <MESSAGE value="Add test Folder" />
+    <MESSAGE value="Solve plugins problems" />
+    <MESSAGE value="Add Gson Lib" />
+    <MESSAGE value="Add JArgs lib &amp; change JUnit jupiter" />
+    <MESSAGE value="People completed &amp; Packages' names corrected" />
+    <MESSAGE value="Map edited &amp; Map edit menu completed upto drop cliff(rock)" />
+    <MESSAGE value="Map edit menu ended without saving in database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Map edit menu ended without saving in database" />
   </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="userObject.entrySet().toArray()[0]" />
-        <watch expression="Stronghold.userList" />
-      </configuration>
-    </watches-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

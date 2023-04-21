@@ -1,23 +1,27 @@
 package model.map;
 
 
-public enum Tree {
-    SMALL("small"),
-    DATE("date"),
-    COCONUT("coconut"),
-    CHERRY("cherry"),
-    OLIVE("olive"),
-    ;
-
+public class Tree {
     private final String name;
+    private int leftWood = 2000;
 
-    Tree(String name) {
+    public Tree(String name) {
         this.name = name;
     }
 
-    public static Tree getTreeByName(String name) {
-        for (Tree value : Tree.values())
-            if (value.name.equals(name)) return value;
-        return null;
+    public String getName() {
+        return name;
+    }
+
+    public int getLeftWood() {
+        return leftWood;
+    }
+
+    public void setLeftWood(int leftWood) {
+        this.leftWood = leftWood;
+    }
+
+    public static boolean isTreeName(String name) {
+        return name.equals("small") || name.equals("date") ||name.equals("coconut") ||name.equals("cherry") || name.equals("olive");
     }
 }

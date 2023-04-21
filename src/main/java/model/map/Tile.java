@@ -1,7 +1,6 @@
 package model.map;
 
 import model.buildings.Building;
-import model.resources.AllResource;
 import model.people.Units;
 
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ public class Tile {
     private Texture texture = Texture.SAND;
     private Building building = null;
     private ArrayList<Units> units = new ArrayList<>();
-    private ArrayList<AllResource> resources = new ArrayList<>();
     private Tree tree = null;
 
     public Texture getTexture() {
@@ -37,12 +35,12 @@ public class Tile {
         this.units = units;
     }
 
-    public ArrayList<AllResource> getResource() {
-        return resources;
-    }
-
-    public void addResource(AllResource resource) {
-        this.resources.add(resource);
+    public String getResourceAmount() {
+        String result = null;
+        if (this.tree != null) result = "Wood: " + tree.getLeftWood();
+        else if (this.texture.equals(Texture.IRON) || this.texture.equals(Texture.STONE))
+            result = this.texture.getName() + ": Infinite";
+        return result;
     }
 
     public Tree getTree() {
@@ -61,7 +59,6 @@ public class Tile {
         this.building = null;
         this.tree = null;
         this.units = new ArrayList<>();
-        this.resources = new ArrayList<>();
     }
 
     public boolean isFull() {
