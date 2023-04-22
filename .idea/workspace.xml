@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/TroopTypes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Assassin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Engineer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Engineer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Ladderman.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/MeleeTroop.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/RangedTroop.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/Damage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Damage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/MeleeTroops.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/RangedTroops.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +71,20 @@
       <recent name="" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ProjectAP" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -109,7 +114,9 @@
       <workItem from="1682033678428" duration="163000" />
       <workItem from="1682082803153" duration="3909000" />
       <workItem from="1682104812915" duration="9199000" />
-      <workItem from="1682169932786" duration="13180000" />
+      <workItem from="1682169932786" duration="13385000" />
+      <workItem from="1682184027134" duration="8645000" />
+      <workItem from="1682194774772" duration="2233000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -223,7 +230,35 @@
       <option name="project" value="LOCAL" />
       <updated>1682179028493</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="People classes compressed and finished">
+      <created>1682183859761</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1682183859761</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Login menu ended without stay_logged_in &amp; Map edit menu completed but map making has bugs">
+      <created>1682192068717</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1682192068717</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Map constructing debugged">
+      <created>1682193917312</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1682193917312</updated>
+    </task>
+    <task id="LOCAL-00020" summary="First try to read maps">
+      <created>1682196760022</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1682196760023</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +316,37 @@
     <MESSAGE value="Map edit menu updated &amp; Main menu added incompletely" />
     <MESSAGE value="Remove &quot;s functiona dded &amp; game menu &amp; map edit menu regexes edited" />
     <MESSAGE value="Main menu ended &amp; remove &quot;s updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Main menu ended &amp; remove &quot;s updated" />
+    <MESSAGE value="People classes compressed and finished" />
+    <MESSAGE value="Login menu ended without stay_logged_in &amp; Map edit menu completed but map making has bugs" />
+    <MESSAGE value="Map constructing debugged" />
+    <MESSAGE value="First try to read maps" />
+    <option name="LAST_COMMIT_MESSAGE" value="First try to read maps" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/model/map/Map.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/view/EntryMenu.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
