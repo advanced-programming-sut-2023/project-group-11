@@ -12,6 +12,7 @@ public class Stronghold {
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
     private static User currentUser;
     private static Governance currentGovernance;
+    private static Game currentGame;
 
     static {
         recoveryQuestions.add("What is my father's name?");
@@ -120,5 +121,13 @@ public class Stronghold {
 
     public static ArrayList<User> getUsers() {
         return users;
+    }
+
+    public static Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public static void setCurrentGame(Game currentGame) {
+        Stronghold.currentGame = currentGame;
     }
 }

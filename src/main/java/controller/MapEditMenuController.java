@@ -81,7 +81,7 @@ public class MapEditMenuController {
         int x2 = Integer.parseInt(matcher.group("x2"));
         int y1 = Integer.parseInt(matcher.group("y1"));
         int y2 = Integer.parseInt(matcher.group("y2"));
-        Texture type = Texture.getTextureByName(matcher.group("type1"));
+        Texture type = Texture.getTextureByName(Utils.removeDoubleQuotation(matcher.group("type1")));
 
         if (x1 >= currentMap.getSize() || x1 < 0 ||
                 y1 >= currentMap.getSize() || y1 < 0 ||
@@ -109,7 +109,7 @@ public class MapEditMenuController {
     private static MapEditMenuMessages setTextureFirstType(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        Texture type = Texture.getTextureByName(matcher.group("type"));
+        Texture type = Texture.getTextureByName(Utils.removeDoubleQuotation(matcher.group("type")));
 
         if (x >= currentMap.getSize() || x < 0 || y >= currentMap.getSize() || y < 0)
             return MapEditMenuMessages.INVALID_COORDINATE;
@@ -188,12 +188,6 @@ public class MapEditMenuController {
         for (Map map : Stronghold.getMaps())
             result.append("* ").append(map.getName());
         return result.toString();
-    }
-
-    public static boolean isMapName(String name) {
-        for (Map map : Stronghold.getMaps())
-            if (map.getName().equals(name)) return true;
-        return false;
     }
 
     public static void saveMap() {

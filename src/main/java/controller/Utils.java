@@ -5,6 +5,8 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Stronghold;
+import model.User;
+import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.simple.JSONArray;
 
@@ -101,10 +103,25 @@ public class Utils {
         return jsonArray;
     }
 
-    public static String  removeDoubleQuotation(String name) {
-        StringBuilder temp = new StringBuilder(name);
-        temp.deleteCharAt(name.length() - 1);
-        temp.deleteCharAt(0);
-        return temp.toString();
+    public static String removeDoubleQuotation(String name) {
+        if (name != null && name.charAt(0) == '\"') {
+            StringBuilder temp = new StringBuilder(name);
+            temp.deleteCharAt(name.length() - 1);
+            temp.deleteCharAt(0);
+            return temp.toString();
+        }
+        return name;
+    }
+
+    public static boolean isMapName(String name) {
+        for (Map map : Stronghold.getMaps())
+            if (map.getName().equals(name)) return true;
+        return false;
+    }
+
+    public static boolean isPlayerName(String name) {
+        for (User user : Stronghold.getUsers())
+            if (user.getUsername().equals(name)) return true;
+        return false;
     }
 }

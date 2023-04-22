@@ -40,9 +40,12 @@ public class MainMenu {
 
         switch (mainMenuMessage) {
             case SUCCESS -> {
-                System.out.println("");
+                System.out.println("Game started with :" + MainMenuController.makeListOfPlayers(matcher.group("guests")));
                 GameMenu.run();
             }
+            case INVALID_COMMAND -> System.out.println("Invalid command!");
+            case MAP_NOT_EXIST -> System.out.println("Map does not exist!");
+            case USER_NOT_EXIST -> System.out.println("At least one of the users does not exist!");
         }
     }
 }
