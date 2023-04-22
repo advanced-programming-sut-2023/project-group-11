@@ -1,5 +1,6 @@
 package controller;
 
+import model.Delay;
 import model.Stronghold;
 import model.User;
 import view.enums.messages.LoginMenuMessages;
@@ -12,7 +13,9 @@ public class LoginMenuController {
         String password = matcher.group("password");
         if (user == null) return LoginMenuMessages.USERNAME_NOT_EXIST;
         if (!user.isPasswordCorrect(Utils.encryptField(password))) {
-
+            int currentDelay = Delay.getDelay(user);
+            currentDelay += currentDelay == 0 ? 5 : currentDelay;
+            Delay.addDelayedUser(user, new Delay(System.currentTimeMillis()));
             return LoginMenuMessages.INCORRECT_PASSWORD;
         }
         if (matcher.group("stayLoggedIn") != null) user.setStayLoggedIn(true);

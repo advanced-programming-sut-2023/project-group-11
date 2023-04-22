@@ -1,18 +1,14 @@
 package view;
 
-import com.mgnt.utils.TimeUtils;
 import controller.LoginMenuController;
 import controller.Utils;
 import view.enums.commands.LoginMenuCommands;
 import view.enums.messages.LoginMenuMessages;
 
-import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 
 public class LoginMenu {
-    private static int sleepTime = 5;
     public static void run() {
         System.out.println("You have entered Login Menu!");
         Scanner scanner = EntryMenu.getScanner();
@@ -38,15 +34,9 @@ public class LoginMenu {
         LoginMenuMessages message = LoginMenuController.checkLogin(matcher);
         switch (message) {
             case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
-            case INCORRECT_PASSWORD -> {
-                System.out.println("Username and password didn't match!");
-                System.out.println("You can't login for " + sleepTime + " seconds");
-                TimeUtils.sleepFor(sleepTime, TimeUnit.SECONDS);//TODO: sleep and doesn't input any command!
-                sleepTime *= 2;
-            }
+            case INCORRECT_PASSWORD -> System.out.println("Username and password didn't match!");
             case SUCCESS -> {
-                if (checkCaptchaConfirmation()) {
-                    sleepTime = 5;
+                if (Menu.checkCaptchaConfirmation()) {
                     System.out.println("user logged in successfully!");
                     LoginMenuController.loginUser(matcher);
                     MainMenu.run();
@@ -60,24 +50,6 @@ public class LoginMenu {
         switch (message) {
             case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
             case SUCCESS -> showRecoveryQuestion(matcher);
-        }
-    }
-
-    private static boolean checkCaptchaConfirmation() {
-        Scanner scanner = EntryMenu.getScanner();//TODO: duplicated code
-        while (true) {
-            System.out.println("Enter the captcha below!");
-            int captchaNumber = new Random().nextInt(1000, 100000000);
-            System.out.println(Utils.generateCaptcha(captchaNumber));
-            String enteredCaptcha = scanner.nextLine();
-            if (enteredCaptcha.equals("end")) System.exit(0);
-            else if (enteredCaptcha.equals("back")) return false;
-            else if (enteredCaptcha.equals("generate another captcha")) continue;
-            else if (enteredCaptcha.matches("\\d+")) {
-                if (Utils.checkCaptchaConfirmation(Integer.parseInt(enteredCaptcha), captchaNumber))
-                    return true;
-                else System.out.println("Wrong captcha confirmation!");
-            } else System.out.println("Wrong captcha confirmation!");
         }
     }
 
@@ -108,7 +80,7 @@ public class LoginMenu {
             if (LoginMenuCommands.getMatcher(newPassword, LoginMenuCommands.END) != null) System.exit(0);
             else if (LoginMenuCommands.getMatcher(newPassword, LoginMenuCommands.BACK) != null) return;
             else if (Utils.isStrongPassword(newPassword)) {
-                if (checkCaptchaConfirmation()) {
+                if (Menu.checkCaptchaConfirmation()) {
                     LoginMenuController.setNewPassword(matcher, newPassword);
                     System.out.println("You have set a new password successfully!");
                     return;

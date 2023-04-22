@@ -6,7 +6,6 @@ import view.enums.commands.SignupMenuCommands;
 import view.enums.messages.SignupMenuMessages;
 
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -156,29 +155,11 @@ public class SignupMenu {
             case INVALID_QUESTION_NUMBER -> System.out.println("Invalid number!");
             case WRONG_ANSWER_CONFIRMATION -> System.out.println("answer and its confirmation doesn't match!");
             case SUCCESS -> {
-                if (checkCaptchaConfirmation()) {
+                if (Menu.checkCaptchaConfirmation()) {
                     System.out.println("User created successfully!");
                     SignupMenuController.createUser(pickQuestionMatcher, registerMatcher, username, password, slogan);
                 }
             }
-        }
-    }
-
-    private static boolean checkCaptchaConfirmation() {
-        Scanner scanner = EntryMenu.getScanner();
-        while (true) {
-            System.out.println("Enter the captcha below!");
-            int captchaNumber = new Random().nextInt(1000, 100000000);
-            System.out.println(Utils.generateCaptcha(captchaNumber));
-            String enteredCaptcha = scanner.nextLine();
-            if (enteredCaptcha.equals("end")) System.exit(0);
-            else if (enteredCaptcha.equals("back")) return false;
-            else if (enteredCaptcha.equals("generate another captcha")) continue;
-            else if (enteredCaptcha.matches("\\d+")) {
-                if (Utils.checkCaptchaConfirmation(Integer.parseInt(enteredCaptcha), captchaNumber))
-                    return true;
-                else System.out.println("Wrong captcha confirmation!");
-            } else System.out.println("Wrong captcha confirmation!");
         }
     }
 }
