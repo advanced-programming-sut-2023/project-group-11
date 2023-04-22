@@ -14,7 +14,7 @@ public class LoginMenu {
         Matcher matcher;
         String command = scanner.nextLine();
         while (true) {
-            if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.END) != null) System.exit(0);
+            if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.END) != null) Utils.endStronghold();
             else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.BACK) != null) return;
             else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Login Menu!");
@@ -60,7 +60,7 @@ public class LoginMenu {
         Scanner scanner = EntryMenu.getScanner();
         String recoveryAnswer = scanner.nextLine();
         while (true) {
-            if (LoginMenuCommands.getMatcher(recoveryAnswer, LoginMenuCommands.END) != null) System.exit(0);
+            if (LoginMenuCommands.getMatcher(recoveryAnswer, LoginMenuCommands.END) != null) Utils.endStronghold();
             else if (LoginMenuCommands.getMatcher(recoveryAnswer, LoginMenuCommands.BACK) != null) return;
             else {
                 LoginMenuMessages message = LoginMenuController.checkRecoveryAnswer(matcher, recoveryAnswer);
@@ -78,7 +78,7 @@ public class LoginMenu {
         Scanner scanner = EntryMenu.getScanner();
         String newPassword = scanner.nextLine();
         while (true) {
-            if (LoginMenuCommands.getMatcher(newPassword, LoginMenuCommands.END) != null) System.exit(0);
+            if (LoginMenuCommands.getMatcher(newPassword, LoginMenuCommands.END) != null) Utils.endStronghold();
             else if (LoginMenuCommands.getMatcher(newPassword, LoginMenuCommands.BACK) != null) return;
             else if (Utils.isStrongPassword(newPassword)) {
                 if (Menu.checkCaptchaConfirmation()) {

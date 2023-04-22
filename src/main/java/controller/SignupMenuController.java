@@ -129,6 +129,5 @@ public class SignupMenuController {
         recoveryAnswer = Utils.encryptField(recoveryAnswer);
         password = Utils.encryptField(password);
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
-        Utils.updateDatabase("users");
     }
 }

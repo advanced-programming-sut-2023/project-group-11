@@ -13,7 +13,7 @@ public class Menu {
             int captchaNumber = new Random().nextInt(1000, 100000000);
             System.out.println(Utils.generateCaptcha(captchaNumber));
             String enteredCaptcha = scanner.nextLine();
-            if (enteredCaptcha.equals("end")) System.exit(0);
+            if (enteredCaptcha.equals("end")) Utils.endStronghold();
             else if (enteredCaptcha.equals("back")) return false;
             else if (enteredCaptcha.equals("generate another captcha")) continue;
             else if (enteredCaptcha.matches("\\d+")) {

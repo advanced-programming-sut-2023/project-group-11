@@ -119,17 +119,15 @@ public class Utils {
         return false;
     }
 
-    public static boolean isPlayerName(String name) {
-        for (User user : Stronghold.getUsers())
-            if (user.getUsername().equals(name)) return true;
-        return false;
-    }
-
     public static String logout() {
         User currentUser = Stronghold.getCurrentUser();
         currentUser.setStayLoggedIn(false);
         Stronghold.setCurrentUser(null);
-        updateDatabase("users");
         return "Logged out!";
+    }
+
+    public static void endStronghold() {
+        updateDatabase("users");
+        System.exit(0);
     }
 }

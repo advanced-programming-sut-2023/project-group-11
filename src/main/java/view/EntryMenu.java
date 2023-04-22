@@ -2,6 +2,7 @@ package view;
 
 
 import controller.EntryMenuController;
+import controller.Utils;
 
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class EntryMenu {
             System.out.println("2. Login menu");
             String menuNumber = scanner.nextLine();
             switch (menuNumber) {
-                case "end" -> System.exit(0);
+                case "end" -> Utils.endStronghold();
                 case "1" -> {
                     System.out.println("Entered Signup Menu!");
                     SignupMenu.run();

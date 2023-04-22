@@ -2,12 +2,10 @@ package controller;
 
 import model.Stronghold;
 import model.User;
-import model.buildings.Building;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
 import model.map.Tree;
-import model.people.Units;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,8 +13,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class EntryMenuController {
     public static void fillAllFieldsWithPreviousData() {

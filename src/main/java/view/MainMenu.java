@@ -2,7 +2,6 @@ package view;
 
 import controller.MainMenuController;
 import controller.Utils;
-import jdk.jshell.execution.Util;
 import view.enums.commands.MainMenuCommands;
 import view.enums.messages.MainMenuMessages;
 
@@ -19,7 +18,7 @@ public class MainMenu {
             input = scanner.nextLine();
 
             if (MainMenuCommands.getMatcher(input, MainMenuCommands.END) != null)
-                System.exit(0);
+                Utils.endStronghold();
             else if (MainMenuCommands.getMatcher(input, MainMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Main menu");
             else if (MainMenuCommands.getMatcher(input, MainMenuCommands.LOGOUT) != null) {

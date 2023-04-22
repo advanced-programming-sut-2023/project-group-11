@@ -1,8 +1,6 @@
 package model.people;
 
-import model.Governance;
 import model.Stronghold;
-import model.User;
 import model.people.enums.Hp;
 import model.people.enums.Speed;
 

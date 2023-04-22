@@ -28,10 +28,8 @@ public class LoginMenuController {
                 return LoginMenuMessages.LOCKED_ACCOUNT;
         }
 
-        if (matcher.group("stayLoggedIn") != null) {
-            user.setStayLoggedIn(true);
-            Utils.updateDatabase("users");
-        }
+        if (matcher.group("stayLoggedIn") != null) user.setStayLoggedIn(true);
+
         return LoginMenuMessages.SUCCESS;
     }
 
@@ -61,7 +59,6 @@ public class LoginMenuController {
     public static void setNewPassword(Matcher matcher, String password) {
         User user = getUserByUsername(matcher);
         user.setPassword(Utils.encryptField(password));
-        Utils.updateDatabase("users");
     }
 
     public static User getUserByUsername(Matcher matcher) {

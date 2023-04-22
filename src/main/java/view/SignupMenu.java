@@ -15,7 +15,7 @@ public class SignupMenu {
         Matcher matcher;
         String command = scanner.nextLine();
         while (true) {
-            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) System.exit(0);
+            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) Utils.endStronghold();
             else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) return;
             else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Signup Menu");
@@ -97,7 +97,7 @@ public class SignupMenu {
             if (userAnswer.equals("1")) return username;
             else if (userAnswer.equals("2") || SignupMenuCommands.getMatcher(userAnswer, SignupMenuCommands.BACK) != null)
                 return null;
-            else if (SignupMenuCommands.getMatcher(userAnswer, SignupMenuCommands.END) != null) System.exit(0);
+            else if (SignupMenuCommands.getMatcher(userAnswer, SignupMenuCommands.END) != null) Utils.endStronghold();
             else System.out.println("Invalid command: only 1 and 2 is acceptable!");
             userAnswer = scanner.nextLine();
         }
@@ -123,7 +123,7 @@ public class SignupMenu {
         System.out.println("Please re-enter your password here:");
         String confirmation = scanner.nextLine();
         while (!password.equals(confirmation)) {
-            if (SignupMenuCommands.getMatcher(confirmation, SignupMenuCommands.END) != null) System.exit(0);
+            if (SignupMenuCommands.getMatcher(confirmation, SignupMenuCommands.END) != null) Utils.endStronghold();
             else if (SignupMenuCommands.getMatcher(confirmation, SignupMenuCommands.BACK) != null) return null;
             System.out.println("password and its confirmation doesn't match");
             confirmation = EntryMenu.getScanner().nextLine();
@@ -139,7 +139,7 @@ public class SignupMenu {
         String command = scanner.nextLine();
         SignupMenuMessages message;
         while ((pickQuestionMatcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.PICK_QUESTION)) == null) {
-            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) System.exit(0);
+            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) Utils.endStronghold();
             else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) return;
             System.out.println("Invalid command");
             command = scanner.nextLine();
