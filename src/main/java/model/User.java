@@ -1,7 +1,5 @@
 package model;
 
-import controller.Utils;
-
 import java.util.ArrayList;
 
 public class User {

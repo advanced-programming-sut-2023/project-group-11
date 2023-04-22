@@ -49,8 +49,10 @@ public class SignupMenu {
     private static void checkRegister(Matcher registerMatcher) {
         String username = registerMatcher.group("username");
         String password = registerMatcher.group("password");
-        password = Arrays.asList(password.split(" ")).get(0);
         String slogan = registerMatcher.group("slogan");
+        username = Utils.removeDoubleQuotation(username);
+        slogan = Utils.removeDoubleQuotation(slogan);
+        password = Arrays.asList(password.split(" ")).get(0);
         SignupMenuMessages message = SignupMenuController.checkRegister(registerMatcher, username);
         switch (message) {
             case EMPTY_FIELD -> System.out.println("You can't have an empty field");

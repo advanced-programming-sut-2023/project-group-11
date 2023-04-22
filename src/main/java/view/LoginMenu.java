@@ -1,5 +1,6 @@
 package view;
 
+import com.mgnt.utils.TimeUtils;
 import controller.LoginMenuController;
 import controller.Utils;
 import view.enums.commands.LoginMenuCommands;
@@ -7,9 +8,11 @@ import view.enums.messages.LoginMenuMessages;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 
 public class LoginMenu {
+    private static int sleepTime = 5;
     public static void run() {
         System.out.println("You have entered Login Menu!");
         Scanner scanner = EntryMenu.getScanner();
@@ -35,9 +38,15 @@ public class LoginMenu {
         LoginMenuMessages message = LoginMenuController.checkLogin(matcher);
         switch (message) {
             case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
-            case INCORRECT_PASSWORD -> System.out.println("Username and password didn't match!");
+            case INCORRECT_PASSWORD -> {
+                System.out.println("Username and password didn't match!");
+                System.out.println("You can't login for " + sleepTime + " seconds");
+                TimeUtils.sleepFor(sleepTime, TimeUnit.SECONDS);//TODO: sleep and doesn't input any command!
+                sleepTime *= 2;
+            }
             case SUCCESS -> {
                 if (checkCaptchaConfirmation()) {
+                    sleepTime = 5;
                     System.out.println("user logged in successfully!");
                     LoginMenuController.loginUser(matcher);
                     MainMenu.run();

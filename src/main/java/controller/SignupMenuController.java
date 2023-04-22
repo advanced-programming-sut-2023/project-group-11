@@ -120,12 +120,14 @@ public class SignupMenuController {
     public static void createUser(Matcher pickQuestionMatcher, Matcher registerMatcher, String username, String password, String slogan) {
         String email = registerMatcher.group("email").toLowerCase();
         String nickname = registerMatcher.group("nickname");
+        nickname = Utils.removeDoubleQuotation(nickname);
         ArrayList<String> recoveryQuestions = Stronghold.getRecoveryQuestions();
         int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
-        String recoveryAnswer = pickQuestionMatcher.group("answer");
         String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
-        password = Utils.encryptField(password);
+        String recoveryAnswer = pickQuestionMatcher.group("answer");
+        recoveryAnswer = Utils.removeDoubleQuotation(recoveryAnswer);
         recoveryAnswer = Utils.encryptField(recoveryAnswer);
+        password = Utils.encryptField(password);
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
         Utils.updateDatabase("users");
     }

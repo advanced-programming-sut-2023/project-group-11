@@ -8,43 +8,42 @@ import java.util.regex.Matcher;
 
 public class LoginMenuController {
     public static LoginMenuMessages checkLogin(Matcher matcher) {
-        String username = matcher.group("username");
+        User user = getUserByUsername(matcher);
         String password = matcher.group("password");
-        User user = Stronghold.getUserByUsername(username);
         if (user == null) return LoginMenuMessages.USERNAME_NOT_EXIST;
-        if (!user.isPasswordCorrect(Utils.encryptField(password))) return LoginMenuMessages.INCORRECT_PASSWORD;
+        if (!user.isPasswordCorrect(Utils.encryptField(password))) {
+
+            return LoginMenuMessages.INCORRECT_PASSWORD;
+        }
         if (matcher.group("stayLoggedIn") != null) user.setStayLoggedIn(true);
         return LoginMenuMessages.SUCCESS;
     }
 
     public static void loginUser(Matcher matcher) {
-        Stronghold.setCurrentUser(Stronghold.getUserByUsername(matcher.group("username")));
+        User user = getUserByUsername(matcher);
+        Stronghold.setCurrentUser(user);
     }
 
     public static LoginMenuMessages checkForgotPassword(Matcher matcher) {
-        String username = matcher.group("username");
-        User user = Stronghold.getUserByUsername(username);
+        User user = getUserByUsername(matcher);
         if (user == null) return LoginMenuMessages.USERNAME_NOT_EXIST;
         return LoginMenuMessages.SUCCESS;
     }
 
     public static LoginMenuMessages checkRecoveryAnswer(Matcher matcher, String recoveryAnswer) {
-        String username = matcher.group("username");
-        User user = Stronghold.getUserByUsername(username);
+        User user = getUserByUsername(matcher);
         if (!user.isRecoveryAnswerCorrect(Utils.encryptField(recoveryAnswer)))
             return LoginMenuMessages.WRONG_RECOVERY_ANSWER;
         return LoginMenuMessages.SUCCESS;
     }
 
     public static String showRecoveryQuestion(Matcher matcher) {
-        String username = matcher.group("username");
-        User user = Stronghold.getUserByUsername(username);
+        User user = getUserByUsername(matcher);
         return user.getRecoveryQuestion();
     }
 
     public static void setNewPassword(Matcher matcher, String password) {
-        String username = matcher.group("username");
-        User user = Stronghold.getUserByUsername(username);
+        User user = getUserByUsername(matcher);
         user.setPassword(Utils.encryptField(password));
         Utils.updateDatabase("users");
     }
@@ -53,5 +52,10 @@ public class LoginMenuController {
         Stronghold.getCurrentUser().setStayLoggedIn(false);
         Stronghold.setCurrentUser(null);
         return "user logged out successfully!";
+    }
+
+    public static User getUserByUsername(Matcher matcher) {
+        String username = matcher.group("username");
+        return Stronghold.getUserByUsername(username);
     }
 }
