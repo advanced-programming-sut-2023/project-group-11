@@ -39,6 +39,7 @@ public class MapEditMenu {
                     System.out.println("Repeated map name! Try again!");
                     continue;
                 }
+                System.out.println("Enter size for the \"" + mapName + "\" map");
                 int size = Integer.parseInt(scanner.nextLine());
                 if (size <= 10 || size >= 500) {
                     System.out.println("Invalid size! Try again!");
@@ -51,6 +52,8 @@ public class MapEditMenu {
                 System.out.println("Invalid input! Try again!");
                 continue;
             }
+
+            System.out.println("Now you can edit the map!");
 
             while (true) {
                 input = scanner.nextLine();

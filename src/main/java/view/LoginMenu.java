@@ -35,6 +35,9 @@ public class LoginMenu {
         switch (message) {
             case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
             case INCORRECT_PASSWORD -> System.out.println("Username and password didn't match!");
+            case LOCKED_ACCOUNT ->
+                    System.out.println("Your account is loked for " +
+                            (double) (LoginMenuController.getLeftLockedTime(matcher) / 1000) + " seconds more!");
             case SUCCESS -> {
                 if (Menu.checkCaptchaConfirmation()) {
                     System.out.println("user logged in successfully!");

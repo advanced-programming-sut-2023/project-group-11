@@ -11,13 +11,23 @@ public class LoginMenuController {
     public static LoginMenuMessages checkLogin(Matcher matcher) {
         User user = getUserByUsername(matcher);
         String password = matcher.group("password");
+
         if (user == null) return LoginMenuMessages.USERNAME_NOT_EXIST;
-        if (!user.isPasswordCorrect(Utils.encryptField(password))) {
-            int currentDelay = Delay.getDelay(user);
-            currentDelay += currentDelay == 0 ? 5 : currentDelay;
-            Delay.addDelayedUser(user, new Delay(System.currentTimeMillis()));
+        else if (!user.isPasswordCorrect(Utils.encryptField(password))) {
+            long currentTime = System.currentTimeMillis();
+            if (!Delay.hasUser(user))
+                Delay.addDelayedUser(user, new Delay(currentTime));
+            Delay delay = Delay.getDelayByUser(user);
+            delay.setDelayTime(delay.getDelayTime() == 0 ? 5000 : 2 * delay.getDelayTime());
+            delay.setLastLoginCommandTime(currentTime);
             return LoginMenuMessages.INCORRECT_PASSWORD;
+        } else if (Delay.getDelayByUser(user) != null) {
+            long currentTime = System.currentTimeMillis();
+            Delay delay = Delay.getDelayByUser(user);
+            if (delay.getDelayTime() > currentTime - delay.getLastLoginCommandTime())
+                return LoginMenuMessages.LOCKED_ACCOUNT;
         }
+
         if (matcher.group("stayLoggedIn") != null) user.setStayLoggedIn(true);
         return LoginMenuMessages.SUCCESS;
     }
@@ -61,4 +71,11 @@ public class LoginMenuController {
         String username = matcher.group("username");
         return Stronghold.getUserByUsername(username);
     }
+
+    public static long getLeftLockedTime(Matcher matcher) {
+        User user = getUserByUsername(matcher);
+        Delay delay = Delay.getDelayByUser(user);
+        return (delay.getDelayTime() - System.currentTimeMillis() + delay.getLastLoginCommandTime());
+    }
+
 }

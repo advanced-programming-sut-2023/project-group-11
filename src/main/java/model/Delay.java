@@ -5,26 +5,33 @@ import java.util.HashMap;
 public class Delay {
     private static final HashMap<User, Delay> delayedUsers = new HashMap<>();
     private long lastLoginCommandTime;
-    private int delayTime = 0;
+    private long delayTime = 0;
+
+    public static Delay getDelayByUser(User user) {
+        return delayedUsers.get(user);
+    }
 
     public static void addDelayedUser(User user, Delay delay) {
         delayedUsers.put(user, delay);
     }
 
-    public void setDelayTime(int delayTime) {
+    public static boolean hasUser(User user) {
+        return delayedUsers.containsKey(user);
+    }
+
+    public void setDelayTime(long delayTime) {
         this.delayTime = delayTime;
     }
 
-    public static Integer getDelay(User user) {
-        Delay delay = delayedUsers.get(user);
-        return delayedUsers.get(user) == null ? null : delay.delayTime;
+    public long getDelayTime() {
+        return delayTime;
     }
 
     public void setLastLoginCommandTime(long lastLoginCommandTime) {
         this.lastLoginCommandTime = lastLoginCommandTime;
     }
 
-    public long getLastCommandTime() {
+    public long getLastLoginCommandTime() {
         return lastLoginCommandTime;
     }
 
