@@ -89,7 +89,6 @@ public class Utils {
         }
     }
 
-
     public static JSONArray makeJsonArrayFromArraylist(String field) {
         JSONArray jsonArray = new JSONArray();
         switch (field) {

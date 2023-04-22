@@ -19,16 +19,18 @@ public class MapEditMenu {
         while (true) {
             System.out.println("Maps:");
             System.out.println(MapEditMenuController.getMapsList());
-            System.out.println("Please choose your menu name:");
-            System.out.println("(Type \"exit\" for going back to main menu)");
+            System.out.println("Please choose your map name:");
+            System.out.println("(Type \"back\" for going back to main menu)");
             System.out.println("(Type \"new map\" for making a new map)");
 
             input = scanner.nextLine();
 
-            if (input.matches("exit")) return;
-            else if (MapEditMenuController.isMapName(input))
-                MapEditMenuController.setCurrentMap(input);
-            else if (input.matches("new map")) {
+            if (MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.BACK) != null) {
+                System.out.println("You have entered main menu!");
+                return;
+            } else if (MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.SHOW_CURRENT_MENU) != null)
+                System.out.println("Map edit menu");
+            else if (MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.NEW_MAP) != null) {
                 System.out.println("Enter the map's name:");
                 String mapName = scanner.nextLine();
                 if (MapEditMenuController.isMapName(mapName)) {
@@ -41,7 +43,9 @@ public class MapEditMenu {
                     continue;
                 }
                 MapEditMenuController.setNewMapAsCurrentMap(mapName, size);
-            } else {
+            } else if (MapEditMenuController.isMapName(input))
+                MapEditMenuController.setCurrentMap(input);
+            else {
                 System.out.println("Invalid input! Try again!");
                 continue;
             }
@@ -57,7 +61,7 @@ public class MapEditMenu {
                     checkDropCliff(matcher);
                 else if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.DROP_TREE)) != null)
                     checkDropTree(matcher);
-                else if (input.matches("save")) {
+                else if (MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.SAVE) != null) {
                     System.out.println("Map saved!");
                     MapEditMenuController.saveMap();
                     break;

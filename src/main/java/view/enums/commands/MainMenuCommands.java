@@ -4,7 +4,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum MainMenuCommands {
-    COMMAND(""),
+    END("end"),
+    LOGOUT("logout"),
+    SHOW_CURRENT_MENU("show current menu"),
+    ENTER_MAP_EDIT_MENU("enter map edit menu"),
+    ENTER_PROFILE_MENU("enter profile menu"),
+    START_GAME(""),
     ;
 
     private final String regex;
