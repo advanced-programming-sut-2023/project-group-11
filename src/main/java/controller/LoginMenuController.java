@@ -28,7 +28,10 @@ public class LoginMenuController {
                 return LoginMenuMessages.LOCKED_ACCOUNT;
         }
 
-        if (matcher.group("stayLoggedIn") != null) user.setStayLoggedIn(true);
+        if (matcher.group("stayLoggedIn") != null) {
+            user.setStayLoggedIn(true);
+            Utils.updateDatabase("users");
+        }
         return LoginMenuMessages.SUCCESS;
     }
 
@@ -59,12 +62,6 @@ public class LoginMenuController {
         User user = getUserByUsername(matcher);
         user.setPassword(Utils.encryptField(password));
         Utils.updateDatabase("users");
-    }
-
-    public static String logout() {
-        Stronghold.getCurrentUser().setStayLoggedIn(false);
-        Stronghold.setCurrentUser(null);
-        return "user logged out successfully!";
     }
 
     public static User getUserByUsername(Matcher matcher) {

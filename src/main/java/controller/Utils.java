@@ -124,4 +124,12 @@ public class Utils {
             if (user.getUsername().equals(name)) return true;
         return false;
     }
+
+    public static String logout() {
+        User currentUser = Stronghold.getCurrentUser();
+        currentUser.setStayLoggedIn(false);
+        Stronghold.setCurrentUser(null);
+        updateDatabase("users");
+        return "Logged out!";
+    }
 }
