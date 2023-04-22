@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 
 public class LoginMenu {
     public static void run() {
-        System.out.println("You have entered Login Menu!");
         Scanner scanner = EntryMenu.getScanner();
         Matcher matcher;
         String command = scanner.nextLine();
@@ -24,7 +23,7 @@ public class LoginMenu {
             else if ((matcher = LoginMenuCommands.getMatcher(command, LoginMenuCommands.FORGOT_PASSWORD)) != null)
                 checkForgotPassword(matcher);
             else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.LOGOUT) != null)
-                System.out.println(LoginMenuController.logout());
+                System.out.println(Utils.logout());
             else System.out.println("Invalid command!");
             command = scanner.nextLine();
         }
@@ -35,13 +34,12 @@ public class LoginMenu {
         switch (message) {
             case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
             case INCORRECT_PASSWORD -> System.out.println("Username and password didn't match!");
-            case LOCKED_ACCOUNT ->
-                    System.out.println("Your account is loked for " +
-                            (double) (LoginMenuController.getLeftLockedTime(matcher) / 1000) + " seconds more!");
+            case LOCKED_ACCOUNT -> System.out.println("Your account is locked for " +
+                    LoginMenuController.getLeftLockedTime(matcher) / 1000.0 + " seconds more!");
             case SUCCESS -> {
                 if (Menu.checkCaptchaConfirmation()) {
-                    System.out.println("user logged in successfully!");
                     LoginMenuController.loginUser(matcher);
+                    System.out.println("Logged in! Entered Main Menu");
                     MainMenu.run();
                 }
             }

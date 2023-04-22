@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
 
 public class SignupMenu {
     public static void run() {
-        System.out.println("You have entered signup menu!");
         Scanner scanner = EntryMenu.getScanner();
         Matcher matcher;
         String command = scanner.nextLine();

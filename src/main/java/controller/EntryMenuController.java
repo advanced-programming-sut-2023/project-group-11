@@ -46,7 +46,8 @@ public class EntryMenuController {
         String recoveryAnswer = (String) user.get("recoveryAnswer");
         String slogan = (String) user.get("slogan");
 
-        new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
+        User previousUser = new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
+        if ((Boolean) user.get("stayLoggedIn")) previousUser.setStayLoggedIn(true);
     }
 
     private static void parseMapObject(JSONObject map) {
