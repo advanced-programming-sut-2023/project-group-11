@@ -6,10 +6,20 @@ import model.people.Units;
 import java.util.ArrayList;
 
 public class Tile {
-    private Texture texture = Texture.SAND;
+    private Texture texture;
     private Building building = null;
     private ArrayList<Units> units = new ArrayList<>();
-    private Tree tree = null;
+    private Tree tree;
+
+    public Tile() {
+        texture = Texture.SAND;
+        tree = null;
+    }
+
+    public Tile(Texture texture, Tree tree) {
+        this.texture = texture;
+        this.tree = tree;
+    }
 
     public Texture getTexture() {
         return texture;
