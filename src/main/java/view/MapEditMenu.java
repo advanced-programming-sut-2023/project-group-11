@@ -1,6 +1,7 @@
 package view;
 
 import controller.MapEditMenuController;
+import controller.Utils;
 import view.enums.commands.MapEditMenuCommands;
 import view.enums.messages.MapEditMenuMessages;
 
@@ -33,6 +34,8 @@ public class MapEditMenu {
             else if (MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.NEW_MAP) != null) {
                 System.out.println("Enter the map's name:");
                 String mapName = scanner.nextLine();
+                if (mapName.charAt(0) == '\"')
+                    mapName = Utils.removeDoubleQuotation(mapName);
                 if (MapEditMenuController.isMapName(mapName)) {
                     System.out.println("Repeated map name! Try again!");
                     continue;

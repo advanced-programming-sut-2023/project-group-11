@@ -81,6 +81,7 @@ public class Utils {
     public static boolean checkCaptchaConfirmation(int enteredCaptcha, int captchaNumber) {
         return captchaNumber == enteredCaptcha;
     }
+
     public static void updateDatabase(String field) {
         JSONArray jsonArray = makeJsonArrayFromArraylist(field);
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
@@ -98,5 +99,12 @@ public class Utils {
             case "maps" -> jsonArray.addAll(Stronghold.getMaps());
         }
         return jsonArray;
+    }
+
+    public static String  removeDoubleQuotation(String name) {
+        StringBuilder temp = new StringBuilder(name);
+        temp.deleteCharAt(name.length() - 1);
+        temp.deleteCharAt(0);
+        return temp.toString();
     }
 }
