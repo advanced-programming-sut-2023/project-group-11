@@ -117,10 +117,6 @@ public class SignupMenuController {
         return null;
     }
 
-    public static boolean checkCaptchaConfirmation(int enteredCaptcha, int captchaNumber) {
-        return captchaNumber == enteredCaptcha;
-    }
-
     public static void createUser(Matcher pickQuestionMatcher, Matcher registerMatcher, String username, String password, String slogan) {
         String email = registerMatcher.group("email").toLowerCase();
         String nickname = registerMatcher.group("nickname");
@@ -128,6 +124,8 @@ public class SignupMenuController {
         int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
         String recoveryAnswer = pickQuestionMatcher.group("answer");
         String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
+        password = Utils.encryptField(password);
+        recoveryAnswer = Utils.encryptField(recoveryAnswer);
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
         Utils.updateDatabase("users");
     }

@@ -59,7 +59,6 @@ public class Utils {
         graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-
         StringBuilder captcha = new StringBuilder();
         graphics.drawString(Integer.toString(captchaNumber), 15, 25);
 
@@ -79,6 +78,9 @@ public class Utils {
         return captcha.toString();
     }
 
+    public static boolean checkCaptchaConfirmation(int enteredCaptcha, int captchaNumber) {
+        return captchaNumber == enteredCaptcha;
+    }
     public static void updateDatabase(String field) {
         JSONArray jsonArray = makeJsonArrayFromArraylist(field);
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();

@@ -14,14 +14,15 @@ public class User {
     private final String recoveryAnswer;
     private final ArrayList<Trade> previousTrades = new ArrayList<>();
     private int highScore;
+    private boolean stayLoggedIn;
 
     public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer, String slogan) {
         this.username = username;
-        this.password = Utils.encryptField(password);
+        this.password = password;
         this.email = email;
         this.nickname = nickname;
         this.recoveryQuestion = recoveryQuestion;
-        this.recoveryAnswer = Utils.encryptField(recoveryAnswer);
+        this.recoveryAnswer = recoveryAnswer;
         this.slogan = slogan;
         Stronghold.addUser(this);
     }
@@ -82,6 +83,14 @@ public class User {
         return this.recoveryAnswer.equals(recoveryAnswer);
     }
 
+    public boolean isStayLoggedIn() {
+        return stayLoggedIn;
+    }
+
+    public void setStayLoggedIn(boolean stayLoggedIn) {
+        this.stayLoggedIn = stayLoggedIn;
+    }
+
     public void addTrade(Trade trade) {
         previousTrades.add(trade);
     }
@@ -94,5 +103,4 @@ public class User {
                     + previousTrade.price() + previousTrade.message() + "\n";
         return output;
     }
-
 }

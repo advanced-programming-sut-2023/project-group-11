@@ -12,7 +12,6 @@ public class Stronghold {
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
     private static User currentUser;
     private static Governance currentGovernance;
-    private static boolean stayLoggedIn;
 
     static {
         recoveryQuestions.add("What is my father's name?");
@@ -54,14 +53,6 @@ public class Stronghold {
     public static int getRankByUsername(String name) {
         sortUsersRank();
         return 0;
-    }
-
-    public static boolean isStayLoggedIn() {
-        return stayLoggedIn;
-    }
-
-    public static void setStayLoggedIn(boolean stayLoggedIn) {
-        Stronghold.stayLoggedIn = stayLoggedIn;
     }
 
     public static Governance getCurrentGovernance() {

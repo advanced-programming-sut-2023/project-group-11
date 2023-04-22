@@ -4,9 +4,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum LoginMenuCommands {
+    END("end"),
+    BACK("back"),
+    SHOW_CURRENT_MENU("show current menu"),
     LOGIN("user login" +
             "(( (?<usernameTag>-u) (?<username>\".*?[^\\\\]\"|(\\\"|[^\" ])*))" +
-            "|( (?<passwordTag>-p) (?<password>\\S*))){2}"),
+            "|( (?<passwordTag>-p) (?<password>\\S*))){2}" +
+            "( (?<stayLoggedIn>--stay-logged-in))?"),
+    FORGOT_PASSWORD("forgot my password" +
+            " -u (?<username>\".*?[^\\\\]\"|(\\\"|[^\" ])*)"),
+    LOGOUT("user logout"),
     ;
 
     private final String regex;

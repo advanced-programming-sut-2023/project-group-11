@@ -51,7 +51,10 @@ public class EntryMenuController {
         new Map(name, mapTiles, size);
     }
 
-    public static boolean isStayLoggedIn() {
-        return Stronghold.isStayLoggedIn();
+    public static User getStayLoggedIn() {
+        for (User user : Stronghold.getUsers()) {
+            if (user.isStayLoggedIn()) return user;
+        }
+        return null;
     }
 }
