@@ -1,6 +1,7 @@
 package model.people.enums;
 
 public enum Damage {
+    NO_ATTACK(0),
     VERY_LOW(20),
     LOW(30),
     MEDIUM(40),

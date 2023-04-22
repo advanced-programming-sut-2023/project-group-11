@@ -24,7 +24,7 @@ public class Utils {
     }
 
     public static boolean isValidUsernameFormat(String username) {
-        return username.matches("[\\w ]+");
+        return username.matches("\\w+");
     }
 
     public static boolean usernameExist(String username) {
@@ -101,13 +101,10 @@ public class Utils {
         return jsonArray;
     }
 
-    public static String removeDoubleQuotation(String name) {
-        if (name != null && name.charAt(0) == '\"') {
-            StringBuilder temp = new StringBuilder(name);
-            temp.deleteCharAt(name.length() - 1);
-            temp.deleteCharAt(0);
-            return temp.toString();
-        }
-        return name;
+    public static String  removeDoubleQuotation(String name) {
+        StringBuilder temp = new StringBuilder(name);
+        temp.deleteCharAt(name.length() - 1);
+        temp.deleteCharAt(0);
+        return temp.toString();
     }
 }

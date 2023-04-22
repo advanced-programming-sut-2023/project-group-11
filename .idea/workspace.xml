@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/TroopTypes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/MainMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MainMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/MapEditMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MapEditMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Assassin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Engineer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Engineer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Ladderman.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/MeleeTroop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/RangedTroop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/Damage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Damage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/MeleeTroops.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/RangedTroops.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +25,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="package.json" />
+        <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -65,6 +72,10 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="controller.MainMenuController" />
+      <recent name="controller.Utils" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
@@ -98,7 +109,7 @@
       <workItem from="1682033678428" duration="163000" />
       <workItem from="1682082803153" duration="3909000" />
       <workItem from="1682104812915" duration="9199000" />
-      <workItem from="1682169932786" duration="3338000" />
+      <workItem from="1682169932786" duration="13180000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -198,7 +209,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682170102764</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Remove &quot;s functiona dded &amp; game menu &amp; map edit menu regexes edited">
+      <created>1682173358490</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1682173358490</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Main menu ended &amp; remove &quot;s updated">
+      <created>1682179028493</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1682179028493</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,7 +279,9 @@
     <MESSAGE value="Making a new map in map edit menu &amp; Add map to database" />
     <MESSAGE value="Edit adding to database &amp; save maps completed" />
     <MESSAGE value="Map edit menu updated &amp; Main menu added incompletely" />
-    <option name="LAST_COMMIT_MESSAGE" value="Map edit menu updated &amp; Main menu added incompletely" />
+    <MESSAGE value="Remove &quot;s functiona dded &amp; game menu &amp; map edit menu regexes edited" />
+    <MESSAGE value="Main menu ended &amp; remove &quot;s updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Main menu ended &amp; remove &quot;s updated" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

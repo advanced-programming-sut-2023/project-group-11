@@ -2,5 +2,7 @@ package view.enums.messages;
 
 public enum MainMenuMessages {
     SUCCESS,
-    USERS_INVALID,
+    INVALID_COMMAND,
+    USER_NOT_EXIST,
+    MAP_NOT_EXIST,
 }

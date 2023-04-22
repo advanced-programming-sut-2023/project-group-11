@@ -34,9 +34,8 @@ public class MapEditMenu {
             else if (MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.NEW_MAP) != null) {
                 System.out.println("Enter the map's name:");
                 String mapName = scanner.nextLine();
-                if (mapName.charAt(0) == '\"')
-                    mapName = Utils.removeDoubleQuotation(mapName);
-                if (MapEditMenuController.isMapName(mapName)) {
+                mapName = Utils.removeDoubleQuotation(mapName);
+                if (Utils.isMapName(mapName)) {
                     System.out.println("Repeated map name! Try again!");
                     continue;
                 }
@@ -46,7 +45,7 @@ public class MapEditMenu {
                     continue;
                 }
                 MapEditMenuController.setNewMapAsCurrentMap(mapName, size);
-            } else if (MapEditMenuController.isMapName(input))
+            } else if (Utils.isMapName(input))
                 MapEditMenuController.setCurrentMap(input);
             else {
                 System.out.println("Invalid input! Try again!");
