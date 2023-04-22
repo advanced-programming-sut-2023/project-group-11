@@ -75,10 +75,12 @@ public class EntryMenuController {
     }
 
     private static Tile parseTileObject(JSONObject tile) {
-        String texture = (String) tile.get("texture");
-        String tree = (String) tile.get("tree");
+        Texture texture = Texture.getTextureByName(((String) tile.get("texture")).toLowerCase());
+        Tree tree = null;
+        if ((String) tile.get("tree") != null)
+            tree = new Tree((String) tile.get("tree"));
 
-        return new Tile(Texture.getTextureByName(texture), new Tree(tree));
+        return new Tile(texture, tree);
     }
 
     public static User getStayLoggedIn() {
