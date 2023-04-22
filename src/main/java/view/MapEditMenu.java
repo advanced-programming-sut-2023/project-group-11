@@ -90,8 +90,7 @@ public class MapEditMenu {
         mapEditMenuMessage = MapEditMenuController.checkSetTexture(matcher);
 
         switch (mapEditMenuMessage) {
-            case SUCCESS -> System.out.println("Map edited successfully in x=" + matcher.group("x") +
-                    " and y=" + matcher.group("y") + "!");
+            case SUCCESS -> System.out.println("Map edited successfully!");
             case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INVALID_TEXTURE_TYPE -> System.out.println("Invalid texture type!");
             case INVALID_COORDINATE -> System.out.println("Invalid coordinates!");

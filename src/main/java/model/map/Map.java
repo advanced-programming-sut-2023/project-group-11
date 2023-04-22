@@ -12,9 +12,12 @@ public class Map {
         this.size = size;
 
         this.map  = new Tile[size][size];
-        for (Tile[] tiles : map)
-            for (Tile tile : tiles)
-                tile = new Tile();
+        for (int i = 0; i < size; i++) {
+            map[i] = new Tile[size];
+            for (int j = 0; j < size; j++) {
+                map[i][j] = new Tile();
+            }
+        }
         Stronghold.addMap(this);
     }
 
