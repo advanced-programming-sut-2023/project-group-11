@@ -53,9 +53,11 @@ public class EntryMenuController {
     }
 
     public static User getStayLoggedIn() {
-        for (User user : Stronghold.getUsers()) {
-            if (user.isStayLoggedIn()) return user;
-        }
+        for (User user : Stronghold.getUsers())
+            if (user.isStayLoggedIn()) {
+                Stronghold.setCurrentUser(user);
+                return user;
+            }
         return null;
     }
 }
