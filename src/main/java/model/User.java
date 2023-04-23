@@ -10,7 +10,6 @@ public class User {
     private String slogan;
     private final String recoveryQuestion;
     private final String recoveryAnswer;
-    private final ArrayList<Trade> previousTrades = new ArrayList<>();
     private int highScore;
     private boolean stayLoggedIn;
 
@@ -89,16 +88,4 @@ public class User {
         this.stayLoggedIn = stayLoggedIn;
     }
 
-    public void addTrade(Trade trade) {
-        previousTrades.add(trade);
-    }
-
-    public String printTrades() {
-        String output = "";
-        int i = 1;
-        for (Trade previousTrade : previousTrades)
-            output += (i++) + "- " + previousTrade.resourceType() + previousTrade.resourceAmount()
-                    + previousTrade.price() + previousTrade.message() + "\n";
-        return output;
-    }
 }

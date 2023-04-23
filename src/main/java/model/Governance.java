@@ -4,6 +4,7 @@ import model.resources.Food;
 import model.resources.Resource;
 import model.resources.TroopEquipment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Governance {
@@ -19,6 +20,7 @@ public class Governance {
     private int fearFactor = 0;
     private int foodFactor = 0;
     private int religiousFactor = 0;
+    private final ArrayList<Trade> previousTrades = new ArrayList<>();
     //popularity = taxFactor + fearFactor + foodFactor + religiousFactor
     private final HashMap<Resource, Integer> resources = new HashMap<>();
     private final HashMap<Food, Integer> foods = new HashMap<>();
@@ -139,6 +141,8 @@ public class Governance {
         this.religiousFactor = religiousFactor;
     }
 
+    public void addTrade(Trade trade) { previousTrades.add(trade); }
+
     public void addResource(Resource resource, int count) {
         resources.put(resource, count);
     }
@@ -165,5 +169,12 @@ public class Governance {
 
     public Governance(User owner) {
         this.owner = owner;
+    }
+    public String tradeHistory() {
+        String output = "";
+        int i = 1;
+        for (Trade previousTrade : previousTrades)
+            output += (i++) + "-" + previousTrade;
+        return output;
     }
 }

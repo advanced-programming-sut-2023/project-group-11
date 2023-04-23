@@ -41,6 +41,12 @@ public enum AllResource {
         this.price = price;
     }
 
+    public static Object getAllResourceByName(String name){
+        for (AllResource allResource : AllResource.values())
+            if(allResource.name.equals(name)) return allResource;
+        return null;
+    }
+
     public int getPrice() {
         return price;
     }
