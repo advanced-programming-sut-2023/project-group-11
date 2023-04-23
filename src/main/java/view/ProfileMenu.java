@@ -83,7 +83,9 @@ public class ProfileMenu {
         profileMenuMessage = ProfileMenuController.checkChangePassword(matcher);
 
         switch (profileMenuMessage) {
-            case SUCCESS -> System.out.println("Your password changed successfully!");
+            case SUCCESS -> {
+                if (Menu.checkCaptchaConfirmation()) System.out.println("Your password changed successfully!");
+            }
             case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INCORRECT_PASSWORD -> System.out.println("Incorrect password!");
             case SAME_PASSWORD -> System.out.println("Invalid new password: New password is same as the previous password!");
