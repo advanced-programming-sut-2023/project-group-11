@@ -88,13 +88,6 @@ public class Stronghold {
         return randomSlogans;
     }
 
-    public static String printTrades() {
-        String output = "";
-        int i = 1;
-        for (Trade trade : trades)
-            output += (i++) + "- " + trade.resourceType() + trade.resourceAmount() + trade.price() + trade.message() + "\n";
-        return output;
-    }
 
     public static String printRecoveryQuestions() {
         String output = "";
