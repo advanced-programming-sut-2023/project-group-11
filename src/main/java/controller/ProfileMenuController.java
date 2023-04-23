@@ -1,6 +1,7 @@
 package controller;
 
 import model.Stronghold;
+import model.User;
 import view.enums.messages.ProfileMenuMessages;
 
 import java.util.regex.Matcher;
@@ -38,7 +39,7 @@ public class ProfileMenuController {
     }
 
     public static void changeSlogan(Matcher matcher) {
-        String slogan = Utils.removeDoubleQuotation("field");
+        String slogan = Utils.removeDoubleQuotation(matcher.group("field"));
         Stronghold.getCurrentUser().setSlogan(slogan);
     }
 
@@ -66,9 +67,9 @@ public class ProfileMenuController {
     public static ProfileMenuMessages checkDisplayProfile(Matcher matcher) {
         String field = matcher.group("field");
 
-        if (!(field.equals("highscore") || field.equals("slogan") || field.equals("rank") || field == null))
+        if (!(field == null || field.equals("highscore") || field.equals("slogan") || field.equals("rank")))
             return ProfileMenuMessages.INVALID_COMMAND;
-        else if (field.equals("slogan") && Stronghold.getCurrentUser().getSlogan() == null)
+        else if (field != null && field.equals("slogan") && Stronghold.getCurrentUser().getSlogan() == null)
             return ProfileMenuMessages.EMPTY_SLOGAN;
 
         return ProfileMenuMessages.SUCCESS;
@@ -76,16 +77,20 @@ public class ProfileMenuController {
 
     public static String displayProfile(String field) {
         String result = "";
+        User user = Stronghold.getCurrentUser();
 
-        switch (field) {
-            case "highscore" -> result = "HighScore = " + Stronghold.getCurrentUser().getHighScore();
-            case "rank" -> result = "Rank = " + Stronghold.getRankByUsername(Stronghold.getCurrentUser().getUsername());
-            case "slogan" -> result = "Slogan = " + Stronghold.getCurrentUser().getSlogan();
-            default -> {
-                result += "** UserName: " + Stronghold.getCurrentUser().getUsername() + " **\n";
-                result += "HighScore = " + Stronghold.getCurrentUser().getHighScore() + '\n';
-                result += "Rank = " + Stronghold.getRankByUsername(Stronghold.getCurrentUser().getUsername()) + '\n';
-                result += "Slogan = " + Stronghold.getCurrentUser().getSlogan();
+        if (field == null) {
+            result += "** UserName: " + user.getUsername() + " **\n";
+            result += "HighScore = " + user.getHighScore() + '\n';
+            result += "Rank = " + Stronghold.getRankByUsername(user.getUsername());
+            if (user.getSlogan() != null)
+                result += "\nSlogan = " + user.getSlogan();
+        }
+        else {
+            switch (field) {
+                case "highscore" -> result = "HighScore = " + user.getHighScore();
+                case "rank" -> result = "Rank = " + Stronghold.getRankByUsername(user.getUsername());
+                case "slogan" -> result = "Slogan = " + user.getSlogan();
             }
         }
         return result;
