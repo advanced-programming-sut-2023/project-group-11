@@ -13,7 +13,7 @@ import view.enums.messages.ShowMapMenuMessages;
 import java.util.regex.Matcher;
 
 public class ShowMapMenuController {
-    public static ShowMapMenuMessages checkShowDetails(Matcher matcher, String command) {
+    public static ShowMapMenuMessages checkShowDetails(Matcher matcher) {
         if (!Utils.isValidMapTags(matcher)) return ShowMapMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
@@ -63,24 +63,22 @@ public class ShowMapMenuController {
                 StringUtils.countMatches(command, "left") <= 1;
     }
 
-    public static String showMap(String name, int x, int y) {
+    public static String showMap(String name, int x, int y) {//TODO: in Utils?
         String output = "";
         Map map = Stronghold.getMapByName(name);
         AnsiFormat COLOR;
-        for (int i = (Math.max(x - 5, 0)); i < x + 5 && i < map.getSize(); i++) {
-            for (int j = (Math.max(y - 25, 0)); j < y + 25 && j < map.getSize(); j++) {
+        for (int i = (Math.max(x - 7, 0)); i < x + 7 && i < map.getSize(); i++) {
+            for (int j = (Math.max(y - 50, 0)); j < y + 50 && j < map.getSize(); j++) {
                 if (i % 4 == 0) output += "-";
                 else if (j % 7 == 0) output += "|";
                 else {
                     Tile tile = map.getTile(i, j);
                     if (i == x && j == y) COLOR = Color.BLACK_BACKGROUND.getColorCode();
                     else COLOR = tile.getTexture().getColor().getColorCode();
-                    if (tile.getUnits().size() > 0)
-                        output += (Ansi.colorize("S", COLOR));
-                    else if (tile.getBuilding() != null)
-                        output += (Ansi.colorize("B", COLOR));
-                    else if (tile.getTree() != null)
-                        output += (Ansi.colorize("T", COLOR));
+
+                    if (tile.getUnits().size() > 0) output += (Ansi.colorize("S", COLOR));
+                    else if (tile.getBuilding() != null) output += (Ansi.colorize("B", COLOR));
+                    else if (tile.getTree() != null) output += (Ansi.colorize("T", COLOR));
                     else output += (Ansi.colorize(".", COLOR));
                 }
             }
