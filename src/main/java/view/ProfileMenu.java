@@ -34,7 +34,7 @@ public class ProfileMenu {
             else if ((matcher = ProfileMenuCommands.getMatcher(input, ProfileMenuCommands.PROFILE_DISPLAY)) != null)
                 checkDisplayProfile(matcher);
             else if (ProfileMenuCommands.getMatcher(input, ProfileMenuCommands.REMOVE_SLOGAN) != null)
-                checkRemoveSlogan();
+                removeSlogan();
             else System.out.println("Invalid command!");
         }
     }
@@ -87,19 +87,25 @@ public class ProfileMenu {
             case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INCORRECT_PASSWORD -> System.out.println("Incorrect password!");
             case SAME_PASSWORD -> System.out.println("Invalid new password: New password is same as the previous password!");
-            case WEAK_PASSWORD_NO_NUMBER -> System.out.println("Weak password: Password must have one number at least!");
-            case WEAK_PASSWORD_NO_LOWERCASE -> System.out.println("Weak password: Password must have an lowercase character at least!");
-            case WEAK_PASSWORD_NO_UPPERCASE -> System.out.println("Weak password: Password must have an uppercase character at least!");
-            case WEAK_PASSWORD_SHORT_PASSWORD -> System.out.println("Weak password: Password must be more than 6 characters!");
-            case WEAK_PASSWORD_NO_SPECIAL -> System.out.println("Weak password: Password must have a special character at least!");
+            case NO_NUMBER -> System.out.println("Weak password: Password must have one number at least!");
+            case NO_LOWERCASE -> System.out.println("Weak password: Password must have an lowercase character at least!");
+            case NO_UPPERCASE -> System.out.println("Weak password: Password must have an uppercase character at least!");
+            case SHORT_PASSWORD -> System.out.println("Weak password: Password must be more than 6 characters!");
+            case NO_SPECIAL -> System.out.println("Weak password: Password must have a special character at least!");
         }
     }
 
-    private static void checkRemoveSlogan() {
+    private static void checkDisplayProfile(Matcher matcher) {
+        profileMenuMessage = ProfileMenuController.checkDisplayProfile(matcher);
 
+        switch (profileMenuMessage) {
+            case SUCCESS -> System.out.println(ProfileMenuController.displayProfile(matcher.group("field")));
+            case INVALID_COMMAND -> System.out.println("Invalid command!");
+            case EMPTY_SLOGAN -> System.out.println("Slogan is empty!");
+        }
     }
 
-    private static void checkDisplayProfile(Matcher matcher) {
-
+    private static void removeSlogan() {
+        ProfileMenuController.removeSlogan();
     }
 }

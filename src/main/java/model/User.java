@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class User {
+public class User implements Comparable<User>{
     private String username;
     private String password;
     private String nickname;
@@ -88,4 +88,10 @@ public class User {
         this.stayLoggedIn = stayLoggedIn;
     }
 
+    @Override
+    public int compareTo(User o) {
+        if (this.highScore < o.highScore) return 1;
+        else if (this.highScore > o.highScore) return -1;
+        else return this.username.compareTo(o.username);
+    }
 }

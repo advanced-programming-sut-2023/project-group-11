@@ -2,7 +2,6 @@ package controller;
 
 import model.Stronghold;
 import view.enums.messages.ProfileMenuMessages;
-import view.enums.messages.SignupMenuMessages;
 
 import java.util.regex.Matcher;
 
@@ -60,20 +59,44 @@ public class ProfileMenuController {
         return ProfileMenuMessages.SUCCESS;
     }
 
-    public static ProfileMenuMessages checkRemoveSlogan() {
-        return null;
+    public static void removeSlogan() {
+        Stronghold.getCurrentUser().setSlogan(null);
     }
 
-    public static String displayProfile(Matcher matcher) {
-        return null;
+    public static ProfileMenuMessages checkDisplayProfile(Matcher matcher) {
+        String field = matcher.group("field");
+
+        if (!(field.equals("highscore") || field.equals("slogan") || field.equals("rank") || field == null))
+            return ProfileMenuMessages.INVALID_COMMAND;
+        else if (field.equals("slogan") && Stronghold.getCurrentUser().getSlogan() == null)
+            return ProfileMenuMessages.EMPTY_SLOGAN;
+
+        return ProfileMenuMessages.SUCCESS;
+    }
+
+    public static String displayProfile(String field) {
+        String result = "";
+
+        switch (field) {
+            case "highscore" -> result = "HighScore = " + Stronghold.getCurrentUser().getHighScore();
+            case "rank" -> result = "Rank = " + Stronghold.getRankByUsername(Stronghold.getCurrentUser().getUsername());
+            case "slogan" -> result = "Slogan = " + Stronghold.getCurrentUser().getSlogan();
+            default -> {
+                result += "** UserName: " + Stronghold.getCurrentUser().getUsername() + " **\n";
+                result += "HighScore = " + Stronghold.getCurrentUser().getHighScore() + '\n';
+                result += "Rank = " + Stronghold.getRankByUsername(Stronghold.getCurrentUser().getUsername()) + '\n';
+                result += "Slogan = " + Stronghold.getCurrentUser().getSlogan();
+            }
+        }
+        return result;
     }
 
     public static ProfileMenuMessages findWeakPartOfPassword(String password) {
-        if (password.length() < 6) return ProfileMenuMessages.WEAK_PASSWORD_SHORT_PASSWORD;
-        if (!password.matches("(?=.*[A-Z]).*")) return ProfileMenuMessages.WEAK_PASSWORD_NO_UPPERCASE;
-        if (!password.matches("(?=.*[a-z]).*")) return ProfileMenuMessages.WEAK_PASSWORD_NO_LOWERCASE;
-        if (!password.matches("(?=.*[0-9]).*")) return ProfileMenuMessages.WEAK_PASSWORD_NO_NUMBER;
-        if (!password.matches("(?=.*[^A-Za-z0-9]).*")) return ProfileMenuMessages.WEAK_PASSWORD_NO_SPECIAL;
+        if (password.length() < 6) return ProfileMenuMessages.SHORT_PASSWORD;
+        if (!password.matches("(?=.*[A-Z]).*")) return ProfileMenuMessages.NO_UPPERCASE;
+        if (!password.matches("(?=.*[a-z]).*")) return ProfileMenuMessages.NO_LOWERCASE;
+        if (!password.matches("(?=.*[0-9]).*")) return ProfileMenuMessages.NO_NUMBER;
+        if (!password.matches("(?=.*[^A-Za-z0-9]).*")) return ProfileMenuMessages.NO_SPECIAL;
         return null;
     }
 }
