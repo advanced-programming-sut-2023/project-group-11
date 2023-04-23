@@ -5,33 +5,33 @@ import model.map.Map;
 import java.util.ArrayList;
 
 public class Game {
-    private User owner = Stronghold.getCurrentUser();
-    private ArrayList<Governance> governances;
-    private Map map;
-    private int turn = 1;
+    private static User owner = Stronghold.getCurrentUser();
+    private static ArrayList<Governance> governances;
+    private static Map map;
+    private static int turn = 1;
 
     public Game(ArrayList<Governance> governances, Map map) {
         this.governances = governances;
         this.map = map;
     }
 
-    public User getOwner() {
+    public static User getOwner() {
         return owner;
     }
 
-    public ArrayList<Governance> getGovernances() {
+    public static ArrayList<Governance> getGovernances() {
         return governances;
     }
 
-    public Map getMap() {
+    public static Map getMap() {
         return map;
     }
 
-    public int getTurn() {
+    public static int getTurn() {
         return turn;
     }
 
-    public void setTurn(int turn) {
-        this.turn = turn;
+    public static void setTurn(int turn) {
+        turn = turn;
     }
 }
