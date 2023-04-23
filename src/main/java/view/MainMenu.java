@@ -13,9 +13,7 @@ public class MainMenu {
         Scanner scanner = EntryMenu.getScanner();
         String input;
         Matcher matcher;
-
-        ShowMapMenu.run(2,2);
-
+        ShowMapMenu.run(10, 3);
         while (true) {
             input = scanner.nextLine();
 

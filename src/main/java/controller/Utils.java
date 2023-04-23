@@ -122,7 +122,7 @@ public class Utils {
     }
 
     public static boolean isValidCoordinates(int x, int y) {
-        Map map = Stronghold.getCurrentGame().getMap();//TODO: change this
+        Map map = Stronghold.getCurrentGame().getMap();
         int mapSize = map.getSize();
         return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
     }

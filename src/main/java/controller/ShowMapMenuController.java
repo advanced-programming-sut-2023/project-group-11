@@ -63,9 +63,9 @@ public class ShowMapMenuController {
                 StringUtils.countMatches(command, "left") <= 1;
     }
 
-    public static String showMap(int x, int y) {
+    public static String showMap(String name, int x, int y) {
         String output = "";
-        Map map = Stronghold.getCurrentGame().getMap();
+        Map map = Stronghold.getMapByName(name);
         AnsiFormat COLOR;
         for (int i = (Math.max(x - 5, 0)); i < x + 5 && i < map.getSize(); i++) {
             for (int j = (Math.max(y - 25, 0)); j < y + 25 && j < map.getSize(); j++) {
@@ -95,5 +95,9 @@ public class ShowMapMenuController {
         Tile tile = map.getTile(x, y);
         output += tile.toString();
         return output;
+    }
+
+    public static String getCurrentMapName() {
+        return Stronghold.getCurrentGame().getMap().getName();
     }
 }

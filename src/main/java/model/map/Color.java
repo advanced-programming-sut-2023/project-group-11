@@ -9,7 +9,7 @@ public enum Color {
     DARK_BLUE_BACKGROUND(new AnsiFormat(Attribute.BACK_COLOR(0, 0, 110))),
     BEIGE_BACKGROUND(new AnsiFormat(Attribute.BACK_COLOR(166, 166, 107))),
     GRAY_BACKGROUND(new AnsiFormat(Attribute.BACK_COLOR(128, 128, 128))),
-    SILVER_BACKGROUND(new AnsiFormat(Attribute.BACK_COLOR(192, 192, 192))),
+    SILVER_BACKGROUND(new AnsiFormat(Attribute.BACK_COLOR(135, 125, 125))),
     DARK_GRAY_BACKGROUND(new AnsiFormat(Attribute.BACK_COLOR(33, 43, 39))),
     ORANGE_BACKGROUND(new AnsiFormat(Attribute.BACK_COLOR(152, 77, 1))),
     GREEN_BACKGROUND(new AnsiFormat(Attribute.GREEN_BACK())),
