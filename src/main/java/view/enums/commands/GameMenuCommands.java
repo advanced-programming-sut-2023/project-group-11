@@ -4,7 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommands {
-    COMMAND(""),
+    SHOW_MAP("show map(( -x (?<xCoordinate>\\d+))" +
+            "|( -y (?<yCoordinate>\\d+))){2}"),
     ;
 
     private final String regex;

@@ -3,33 +3,36 @@ package controller;
 import model.Stronghold;
 import model.map.Map;
 import model.map.Tile;
+import org.apache.commons.lang3.StringUtils;
 import view.enums.messages.ShowMapMenuMessages;
 
 import java.util.regex.Matcher;
 
 public class ShowMapMenuController {
-    public static ShowMapMenuMessages checkShowDetails(Integer xCoordinate, Integer yCoordinate) {
+    public static ShowMapMenuMessages checkShowDetails(Matcher matcher, String command) {
         return null;
     }
 
-    public static ShowMapMenuMessages checkMoveInMap(Matcher matcher, Integer xCoordinate, Integer yCoordinate) {
-        return null;
-    }
-
-    public static ShowMapMenuMessages checkShowMap(Matcher matcher) {
-        Integer x = Integer.parseInt(matcher.group("x"));
-        Integer y = Integer.parseInt(matcher.group("y"));
-        Map map = Stronghold.getMapByName("first");//TODO: change this
-        int mapSize = map.getSize();
-        if (x > mapSize || y > mapSize) return ShowMapMenuMessages.INVALID_COORDINATE;
+    public static ShowMapMenuMessages checkMoveInMap(Matcher matcher, String command) {
+        if (checkMoveInMapTags(command)) return ShowMapMenuMessages.INVALID_COMMAND;
+        int x = Integer.parseInt(matcher.group("xCoordinate"));
+        int y = Integer.parseInt(matcher.group("yCoordinate"));
+        if (!Utils.checkCoordinates(x, y)) return ShowMapMenuMessages.INVALID_COORDINATE;
         return ShowMapMenuMessages.SUCCESS;
     }
 
 
-    public static String showMap(Matcher matcher) {
+    private static boolean checkMoveInMapTags(String command) {
+        return StringUtils.countMatches(command, "up") <= 1 &&
+                StringUtils.countMatches(command, "down") <= 1 &&
+                StringUtils.countMatches(command, "right") <= 1 &&
+                StringUtils.countMatches(command, "left") <= 1;
+    }
+
+    public static String showMap(String xCoordinate, String yCoordinate) {
+        int x = Integer.parseInt(xCoordinate);
+        int y = Integer.parseInt(yCoordinate);
         String output = "";
-        Integer x = Integer.parseInt(matcher.group("x"));
-        Integer y = Integer.parseInt(matcher.group("y"));
         Map map = Stronghold.getMapByName("first");//TODO: change this
         for (int i = (Math.max(x - 5, 0)); i < x + 5 && i < map.getSize(); i++) {
             for (int j = (Math.max(y - 25, 0)); j < y + 25 && j < map.getSize(); j++) {
@@ -44,4 +47,5 @@ public class ShowMapMenuController {
         }
         return output;
     }
+
 }

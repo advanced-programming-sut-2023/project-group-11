@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Stronghold;
 import model.User;
+import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.simple.JSONArray;
 
@@ -121,5 +122,11 @@ public class Utils {
     public static void endStronghold() {
         updateDatabase("users");
         System.exit(0);
+    }
+
+    public static boolean checkCoordinates(int x, int y) {
+        Map map = Stronghold.getMapByName("first");//TODO: change this
+        int mapSize = map.getSize();
+        return x > mapSize || y > mapSize;
     }
 }

@@ -20,28 +20,11 @@ public class SignupMenu {
             else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Signup Menu");
             else if ((matcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.REGISTER)) != null) {
-                if (checkTags(matcher, SignupMenuCommands.REGISTER)) checkRegister(matcher);
+                if (SignupMenuController.checkTags(matcher, SignupMenuCommands.REGISTER)) checkRegister(matcher);
                 else System.out.println("Invalid command!");
             } else System.out.println("Invalid command!");
             command = scanner.nextLine();
         }
-    }
-
-    private static boolean checkTags(Matcher matcher, SignupMenuCommands signupMenuCommands) {
-        switch (signupMenuCommands) {
-            case REGISTER -> {
-                return matcher.group("usernameTag") != null &&
-                        matcher.group("passwordTag") != null &&
-                        matcher.group("emailTag") != null &&
-                        matcher.group("nicknameTag") != null;//TODO: duplicated options?
-            }
-            case PICK_QUESTION -> {
-                return matcher.group("questionNumberTag") != null &&
-                        matcher.group("answerTag") != null &&
-                        matcher.group("confirmationTag") != null;
-            }
-        }
-        return false;
     }
 
     private static void checkRegister(Matcher registerMatcher) {
@@ -144,7 +127,7 @@ public class SignupMenu {
             System.out.println("Invalid command");
             command = scanner.nextLine();
         }
-        if (checkTags(pickQuestionMatcher, SignupMenuCommands.PICK_QUESTION))
+        if (SignupMenuController.checkTags(pickQuestionMatcher, SignupMenuCommands.PICK_QUESTION))
             message = SignupMenuController.checkPickQuestion(pickQuestionMatcher);
         else {
             System.out.println("Invalid command!");

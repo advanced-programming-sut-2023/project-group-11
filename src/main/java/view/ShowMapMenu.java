@@ -1,9 +1,7 @@
 package view;
 
 import controller.ShowMapMenuController;
-import controller.SignupMenuController;
 import controller.Utils;
-import model.Stronghold;
 import view.enums.commands.ShowMapMenuCommands;
 import view.enums.messages.ShowMapMenuMessages;
 
@@ -11,7 +9,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class ShowMapMenu {
-    public static void run() {
+    public static void run(int x, int y) {
         Scanner scanner = EntryMenu.getScanner();
         Matcher matcher;
         String command;
@@ -20,29 +18,27 @@ public class ShowMapMenu {
         while (true) {
             if (ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.END) != null) Utils.endStronghold();
             else if (ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.BACK) != null) return;
-            else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_MAP)) != null)
-                checkShowMap(matcher);
-            else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_MAP)) != null)
-                checkShowMap(matcher);
-            else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_MAP)) != null)
-                checkShowMap(matcher);
+            else if (ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_CURRENT_MENU) != null)
+                System.out.println("Show Map Menu");
+            else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.MOVE_IN_MAP)) != null)
+                checkMoveInMap(matcher, command, x, y);
+            else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_DETAILS)) != null)
+                checkShowDetails(matcher, command);
             command = scanner.nextLine();
         }
     }
 
-    private static void checkShowDetails(Integer xCoordinate, Integer yCoordinate) {
-
+    private static void checkShowDetails(Matcher matcher, String command) {
+        ShowMapMenuController.checkShowDetails(matcher, command);
     }
 
-    private static void checkMoveInMap(Matcher matcher, Integer xCoordinate, Integer yCoordinate) {
-
-    }
-
-    public static void checkShowMap(Matcher matcher) {
-        ShowMapMenuMessages message = ShowMapMenuController.checkShowMap(matcher);
+    private static void checkMoveInMap(Matcher matcher, String command, int x, int y) {
+        ShowMapMenuMessages message = ShowMapMenuController.checkMoveInMap(matcher, command, x, y);
         switch (message) {
-            case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
-            case SUCCESS -> System.out.println(ShowMapMenuController.showMap(matcher));
+            case INVALID_COMMAND -> System.out.println("Invalid command!");
+            case INVALID_COORDINATE -> System.out.println("Invalid coordinate");
+            case SUCCESS ->
+                    System.out.println(ShowMapMenuController.showMap(matcher.group("xCoordinate"), matcher.group("yCoordinate")));
         }
     }
 }

@@ -6,6 +6,7 @@ import org.passay.CharacterData;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
+import view.enums.commands.SignupMenuCommands;
 import view.enums.messages.SignupMenuMessages;
 
 import java.util.ArrayList;
@@ -129,5 +130,22 @@ public class SignupMenuController {
         recoveryAnswer = Utils.encryptField(recoveryAnswer);
         password = Utils.encryptField(password);
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
+    }
+
+    public static boolean checkTags(Matcher matcher, SignupMenuCommands signupMenuCommands) {
+        switch (signupMenuCommands) {
+            case REGISTER -> {
+                return matcher.group("usernameTag") != null &&
+                        matcher.group("passwordTag") != null &&
+                        matcher.group("emailTag") != null &&
+                        matcher.group("nicknameTag") != null;//TODO: duplicated options?
+            }
+            case PICK_QUESTION -> {
+                return matcher.group("questionNumberTag") != null &&
+                        matcher.group("answerTag") != null &&
+                        matcher.group("confirmationTag") != null;
+            }
+        }
+        return false;
     }
 }

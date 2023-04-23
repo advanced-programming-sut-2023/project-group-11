@@ -1,5 +1,8 @@
 package view;
 
+import controller.GameMenuController;
+import view.enums.messages.GameMenuMessages;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -53,7 +56,7 @@ public class GameMenu {
 
     }
 
-    private static void checkSelectUnit(Matcher matcher){
+    private static void checkSelectUnit(Matcher matcher) {
 
     }
 
@@ -67,5 +70,19 @@ public class GameMenu {
 
     private static void nextTurn() {
 
+    }
+
+    public static void checkShowMap(Matcher matcher) {
+        GameMenuMessages message = GameMenuController.checkShowMap(matcher);
+        switch (message) {
+            case INVALID_COMMAND -> System.out.println("Invalid command");
+            case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
+            case SUCCESS -> {
+                System.out.println("Entered Show Map Menu");
+                int x = Integer.parseInt(matcher.group("xCoordinate"));
+                int y = Integer.parseInt(matcher.group("yCoordinate"));
+                ShowMapMenu.run(x, y);
+            }
+        }
     }
 }
