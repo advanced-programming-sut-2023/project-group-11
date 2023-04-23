@@ -74,4 +74,14 @@ public class Tile {
     public boolean isFull() {
         return building != null || units.size() != 0 || tree != null;
     }
+
+    @Override
+    public String toString() {
+        return "Tile{" +
+                "texture=" + texture +
+                ", building=" + building +
+                ", units=" + units +
+                ", tree=" + tree +
+                '}';
+    }
 }

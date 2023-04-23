@@ -31,6 +31,7 @@ public class ShowMapMenu {
                 System.out.println(ShowMapMenuController.showMap(xCoordinate, yCoordinate));
             } else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_DETAILS)) != null)
                 checkShowDetails(matcher, command);
+            else System.out.println("Invalid command!");
             command = scanner.nextLine();
         }
     }
@@ -42,7 +43,6 @@ public class ShowMapMenu {
             case INVALID_COORDINATE -> System.out.println("Invalid coordinate");
             case SUCCESS -> System.out.println(ShowMapMenuController.showMapDetails(xCoordinate, yCoordinate));
         }
-        ShowMapMenuController.showMapDetails
     }
 
     private static void checkMoveInMap(Matcher matcher, String command) {

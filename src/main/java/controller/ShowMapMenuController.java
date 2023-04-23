@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 
 public class ShowMapMenuController {
     public static ShowMapMenuMessages checkShowDetails(Matcher matcher, String command) {
-        return null;
+        return ShowMapMenuMessages.SUCCESS;
     }
 
     public static ShowMapMenuMessages checkMoveInMap(Matcher matcher, String command) {
@@ -76,18 +76,8 @@ public class ShowMapMenuController {
     public static String showMapDetails(int x, int y) {
         String output = "";
         Map map = Stronghold.getMapByName("first");//TODO: change this
-        for (int i = (Math.max(x - 5, 0)); i < x + 5 && i < map.getSize(); i++) {
-            for (int j = (Math.max(y - 25, 0)); j < y + 25 && j < map.getSize(); j++) {
-                Tile tile = map.getTile(i, j);
-                if (i == x && j == y) output += '!';
-                if (tile.getUnits().size() > 0) output += 'S';
-                if (tile.getBuilding() != null) output += 'B';
-                if (tile.getTree() != null) output += 'T';
-                output += '#';
-            }
-            output += '\n';
-        }
+        Tile tile = map.getTile(x, y);
+        output += tile;
         return output;
     }
-}
 }
