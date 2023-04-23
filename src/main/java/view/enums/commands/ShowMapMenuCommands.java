@@ -7,10 +7,7 @@ public enum ShowMapMenuCommands {
     END("end"),
     BACK("back"),
     SHOW_CURRENT_MENU("show current menu"),
-    MOVE_IN_MAP("map(((?<upDirection> up)( (?<upCount>\\d+))?)" +
-            "|((?<leftDirection> left)( (?<leftCount>\\d+))?)" +
-            "|(?<downDirection> down( (?<downCount>\\d+))?)" +
-            "|(?<rightDirection> right( (?<rightCount>\\d+))?)){1,4}"),
+    MOVE_IN_MAP("map(((?<upDirection> up)( (?<upCount>\\d+))?)|((?<leftDirection> left)( (?<leftCount>\\d+))?)|(?<downDirection> down( (?<downCount>\\d+))?)|(?<rightDirection> right( (?<rightCount>\\d+))?)){1,4}"),
     SHOW_DETAILS("show details ((-x (?<xCoordinate>\\\\d+))" +
             "|( -y (?<yCoordinate>\\\\d+))){2}")
     ;

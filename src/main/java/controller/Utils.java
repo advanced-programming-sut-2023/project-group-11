@@ -124,9 +124,9 @@ public class Utils {
         System.exit(0);
     }
 
-    public static boolean checkCoordinates(int x, int y) {
+    public static boolean isValidCoordinates(int x, int y) {
         Map map = Stronghold.getMapByName("first");//TODO: change this
         int mapSize = map.getSize();
-        return x > mapSize || y > mapSize;
+        return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
     }
 }
