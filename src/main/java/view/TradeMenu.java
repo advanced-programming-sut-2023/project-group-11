@@ -6,7 +6,12 @@ import java.util.regex.Matcher;
 
 public class TradeMenu {
     public static void run() {
-        Scanner scanner;
+        Scanner scanner = EntryMenu.getScanner();
+        Matcher matcher;
+        String command = scanner.nextLine();
+        while (true){
+
+        }
 
     }
 

@@ -16,6 +16,7 @@ public abstract class Building {
     private int resourceCostNumber;
     private int workersNumber;
     private boolean isActive;
+    private boolean areWorkersEngineer;
     public ArrayList<Engineer> Engineer;
 
     public void setActive(boolean active) {

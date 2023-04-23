@@ -1,5 +1,7 @@
 package model.buildings.enums;
 
+import java.lang.ref.PhantomReference;
+
 public enum ChurchType {
 
     CHAPEL(false, 0),
