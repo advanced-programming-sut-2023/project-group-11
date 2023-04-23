@@ -17,19 +17,22 @@ public class SignupMenuController {
     public static SignupMenuMessages checkRegister(Matcher registerMatcher, String username) {
         String password = registerMatcher.group("password");
         String passwordConfirmation = null;
+
         if (!password.equals("random")) {
             passwordConfirmation = Arrays.asList(password.split(" ")).get(1);
             password = Arrays.asList(password.split(" ")).get(0);
         }
+
         String email = registerMatcher.group("email").toLowerCase();
         String nickname = registerMatcher.group("nickname");
         String slogan = registerMatcher.group("slogan");
         boolean hasSlogan = slogan != null;
+
         if (Utils.checkEmptyField(username, password, email, nickname, slogan, hasSlogan))
             return SignupMenuMessages.EMPTY_FIELD;
         if (!Utils.isValidUsernameFormat(username))
             return SignupMenuMessages.INVALID_USERNAME_FORMAT;
-        if (Utils.usernameExist(username)) return SignupMenuMessages.USERNAME_EXIST;
+        if (Stronghold.usernameExist(username)) return SignupMenuMessages.USERNAME_EXIST;
         if (!Utils.isStrongPassword(password) && !password.equals("random"))
             return findWeakPartOfPassword(password);
         if (!password.equals("random"))
@@ -45,6 +48,7 @@ public class SignupMenuController {
         int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
         String recoveryAnswer = pickQuestionMatcher.group("answer");
         String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
+
         if (questionNumber > recoveryQuestions.size()) return SignupMenuMessages.INVALID_QUESTION_NUMBER;
         if (!recoveryAnswer.equals(answerConfirmation)) return SignupMenuMessages.WRONG_ANSWER_CONFIRMATION;
         return SignupMenuMessages.SUCCESS;
@@ -104,7 +108,7 @@ public class SignupMenuController {
 
     public static String generateRandomUsername(String username) {
         Random random = new Random();
-        while (Utils.usernameExist(username)) username += random.nextInt(10);
+        while (Stronghold.usernameExist(username)) username += random.nextInt(10);
         return username;
     }
 

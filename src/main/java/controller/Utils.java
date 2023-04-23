@@ -29,10 +29,6 @@ public class Utils {
         return username.matches("\\w+");
     }
 
-    public static boolean usernameExist(String username) {
-        return Stronghold.getUserByUsername(username) != null;
-    }
-
     public static boolean isStrongPassword(String password) {
         return password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{6,}$");
     }

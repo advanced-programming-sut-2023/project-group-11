@@ -4,7 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ProfileMenuCommands {
-    COMMAND(""),
+    BACK("back"),
+    END("end"),
+    SHOW_CURRENT_MENU("show current menu"),
+    PROFILE_CHANGE("profile change -(?<tag>\\w) (?<field>\"[^\"]+\"|\\S+)"),
+    CHANGE_PASSWORD("profile change password( -o (?<old>\\S+)| -n (?<new>\\S+)){2}"),
+    REMOVE_SLOGAN("profile remove slogan"),
+    PROFILE_DISPLAY("profile display( (?<field>\\S+))?"),
     ;
 
     private final String regex;

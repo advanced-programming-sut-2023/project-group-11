@@ -31,6 +31,7 @@ public class LoginMenu {
 
     private static void checkLogin(Matcher matcher) {
         LoginMenuMessages message = LoginMenuController.checkLogin(matcher);
+
         switch (message) {
             case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
             case INCORRECT_PASSWORD -> System.out.println("Username and password didn't match!");
