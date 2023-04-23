@@ -16,7 +16,7 @@ public class MainMenuController {
         String mapName = matcher.group("mapName");
         String[] listOfPlayers = makeListOfPlayers(matcher.group("guests")).split("-");
 
-        if (!Stronghold.mapNameExist(mapName))
+        if (!Stronghold.isMapName(mapName))
             return MainMenuMessages.MAP_NOT_EXIST;
 
         for (String name : listOfPlayers)

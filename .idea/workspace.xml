@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ProfileMenu.java" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Profie menu finished">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +120,8 @@
       <workItem from="1682184027134" duration="8645000" />
       <workItem from="1682194774772" duration="2513000" />
       <workItem from="1682197946236" duration="739000" />
-      <workItem from="1682243811881" duration="18876000" />
+      <workItem from="1682243811881" duration="18962000" />
+      <workItem from="1682277282836" duration="666000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -295,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682271939013</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Profie menu finished">
+      <created>1682272328867</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1682272328867</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,7 +347,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Replacing Phase 0's Files" />
     <MESSAGE value="Replacing Phase 0's Files second try" />
     <MESSAGE value="Add test Folder" />
     <MESSAGE value="Solve plugins problems" />
@@ -362,7 +371,8 @@
     <MESSAGE value="Profile menu ended (not debugged)" />
     <MESSAGE value="Remove static fields in Game" />
     <MESSAGE value="Profie menu debugged (without captcha)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Profie menu debugged (without captcha)" />
+    <MESSAGE value="Profie menu finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="Profie menu finished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -379,7 +389,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/view/MainMenu.java</url>
-          <line>19</line>
+          <line>20</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>

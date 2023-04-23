@@ -114,4 +114,10 @@ public class Stronghold {
     public static boolean usernameExist(String username) {
         return getUserByUsername(username) != null;
     }
+
+    public static boolean isMapName(String name) {
+        for (Map map : getMaps())
+            if (map.getName().equals(name)) return true;
+        return false;
+    }
 }

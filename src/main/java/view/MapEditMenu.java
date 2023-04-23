@@ -36,7 +36,7 @@ public class MapEditMenu {
                 System.out.println("Enter the map's name:");
                 String mapName = scanner.nextLine();
                 mapName = Utils.removeDoubleQuotation(mapName);
-                if (Stronghold.mapNameExist(mapName)) {
+                if (Stronghold.isMapName(mapName)) {
                     System.out.println("Repeated map name! Try again!");
                     continue;
                 }
@@ -47,7 +47,7 @@ public class MapEditMenu {
                     continue;
                 }
                 MapEditMenuController.setNewMapAsCurrentMap(mapName, size);
-            } else if (Stronghold.mapNameExist(input))
+            } else if (Stronghold.isMapName(input))
                 MapEditMenuController.setCurrentMap(input);
             else {
                 System.out.println("Invalid input! Try again!");
