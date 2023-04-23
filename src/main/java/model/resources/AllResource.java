@@ -24,26 +24,34 @@ public enum AllResource {
     BREAD("bread", Food.BREAD, 8);
 
     private final String name;
+    private Object resource;
     private final int price;
 
     AllResource(String name, Food food, int price) {
         this.name = name;
+        this.resource = food;
         this.price = price;
     }
 
     AllResource(String name, Resource resource, int price) {
         this.name = name;
+        this.resource = resource;
         this.price = price;
     }
 
     AllResource(String name, TroopEquipment troopEquipment, int price) {
         this.name = name;
+        this.resource = troopEquipment;
         this.price = price;
+    }
+
+    public Object getResource() {
+        return resource;
     }
 
     public static Object getAllResourceByName(String name){
         for (AllResource allResource : AllResource.values())
-            if(allResource.name.equals(name)) return allResource;
+            if(allResource.name.equals(name)) return allResource.resource;
         return null;
     }
 

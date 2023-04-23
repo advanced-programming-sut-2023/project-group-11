@@ -5,6 +5,7 @@ import model.Trade;
 import view.enums.messages.TradeMenuMessages;
 import model.resources.*;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class TradeMenuController {
@@ -31,16 +32,40 @@ public class TradeMenuController {
         String output = "";
         int index = 1;
         for (Trade trade:Trade.getTrades()){
-            output += "" + (index++) + "-" + trade;
+            output += (index++) + "-" + trade;
         }
         return output;
     }
 
     public static TradeMenuMessages checkAcceptTrade(Matcher matcher) {
-        return null;
+        int id = Integer.parseInt(matcher.group("id"));
+        String message = matcher.group("message");
+        ArrayList<Trade> trades = Trade.getTrades();
+        if(trades.size() < id)
+            return TradeMenuMessages.INVALID_ID;
+        Trade trade = trades.get(id);
+        if(!trade.isOpen())
+            return TradeMenuMessages.TRADE_CLOSED;
+        if(currentGovernance.equals(trade.getSender()))
+            return TradeMenuMessages.UNSUCCESSFUL;
+        if(currentGovernance.getGold() < trade.getResourceAmount() * trade.getPrice())
+            return TradeMenuMessages.UNSUCCESSFUL;
+        trade.accept(message,currentGovernance);
+        return TradeMenuMessages.SUCCESS;
     }
 
     public static String tradeHistory() {
         return currentGovernance.tradeHistory();
     }
+
+    public static String showNotifications(){
+        String output = "";
+        int index = 1;
+        for(Trade trade: currentGovernance.getTradeNotification()){
+            output += (index++) + "-" + trade;
+        }
+        currentGovernance.getTradeNotification().clear();
+        return output;
+    }
+
 }

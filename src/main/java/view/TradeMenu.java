@@ -12,6 +12,7 @@ public class TradeMenu {
     public static void run() {
         Scanner scanner = EntryMenu.getScanner();
         Matcher matcher;
+        System.out.print(TradeMenuController.showNotifications());
         String command = scanner.nextLine();
         while (true) {
             if (TradeMenuCommands.getMatcher(command, TradeMenuCommands.BACK) != null) return;

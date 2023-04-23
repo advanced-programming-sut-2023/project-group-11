@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class Governance {
     private final User owner;
-    private int gold = 2000;
+    private double gold = 2000;
     private int maxPopulation;
     private int currentPopulation;
     private int unemployedPopulation;
@@ -21,6 +21,7 @@ public class Governance {
     private int foodFactor = 0;
     private int religiousFactor = 0;
     private final ArrayList<Trade> previousTrades = new ArrayList<>();
+    private final ArrayList<Trade> tradeNotification = new ArrayList<>();
     //popularity = taxFactor + fearFactor + foodFactor + religiousFactor
     private final HashMap<Resource, Integer> resources = new HashMap<>();
     private final HashMap<Food, Integer> foods = new HashMap<>();
@@ -53,11 +54,11 @@ public class Governance {
         return owner;
     }
 
-    public int getGold() {
+    public double getGold() {
         return gold;
     }
 
-    public void setGold(int gold) {
+    public void setGold(double gold) {
         this.gold = gold;
     }
 
@@ -79,6 +80,10 @@ public class Governance {
 
     public int getUnemployedPopulation() {
         return unemployedPopulation;
+    }
+
+    public ArrayList<Trade> getTradeNotification() {
+        return tradeNotification;
     }
 
     public void setUnemployedPopulation(int unemployedPopulation) {
@@ -155,6 +160,16 @@ public class Governance {
         utils.put(util, count);
     }
 
+    public void changeResourceAmount(Object object, int count){
+        if(object instanceof TroopEquipment)
+            utils.put((TroopEquipment) object,utils.get((TroopEquipment) object) + count);
+
+        if(object instanceof Food)
+            foods.put((Food) object,foods.get((Food) object) + count);
+
+        if(object instanceof Resource)
+            resources.put((Resource) object,resources.get((Resource) object) + count);
+    }
     public int getResourceCount(Resource resource) {
         return 0;
     }
