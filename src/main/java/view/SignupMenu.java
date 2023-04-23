@@ -44,8 +44,7 @@ public class SignupMenu {
             case INVALID_USERNAME_FORMAT -> System.out.println("Invalid username format");
             case USERNAME_EXIST -> {
                 username = generateRandomUsername(username);
-                if (username != null)
-                    message = SignupMenuController.checkRegister(registerMatcher, username);
+                if (username != null) message = SignupMenuController.checkRegister(registerMatcher, username);
                 else return;
             }
         }
@@ -64,10 +63,8 @@ public class SignupMenu {
                     if (slogan == null) return;
                     System.out.println("Your slogan is: " + slogan);
                 }
-                if (password.equals("random"))
-                    password = checkRandomPassword();
-                if (password != null)
-                    checkPickQuestion(registerMatcher, username, password, slogan);
+                if (password.equals("random")) password = checkRandomPassword();
+                if (password != null) checkPickQuestion(registerMatcher, username, password, slogan);
             }
         }
     }

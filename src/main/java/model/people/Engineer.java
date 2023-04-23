@@ -40,4 +40,9 @@ public class Engineer extends Units {
     public void setEmptyPail(boolean emptyPail) {
         this.emptyPail = emptyPail;
     }
+
+    @Override
+    public String getName() {
+        return "engineer";
+    }
 }

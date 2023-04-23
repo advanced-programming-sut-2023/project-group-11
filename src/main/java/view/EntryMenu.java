@@ -1,6 +1,5 @@
 package view;
 
-
 import controller.EntryMenuController;
 import controller.Utils;
 

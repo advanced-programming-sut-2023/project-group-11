@@ -11,6 +11,10 @@ import java.util.regex.Matcher;
 
 public class ShowMapMenuController {
     public static ShowMapMenuMessages checkShowDetails(Matcher matcher, String command) {
+        if (!Utils.isValidMapTags(matcher)) return ShowMapMenuMessages.INVALID_COMMAND;
+        int x = Integer.parseInt(matcher.group("xCoordinate"));
+        int y = Integer.parseInt(matcher.group("yCoordinate"));
+        if (!Utils.isValidCoordinates(x, y)) return ShowMapMenuMessages.INVALID_COORDINATE;
         return ShowMapMenuMessages.SUCCESS;
     }
 
@@ -58,7 +62,7 @@ public class ShowMapMenuController {
 
     public static String showMap(int x, int y) {
         String output = "";
-        Map map = Stronghold.getMapByName("first");//TODO: change this
+        Map map = Stronghold.getMapByName("first");
         for (int i = (Math.max(x - 5, 0)); i < x + 5 && i < map.getSize(); i++) {
             for (int j = (Math.max(y - 25, 0)); j < y + 25 && j < map.getSize(); j++) {
                 Tile tile = map.getTile(i, j);
@@ -66,7 +70,9 @@ public class ShowMapMenuController {
                 else if (tile.getUnits().size() > 0) output += 'S';
                 else if (tile.getBuilding() != null) output += 'B';
                 else if (tile.getTree() != null) output += 'T';
-                else output += '#';
+                else {
+                    output += tile.getTexture().getColor();
+                }
             }
             output += '\n';
         }
@@ -75,9 +81,9 @@ public class ShowMapMenuController {
 
     public static String showMapDetails(int x, int y) {
         String output = "";
-        Map map = Stronghold.getMapByName("first");//TODO: change this
+        Map map = Stronghold.getMapByName("first");
         Tile tile = map.getTile(x, y);
-        output += tile;
+        output += tile.toString();
         return output;
     }
 }

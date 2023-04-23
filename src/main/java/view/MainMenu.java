@@ -14,8 +14,9 @@ public class MainMenu {
         String input;
         Matcher matcher;
 
+        ShowMapMenu.run(2,2);
+
         while (true) {
-            ShowMapMenu.run(5,5);
             input = scanner.nextLine();
 
             if (MainMenuCommands.getMatcher(input, MainMenuCommands.END) != null)

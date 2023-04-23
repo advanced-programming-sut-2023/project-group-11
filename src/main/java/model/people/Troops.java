@@ -90,4 +90,9 @@ public class Troops extends Units {
     public void setRevealed(boolean revealed) {
         this.revealed = revealed;
     }
+
+    @Override
+    public String getName() {
+        return getType().toString().toLowerCase();
+    }
 }

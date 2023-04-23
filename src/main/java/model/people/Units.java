@@ -38,4 +38,8 @@ public abstract class Units {
     public Governance getOwnerGovernance() {
         return ownerGovernance;
     }
+
+    public String getName() {
+        return null;
+    }
 }

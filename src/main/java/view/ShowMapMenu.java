@@ -23,15 +23,18 @@ public class ShowMapMenu {
 
         while (true) {
             if (ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.END) != null) Utils.endStronghold();
-            else if (ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.BACK) != null) return;
-            else if (ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_CURRENT_MENU) != null)
+            else if (ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.BACK) != null) {
+                System.out.println("Entered Game Menu");
+                return;
+            } else if (ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Show Map Menu");
-            else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.MOVE_IN_MAP)) != null) {
+            else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.MOVE_IN_MAP)) != null)
                 checkMoveInMap(matcher, command);
-                System.out.println(ShowMapMenuController.showMap(xCoordinate, yCoordinate));
-            } else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_DETAILS)) != null)
+            else if ((matcher = ShowMapMenuCommands.getMatcher(command, ShowMapMenuCommands.SHOW_DETAILS)) != null)
                 checkShowDetails(matcher, command);
             else System.out.println("Invalid command!");
+
+            System.out.println(ShowMapMenuController.showMap(xCoordinate, yCoordinate));
             command = scanner.nextLine();
         }
     }
@@ -39,8 +42,8 @@ public class ShowMapMenu {
     private static void checkShowDetails(Matcher matcher, String command) {
         ShowMapMenuMessages message = ShowMapMenuController.checkShowDetails(matcher, command);
         switch (message) {
-            case INVALID_COMMAND -> System.out.println("Invalid command");
-            case INVALID_COORDINATE -> System.out.println("Invalid coordinate");
+            case INVALID_COMMAND -> System.out.println("Invalid command!");
+            case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
             case SUCCESS -> System.out.println(ShowMapMenuController.showMapDetails(xCoordinate, yCoordinate));
         }
     }

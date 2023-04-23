@@ -70,15 +70,10 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkShowMap(Matcher matcher) {
-        if (!isValidMapTags(matcher)) return GameMenuMessages.INVALID_COMMAND;
+        if (!Utils.isValidMapTags(matcher)) return GameMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
         if (!Utils.isValidCoordinates(x, y)) return GameMenuMessages.INVALID_COORDINATE;
         return GameMenuMessages.SUCCESS;
-    }
-
-    private static boolean isValidMapTags(Matcher matcher) {
-        return matcher.group("xCoordinate") != null &&
-                matcher.group("yCoordinate") != null;
     }
 }

@@ -46,6 +46,12 @@
             <artifactId>MgntUtils</artifactId>
             <version>1.6.0.6</version>
         </dependency>
+        <!--        colorize background-->
+        <dependency>
+            <groupId>com.diogonunes</groupId>
+            <artifactId>JColor</artifactId>
+            <version>5.5.1</version>
+        </dependency>
     </dependencies>
 
     <build>

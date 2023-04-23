@@ -1,7 +1,9 @@
 package model.map;
 
 import model.buildings.Building;
+import model.people.Troops;
 import model.people.Units;
+import model.people.enums.TroopTypes;
 
 import java.util.ArrayList;
 
@@ -77,10 +79,13 @@ public class Tile {
 
     @Override
     public String toString() {
+        String unitsName = "";
+        for (Units unit : units) unitsName += unit.getName() + ",";
+
         return "Tile{" +
                 "texture=" + texture +
                 ", building=" + building +
-                ", units=" + units +
+                ", units=[" + unitsName +']'+
                 ", tree=" + tree +
                 '}';
     }

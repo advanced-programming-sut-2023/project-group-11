@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
+import java.util.regex.Matcher;
 
 public class Utils {
     public static boolean checkEmptyField(String username, String password, String email, String nickname, String slogan, boolean hasSlogan) {
@@ -124,5 +125,9 @@ public class Utils {
         Map map = Stronghold.getMapByName("first");//TODO: change this
         int mapSize = map.getSize();
         return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
+    }
+    public static boolean isValidMapTags(Matcher matcher) {
+        return matcher.group("xCoordinate") != null &&
+                matcher.group("yCoordinate") != null;
     }
 }
