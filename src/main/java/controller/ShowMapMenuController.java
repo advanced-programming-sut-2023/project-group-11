@@ -1,6 +1,9 @@
 package controller;
 
+import com.diogonunes.jcolor.Ansi;
+import com.diogonunes.jcolor.AnsiFormat;
 import model.Stronghold;
+import model.map.Color;
 import model.map.Map;
 import model.map.Tile;
 import org.apache.commons.lang3.StringUtils;
@@ -62,16 +65,23 @@ public class ShowMapMenuController {
 
     public static String showMap(int x, int y) {
         String output = "";
-        Map map = Stronghold.getMapByName("first");
+        Map map = Stronghold.getCurrentGame().getMap();
+        AnsiFormat COLOR;
         for (int i = (Math.max(x - 5, 0)); i < x + 5 && i < map.getSize(); i++) {
             for (int j = (Math.max(y - 25, 0)); j < y + 25 && j < map.getSize(); j++) {
-                Tile tile = map.getTile(i, j);
-                if (i == x && j == y) output += '!';
-                else if (tile.getUnits().size() > 0) output += 'S';
-                else if (tile.getBuilding() != null) output += 'B';
-                else if (tile.getTree() != null) output += 'T';
+                if (i % 4 == 0) output += "-";
+                else if (j % 7 == 0) output += "|";
                 else {
-                    output += tile.getTexture().getColor();
+                    Tile tile = map.getTile(i, j);
+                    if (i == x && j == y) COLOR = Color.BLACK_BACKGROUND.getColorCode();
+                    else COLOR = tile.getTexture().getColor().getColorCode();
+                    if (tile.getUnits().size() > 0)
+                        output += (Ansi.colorize("S", COLOR));
+                    else if (tile.getBuilding() != null)
+                        output += (Ansi.colorize("B", COLOR));
+                    else if (tile.getTree() != null)
+                        output += (Ansi.colorize("T", COLOR));
+                    else output += (Ansi.colorize(".", COLOR));
                 }
             }
             output += '\n';
@@ -81,7 +91,7 @@ public class ShowMapMenuController {
 
     public static String showMapDetails(int x, int y) {
         String output = "";
-        Map map = Stronghold.getMapByName("first");
+        Map map = Stronghold.getCurrentGame().getMap();
         Tile tile = map.getTile(x, y);
         output += tile.toString();
         return output;
