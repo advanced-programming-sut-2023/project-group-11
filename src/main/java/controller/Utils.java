@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Stronghold;
 import model.User;
-import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.simple.JSONArray;
 
@@ -68,8 +67,7 @@ public class Utils {
             StringBuilder captchaLine = new StringBuilder();
             for (int x = 0; x < width; x++) {
                 int randomNumber = random.nextInt(8);
-                if (image.getRGB(x, y) == -16777216 || (x + y) % 8 == randomNumber)
-                    captchaLine.append(" ");
+                if (image.getRGB(x, y) == -16777216 || (x + y) % 8 == randomNumber) captchaLine.append(" ");
                 else captchaLine.append("*");
             }
             if (captchaLine.toString().trim().isEmpty()) {
@@ -111,12 +109,6 @@ public class Utils {
             return temp.toString();
         }
         return name;
-    }
-
-    public static boolean isMapName(String name) {
-        for (Map map : Stronghold.getMaps())
-            if (map.getName().equals(name)) return true;
-        return false;
     }
 
     public static String logout() {

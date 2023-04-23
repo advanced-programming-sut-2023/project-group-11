@@ -2,6 +2,7 @@ package view;
 
 import controller.MapEditMenuController;
 import controller.Utils;
+import model.Stronghold;
 import view.enums.commands.MapEditMenuCommands;
 import view.enums.messages.MapEditMenuMessages;
 
@@ -35,7 +36,7 @@ public class MapEditMenu {
                 System.out.println("Enter the map's name:");
                 String mapName = scanner.nextLine();
                 mapName = Utils.removeDoubleQuotation(mapName);
-                if (Utils.isMapName(mapName)) {
+                if (Stronghold.mapNameExist(mapName)) {
                     System.out.println("Repeated map name! Try again!");
                     continue;
                 }
@@ -46,7 +47,7 @@ public class MapEditMenu {
                     continue;
                 }
                 MapEditMenuController.setNewMapAsCurrentMap(mapName, size);
-            } else if (Utils.isMapName(input))
+            } else if (Stronghold.mapNameExist(input))
                 MapEditMenuController.setCurrentMap(input);
             else {
                 System.out.println("Invalid input! Try again!");

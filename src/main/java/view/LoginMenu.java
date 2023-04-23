@@ -18,9 +18,9 @@ public class LoginMenu {
             else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.BACK) != null) return;
             else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Login Menu!");
-            else if ((matcher = LoginMenuCommands.getMatcher(command, LoginMenuCommands.LOGIN)) != null)
-                checkLogin(matcher);
-            else if ((matcher = LoginMenuCommands.getMatcher(command, LoginMenuCommands.FORGOT_PASSWORD)) != null)
+            else if ((matcher = LoginMenuCommands.getMatcher(command, LoginMenuCommands.LOGIN)) != null) {
+                if (checkLogin(matcher) == LoginMenuMessages.SUCCESS) return;
+            } else if ((matcher = LoginMenuCommands.getMatcher(command, LoginMenuCommands.FORGOT_PASSWORD)) != null)
                 checkForgotPassword(matcher);
             else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.LOGOUT) != null)
                 System.out.println(Utils.logout());
@@ -29,7 +29,7 @@ public class LoginMenu {
         }
     }
 
-    private static void checkLogin(Matcher matcher) {
+    private static LoginMenuMessages checkLogin(Matcher matcher) {
         LoginMenuMessages message = LoginMenuController.checkLogin(matcher);
         switch (message) {
             case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
@@ -44,6 +44,7 @@ public class LoginMenu {
                 }
             }
         }
+        return message;
     }
 
     private static void checkForgotPassword(Matcher matcher) {

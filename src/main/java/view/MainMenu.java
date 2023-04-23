@@ -15,6 +15,7 @@ public class MainMenu {
         Matcher matcher;
 
         while (true) {
+            ShowMapMenu.run();
             input = scanner.nextLine();
 
             if (MainMenuCommands.getMatcher(input, MainMenuCommands.END) != null)

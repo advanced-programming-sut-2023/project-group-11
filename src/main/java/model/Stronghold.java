@@ -130,4 +130,8 @@ public class Stronghold {
     public static void setCurrentGame(Game currentGame) {
         Stronghold.currentGame = currentGame;
     }
+
+    public static boolean mapNameExist(String name) {
+        return getMapByName(name) != null;
+    }
 }

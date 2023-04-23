@@ -17,8 +17,7 @@ public class Menu {
             else if (enteredCaptcha.equals("back")) return false;
             else if (enteredCaptcha.equals("generate another captcha")) continue;
             else if (enteredCaptcha.matches("\\d+")) {
-                if (Utils.checkCaptchaConfirmation(Integer.parseInt(enteredCaptcha), captchaNumber))
-                    return true;
+                if (Utils.checkCaptchaConfirmation(Integer.parseInt(enteredCaptcha), captchaNumber)) return true;
                 else System.out.println("Wrong captcha confirmation!");
             } else System.out.println("Wrong captcha confirmation!");
         }
