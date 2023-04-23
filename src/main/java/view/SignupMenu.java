@@ -15,8 +15,10 @@ public class SignupMenu {
         Matcher matcher;
         String command = scanner.nextLine();
         while (true) {
-            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) Utils.endStronghold();
-            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) return;
+            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null)
+                Utils.endStronghold();
+            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null)
+                return;
             else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Signup Menu");
             else if ((matcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.REGISTER)) != null) {
@@ -34,7 +36,9 @@ public class SignupMenu {
         username = Utils.removeDoubleQuotation(username);
         slogan = Utils.removeDoubleQuotation(slogan);
         password = Arrays.asList(password.split(" ")).get(0);
+
         SignupMenuMessages message = SignupMenuController.checkRegister(registerMatcher, username);
+
         switch (message) {
             case EMPTY_FIELD -> System.out.println("You can't have an empty field");
             case INVALID_USERNAME_FORMAT -> System.out.println("Invalid username format");
@@ -46,11 +50,11 @@ public class SignupMenu {
             }
         }
         switch (message) {
-            case SHORT_PASSWORD -> System.out.println("Password must be more than 6 characters!");
-            case NO_UPPERCASE -> System.out.println("Password must have an uppercase character at least!");
-            case NO_LOWERCASE -> System.out.println("Password must have an lowercase character at least!");
-            case NO_NUMBER -> System.out.println("Password must have one number at least!");
-            case NO_SPECIAL -> System.out.println("Password must have a special character at least!");
+            case SHORT_PASSWORD -> System.out.println("Weak password: Password must be more than 6 characters!");
+            case NO_UPPERCASE -> System.out.println("Weak password: Password must have an uppercase character at least!");
+            case NO_LOWERCASE -> System.out.println("Weak password: Password must have an lowercase character at least!");
+            case NO_NUMBER -> System.out.println("Weak password: Password must have one number at least!");
+            case NO_SPECIAL -> System.out.println("Weak password: Password must have a special character at least!");
             case WRONG_PASSWORD_CONFIRMATION -> System.out.println("Password and its confirmation doesn't match!");
             case EMAIL_EXIST -> System.out.println("Email already exist!");
             case INVALID_EMAIL_FORMAT -> System.out.println("Invalid email format!");

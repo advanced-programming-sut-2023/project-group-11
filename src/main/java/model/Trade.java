@@ -15,6 +15,7 @@ public class Trade {
     private String receiverMessage;
     private boolean isOpen = true;
     private final Governance sender;
+    private Governance receiver;
 
 
     public Trade(AllResource resourceType, int resourceAmount, double price, String senderMessage, Governance sender) {
@@ -29,7 +30,7 @@ public class Trade {
     }
 
     private void tradeNotify(Trade trade){
-        for(Governance governance : Game.getGovernances()){
+        for(Governance governance : Stronghold.getCurrentGame().getGovernances()){
             if(trade.sender.equals(governance))
                 continue;
             governance.getTradeNotification().add(trade);
@@ -76,15 +77,20 @@ public class Trade {
         sender.changeResourceAmount(resourceType.getResource(),-resourceAmount);
         receiver.setGold(receiver.getGold() - transfer);
         receiver.changeResourceAmount(resourceType.getResource(),resourceAmount);
+        this.receiver = receiver;
     }
 
     @Override
     public String toString() {
         String status = isOpen ? "Open" : "Closed";
-
+        String receiverMessage = "";
+        if(status.equals("Closed")) {
+            receiverMessage = " ReceiverMessage: " + receiverMessage +
+                              " Receiver: " + receiver.getOwner().getUsername();
+        }
         return " ResourceType: " + resourceType.name() + " Amount: " + resourceAmount +
-                " price: " + price + " senderMessage: " + senderMessage + " Sender: " +
-                sender.getOwner().getUsername() + " Status: " + status + "\n";
+                " price: " + price + " SenderMessage: " + senderMessage + " Sender: " +
+                sender.getOwner().getUsername() + receiverMessage + " Status: " + status + "\n";
     }
 
 

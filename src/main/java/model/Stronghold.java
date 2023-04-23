@@ -11,7 +11,6 @@ public class Stronghold {
     private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
     private static User currentUser;
-    private static Governance currentGovernance;
     private static Game currentGame;
 
     static {
@@ -47,21 +46,9 @@ public class Stronghold {
         Stronghold.currentUser = currentUser;
     }
 
-    private static void sortUsersRank() {
-
-    }
-
     public static int getRankByUsername(String name) {
-        sortUsersRank();
-        return 0;
-    }
-
-    public static Governance getCurrentGovernance() {
-        return currentGovernance;
-    }
-
-    public static void setCurrentGovernance(Governance currentGovernance) {
-        Stronghold.currentGovernance = currentGovernance;
+        users.sort(User::compareTo);
+        return users.indexOf(getUserByUsername(name)) + 1;
     }
 
     public static ArrayList<Map> getMaps() {
@@ -124,7 +111,7 @@ public class Stronghold {
         Stronghold.currentGame = currentGame;
     }
 
-    public static boolean mapNameExist(String name) {
-        return getMapByName(name) != null;
+    public static boolean usernameExist(String username) {
+        return getUserByUsername(username) != null;
     }
 }

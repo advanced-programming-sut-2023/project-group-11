@@ -8,16 +8,26 @@ import java.util.ArrayList;
 
 public abstract class Building {
 
-    private Governance owner;
-    private int size;
-    private int hitPoint;
-    private int goldCost;
-    private Resource resourceCostType;
-    private int resourceCostNumber;
-    private int workersNumber;
-    private boolean isActive;
-    private boolean areWorkersEngineer;
-    public ArrayList<Engineer> Engineer;
+    protected Governance owner;
+    protected int size;
+    protected int hitPoint;
+    protected double goldCost;
+    protected Resource resourceCostType;
+    protected int resourceCostNumber;
+    protected int workersNumber;
+    protected boolean isActive;
+    protected boolean areWorkersEngineer;
+    protected ArrayList<Engineer> engineers;
+    protected int popularityEffect;
+
+    public void setOwner(Governance owner) {
+        this.owner = owner;
+    }
+
+    public ArrayList<model.people.Engineer> getEngineer() {
+        return engineers;
+    }
+
 
     public void setActive(boolean active) {
         isActive = active;
@@ -31,17 +41,24 @@ public abstract class Building {
         this.hitPoint = hitPoint;
     }
 
-    private int popularityEffect;
+
+    public Governance getOwner() {
+        return owner;
+    }
 
     public int getSize() {
         return size;
+    }
+
+    public boolean isAreWorkersEngineer() {
+        return areWorkersEngineer;
     }
 
     public int getHitPoint() {
         return hitPoint;
     }
 
-    public int getGoldCost() {
+    public double getGoldCost() {
         return goldCost;
     }
 
