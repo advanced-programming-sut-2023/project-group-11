@@ -1,5 +1,6 @@
 package model.people;
 
+import model.Game;
 import model.Stronghold;
 import model.people.enums.Hp;
 import model.people.enums.Speed;
@@ -13,7 +14,7 @@ public class Engineer extends Units {
         this.hp = Hp.VERY_LOW.getHp();
         this.cost = 30;
         this.speed = Speed.HIGH;
-        this.ownerGovernance = Stronghold.getCurrentGovernance();
+        this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
     }
 
     public boolean isInWork() {

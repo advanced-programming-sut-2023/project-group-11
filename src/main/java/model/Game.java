@@ -5,33 +5,45 @@ import model.map.Map;
 import java.util.ArrayList;
 
 public class Game {
-    private static User owner = Stronghold.getCurrentUser();
-    private static ArrayList<Governance> governances;
-    private static Map map;
-    private static int turn = 1;
+    private final User owner;
+    private final ArrayList<Governance> governances;
+    private Governance currentGovernance;
+    private final Map map;
+    private int turn;
 
     public Game(ArrayList<Governance> governances, Map map) {
+        this.owner = Stronghold.getCurrentUser();
         this.governances = governances;
+        this.currentGovernance = governances.get(0);
         this.map = map;
+        this.turn = 1;
     }
 
-    public static User getOwner() {
+    public User getOwner() {
         return owner;
     }
 
-    public static ArrayList<Governance> getGovernances() {
+    public ArrayList<Governance> getGovernances() {
         return governances;
     }
 
-    public static Map getMap() {
+    public Map getMap() {
         return map;
     }
 
-    public static int getTurn() {
+    public int getTurn() {
         return turn;
     }
 
-    public static void setTurn(int turn) {
-        turn = turn;
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
+
+    public Governance getCurrentGovernance() {
+        return currentGovernance;
+    }
+
+    public void setCurrentGovernance(Governance currentGovernance) {
+        this.currentGovernance = currentGovernance;
     }
 }

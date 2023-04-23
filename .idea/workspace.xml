@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Remove static fields in Game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ProfileMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/ProfileMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/ProfileMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Engineer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Engineer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +123,7 @@
       <workItem from="1682184027134" duration="8645000" />
       <workItem from="1682194774772" duration="2513000" />
       <workItem from="1682197946236" duration="739000" />
-      <workItem from="1682243811881" duration="16417000" />
+      <workItem from="1682243811881" duration="17281000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -279,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682266533006</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Profile menu ended (not debugged)">
+      <created>1682269825237</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1682269825237</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,7 +350,9 @@
     <MESSAGE value="First try to read maps" />
     <MESSAGE value="Reading maps complete" />
     <MESSAGE value="Change profile &amp; change password" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change profile &amp; change password" />
+    <MESSAGE value="Profile menu ended (not debugged)" />
+    <MESSAGE value="Remove static fields in Game" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove static fields in Game" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

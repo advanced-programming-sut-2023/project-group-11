@@ -7,7 +7,6 @@
     "slogan": "<slogan>",
     "recoveryQuestion": "What is my best friend's name?",
     "recoveryAnswer": "753bd5b3281c375ac9917f0080e4ced18daa8e6a23d4390c16e05c6038d4d611",
-    "previousTrades": [],
     "highScore": 0,
     "stayLoggedIn": false
   },
@@ -18,7 +17,6 @@
     "email": "sadegh.sg.sn@gmail.com",
     "recoveryQuestion": "What is my father's name?",
     "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
-    "previousTrades": [],
     "highScore": 0,
     "stayLoggedIn": true
   }

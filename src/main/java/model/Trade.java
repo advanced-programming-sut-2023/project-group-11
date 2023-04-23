@@ -29,7 +29,7 @@ public class Trade {
     }
 
     private void tradeNotify(Trade trade){
-        for(Governance governance : Game.getGovernances()){
+        for(Governance governance : Stronghold.getCurrentGame().getGovernances()){
             if(trade.sender.equals(governance))
                 continue;
             governance.getTradeNotification().add(trade);

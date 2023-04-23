@@ -1,5 +1,6 @@
 package model.people;
 
+import model.Game;
 import model.Stronghold;
 import model.people.enums.TroopTypes;
 import model.resources.TroopEquipment;
@@ -35,7 +36,7 @@ public class Troops extends Units {
         this.canDigKhandagh = TROOP.canDigKhandagh();
         this.revealed = TROOP.isRevealed();
         this.cost = TROOP.getCost();
-        this.ownerGovernance = Stronghold.getCurrentGovernance();
+        this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
     }
 
     public TroopTypes getType() {
