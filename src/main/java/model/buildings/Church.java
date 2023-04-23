@@ -8,7 +8,18 @@ public class Church extends Building{
     private int makeMonkCost;
 
     public Church(ChurchType churchType) {
-        this.isGeneral = churchType.isGeneral();
+        size = churchType.getSize();
+        hitPoint = churchType.getHitPoint();
+        goldCost = churchType.getGoldCost();
+        resourceCostType = churchType.getResourceCostType();
+        resourceCostNumber = churchType.getResourceCostNumber();
+        workersNumber = churchType.getWorkersNumber();
+        isActive = churchType.isActive();
+        areWorkersEngineer = churchType.AreWorkersEngineer();
+        engineers = churchType.getEngineer();
+        popularityEffect = churchType.getPopularityEffect();
+        isGeneral = churchType.isGeneral();
+        makeMonkCost = churchType.getMakeMonkCost();
     }
 
     public boolean isGeneral() {
@@ -20,7 +31,10 @@ public class Church extends Building{
     }
 
     public void makeMonk(){
-
+        if(!isGeneral)
+            return;
+        owner.setGold(owner.getGold() - makeMonkCost);
+        //TODO : more implementations
     }
 
 }
