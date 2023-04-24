@@ -31,12 +31,6 @@ public class SignupMenu {
 
     private static void checkRegister(Matcher registerMatcher) {
         String username = registerMatcher.group("username");
-        String password = registerMatcher.group("password");
-        String slogan = registerMatcher.group("slogan");
-        username = Utils.removeDoubleQuotation(username);
-        slogan = Utils.removeDoubleQuotation(slogan);
-        password = Arrays.asList(password.split(" ")).get(0);
-
         SignupMenuMessages message = SignupMenuController.checkRegister(registerMatcher, username);
 
         switch (message) {
@@ -61,6 +55,12 @@ public class SignupMenu {
             case EMAIL_EXIST -> System.out.println("Email already exist!");
             case INVALID_EMAIL_FORMAT -> System.out.println("Invalid email format!");
             case SUCCESS -> {
+                String password = registerMatcher.group("password");
+                String slogan = registerMatcher.group("slogan");
+                username = Utils.removeDoubleQuotation(username);
+                slogan = Utils.removeDoubleQuotation(slogan);
+                password = Arrays.asList(password.split(" ")).get(0);
+
                 if (slogan != null && slogan.equals("random")) {
                     slogan = checkRandomSlogan();
                     if (slogan == null) return;

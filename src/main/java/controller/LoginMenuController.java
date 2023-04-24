@@ -65,6 +65,7 @@ public class LoginMenuController {
 
     public static User getUserByUsername(Matcher matcher) {
         String username = matcher.group("username");
+        username = Utils.removeDoubleQuotation(username);
         return Stronghold.getUserByUsername(username);
     }
 

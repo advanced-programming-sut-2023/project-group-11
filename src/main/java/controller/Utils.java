@@ -27,7 +27,7 @@ public class Utils {
     }
 
     public static boolean isValidUsernameFormat(String username) {
-        return username.matches("\\w+");
+        return username.matches("\"[\\w ]+\"|\\w+");
     }
 
     public static boolean isStrongPassword(String password) {
