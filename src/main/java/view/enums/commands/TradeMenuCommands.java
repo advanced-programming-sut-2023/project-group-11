@@ -12,7 +12,8 @@ public enum TradeMenuCommands {
                 " (?<message>((\".*?[^\\\\]\")|([^\"\\s]*))))){2}"),
     TRADE_HISTORY("trade history"),
     SHOW_CURRENT_MENU("show current menu"),
-    BACK("back");
+    BACK("back"),
+    END("end")
     ;
 
     private final String regex;

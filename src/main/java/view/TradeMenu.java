@@ -17,6 +17,7 @@ public class TradeMenu {
         String command = scanner.nextLine();
         while (true) {
             if (TradeMenuCommands.getMatcher(command, TradeMenuCommands.BACK) != null) return;
+            else if(TradeMenuCommands.getMatcher(command, TradeMenuCommands.END) != null) Utils.endStronghold();
             else if (TradeMenuCommands.getMatcher(command, TradeMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Trade Menu");
             else if ((matcher = TradeMenuCommands.getMatcher(command, TradeMenuCommands.TRADE)) != null) {

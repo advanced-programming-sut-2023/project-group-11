@@ -10,10 +10,12 @@ import java.util.HashMap;
 
 public class Storage extends Building{
 
-    private HashMap<Object,Integer> storage;
-    private int capacity;
+    private HashMap<Object,Integer> storage = new HashMap<>();
+    private int capacity,currentCapacity;
+    private StorageType storageType;
 
     public Storage(StorageType storageType) {
+        this.storageType = storageType;
         switch (storageType){
             case ARMOURY -> {
                 storage.put(TroopEquipment.CROSSBOW, 0);
@@ -58,6 +60,12 @@ public class Storage extends Building{
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public void addToStorage(AllResource resource,int amount){
+        Object object = resource.getResource();
+        storage.put(object, storage.get(object) + amount);
+        currentCapacity += amount;
     }
 
 }

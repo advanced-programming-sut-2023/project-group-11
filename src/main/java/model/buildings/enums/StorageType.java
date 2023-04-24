@@ -11,9 +11,9 @@ public enum StorageType {
     STOCKPILE("stockpile",5,114,0,null,0,
             0,true,100),
     ARMOURY("armoury",4,196,0,Resource.WOOD,5,
-            0,true,100),
+            0,true,50),
     GRANARY("granary",4,114,0,Resource.WOOD,5,
-            0,true,100);
+            0,true,250);
     ;
     private String name;
     private int size;

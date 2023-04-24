@@ -1,6 +1,8 @@
 package controller;
 
+import model.Game;
 import model.Governance;
+import model.Stronghold;
 import model.Trade;
 import view.enums.messages.TradeMenuMessages;
 import model.resources.*;
@@ -10,7 +12,7 @@ import java.util.regex.Matcher;
 
 public class TradeMenuController {
 
-    private static Governance currentGovernance;
+    private static Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
     public static TradeMenuMessages checkTrade(Matcher matcher) {
         String resourceType = matcher.group("resourceType"),

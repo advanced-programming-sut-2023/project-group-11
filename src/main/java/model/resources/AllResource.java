@@ -33,6 +33,10 @@ public enum AllResource {
         this.price = price;
     }
 
+    public String getName() {
+        return name;
+    }
+
     AllResource(String name, Resource resource, int price) {
         this.name = name;
         this.resource = resource;

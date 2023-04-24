@@ -1,5 +1,6 @@
 package model;
 
+import model.resources.AllResource;
 import model.resources.Food;
 import model.resources.Resource;
 import model.resources.TroopEquipment;
@@ -170,8 +171,8 @@ public class Governance {
         if(object instanceof Resource)
             resources.put((Resource) object,resources.get((Resource) object) + count);
     }
-    public int getResourceCount(Resource resource) {
-        return 0;
+    public int getResourceCount(AllResource resource) {
+        return resources.get(resource.getResource());
     }
 
     public int getFoodCount(Food food) {
