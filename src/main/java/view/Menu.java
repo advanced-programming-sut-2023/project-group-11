@@ -10,8 +10,8 @@ public class Menu {
         Scanner scanner = EntryMenu.getScanner();
         while (true) {
             System.out.println("Enter the captcha below!");
-            int bound = (int) Math.pow(10, new Random().nextInt(3, 9));
-            int captchaNumber = new Random().nextInt(1000, bound);
+            int bound = new Random().nextInt(3, 9);
+            int captchaNumber = new Random().nextInt((int) Math.pow(10, bound),(int) Math.pow(10, bound + 1));
             System.out.println(Utils.generateCaptcha(captchaNumber));
             String enteredCaptcha = scanner.nextLine();
             if (enteredCaptcha.equals("end")) Utils.endStronghold();
