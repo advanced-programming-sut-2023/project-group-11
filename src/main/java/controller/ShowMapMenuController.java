@@ -14,7 +14,8 @@ import java.util.regex.Matcher;
 
 public class ShowMapMenuController {
     public static ShowMapMenuMessages checkShowDetails(Matcher matcher) {
-        if (!Utils.isValidMapTags(matcher)) return ShowMapMenuMessages.INVALID_COMMAND;
+        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
+            return ShowMapMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
         if (!Utils.isValidCoordinates(x, y)) return ShowMapMenuMessages.INVALID_COORDINATE;
@@ -54,7 +55,6 @@ public class ShowMapMenuController {
 
         return ShowMapMenuMessages.SUCCESS;
     }
-
 
     private static boolean checkMoveInMapTags(String command) {
         return StringUtils.countMatches(command, "up") <= 1 &&

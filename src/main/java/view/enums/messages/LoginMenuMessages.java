@@ -5,5 +5,6 @@ public enum LoginMenuMessages {
     INCORRECT_PASSWORD,
     WRONG_RECOVERY_ANSWER,
     LOCKED_ACCOUNT,
+    INVALID_COMMAND,
     SUCCESS,
 }

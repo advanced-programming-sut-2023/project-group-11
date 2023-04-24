@@ -8,8 +8,8 @@ public enum LoginMenuCommands {
     BACK("back"),
     SHOW_CURRENT_MENU("show current menu"),
     LOGIN("user login" +
-            "(( (?<usernameTag>-u) (?<username>\"[\"]+\"|\\S+))" +
-            "|( (?<passwordTag>-p) (?<password>\\S*))){2}" +
+            "(( -u (?<username>\"[\"]+\"|\\S+))" +
+            "|( -p (?<password>\\S*))){2}" +
             "( (?<stayLoggedIn>--stay-logged-in))?"),
     FORGOT_PASSWORD("forgot my password" +
             " -u (?<username>\"[\"]+\"|\\S+)"),

@@ -15,7 +15,10 @@ public class LoginMenu {
         String command = scanner.nextLine();
         while (true) {
             if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.END) != null) Utils.endStronghold();
-            else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.BACK) != null) return;
+            else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.BACK) != null) {
+                System.out.println("Entered Entry Menu");
+                return;
+            }
             else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Login Menu!");
             else if ((matcher = LoginMenuCommands.getMatcher(command, LoginMenuCommands.LOGIN)) != null) {
@@ -33,6 +36,7 @@ public class LoginMenu {
         LoginMenuMessages message = LoginMenuController.checkLogin(matcher);
 
         switch (message) {
+            case INVALID_COMMAND -> System.out.println("Invalid command!");
             case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
             case INCORRECT_PASSWORD -> System.out.println("Username and password didn't match!");
             case LOCKED_ACCOUNT -> System.out.println("Your account is locked for " +

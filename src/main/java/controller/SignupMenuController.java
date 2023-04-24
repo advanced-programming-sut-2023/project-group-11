@@ -6,7 +6,6 @@ import org.passay.CharacterData;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
-import view.enums.commands.SignupMenuCommands;
 import view.enums.messages.SignupMenuMessages;
 
 import java.util.ArrayList;
@@ -16,6 +15,8 @@ import java.util.regex.Matcher;
 
 public class SignupMenuController {
     public static SignupMenuMessages checkRegister(Matcher registerMatcher, String username) {
+        if (!Utils.isValidCommandTags(registerMatcher, "usernameTag", "passwordTag", "emailTag", "nicknameTag"))
+            return SignupMenuMessages.INVALID_COMMAND;
         String password = registerMatcher.group("password");
         String passwordConfirmation = null;
 
@@ -24,7 +25,7 @@ public class SignupMenuController {
             password = Arrays.asList(password.split(" ")).get(0);
         }
 
-        String email = registerMatcher.group("email").toLowerCase();
+        String email = registerMatcher.group("email");
         String nickname = registerMatcher.group("nickname");
         String slogan = registerMatcher.group("slogan");
         boolean hasSlogan = slogan != null;
@@ -45,6 +46,8 @@ public class SignupMenuController {
     }
 
     public static SignupMenuMessages checkPickQuestion(Matcher pickQuestionMatcher) {
+        if (!Utils.isValidCommandTags(pickQuestionMatcher, "questionNumber", "answer", "answerConfirmation"))
+            return SignupMenuMessages.INVALID_COMMAND;
         ArrayList<String> recoveryQuestions = Stronghold.getRecoveryQuestions();
         int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
         String recoveryAnswer = pickQuestionMatcher.group("answer");
@@ -123,7 +126,7 @@ public class SignupMenuController {
     }
 
     public static void createUser(Matcher pickQuestionMatcher, Matcher registerMatcher, String username, String password, String slogan) {
-        String email = registerMatcher.group("email").toLowerCase();
+        String email = registerMatcher.group("email");
         String nickname = registerMatcher.group("nickname");
         nickname = Utils.removeDoubleQuotation(nickname);
         ArrayList<String> recoveryQuestions = Stronghold.getRecoveryQuestions();
@@ -134,22 +137,5 @@ public class SignupMenuController {
         recoveryAnswer = Utils.encryptField(recoveryAnswer);
         password = Utils.encryptField(password);
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
-    }
-
-    public static boolean checkTags(Matcher matcher, SignupMenuCommands signupMenuCommands) {
-        switch (signupMenuCommands) {
-            case REGISTER -> {
-                return matcher.group("usernameTag") != null &&
-                        matcher.group("passwordTag") != null &&
-                        matcher.group("emailTag") != null &&
-                        matcher.group("nicknameTag") != null;//TODO: duplicated options?
-            }
-            case PICK_QUESTION -> {
-                return matcher.group("questionNumberTag") != null &&
-                        matcher.group("answerTag") != null &&
-                        matcher.group("confirmationTag") != null;
-            }
-        }
-        return false;
     }
 }

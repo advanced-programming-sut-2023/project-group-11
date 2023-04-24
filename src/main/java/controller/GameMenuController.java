@@ -46,9 +46,10 @@ public class GameMenuController {
         return null;
     }
 
-    private static void nextTurn(){
+    private static void nextTurn() {
 
     }
+
     private static void updatePopulation() {
 
     }
@@ -70,7 +71,8 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkShowMap(Matcher matcher) {
-        if (!Utils.isValidMapTags(matcher)) return GameMenuMessages.INVALID_COMMAND;
+        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
+            return GameMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
         if (!Utils.isValidCoordinates(x, y)) return GameMenuMessages.INVALID_COORDINATE;

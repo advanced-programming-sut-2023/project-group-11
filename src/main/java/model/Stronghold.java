@@ -28,7 +28,7 @@ public class Stronghold {
 
     public static boolean emailExist(String email) {
         for (User user : users)
-            if (user.getEmail().equals(email)) return true;
+            if (user.getEmail().equalsIgnoreCase(email)) return true;
         return false;
     }
 

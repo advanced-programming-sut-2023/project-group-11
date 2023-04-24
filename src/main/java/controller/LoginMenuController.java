@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 
 public class LoginMenuController {
     public static LoginMenuMessages checkLogin(Matcher matcher) {
+        if (!Utils.isValidCommandTags(matcher, "username", "password"))
+            return LoginMenuMessages.INVALID_COMMAND;
         User user = getUserByUsername(matcher);
         String password = matcher.group("password");
 
@@ -71,5 +73,4 @@ public class LoginMenuController {
         Delay delay = Delay.getDelayByUser(user);
         return (delay.getDelayTime() - System.currentTimeMillis() + delay.getLastLoginCommandTime());
     }
-
 }

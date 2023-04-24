@@ -46,6 +46,12 @@ public class Utils {
         return new DigestUtils("SHA3-256").digestAsHex(field);
     }
 
+    public static boolean isValidCommandTags(Matcher matcher, String... options) {
+        for (String option : options)
+            if (matcher.group(option) == null) return false;
+        return true;
+    }
+
     public static String generateCaptcha(int captchaNumber) {
         Random random = new Random();
         int width = 150;
@@ -125,9 +131,5 @@ public class Utils {
         Map map = Stronghold.getCurrentGame().getMap();
         int mapSize = map.getSize();
         return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
-    }
-    public static boolean isValidMapTags(Matcher matcher) {
-        return matcher.group("xCoordinate") != null &&
-                matcher.group("yCoordinate") != null;
     }
 }

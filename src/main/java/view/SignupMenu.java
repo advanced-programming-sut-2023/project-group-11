@@ -17,14 +17,14 @@ public class SignupMenu {
         while (true) {
             if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null)
                 Utils.endStronghold();
-            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null)
+            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) {
+                System.out.println("Entered Entry Menu!");
                 return;
-            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.SHOW_CURRENT_MENU) != null)
+            } else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Signup Menu");
-            else if ((matcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.REGISTER)) != null) {
-                if (SignupMenuController.checkTags(matcher, SignupMenuCommands.REGISTER)) checkRegister(matcher);
-                else System.out.println("Invalid command!");
-            } else System.out.println("Invalid command!");
+            else if ((matcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.REGISTER)) != null)
+                checkRegister(matcher);
+            else System.out.println("Invalid command!");
             command = scanner.nextLine();
         }
     }
@@ -40,6 +40,7 @@ public class SignupMenu {
         SignupMenuMessages message = SignupMenuController.checkRegister(registerMatcher, username);
 
         switch (message) {
+            case INVALID_COMMAND -> System.out.println("Invalid command!");
             case EMPTY_FIELD -> System.out.println("You can't have an empty field");
             case INVALID_USERNAME_FORMAT -> System.out.println("Invalid username format");
             case USERNAME_EXIST -> {
@@ -50,8 +51,10 @@ public class SignupMenu {
         }
         switch (message) {
             case SHORT_PASSWORD -> System.out.println("Weak password: Password must be more than 6 characters!");
-            case NO_UPPERCASE -> System.out.println("Weak password: Password must have an uppercase character at least!");
-            case NO_LOWERCASE -> System.out.println("Weak password: Password must have an lowercase character at least!");
+            case NO_UPPERCASE ->
+                    System.out.println("Weak password: Password must have an uppercase character at least!");
+            case NO_LOWERCASE ->
+                    System.out.println("Weak password: Password must have an lowercase character at least!");
             case NO_NUMBER -> System.out.println("Weak password: Password must have one number at least!");
             case NO_SPECIAL -> System.out.println("Weak password: Password must have a special character at least!");
             case WRONG_PASSWORD_CONFIRMATION -> System.out.println("Password and its confirmation doesn't match!");
@@ -121,20 +124,17 @@ public class SignupMenu {
         Matcher pickQuestionMatcher;
         Scanner scanner = EntryMenu.getScanner();
         String command = scanner.nextLine();
-        SignupMenuMessages message;
         while ((pickQuestionMatcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.PICK_QUESTION)) == null) {
             if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) Utils.endStronghold();
             else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) return;
             System.out.println("Invalid command");
             command = scanner.nextLine();
         }
-        if (SignupMenuController.checkTags(pickQuestionMatcher, SignupMenuCommands.PICK_QUESTION))
-            message = SignupMenuController.checkPickQuestion(pickQuestionMatcher);
-        else {
-            System.out.println("Invalid command!");
-            return;
-        }
+
+        SignupMenuMessages message = SignupMenuController.checkPickQuestion(pickQuestionMatcher);
+
         switch (message) {
+            case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INVALID_QUESTION_NUMBER -> System.out.println("Invalid number!");
             case WRONG_ANSWER_CONFIRMATION -> System.out.println("answer and its confirmation doesn't match!");
             case SUCCESS -> {
