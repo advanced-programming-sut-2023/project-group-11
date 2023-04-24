@@ -101,5 +101,11 @@ public enum TowerType {
         return popularityEffect;
     }
 
+    public static TowerType getTowerTypeByName(String name){
+        for (TowerType towerType : TowerType.values())
+            if(towerType.name.equals(name))
+                return towerType;
+        return null;
+    }
 
 }

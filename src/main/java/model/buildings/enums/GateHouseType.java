@@ -82,4 +82,11 @@ public enum GateHouseType {
     public int getCapacity() {
         return capacity;
     }
+
+    public static GateHouseType getGateHouseTypeByName(String name){
+        for (GateHouseType gateHouseType : GateHouseType.values())
+            if(gateHouseType.name.equals(name))
+                return gateHouseType;
+        return null;
+    }
 }

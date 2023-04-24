@@ -4,12 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="building 60% complete">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Building almost complete (except machine)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/ProductiveBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/ProductiveBuilding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/UnitMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/UnitMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Machine.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/RangedMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/RangedMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ChurchType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ChurchType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/FillerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/FillerType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/GateHouseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/GateHouseType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/MachineType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/MachineType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ProductiveBuildingType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ProductiveBuildingType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/RangedMachineType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/RangedMachineType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/StorageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/StorageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TowerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TowerType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TrapType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TrapType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/UnitMakerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/UnitMakerType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Units.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Units.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/Speed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Speed.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682316671354</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Building almost complete (except machine)">
+      <created>1682321885166</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1682321885166</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,7 +371,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Replacing Phase 0's Files second try" />
     <MESSAGE value="Add test Folder" />
     <MESSAGE value="Solve plugins problems" />
     <MESSAGE value="Add Gson Lib" />
@@ -373,7 +395,8 @@
     <MESSAGE value="Remove static fields in Game" />
     <MESSAGE value="Profie menu debugged (without captcha)" />
     <MESSAGE value="building 60% complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="building 60% complete" />
+    <MESSAGE value="Building almost complete (except machine)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Building almost complete (except machine)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

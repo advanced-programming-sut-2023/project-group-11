@@ -91,7 +91,7 @@ public enum ChurchType {
         return makeMonkCost;
     }
 
-    public ChurchType getChurchTypeByName(String name){
+    public static ChurchType getChurchTypeByName(String name){
         for (ChurchType churchType : ChurchType.values())
             if(churchType.name.equals(name))
                 return churchType;

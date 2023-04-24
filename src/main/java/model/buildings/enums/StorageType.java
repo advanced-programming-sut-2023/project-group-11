@@ -7,8 +7,13 @@ import model.resources.Resource;
 import java.util.ArrayList;
 
 public enum StorageType {
-//    TODO: is it needed?
-//    STOCKPILE(),ARMOURY(),GRANARY();
+
+    STOCKPILE("stockpile",5,114,0,null,0,
+            0,true,100),
+    ARMOURY("armoury",4,196,0,Resource.WOOD,5,
+            0,true,100),
+    GRANARY("granary",4,114,0,Resource.WOOD,5,
+            0,true,100);
     ;
     private String name;
     private int size;
@@ -18,9 +23,7 @@ public enum StorageType {
     private int resourceCostNumber;
     private int workersNumber;
     private boolean isActive;
-    private final AllResource resource;
     private final int capacity;
-    private final int filledCapacity;
 
     public int getSize() {
         return size;
@@ -53,8 +56,7 @@ public enum StorageType {
 
 
     StorageType(String name, int size, int hitPoint, int goldCost, Resource resourceCostType,
-                int resourceCostNumber, int workersNumber, boolean isActive,
-                AllResource resource, int capacity, int filledCapacity) {
+                int resourceCostNumber, int workersNumber, boolean isActive, int capacity) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -63,20 +65,11 @@ public enum StorageType {
         this.resourceCostNumber = resourceCostNumber;
         this.workersNumber = workersNumber;
         this.isActive = isActive;
-        this.resource = resource;
         this.capacity = capacity;
-        this.filledCapacity = filledCapacity;
-    }
-
-    public AllResource getResource() {
-        return resource;
     }
 
     public int getCapacity() {
         return capacity;
     }
 
-    public int getFilledCapacity() {
-        return filledCapacity;
-    }
 }

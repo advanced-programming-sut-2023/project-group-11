@@ -8,13 +8,15 @@ import java.util.ArrayList;
 public enum FillerType {
 
     WALL("wall",1,72,0,null,0,0,
-            true,false,0),
+            true,false,0,true),
     STAIRS("stairs",1,72,0,null,0,0,
-            true,false,0),
+            true,false,0,false),
     SHOP("shop",5,114,0,Resource.WOOD,5,1,
-            true,false,0),
+            true,false,0,false),
     TENT("tent",1,0,0,null,0,-1,
-            true,true,0);
+            true,true,0,false),
+    STABLE("stable",6,114,400,Resource.WOOD,20,0,
+            true,false,0,false);
 
     private String name;
     private int size;
@@ -26,6 +28,7 @@ public enum FillerType {
     private boolean isActive;
     private boolean areWorkersEngineer;
     private int popularityEffect;
+    private boolean isWall;
 
     public int getSize() {
         return size;
@@ -41,6 +44,14 @@ public enum FillerType {
 
     public Resource getResourceCostType() {
         return resourceCostType;
+    }
+
+    public boolean isAreWorkersEngineer() {
+        return areWorkersEngineer;
+    }
+
+    public boolean isWall() {
+        return isWall;
     }
 
     public int getResourceCostNumber() {
@@ -66,7 +77,7 @@ public enum FillerType {
 
     FillerType(String name,int size, int hitPoint, double goldCost,
                Resource resourceCostType, int resourceCostNumber, int workersNumber,
-               boolean isActive, boolean areWorkersEngineer, int popularityEffect) {
+               boolean isActive, boolean areWorkersEngineer, int popularityEffect,boolean isWall) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -77,8 +88,9 @@ public enum FillerType {
         this.isActive = isActive;
         this.areWorkersEngineer = areWorkersEngineer;
         this.popularityEffect = popularityEffect;
+        this.isWall = isWall;
     }
-    public FillerType getFillerTypeByName(String name){
+    public static FillerType getFillerTypeByName(String name){
         for (FillerType fillerType : FillerType.values())
             if(fillerType.name.equals(name))
                 return fillerType;

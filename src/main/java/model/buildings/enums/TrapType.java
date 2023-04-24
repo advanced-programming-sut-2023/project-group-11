@@ -68,4 +68,12 @@ public enum TrapType {
         this.damage = damage;
         this.isActive = isActive;
     }
+
+    public static TrapType getTrapTypeByName(String name){
+        for (TrapType trapType : TrapType.values())
+            if(trapType.name.equals(name))
+                return trapType;
+        return null;
+    }
+
 }

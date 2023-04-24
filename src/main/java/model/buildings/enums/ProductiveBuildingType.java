@@ -123,4 +123,11 @@ public enum ProductiveBuildingType {
     public int getProductionRate() {
         return productionRate;
     }
+
+    public static ProductiveBuildingType getProductiveBuildingTypeByName(String name){
+        for (ProductiveBuildingType productiveBuildingType : ProductiveBuildingType.values())
+            if(productiveBuildingType.name.equals(name))
+                return productiveBuildingType;
+        return null;
+    }
 }

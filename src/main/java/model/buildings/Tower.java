@@ -10,12 +10,9 @@ public class Tower extends DefensiveBuilding {
     private int fireRange;
     private int defendRange;
     private int unitCapacity;
-    private boolean hasGate = false;
+    private boolean isClimable = false;
 
     private ArrayList<Units> units = new ArrayList<>();
-    public void setHasGate(boolean hasGate) {
-        this.hasGate = hasGate;
-    }
 
     public Tower(TowerType towerType) {
         size = towerType.getSize();
@@ -32,6 +29,13 @@ public class Tower extends DefensiveBuilding {
         unitCapacity = towerType.getUnitCapacity();
     }
 
+    public boolean isClimable() {
+        return isClimable;
+    }
+
+    public void setClimable(boolean climable) {
+        this.isClimable = climable;
+    }
 
     public int getFireRange() {
         return fireRange;

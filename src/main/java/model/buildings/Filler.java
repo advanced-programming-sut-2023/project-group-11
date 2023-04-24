@@ -2,8 +2,10 @@ package model.buildings;
 
 import model.buildings.enums.FillerType;
 
-public class Filler extends Building{
-// wall stair tent ...
+public class Filler extends Building {
+    // wall stair tent ...
+    private boolean isWall,
+            isClimable = false;
 
     public Filler(FillerType fillerType) {
         size = fillerType.getSize();
@@ -15,6 +17,7 @@ public class Filler extends Building{
         isActive = fillerType.isActive();
         areWorkersEngineer = fillerType.AreWorkersEngineer();
         popularityEffect = fillerType.getPopularityEffect();
+        isWall = fillerType.isWall();
     }
 
 }

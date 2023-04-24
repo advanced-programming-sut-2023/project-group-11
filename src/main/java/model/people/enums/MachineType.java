@@ -1,45 +1,36 @@
-package model.buildings.enums;
+package model.people.enums;
 
-import model.Governance;
-import model.resources.Resource;
-import model.people.enums.Speed;
+public enum MachineType {
 
-import java.util.ArrayList;
-
-public enum RangedMachineType {
-
+    PORTABLE_SHIELD("portable shield",1,72,50,
+            1,false,Speed.CONSTANT,0),
+    BATTERING_RAM("battering ram",2,72,150,
+            4,false,Speed.VERY_LOW,31),
+    SIEGE_TOWER("siege tower",3,72,150,
+            4,false,Speed.LOW,0);
     ;
 
     private String name;
     private int size;
     private int hitPoint;
     private int goldCost;
-    private Resource resourceCostType;
-    private int resourceCostNumber;
     private int workersNumber;
     private boolean isActive;
     private Speed speed;
     private int damage;
-    private int range;
 
-    RangedMachineType(String name, int size, int hitPoint, int goldCost,
-                      Resource resourceCostType, int resourceCostNumber, int workersNumber,
-                      boolean isActive,
-                      Speed speed, int damage, int range) {
-
+    MachineType(String name, int size, int hitPoint,
+                int goldCost, int workersNumber, boolean isActive,
+                Speed speed, int damage) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
         this.goldCost = goldCost;
-        this.resourceCostType = resourceCostType;
-        this.resourceCostNumber = resourceCostNumber;
         this.workersNumber = workersNumber;
         this.isActive = isActive;
         this.speed = speed;
         this.damage = damage;
-        this.range = range;
     }
-
 
     public int getSize() {
         return size;
@@ -53,14 +44,6 @@ public enum RangedMachineType {
         return goldCost;
     }
 
-    public Resource getResourceCostType() {
-        return resourceCostType;
-    }
-
-    public int getResourceCostNumber() {
-        return resourceCostNumber;
-    }
-
     public int getWorkersNumber() {
         return workersNumber;
     }
@@ -68,7 +51,6 @@ public enum RangedMachineType {
     public boolean isActive() {
         return isActive;
     }
-
 
     public Speed getSpeed() {
         return speed;
@@ -78,7 +60,10 @@ public enum RangedMachineType {
         return damage;
     }
 
-    public int getRange() {
-        return range;
+    public static MachineType getMachineTypeByName(String name){
+        for (MachineType machineType : MachineType.values())
+            if(machineType.name.equals(name))
+                return machineType;
+        return null;
     }
 }
