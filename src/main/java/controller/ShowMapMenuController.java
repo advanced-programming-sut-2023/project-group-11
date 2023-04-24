@@ -1,7 +1,7 @@
 package controller;
 
 import com.diogonunes.jcolor.Ansi;
-import com.diogonunes.jcolor.AnsiFormat;
+import com.diogonunes.jcolor.Attribute;
 import model.Stronghold;
 import model.map.Color;
 import model.map.Map;
@@ -66,20 +66,23 @@ public class ShowMapMenuController {
     public static String showMap(String name, int x, int y) {//TODO: in Utils?
         String output = "";
         Map map = Stronghold.getMapByName(name);
-        AnsiFormat COLOR;
+        Attribute backgroundColor;
+        Attribute textColor;
         for (int i = (Math.max(x - 7, 0)); i < x + 7 && i < map.getSize(); i++) {
             for (int j = (Math.max(y - 50, 0)); j < y + 50 && j < map.getSize(); j++) {
                 if (i % 4 == 0) output += "-";
                 else if (j % 7 == 0) output += "|";
                 else {
                     Tile tile = map.getTile(i, j);
-                    if (i == x && j == y) COLOR = Color.BLACK_BACKGROUND.getColorCode();
-                    else COLOR = tile.getTexture().getColor().getColorCode();
+                    backgroundColor = tile.getTexture().getColor().getColor();
 
-                    if (tile.getUnits().size() > 0) output += (Ansi.colorize("S", COLOR));
-                    else if (tile.getBuilding() != null) output += (Ansi.colorize("B", COLOR));
-                    else if (tile.getTree() != null) output += (Ansi.colorize("T", COLOR));
-                    else output += (Ansi.colorize(".", COLOR));
+                    if (i == x && j == y) textColor = Color.BLACK_TEXT.getColor();
+                    else textColor = Color.WHITE_TEXT.getColor();
+
+                    if (tile.getUnits().size() > 0) output += (Ansi.colorize("S", textColor, backgroundColor));
+                    else if (tile.getBuilding() != null) output += (Ansi.colorize("B", textColor, backgroundColor));
+                    else if (tile.getTree() != null) output += (Ansi.colorize("T", textColor, backgroundColor));
+                    else output += (Ansi.colorize(".", textColor, backgroundColor));
                 }
             }
             output += '\n';
