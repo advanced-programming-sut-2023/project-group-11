@@ -10,7 +10,7 @@ public enum RangedMachineType {
 
     ;
 
-    private Governance owner;
+    private String name;
     private int size;
     private int hitPoint;
     private int goldCost;
@@ -18,17 +18,16 @@ public enum RangedMachineType {
     private int resourceCostNumber;
     private int workersNumber;
     private boolean isActive;
-    public ArrayList<model.people.Engineer> Engineer;
     private Speed speed;
     private int damage;
     private int range;
 
-    RangedMachineType(Governance owner, int size, int hitPoint, int goldCost,
+    RangedMachineType(String name, int size, int hitPoint, int goldCost,
                       Resource resourceCostType, int resourceCostNumber, int workersNumber,
-                      boolean isActive, ArrayList<model.people.Engineer> engineer,
+                      boolean isActive,
                       Speed speed, int damage, int range) {
 
-        this.owner = owner;
+        this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
         this.goldCost = goldCost;
@@ -36,15 +35,11 @@ public enum RangedMachineType {
         this.resourceCostNumber = resourceCostNumber;
         this.workersNumber = workersNumber;
         this.isActive = isActive;
-        Engineer = engineer;
         this.speed = speed;
         this.damage = damage;
         this.range = range;
     }
 
-    public Governance getOwner() {
-        return owner;
-    }
 
     public int getSize() {
         return size;
@@ -74,9 +69,6 @@ public enum RangedMachineType {
         return isActive;
     }
 
-    public ArrayList<model.people.Engineer> getEngineer() {
-        return Engineer;
-    }
 
     public Speed getSpeed() {
         return speed;

@@ -10,6 +10,7 @@ public class Machine extends Building{
     private int damage;
     private MachineType machineType;
 
+
     public void move(){
 
     }

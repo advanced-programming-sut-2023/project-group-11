@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public enum ChurchType {
 
     CHAPEL("chapel",6,150,250,null,0,0,
-            true,false,null,2,false,0),
+            true,false,2,false,0),
     CATHEDRAL("cathedral",13,459,1000,null,0,0,
-            true,false,null,2,true, 5);
+            true,false,2,true, 5);
 
     private String name;
     private int size;
@@ -23,7 +23,6 @@ public enum ChurchType {
     private int workersNumber;
     private boolean isActive;
     private boolean areWorkersEngineer;
-    private ArrayList<model.people.Engineer> engineers;
     private int popularityEffect;
     private boolean isGeneral;
     private int makeMonkCost;
@@ -31,7 +30,7 @@ public enum ChurchType {
 
     ChurchType(String name,int size, int hitPoint, double goldCost,
                Resource resourceCostType, int resourceCostNumber, int workersNumber,
-               boolean isActive, boolean areWorkersEngineer, ArrayList<model.people.Engineer> engineer,
+               boolean isActive, boolean areWorkersEngineer,
                int popularityEffect, boolean isGeneral, int makeMonkCost) {
         this.name = name;
         this.size = size;
@@ -42,7 +41,6 @@ public enum ChurchType {
         this.workersNumber = workersNumber;
         this.isActive = isActive;
         this.areWorkersEngineer = areWorkersEngineer;
-        engineers = engineer;
         this.popularityEffect = popularityEffect;
         this.isGeneral = isGeneral;
         this.makeMonkCost = makeMonkCost;
@@ -80,9 +78,6 @@ public enum ChurchType {
         return areWorkersEngineer;
     }
 
-    public ArrayList<model.people.Engineer> getEngineer() {
-        return engineers;
-    }
 
     public int getPopularityEffect() {
         return popularityEffect;

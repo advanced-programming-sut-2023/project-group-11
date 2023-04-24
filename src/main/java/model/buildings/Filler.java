@@ -14,7 +14,6 @@ public class Filler extends Building{
         workersNumber = fillerType.getWorkersNumber();
         isActive = fillerType.isActive();
         areWorkersEngineer = fillerType.AreWorkersEngineer();
-        engineers = fillerType.getEngineers();
         popularityEffect = fillerType.getPopularityEffect();
     }
 

@@ -1,18 +1,21 @@
 package model.buildings;
 
+import model.buildings.enums.TrapType;
+
 public class Trap extends DefensiveBuilding {
 
     private int damage;
-    private boolean isActive;
 
-    @Override
-    public boolean isActive() {
-        return isActive;
-    }
 
-    @Override
-    public void setActive(boolean active) {
-        isActive = active;
+    public Trap(TrapType trapType) {
+        size = trapType.getSize();
+        hitPoint = trapType.getHitPoint();
+        goldCost = trapType.getGoldCost();
+        resourceCostType = trapType.getResourceCostType();
+        resourceCostNumber = trapType.getResourceCostNumber();
+        workersNumber = trapType.getWorkersNumber();
+        isActive = trapType.isActive();
+        damage = trapType.getDamage();
     }
 
     public int getDamage() {

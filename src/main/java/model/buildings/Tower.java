@@ -1,5 +1,6 @@
 package model.buildings;
 
+import model.buildings.enums.TowerType;
 import model.people.Units;
 
 import java.util.ArrayList;
@@ -9,7 +10,28 @@ public class Tower extends DefensiveBuilding {
     private int fireRange;
     private int defendRange;
     private int unitCapacity;
+    private boolean hasGate = false;
+
     private ArrayList<Units> units = new ArrayList<>();
+    public void setHasGate(boolean hasGate) {
+        this.hasGate = hasGate;
+    }
+
+    public Tower(TowerType towerType) {
+        size = towerType.getSize();
+        hitPoint = towerType.getHitPoint();
+        goldCost = towerType.getGoldCost();
+        resourceCostType = towerType.getResourceCostType();
+        resourceCostNumber = towerType.getResourceCostNumber();
+        workersNumber = towerType.getWorkersNumber();
+        isActive = towerType.isActive();
+        areWorkersEngineer = towerType.AreWorkersEngineer();
+        popularityEffect = towerType.getPopularityEffect();
+        fireRange = towerType.getFireRange();
+        defendRange = towerType.getDefendRange();
+        unitCapacity = towerType.getUnitCapacity();
+    }
+
 
     public int getFireRange() {
         return fireRange;

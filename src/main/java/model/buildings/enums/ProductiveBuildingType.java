@@ -1,5 +1,6 @@
 package model.buildings.enums;
 
+import model.people.Engineer;
 import model.resources.Resource;
 
 import java.util.ArrayList;
@@ -7,9 +8,7 @@ import java.util.ArrayList;
 public enum ProductiveBuildingType {
     ;
 
-    private final Resource producedResource;
-    private Resource requiredResource;
-    private final int productionRate;
+    private String name;
     private int size;
     private int hitPoint;
     private int goldCost;
@@ -18,16 +17,58 @@ public enum ProductiveBuildingType {
     private int workersNumber;
     private boolean isActive;
     public ArrayList<model.people.Engineer> Engineer;
+    private final Resource producedResource;
+    private Resource requiredResource;
+    private final int productionRate;
 
-    ProductiveBuildingType(Resource producedResource, Resource requiredResource, int productionRate) {
+    ProductiveBuildingType(String name, int size, int hitPoint, int goldCost, Resource resourceCostType,
+                           int resourceCostNumber, int workersNumber, boolean isActive,
+                           ArrayList<model.people.Engineer> engineer, Resource producedResource,
+                           Resource requiredResource, int productionRate) {
+        this.name = name;
+        this.size = size;
+        this.hitPoint = hitPoint;
+        this.goldCost = goldCost;
+        this.resourceCostType = resourceCostType;
+        this.resourceCostNumber = resourceCostNumber;
+        this.workersNumber = workersNumber;
+        this.isActive = isActive;
+        Engineer = engineer;
         this.producedResource = producedResource;
         this.requiredResource = requiredResource;
         this.productionRate = productionRate;
     }
 
-    ProductiveBuildingType(Resource producedResource, int productionRate) {
-        this.producedResource = producedResource;
-        this.productionRate = productionRate;
+    public int getSize() {
+        return size;
+    }
+
+    public int getHitPoint() {
+        return hitPoint;
+    }
+
+    public int getGoldCost() {
+        return goldCost;
+    }
+
+    public Resource getResourceCostType() {
+        return resourceCostType;
+    }
+
+    public int getResourceCostNumber() {
+        return resourceCostNumber;
+    }
+
+    public int getWorkersNumber() {
+        return workersNumber;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public ArrayList<model.people.Engineer> getEngineer() {
+        return Engineer;
     }
 
     public Resource getProducedResource() {
