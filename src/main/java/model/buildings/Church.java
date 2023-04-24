@@ -16,7 +16,6 @@ public class Church extends Building{
         workersNumber = churchType.getWorkersNumber();
         isActive = churchType.isActive();
         areWorkersEngineer = churchType.AreWorkersEngineer();
-        engineers = churchType.getEngineer();
         popularityEffect = churchType.getPopularityEffect();
         isGeneral = churchType.isGeneral();
         makeMonkCost = churchType.getMakeMonkCost();
