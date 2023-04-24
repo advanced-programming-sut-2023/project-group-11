@@ -11,7 +11,18 @@ public class Inn extends Building {
     private int wineUsageRate;
 
     public Inn() {
-
+        size = 5;
+        hitPoint = 114;
+        goldCost = 100;
+        resourceCostType = Resource.WOOD;
+        resourceCostNumber = 20;
+        workersNumber = 1;
+        isActive = true;
+        areWorkersEngineer = false;
+        engineers = null;
+        popularityEffect = 0;
+        popularityRate = 2;
+        wineUsageRate = 10;
     }
 
     public int getPopularityRate() {
@@ -20,6 +31,10 @@ public class Inn extends Building {
 
     public int getWineUsageRate() {
         return wineUsageRate;
+    }
+
+    public void addToPopularity(){
+        owner.setPopularity(owner.getPopularity() + popularityRate);
     }
 
     public void oneTurnPass(){

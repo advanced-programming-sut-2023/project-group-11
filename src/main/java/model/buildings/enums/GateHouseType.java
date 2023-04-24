@@ -7,11 +7,12 @@ import java.util.ArrayList;
 
 public enum GateHouseType {
 
-    SMALL(5,114,0,null,0,0,
-            true,false,null,0,8),
-    LARGE(7,150,0,Resource.STONE,20,0,
-            true,false,null,0,10);
+    SMALL("small gatehouse",5,114,0,null,0,0,
+            true,false,0,8),
+    LARGE("large gatehouse",7,150,0,Resource.STONE,20,0,
+            true,false,0,10);
 
+    private String name;
     private int size;
     private int hitPoint;
     private double goldCost;
@@ -20,15 +21,15 @@ public enum GateHouseType {
     private int workersNumber;
     private boolean isActive;
     private boolean areWorkersEngineer;
-    private ArrayList<Engineer> engineers;
     private int popularityEffect;
     private int capacity;
 
 
-    GateHouseType(int size, int hitPoint, double goldCost,
+    GateHouseType(String name,int size, int hitPoint, double goldCost,
                   Resource resourceCostType, int resourceCostNumber, int workersNumber,
-                  boolean isActive, boolean areWorkersEngineer, ArrayList<Engineer> engineers,
+                  boolean isActive, boolean areWorkersEngineer,
                   int popularityEffect, int capacity) {
+        this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
         this.goldCost = goldCost;
@@ -37,7 +38,6 @@ public enum GateHouseType {
         this.workersNumber = workersNumber;
         this.isActive = isActive;
         this.areWorkersEngineer = areWorkersEngineer;
-        this.engineers = engineers;
         this.popularityEffect = popularityEffect;
         this.capacity = capacity;
     }
@@ -74,9 +74,6 @@ public enum GateHouseType {
         return areWorkersEngineer;
     }
 
-    public ArrayList<Engineer> getEngineers() {
-        return engineers;
-    }
 
     public int getPopularityEffect() {
         return popularityEffect;
@@ -84,5 +81,12 @@ public enum GateHouseType {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public static GateHouseType getGateHouseTypeByName(String name){
+        for (GateHouseType gateHouseType : GateHouseType.values())
+            if(gateHouseType.name.equals(name))
+                return gateHouseType;
+        return null;
     }
 }

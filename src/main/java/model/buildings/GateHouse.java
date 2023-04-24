@@ -8,6 +8,7 @@ public class GateHouse extends Building{
     private int capacity,filledCapacity;
     private Governance gateController;
 
+
     public GateHouse(GateHouseType gateHouseType) {
         size = gateHouseType.getSize();
         hitPoint = gateHouseType.getHitPoint();
@@ -17,9 +18,16 @@ public class GateHouse extends Building{
         workersNumber = gateHouseType.getWorkersNumber();
         isActive = gateHouseType.isActive();
         areWorkersEngineer = gateHouseType.AreWorkersEngineer();
-        engineers = gateHouseType.getEngineers();
         popularityEffect = gateHouseType.getPopularityEffect();
         capacity = gateHouseType.getCapacity();
+    }
+
+    public Governance getGateController() {
+        return gateController;
+    }
+
+    public void setGateController(Governance gateController) {
+        this.gateController = gateController;
     }
 
     public int getCapacity() {

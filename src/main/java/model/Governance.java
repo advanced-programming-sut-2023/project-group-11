@@ -25,7 +25,7 @@ public class Governance {
     //popularity = taxFactor + fearFactor + foodFactor + religiousFactor
     private final HashMap<Resource, Integer> resources = new HashMap<>();
     private final HashMap<Food, Integer> foods = new HashMap<>();
-    private final HashMap<TroopEquipment, Integer> utils = new HashMap<>();
+    private final HashMap<TroopEquipment, Integer> troopEquipments = new HashMap<>();
 
     {
         resources.put(Resource.WOOD, 100);
@@ -40,14 +40,14 @@ public class Governance {
         foods.put(Food.APPLE, 0);
         foods.put(Food.MEAT, 0);
         foods.put(Food.CHEESE, 0);
-        utils.put(TroopEquipment.CROSSBOW, 0);
-        utils.put(TroopEquipment.SPEAR, 0);
-        utils.put(TroopEquipment.BOW, 0);
-        utils.put(TroopEquipment.MACE, 0);
-        utils.put(TroopEquipment.PIKE, 0);
-        utils.put(TroopEquipment.LEATHER_ARMOR, 0);
-        utils.put(TroopEquipment.METAL_ARMOR, 0);
-        utils.put(TroopEquipment.SWORD, 0);
+        troopEquipments.put(TroopEquipment.CROSSBOW, 0);
+        troopEquipments.put(TroopEquipment.SPEAR, 0);
+        troopEquipments.put(TroopEquipment.BOW, 0);
+        troopEquipments.put(TroopEquipment.MACE, 0);
+        troopEquipments.put(TroopEquipment.PIKE, 0);
+        troopEquipments.put(TroopEquipment.LEATHER_ARMOR, 0);
+        troopEquipments.put(TroopEquipment.METAL_ARMOR, 0);
+        troopEquipments.put(TroopEquipment.SWORD, 0);
     }
 
     public User getOwner() {
@@ -157,12 +157,12 @@ public class Governance {
     }
 
     public void addResource(TroopEquipment util, int count) {
-        utils.put(util, count);
+        troopEquipments.put(util, count);
     }
 
     public void changeResourceAmount(Object object, int count){
         if(object instanceof TroopEquipment)
-            utils.put((TroopEquipment) object,utils.get((TroopEquipment) object) + count);
+            troopEquipments.put((TroopEquipment) object, troopEquipments.get((TroopEquipment) object) + count);
 
         if(object instanceof Food)
             foods.put((Food) object,foods.get((Food) object) + count);

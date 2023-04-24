@@ -2,6 +2,7 @@ package model.people.enums;
 
 public enum Speed {
 
+    CONSTANT(0),
     VERY_LOW(1),
     LOW(2),
     MEDIUM(3),

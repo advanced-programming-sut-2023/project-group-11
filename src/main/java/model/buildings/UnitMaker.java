@@ -1,41 +1,29 @@
 package model.buildings;
 
+import model.buildings.enums.UnitMakerType;
 import model.resources.TroopEquipment;
 import model.people.Units;
 
 public class UnitMaker extends Building {
 
-    private int unitCost;
-    private TroopEquipment unitUtilType;
-    private int unitUtilNumber;
-    private Units MadeUnit;
 
-    public int getUnitCost() {
-        return unitCost;
+    private boolean isMercenaryMaker;
+    private boolean isEngineerMaker;
+
+    public UnitMaker(UnitMakerType unitMakerType) {
+        size = unitMakerType.getSize();
+        hitPoint = unitMakerType.getHitPoint();
+        goldCost = unitMakerType.getGoldCost();
+        resourceCostType = unitMakerType.getResourceCostType();
+        resourceCostNumber = unitMakerType.getResourceCostNumber();
+        workersNumber = unitMakerType.getWorkersNumber();
+        isActive = unitMakerType.isActive();
+        isMercenaryMaker = unitMakerType.isMercenaryMaker();
+        isEngineerMaker = unitMakerType.isEngineerMaker();
     }
 
-    public int getUnitUtilNumber() {
-        return unitUtilNumber;
-    }
-
-    public TroopEquipment getUnitUtilType() {
-        return unitUtilType;
-    }
-
-    public Units getMadeUnit() {
-        return MadeUnit;
-    }
-
-    public void makeEngineer(){
-
-    }
-
-    public void makeLadderMan(){
-
-    }
-
-    public void makeMilitaryUnit(){
-
+    public void makeUnit(String UnitName){
+        //TODO: implementation
     }
 
 }

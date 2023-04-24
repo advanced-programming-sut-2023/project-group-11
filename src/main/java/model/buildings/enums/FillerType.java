@@ -7,15 +7,18 @@ import java.util.ArrayList;
 
 public enum FillerType {
 
-    WALL(1,72,0,null,0,0,
-            true,false,null,0),
-    STAIRS(1,72,0,null,0,0,
-            true,false,null,0),
-    SHOP(5,114,0,Resource.WOOD,5,1,
-            true,false,null,0),
-    TENT(1,0,0,null,0,-1,
-            true,true,null,0);
+    WALL("wall",1,72,0,null,0,0,
+            true,false,0,true),
+    STAIRS("stairs",1,72,0,null,0,0,
+            true,false,0,false),
+    SHOP("shop",5,114,0,Resource.WOOD,5,1,
+            true,false,0,false),
+    TENT("tent",1,0,0,null,0,-1,
+            true,true,0,false),
+    STABLE("stable",6,114,400,Resource.WOOD,20,0,
+            true,false,0,false);
 
+    private String name;
     private int size;
     private int hitPoint;
     private double goldCost;
@@ -24,8 +27,8 @@ public enum FillerType {
     private int workersNumber;
     private boolean isActive;
     private boolean areWorkersEngineer;
-    private ArrayList<model.people.Engineer> engineers;
     private int popularityEffect;
+    private boolean isWall;
 
     public int getSize() {
         return size;
@@ -41,6 +44,14 @@ public enum FillerType {
 
     public Resource getResourceCostType() {
         return resourceCostType;
+    }
+
+    public boolean isAreWorkersEngineer() {
+        return areWorkersEngineer;
+    }
+
+    public boolean isWall() {
+        return isWall;
     }
 
     public int getResourceCostNumber() {
@@ -59,17 +70,15 @@ public enum FillerType {
         return areWorkersEngineer;
     }
 
-    public ArrayList<Engineer> getEngineers() {
-        return engineers;
-    }
 
     public int getPopularityEffect() {
         return popularityEffect;
     }
 
-    FillerType(int size, int hitPoint, double goldCost,
+    FillerType(String name,int size, int hitPoint, double goldCost,
                Resource resourceCostType, int resourceCostNumber, int workersNumber,
-               boolean isActive, boolean areWorkersEngineer, ArrayList<Engineer> engineers, int popularityEffect) {
+               boolean isActive, boolean areWorkersEngineer, int popularityEffect,boolean isWall) {
+        this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
         this.goldCost = goldCost;
@@ -78,7 +87,13 @@ public enum FillerType {
         this.workersNumber = workersNumber;
         this.isActive = isActive;
         this.areWorkersEngineer = areWorkersEngineer;
-        this.engineers = engineers;
         this.popularityEffect = popularityEffect;
+        this.isWall = isWall;
+    }
+    public static FillerType getFillerTypeByName(String name){
+        for (FillerType fillerType : FillerType.values())
+            if(fillerType.name.equals(name))
+                return fillerType;
+        return null;
     }
 }

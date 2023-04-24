@@ -7,7 +7,7 @@ import model.people.enums.UnitState;
 public abstract class Units {
     protected int hp;
     protected Speed speed;
-    protected int cost;
+    protected double cost;
     protected Governance ownerGovernance;
     protected UnitState unitState = UnitState.STANDING;
 
@@ -27,11 +27,15 @@ public abstract class Units {
         return unitState;
     }
 
+    public void setOwnerGovernance(Governance ownerGovernance) {
+        this.ownerGovernance = ownerGovernance;
+    }
+
     public void setUnitState(UnitState unitState) {
         this.unitState = unitState;
     }
 
-    public int getCost() {
+    public double getCost() {
         return cost;
     }
 
