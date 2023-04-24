@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public enum UnitMakerType {
     MERCENARY_TENT("mercenary tent",10,114,0,Resource.WOOD,10,
             0,true,true,false),
-    BARRACKS("barracks",10,114,0,Resource.WOOD,15,
+    BARRACKS("barracks",10,189,0,Resource.WOOD,15,
             0,true,false,false),
-    ENGINEER_GUILD("engineer guild",10,114,100,Resource.WOOD,10,
+    ENGINEER_GUILD("engineer guild",10,189,100,Resource.WOOD,10,
             0,true,false,true);
 
 

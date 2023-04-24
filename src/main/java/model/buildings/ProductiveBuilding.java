@@ -1,14 +1,31 @@
 package model.buildings;
 
+import model.buildings.enums.ProductiveBuildingType;
 import model.resources.AllResource;
+
+import java.util.ArrayList;
 
 public class ProductiveBuilding extends Building {
 
-    private AllResource producedResource;
+    private ArrayList<AllResource> producedResource;
     private AllResource requiredResource;
-    private int productionRate;
+    private int productionRate,consumptionRate;
 
-    public AllResource getProducedResource() {
+    public ProductiveBuilding(ProductiveBuildingType productiveBuildingType) {
+        size = productiveBuildingType.getSize();
+        hitPoint = productiveBuildingType.getHitPoint();
+        goldCost = productiveBuildingType.getGoldCost();
+        resourceCostType = productiveBuildingType.getResourceCostType();
+        resourceCostNumber = productiveBuildingType.getResourceCostNumber();
+        workersNumber = productiveBuildingType.getWorkersNumber();
+        isActive = productiveBuildingType.isActive();
+        producedResource = productiveBuildingType.getProducedResource();
+        requiredResource = productiveBuildingType.getRequiredResource();
+        productionRate = productiveBuildingType.getProductionRate();
+        consumptionRate = productiveBuildingType.getConsumptionRate();
+    }
+
+    public ArrayList<AllResource> getProducedResource() {
         return producedResource;
     }
 
@@ -18,6 +35,14 @@ public class ProductiveBuilding extends Building {
 
     public int getProductionRate() {
         return productionRate;
+    }
+
+    public void produce(){
+        for(AllResource allResource:producedResource) {
+            owner.changeResourceAmount(allResource, productionRate);
+            if (requiredResource != null)
+                owner.changeResourceAmount(requiredResource, -consumptionRate);
+        }
     }
 
     public void oneTurnPass(){
