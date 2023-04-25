@@ -36,6 +36,7 @@ public class MarketMenuController {
         if(MarketMenu.isSure()) {
             currentGovernance.setGold(currentGovernance.getGold() - item.getPrice() * amount);
             currentGovernance.addToStorage(item, amount);
+            currentGovernance.changeResourceAmount(item.getResource(),amount);
             return MarketMenuMessages.SUCCESS;
         }
         return MarketMenuMessages.CANCEL;
@@ -52,6 +53,7 @@ public class MarketMenuController {
         if(MarketMenu.isSure()){
             currentGovernance.setGold(currentGovernance.getGold() + (item.getPrice() * amount) / 2);
             currentGovernance.removeFromStorage(item,amount);
+            currentGovernance.changeResourceAmount(item.getResource(),-amount);
             return MarketMenuMessages.SUCCESS;
         }
         return MarketMenuMessages.CANCEL;

@@ -75,8 +75,10 @@ public class Trade {
         double transfer = price * resourceAmount;
         sender.setGold(sender.getGold() + transfer);
         sender.changeResourceAmount(resourceType.getResource(),-resourceAmount);
+        sender.removeFromStorage(resourceType,resourceAmount);
         receiver.setGold(receiver.getGold() - transfer);
         receiver.changeResourceAmount(resourceType.getResource(),resourceAmount);
+        receiver.addToStorage(resourceType,resourceAmount);
         this.receiver = receiver;
     }
 

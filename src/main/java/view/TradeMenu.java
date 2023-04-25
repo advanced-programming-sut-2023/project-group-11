@@ -42,7 +42,7 @@ public class TradeMenu {
     private static void checkTrade(Matcher matcher) {
         switch (TradeMenuController.checkTrade(matcher)){
             case INVALID_RESOURCE_TYPE -> System.out.println("Invalid Resource Type!");
-            case SUCCESS -> System.out.println("Trade Successfully Added!");
+            case SUCCESS -> System.out.println("Trade Added Successfully!");
         }
     }
 
@@ -51,7 +51,14 @@ public class TradeMenu {
     }
 
     private static void checkAcceptTrade(Matcher matcher) {
-
+        switch (TradeMenuController.checkAcceptTrade(matcher)){
+            case INVALID_ID -> System.out.println("Invalid id!");
+            case NOT_ENOUGH_STORAGE -> System.out.println("You Don't Have Enough Storage For This Trade!");
+            case NOT_ENOUGH_GOLD -> System.out.println("You Don't Have Enough Gold For This Trade!");
+            case NOT_ENOUGH_AMOUNT -> System.out.println("Trade Sender Doesn't Have Enough Of This Item!");
+            case TRADE_CLOSED -> System.out.println("Your Chosen Trade Is Closed!");
+            case SUCCESS -> System.out.println("Trade Accepted Successfully!");
+        }
     }
 
     private static void tradeHistory() {

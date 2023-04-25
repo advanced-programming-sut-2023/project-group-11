@@ -242,6 +242,7 @@ public class Governance {
 
     public void removeFromStorage(AllResource item,int amount){
         Object resource = item.getResource();
+
         for (Storage storage:storages){
             if(storage.getStorage().containsKey(resource)){
                 if(amount == 0)
