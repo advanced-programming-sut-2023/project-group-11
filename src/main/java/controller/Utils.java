@@ -8,12 +8,12 @@ import model.Stronghold;
 import model.User;
 import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.json.simple.JSONArray;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Matcher;
 
@@ -87,22 +87,20 @@ public class Utils {
     }
 
     public static void updateDatabase(String field) {
-        JSONArray jsonArray = makeJsonArrayFromArraylist(field);
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
         try (FileWriter usersDatabase = new FileWriter("src/main/resources/" + field + ".json")) {
-            gson.toJson(jsonArray, usersDatabase);
+            gson.toJson(getDatabaseList(field), usersDatabase);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-    public static JSONArray makeJsonArrayFromArraylist(String field) {
-        JSONArray jsonArray = new JSONArray();
-        switch (field) {
-            case "users" -> jsonArray.addAll(Stronghold.getUsers());
-            case "maps" -> jsonArray.addAll(Stronghold.getMaps());
+    public static ArrayList<Object> getDatabaseList(String field){
+        ArrayList<Object> databaseList = new ArrayList<>();
+        switch (field){
+            case "users"-> databaseList.addAll(Stronghold.getUsers());
+            case "maps"-> databaseList.addAll(Stronghold.getMaps());
         }
-        return jsonArray;
+        return databaseList;
     }
 
     public static String removeDoubleQuotation(String name) {

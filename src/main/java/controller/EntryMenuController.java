@@ -1,82 +1,38 @@
 package controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.Stronghold;
 import model.User;
 import model.map.Map;
-import model.map.Texture;
-import model.map.Tile;
-import model.map.Tree;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class EntryMenuController {
     public static void fillAllFieldsWithPreviousData() {
-        initializeFields("users");
-        initializeFields("maps");
+        parseUsers();
+        parseMaps();
     }
 
-    private static void initializeFields(String field) {
-        JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("src/main/resources/" + field + ".json")) {
-            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
-            switch (field) {
-                case "users" -> jsonArray.forEach(user -> parseUserObject((JSONObject) user));
-                case "maps" -> jsonArray.forEach(map -> parseMapObject((JSONObject) map));
-            }
-        } catch (IOException | ParseException ignored) {
+    private static void parseUsers() {
+        try (FileReader reader = new FileReader("src/main/resources/users.json")) {
+            Type userDatabaseType = new TypeToken<ArrayList<User>>() {
+            }.getType();
+            Stronghold.getUsers().addAll(new Gson().fromJson(reader, userDatabaseType));
+        } catch (IOException ignored) {
         }
     }
 
-    private static void parseUserObject(JSONObject user) {
-        //Get user fields
-        String username = (String) user.get("username");
-        String password = (String) user.get("password");
-        String nickname = (String) user.get("nickname");
-        String email = (String) user.get("email");
-        String recoveryQuestion = (String) user.get("recoveryQuestion");
-        String recoveryAnswer = (String) user.get("recoveryAnswer");
-        String slogan = (String) user.get("slogan");
-
-        User previousUser = new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
-        if ((Boolean) user.get("stayLoggedIn")) previousUser.setStayLoggedIn(true);
-    }
-
-    private static void parseMapObject(JSONObject map) {
-        String name = (String) map.get("name");
-        long size = (Long) map.get("size");
-        JSONArray mapTiles = (JSONArray) map.get("map");
-
-        new Map(name, convertTo2DTileArray(mapTiles, (int) size), (int) size);
-    }
-
-    private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int size) {
-        Tile[][] result = new Tile[size][];
-        for (int i = 0; i < size; i++) {
-            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), size);
+    private static void parseMaps() {
+        try (FileReader reader = new FileReader("src/main/resources/maps.json")) {
+            Type mapDatabaseType = new TypeToken<ArrayList<Map>>() {
+            }.getType();
+            Stronghold.getMaps().addAll(new Gson().fromJson(reader, mapDatabaseType));
+        } catch (IOException ignored) {
         }
-        return result;
-    }
-
-    private static Tile[] convertToTileArray(JSONArray tiles, int size) {
-        Tile[] result = new Tile[size];
-        for (int i = 0; i < size; i++) {
-            result[i] = parseTileObject((JSONObject) tiles.get(i));
-        }
-        return result;
-    }
-
-    private static Tile parseTileObject(JSONObject tile) {
-        Texture texture = Texture.getTextureByName(((String) tile.get("texture")).toLowerCase());
-        Tree tree = null;
-        if ((String) tile.get("tree") != null)
-            tree = new Tree((String) tile.get("tree"));
-
-        return new Tile(texture, tree);
     }
 
     public static User getStayLoggedIn() {

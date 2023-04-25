@@ -15,21 +15,30 @@
     </properties>
 
     <dependencies>
+        <!--junit jupiter-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
+        <!--random password generator-->
         <dependency>
             <groupId>org.passay</groupId>
             <artifactId>passay</artifactId>
             <version>1.6.2</version>
         </dependency>
+        <!--gson-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
+        </dependency>
+        <!--json-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20230227</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
@@ -37,16 +46,11 @@
             <version>1.15</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.michaelgantman</groupId>
             <artifactId>MgntUtils</artifactId>
             <version>1.6.0.6</version>
         </dependency>
-        <!--        colorize background-->
+        <!--colorize background-->
         <dependency>
             <groupId>com.diogonunes</groupId>
             <artifactId>JColor</artifactId>
