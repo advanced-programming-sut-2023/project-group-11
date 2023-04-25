@@ -19,6 +19,7 @@ public abstract class Building {
     protected boolean areWorkersEngineer;
     protected ArrayList<Engineer> engineers;
     protected int popularityEffect;
+    protected String name;
 
     public void setOwner(Governance owner) {
         this.owner = owner;
@@ -76,5 +77,9 @@ public abstract class Building {
 
     public int getPopularityEffect() {
         return popularityEffect;
+    }
+
+    public String getName() {
+        return name;
     }
 }

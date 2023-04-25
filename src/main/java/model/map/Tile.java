@@ -80,13 +80,15 @@ public class Tile {
     @Override
     public String toString() {
         String unitsName = "";
-        for (Units unit : units) unitsName += unit.getName() + ",";
+        String result = "";
+        for (Units unit : units) unitsName += unit.getName() + ", ";
 
-        return "Tile{" +
-                "texture=" + texture +
-                ", building=" + building +
-                ", units=[" + unitsName +']'+
-                ", tree=" + tree +
-                '}';
+        result += "Texture: " + texture.getName() + '\n';
+        if (building != null) result += "Building: " + building.getName() + '\n';
+        if (units.size() > 0) result += "Units: " + unitsName + '\n';
+        if (tree != null) result += "Tree: " + tree.getName();
+        if (getResourceAmount() != null) result += getResourceAmount();
+
+        return result;
     }
 }

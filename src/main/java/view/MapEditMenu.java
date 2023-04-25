@@ -35,14 +35,13 @@ public class MapEditMenu {
             else if (MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.NEW_MAP) != null) {
                 System.out.println("Enter the map's name:");
                 String mapName = scanner.nextLine();
-                mapName = Utils.removeDoubleQuotation(mapName);
-                if (Stronghold.isMapName(mapName)) {
+                if (Stronghold.isMapName(Utils.removeDoubleQuotation(mapName))) {
                     System.out.println("Repeated map name! Try again!");
                     continue;
                 }
                 System.out.println("Enter size for the \"" + mapName + "\" map");
                 int size = Integer.parseInt(scanner.nextLine());
-                if (size <= 10 || size >= 500) {
+                if (size <= 50 || size >= 500) {
                     System.out.println("Invalid size! Try again!");
                     continue;
                 }
@@ -59,7 +58,9 @@ public class MapEditMenu {
             while (true) {
                 input = scanner.nextLine();
 
-                if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.SET_TEXTURE)) != null)
+                if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.SHOW_MAP)) != null)
+                    checkShowMap(matcher);
+                else if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.SET_TEXTURE)) != null)
                     checkSetTexture(matcher);
                 else if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.CLEAR)) != null)
                     clear(matcher);
@@ -73,6 +74,16 @@ public class MapEditMenu {
                     break;
                 } else System.out.println("Invalid command!");
             }
+        }
+    }
+
+    private static void checkShowMap(Matcher matcher) {
+        mapEditMenuMessage = MapEditMenuController.checkShowMap(matcher);
+
+        switch (mapEditMenuMessage) {
+            case SUCCESS -> System.out.println(MapEditMenuController.showMap(matcher));
+            case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
+            case INVALID_COMMAND -> System.out.println("Invalid command");
         }
     }
 

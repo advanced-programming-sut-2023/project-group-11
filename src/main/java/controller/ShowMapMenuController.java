@@ -2,6 +2,7 @@ package controller;
 
 import com.diogonunes.jcolor.Ansi;
 import com.diogonunes.jcolor.Attribute;
+import model.Game;
 import model.Stronghold;
 import model.map.Color;
 import model.map.Map;
@@ -18,7 +19,8 @@ public class ShowMapMenuController {
             return ShowMapMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
-        if (!Utils.isValidCoordinates(x, y)) return ShowMapMenuMessages.INVALID_COORDINATE;
+        if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y))
+            return ShowMapMenuMessages.INVALID_COORDINATE;
         return ShowMapMenuMessages.SUCCESS;
     }
 
@@ -47,7 +49,7 @@ public class ShowMapMenuController {
         int verticalMove = downCount - upCount;
         int horizontalMove = rightCount - leftCount;
 
-        if (!Utils.isValidCoordinates(ShowMapMenu.xCoordinate + verticalMove, ShowMapMenu.yCoordinate + horizontalMove))
+        if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), ShowMapMenu.xCoordinate + verticalMove, ShowMapMenu.yCoordinate + horizontalMove))
             return ShowMapMenuMessages.INVALID_COORDINATE;
 
         ShowMapMenu.xCoordinate += verticalMove;
@@ -68,23 +70,26 @@ public class ShowMapMenuController {
         Map map = Stronghold.getMapByName(name);
         Attribute backgroundColor;
         Attribute textColor;
-        for (int i = (Math.max(x - 7, 0)); i < x + 7 && i < map.getSize(); i++) {
-            for (int j = (Math.max(y - 50, 0)); j < y + 50 && j < map.getSize(); j++) {
-                if (i % 4 == 0) output += "-";
-                else if (j % 7 == 0) output += "|";
+        for (int i = (Math.max(x - 7, 0)), k = (Math.max(x - 7, 0)); i < x + 7 && i < map.getSize(); i++, k++) {
+            for (int j = (Math.max(y - 50, 0)), l = (Math.max(y - 50, 0)); j < y + 50 && j < map.getSize(); j++, l++) {
+                if (l % 8 == 0) {
+                    output += "|";
+                    j--;
+                } else if (k % 4 == 0) output += "-";
                 else {
                     Tile tile = map.getTile(i, j);
                     backgroundColor = tile.getTexture().getColor().getColor();
 
-                    if (i == x && j == y) textColor = Color.BLACK_TEXT.getColor();
+                    if (i == x && j == y) textColor = Color.RED_TEXT.getColor();
                     else textColor = Color.WHITE_TEXT.getColor();
 
                     if (tile.getUnits().size() > 0) output += (Ansi.colorize("S", textColor, backgroundColor));
                     else if (tile.getBuilding() != null) output += (Ansi.colorize("B", textColor, backgroundColor));
                     else if (tile.getTree() != null) output += (Ansi.colorize("T", textColor, backgroundColor));
-                    else output += (Ansi.colorize(".", textColor, backgroundColor));
+                    else output += (Ansi.colorize("#", textColor, backgroundColor));
                 }
             }
+            if (k % 4 == 0) i--;
             output += '\n';
         }
         return output;

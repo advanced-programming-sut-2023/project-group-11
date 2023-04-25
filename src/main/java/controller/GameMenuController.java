@@ -1,5 +1,6 @@
 package controller;
 
+import model.Stronghold;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.regex.Matcher;
@@ -75,7 +76,7 @@ public class GameMenuController {
             return GameMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
-        if (!Utils.isValidCoordinates(x, y)) return GameMenuMessages.INVALID_COORDINATE;
+        if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y)) return GameMenuMessages.INVALID_COORDINATE;
         return GameMenuMessages.SUCCESS;
     }
 }

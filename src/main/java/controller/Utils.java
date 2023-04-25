@@ -125,8 +125,7 @@ public class Utils {
         System.exit(0);
     }
 
-    public static boolean isValidCoordinates(int x, int y) {
-        Map map = Stronghold.getCurrentGame().getMap();
+    public static boolean isValidCoordinates(Map map, int x, int y) {
         int mapSize = map.getSize();
         return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
     }

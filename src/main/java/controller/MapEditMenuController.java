@@ -206,4 +206,22 @@ public class MapEditMenuController {
         currentMap = new Map(mapName, size);
         Utils.updateDatabase("maps");
     }
+
+    public static MapEditMenuMessages checkShowMap(Matcher matcher) {
+        if (!Utils.isValidCommandTags(matcher, "x", "y"))
+            return MapEditMenuMessages.INVALID_COMMAND;
+
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        if (!Utils.isValidCoordinates(currentMap, x , y))
+            return MapEditMenuMessages.INVALID_COORDINATE;
+
+        return MapEditMenuMessages.SUCCESS;
+    }
+
+    public static String showMap(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        return ShowMapMenuController.showMap(currentMap.getName(), x, y);
+    }
 }

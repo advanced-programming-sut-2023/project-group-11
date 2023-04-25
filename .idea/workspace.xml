@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="MarketMenu basics added">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Captcha Updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/resources/AllResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/resources/AllResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/MarketMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MarketMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/MapEditMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MapEditMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/maps.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +34,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/controller/Utils.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/model/buildings/Church.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/view/Menu.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/users.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -81,7 +92,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="project-group-11" />
+      <module name="ProjectAP" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -125,8 +136,14 @@
       <workItem from="1682184027134" duration="8645000" />
       <workItem from="1682194774772" duration="2513000" />
       <workItem from="1682197946236" duration="739000" />
-      <workItem from="1682243811881" duration="18876000" />
-      <workItem from="1682391971318" duration="4440000" />
+      <workItem from="1682243811881" duration="18962000" />
+      <workItem from="1682277282836" duration="818000" />
+      <workItem from="1682278137904" duration="9000" />
+      <workItem from="1682342047019" duration="25000" />
+      <workItem from="1682352163979" duration="1448000" />
+      <workItem from="1682353632861" duration="19000" />
+      <workItem from="1682425076698" duration="55000" />
+      <workItem from="1682427971355" duration="6929000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -303,42 +320,28 @@
       <option name="project" value="LOCAL" />
       <updated>1682271939013</updated>
     </task>
-    <task id="LOCAL-00026" summary="building 60% complete">
-      <created>1682316671354</created>
+    <task id="LOCAL-00026" summary="Profie menu finished">
+      <created>1682272328867</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1682316671354</updated>
+      <updated>1682272328867</updated>
     </task>
-    <task id="LOCAL-00027" summary="Building almost complete (except machine)">
-      <created>1682321885166</created>
+    <task id="LOCAL-00027" summary="isMapName problem fixed">
+      <created>1682278048312</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1682321885166</updated>
+      <updated>1682278048312</updated>
     </task>
-    <task id="LOCAL-00028" summary="Building enums finished + machine updated">
-      <created>1682350413681</created>
+    <task id="LOCAL-00028" summary="Captcha Updated">
+      <created>1682353591245</created>
       <option name="number" value="00028" />
       <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1682350413681</updated>
+      <updated>1682353591245</updated>
     </task>
-    <task id="LOCAL-00029" summary="minor update and debug in trade and ...">
-      <created>1682355686794</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1682355686794</updated>
-    </task>
-    <task id="LOCAL-00030" summary="MarketMenu basics added">
-      <created>1682363641389</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1682363641389</updated>
-    </task>
-    <option name="localTasksCounter" value="31" />
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,6 +383,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Solve plugins problems" />
+    <MESSAGE value="Add Gson Lib" />
     <MESSAGE value="Add JArgs lib &amp; change JUnit jupiter" />
     <MESSAGE value="People completed &amp; Packages' names corrected" />
     <MESSAGE value="Map edited &amp; Map edit menu completed upto drop cliff(rock)" />
@@ -400,12 +405,10 @@
     <MESSAGE value="Profile menu ended (not debugged)" />
     <MESSAGE value="Remove static fields in Game" />
     <MESSAGE value="Profie menu debugged (without captcha)" />
-    <MESSAGE value="building 60% complete" />
-    <MESSAGE value="Building almost complete (except machine)" />
-    <MESSAGE value="Building enums finished + machine updated" />
-    <MESSAGE value="minor update and debug in trade and ..." />
-    <MESSAGE value="MarketMenu basics added" />
-    <option name="LAST_COMMIT_MESSAGE" value="MarketMenu basics added" />
+    <MESSAGE value="Profie menu finished" />
+    <MESSAGE value="isMapName problem fixed" />
+    <MESSAGE value="Captcha Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Captcha Updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -417,12 +420,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/view/EntryMenu.java</url>
-          <line>25</line>
+          <line>24</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/view/MainMenu.java</url>
-          <line>19</line>
+          <line>18</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
