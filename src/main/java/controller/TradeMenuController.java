@@ -20,7 +20,7 @@ public class TradeMenuController {
                 message = matcher.group("message");
         int resourceAmount = Integer.parseInt(matcher.group("resourceAmount")),
                 price = Integer.parseInt(matcher.group("price"));
-        AllResource resource = (AllResource) AllResource.getAllResourceByName(resourceType);
+        AllResource resource =  AllResource.getAllResourceByName(resourceType);
         if (resource == null)
             return TradeMenuMessages.INVALID_RESOURCE_TYPE;
         new Trade(resource, resourceAmount, price, message, currentGovernance);
@@ -51,9 +51,13 @@ public class TradeMenuController {
         if(!trade.isOpen())
             return TradeMenuMessages.TRADE_CLOSED;
         if(currentGovernance.equals(trade.getSender()))
-            return TradeMenuMessages.UNSUCCESSFUL;
+            return TradeMenuMessages.CANT_ACCEPT_YOUR_OWN_TRADE;
         if(currentGovernance.getGold() < trade.getResourceAmount() * trade.getPrice())
-            return TradeMenuMessages.UNSUCCESSFUL;
+            return TradeMenuMessages.NOT_ENOUGH_GOLD;
+        if(!trade.getSender().hasEnoughItem(trade.getResourceType(), trade.getResourceAmount()))
+            return TradeMenuMessages.NOT_ENOUGH_AMOUNT;
+        if(!currentGovernance.hasStorageForItem(trade.getResourceType(), trade.getResourceAmount()))
+            return TradeMenuMessages.NOT_ENOUGH_STORAGE;
         trade.accept(message,currentGovernance);
         return TradeMenuMessages.SUCCESS;
     }
