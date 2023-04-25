@@ -34,10 +34,35 @@ public class MarketMenu {
     }
 
     private static void checkBuyItem(Matcher matcher) {
-
+        switch (MarketMenuController.checkBuyItem(matcher)){
+            case INVALID_ITEM -> System.out.println("Invalid Item!");
+            case NOT_ENOUGH_GOLD -> System.out.println("Your Gold Is Not Enough!");
+            case NOT_ENOUGH_STORAGE -> System.out.println("Your Storage Is Not Enough For Storing This Item!");
+            case CANCEL -> System.out.println("Deal Canceled!");
+            case SUCCESS -> System.out.println("Item Bought Successfully!");
+        }
     }
 
     private static void checkSellItem(Matcher matcher) {
+        switch (MarketMenuController.checkSellItem(matcher)){
+            case INVALID_ITEM -> System.out.println("Invalid Item!");
+            case NOT_ENOUGH_STORAGE -> System.out.println("You Dont Have Enough Of This Item!");
+            case CANCEL -> System.out.println("Deal Canceled!");
+            case SUCCESS -> System.out.println("Item Sold Successfully!");
+        }
+    }
 
+    public static boolean isSure(){
+        System.out.println("Are You Sure About This Deal?[Y/N]");
+        String answer;
+        while (true){
+            answer = EntryMenu.getScanner().nextLine();
+            if(answer.equals("Y"))
+                return true;
+            if(answer.equals("N"))
+                return false;
+            System.out.println("Invalid Answer!");
+            System.out.println("Are You Sure About This Deal?[Y/N]");
+        }
     }
 }

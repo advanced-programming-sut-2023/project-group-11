@@ -12,9 +12,10 @@ import java.util.regex.Matcher;
 
 public class TradeMenuController {
 
-    private static Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+    private static Governance currentGovernance;
 
     public static TradeMenuMessages checkTrade(Matcher matcher) {
+        currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         String resourceType = matcher.group("resourceType"),
                 message = matcher.group("message");
         int resourceAmount = Integer.parseInt(matcher.group("resourceAmount")),
@@ -40,6 +41,7 @@ public class TradeMenuController {
     }
 
     public static TradeMenuMessages checkAcceptTrade(Matcher matcher) {
+        currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         int id = Integer.parseInt(matcher.group("id"));
         String message = matcher.group("message");
         ArrayList<Trade> trades = Trade.getTrades();
@@ -57,10 +59,12 @@ public class TradeMenuController {
     }
 
     public static String tradeHistory() {
+        currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         return currentGovernance.tradeHistory();
     }
 
     public static String showNotifications(){
+        currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         String output = "";
         int index = 1;
         for(Trade trade: currentGovernance.getTradeNotification()){

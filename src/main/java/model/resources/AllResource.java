@@ -53,7 +53,13 @@ public enum AllResource {
         return resource;
     }
 
-    public static Object getAllResourceByName(String name){
+    public static AllResource getAllResourceByName(String name){
+        for (AllResource allResource : AllResource.values())
+            if(allResource.name.equals(name)) return allResource;
+        return null;
+    }
+
+    public static Object getResourceByName(String name){
         for (AllResource allResource : AllResource.values())
             if(allResource.name.equals(name)) return allResource.resource;
         return null;

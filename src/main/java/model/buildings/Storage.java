@@ -58,6 +58,10 @@ public class Storage extends Building{
         return storage;
     }
 
+    public int getCurrentCapacity() {
+        return currentCapacity;
+    }
+
     public int getCapacity() {
         return capacity;
     }
@@ -65,7 +69,12 @@ public class Storage extends Building{
     public void addToStorage(AllResource resource,int amount){
         Object object = resource.getResource();
         storage.put(object, storage.get(object) + amount);
-        currentCapacity += amount;
+        currentCapacity -= amount;
     }
 
+    public void removeFromStorage(AllResource resource,int amount){
+        Object object = resource.getResource();
+        storage.put(object, storage.get(object) - amount);
+        currentCapacity += amount;
+    }
 }

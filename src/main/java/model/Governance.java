@@ -1,5 +1,6 @@
 package model;
 
+import model.buildings.Storage;
 import model.resources.AllResource;
 import model.resources.Food;
 import model.resources.Resource;
@@ -27,6 +28,7 @@ public class Governance {
     private final HashMap<Resource, Integer> resources = new HashMap<>();
     private final HashMap<Food, Integer> foods = new HashMap<>();
     private final HashMap<TroopEquipment, Integer> troopEquipments = new HashMap<>();
+    private final ArrayList<Storage> storages = new ArrayList<>();
 
     {
         resources.put(Resource.WOOD, 100);
@@ -147,7 +149,9 @@ public class Governance {
         this.religiousFactor = religiousFactor;
     }
 
-    public void addTrade(Trade trade) { previousTrades.add(trade); }
+    public void addTrade(Trade trade) {
+        previousTrades.add(trade);
+    }
 
     public void addResource(Resource resource, int count) {
         resources.put(resource, count);
@@ -161,16 +165,17 @@ public class Governance {
         troopEquipments.put(util, count);
     }
 
-    public void changeResourceAmount(Object object, int count){
-        if(object instanceof TroopEquipment)
+    public void changeResourceAmount(Object object, int count) {
+        if (object instanceof TroopEquipment)
             troopEquipments.put((TroopEquipment) object, troopEquipments.get((TroopEquipment) object) + count);
 
-        if(object instanceof Food)
-            foods.put((Food) object,foods.get((Food) object) + count);
+        if (object instanceof Food)
+            foods.put((Food) object, foods.get((Food) object) + count);
 
-        if(object instanceof Resource)
-            resources.put((Resource) object,resources.get((Resource) object) + count);
+        if (object instanceof Resource)
+            resources.put((Resource) object, resources.get((Resource) object) + count);
     }
+
     public int getResourceCount(AllResource resource) {
         return resources.get(resource.getResource());
     }
@@ -186,6 +191,7 @@ public class Governance {
     public Governance(User owner) {
         this.owner = owner;
     }
+
     public String tradeHistory() {
         String output = "";
         int i = 1;
@@ -193,4 +199,63 @@ public class Governance {
             output += (i++) + "-" + previousTrade;
         return output;
     }
+
+    public boolean hasStorageForItem(AllResource item, int amount) {
+        int capacity = 0;
+        for (Storage storage : storages) {
+            if (storage.getStorage().containsKey(item.getResource())) {
+                capacity += storage.getCurrentCapacity();
+                if(capacity >= amount)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasEnoughItem(AllResource item, int amount){
+        int capacity = 0;
+        for (Storage storage : storages) {
+            if (storage.getStorage().containsKey(item.getResource())) {
+                capacity += storage.getStorage().get(item.getResource());
+                if(capacity >= amount)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public void addToStorage(AllResource item,int amount){
+        for (Storage storage:storages){
+            if(storage.getStorage().containsKey(item.getResource())){
+                if(amount == 0)
+                    break;
+                if(storage.getCurrentCapacity() <= amount){
+                    amount -= storage.getCurrentCapacity();
+                    storage.addToStorage(item, storage.getCurrentCapacity());
+                }else{
+                    storage.addToStorage(item,amount);
+                    amount = 0;
+                }
+            }
+        }
+    }
+
+    public void removeFromStorage(AllResource item,int amount){
+        Object resource = item.getResource();
+        for (Storage storage:storages){
+            if(storage.getStorage().containsKey(resource)){
+                if(amount == 0)
+                    break;
+                int storageRemaining = storage.getStorage().get(resource);
+                if(storageRemaining <= amount){
+                    amount -= storageRemaining;
+                    storage.removeFromStorage(item, storageRemaining);
+                }else{
+                    storage.removeFromStorage(item,amount);
+                    amount = 0;
+                }
+            }
+        }
+    }
+
 }

@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="minor update and debug in trade and ...">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="MarketMenu basics added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/StorageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/StorageType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/resources/AllResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/resources/AllResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/TradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/TradeMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/MarketMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MarketMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/TradeMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/TradeMenuCommands.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/MarketMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MarketMenuMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +35,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2OT1PI8Q02cnKX6wIVxdqs3bExz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -131,6 +126,7 @@
       <workItem from="1682194774772" duration="2513000" />
       <workItem from="1682197946236" duration="739000" />
       <workItem from="1682243811881" duration="18876000" />
+      <workItem from="1682391971318" duration="4440000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -335,7 +331,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682355686794</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="MarketMenu basics added">
+      <created>1682363641389</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1682363641389</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,7 +380,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add Gson Lib" />
     <MESSAGE value="Add JArgs lib &amp; change JUnit jupiter" />
     <MESSAGE value="People completed &amp; Packages' names corrected" />
     <MESSAGE value="Map edited &amp; Map edit menu completed upto drop cliff(rock)" />
@@ -402,7 +404,8 @@
     <MESSAGE value="Building almost complete (except machine)" />
     <MESSAGE value="Building enums finished + machine updated" />
     <MESSAGE value="minor update and debug in trade and ..." />
-    <option name="LAST_COMMIT_MESSAGE" value="minor update and debug in trade and ..." />
+    <MESSAGE value="MarketMenu basics added" />
+    <option name="LAST_COMMIT_MESSAGE" value="MarketMenu basics added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
