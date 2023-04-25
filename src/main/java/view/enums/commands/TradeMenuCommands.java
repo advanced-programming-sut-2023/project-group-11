@@ -4,12 +4,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum TradeMenuCommands {
-    TRADE("trade((?<resourceTypeGroup> -t (?<resourceType>)\\S+)|" +
-                "((?<resourceAmountGroup> -a (?<resourceAmount>\\d+)))|" +
-                "((?<priceGroup> -p (?<price>\\d+))|((?<messageGroup> -m (?<message>\".*?[^\\\\]\"|[^\"\\s]*))){4}"),
+    TRADE("trade(((?<resourceTypeGroup> -t (?<resourceType>\\S+)))|" +
+            "((?<resourceAmountGroup> -a (?<resourceAmount>\\d+)))|" +
+            "((?<priceGroup> -p (?<price>\\d+)))|((?<messageGroup> -m (?<message>\".*?[^\\]\"|[^\"\s]*)))){4}"),
     TRADE_LIST("trade list"),
-    TRADE_ACCEPT("trade accept((?<idGroup> -i (?<id>\\d+)))|((?<messageGroup> -m" +
-                " (?<message>((\".*?[^\\\\]\")|([^\"\\s]*))))){2}"),
+    TRADE_ACCEPT("trade accept(((?<idGroup> -i (?<id>\\d+)))|" +
+            "((?<messageGroup> -m (?<message>((\\\".*?[^\\\\\\\\]\\\")|([^\\\"\\s]*)))))){2}"),
     TRADE_HISTORY("trade history"),
     SHOW_CURRENT_MENU("show current menu"),
     BACK("back"),

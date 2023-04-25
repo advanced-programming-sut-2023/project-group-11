@@ -35,7 +35,7 @@ public class TradeMenuController {
         String output = "";
         int index = 1;
         for (Trade trade:Trade.getTrades()){
-            output += (index++) + "-" + trade;
+            output += (index++) + "-" + trade + "\n";
         }
         return output;
     }
