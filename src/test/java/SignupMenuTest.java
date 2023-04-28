@@ -1,5 +1,9 @@
+import controller.EntryMenuController;
 import controller.SignupMenuController;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
+import view.EntryMenu;
 import view.enums.commands.SignupMenuCommands;
 import view.enums.messages.SignupMenuMessages;
 
@@ -10,6 +14,11 @@ import java.util.regex.Matcher;
 
 public class SignupMenuTest {
 
+
+    @BeforeAll
+    public static void setupAll(){
+        EntryMenuController.fillAllFieldsWithPreviousData();
+    }
 
     private Matcher getRegisterMatcher(String command){
         return SignupMenuCommands.getMatcher(command,SignupMenuCommands.REGISTER);
@@ -40,7 +49,6 @@ public class SignupMenuTest {
         assertEquals(SignupMenuMessages.INVALID_USERNAME_FORMAT,SignupMenuController.checkRegister(matcher,"sepehr#"));
     }
 
-    @Disabled
     @Test
     public void usernameExistTest(){
         Matcher matcher = getRegisterMatcher("user create -u amir -n amireza -e ali.com -p god god");
@@ -81,6 +89,12 @@ public class SignupMenuTest {
     public void WrongConfirmationTest(){
         Matcher matcher = getRegisterMatcher("user create -u sepehr -n amireza -e ali.com -p #Strong9 potato");
         assertEquals(SignupMenuMessages.WRONG_PASSWORD_CONFIRMATION,SignupMenuController.checkRegister(matcher,"sepehr"));
+    }
+
+    @Test
+    public void emailExistTest(){
+        Matcher matcher = getRegisterMatcher("user create -u sepehr -n amireza -e sadegh.sg.sn@gmail.com -p #Strong9 #Strong9");
+        assertEquals(SignupMenuMessages.EMAIL_EXIST,SignupMenuController.checkRegister(matcher,"sepehr"));
     }
 
     @Test
