@@ -39,8 +39,23 @@ public class GameMenuController {
         return null;
     }
 
-    private static GameMenuMessages checkDropBuilding(Matcher matcher) {
-        return null;
+    public static GameMenuMessages checkDropBuilding(Matcher matcher) {
+        if(!Utils.isValidCommandTags(matcher,"xGroup","yGroup","typeGroup"))
+            return GameMenuMessages.INVALID_COMMAND;
+        int x = Integer.parseInt(matcher.group("xGroup"));
+        int y = Integer.parseInt(matcher.group("yGroup"));
+        String type = matcher.group("typeGroup");
+        if(!BuildingUtils.isValidBuildingType(type))
+            return GameMenuMessages.INVALID_BUILDING_TYPE;
+        int size = BuildingUtils.getBuildingSizeByName(type);
+        if(!BuildingUtils.isValidCoordinates(Stronghold.getCurrentGame().getMap(),x,y,size))
+            return GameMenuMessages.INVALID_COORDINATE;
+        if(!BuildingUtils.isMapEmpty(x,y,size))
+            return GameMenuMessages.CANT_BUILD_HERE;
+        if(!BuildingUtils.isTextureSuitable(type,x,y,size))
+            return GameMenuMessages.CANT_BUILD_HERE;
+        BuildingUtils.build(type,x,y,size);
+        return GameMenuMessages.SUCCESS;
     }
 
     private static GameMenuMessages checkSelectBuilding(Matcher matcher) {

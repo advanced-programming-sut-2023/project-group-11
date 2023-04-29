@@ -49,7 +49,14 @@ public class GameMenu {
     }
 
     private static void checkDropBuilding(Matcher matcher) {
-
+        GameMenuMessages message = GameMenuController.checkDropBuilding(matcher);
+        switch (message){
+            case INVALID_COMMAND -> System.out.println("Invalid Command!");
+            case INVALID_BUILDING_TYPE -> System.out.println("Invalid Building Type!");
+            case INVALID_COORDINATE -> System.out.println("Invalid Coordinates!");
+            case CANT_BUILD_HERE -> System.out.println("Can't Build Here!");
+            case SUCCESS -> System.out.println("Building Has Been Built Successfully!");
+        }
     }
 
     private static void checkSelectBuilding(Matcher matcher) {

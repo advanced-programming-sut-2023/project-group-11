@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 public enum GameMenuCommands {
     SHOW_MAP("show map(( -x (?<xCoordinate>\\d+))" +
             "|( -y (?<yCoordinate>\\d+))){2}"),
+    DROP_BUILDING("dropbuilding((?<xGroup> -x (?<xCoordinate>\\d+))" +
+            "|(?<yGroup> -y (?<yCoordinate>\\d+))" +
+            "|(?<typeGroup> -type (?<type>\\\"[^\\\"]+\\\"|\\S+))){3}");
     ;
 
     private final String regex;

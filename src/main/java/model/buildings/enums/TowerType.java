@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public enum TowerType {
     LOOKOUT_TOWER("lookout tower",3,1000,0,Resource.STONE,10,
-            0,true,false,0,10,10,10,true),
+            0,true,false,0,10,10,10,false),
     PERIMETER_TURRET("perimeter turret",4,1000,0,Resource.STONE,10,
             0,true,false,0,10,10,10,false),
     DEFENCE_TURRET("defence turret",5,1000,0,Resource.STONE,15,

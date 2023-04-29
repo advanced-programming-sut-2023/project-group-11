@@ -6,7 +6,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Stronghold;
 import model.User;
+import model.buildings.enums.*;
 import model.map.Map;
+import model.map.Tile;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.awt.*;
@@ -129,4 +131,7 @@ public class Utils {
         int mapSize = map.getSize();
         return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
     }
+
+
+
 }

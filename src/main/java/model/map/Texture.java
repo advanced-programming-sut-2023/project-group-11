@@ -43,6 +43,14 @@ public enum Texture {
         return this.equals(ROCK) || this.equals(STONE) || this.equals(CLIFF);
     }
 
+    public boolean isIron(){return this.equals(IRON);}
+
+    public boolean isGrass(){return this.equals(GRASS) || this.equals(GRASSLAND) || this.equals(DENSE_GRASSLAND);}
+
+    public boolean isBuildable(){
+        return !(isStone() || isIron() || isWater());
+    }
+
     public String getName() {
         return name;
     }

@@ -154,6 +154,10 @@ public class Governance {
         previousTrades.add(trade);
     }
 
+    public ArrayList<Storage> getStorages() {
+        return storages;
+    }
+
     public void addResource(Resource resource, int count) {
         resources.put(resource, count);
     }
