@@ -8,6 +8,7 @@ public class Church extends Building{
     private int makeMonkCost;
 
     public Church(ChurchType churchType) {
+        name = churchType.getName();
         size = churchType.getSize();
         hitPoint = churchType.getHitPoint();
         goldCost = churchType.getGoldCost();

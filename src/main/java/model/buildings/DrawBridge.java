@@ -6,6 +6,7 @@ public class DrawBridge extends DefensiveBuilding{
 
     public DrawBridge(boolean isOpen) {
         this.isOpen = isOpen;
+        name = "draw bridge";
     }
 
     public boolean isOpen() {

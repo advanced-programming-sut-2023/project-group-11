@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public enum TowerType {
     LOOKOUT_TOWER("lookout tower",3,1000,0,Resource.STONE,10,
-            0,true,false,0,10,10,10),
+            0,true,false,0,10,10,10,true),
     PERIMETER_TURRET("perimeter turret",4,1000,0,Resource.STONE,10,
-            0,true,false,0,10,10,10),
+            0,true,false,0,10,10,10,false),
     DEFENCE_TURRET("defence turret",5,1000,0,Resource.STONE,15,
-            0,true,false,0,10,10,10),
+            0,true,false,0,10,10,10,false),
     SQUARE_TOWER("square tower",6,1000,0,Resource.STONE,35,
-            0,true,false,0,10,10,10),
+            0,true,false,0,10,10,10,true),
     ROUND_TOWER("round tower",3,1000,0,Resource.STONE,40,
-            0,true,false,0,10,10,10);
+            0,true,false,0,10,10,10,true);
 
 
     private String name;
@@ -32,6 +32,7 @@ public enum TowerType {
     private final int fireRange;
     private final int defendRange;
     private final int unitCapacity;
+    private final boolean isTower;
 
 
     public int getFireRange() {
@@ -49,7 +50,7 @@ public enum TowerType {
 
     TowerType(String name,int size, int hitPoint, int goldCost, Resource resourceCostType, int resourceCostNumber,
               int workersNumber, boolean isActive, boolean areWorkersEngineer, int popularityEffect,
-              int fireRange, int defendRange, int unitCapacity) {
+              int fireRange, int defendRange, int unitCapacity,boolean isTower) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -63,6 +64,15 @@ public enum TowerType {
         this.fireRange = fireRange;
         this.defendRange = defendRange;
         this.unitCapacity = unitCapacity;
+        this.isTower = isTower;
+    }
+
+    public boolean isTower() {
+        return isTower;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getSize() {

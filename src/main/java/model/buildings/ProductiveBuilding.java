@@ -12,6 +12,7 @@ public class ProductiveBuilding extends Building {
     private int productionRate,consumptionRate;
 
     public ProductiveBuilding(ProductiveBuildingType productiveBuildingType) {
+        name = productiveBuildingType.getName();
         size = productiveBuildingType.getSize();
         hitPoint = productiveBuildingType.getHitPoint();
         goldCost = productiveBuildingType.getGoldCost();

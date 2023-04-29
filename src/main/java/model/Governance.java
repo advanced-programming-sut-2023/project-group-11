@@ -28,6 +28,7 @@ public class Governance {
     private final HashMap<Resource, Integer> resources = new HashMap<>();
     private final HashMap<Food, Integer> foods = new HashMap<>();
     private final HashMap<TroopEquipment, Integer> troopEquipments = new HashMap<>();
+    //TODO: implement storages
     private final ArrayList<Storage> storages = new ArrayList<>();
 
     {

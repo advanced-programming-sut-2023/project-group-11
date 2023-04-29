@@ -11,6 +11,7 @@ public class UnitMaker extends Building {
     private boolean isEngineerMaker;
 
     public UnitMaker(UnitMakerType unitMakerType) {
+        name = unitMakerType.getName();
         size = unitMakerType.getSize();
         hitPoint = unitMakerType.getHitPoint();
         goldCost = unitMakerType.getGoldCost();

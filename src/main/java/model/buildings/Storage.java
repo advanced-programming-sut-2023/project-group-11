@@ -16,6 +16,7 @@ public class Storage extends Building{
 
     public Storage(StorageType storageType) {
         this.storageType = storageType;
+        name = storageType.getName();
         switch (storageType){
             case ARMOURY -> {
                 storage.put(TroopEquipment.CROSSBOW, 0);

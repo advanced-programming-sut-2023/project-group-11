@@ -8,6 +8,7 @@ public class Filler extends Building {
             isClimable = false;
 
     public Filler(FillerType fillerType) {
+        name = fillerType.getName();
         size = fillerType.getSize();
         hitPoint = fillerType.getHitPoint();
         goldCost = fillerType.getGoldCost();

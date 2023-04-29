@@ -81,6 +81,10 @@ public enum ProductiveBuildingType {
         this.consumptionRate = consumptionRate;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getConsumptionRate() {
         return consumptionRate;
     }

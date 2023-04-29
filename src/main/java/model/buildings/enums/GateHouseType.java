@@ -7,10 +7,14 @@ import java.util.ArrayList;
 
 public enum GateHouseType {
 
-    SMALL("small gatehouse",5,114,0,null,0,0,
-            true,false,0,8),
-    LARGE("large gatehouse",7,150,0,Resource.STONE,20,0,
-            true,false,0,10);
+    SMALL_HORIZONTAL("small gatehouse",5,114,0,null,0,0,
+            true,false,0,8,true),
+    LARGE_HORIZONTAL("large gatehouse",7,150,0,Resource.STONE,20,0,
+            true,false,0,10,true),
+    SMALL_VERTICAL("small gatehouse",5,114,0,null,0,0,
+                             true,false,0,8,false),
+    LARGE_VERTICAL("large gatehouse",7,150,0,Resource.STONE,20,0,
+            true,false,0,10,false);
 
     private String name;
     private int size;
@@ -23,12 +27,13 @@ public enum GateHouseType {
     private boolean areWorkersEngineer;
     private int popularityEffect;
     private int capacity;
+    private boolean horizontalDirection;
 
 
     GateHouseType(String name,int size, int hitPoint, double goldCost,
                   Resource resourceCostType, int resourceCostNumber, int workersNumber,
                   boolean isActive, boolean areWorkersEngineer,
-                  int popularityEffect, int capacity) {
+                  int popularityEffect, int capacity,boolean horizontalDirection) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -40,10 +45,15 @@ public enum GateHouseType {
         this.areWorkersEngineer = areWorkersEngineer;
         this.popularityEffect = popularityEffect;
         this.capacity = capacity;
+        this.horizontalDirection = horizontalDirection;
     }
 
     public int getSize() {
         return size;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getHitPoint() {

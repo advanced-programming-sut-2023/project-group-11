@@ -69,6 +69,10 @@ public enum TrapType {
         this.isActive = isActive;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static TrapType getTrapTypeByName(String name){
         for (TrapType trapType : TrapType.values())
             if(trapType.name.equals(name))

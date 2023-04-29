@@ -11,6 +11,7 @@ public class Inn extends Building {
     private int wineUsageRate;
 
     public Inn() {
+        name = "inn";
         size = 5;
         hitPoint = 114;
         goldCost = 100;

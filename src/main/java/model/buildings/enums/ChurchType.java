@@ -46,6 +46,10 @@ public enum ChurchType {
         this.makeMonkCost = makeMonkCost;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getSize() {
         return size;
     }

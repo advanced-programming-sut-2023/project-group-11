@@ -16,6 +16,8 @@ public enum FillerType {
     TENT("tent",1,0,0,null,0,-1,
             true,true,0,false),
     STABLE("stable",6,114,400,Resource.WOOD,20,0,
+            true,false,0,false),
+    OX_TETHER("ox tether",1,39,0,Resource.WOOD,5,1,
             true,false,0,false);
 
     private String name;
@@ -48,6 +50,10 @@ public enum FillerType {
 
     public boolean isAreWorkersEngineer() {
         return areWorkersEngineer;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public boolean isWall() {

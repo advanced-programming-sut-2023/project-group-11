@@ -78,6 +78,10 @@ public enum UnitMakerType {
         return isActive;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static UnitMakerType getUnitMakerTypeByName(String name){
         for (UnitMakerType unitMakerType : UnitMakerType.values())
             if(unitMakerType.name.equals(name))

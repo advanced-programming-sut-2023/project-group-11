@@ -7,9 +7,12 @@ public class GateHouse extends Building{
 
     private int capacity,filledCapacity;
     private Governance gateController;
+    private boolean isOpen = false;
+    private boolean horizontalDirection;
 
 
     public GateHouse(GateHouseType gateHouseType) {
+        name = gateHouseType.getName();
         size = gateHouseType.getSize();
         hitPoint = gateHouseType.getHitPoint();
         goldCost = gateHouseType.getGoldCost();
