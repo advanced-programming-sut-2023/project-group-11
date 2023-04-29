@@ -67,6 +67,14 @@ public class GameMenu {
 
     private static void checkSelectBuilding(Matcher matcher) {
         GameMenuMessages message = GameMenuController.checkSelectBuilding(matcher);
+        switch (message){
+            case INVALID_COMMAND -> System.out.println("Invalid Command!");
+            case INVALID_COORDINATE -> System.out.println("Invalid Coordinates!");
+            case NO_BUILDING_HERE -> System.out.println("There's No Building Here To Select!");
+            case NOT_YOUR_BUILDING -> System.out.println("It's Not Your Building");
+            case SUCCESS -> {//TODO: implementation needed
+                }
+        }
     }
 
     private static void checkSelectUnit(Matcher matcher) {

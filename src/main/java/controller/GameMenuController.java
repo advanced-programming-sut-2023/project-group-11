@@ -87,6 +87,7 @@ public class GameMenuController {
             else
                 return GameMenuMessages.NOT_YOUR_BUILDING;
         return GameMenuMessages.SUCCESS;
+        //TODO: select building after commands need a structure to implement...
     }
 
     private static void nextTurn() {
