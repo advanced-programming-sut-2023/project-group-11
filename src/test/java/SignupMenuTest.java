@@ -1,9 +1,7 @@
 import controller.EntryMenuController;
 import controller.SignupMenuController;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
-import view.EntryMenu;
 import view.enums.commands.SignupMenuCommands;
 import view.enums.messages.SignupMenuMessages;
 
@@ -28,8 +26,6 @@ public class SignupMenuTest {
         return SignupMenuCommands.getMatcher(command,SignupMenuCommands.PICK_QUESTION);
     }
 
-//    @ParameterizedTest
-//    @CsvFileSource(resources = "/invalidCommand.csv")
     @Test
     public void validTagTest(){
         Matcher matcher = getRegisterMatcher("user create -u sepehr -u sadegh -e ali.com -n saeedi");

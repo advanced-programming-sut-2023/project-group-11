@@ -34,7 +34,7 @@ public class TradeMenuController {
     public static String tradeList() {
         String output = "";
         int index = 1;
-        for (Trade trade:Trade.getTrades()){
+        for (Trade trade:Stronghold.getCurrentGame().getTrades()){
             output += (index++) + "-" + trade + "\n";
         }
         return output;
@@ -44,7 +44,7 @@ public class TradeMenuController {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         int id = Integer.parseInt(matcher.group("id"));
         String message = matcher.group("message");
-        ArrayList<Trade> trades = Trade.getTrades();
+        ArrayList<Trade> trades = Stronghold.getCurrentGame().getTrades();
         if(trades.size() < id)
             return TradeMenuMessages.INVALID_ID;
         Trade trade = trades.get(id);

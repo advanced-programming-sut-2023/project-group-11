@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Trade {
 
-    private static ArrayList<Trade> trades = new ArrayList<>();
     private final AllResource resourceType;
     private final int resourceAmount;
     private final double price;
@@ -24,7 +23,7 @@ public class Trade {
         this.price = price;
         this.senderMessage = senderMessage;
         this.sender = sender;
-        trades.add(this);
+        Stronghold.getCurrentGame().getTrades().add(this);
         sender.addTrade(this);
         tradeNotify(this);
     }
@@ -45,9 +44,6 @@ public class Trade {
         isOpen = open;
     }
 
-    public static ArrayList<Trade> getTrades() {
-        return trades;
-    }
 
     public void setReceiverMessage(String receiverMessage) {
         this.receiverMessage = receiverMessage;
@@ -80,6 +76,7 @@ public class Trade {
         receiver.changeResourceAmount(resourceType.getResource(),resourceAmount);
         receiver.addToStorage(resourceType,resourceAmount);
         this.receiver = receiver;
+        receiver.addTrade(this);
     }
 
     @Override

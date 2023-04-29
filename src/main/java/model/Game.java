@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Game {
     private final User owner;
     private final ArrayList<Governance> governances;
+    private final ArrayList<Trade> trades = new ArrayList<>();
     private Governance currentGovernance;
     private final Map map;
     private int turn;
@@ -17,6 +18,10 @@ public class Game {
         this.currentGovernance = governances.get(0);
         this.map = map;
         this.turn = 1;
+    }
+
+    public ArrayList<Trade> getTrades() {
+        return trades;
     }
 
     public User getOwner() {
