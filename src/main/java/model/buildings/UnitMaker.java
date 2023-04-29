@@ -1,8 +1,6 @@
 package model.buildings;
 
 import model.buildings.enums.UnitMakerType;
-import model.resources.TroopEquipment;
-import model.people.Units;
 
 public class UnitMaker extends Building {
 

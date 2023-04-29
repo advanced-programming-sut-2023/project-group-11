@@ -39,11 +39,7 @@ public class ProductiveBuilding extends Building {
     }
 
     public void produce(){
-        for(AllResource allResource:producedResource) {
-            owner.changeResourceAmount(allResource, productionRate);
-            if (requiredResource != null)
-                owner.changeResourceAmount(requiredResource, -consumptionRate);
-        }
+        //TODO: implement
     }
 
     public void oneTurnPass(){

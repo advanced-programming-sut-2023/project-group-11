@@ -1,5 +1,6 @@
 package controller;
 
+import model.Governance;
 import model.Stronghold;
 import view.enums.messages.GameMenuMessages;
 
@@ -40,21 +41,30 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkDropBuilding(Matcher matcher) {
-        if(!Utils.isValidCommandTags(matcher,"xGroup","yGroup","typeGroup"))
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup", "typeGroup"))
             return GameMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
         String type = matcher.group("typeGroup");
-        if(!BuildingUtils.isValidBuildingType(type))
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        if (!BuildingUtils.isValidBuildingType(type))
             return GameMenuMessages.INVALID_BUILDING_TYPE;
         int size = BuildingUtils.getBuildingSizeByName(type);
-        if(!BuildingUtils.isValidCoordinates(Stronghold.getCurrentGame().getMap(),x,y,size))
+        if (!BuildingUtils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y, size))
             return GameMenuMessages.INVALID_COORDINATE;
-        if(!BuildingUtils.isMapEmpty(x,y,size))
+        if (!BuildingUtils.isMapEmpty(x, y, size))
             return GameMenuMessages.CANT_BUILD_HERE;
-        if(!BuildingUtils.isTextureSuitable(type,x,y,size))
+        if (!BuildingUtils.isTextureSuitable(type, x, y, size))
             return GameMenuMessages.CANT_BUILD_HERE;
-        BuildingUtils.build(type,x,y,size);
+        if (BuildingUtils.getBuildingGoldCostByName(type) > currentGovernance.getGold())
+            return GameMenuMessages.NOT_ENOUGH_MONEY;
+        if (BuildingUtils.getBuildingResourceCostTypeByName(type) != null) {
+            if (!currentGovernance.hasEnoughItem(BuildingUtils.getBuildingResourceCostTypeByName(type),
+                    BuildingUtils.getBuildingResourceCostByName(type))) {
+                return GameMenuMessages.NOT_ENOUGH_RESOURCE;
+            }
+        }
+        BuildingUtils.build(type, x, y, size);
         return GameMenuMessages.SUCCESS;
     }
 
@@ -91,7 +101,8 @@ public class GameMenuController {
             return GameMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
-        if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y)) return GameMenuMessages.INVALID_COORDINATE;
+        if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y))
+            return GameMenuMessages.INVALID_COORDINATE;
         return GameMenuMessages.SUCCESS;
     }
 }

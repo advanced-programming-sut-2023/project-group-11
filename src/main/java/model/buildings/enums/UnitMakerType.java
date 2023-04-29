@@ -1,18 +1,13 @@
 package model.buildings.enums;
 
-import model.people.Engineer;
-import model.resources.Resource;
-import model.resources.TroopEquipment;
-import model.people.Units;
-
-import java.util.ArrayList;
+import model.resources.AllResource;
 
 public enum UnitMakerType {
-    MERCENARY_TENT("mercenary tent",10,114,0,Resource.WOOD,10,
+    MERCENARY_TENT("mercenary tent",10,114,0, AllResource.WOOD,10,
             0,true,true,false),
-    BARRACKS("barracks",10,189,0,Resource.WOOD,15,
+    BARRACKS("barracks",10,189,0,AllResource.WOOD,15,
             0,true,false,false),
-    ENGINEER_GUILD("engineer guild",10,189,100,Resource.WOOD,10,
+    ENGINEER_GUILD("engineer guild",10,189,100,AllResource.WOOD,10,
             0,true,false,true);
 
 
@@ -20,14 +15,14 @@ public enum UnitMakerType {
     private int size;
     private int hitPoint;
     private int goldCost;
-    private Resource resourceCostType;
+    private AllResource resourceCostType;
     private int resourceCostNumber;
     private int workersNumber;
     private boolean isActive;
     private boolean isMercenaryMaker;
     private boolean isEngineerMaker;
 
-    UnitMakerType(String name, int size, int hitPoint, int goldCost, Resource resourceCostType,
+    UnitMakerType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType,
                   int resourceCostNumber, int workersNumber, boolean isActive,
                   boolean isMercenaryMaker, boolean isEngineerMaker) {
         this.name = name;
@@ -62,7 +57,7 @@ public enum UnitMakerType {
         return goldCost;
     }
 
-    public Resource getResourceCostType() {
+    public AllResource getResourceCostType() {
         return resourceCostType;
     }
 

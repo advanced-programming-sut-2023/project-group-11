@@ -1,14 +1,13 @@
 package model.people;
 
-import model.Game;
 import model.Stronghold;
 import model.people.enums.TroopTypes;
-import model.resources.TroopEquipment;
+import model.resources.AllResource;
 
 public class Troops extends Units {
     protected final TroopTypes type;
-    protected TroopEquipment weaponType;
-    protected TroopEquipment armorType;
+    protected AllResource weaponType;
+    protected AllResource armorType;
     protected int damage;
     protected boolean hasHorse;
     protected boolean isArab;
@@ -43,11 +42,11 @@ public class Troops extends Units {
         return type;
     }
 
-    public TroopEquipment getWeaponType() {
+    public AllResource getWeaponType() {
         return weaponType;
     }
 
-    public TroopEquipment getArmorType() {
+    public AllResource getArmorType() {
         return armorType;
     }
 

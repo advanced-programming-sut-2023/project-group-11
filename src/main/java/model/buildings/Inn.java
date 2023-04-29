@@ -1,9 +1,7 @@
 package model.buildings;
 
-import model.people.Engineer;
-import model.resources.Resource;
+import model.resources.AllResource;
 
-import java.util.ArrayList;
 
 public class Inn extends Building {
 
@@ -15,7 +13,7 @@ public class Inn extends Building {
         size = 5;
         hitPoint = 114;
         goldCost = 100;
-        resourceCostType = Resource.WOOD;
+        resourceCostType = AllResource.WOOD;
         resourceCostNumber = 20;
         workersNumber = 1;
         isActive = true;

@@ -1,9 +1,7 @@
 package model.buildings.enums;
 
-import model.people.Engineer;
-import model.resources.Resource;
+import model.resources.AllResource;
 
-import java.util.ArrayList;
 
 public enum FillerType {
 
@@ -11,20 +9,20 @@ public enum FillerType {
             true,false,0,true),
     STAIRS("stairs",1,72,0,null,0,0,
             true,false,0,false),
-    SHOP("shop",5,114,0,Resource.WOOD,5,1,
+    SHOP("shop",5,114,0,AllResource.WOOD,5,1,
             true,false,0,false),
     TENT("tent",1,0,0,null,0,-1,
             true,true,0,false),
-    STABLE("stable",6,114,400,Resource.WOOD,20,0,
+    STABLE("stable",6,114,400, AllResource.WOOD,20,0,
             true,false,0,false),
-    OX_TETHER("ox tether",1,39,0,Resource.WOOD,5,1,
+    OX_TETHER("ox tether",1,39,0,AllResource.WOOD,5,1,
             true,false,0,false);
 
     private String name;
     private int size;
     private int hitPoint;
     private double goldCost;
-    private Resource resourceCostType;
+    private AllResource resourceCostType;
     private int resourceCostNumber;
     private int workersNumber;
     private boolean isActive;
@@ -44,7 +42,7 @@ public enum FillerType {
         return goldCost;
     }
 
-    public Resource getResourceCostType() {
+    public AllResource getResourceCostType() {
         return resourceCostType;
     }
 
@@ -82,7 +80,7 @@ public enum FillerType {
     }
 
     FillerType(String name,int size, int hitPoint, double goldCost,
-               Resource resourceCostType, int resourceCostNumber, int workersNumber,
+               AllResource resourceCostType, int resourceCostNumber, int workersNumber,
                boolean isActive, boolean areWorkersEngineer, int popularityEffect,boolean isWall) {
         this.name = name;
         this.size = size;

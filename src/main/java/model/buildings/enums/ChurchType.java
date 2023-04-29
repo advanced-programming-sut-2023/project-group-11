@@ -1,11 +1,6 @@
 package model.buildings.enums;
 
-import model.Governance;
-import model.people.Engineer;
-import model.resources.Resource;
-
-import java.lang.ref.PhantomReference;
-import java.util.ArrayList;
+import model.resources.AllResource;
 
 public enum ChurchType {
 
@@ -18,7 +13,7 @@ public enum ChurchType {
     private int size;
     private int hitPoint;
     private double goldCost;
-    private Resource resourceCostType;
+    private AllResource resourceCostType;
     private int resourceCostNumber;
     private int workersNumber;
     private boolean isActive;
@@ -29,7 +24,7 @@ public enum ChurchType {
 
 
     ChurchType(String name,int size, int hitPoint, double goldCost,
-               Resource resourceCostType, int resourceCostNumber, int workersNumber,
+               AllResource resourceCostType, int resourceCostNumber, int workersNumber,
                boolean isActive, boolean areWorkersEngineer,
                int popularityEffect, boolean isGeneral, int makeMonkCost) {
         this.name = name;
@@ -62,7 +57,7 @@ public enum ChurchType {
         return goldCost;
     }
 
-    public Resource getResourceCostType() {
+    public AllResource getResourceCostType() {
         return resourceCostType;
     }
 

@@ -2,9 +2,6 @@ package model;
 
 import model.buildings.Storage;
 import model.resources.AllResource;
-import model.resources.Food;
-import model.resources.Resource;
-import model.resources.TroopEquipment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,33 +22,30 @@ public class Governance {
     private final ArrayList<Trade> previousTrades = new ArrayList<>();
     private final ArrayList<Trade> tradeNotification = new ArrayList<>();
     //popularity = taxFactor + fearFactor + foodFactor + religiousFactor
-    private final HashMap<Resource, Integer> resources = new HashMap<>();
-    private final HashMap<Food, Integer> foods = new HashMap<>();
-    private final HashMap<TroopEquipment, Integer> troopEquipments = new HashMap<>();
-    //TODO: implement storages
+    private final HashMap<AllResource, Integer> allResources = new HashMap<>();
     private final ArrayList<Storage> storages = new ArrayList<>();
 
     {
-        resources.put(Resource.WOOD, 100);
-        resources.put(Resource.STONE, 50);
-        resources.put(Resource.IRON, 0);
-        resources.put(Resource.WHEAT, 10);
-        resources.put(Resource.FLOUR, 0);
-        resources.put(Resource.HOP, 0);
-        resources.put(Resource.ALE, 0);
-        resources.put(Resource.PITCH, 0);
-        foods.put(Food.BREAD, 100);
-        foods.put(Food.APPLE, 0);
-        foods.put(Food.MEAT, 0);
-        foods.put(Food.CHEESE, 0);
-        troopEquipments.put(TroopEquipment.CROSSBOW, 0);
-        troopEquipments.put(TroopEquipment.SPEAR, 0);
-        troopEquipments.put(TroopEquipment.BOW, 0);
-        troopEquipments.put(TroopEquipment.MACE, 0);
-        troopEquipments.put(TroopEquipment.PIKE, 0);
-        troopEquipments.put(TroopEquipment.LEATHER_ARMOR, 0);
-        troopEquipments.put(TroopEquipment.METAL_ARMOR, 0);
-        troopEquipments.put(TroopEquipment.SWORD, 0);
+        allResources.put(AllResource.WOOD, 100);
+        allResources.put(AllResource.STONE, 50);
+        allResources.put(AllResource.IRON, 0);
+        allResources.put(AllResource.WHEAT, 10);
+        allResources.put(AllResource.FLOUR, 0);
+        allResources.put(AllResource.HOP, 0);
+        allResources.put(AllResource.ALE, 0);
+        allResources.put(AllResource.PITCH, 0);
+        allResources.put(AllResource.BREAD, 100);
+        allResources.put(AllResource.APPLE, 0);
+        allResources.put(AllResource.MEAT, 0);
+        allResources.put(AllResource.CHEESE, 0);
+        allResources.put(AllResource.CROSSBOW, 0);
+        allResources.put(AllResource.SPEAR, 0);
+        allResources.put(AllResource.BOW, 0);
+        allResources.put(AllResource.MACE, 0);
+        allResources.put(AllResource.PIKE, 0);
+        allResources.put(AllResource.LEATHER_ARMOR, 0);
+        allResources.put(AllResource.METAL_ARMOR, 0);
+        allResources.put(AllResource.SWORD, 0);
     }
 
     public User getOwner() {
@@ -158,40 +152,18 @@ public class Governance {
         return storages;
     }
 
-    public void addResource(Resource resource, int count) {
-        resources.put(resource, count);
+    public void changeResourceAmount(AllResource allResource, int count) {
+        allResources.put(allResource, allResources.get(allResource) + count);
     }
 
-    public void addFood(Food food, int count) {
-        foods.put(food, count);
-    }
-
-    public void addResource(TroopEquipment util, int count) {
-        troopEquipments.put(util, count);
-    }
-
-    public void changeResourceAmount(Object object, int count) {
-        if (object instanceof TroopEquipment)
-            troopEquipments.put((TroopEquipment) object, troopEquipments.get((TroopEquipment) object) + count);
-
-        if (object instanceof Food)
-            foods.put((Food) object, foods.get((Food) object) + count);
-
-        if (object instanceof Resource)
-            resources.put((Resource) object, resources.get((Resource) object) + count);
+    public HashMap<AllResource, Integer> getAllResources() {
+        return allResources;
     }
 
     public int getResourceCount(AllResource resource) {
-        return resources.get(resource.getResource());
+        return allResources.get(resource);
     }
 
-    public int getFoodCount(Food food) {
-        return 0;
-    }
-
-    public int getUtilCount(TroopEquipment util) {
-        return 0;
-    }
 
     public Governance(User owner) {
         this.owner = owner;
@@ -208,56 +180,50 @@ public class Governance {
     public boolean hasStorageForItem(AllResource item, int amount) {
         int capacity = 0;
         for (Storage storage : storages) {
-            if (storage.getStorage().containsKey(item.getResource())) {
+            if (storage.getStorage().containsKey(item)) {
                 capacity += storage.getCurrentCapacity();
-                if(capacity >= amount)
+                if (capacity >= amount)
                     return true;
             }
         }
         return false;
     }
 
-    public boolean hasEnoughItem(AllResource item, int amount){
-        int capacity = 0;
+    public boolean hasEnoughItem(AllResource item, int amount) {
+        if (allResources.get(item) >= amount)
+            return true;
+        return false;
+    }
+
+    public void addToStorage(AllResource item, int amount) {
+        changeResourceAmount(item, amount);
         for (Storage storage : storages) {
-            if (storage.getStorage().containsKey(item.getResource())) {
-                capacity += storage.getStorage().get(item.getResource());
-                if(capacity >= amount)
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    public void addToStorage(AllResource item,int amount){
-        for (Storage storage:storages){
-            if(storage.getStorage().containsKey(item.getResource())){
-                if(amount == 0)
+            if (storage.getStorage().containsKey(item)) {
+                if (amount == 0)
                     break;
-                if(storage.getCurrentCapacity() <= amount){
+                if (storage.getCurrentCapacity() <= amount) {
                     amount -= storage.getCurrentCapacity();
                     storage.addToStorage(item, storage.getCurrentCapacity());
-                }else{
-                    storage.addToStorage(item,amount);
+                } else {
+                    storage.addToStorage(item, amount);
                     amount = 0;
                 }
             }
         }
     }
 
-    public void removeFromStorage(AllResource item,int amount){
-        Object resource = item.getResource();
-
-        for (Storage storage:storages){
-            if(storage.getStorage().containsKey(resource)){
-                if(amount == 0)
+    public void removeFromStorage(AllResource item, int amount) {
+        changeResourceAmount(item, -amount);
+        for (Storage storage : storages) {
+            if (storage.getStorage().containsKey(item)) {
+                if (amount == 0)
                     break;
-                int storageRemaining = storage.getStorage().get(resource);
-                if(storageRemaining <= amount){
+                int storageRemaining = storage.getStorage().get(item);
+                if (storageRemaining <= amount) {
                     amount -= storageRemaining;
                     storage.removeFromStorage(item, storageRemaining);
-                }else{
-                    storage.removeFromStorage(item,amount);
+                } else {
+                    storage.removeFromStorage(item, amount);
                     amount = 0;
                 }
             }

@@ -2,47 +2,42 @@ package model.buildings;
 
 import model.buildings.enums.StorageType;
 import model.resources.AllResource;
-import model.resources.Food;
-import model.resources.Resource;
-import model.resources.TroopEquipment;
 
 import java.util.HashMap;
 
 public class Storage extends Building{
 
-    private HashMap<Object,Integer> storage = new HashMap<>();
+    private HashMap<AllResource,Integer> storage = new HashMap<>();
     private int capacity,currentCapacity;
-    private StorageType storageType;
 
     public Storage(StorageType storageType) {
-        this.storageType = storageType;
         name = storageType.getName();
         switch (storageType){
             case ARMOURY -> {
-                storage.put(TroopEquipment.CROSSBOW, 0);
-                storage.put(TroopEquipment.SPEAR, 0);
-                storage.put(TroopEquipment.BOW, 0);
-                storage.put(TroopEquipment.MACE, 0);
-                storage.put(TroopEquipment.PIKE, 0);
-                storage.put(TroopEquipment.LEATHER_ARMOR, 0);
-                storage.put(TroopEquipment.METAL_ARMOR, 0);
-                storage.put(TroopEquipment.SWORD, 0);
+                storage.put(AllResource.CROSSBOW, 0);
+                storage.put(AllResource.SPEAR, 0);
+                storage.put(AllResource.BOW, 0);
+                storage.put(AllResource.MACE, 0);
+                storage.put(AllResource.PIKE, 0);
+                storage.put(AllResource.LEATHER_ARMOR, 0);
+                storage.put(AllResource.METAL_ARMOR, 0);
+                storage.put(AllResource.SWORD, 0);
             }
             case GRANARY -> {
-                storage.put(Food.BREAD, 100);
-                storage.put(Food.APPLE, 0);
-                storage.put(Food.MEAT, 0);
-                storage.put(Food.CHEESE, 0);
+                storage.put(AllResource.BREAD, 100);
+                storage.put(AllResource.APPLE, 0);
+                storage.put(AllResource.MEAT, 0);
+                storage.put(AllResource.CHEESE, 0);
             }
             case STOCKPILE -> {
-                storage.put(Resource.WOOD, 100);
-                storage.put(Resource.STONE, 50);
-                storage.put(Resource.IRON, 0);
-                storage.put(Resource.WHEAT, 10);
-                storage.put(Resource.FLOUR, 0);
-                storage.put(Resource.HOP, 0);
-                storage.put(Resource.ALE, 0);
-                storage.put(Resource.PITCH, 0);
+                storage.put(AllResource.WOOD, 100);
+                storage.put(AllResource.STONE, 50);
+                storage.put(AllResource.IRON, 0);
+                storage.put(AllResource.WHEAT, 10);
+                storage.put(AllResource.FLOUR, 0);
+                storage.put(AllResource.HOP, 0);
+                storage.put(AllResource.ALE, 0);
+                storage.put(AllResource.PITCH, 0);
             }
         }
         size = storageType.getSize();
@@ -55,7 +50,7 @@ public class Storage extends Building{
         capacity = storageType.getCapacity();
     }
 
-    public HashMap<Object, Integer> getStorage() {
+    public HashMap<AllResource, Integer> getStorage() {
         return storage;
     }
 
@@ -68,14 +63,12 @@ public class Storage extends Building{
     }
 
     public void addToStorage(AllResource resource,int amount){
-        Object object = resource.getResource();
-        storage.put(object, storage.get(object) + amount);
+        storage.put(resource, storage.get(resource) + amount);
         currentCapacity -= amount;
     }
 
     public void removeFromStorage(AllResource resource,int amount){
-        Object object = resource.getResource();
-        storage.put(object, storage.get(object) - amount);
+        storage.put(resource, storage.get(resource) - amount);
         currentCapacity += amount;
     }
 }

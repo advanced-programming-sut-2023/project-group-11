@@ -2,55 +2,37 @@ package model.resources;
 
 public enum AllResource {
 
-    BOW("bow", TroopEquipment.BOW, 31),
-    CROSSBOW("crossbow", TroopEquipment.CROSSBOW, 58),
-    SPEAR("spear", TroopEquipment.SPEAR, 20),
-    PIKE("pike", TroopEquipment.PIKE, 36),
-    MACE("mace", TroopEquipment.MACE, 58),
-    SWORD("sword", TroopEquipment.SWORD, 58),
-    LEATHER_ARMOR("leather", TroopEquipment.LEATHER_ARMOR, 25),
-    METAL_ARMOR("metal", TroopEquipment.METAL_ARMOR, 58),
-    HOP("hop", Resource.HOP, 15),
-    ALE("ale", Resource.ALE, 20),
-    WHEAT("wheat", Resource.WHEAT, 23),
-    FLOUR("flour", Resource.FLOUR, 32),
-    IRON("iron", Resource.IRON, 45),
-    STONE("stone", Resource.STONE, 14),
-    PITCH("pitch", Resource.PITCH, 20),
-    WOOD("wood", Resource.WOOD, 4),
-    MEAT("meat", Food.MEAT, 8),
-    APPLE("apple", Food.APPLE, 8),
-    CHEESE("cheese", Food.CHEESE, 8),
-    BREAD("bread", Food.BREAD, 8);
+    BOW("bow", 31),
+    CROSSBOW("crossbow", 58),
+    SPEAR("spear",20),
+    PIKE("pike", 36),
+    MACE("mace", 58),
+    SWORD("sword", 58),
+    LEATHER_ARMOR("leather", 25),
+    METAL_ARMOR("metal", 58),
+    HOP("hop", 15),
+    ALE("ale", 20),
+    WHEAT("wheat", 23),
+    FLOUR("flour", 32),
+    IRON("iron", 45),
+    STONE("stone", 14),
+    PITCH("pitch", 20),
+    WOOD("wood", 4),
+    MEAT("meat", 8),
+    APPLE("apple", 8),
+    CHEESE("cheese", 8),
+    BREAD("bread", 8);
 
     private final String name;
-    private Object resource;
     private final int price;
 
-    AllResource(String name, Food food, int price) {
+    AllResource(String name, int price) {
         this.name = name;
-        this.resource = food;
         this.price = price;
     }
 
     public String getName() {
         return name;
-    }
-
-    AllResource(String name, Resource resource, int price) {
-        this.name = name;
-        this.resource = resource;
-        this.price = price;
-    }
-
-    AllResource(String name, TroopEquipment troopEquipment, int price) {
-        this.name = name;
-        this.resource = troopEquipment;
-        this.price = price;
-    }
-
-    public Object getResource() {
-        return resource;
     }
 
     public static AllResource getAllResourceByName(String name){
@@ -59,17 +41,8 @@ public enum AllResource {
         return null;
     }
 
-    public static Object getResourceByName(String name){
-        for (AllResource allResource : AllResource.values())
-            if(allResource.name.equals(name)) return allResource.resource;
-        return null;
-    }
-
     public int getPrice() {
         return price;
     }
 
-    public String printResource() {
-        return null;
-    }
 }

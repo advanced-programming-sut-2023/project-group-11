@@ -1,21 +1,18 @@
 package model.buildings.enums;
 
-import model.resources.Resource;
-import model.people.Engineer;
-import model.people.Units;
+import model.resources.AllResource;
 
-import java.util.ArrayList;
 
 public enum TowerType {
-    LOOKOUT_TOWER("lookout tower",3,1000,0,Resource.STONE,10,
+    LOOKOUT_TOWER("lookout tower",3,1000,0, AllResource.STONE,10,
             0,true,false,0,10,10,10,false),
-    PERIMETER_TURRET("perimeter turret",4,1000,0,Resource.STONE,10,
+    PERIMETER_TURRET("perimeter turret",4,1000,0,AllResource.STONE,10,
             0,true,false,0,10,10,10,false),
-    DEFENCE_TURRET("defence turret",5,1000,0,Resource.STONE,15,
+    DEFENCE_TURRET("defence turret",5,1000,0,AllResource.STONE,15,
             0,true,false,0,10,10,10,false),
-    SQUARE_TOWER("square tower",6,1000,0,Resource.STONE,35,
+    SQUARE_TOWER("square tower",6,1000,0,AllResource.STONE,35,
             0,true,false,0,10,10,10,true),
-    ROUND_TOWER("round tower",3,1000,0,Resource.STONE,40,
+    ROUND_TOWER("round tower",3,1000,0,AllResource.STONE,40,
             0,true,false,0,10,10,10,true);
 
 
@@ -23,7 +20,7 @@ public enum TowerType {
     private int size;
     private int hitPoint;
     private int goldCost;
-    private Resource resourceCostType;
+    private AllResource resourceCostType;
     private int resourceCostNumber;
     private int workersNumber;
     private boolean isActive;
@@ -48,7 +45,7 @@ public enum TowerType {
     }
 
 
-    TowerType(String name,int size, int hitPoint, int goldCost, Resource resourceCostType, int resourceCostNumber,
+    TowerType(String name,int size, int hitPoint, int goldCost, AllResource resourceCostType, int resourceCostNumber,
               int workersNumber, boolean isActive, boolean areWorkersEngineer, int popularityEffect,
               int fireRange, int defendRange, int unitCapacity,boolean isTower) {
         this.name = name;
@@ -87,7 +84,7 @@ public enum TowerType {
         return goldCost;
     }
 
-    public Resource getResourceCostType() {
+    public AllResource getResourceCostType() {
         return resourceCostType;
     }
 

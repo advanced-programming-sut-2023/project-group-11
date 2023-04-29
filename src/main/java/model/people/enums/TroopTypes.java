@@ -1,15 +1,15 @@
 package model.people.enums;
 
-import model.resources.TroopEquipment;
+import model.resources.AllResource;
 
 public enum TroopTypes {
-    ARCHER              (Hp.LOW,        Speed.HIGH,         TroopEquipment.BOW,         null,                Damage.LOW,       false, false, false, 5, 0.5, true, true, true, 12),
-    CROSSBOWMAN         (Hp.MEDIUM,     Speed.LOW,          TroopEquipment.CROSSBOW,    null,                Damage.LOW,       false, false, false, 3, 1, false, false, true, 20),
-    SPEARMAN            (Hp.VERY_LOW,   Speed.MEDIUM,       TroopEquipment.SPEAR,       null,                Damage.MEDIUM,    false, false, false, 1, 1, true, true, true, 8),
-    PIKEMAN             (Hp.HIGH,       Speed.LOW,          TroopEquipment.PIKE,         TroopEquipment.METAL_ARMOR,   Damage.MEDIUM,     false, false, false, 1, 1, false, true, true, 20),
-    MACEMAN             (Hp.MEDIUM,     Speed.HIGH,         TroopEquipment.MACE,         TroopEquipment.LEATHER_ARMOR, Damage.HIGH,      false, false, false, 1, 1, true, true, true, 20),
-    SWORDSMAN           (Hp.HIGH,       Speed.VERY_LOW,     TroopEquipment.SWORD,        TroopEquipment.METAL_ARMOR,   Damage.VERY_HIGH,  false, false, false, 1, 1, false, false, true, 40),
-    KNIGHT              (Hp.HIGH,       Speed.VERY_HIGH,    TroopEquipment.SWORD,        TroopEquipment.METAL_ARMOR,   Damage.VERY_HIGH, true, false, false, 1, 1, false, false, true, 40),
+    ARCHER              (Hp.LOW,        Speed.HIGH,         AllResource.BOW,         null,                Damage.LOW,       false, false, false, 5, 0.5, true, true, true, 12),
+    CROSSBOWMAN         (Hp.MEDIUM,     Speed.LOW,          AllResource.CROSSBOW,    null,                Damage.LOW,       false, false, false, 3, 1, false, false, true, 20),
+    SPEARMAN            (Hp.VERY_LOW,   Speed.MEDIUM,       AllResource.SPEAR,       null,                Damage.MEDIUM,    false, false, false, 1, 1, true, true, true, 8),
+    PIKEMAN             (Hp.HIGH,       Speed.LOW,          AllResource.PIKE,         AllResource.METAL_ARMOR,   Damage.MEDIUM,     false, false, false, 1, 1, false, true, true, 20),
+    MACEMAN             (Hp.MEDIUM,     Speed.HIGH,         AllResource.MACE,         AllResource.LEATHER_ARMOR, Damage.HIGH,      false, false, false, 1, 1, true, true, true, 20),
+    SWORDSMAN           (Hp.HIGH,       Speed.VERY_LOW,     AllResource.SWORD,        AllResource.METAL_ARMOR,   Damage.VERY_HIGH,  false, false, false, 1, 1, false, false, true, 40),
+    KNIGHT              (Hp.HIGH,       Speed.VERY_HIGH,    AllResource.SWORD,        AllResource.METAL_ARMOR,   Damage.VERY_HIGH, true, false, false, 1, 1, false, false, true, 40),
     TUNNELER            (Hp.VERY_LOW,   Speed.HIGH,         null,            null,                Damage.MEDIUM,    false, false, false, 1, 1, false, false, true, 30),
     LADDERMAN           (Hp.VERY_LOW,   Speed.HIGH,         null,            null,                Damage.NO_ATTACK,  false, false, false, 0, 0, false, false, true, 4),
     BLACK_M0NK          (Hp.MEDIUM,     Speed.LOW,          null,            null,                Damage.MEDIUM,     false, false, false, 1, 1, false, false, true, 10),
@@ -23,8 +23,8 @@ public enum TroopTypes {
     ;
     private final Hp hp;
     private final Speed speed;
-    private final TroopEquipment weaponType;
-    private final TroopEquipment armorType;
+    private final AllResource weaponType;
+    private final AllResource armorType;
     private final Damage damage;
     private final boolean hasHorse;
     private final boolean isArab;
@@ -36,7 +36,7 @@ public enum TroopTypes {
     private final boolean revealed;
     private final int cost;
 
-    TroopTypes(Hp hp, Speed speed, TroopEquipment weaponType, TroopEquipment armorType, Damage damage, boolean hasHorse,
+    TroopTypes(Hp hp, Speed speed, AllResource weaponType, AllResource armorType, Damage damage, boolean hasHorse,
                boolean isArab, boolean hasFiringWeapon, int range, double damageRatioOnArmor, boolean canScaleWall,
                boolean canDigKhandagh, boolean revealed, int cost) {
         this.hp = hp;
@@ -63,11 +63,11 @@ public enum TroopTypes {
         return speed;
     }
 
-    public TroopEquipment getWeaponType() {
+    public AllResource getWeaponType() {
         return weaponType;
     }
 
-    public TroopEquipment getArmorType() {
+    public AllResource getArmorType() {
         return armorType;
     }
 

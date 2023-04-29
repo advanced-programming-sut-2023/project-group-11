@@ -1,23 +1,21 @@
 package model.buildings.enums;
 
-import model.people.Engineer;
-import model.resources.Resource;
+import model.resources.AllResource;
 
-import java.util.ArrayList;
 
 public enum TrapType {
-    KILLING_PIT("killing pit",1,0,0,Resource.WOOD,6,
+    KILLING_PIT("killing pit",1,0,0, AllResource.WOOD,6,
             0,100,true),
-    PITCH_DITCH("pitch ditch",1,0,0,Resource.PITCH,2,
+    PITCH_DITCH("pitch ditch",1,0,0,AllResource.PITCH,2,
             0,100,false),
-    CAGED_WARDOGS("caged wardogs",3,0,100,Resource.WOOD,10,
+    CAGED_WARDOGS("caged wardogs",3,0,100,AllResource.WOOD,10,
             0,100,false);
 
     private String name;
     private int size;
     private int hitPoint;
     private int goldCost;
-    private Resource resourceCostType;
+    private AllResource resourceCostType;
     private int resourceCostNumber;
     private int workersNumber;
     private final int damage;
@@ -43,7 +41,7 @@ public enum TrapType {
         return goldCost;
     }
 
-    public Resource getResourceCostType() {
+    public AllResource getResourceCostType() {
         return resourceCostType;
     }
 
@@ -56,7 +54,7 @@ public enum TrapType {
     }
 
 
-    TrapType(String name, int size, int hitPoint, int goldCost, Resource resourceCostType, int resourceCostNumber,
+    TrapType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType, int resourceCostNumber,
              int workersNumber, int damage, boolean isActive) {
         this.name = name;
         this.size = size;

@@ -1,7 +1,7 @@
 package model.buildings;
 
 import model.Governance;
-import model.resources.Resource;
+import model.resources.AllResource;
 import model.people.Engineer;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public abstract class Building {
     protected int size;
     protected int hitPoint;
     protected double goldCost;
-    protected Resource resourceCostType;
+    protected AllResource resourceCostType;
     protected int resourceCostNumber;
     protected int workersNumber;
     protected boolean isActive;
@@ -63,7 +63,7 @@ public abstract class Building {
         return goldCost;
     }
 
-    public Resource getResourceCostType() {
+    public AllResource getResourceCostType() {
         return resourceCostType;
     }
 
