@@ -76,7 +76,9 @@ public class Tile {
     public boolean isFull() {
         return building != null || units.size() != 0 || tree != null;
     }
-
+    public boolean hasBuilding(){
+        return building != null;
+    }
     @Override
     public String toString() {
         String unitsName = "";

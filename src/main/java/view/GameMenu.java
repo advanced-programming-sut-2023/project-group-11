@@ -66,7 +66,7 @@ public class GameMenu {
     }
 
     private static void checkSelectBuilding(Matcher matcher) {
-
+        GameMenuMessages message = GameMenuController.checkSelectBuilding(matcher);
     }
 
     private static void checkSelectUnit(Matcher matcher) {

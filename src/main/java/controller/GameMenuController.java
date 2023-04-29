@@ -2,6 +2,8 @@ package controller;
 
 import model.Governance;
 import model.Stronghold;
+import model.buildings.Building;
+import model.buildings.Trap;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.regex.Matcher;
@@ -68,12 +70,26 @@ public class GameMenuController {
         return GameMenuMessages.SUCCESS;
     }
 
-    private static GameMenuMessages checkSelectBuilding(Matcher matcher) {
-        return null;
+    public static GameMenuMessages checkSelectBuilding(Matcher matcher) {
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
+            return GameMenuMessages.INVALID_COMMAND;
+        int x = Integer.parseInt(matcher.group("xGroup"));
+        int y = Integer.parseInt(matcher.group("yGroup"));
+        if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y))
+            return GameMenuMessages.INVALID_COORDINATE;
+        Building building = Stronghold.getCurrentGame().getMap().getTile(x,y).getBuilding();
+        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+        if(building == null)
+            return GameMenuMessages.NO_BUILDING_HERE;
+        if(!building.getOwner().equals(governance))
+            if(building instanceof Trap)
+                return GameMenuMessages.NO_BUILDING_HERE;
+            else
+                return GameMenuMessages.NOT_YOUR_BUILDING;
+        return GameMenuMessages.SUCCESS;
     }
 
     private static void nextTurn() {
-
     }
 
     private static void updatePopulation() {

@@ -7,6 +7,8 @@ public enum GameMenuMessages {
     CANT_BUILD_HERE,
     NOT_ENOUGH_MONEY,
     NOT_ENOUGH_RESOURCE,
+    NO_BUILDING_HERE,
+    NOT_YOUR_BUILDING,
     SUCCESS,
 
 }
