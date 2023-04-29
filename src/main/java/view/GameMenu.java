@@ -8,7 +8,13 @@ import java.util.regex.Matcher;
 
 public class GameMenu {
     public static void run() {
-        Scanner scanner;
+        Scanner scanner = EntryMenu.getScanner();
+        String command;
+        Matcher matcher;
+        while (true){
+            command = scanner.nextLine();
+
+        }
     }
 
     private static void showMap(Matcher matcher) {

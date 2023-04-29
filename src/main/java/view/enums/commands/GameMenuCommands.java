@@ -4,11 +4,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommands {
+
     SHOW_MAP("show map(( -x (?<xCoordinate>\\d+))" +
             "|( -y (?<yCoordinate>\\d+))){2}"),
     DROP_BUILDING("dropbuilding((?<xGroup> -x (?<xCoordinate>\\d+))" +
             "|(?<yGroup> -y (?<yCoordinate>\\d+))" +
-            "|(?<typeGroup> -type (?<type>\\\"[^\\\"]+\\\"|\\S+))){3}");
+            "|(?<typeGroup> -type (?<type>\\\"[^\\\"]+\\\"|\\S+))){3}"),
+    SELECT_BUILDING("select building((?<xGroup> -x (?<xCoordinate>\\d+))" +
+            "|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
     ;
 
     private final String regex;
