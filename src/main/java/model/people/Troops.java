@@ -1,8 +1,18 @@
 package model.people;
 
 import model.Stronghold;
+import model.people.enums.Damage;
+import model.people.enums.Speed;
 import model.people.enums.TroopTypes;
+import model.people.enums.UnitState;
 import model.resources.AllResource;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Troops extends Units {
     protected final TroopTypes type;
@@ -19,23 +29,37 @@ public class Troops extends Units {
     protected boolean revealed;
 
 
-    public Troops(TroopTypes TROOP) {
-        this.type = TROOP;
-        this.hp = TROOP.getHp();
-        this.speed = TROOP.getSpeed();
-        this.weaponType = TROOP.getWeaponType();
-        this.armorType = TROOP.getArmorType();
-        this.damage = TROOP.getDamage();
-        this.hasHorse = TROOP.hasHorse();
-        this.isArab = TROOP.isArab();
-        this.hasFiringWeapon = TROOP.hasFiringWeapon();
-        this.range = TROOP.getRange();
-        this.damageRatioOnArmor = TROOP.getDamageRatioOnArmor();
-        this.canScaleWall = TROOP.canScaleWall();
-        this.canDigKhandagh = TROOP.canDigKhandagh();
-        this.revealed = TROOP.isRevealed();
-        this.cost = TROOP.getCost();
+    public Troops(String name) {
+        JSONObject troop = getTroopFromDictionary(name);
+
+        this.type = TroopTypes.valueOf(name.toUpperCase());
+        this.hp = ((Long) troop.get("hp")).intValue();
+        this.speed = Speed.valueOf((String) troop.get("speed"));
+        this.weaponType = AllResource.valueOf((String) troop.get("weaponType"));
+        this.armorType = AllResource.valueOf((String) troop.get("armorType"));
+        this.damage = Damage.valueOf((String) troop.get("damage")).getDamage();
+        this.hasHorse = (Boolean) troop.get("hasHorse");
+        this.isArab = (Boolean) troop.get("isArab");
+        this.hasFiringWeapon = (Boolean) troop.get("hasFiringWeapon");
+        this.range = ((Long) troop.get("range")).intValue();
+        this.damageRatioOnArmor = (Double) troop.get("damageRatioOnArmor");
+        this.canScaleWall = (Boolean) troop.get("canScaleWall");
+        this.canDigKhandagh = (Boolean) troop.get("canDigKhandagh");
+        this.revealed = (Boolean) troop.get("revealed");
+        this.cost = ((Long) troop.get("cost")).intValue();
         this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+    }
+
+    private JSONObject getTroopFromDictionary(String name) {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject troop = new JSONObject();
+
+        try (FileReader reader = new FileReader("src/main/resources/Troops.json")) {
+            troop = (JSONObject) ((JSONObject) ((JSONArray) jsonParser.parse(reader)).get(0)).get(name);
+        } catch (IOException | ParseException ignored) {
+        }
+
+        return troop;
     }
 
     public TroopTypes getType() {

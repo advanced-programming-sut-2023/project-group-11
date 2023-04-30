@@ -21,7 +21,8 @@ public enum AllResource {
     MEAT("meat", 8),
     APPLE("apple", 8),
     CHEESE("cheese", 8),
-    BREAD("bread", 8);
+    BREAD("bread", 8),
+    NONE("none", 0);
 
     private final String name;
     private final int price;
