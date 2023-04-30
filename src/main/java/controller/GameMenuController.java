@@ -45,8 +45,6 @@ public class GameMenuController {
         if (rateNumber < -2 || rateNumber > 2) return GameMenuMessages.INVALID_RATE;
 
         currentGovernance.setFoodRate(rateNumber);
-        currentGovernance.setFoodFactor(rateNumber * 4);
-        currentGovernance.setPopularity(currentGovernance.getPopularity() + currentGovernance.getFoodFactor());
 
         return GameMenuMessages.SUCCESS;
     }
@@ -64,12 +62,6 @@ public class GameMenuController {
 
         currentGovernance.setTaxRate(rateNumber);
 
-        if (rateNumber <= 0) currentGovernance.setTaxFactor(-2 * rateNumber + 1);
-        else if (rateNumber <= 4) currentGovernance.setTaxFactor(-2 * rateNumber);
-        else currentGovernance.setTaxFactor(-4 * rateNumber + 8);
-
-        currentGovernance.setPopularity(currentGovernance.getPopularity() + currentGovernance.getTaxFactor());
-
         return GameMenuMessages.SUCCESS;
     }
 
@@ -85,9 +77,6 @@ public class GameMenuController {
         if (rateNumber < -5 || rateNumber > 5) return GameMenuMessages.INVALID_RATE;
 
         currentGovernance.setFearFactor(rateNumber);
-        currentGovernance.setPopularity(currentGovernance.getPopularity() + currentGovernance.getFearFactor());
-        currentGovernance.setTroopDamageRatio(1 + 5 * (rateNumber) / 100.0);
-        currentGovernance.setWorkersEfficiency(1 + 5 * (rateNumber) / 100.0);
 
         return GameMenuMessages.SUCCESS;
     }
@@ -126,12 +115,12 @@ public class GameMenuController {
         int y = Integer.parseInt(matcher.group("yGroup"));
         if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y))
             return GameMenuMessages.INVALID_COORDINATE;
-        Building building = Stronghold.getCurrentGame().getMap().getTile(x,y).getBuilding();
+        Building building = Stronghold.getCurrentGame().getMap().getTile(x, y).getBuilding();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
-        if(building == null)
+        if (building == null)
             return GameMenuMessages.NO_BUILDING_HERE;
-        if(!building.getOwner().equals(governance))
-            if(building instanceof Trap)
+        if (!building.getOwner().equals(governance))
+            if (building instanceof Trap)
                 return GameMenuMessages.NO_BUILDING_HERE;
             else
                 return GameMenuMessages.NOT_YOUR_BUILDING;
@@ -139,10 +128,10 @@ public class GameMenuController {
         //TODO: select building after commands need a structure to implement...
     }
 
-    public static String selectBuildingDetails(Matcher matcher){
+    public static String selectBuildingDetails(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
-        Building building = Stronghold.getCurrentGame().getMap().getTile(x,y).getBuilding();
+        Building building = Stronghold.getCurrentGame().getMap().getTile(x, y).getBuilding();
         return building.toString();
     }
 
@@ -157,19 +146,61 @@ public class GameMenuController {
 
     }
 
-    private static void updateStorage() {
+    private static void updateGold() {
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
+        int taxRate = currentGovernance.getTaxRate();
+        double currentGold = currentGovernance.getGold();
+        double taxGold = currentGovernance.getTaxGold();
+        currentGovernance.setGold(Math.max(0, currentGold - taxGold));
+    }
+
+    private static void updateStorage() {//TODO: split into two methods
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+
+        //increase foods, troop equipments, resources & decrease troop equipments, resources
         for (AllResource resource : AllResource.values()) {
             int productionRate = currentGovernance.getResourceProductionRate(resource);
-            int consumptionRate = currentGovernance.getResourceConsumptionRate(resource);
-            currentGovernance.addToStorage(resource, productionRate);
-            currentGovernance.removeFromStorage(resource, consumptionRate);
+            if (currentGovernance.hasStorageForItem(resource, productionRate))
+                currentGovernance.addToStorage(resource, productionRate);
+
+            if (!Utils.isFood(resource)) {
+                int consumptionRate = currentGovernance.getResourceConsumptionRate(resource);
+                if (currentGovernance.hasEnoughItem(resource, consumptionRate))
+                    currentGovernance.removeFromStorage(resource, consumptionRate);
+            }
         }
+
+        //decrease foods
+        int foodConsumption = currentGovernance.getFoodConsumption();
+        int foodRatio = currentGovernance.getFoodRate() / 2 + 1;
+        int totalFoodRemoved = 0;
+        for (AllResource resource : AllResource.values())
+            if (Utils.isFood(resource))
+                while (totalFoodRemoved < foodConsumption * foodRatio) {//TODO: foodConsumption * foodRatio * population?
+                    if (!currentGovernance.hasEnoughItem(resource, 1)) continue;
+                    currentGovernance.removeFromStorage(resource, 1);
+                    totalFoodRemoved++;
+                }
+        currentGovernance.updateFood();
     }
 
     private static void updatePopularityRate() {
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
+        if (currentGovernance.getTotalFood() == 0) currentGovernance.setFoodRate(-2);
+        if (currentGovernance.getGold() < currentGovernance.getTaxGold()) currentGovernance.setTaxRate(0);
+
+        int currentFoodFactor = currentGovernance.getFoodFactor();
+        int currentFearFactor = currentGovernance.getFearFactor();
+        int currentTaxFactor = currentGovernance.getTaxFactor();
+        int currentReligiousFactor = currentGovernance.getReligiousFactor();
+        int totalFactor = currentReligiousFactor + currentFoodFactor + currentFearFactor + currentTaxFactor;
+
+        totalFactor = Math.min(totalFactor + currentGovernance.getPopularity(), 100);
+        totalFactor = Math.max(totalFactor, 0);
+
+        currentGovernance.setPopularity(totalFactor);
     }
 
     private static void fight() {

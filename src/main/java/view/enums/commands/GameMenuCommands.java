@@ -19,7 +19,6 @@ public enum GameMenuCommands {
     CHANGE_TAX_RATE("tax rate -r (?<rateNumber>\\d+)"),
     SHOW_TAX_RATE("tax rate show"),
     CHANGE_FEAR_RATE("fear rate -r (?<rateNumber>\\d+)"),
-    SHOW_FEAR_RATE("fear rate show"),
     ;
 
     private final String regex;
