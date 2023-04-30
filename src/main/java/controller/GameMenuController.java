@@ -45,6 +45,7 @@ public class GameMenuController {
 
         currentGovernance.setFoodRate(rateNumber);
         currentGovernance.setFoodFactor(rateNumber * 4);
+        currentGovernance.setPopularity(currentGovernance.getPopularity() + currentGovernance.getFoodFactor());
 
         return GameMenuMessages.SUCCESS;
     }
@@ -66,6 +67,8 @@ public class GameMenuController {
         else if (rateNumber <= 4) currentGovernance.setTaxFactor(-2 * rateNumber);
         else currentGovernance.setTaxFactor(-4 * rateNumber + 8);
 
+        currentGovernance.setPopularity(currentGovernance.getPopularity() + currentGovernance.getTaxFactor());
+
         return GameMenuMessages.SUCCESS;
     }
 
@@ -81,6 +84,10 @@ public class GameMenuController {
         if (rateNumber < -5 || rateNumber > 5) return GameMenuMessages.INVALID_RATE;
 
         currentGovernance.setFearFactor(rateNumber);
+        currentGovernance.setPopularity(currentGovernance.getPopularity() + currentGovernance.getFearFactor());
+        currentGovernance.setTroopDamageRatio(1 + 5 * (rateNumber) / 100.0);
+        currentGovernance.setWorkersEfficiency(1 + 5 * (rateNumber) / 100.0);
+
         return GameMenuMessages.SUCCESS;
     }
 
