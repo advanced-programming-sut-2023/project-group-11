@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 
 public class MainMenuController {
     public static MainMenuMessages checkStartGame(Matcher matcher) {
-        if (matcher.group("mapName") == null || matcher.group("guests") == null)
+        if (!Utils.isValidCommandTags(matcher, "mapName", "guests"))
             return MainMenuMessages.INVALID_COMMAND;
 
         String mapName = matcher.group("mapName");
@@ -28,10 +28,11 @@ public class MainMenuController {
 
     private static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {
         ArrayList<Governance> governances = new ArrayList<>();
-        governances.add(new Governance(Stronghold.getCurrentUser()));
+        governances.add(new Governance(Stronghold.getCurrentUser(), 1));
 
+        int i = 2;
         for (String name : listOfPlayers)
-            governances.add(new Governance(Stronghold.getUserByUsername(name)));
+            governances.add(new Governance(Stronghold.getUserByUsername(name), i++));
 
         return governances;
     }

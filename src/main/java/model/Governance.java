@@ -1,6 +1,7 @@
 package model;
 
 import model.buildings.Storage;
+import model.map.Territory;
 import model.resources.AllResource;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 
 public class Governance {
     private final User owner;
+    private final Territory territory;
     private double gold = 2000;
     private int maxPopulation;
     private int currentPopulation;
@@ -50,6 +52,12 @@ public class Governance {
         allResources.put(AllResource.LEATHER_ARMOR, 0);
         allResources.put(AllResource.METAL_ARMOR, 0);
         allResources.put(AllResource.SWORD, 0);
+    }
+
+
+    public Governance(User owner, int area) {
+        this.owner = owner;
+        this.territory = Territory.DOWN_LEFT.getTerritoryByArea(area);
     }
 
     public User getOwner() {
@@ -190,11 +198,6 @@ public class Governance {
 
     public int getResourceCount(AllResource resource) {
         return allResources.get(resource);
-    }
-
-
-    public Governance(User owner) {
-        this.owner = owner;
     }
 
     public String tradeHistory() {

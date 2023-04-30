@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/map/Territory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,23 +85,19 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SignupMenuTest.wrongAnswerConfirmationTest">
-    <configuration name="SignupMenuTest.emailExistTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ProjectAP" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SignupMenuTest" />
-      <option name="METHOD_NAME" value="emailExistTest" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SignupMenuTest.invalidEmailFormatTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SignupMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProjectAP" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="SignupMenuTest" />
-      <option name="METHOD_NAME" value="invalidEmailFormatTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -136,11 +134,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.SignupMenuTest" />
         <item itemvalue="JUnit.SignupMenuTest.wrongAnswerConfirmationTest" />
         <item itemvalue="JUnit.SignupMenuTest.invalidQuestionNumberTest" />
         <item itemvalue="JUnit.SignupMenuTest.validTagQuestionPickTest" />
-        <item itemvalue="JUnit.SignupMenuTest.invalidEmailFormatTest" />
-        <item itemvalue="JUnit.SignupMenuTest.emailExistTest" />
       </list>
     </recent_temporary>
   </component>
@@ -189,6 +187,8 @@
       <workItem from="1682676129481" duration="4344000" />
       <workItem from="1682794132459" duration="1347000" />
       <workItem from="1682819061297" duration="657000" />
+      <workItem from="1682856031647" duration="1904000" />
+      <workItem from="1682864878247" duration="10352000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -393,7 +393,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682434961209</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Use validCommandTags in MapEditMenuController">
+      <created>1682865467024</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1682865467024</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Troop Dictionary added">
+      <created>1682871602800</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1682871602800</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,8 +449,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add Gson Lib" />
-    <MESSAGE value="Add JArgs lib &amp; change JUnit jupiter" />
     <MESSAGE value="People completed &amp; Packages' names corrected" />
     <MESSAGE value="Map edited &amp; Map edit menu completed upto drop cliff(rock)" />
     <MESSAGE value="Map edit menu ended without saving in database" />
@@ -460,7 +472,9 @@
     <MESSAGE value="isMapName problem fixed" />
     <MESSAGE value="Captcha Updated" />
     <MESSAGE value="Show map added in MapEditMenu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Show map added in MapEditMenu" />
+    <MESSAGE value="Use validCommandTags in MapEditMenuController" />
+    <MESSAGE value="Troop Dictionary added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Troop Dictionary added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -495,6 +509,7 @@
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidEmailFormatTest.ic" NAME="SignupMenuTest.invalidEmailFormatTest Coverage Results" MODIFIED="1682819412108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emailExistTest.ic" NAME="SignupMenuTest.emailExistTest Coverage Results" MODIFIED="1682819409536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_WrongConfirmationTest.ic" NAME="SignupMenuTest.WrongConfirmationTest Coverage Results" MODIFIED="1682819405048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1682864228552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$Main.ic" NAME="Main Coverage Results" MODIFIED="1682711397956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_randomArgsTest.ic" NAME="SignupMenuTest.randomArgsTest Coverage Results" MODIFIED="1682819201893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noNumberTest.ic" NAME="SignupMenuTest.noNumberTest Coverage Results" MODIFIED="1682819397820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
