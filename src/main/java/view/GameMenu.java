@@ -11,6 +11,7 @@ public class GameMenu {
         Scanner scanner = EntryMenu.getScanner();
         String command;
         Matcher matcher;
+
         while (true){
             command = scanner.nextLine();
 

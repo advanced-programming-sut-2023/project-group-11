@@ -25,9 +25,10 @@ public class SignupMenuController {
             password = Arrays.asList(password.split(" ")).get(0);
         }
 
+        username = Utils.removeDoubleQuotation(username);
         String email = registerMatcher.group("email");
-        String nickname = registerMatcher.group("nickname");
-        String slogan = registerMatcher.group("slogan");
+        String nickname = Utils.removeDoubleQuotation(registerMatcher.group("nickname"));
+        String slogan = Utils.removeDoubleQuotation(registerMatcher.group("slogan"));
         boolean hasSlogan = slogan != null;
 
         if (Utils.checkEmptyField(username, password, email, nickname, slogan, hasSlogan))
