@@ -13,7 +13,7 @@ public class MapEditMenuController {
     private static Map currentMap;
 
     public static MapEditMenuMessages clear(Matcher matcher) {
-        if (matcher.group("x") == null || matcher.group("y") == null)
+        if (!Utils.isValidCommandTags(matcher, "x", "y"))
             return MapEditMenuMessages.INVALID_COMMAND;
 
         int x = Integer.parseInt(matcher.group("x"));
@@ -27,21 +27,18 @@ public class MapEditMenuController {
     }
 
     public static MapEditMenuMessages checkSetTexture(Matcher matcher) {
-        if (matcher.group("x") != null && matcher.group("y") != null && matcher.group("type") != null) {
+        if (Utils.isValidCommandTags(matcher, "x", "y", "type")) {
             return setTextureFirstType(matcher);
-        } else if (matcher.group("x1") != null && matcher.group("y1") != null &&
-                matcher.group("x2") != null && matcher.group("y2") != null &&
-                matcher.group("type1") != null) {
+        } else if (Utils.isValidCommandTags(matcher, "x1", "y1", "x2", "y2", "type1")) {
             return setTextureSecondType(matcher);
         } else return MapEditMenuMessages.INVALID_COMMAND;
     }
 
     public static MapEditMenuMessages checkDropCliff(Matcher matcher) {
-        String direction = matcher.group("direction");
-
-        if (matcher.group("x") == null || matcher.group("y") == null || direction == null)
+        if (!Utils.isValidCommandTags(matcher, "x", "y", "direction"))
             return MapEditMenuMessages.INVALID_COMMAND;
 
+        String direction = matcher.group("direction");
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
 
@@ -58,7 +55,7 @@ public class MapEditMenuController {
     }
 
     public static MapEditMenuMessages checkDropTree(Matcher matcher) {
-        if (matcher.group("x") == null || matcher.group("y") == null ||
+        if (!Utils.isValidCommandTags(matcher, "x", "y", "type") ||
                 !Tree.isTreeName(matcher.group("type")))
             return MapEditMenuMessages.INVALID_COMMAND;
 

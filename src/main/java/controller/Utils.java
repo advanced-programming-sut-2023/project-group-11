@@ -131,7 +131,4 @@ public class Utils {
         int mapSize = map.getSize();
         return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
     }
-
-
-
 }
