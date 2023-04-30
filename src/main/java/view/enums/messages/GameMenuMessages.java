@@ -9,6 +9,7 @@ public enum GameMenuMessages {
     NOT_ENOUGH_RESOURCE,
     NO_BUILDING_HERE,
     NOT_YOUR_BUILDING,
+    INVALID_RATE,
     SUCCESS,
 
 }

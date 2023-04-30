@@ -19,6 +19,8 @@ public class Governance {
     private int fearFactor = 0;
     private int foodFactor = 0;
     private int religiousFactor = 0;
+    private double troopDamageRatio = 1;
+    private double workersEfficiency = 1;
     private final ArrayList<Trade> previousTrades = new ArrayList<>();
     private final ArrayList<Trade> tradeNotification = new ArrayList<>();
     //popularity = taxFactor + fearFactor + foodFactor + religiousFactor
@@ -142,6 +144,22 @@ public class Governance {
 
     public void setReligiousFactor(int religiousFactor) {
         this.religiousFactor = religiousFactor;
+    }
+
+    public double getTroopDamageRatio() {
+        return troopDamageRatio;
+    }
+
+    public void setTroopDamageRatio(double troopDamageRatio) {
+        this.troopDamageRatio = troopDamageRatio;
+    }
+
+    public double getWorkersEfficiency() {
+        return workersEfficiency;
+    }
+
+    public void setWorkersEfficiency(double workersEfficiency) {
+        this.workersEfficiency = workersEfficiency;
     }
 
     public void addTrade(Trade trade) {

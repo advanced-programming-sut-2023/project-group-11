@@ -12,7 +12,7 @@ public class GameMenu {
         String command;
         Matcher matcher;
 
-        while (true){
+        while (true) {
             command = scanner.nextLine();
 
         }
@@ -22,37 +22,44 @@ public class GameMenu {
 
     }
 
-    private static void showPopularity() {
-        //show popularity factors and show popularity
+    private static void showPopularity(Matcher matcher) {
+        System.out.println(GameMenuController.showPopularity(matcher));
     }
 
     private static void showFoodList() {
-
+        System.out.println(GameMenuController.showFoodList());
     }
 
     private static void checkChangeFoodRate(Matcher matcher) {
-
+        GameMenuMessages message = GameMenuController.checkChangeFoodRate(matcher);
+        switch (message) {
+            case INVALID_RATE -> System.out.println("Your rate number must be between -2 and 2!");
+            case SUCCESS -> System.out.println("You have successfully changed your food rate!");
+        }
     }
 
     private static void showFoodRate() {
-
+        System.out.println(GameMenuController.showFoodRate());
     }
 
     private static void checkChangeTaxRate(Matcher matcher) {
-
-
+        GameMenuMessages message = GameMenuController.checkChangeTaxRate(matcher);
+        switch (message) {
+            case INVALID_RATE -> System.out.println("Your rate number must be between -3 and 8!");
+            case SUCCESS -> System.out.println("You have successfully changed your tax rate!");
+        }
     }
 
     private static void showTaxRate() {
-
+        System.out.println(GameMenuController.showTaxRate());
     }
 
     private static void checkChangeFearRate(Matcher matcher) {
-
-    }
-
-    private static void showFearRate() {
-
+        GameMenuMessages message = GameMenuController.checkChangeTaxRate(matcher);
+        switch (message) {
+            case INVALID_RATE -> System.out.println("Your rate number must be between -5 and 5!");
+            case SUCCESS -> System.out.println("You have successfully changed your fear rate!");
+        }
     }
 
     private static void checkDropBuilding(Matcher matcher) {
