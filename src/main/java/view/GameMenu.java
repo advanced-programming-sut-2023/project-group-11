@@ -55,7 +55,7 @@ public class GameMenu {
     }
 
     private static void checkChangeFearRate(Matcher matcher) {
-        GameMenuMessages message = GameMenuController.checkChangeTaxRate(matcher);
+        GameMenuMessages message = GameMenuController.checkChangeFearRate(matcher);
         switch (message) {
             case INVALID_RATE -> System.out.println("Your rate number must be between -5 and 5!");
             case SUCCESS -> System.out.println("You have successfully changed your fear rate!");

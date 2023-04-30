@@ -109,7 +109,7 @@ public class BuildingUtils {
     }
 
     public static void build(Building building, int x, int y, int size) {
-
+        //TODO: change the production and consumption rate of each resource for a government
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);

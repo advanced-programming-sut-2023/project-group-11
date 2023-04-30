@@ -25,6 +25,8 @@ public class Governance {
     private final ArrayList<Trade> tradeNotification = new ArrayList<>();
     //popularity = taxFactor + fearFactor + foodFactor + religiousFactor
     private final HashMap<AllResource, Integer> allResources = new HashMap<>();
+    private final HashMap<AllResource, Integer> resourceProductionRate = new HashMap<>();
+    private final HashMap<AllResource, Integer> resourceConsumptionRate = new HashMap<>();
     private final ArrayList<Storage> storages = new ArrayList<>();
 
     {
@@ -176,6 +178,14 @@ public class Governance {
 
     public HashMap<AllResource, Integer> getAllResources() {
         return allResources;
+    }
+
+    public Integer getResourceProductionRate(AllResource resource) {
+        return resourceProductionRate.get(resource);
+    }
+
+    public Integer getResourceConsumptionRate(AllResource resource) {
+        return resourceConsumptionRate.get(resource);
     }
 
     public int getResourceCount(AllResource resource) {

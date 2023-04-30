@@ -7,6 +7,7 @@ import model.buildings.Trap;
 import model.resources.AllResource;
 import view.enums.messages.GameMenuMessages;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class GameMenuController {
@@ -157,7 +158,14 @@ public class GameMenuController {
     }
 
     private static void updateStorage() {
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
+        for (AllResource resource : AllResource.values()) {
+            int productionRate = currentGovernance.getResourceProductionRate(resource);
+            int consumptionRate = currentGovernance.getResourceConsumptionRate(resource);
+            currentGovernance.addToStorage(resource, productionRate);
+            currentGovernance.removeFromStorage(resource, consumptionRate);
+        }
     }
 
     private static void updatePopularityRate() {
