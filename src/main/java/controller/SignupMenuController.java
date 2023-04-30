@@ -14,10 +14,9 @@ import java.util.Random;
 import java.util.regex.Matcher;
 
 public class SignupMenuController {
-    public static SignupMenuMessages checkRegister(Matcher registerMatcher, String username) {
+    public static SignupMenuMessages checkRegister(Matcher registerMatcher, String username, String password, String email, String nickname, String slogan) {
         if (!Utils.isValidCommandTags(registerMatcher, "usernameTag", "passwordTag", "emailTag", "nicknameTag"))
             return SignupMenuMessages.INVALID_COMMAND;
-        String password = registerMatcher.group("password");
         String passwordConfirmation = null;
 
         if (!password.equals("random")) {
@@ -25,10 +24,6 @@ public class SignupMenuController {
             password = Arrays.asList(password.split(" ")).get(0);
         }
 
-        username = Utils.removeDoubleQuotation(username);
-        String email = registerMatcher.group("email");
-        String nickname = Utils.removeDoubleQuotation(registerMatcher.group("nickname"));
-        String slogan = Utils.removeDoubleQuotation(registerMatcher.group("slogan"));
         boolean hasSlogan = slogan != null;
 
         if (Utils.checkEmptyField(username, password, email, nickname, slogan, hasSlogan))
@@ -46,13 +41,11 @@ public class SignupMenuController {
         return SignupMenuMessages.SUCCESS;
     }
 
-    public static SignupMenuMessages checkPickQuestion(Matcher pickQuestionMatcher) {
+    public static SignupMenuMessages checkPickQuestion(Matcher pickQuestionMatcher, int questionNumber, String recoveryAnswer, String answerConfirmation) {
         if (!Utils.isValidCommandTags(pickQuestionMatcher, "questionNumber", "answer", "answerConfirmation"))
             return SignupMenuMessages.INVALID_COMMAND;
+
         ArrayList<String> recoveryQuestions = Stronghold.getRecoveryQuestions();
-        int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
-        String recoveryAnswer = pickQuestionMatcher.group("answer");
-        String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
 
         if (questionNumber > recoveryQuestions.size()) return SignupMenuMessages.INVALID_QUESTION_NUMBER;
         if (!recoveryAnswer.equals(answerConfirmation)) return SignupMenuMessages.WRONG_ANSWER_CONFIRMATION;
@@ -126,17 +119,14 @@ public class SignupMenuController {
         return null;
     }
 
-    public static void createUser(Matcher pickQuestionMatcher, Matcher registerMatcher, String username, String password, String slogan) {
-        String email = registerMatcher.group("email");
-        String nickname = registerMatcher.group("nickname");
+    public static void createUser(String username, String password, String email, String nickname, String slogan, int questionNumber, String recoveryAnswer) {
         nickname = Utils.removeDoubleQuotation(nickname);
         ArrayList<String> recoveryQuestions = Stronghold.getRecoveryQuestions();
-        int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
         String recoveryQuestion = recoveryQuestions.get(questionNumber - 1);
-        String recoveryAnswer = pickQuestionMatcher.group("answer");
         recoveryAnswer = Utils.removeDoubleQuotation(recoveryAnswer);
         recoveryAnswer = Utils.encryptField(recoveryAnswer);
         password = Utils.encryptField(password);
+
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
     }
 }
