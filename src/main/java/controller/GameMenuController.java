@@ -4,42 +4,84 @@ import model.Governance;
 import model.Stronghold;
 import model.buildings.Building;
 import model.buildings.Trap;
+import model.resources.AllResource;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.regex.Matcher;
 
 public class GameMenuController {
-    private static String showPopularity() {
-        //show popularity factors and show popularity
-        return null;
+    public static String showPopularity(Matcher matcher) {
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        String output = "";
+
+        if (matcher.group("factors") == null) output += currentGovernance.getPopularity();
+        else {
+            output += "Food: " + currentGovernance.getFoodFactor() + '\n';
+            output += "Tax: " + currentGovernance.getTaxFactor() + '\n';
+            output += "Religious: " + currentGovernance.getReligiousFactor() + '\n';
+            output += "Fear: " + currentGovernance.getFearFactor() + '\n';
+        }
+
+        return output;
     }
 
-    private static String showFoodList() {
-        return null;
+    public static String showFoodList() {
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        String output = "";
+
+        output += "Bread: " + currentGovernance.getAllResources().get(AllResource.BREAD) + '\n';
+        output += "Apple: " + currentGovernance.getAllResources().get(AllResource.APPLE) + '\n';
+        output += "Cheese: " + currentGovernance.getAllResources().get(AllResource.CHEESE) + '\n';
+        output += "Meat: " + currentGovernance.getAllResources().get(AllResource.MEAT) + '\n';
+
+        return output;
     }
 
-    private static GameMenuMessages checkChangeFoodRate(Matcher matcher) {
-        return null;
+    public static GameMenuMessages checkChangeFoodRate(Matcher matcher) {
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
+
+        if (rateNumber < -2 || rateNumber > 2) return GameMenuMessages.INVALID_RATE;
+
+        currentGovernance.setFoodRate(rateNumber);
+        currentGovernance.setFoodFactor(rateNumber * 4);
+
+        return GameMenuMessages.SUCCESS;
     }
 
-    private static String showFoodRate() {
-        return null;
+    public static String showFoodRate() {
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        return "Food rate: " + currentGovernance.getFoodRate();
     }
 
-    private static GameMenuMessages checkChangeTaxRate(Matcher matcher) {
-        return null;
+    public static GameMenuMessages checkChangeTaxRate(Matcher matcher) {
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
+
+        if (rateNumber < -3 || rateNumber > 8) return GameMenuMessages.INVALID_RATE;
+
+        currentGovernance.setTaxRate(rateNumber);
+
+        if (rateNumber <= 0) currentGovernance.setTaxFactor(-2 * rateNumber + 1);
+        else if (rateNumber <= 4) currentGovernance.setTaxFactor(-2 * rateNumber);
+        else currentGovernance.setTaxFactor(-4 * rateNumber + 8);
+
+        return GameMenuMessages.SUCCESS;
     }
 
-    private static String showTaxRate() {
-        return null;
+    public static String showTaxRate() {
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        return "Tax rate: " + currentGovernance.getTaxRate();
     }
 
-    private static GameMenuMessages checkChangeFearRate(Matcher matcher) {
-        return null;
-    }
+    public static GameMenuMessages checkChangeFearRate(Matcher matcher) { //TODO: not in the actual game!
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
 
-    private static String showFearRate() {
-        return null;
+        if (rateNumber < -5 || rateNumber > 5) return GameMenuMessages.INVALID_RATE;
+
+        currentGovernance.setFearFactor(rateNumber);
+        return GameMenuMessages.SUCCESS;
     }
 
     public static GameMenuMessages checkDropBuilding(Matcher matcher) {
