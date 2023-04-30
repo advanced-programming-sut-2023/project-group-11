@@ -82,4 +82,9 @@ public abstract class Building {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Building Type: " + name + " HP: " + hitPoint;
+    }
 }

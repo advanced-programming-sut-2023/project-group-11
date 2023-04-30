@@ -4,6 +4,7 @@ import model.buildings.enums.StorageType;
 import model.resources.AllResource;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Storage extends Building{
 
@@ -71,4 +72,14 @@ public class Storage extends Building{
         storage.put(resource, storage.get(resource) - amount);
         currentCapacity += amount;
     }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (Map.Entry<AllResource,Integer> entry:storage.entrySet()){
+            output += "\n" + entry.getKey().getName() + " " + entry.getValue();
+        }
+            return super.toString() + output;
+    }
+
 }

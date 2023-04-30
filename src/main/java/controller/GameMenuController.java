@@ -49,24 +49,23 @@ public class GameMenuController {
         int y = Integer.parseInt(matcher.group("yGroup"));
         String type = matcher.group("typeGroup");
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Building building = BuildingUtils.getBuildingByType(type);
         if (!BuildingUtils.isValidBuildingType(type))
             return GameMenuMessages.INVALID_BUILDING_TYPE;
-        int size = BuildingUtils.getBuildingSizeByName(type);
+        int size = building.getSize();
         if (!BuildingUtils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y, size))
             return GameMenuMessages.INVALID_COORDINATE;
         if (!BuildingUtils.isMapEmpty(x, y, size))
             return GameMenuMessages.CANT_BUILD_HERE;
         if (!BuildingUtils.isTextureSuitable(type, x, y, size))
             return GameMenuMessages.CANT_BUILD_HERE;
-        if (BuildingUtils.getBuildingGoldCostByName(type) > currentGovernance.getGold())
+        if (building.getGoldCost() > currentGovernance.getGold())
             return GameMenuMessages.NOT_ENOUGH_MONEY;
-        if (BuildingUtils.getBuildingResourceCostTypeByName(type) != null) {
-            if (!currentGovernance.hasEnoughItem(BuildingUtils.getBuildingResourceCostTypeByName(type),
-                    BuildingUtils.getBuildingResourceCostByName(type))) {
+        if (building.getResourceCostType() != null) {
+            if (!currentGovernance.hasEnoughItem(building.getResourceCostType(), building.getResourceCostNumber()))
                 return GameMenuMessages.NOT_ENOUGH_RESOURCE;
-            }
         }
-        BuildingUtils.build(type, x, y, size);
+        BuildingUtils.build(building, x, y, size);
         return GameMenuMessages.SUCCESS;
     }
 
@@ -88,6 +87,13 @@ public class GameMenuController {
                 return GameMenuMessages.NOT_YOUR_BUILDING;
         return GameMenuMessages.SUCCESS;
         //TODO: select building after commands need a structure to implement...
+    }
+
+    public static String selectBuildingDetails(Matcher matcher){
+        int x = Integer.parseInt(matcher.group("xGroup"));
+        int y = Integer.parseInt(matcher.group("yGroup"));
+        Building building = Stronghold.getCurrentGame().getMap().getTile(x,y).getBuilding();
+        return building.toString();
     }
 
     private static void nextTurn() {

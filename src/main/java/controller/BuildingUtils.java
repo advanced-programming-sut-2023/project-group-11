@@ -26,90 +26,6 @@ public class BuildingUtils {
                 || UnitMakerType.getUnitMakerTypeByName(type) != null;
     }
 
-    public static int getBuildingSizeByName(String type) {
-        if (ChurchType.getChurchTypeByName(type) != null)
-            return ChurchType.getChurchTypeByName(type).getSize();
-        if (FillerType.getFillerTypeByName(type) != null)
-            return FillerType.getFillerTypeByName(type).getSize();
-        if (GateHouseType.getGateHouseTypeByName(type) != null)
-            return GateHouseType.getGateHouseTypeByName(type).getSize();
-        if (ProductiveBuildingType.getProductiveBuildingTypeByName(type) != null)
-            return ProductiveBuildingType.getProductiveBuildingTypeByName(type).getSize();
-        if (StorageType.getStorageTypeByName(type) != null)
-            return StorageType.getStorageTypeByName(type).getSize();
-        if (TowerType.getTowerTypeByName(type) != null)
-            return TowerType.getTowerTypeByName(type).getSize();
-        if (TrapType.getTrapTypeByName(type) != null)
-            return TrapType.getTrapTypeByName(type).getSize();
-        if (UnitMakerType.getUnitMakerTypeByName(type) != null)
-            return UnitMakerType.getUnitMakerTypeByName(type).getSize();
-
-        return 0;
-    }
-
-    public static double getBuildingGoldCostByName(String type) {
-        if (ChurchType.getChurchTypeByName(type) != null)
-            return ChurchType.getChurchTypeByName(type).getGoldCost();
-        if (FillerType.getFillerTypeByName(type) != null)
-            return FillerType.getFillerTypeByName(type).getGoldCost();
-        if (GateHouseType.getGateHouseTypeByName(type) != null)
-            return GateHouseType.getGateHouseTypeByName(type).getGoldCost();
-        if (ProductiveBuildingType.getProductiveBuildingTypeByName(type) != null)
-            return ProductiveBuildingType.getProductiveBuildingTypeByName(type).getGoldCost();
-        if (StorageType.getStorageTypeByName(type) != null)
-            return StorageType.getStorageTypeByName(type).getGoldCost();
-        if (TowerType.getTowerTypeByName(type) != null)
-            return TowerType.getTowerTypeByName(type).getGoldCost();
-        if (TrapType.getTrapTypeByName(type) != null)
-            return TrapType.getTrapTypeByName(type).getGoldCost();
-        if (UnitMakerType.getUnitMakerTypeByName(type) != null)
-            return UnitMakerType.getUnitMakerTypeByName(type).getGoldCost();
-
-        return 0;
-    }
-
-    public static AllResource getBuildingResourceCostTypeByName(String type) {
-        if (ChurchType.getChurchTypeByName(type) != null)
-            return ChurchType.getChurchTypeByName(type).getResourceCostType();
-        if (FillerType.getFillerTypeByName(type) != null)
-            return FillerType.getFillerTypeByName(type).getResourceCostType();
-        if (GateHouseType.getGateHouseTypeByName(type) != null)
-            return GateHouseType.getGateHouseTypeByName(type).getResourceCostType();
-        if (ProductiveBuildingType.getProductiveBuildingTypeByName(type) != null)
-            return ProductiveBuildingType.getProductiveBuildingTypeByName(type).getResourceCostType();
-        if (StorageType.getStorageTypeByName(type) != null)
-            return StorageType.getStorageTypeByName(type).getResourceCostType();
-        if (TowerType.getTowerTypeByName(type) != null)
-            return TowerType.getTowerTypeByName(type).getResourceCostType();
-        if (TrapType.getTrapTypeByName(type) != null)
-            return TrapType.getTrapTypeByName(type).getResourceCostType();
-        if (UnitMakerType.getUnitMakerTypeByName(type) != null)
-            return UnitMakerType.getUnitMakerTypeByName(type).getResourceCostType();
-
-        return null;
-    }
-
-    public static int getBuildingResourceCostByName(String type) {
-        if (ChurchType.getChurchTypeByName(type) != null)
-            return ChurchType.getChurchTypeByName(type).getResourceCostNumber();
-        if (FillerType.getFillerTypeByName(type) != null)
-            return FillerType.getFillerTypeByName(type).getResourceCostNumber();
-        if (GateHouseType.getGateHouseTypeByName(type) != null)
-            return GateHouseType.getGateHouseTypeByName(type).getResourceCostNumber();
-        if (ProductiveBuildingType.getProductiveBuildingTypeByName(type) != null)
-            return ProductiveBuildingType.getProductiveBuildingTypeByName(type).getResourceCostNumber();
-        if (StorageType.getStorageTypeByName(type) != null)
-            return StorageType.getStorageTypeByName(type).getResourceCostNumber();
-        if (TowerType.getTowerTypeByName(type) != null)
-            return TowerType.getTowerTypeByName(type).getResourceCostNumber();
-        if (TrapType.getTrapTypeByName(type) != null)
-            return TrapType.getTrapTypeByName(type).getResourceCostNumber();
-        if (UnitMakerType.getUnitMakerTypeByName(type) != null)
-            return UnitMakerType.getUnitMakerTypeByName(type).getResourceCostNumber();
-
-        return 0;
-    }
-
     public static boolean isMapEmpty(int x, int y, int size) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         for (int i = x; i < x + size; i++) {
@@ -164,8 +80,7 @@ public class BuildingUtils {
         return true;
     }
 
-    public static void build(String type, int x, int y, int size) {
-
+    public static Building getBuildingByType(String type){
         Building building = new Building() {
         };
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
@@ -189,6 +104,13 @@ public class BuildingUtils {
             building = new Inn();
         if (type.equals("draw bridge"))
             building = new DrawBridge(true);
+
+        return building;
+    }
+
+    public static void build(Building building, int x, int y, int size) {
+
+        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
         governance.setGold(governance.getGold() - building.getGoldCost());
