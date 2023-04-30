@@ -80,11 +80,10 @@ public class GameMenu {
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinates!");
             case NO_BUILDING_HERE -> System.out.println("There's No Building Here To Select!");
             case NOT_YOUR_BUILDING -> System.out.println("It's Not Your Building");
-            case SUCCESS -> {//TODO: implementation needed for create unit and repair
-                System.out.println(GameMenuController.selectBuildingDetails(matcher));
-            }
+            case SUCCESS -> SelectBuildingMenu.run(matcher);
         }
     }
+
 
     private static void checkSelectUnit(Matcher matcher) {
 

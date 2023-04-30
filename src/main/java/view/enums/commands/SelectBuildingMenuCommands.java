@@ -4,7 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum SelectBuildingMenuCommands {
-    COMMAND(""),
+    BACK("back"),
+    CREATE_UNIT("createunit((?<typeGroup> -t (?<type>\\\"[^\\\"]+\\\"|\\S+))" +
+            "|(?<countGroup> -c (?<count>\\d+))){2}"),
+    REPAIR("repair")
     ;
 
     private final String regex;
