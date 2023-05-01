@@ -1,6 +1,5 @@
 package model.people;
 
-import model.Game;
 import model.Stronghold;
 import model.people.enums.Hp;
 import model.people.enums.Speed;

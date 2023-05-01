@@ -32,6 +32,8 @@ public class SelectBuildingMenu {
             case INVALID_TYPE -> System.out.println("Invalid Type!");
             case CANT_CREATE_HERE -> System.out.println("Can't Create Unit Here!");
             case NOT_ENOUGH_GOLD -> System.out.println("You Don't Have Enough Gold!");
+            case NOT_ENOUGH_RESOURCE -> System.out.println("You don't have enough equipment!");
+            case SUCCESS -> System.out.println("Troop created successfully!");
         }
     }
 
