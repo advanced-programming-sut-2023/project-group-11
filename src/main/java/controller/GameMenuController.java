@@ -198,15 +198,42 @@ public class GameMenuController {
 
     }
 
-    private static void updateStorage() {
+    private static void updateGold() {
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
+        double currentGold = currentGovernance.getGold();
+        double taxGold = currentGovernance.getTaxGold();
+        currentGovernance.setGold(Math.max(0, currentGold - taxGold));
+    }
+
+    private static void updateStorage() {//TODO: split into two methods
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+
+        //increase foods, troop equipments, resources & decrease troop equipments, resources
         for (AllResource resource : AllResource.values()) {
             int productionRate = currentGovernance.getResourceProductionRate(resource);
-            int consumptionRate = currentGovernance.getResourceConsumptionRate(resource);
-            currentGovernance.addToStorage(resource, productionRate);
-            currentGovernance.removeFromStorage(resource, consumptionRate);
+            if (currentGovernance.hasStorageForItem(resource, productionRate))
+                currentGovernance.addToStorage(resource, productionRate);
+
+            if (!Utils.isFood(resource)) {
+                int consumptionRate = currentGovernance.getResourceConsumptionRate(resource);
+                if (currentGovernance.hasEnoughItem(resource, consumptionRate))
+                    currentGovernance.removeFromStorage(resource, consumptionRate);
+            }
         }
+
+        //decrease foods
+        int foodConsumption = currentGovernance.getFoodConsumption();
+        int foodRatio = currentGovernance.getFoodRate() / 2 + 1;
+        int totalFoodRemoved = 0;
+        for (AllResource resource : AllResource.values())
+            if (Utils.isFood(resource))
+                while (totalFoodRemoved < foodConsumption * foodRatio) {//TODO: foodConsumption * foodRatio * population?
+                    if (!currentGovernance.hasEnoughItem(resource, 1)) continue;
+                    currentGovernance.removeFromStorage(resource, 1);
+                    totalFoodRemoved++;
+                }
+        currentGovernance.updateFood();
     }
 
     private static void updatePopularityRate() {
@@ -245,7 +272,7 @@ public class GameMenuController {
         return currentGame;
     }
 
-    public static void setCurrentGame(Game currentGame) {
-        GameMenuController.currentGame = currentGame;
+    public static void setCurrentGame() {
+        GameMenuController.currentGame = Stronghold.getCurrentGame();
     }
 }

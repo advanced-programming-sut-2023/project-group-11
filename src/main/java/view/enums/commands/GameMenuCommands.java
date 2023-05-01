@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public enum GameMenuCommands {
 
+    NEXT_TURN("next turn"),
     SHOW_MAP("show map(( -x (?<xCoordinate>\\d+))" +
             "|( -y (?<yCoordinate>\\d+))){2}"),
     DROP_BUILDING("dropbuilding((?<xGroup> -x (?<xCoordinate>\\d+))" +

@@ -1,8 +1,6 @@
 package view;
 
 import controller.GameMenuController;
-import model.Stronghold;
-import view.enums.commands.GameMenuCommands;
 import view.enums.commands.GameMenuCommands;
 import view.enums.messages.GameMenuMessages;
 
@@ -17,7 +15,7 @@ public class GameMenu {
         String command;
         Matcher matcher;
 
-        GameMenuController.setCurrentGame(Stronghold.getCurrentGame());
+        GameMenuController.setCurrentGame();
 
         while (true) {
             command = scanner.nextLine();
