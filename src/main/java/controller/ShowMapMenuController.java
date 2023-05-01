@@ -70,7 +70,7 @@ public class ShowMapMenuController {
                 StringUtils.countMatches(command, "left") <= 1;
     }
 
-    public static String showMap(String name, int x, int y) {//TODO: in Utils?
+    public static String showMap(String name, int x, int y) {
         String output = "";
         Map map = Stronghold.getMapByName(name);
         Attribute backgroundColor;

@@ -88,7 +88,7 @@ public class GameMenuController {
         return "Tax rate: " + currentGovernance.getTaxRate();
     }
 
-    public static GameMenuMessages checkChangeFearRate(Matcher matcher) { //TODO: not in the actual game!
+    public static GameMenuMessages checkChangeFearRate(Matcher matcher) {
         Governance currentGovernance = currentGame.getCurrentGovernance();
         int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
 
@@ -214,23 +214,17 @@ public class GameMenuController {
         currentGovernance.setGold(Math.max(0, currentGold - taxGold));
     }
 
-    private static void updateStorage() {//TODO: split into two methods
+    private static void updateStorage() {
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
         //increase foods, troop equipments, resources & decrease troop equipments, resources
-        for (AllResource resource : AllResource.values()) {
-            int productionRate = currentGovernance.getResourceProductionRate(resource);
-            if (currentGovernance.hasStorageForItem(resource, productionRate))
-                currentGovernance.addToStorage(resource, productionRate);
-
-            if (!Utils.isFood(resource)) {
-                int consumptionRate = currentGovernance.getResourceConsumptionRate(resource);
-                if (currentGovernance.hasEnoughItem(resource, consumptionRate))
-                    currentGovernance.removeFromStorage(resource, consumptionRate);
-            }
-        }
+        updateResourcesAndTroopEquipments(currentGovernance);
 
         //decrease foods
+        updateFood(currentGovernance);
+    }
+
+    private static void updateFood(Governance currentGovernance) {
         int foodConsumption = currentGovernance.getFoodConsumption();
         int foodRatio = currentGovernance.getFoodRate() / 2 + 1;
         int totalFoodRemoved = 0;
@@ -242,6 +236,23 @@ public class GameMenuController {
                     totalFoodRemoved++;
                 }
         currentGovernance.updateFood();
+    }
+
+    private static void updateResourcesAndTroopEquipments(Governance currentGovernance) {
+        for (AllResource resource : AllResource.values()) {
+            int productionRate = currentGovernance.getResourceProductionRate(resource);
+            double workersEfficiency = currentGovernance.getWorkersEfficiency();
+
+            if (currentGovernance.hasStorageForItem(resource, productionRate))
+                currentGovernance.addToStorage(resource, (int) (productionRate * workersEfficiency));
+
+            if (!Utils.isFood(resource)) {
+                int consumptionRate = currentGovernance.getResourceConsumptionRate(resource);
+
+                if (currentGovernance.hasEnoughItem(resource, consumptionRate))
+                    currentGovernance.removeFromStorage(resource, consumptionRate);
+            }
+        }
     }
 
     private static void updatePopularityRate() {
