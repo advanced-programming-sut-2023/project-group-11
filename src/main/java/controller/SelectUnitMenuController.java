@@ -91,4 +91,8 @@ public class SelectUnitMenuController {
         }
         return false;
     }
+
+    private static void attackMachine() {
+
+    }
 }

@@ -3,8 +3,6 @@ package model.buildings;
 import model.buildings.enums.UnitMakerType;
 
 public class UnitMaker extends Building {
-
-
     private final boolean isMercenaryMaker;
     private final boolean isEngineerMaker;
 
@@ -22,7 +20,7 @@ public class UnitMaker extends Building {
         isEngineerMaker = unitMakerType.isEngineerMaker();
     }
 
-    public void makeUnit(String UnitName) {
+    public void makeUnit(String unitName) {
         //TODO: implementation
     }
 

@@ -15,17 +15,17 @@ public class SelectBuildingMenuController {
 
         if (!Utils.isValidCommandTags(matcher, "typeGroup", "countGroup"))
             return SelectBuildingMenuMessages.INVALID_COMMAND;
+
         String type = matcher.group("type");
         int count = Integer.parseInt(matcher.group("count"));
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         Building building = getBuilding(BuildingMatcher);
-        if (!isUnitMaker(building))
-            return SelectBuildingMenuMessages.CANT_CREATE_HERE;
+
+        if (!isUnitMaker(building)) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
         if (type.equals("engineer")) {
-            if (!building.getName().equals("engineer guild"))
-                return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-            if (governance.getGold() < count * 30)
-                return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+            if (!building.getName().equals("engineer guild")) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
+            if (governance.getGold() < count * 30) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+            createEngineer((UnitMaker) building, count);
             return SelectBuildingMenuMessages.SUCCESS;
         }
         try {
@@ -33,11 +33,21 @@ public class SelectBuildingMenuController {
         } catch (IllegalArgumentException e) {
             return SelectBuildingMenuMessages.INVALID_TYPE;
         }
+
         Troops troop = new Troops(type);
+
         if ((troop.isArab() && !building.getName().equals("mercenary tent")) || !building.getName().equals("barracks"))
             return SelectBuildingMenuMessages.CANT_CREATE_HERE;
         if (governance.getGold() < count * troop.getCost())
             return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+
+        AllResource armor = troop.getArmorType();
+        AllResource weapon = troop.getWeaponType();
+
+        if ((armor.equals(AllResource.NONE) && !governance.hasEnoughItem(armor, count))
+                || (weapon.equals(AllResource.NONE) && !governance.hasEnoughItem(weapon, count)))
+            return SelectBuildingMenuMessages.NOT_ENOUGH_RESOURCE;
+        createUnit((UnitMaker) building, troop, count);
         return SelectBuildingMenuMessages.SUCCESS;
     }
 
@@ -73,18 +83,33 @@ public class SelectBuildingMenuController {
     public static SelectBuildingMenuMessages checkRepair(Matcher buildingMatcher) {
         Building building = getBuilding(buildingMatcher);
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
-        if (!isRepairable(building))
-            return SelectBuildingMenuMessages.CANT_REPAIR;
-        if (building.getHitPoint() == building.getMaxHitPoint())
-            return SelectBuildingMenuMessages.NO_NEED_TO_REPAIR;
-        if (!governance.hasEnoughItem(AllResource.STONE, 8))
-            return SelectBuildingMenuMessages.NOT_ENOUGH_RESOURCE;
+
+        if (!isRepairable(building)) return SelectBuildingMenuMessages.CANT_REPAIR;
+        if (building.getHitPoint() == building.getMaxHitPoint()) return SelectBuildingMenuMessages.NO_NEED_TO_REPAIR;
+        if (!governance.hasEnoughItem(AllResource.STONE, 8)) return SelectBuildingMenuMessages.NOT_ENOUGH_RESOURCE;
+
         governance.removeFromStorage(AllResource.STONE, 8);
+
         building.repair();
+
         return SelectBuildingMenuMessages.SUCCESS;
     }
 
-    private static SelectBuildingMenuMessages attackMachine() {
-        return null;
+    private static void createUnit(UnitMaker unitMaker, Troops troop, int count) {
+        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+        governance.setGold(governance.getGold() - troop.getCost() * count);
+
+        if (troop.getArmorType().equals(AllResource.NONE))
+            governance.changeResourceAmount(troop.getArmorType(), -count);
+        if (troop.getWeaponType().equals(AllResource.NONE))
+            governance.changeResourceAmount(troop.getWeaponType(), -count);
+        //TODO: initialize units coordinates
+    }
+
+    private static void createEngineer(UnitMaker unitMaker, int count) {
+        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+        governance.setGold(governance.getGold() - 30 * count);
+        //TODO: initialize units coordinates
+
     }
 }
