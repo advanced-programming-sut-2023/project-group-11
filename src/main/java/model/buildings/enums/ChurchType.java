@@ -4,26 +4,26 @@ import model.resources.AllResource;
 
 public enum ChurchType {
 
-    CHAPEL("chapel",6,150,250,null,0,0,
-            true,false,2,false,0),
-    CATHEDRAL("cathedral",13,459,1000,null,0,0,
-            true,false,2,true, 5);
+    CHAPEL("chapel", 6, 150, 250, null, 0, 0,
+            true, false, 2, false, 0),
+    CATHEDRAL("cathedral", 13, 459, 1000, null, 0, 0,
+            true, false, 2, true, 5);
 
-    private String name;
-    private int size;
-    private int hitPoint;
-    private double goldCost;
-    private AllResource resourceCostType;
-    private int resourceCostNumber;
-    private int workersNumber;
-    private boolean isActive;
-    private boolean areWorkersEngineer;
-    private int popularityEffect;
-    private boolean isGeneral;
-    private int makeMonkCost;
+    private final String name;
+    private final int size;
+    private final int hitPoint;
+    private final double goldCost;
+    private final AllResource resourceCostType;
+    private final int resourceCostNumber;
+    private final int workersNumber;
+    private final boolean isActive;
+    private final boolean areWorkersEngineer;
+    private final int popularityEffect;
+    private final boolean isGeneral;
+    private final int makeMonkCost;
 
 
-    ChurchType(String name,int size, int hitPoint, double goldCost,
+    ChurchType(String name, int size, int hitPoint, double goldCost,
                AllResource resourceCostType, int resourceCostNumber, int workersNumber,
                boolean isActive, boolean areWorkersEngineer,
                int popularityEffect, boolean isGeneral, int makeMonkCost) {
@@ -90,9 +90,9 @@ public enum ChurchType {
         return makeMonkCost;
     }
 
-    public static ChurchType getChurchTypeByName(String name){
+    public static ChurchType getChurchTypeByName(String name) {
         for (ChurchType churchType : ChurchType.values())
-            if(churchType.name.equals(name))
+            if (churchType.name.equals(name))
                 return churchType;
         return null;
     }

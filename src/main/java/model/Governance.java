@@ -89,9 +89,9 @@ public class Governance {
         return currentPopulation;
     }
 
-    public void changeCurrentPopulation(int currentPopulation) {
-        this.currentPopulation += currentPopulation;
-        unemployedPopulation += currentPopulation;
+    public void changeCurrentPopulation(int changePopulationRate) {
+        this.currentPopulation += changePopulationRate;
+        this.unemployedPopulation += changePopulationRate;
     }
 
     public int getUnemployedPopulation() {

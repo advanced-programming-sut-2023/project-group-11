@@ -17,7 +17,7 @@ public class Filler extends Building {
         resourceCostNumber = fillerType.getResourceCostNumber();
         workersNumber = fillerType.getWorkersNumber();
         isActive = fillerType.isActive();
-        areWorkersEngineer = fillerType.AreWorkersEngineer();
+        areWorkersEngineer = fillerType.areWorkersEngineer();
         popularityEffect = fillerType.getPopularityEffect();
         isWall = fillerType.isWall();
     }

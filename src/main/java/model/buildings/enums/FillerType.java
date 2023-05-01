@@ -5,30 +5,32 @@ import model.resources.AllResource;
 
 public enum FillerType {
 
-    WALL("wall",1,72,0,null,0,0,
-            true,false,0,true),
-    STAIRS("stairs",1,72,0,null,0,0,
-            true,false,0,false),
-    SHOP("shop",5,114,0,AllResource.WOOD,5,1,
-            true,false,0,false),
-    TENT("tent",1,0,0,null,0,-1,
-            true,true,0,false),
-    STABLE("stable",6,114,400, AllResource.WOOD,20,0,
-            true,false,0,false),
-    OX_TETHER("ox tether",1,39,0,AllResource.WOOD,5,1,
-            true,false,0,false);
+    SHORT_WALL("short wall", 1, 72, 0, null, 0,
+            0, true, false, 0, true),
+    TALL_WALL("tall wall", 1, 144, 0, null, 0,
+            0, true, false, 0, true),
+    STAIRS("stairs", 1, 72, 0, null, 0, 0,
+            true, false, 0, false),
+    SHOP("shop", 5, 114, 0, AllResource.WOOD, 5, 1,
+            true, false, 0, false),
+    TENT("tent", 1, 0, 0, null, 0, -1,
+            true, true, 0, false),
+    STABLE("stable", 6, 114, 400, AllResource.WOOD, 20, 0,
+            true, false, 0, false),
+    OX_TETHER("ox tether", 1, 39, 0, AllResource.WOOD, 5, 1,
+            true, false, 0, false);
 
-    private String name;
-    private int size;
-    private int hitPoint;
-    private double goldCost;
-    private AllResource resourceCostType;
-    private int resourceCostNumber;
-    private int workersNumber;
-    private boolean isActive;
-    private boolean areWorkersEngineer;
-    private int popularityEffect;
-    private boolean isWall;
+    private final String name;
+    private final int size;
+    private final int hitPoint;
+    private final double goldCost;
+    private final AllResource resourceCostType;
+    private final int resourceCostNumber;
+    private final int workersNumber;
+    private final boolean isActive;
+    private final boolean areWorkersEngineer;
+    private final int popularityEffect;
+    private final boolean isWall;
 
     public int getSize() {
         return size;
@@ -44,10 +46,6 @@ public enum FillerType {
 
     public AllResource getResourceCostType() {
         return resourceCostType;
-    }
-
-    public boolean isAreWorkersEngineer() {
-        return areWorkersEngineer;
     }
 
     public String getName() {
@@ -70,7 +68,7 @@ public enum FillerType {
         return isActive;
     }
 
-    public boolean AreWorkersEngineer() {
+    public boolean areWorkersEngineer() {
         return areWorkersEngineer;
     }
 
@@ -79,9 +77,9 @@ public enum FillerType {
         return popularityEffect;
     }
 
-    FillerType(String name,int size, int hitPoint, double goldCost,
+    FillerType(String name, int size, int hitPoint, double goldCost,
                AllResource resourceCostType, int resourceCostNumber, int workersNumber,
-               boolean isActive, boolean areWorkersEngineer, int popularityEffect,boolean isWall) {
+               boolean isActive, boolean areWorkersEngineer, int popularityEffect, boolean isWall) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -94,9 +92,10 @@ public enum FillerType {
         this.popularityEffect = popularityEffect;
         this.isWall = isWall;
     }
-    public static FillerType getFillerTypeByName(String name){
+
+    public static FillerType getFillerTypeByName(String name) {
         for (FillerType fillerType : FillerType.values())
-            if(fillerType.name.equals(name))
+            if (fillerType.name.equals(name))
                 return fillerType;
         return null;
     }

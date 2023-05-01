@@ -16,16 +16,16 @@ public enum TowerType {
             0,true,false,0,10,10,10,true);
 
 
-    private String name;
-    private int size;
-    private int hitPoint;
-    private int goldCost;
-    private AllResource resourceCostType;
-    private int resourceCostNumber;
-    private int workersNumber;
-    private boolean isActive;
-    private boolean areWorkersEngineer;
-    private int popularityEffect;
+    private final String name;
+    private final int size;
+    private final int hitPoint;
+    private final int goldCost;
+    private final AllResource resourceCostType;
+    private final int resourceCostNumber;
+    private final int workersNumber;
+    private final boolean isActive;
+    private final boolean areWorkersEngineer;
+    private final int popularityEffect;
     private final int fireRange;
     private final int defendRange;
     private final int unitCapacity;

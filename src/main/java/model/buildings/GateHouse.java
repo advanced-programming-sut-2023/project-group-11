@@ -21,9 +21,10 @@ public class GateHouse extends Building{
         resourceCostNumber = gateHouseType.getResourceCostNumber();
         workersNumber = gateHouseType.getWorkersNumber();
         isActive = gateHouseType.isActive();
-        areWorkersEngineer = gateHouseType.AreWorkersEngineer();
+        areWorkersEngineer = gateHouseType.areWorkersEngineer();
         popularityEffect = gateHouseType.getPopularityEffect();
         capacity = gateHouseType.getCapacity();
+        horizontalDirection = gateHouseType.getHorizontalDirection();
     }
 
     public Governance getGateController() {
@@ -44,5 +45,9 @@ public class GateHouse extends Building{
 
     public void setFilledCapacity(int filledCapacity) {
         this.filledCapacity = filledCapacity;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
     }
 }

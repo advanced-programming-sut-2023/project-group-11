@@ -18,6 +18,19 @@ import java.util.regex.Matcher;
 public class GameMenuController {
     private static Game currentGame;
 
+    private static void nextTurn() {
+    }
+
+    public static GameMenuMessages checkShowMap(Matcher matcher) {
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
+            return GameMenuMessages.INVALID_COMMAND;
+        int x = Integer.parseInt(matcher.group("xCoordinate"));
+        int y = Integer.parseInt(matcher.group("yCoordinate"));
+        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
+            return GameMenuMessages.INVALID_COORDINATE;
+        return GameMenuMessages.SUCCESS;
+    }
+
     public static String showPopularity(Matcher matcher) {
         Governance currentGovernance = currentGame.getCurrentGovernance();
         String output = "";
@@ -168,18 +181,15 @@ public class GameMenuController {
         return GameMenuMessages.SUCCESS;
     }
 
-    private static void nextTurn() {
-    }
-
     private static void updatePopulation() {
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        ArrayList<Building> buildings = currentGovernance.getBuildings();
+        int currentPopulation = currentGovernance.getCurrentPopulation();
         int maxPopulation = currentGovernance.getMaxPopulation();
         int popularity = currentGovernance.getPopularity();
-
-        currentGovernance.changeCurrentPopulation(Math.min(popularity / 10 - 5, maxPopulation));
-
         int unemployedPopulation = currentGovernance.getUnemployedPopulation();
-        ArrayList<Building> buildings = currentGovernance.getBuildings();
+
+        currentGovernance.changeCurrentPopulation(Math.min(popularity / 10 - 5, maxPopulation - currentPopulation));
 
         for (Building building : buildings) {
             if (building.isActive() && unemployedPopulation < 0) {
@@ -256,16 +266,6 @@ public class GameMenuController {
 
     private static void fight() {
 
-    }
-
-    public static GameMenuMessages checkShowMap(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
-            return GameMenuMessages.INVALID_COMMAND;
-        int x = Integer.parseInt(matcher.group("xCoordinate"));
-        int y = Integer.parseInt(matcher.group("yCoordinate"));
-        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
-            return GameMenuMessages.INVALID_COORDINATE;
-        return GameMenuMessages.SUCCESS;
     }
 
     public static Game getCurrentGame() {

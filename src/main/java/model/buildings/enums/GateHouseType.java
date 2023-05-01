@@ -14,18 +14,18 @@ public enum GateHouseType {
     LARGE_VERTICAL("large gatehouse",7,150,0,AllResource.STONE,20,0,
             true,false,0,10,false);
 
-    private String name;
-    private int size;
-    private int hitPoint;
-    private double goldCost;
-    private AllResource resourceCostType;
-    private int resourceCostNumber;
-    private int workersNumber;
-    private boolean isActive;
-    private boolean areWorkersEngineer;
-    private int popularityEffect;
-    private int capacity;
-    private boolean horizontalDirection;
+    private final String name;
+    private final int size;
+    private final int hitPoint;
+    private final double goldCost;
+    private final AllResource resourceCostType;
+    private final int resourceCostNumber;
+    private final int workersNumber;
+    private final boolean isActive;
+    private final boolean areWorkersEngineer;
+    private final int popularityEffect;
+    private final int capacity;
+    private final boolean horizontalDirection;
 
 
     GateHouseType(String name,int size, int hitPoint, double goldCost,
@@ -78,7 +78,7 @@ public enum GateHouseType {
         return isActive;
     }
 
-    public boolean AreWorkersEngineer() {
+    public boolean areWorkersEngineer() {
         return areWorkersEngineer;
     }
 
@@ -89,6 +89,10 @@ public enum GateHouseType {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public boolean getHorizontalDirection() {
+        return horizontalDirection;
     }
 
     public static GateHouseType getGateHouseTypeByName(String name){
