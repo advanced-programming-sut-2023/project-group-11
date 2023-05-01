@@ -1,5 +1,6 @@
 package model;
 
+import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
 import model.resources.AllResource;
@@ -33,6 +34,7 @@ public class Governance {
     private final HashMap<AllResource, Integer> resourceProductionRate = new HashMap<>();
     private final HashMap<AllResource, Integer> resourceConsumptionRate = new HashMap<>();
     private final ArrayList<Storage> storages = new ArrayList<>();
+    private final ArrayList<Building> buildings = new ArrayList<>();
 
     {
         allResources.put(AllResource.WOOD, 100);
@@ -212,6 +214,10 @@ public class Governance {
 
     public int getResourceCount(AllResource resource) {
         return allResources.get(resource);
+    }
+
+    public ArrayList<Building> getBuildings() {
+        return buildings;
     }
 
     public String tradeHistory() {

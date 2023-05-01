@@ -7,6 +7,7 @@ import model.buildings.Trap;
 import model.resources.AllResource;
 import view.enums.messages.GameMenuMessages;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameMenuController {
@@ -141,7 +142,23 @@ public class GameMenuController {
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         int maxPopulation = currentGovernance.getMaxPopulation();
         int popularity = currentGovernance.getPopularity();
+
         currentGovernance.changeCurrentPopulation(Math.min(popularity / 10 - 5, maxPopulation));
+
+        int unemployedPopulation = currentGovernance.getUnemployedPopulation();
+        ArrayList<Building> buildings = currentGovernance.getBuildings();
+
+        for (Building building : buildings) {
+            if (building.isActive() && unemployedPopulation < 0) {
+                building.setActive(false);
+                unemployedPopulation++;
+            }
+            if (!building.isActive() && unemployedPopulation > 0) {
+                building.setActive(true);
+                unemployedPopulation--;
+            }
+        }
+        currentGovernance.setUnemployedPopulation(Math.max(0, unemployedPopulation));
     }
 
     private static void updateSoldiers() {
