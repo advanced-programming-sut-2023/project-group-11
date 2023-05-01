@@ -3,10 +3,15 @@ package controller;
 import com.diogonunes.jcolor.Ansi;
 import com.diogonunes.jcolor.Attribute;
 import model.Game;
+import model.Governance;
 import model.Stronghold;
+import model.buildings.Building;
 import model.map.Color;
 import model.map.Map;
 import model.map.Tile;
+import model.people.Machine;
+import model.people.Troops;
+import model.people.Units;
 import org.apache.commons.lang3.StringUtils;
 import view.ShowMapMenu;
 import view.enums.messages.ShowMapMenuMessages;
@@ -83,8 +88,8 @@ public class ShowMapMenuController {
                     if (i == x && j == y) textColor = Color.RED_TEXT.getColor();
                     else textColor = Color.WHITE_TEXT.getColor();
 
-                    if (tile.getUnits().size() > 0) output += (Ansi.colorize("S", textColor, backgroundColor));
-                    else if (tile.getBuilding() != null) output += (Ansi.colorize("B", textColor, backgroundColor));
+                    if (isSoldierInTile(tile)) output += (Ansi.colorize("S", textColor, backgroundColor));
+                    else if (isBuildingInTile(tile)) output += (Ansi.colorize("B", textColor, backgroundColor));
                     else if (tile.getTree() != null) output += (Ansi.colorize("T", textColor, backgroundColor));
                     else output += (Ansi.colorize("#", textColor, backgroundColor));
                 }
@@ -105,5 +110,27 @@ public class ShowMapMenuController {
 
     public static String getCurrentMapName() {
         return Stronghold.getCurrentGame().getMap().getName();
+    }
+
+    public static boolean isSoldierInTile(Tile tile) {
+        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+        for (Units unit : tile.getUnits())
+            if (unit instanceof Machine) return true;
+            else if (((Troops) unit).isRevealed() || unit.getOwnerGovernance().equals(governance)) return true;
+
+        return false;
+    }
+
+    public static boolean isBuildingInTile(Tile tile) {
+        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Building building = tile.getBuilding();
+
+        if (building == null) return false;
+
+        String buildingName = building.getName();
+
+        return building.getOwner().equals(governance)
+                || (!buildingName.equals("killing pit")
+                && !buildingName.equals("pitch ditch"));
     }
 }

@@ -56,6 +56,7 @@ public class GameMenu {
 
     public static void checkShowMap(Matcher matcher) {
         GameMenuMessages message = GameMenuController.checkShowMap(matcher);
+
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid command");
             case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
