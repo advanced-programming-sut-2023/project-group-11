@@ -11,6 +11,7 @@ public class Trap extends DefensiveBuilding {
         name = trapType.getName();
         size = trapType.getSize();
         hitPoint = trapType.getHitPoint();
+        maxHitPoint = trapType.getHitPoint();
         goldCost = trapType.getGoldCost();
         resourceCostType = trapType.getResourceCostType();
         resourceCostNumber = trapType.getResourceCostNumber();

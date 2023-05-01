@@ -7,7 +7,10 @@ public enum SelectBuildingMenuMessages {
     INVALID_COMMAND,
     INVALID_TYPE,
     NOT_ENOUGH_GOLD,
-    CANT_CREATE_HERE
+    CANT_CREATE_HERE,
+    NO_NEED_TO_REPAIR,
+    NOT_ENOUGH_RESOURCE,
+    CANT_REPAIR
     ;
 
 }

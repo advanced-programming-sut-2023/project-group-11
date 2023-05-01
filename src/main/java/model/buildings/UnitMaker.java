@@ -12,6 +12,7 @@ public class UnitMaker extends Building {
         name = unitMakerType.getName();
         size = unitMakerType.getSize();
         hitPoint = unitMakerType.getHitPoint();
+        maxHitPoint = unitMakerType.getHitPoint();
         goldCost = unitMakerType.getGoldCost();
         resourceCostType = unitMakerType.getResourceCostType();
         resourceCostNumber = unitMakerType.getResourceCostNumber();

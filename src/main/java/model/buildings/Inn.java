@@ -12,6 +12,7 @@ public class Inn extends Building {
         name = "inn";
         size = 5;
         hitPoint = 114;
+        maxHitPoint = 114;
         goldCost = 100;
         resourceCostType = AllResource.WOOD;
         resourceCostNumber = 20;

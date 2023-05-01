@@ -111,8 +111,8 @@ public class GameMenuController {
     public static GameMenuMessages checkSelectBuilding(Matcher matcher) {
         if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
             return GameMenuMessages.INVALID_COMMAND;
-        int x = Integer.parseInt(matcher.group("xGroup"));
-        int y = Integer.parseInt(matcher.group("yGroup"));
+        int x = Integer.parseInt(matcher.group("xCoordinate"));
+        int y = Integer.parseInt(matcher.group("yCoordinate"));
         if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y))
             return GameMenuMessages.INVALID_COORDINATE;
         Building building = Stronghold.getCurrentGame().getMap().getTile(x, y).getBuilding();

@@ -5,6 +5,7 @@ import model.Stronghold;
 import model.buildings.*;
 import model.people.Troops;
 import model.people.enums.TroopTypes;
+import model.resources.AllResource;
 import view.enums.messages.GameMenuMessages;
 import view.enums.messages.SelectBuildingMenuMessages;
 
@@ -19,6 +20,8 @@ public class SelectBuildingMenuController {
         int count = Integer.parseInt(matcher.group("count"));
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         Building building = getBuilding(BuildingMatcher);
+        if(!isUnitMaker(building))
+            return SelectBuildingMenuMessages.CANT_CREATE_HERE;
         if(type.equals("engineer")){
             if(!building.getName().equals("engineer guild"))
                 return SelectBuildingMenuMessages.CANT_CREATE_HERE;
@@ -47,13 +50,11 @@ public class SelectBuildingMenuController {
         return true;
     }
 
-    public static boolean isUnitMaker(Matcher matcher){
-        Building building = getBuilding(matcher);
+    public static boolean isUnitMaker(Building building){
         return building instanceof UnitMaker;
     }
     
-    public static boolean isRepairable(Matcher matcher){
-        Building building = getBuilding(matcher);
+    public static boolean isRepairable(Building building){
         return ((building instanceof UnitMaker) && (building instanceof Tower)
                 && (building instanceof GateHouse) && (building instanceof Trap));
     }
@@ -70,8 +71,18 @@ public class SelectBuildingMenuController {
         return building;
     }
 
-    private static SelectBuildingMenuMessages repair() {
-        return null;
+    public static SelectBuildingMenuMessages checkRepair(Matcher buildingMatcher) {
+        Building building = getBuilding(buildingMatcher);
+        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+        if(!isRepairable(building))
+            return SelectBuildingMenuMessages.CANT_REPAIR;
+        if(building.getHitPoint() == building.getMaxHitPoint())
+            return SelectBuildingMenuMessages.NO_NEED_TO_REPAIR;
+        if(!governance.hasEnoughItem(AllResource.STONE,8))
+            return SelectBuildingMenuMessages.NOT_ENOUGH_RESOURCE;
+        governance.removeFromStorage(AllResource.STONE,8);
+        building.repair();
+        return SelectBuildingMenuMessages.SUCCESS;
     }
 
     private static SelectBuildingMenuMessages attackMachine() {

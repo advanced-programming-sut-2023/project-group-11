@@ -15,6 +15,7 @@ public class GateHouse extends Building{
         name = gateHouseType.getName();
         size = gateHouseType.getSize();
         hitPoint = gateHouseType.getHitPoint();
+        maxHitPoint = gateHouseType.getHitPoint();
         goldCost = gateHouseType.getGoldCost();
         resourceCostType = gateHouseType.getResourceCostType();
         resourceCostNumber = gateHouseType.getResourceCostNumber();
