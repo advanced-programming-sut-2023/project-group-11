@@ -40,8 +40,8 @@ public class Game {
         return turn;
     }
 
-    public void setTurn(int turn) {
-        this.turn = turn;
+    public void plusTurnCounter() {
+        this.turn =+ 1;
     }
 
     public Governance getCurrentGovernance() {

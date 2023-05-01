@@ -4,12 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/map/Territory.java" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Terrotories added + game capacity initialized (2-4)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Path.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectUnitMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectUnitMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/GameMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/GameMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +195,10 @@
       <workItem from="1682794132459" duration="1347000" />
       <workItem from="1682819061297" duration="657000" />
       <workItem from="1682856031647" duration="1904000" />
-      <workItem from="1682864878247" duration="10352000" />
+      <workItem from="1682864878247" duration="15441000" />
+      <workItem from="1682884745507" duration="875000" />
+      <workItem from="1682923380840" duration="3158000" />
+      <workItem from="1682927054108" duration="2727000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -407,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682871602800</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Terrotories added + game capacity initialized (2-4)">
+      <created>1682879175229</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1682879175229</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -449,7 +466,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="People completed &amp; Packages' names corrected" />
     <MESSAGE value="Map edited &amp; Map edit menu completed upto drop cliff(rock)" />
     <MESSAGE value="Map edit menu ended without saving in database" />
     <MESSAGE value="Tree edited &amp; users.json added in resources folder" />
@@ -474,7 +490,8 @@
     <MESSAGE value="Show map added in MapEditMenu" />
     <MESSAGE value="Use validCommandTags in MapEditMenuController" />
     <MESSAGE value="Troop Dictionary added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Troop Dictionary added" />
+    <MESSAGE value="Terrotories added + game capacity initialized (2-4)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Terrotories added + game capacity initialized (2-4)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

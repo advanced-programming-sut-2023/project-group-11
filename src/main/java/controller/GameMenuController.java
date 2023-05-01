@@ -1,9 +1,14 @@
 package controller;
 
+import model.Game;
 import model.Governance;
+import model.Path;
 import model.Stronghold;
 import model.buildings.Building;
 import model.buildings.Trap;
+import model.map.Map;
+import model.map.Texture;
+import model.map.Tile;
 import model.resources.AllResource;
 import view.enums.messages.GameMenuMessages;
 
@@ -11,8 +16,10 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class GameMenuController {
+    private static Game currentGame;
+
     public static String showPopularity(Matcher matcher) {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = currentGame.getCurrentGovernance();
         String output = "";
 
         if (matcher.group("factors") == null) output += currentGovernance.getPopularity();
@@ -27,7 +34,7 @@ public class GameMenuController {
     }
 
     public static String showFoodList() {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = currentGame.getCurrentGovernance();
         String output = "";
 
         output += "Bread: " + currentGovernance.getAllResources().get(AllResource.BREAD) + '\n';
@@ -39,7 +46,7 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkChangeFoodRate(Matcher matcher) {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = currentGame.getCurrentGovernance();
         int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
 
         if (rateNumber < -2 || rateNumber > 2) return GameMenuMessages.INVALID_RATE;
@@ -52,12 +59,12 @@ public class GameMenuController {
     }
 
     public static String showFoodRate() {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = currentGame.getCurrentGovernance();
         return "Food rate: " + currentGovernance.getFoodRate();
     }
 
     public static GameMenuMessages checkChangeTaxRate(Matcher matcher) {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = currentGame.getCurrentGovernance();
         int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
 
         if (rateNumber < -3 || rateNumber > 8) return GameMenuMessages.INVALID_RATE;
@@ -74,12 +81,12 @@ public class GameMenuController {
     }
 
     public static String showTaxRate() {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = currentGame.getCurrentGovernance();
         return "Tax rate: " + currentGovernance.getTaxRate();
     }
 
     public static GameMenuMessages checkChangeFearRate(Matcher matcher) { //TODO: not in the actual game!
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = currentGame.getCurrentGovernance();
         int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
 
         if (rateNumber < -5 || rateNumber > 5) return GameMenuMessages.INVALID_RATE;
@@ -92,18 +99,23 @@ public class GameMenuController {
         return GameMenuMessages.SUCCESS;
     }
 
+    public static String showFearRate() {
+        Governance currentGovernance = currentGame.getCurrentGovernance();
+        return "Fear rate: " + currentGovernance.getFearFactor();
+    }
+
     public static GameMenuMessages checkDropBuilding(Matcher matcher) {
         if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup", "typeGroup"))
             return GameMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
         String type = matcher.group("typeGroup");
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = currentGame.getCurrentGovernance();
         Building building = BuildingUtils.getBuildingByType(type);
         if (!BuildingUtils.isValidBuildingType(type))
             return GameMenuMessages.INVALID_BUILDING_TYPE;
         int size = building.getSize();
-        if (!BuildingUtils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y, size))
+        if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size))
             return GameMenuMessages.INVALID_COORDINATE;
         if (!BuildingUtils.isMapEmpty(x, y, size))
             return GameMenuMessages.CANT_BUILD_HERE;
@@ -124,14 +136,14 @@ public class GameMenuController {
             return GameMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
-        if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y))
+        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
             return GameMenuMessages.INVALID_COORDINATE;
-        Building building = Stronghold.getCurrentGame().getMap().getTile(x,y).getBuilding();
-        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
-        if(building == null)
+        Building building = currentGame.getMap().getTile(x, y).getBuilding();
+        Governance governance = currentGame.getCurrentGovernance();
+        if (building == null)
             return GameMenuMessages.NO_BUILDING_HERE;
-        if(!building.getOwner().equals(governance))
-            if(building instanceof Trap)
+        if (!building.getOwner().equals(governance))
+            if (building instanceof Trap)
                 return GameMenuMessages.NO_BUILDING_HERE;
             else
                 return GameMenuMessages.NOT_YOUR_BUILDING;
@@ -139,11 +151,32 @@ public class GameMenuController {
         //TODO: select building after commands need a structure to implement...
     }
 
-    public static String selectBuildingDetails(Matcher matcher){
+    public static String selectBuildingDetails(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
-        Building building = Stronghold.getCurrentGame().getMap().getTile(x,y).getBuilding();
+        Building building = currentGame.getMap().getTile(x, y).getBuilding();
         return building.toString();
+    }
+
+    public static GameMenuMessages checkSelectUnit(Matcher matcher) {
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
+            return GameMenuMessages.INVALID_COMMAND;
+
+        int x = Integer.parseInt(matcher.group("xCoordinate"));
+        int y = Integer.parseInt(matcher.group("yCoordinate"));
+        Map map = currentGame.getMap();
+
+        if (!Utils.isValidCoordinates(map, x, y))
+            return GameMenuMessages.INVALID_COORDINATE;
+
+        Tile tile = map.getTile(x, y);
+
+        if (tile.getUnits().size() == 0)
+            return GameMenuMessages.NO_UNIT_HERE;
+        else if (!tile.getUnits().get(0).getOwnerGovernance().equals(currentGame.getCurrentGovernance()))
+            return GameMenuMessages.NOT_YOUR_UNIT;
+
+        return GameMenuMessages.SUCCESS;
     }
 
     private static void nextTurn() {
@@ -158,7 +191,7 @@ public class GameMenuController {
     }
 
     private static void updateStorage() {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = currentGame.getCurrentGovernance();
 
         for (AllResource resource : AllResource.values()) {
             int productionRate = currentGovernance.getResourceProductionRate(resource);
@@ -177,12 +210,20 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkShowMap(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
             return GameMenuMessages.INVALID_COMMAND;
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
-        if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x, y))
+        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
             return GameMenuMessages.INVALID_COORDINATE;
         return GameMenuMessages.SUCCESS;
+    }
+
+    public static Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public static void setCurrentGame(Game currentGame) {
+        GameMenuController.currentGame = currentGame;
     }
 }

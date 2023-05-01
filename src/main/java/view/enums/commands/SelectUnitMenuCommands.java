@@ -4,7 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum SelectUnitMenuCommands {
-    COMMAND(""),;
+    MOVE_UNIT("move unit to((?<xGroup> -x (?<xCoordinate>\\d+))|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
+    ;
 
     private final String regex;
 

@@ -3,7 +3,7 @@ package model.map;
 public enum Texture {
     SAND("sand", Color.BEIGE_BACKGROUND),
     SAND_DUNE("sand dune", Color.BEIGE_BACKGROUND),
-    ROCK("rock", Color.SILVER_BACKGROUND),       // UnBuildable
+    ROCK("rock", Color.SILVER_BACKGROUND),           // UnBuildable
     CLIFF("cliff", Color.DARK_GRAY_BACKGROUND),      // UnBuildable - Sakhreh
     STONE("stone", Color.GRAY_BACKGROUND),
     IRON("iron", Color.ORANGE_BACKGROUND),
