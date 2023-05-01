@@ -33,11 +33,11 @@ public class Inn extends Building {
         return wineUsageRate;
     }
 
-    public void addToPopularity(){
+    public void addToPopularity() {
         owner.setPopularity(owner.getPopularity() + popularityRate);
     }
 
-    public void oneTurnPass(){
+    public void oneTurnPass() {
 
     }
 

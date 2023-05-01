@@ -3,12 +3,13 @@ package model.buildings;
 import model.buildings.enums.GateHouseType;
 import model.Governance;
 
-public class GateHouse extends Building{
+public class GateHouse extends Building {
 
-    private int capacity,filledCapacity;
+    private final int capacity;
+    private int filledCapacity;
     private Governance gateController;
     private boolean isOpen = false;
-    private boolean horizontalDirection;
+    private final boolean horizontalDirection;
 
 
     public GateHouse(GateHouseType gateHouseType) {
@@ -49,5 +50,13 @@ public class GateHouse extends Building{
 
     public void setOpen(boolean open) {
         isOpen = open;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public boolean isHorizontalDirection() {
+        return horizontalDirection;
     }
 }

@@ -87,7 +87,7 @@ public abstract class Building {
         return name;
     }
 
-    public void repair(){
+    public void repair() {
         hitPoint = maxHitPoint;
     }
 

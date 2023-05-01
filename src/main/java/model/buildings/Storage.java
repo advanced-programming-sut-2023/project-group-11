@@ -6,14 +6,15 @@ import model.AllResource;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Storage extends Building{
+public class Storage extends Building {
 
-    private HashMap<AllResource,Integer> storage = new HashMap<>();
-    private int capacity,currentCapacity;
+    private final HashMap<AllResource, Integer> storage = new HashMap<>();
+    private final int capacity;
+    private int currentCapacity;
 
     public Storage(StorageType storageType) {
         name = storageType.getName();
-        switch (storageType){
+        switch (storageType) {
             case ARMOURY -> {
                 storage.put(AllResource.CROSSBOW, 0);
                 storage.put(AllResource.SPEAR, 0);
@@ -64,12 +65,12 @@ public class Storage extends Building{
         return capacity;
     }
 
-    public void addToStorage(AllResource resource,int amount){
+    public void addToStorage(AllResource resource, int amount) {
         storage.put(resource, storage.get(resource) + amount);
         currentCapacity -= amount;
     }
 
-    public void removeFromStorage(AllResource resource,int amount){
+    public void removeFromStorage(AllResource resource, int amount) {
         storage.put(resource, storage.get(resource) - amount);
         currentCapacity += amount;
     }
@@ -77,10 +78,10 @@ public class Storage extends Building{
     @Override
     public String toString() {
         String output = "";
-        for (Map.Entry<AllResource,Integer> entry:storage.entrySet()){
+        for (Map.Entry<AllResource, Integer> entry : storage.entrySet()) {
             output += "\n" + entry.getKey().getName() + " " + entry.getValue();
         }
-            return super.toString() + output;
+        return super.toString() + output;
     }
 
 }

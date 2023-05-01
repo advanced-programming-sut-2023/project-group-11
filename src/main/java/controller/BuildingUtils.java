@@ -124,4 +124,10 @@ public class BuildingUtils {
         }
     }
 
+    public static boolean isBuildingInTile(Building building) {
+        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+
+        if (building == null) return false;
+        return building.getOwner().equals(governance) || !(building instanceof Trap);
+    }
 }

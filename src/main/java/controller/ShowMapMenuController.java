@@ -2,10 +2,8 @@ package controller;
 
 import com.diogonunes.jcolor.Ansi;
 import com.diogonunes.jcolor.Attribute;
-import model.Game;
 import model.Governance;
 import model.Stronghold;
-import model.buildings.Building;
 import model.map.Color;
 import model.map.Map;
 import model.map.Tile;
@@ -89,7 +87,8 @@ public class ShowMapMenuController {
                     else textColor = Color.WHITE_TEXT.getColor();
 
                     if (isSoldierInTile(tile)) output += (Ansi.colorize("S", textColor, backgroundColor));
-                    else if (isBuildingInTile(tile)) output += (Ansi.colorize("B", textColor, backgroundColor));
+                    else if (BuildingUtils.isBuildingInTile(tile.getBuilding()))
+                        output += (Ansi.colorize("B", textColor, backgroundColor));
                     else if (tile.getTree() != null) output += (Ansi.colorize("T", textColor, backgroundColor));
                     else output += (Ansi.colorize("#", textColor, backgroundColor));
                 }
@@ -119,18 +118,5 @@ public class ShowMapMenuController {
             else if (((Troops) unit).isRevealed() || unit.getOwnerGovernance().equals(governance)) return true;
 
         return false;
-    }
-
-    public static boolean isBuildingInTile(Tile tile) {
-        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
-        Building building = tile.getBuilding();
-
-        if (building == null) return false;
-
-        String buildingName = building.getName();
-
-        return building.getOwner().equals(governance)
-                || (!buildingName.equals("killing pit")
-                && !buildingName.equals("pitch ditch"));
     }
 }

@@ -32,8 +32,7 @@ public class Church extends Building {
     }
 
     public void makeMonk() {
-        if (!isGeneral)
-            return;
+        if (!isGeneral) return;
         owner.setGold(owner.getGold() - makeMonkCost);
         //TODO : more implementations
     }

@@ -5,7 +5,7 @@ import model.buildings.enums.FillerType;
 public class Filler extends Building {
     // wall stair tent ...
     private final boolean isWall;
-    private final boolean isClimable = false;
+    private final boolean isClimbable = false;
 
     public Filler(FillerType fillerType) {
         name = fillerType.getName();
@@ -27,7 +27,7 @@ public class Filler extends Building {
         return isWall;
     }
 
-    public boolean isClimable() {
-        return isClimable;
+    public boolean isClimbable() {
+        return isClimbable;
     }
 }

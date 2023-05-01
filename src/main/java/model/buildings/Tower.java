@@ -10,7 +10,7 @@ public class Tower extends DefensiveBuilding {
     private int fireRange;
     private int defendRange;
     private int unitCapacity;
-    private boolean isClimable = false;
+    private boolean isClimbable = false;
     private boolean isTower;
 
     private ArrayList<Units> units = new ArrayList<>();
@@ -33,12 +33,12 @@ public class Tower extends DefensiveBuilding {
         isTower = towerType.isTower();
     }
 
-    public boolean isClimable() {
-        return isClimable;
+    public boolean isClimbable() {
+        return isClimbable;
     }
 
-    public void setClimable(boolean climable) {
-        this.isClimable = climable;
+    public void setClimbable(boolean climbable) {
+        this.isClimbable = climbable;
     }
 
     public int getFireRange() {

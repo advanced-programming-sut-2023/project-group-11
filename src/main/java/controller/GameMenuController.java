@@ -4,7 +4,6 @@ import model.Game;
 import model.Governance;
 import model.Stronghold;
 import model.buildings.Building;
-import model.buildings.Trap;
 import model.map.Map;
 import model.map.Tile;
 import model.AllResource;
@@ -107,46 +106,43 @@ public class GameMenuController {
     public static GameMenuMessages checkDropBuilding(Matcher matcher) {
         if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup", "typeGroup"))
             return GameMenuMessages.INVALID_COMMAND;
+
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
         String type = matcher.group("typeGroup");
         Governance currentGovernance = currentGame.getCurrentGovernance();
         Building building = BuildingUtils.getBuildingByType(type);
-        if (!BuildingUtils.isValidBuildingType(type))
-            return GameMenuMessages.INVALID_BUILDING_TYPE;
+
+        if (!BuildingUtils.isValidBuildingType(type)) return GameMenuMessages.INVALID_BUILDING_TYPE;
+
         int size = building.getSize();
-        if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size))
-            return GameMenuMessages.INVALID_COORDINATE;
-        if (!BuildingUtils.isMapEmpty(x, y, size))
-            return GameMenuMessages.CANT_BUILD_HERE;
-        if (!BuildingUtils.isTextureSuitable(type, x, y, size))
-            return GameMenuMessages.CANT_BUILD_HERE;
-        if (building.getGoldCost() > currentGovernance.getGold())
-            return GameMenuMessages.NOT_ENOUGH_MONEY;
-        if (building.getResourceCostType() != null) {
+
+        if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size)) return GameMenuMessages.INVALID_COORDINATE;
+        if (!BuildingUtils.isMapEmpty(x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
+        if (!BuildingUtils.isTextureSuitable(type, x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
+        if (building.getGoldCost() > currentGovernance.getGold()) return GameMenuMessages.NOT_ENOUGH_MONEY;
+        if (building.getResourceCostType() != null)
             if (!currentGovernance.hasEnoughItem(building.getResourceCostType(), building.getResourceCostNumber()))
                 return GameMenuMessages.NOT_ENOUGH_RESOURCE;
-        }
+
         BuildingUtils.build(building, x, y, size);
+
         return GameMenuMessages.SUCCESS;
     }
 
     public static GameMenuMessages checkSelectBuilding(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
-            return GameMenuMessages.INVALID_COMMAND;
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup")) return GameMenuMessages.INVALID_COMMAND;
+
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
-        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
-            return GameMenuMessages.INVALID_COORDINATE;
+
+        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y)) return GameMenuMessages.INVALID_COORDINATE;
+
         Building building = currentGame.getMap().getTile(x, y).getBuilding();
         Governance governance = currentGame.getCurrentGovernance();
-        if (building == null)
-            return GameMenuMessages.NO_BUILDING_HERE;
-        if (!building.getOwner().equals(governance))
-            if (building instanceof Trap)
-                return GameMenuMessages.NO_BUILDING_HERE;
-            else
-                return GameMenuMessages.NOT_YOUR_BUILDING;
+
+        if (!BuildingUtils.isBuildingInTile(building)) return GameMenuMessages.NO_BUILDING_HERE;
+        if (!building.getOwner().equals(governance)) return GameMenuMessages.NOT_YOUR_BUILDING;
         return GameMenuMessages.SUCCESS;
         //TODO: select building after commands need a structure to implement...
     }
@@ -218,7 +214,7 @@ public class GameMenuController {
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
         //increase foods, troop equipments, resources & decrease troop equipments, resources
-        updateResourcesAndTroopEquipments(currentGovernance);
+        updateAllResources(currentGovernance);
 
         //decrease foods
         updateFood(currentGovernance);
@@ -238,7 +234,7 @@ public class GameMenuController {
         currentGovernance.updateFood();
     }
 
-    private static void updateResourcesAndTroopEquipments(Governance currentGovernance) {
+    private static void updateAllResources(Governance currentGovernance) {
         for (AllResource resource : AllResource.values()) {
             int productionRate = currentGovernance.getResourceProductionRate(resource);
             double workersEfficiency = currentGovernance.getWorkersEfficiency();
