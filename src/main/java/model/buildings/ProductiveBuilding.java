@@ -15,6 +15,7 @@ public class ProductiveBuilding extends Building {
         name = productiveBuildingType.getName();
         size = productiveBuildingType.getSize();
         hitPoint = productiveBuildingType.getHitPoint();
+        maxHitPoint = productiveBuildingType.getHitPoint();
         goldCost = productiveBuildingType.getGoldCost();
         resourceCostType = productiveBuildingType.getResourceCostType();
         resourceCostNumber = productiveBuildingType.getResourceCostNumber();

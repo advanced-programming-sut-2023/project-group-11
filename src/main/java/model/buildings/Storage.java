@@ -43,6 +43,7 @@ public class Storage extends Building{
         }
         size = storageType.getSize();
         hitPoint = storageType.getHitPoint();
+        maxHitPoint = storageType.getHitPoint();
         goldCost = storageType.getGoldCost();
         resourceCostType = storageType.getResourceCostType();
         resourceCostNumber = storageType.getResourceCostNumber();

@@ -11,6 +11,7 @@ public class Filler extends Building {
         name = fillerType.getName();
         size = fillerType.getSize();
         hitPoint = fillerType.getHitPoint();
+        maxHitPoint = fillerType.getHitPoint();
         goldCost = fillerType.getGoldCost();
         resourceCostType = fillerType.getResourceCostType();
         resourceCostNumber = fillerType.getResourceCostNumber();

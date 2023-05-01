@@ -9,6 +9,7 @@ import model.User;
 import model.buildings.enums.*;
 import model.map.Map;
 import model.map.Tile;
+import model.resources.AllResource;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.awt.*;
@@ -130,5 +131,12 @@ public class Utils {
     public static boolean isValidCoordinates(Map map, int x, int y) {
         int mapSize = map.getSize();
         return x >= 0 && x < mapSize && y >= 0 && y < mapSize;
+    }
+
+    public static boolean isFood(AllResource resource) {
+        return resource.equals(AllResource.BREAD)
+                || resource.equals(AllResource.MEAT)
+                || resource.equals(AllResource.CHEESE)
+                || resource.equals(AllResource.APPLE);
     }
 }

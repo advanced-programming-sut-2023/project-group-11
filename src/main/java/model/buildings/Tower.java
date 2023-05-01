@@ -19,6 +19,7 @@ public class Tower extends DefensiveBuilding {
         name = towerType.getName();
         size = towerType.getSize();
         hitPoint = towerType.getHitPoint();
+        maxHitPoint = towerType.getHitPoint();
         goldCost = towerType.getGoldCost();
         resourceCostType = towerType.getResourceCostType();
         resourceCostNumber = towerType.getResourceCostNumber();

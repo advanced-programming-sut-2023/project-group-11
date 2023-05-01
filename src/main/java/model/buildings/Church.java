@@ -11,6 +11,7 @@ public class Church extends Building{
         name = churchType.getName();
         size = churchType.getSize();
         hitPoint = churchType.getHitPoint();
+        maxHitPoint = churchType.getHitPoint();
         goldCost = churchType.getGoldCost();
         resourceCostType = churchType.getResourceCostType();
         resourceCostNumber = churchType.getResourceCostNumber();

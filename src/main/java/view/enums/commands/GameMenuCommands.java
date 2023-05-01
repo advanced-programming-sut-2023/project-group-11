@@ -5,11 +5,13 @@ import java.util.regex.Pattern;
 
 public enum GameMenuCommands {
 
-    NEXT_TURN("next turn"),
-    SHOW_MAP("show map(( -x (?<xCoordinate>\\d+))|( -y (?<yCoordinate>\\d+))){2}"),
-    DROP_BUILDING("dropbuilding((?<xGroup> -x (?<xCoordinate>\\d+))|(?<yGroup> -y (?<yCoordinate>\\d+))|" +
-                        "(?<typeGroup> -type (?<type>\"[^\"]+\"|\\S+))){3}"),
-    SELECT_BUILDING("select building((?<xGroup> -x (?<xCoordinate>\\d+))|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
+    SHOW_MAP("show map(( -x (?<xCoordinate>\\d+))" +
+            "|( -y (?<yCoordinate>\\d+))){2}"),
+    DROP_BUILDING("dropbuilding((?<xGroup> -x (?<xCoordinate>\\d+))" +
+            "|(?<yGroup> -y (?<yCoordinate>\\d+))" +
+            "|(?<typeGroup> -type (?<type>\\\"[^\\\"]+\\\"|\\S+))){3}"),
+    SELECT_BUILDING("select building((?<xGroup> -x (?<xCoordinate>\\d+))" +
+            "|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
     SHOW_POPULARITY("show popularity( (?<factors>factors))?"),
     SHOW_FOOD_LIST("show food list"),
     CHANGE_FOOD_RATE("food rate -r (?<rateNumber>\\d+)"),

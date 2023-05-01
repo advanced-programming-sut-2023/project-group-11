@@ -3,6 +3,7 @@ package view;
 import controller.GameMenuController;
 import model.Stronghold;
 import view.enums.commands.GameMenuCommands;
+import view.enums.commands.GameMenuCommands;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.Scanner;
@@ -47,6 +48,7 @@ public class GameMenu {
                 checkSelectBuilding(matcher);
             else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SELECT_UNIT)) != null)
                 checkSelectUnit(matcher);
+            else System.out.println("Invalid command!");
         }
     }
 
@@ -60,6 +62,7 @@ public class GameMenu {
 
     private static void checkChangeFoodRate(Matcher matcher) {
         message = GameMenuController.checkChangeFoodRate(matcher);
+        
         switch (message) {
             case INVALID_RATE -> System.out.println("Your rate number must be between -2 and 2!");
             case SUCCESS -> System.out.println("You have successfully changed your food rate!");
@@ -72,6 +75,7 @@ public class GameMenu {
 
     private static void checkChangeTaxRate(Matcher matcher) {
         message = GameMenuController.checkChangeTaxRate(matcher);
+
         switch (message) {
             case INVALID_RATE -> System.out.println("Your rate number must be between -3 and 8!");
             case SUCCESS -> System.out.println("You have successfully changed your tax rate!");
@@ -84,6 +88,7 @@ public class GameMenu {
 
     private static void checkChangeFearRate(Matcher matcher) {
         message = GameMenuController.checkChangeFearRate(matcher);
+        
         switch (message) {
             case INVALID_RATE -> System.out.println("Your rate number must be between -5 and 5!");
             case SUCCESS -> System.out.println("You have successfully changed your fear rate!");
@@ -96,6 +101,7 @@ public class GameMenu {
 
     private static void checkDropBuilding(Matcher matcher) {
         message = GameMenuController.checkDropBuilding(matcher);
+
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
             case INVALID_BUILDING_TYPE -> System.out.println("Invalid Building Type!");
@@ -142,7 +148,7 @@ public class GameMenu {
     }
 
     public static void checkShowMap(Matcher matcher) {
-        message = GameMenuController.checkShowMap(matcher);
+        GameMenuMessages message = GameMenuController.checkShowMap(matcher);
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid command");
             case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");

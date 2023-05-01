@@ -31,7 +31,16 @@ public class SignupMenu {
 
     private static void checkRegister(Matcher registerMatcher) {
         String username = registerMatcher.group("username");
-        SignupMenuMessages message = SignupMenuController.checkRegister(registerMatcher, username);
+        String password = registerMatcher.group("password");
+        String email = registerMatcher.group("email");
+        String nickname = Utils.removeDoubleQuotation(registerMatcher.group("nickname"));
+        String slogan = Utils.removeDoubleQuotation(registerMatcher.group("slogan"));
+
+        username = Utils.removeDoubleQuotation(username);
+        slogan = Utils.removeDoubleQuotation(slogan);
+        nickname = Utils.removeDoubleQuotation(nickname);
+
+        SignupMenuMessages message = SignupMenuController.checkRegister(registerMatcher, username, password, email, nickname, slogan);
 
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid command!");
@@ -39,7 +48,8 @@ public class SignupMenu {
             case INVALID_USERNAME_FORMAT -> System.out.println("Invalid username format");
             case USERNAME_EXIST -> {
                 username = generateRandomUsername(username);
-                if (username != null) message = SignupMenuController.checkRegister(registerMatcher, username);
+                if (username != null)
+                    message = SignupMenuController.checkRegister(registerMatcher, username, password, email, nickname, slogan);
                 else return;
             }
         }
@@ -55,10 +65,6 @@ public class SignupMenu {
             case EMAIL_EXIST -> System.out.println("Email already exist!");
             case INVALID_EMAIL_FORMAT -> System.out.println("Invalid email format!");
             case SUCCESS -> {
-                String password = registerMatcher.group("password");
-                String slogan = registerMatcher.group("slogan");
-                username = Utils.removeDoubleQuotation(username);
-                slogan = Utils.removeDoubleQuotation(slogan);
                 password = Arrays.asList(password.split(" ")).get(0);
 
                 if (slogan != null && slogan.equals("random")) {
@@ -124,6 +130,7 @@ public class SignupMenu {
         Matcher pickQuestionMatcher;
         Scanner scanner = EntryMenu.getScanner();
         String command = scanner.nextLine();
+
         while ((pickQuestionMatcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.PICK_QUESTION)) == null) {
             if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) Utils.endStronghold();
             else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) return;
@@ -131,7 +138,10 @@ public class SignupMenu {
             command = scanner.nextLine();
         }
 
-        SignupMenuMessages message = SignupMenuController.checkPickQuestion(pickQuestionMatcher);
+        int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
+        String recoveryAnswer = pickQuestionMatcher.group("answer");
+        String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
+        SignupMenuMessages message = SignupMenuController.checkPickQuestion(pickQuestionMatcher, questionNumber, recoveryAnswer, answerConfirmation);
 
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid command!");
@@ -140,7 +150,9 @@ public class SignupMenu {
             case SUCCESS -> {
                 if (Menu.checkCaptchaConfirmation()) {
                     System.out.println("User created successfully!");
-                    SignupMenuController.createUser(pickQuestionMatcher, registerMatcher, username, password, slogan);
+                    String email = registerMatcher.group("email");
+                    String nickname = registerMatcher.group("nickname");
+                    SignupMenuController.createUser(username, password, email, nickname, slogan, questionNumber, recoveryAnswer);
                 }
             }
         }

@@ -1,5 +1,6 @@
 package model;
 
+import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
 import model.resources.AllResource;
@@ -11,15 +12,18 @@ public class Governance {
     private final User owner;
     private final Territory territory;
     private double gold = 2000;
-    private int maxPopulation;
-    private int currentPopulation;
-    private int unemployedPopulation;
-    private int popularity;
-    private int taxRate = 0;
+    private int maxPopulation = 10;
+    private int currentPopulation = 10;
+    private int unemployedPopulation = 10;
+    private int popularity = 100;
     private int foodRate = 0;
-    private int taxFactor = 0;
-    private int fearFactor = 0;
     private int foodFactor = 0;
+    private int totalFood;
+    private int foodConsumption;
+    private int taxRate = 0;
+    private int taxFactor = 0;
+    private double taxGold = 0;
+    private int fearFactor = 0;
     private int religiousFactor = 0;
     private double troopDamageRatio = 1;
     private double workersEfficiency = 1;
@@ -30,6 +34,7 @@ public class Governance {
     private final HashMap<AllResource, Integer> resourceProductionRate = new HashMap<>();
     private final HashMap<AllResource, Integer> resourceConsumptionRate = new HashMap<>();
     private final ArrayList<Storage> storages = new ArrayList<>();
+    private final ArrayList<Building> buildings = new ArrayList<>();
 
     {
         allResources.put(AllResource.WOOD, 100);
@@ -84,20 +89,21 @@ public class Governance {
         return currentPopulation;
     }
 
-    public void setCurrentPopulation(int currentPopulation) {
-        this.currentPopulation = currentPopulation;
+    public void changeCurrentPopulation(int currentPopulation) {
+        this.currentPopulation += currentPopulation;
+        unemployedPopulation += currentPopulation;
     }
 
     public int getUnemployedPopulation() {
         return unemployedPopulation;
     }
 
-    public ArrayList<Trade> getTradeNotification() {
-        return tradeNotification;
-    }
-
     public void setUnemployedPopulation(int unemployedPopulation) {
         this.unemployedPopulation = unemployedPopulation;
+    }
+
+    public ArrayList<Trade> getTradeNotification() {
+        return tradeNotification;
     }
 
     public int getPopularity() {
@@ -112,24 +118,40 @@ public class Governance {
         return taxRate;
     }
 
+    public int getTaxFactor() {
+        return taxFactor;
+    }
+
+    public double getTaxGold() {
+        return taxGold;
+    }
+
     public void setTaxRate(int taxRate) {
         this.taxRate = taxRate;
+
+        taxGold = 0;
+        if (taxRate != 0) taxGold = taxRate > 0 ? 0.2 * taxRate + 0.4 : 0.2 * taxRate - 0.4;
+
+        if (taxRate <= 0) taxFactor = -2 * taxRate + 1;
+        else if (taxRate <= 4) taxFactor = -2 * taxRate;
+        else taxFactor = -4 * taxRate + 8;
+    }
+
+    public int getTotalFood() {
+        return totalFood;
     }
 
     public int getFoodRate() {
         return foodRate;
     }
 
+    public int getFoodFactor() {
+        return foodFactor;
+    }
+
     public void setFoodRate(int foodRate) {
         this.foodRate = foodRate;
-    }
-
-    public int getTaxFactor() {
-        return taxFactor;
-    }
-
-    public void setTaxFactor(int taxFactor) {
-        this.taxFactor = taxFactor;
+        foodFactor = foodRate * 4 + foodTypesCount();
     }
 
     public int getFearFactor() {
@@ -138,14 +160,8 @@ public class Governance {
 
     public void setFearFactor(int fearFactor) {
         this.fearFactor = fearFactor;
-    }
-
-    public int getFoodFactor() {
-        return foodFactor;
-    }
-
-    public void setFoodFactor(int foodFactor) {
-        this.foodFactor = foodFactor;
+        troopDamageRatio = 1 + 5 * (fearFactor) / 100.0;
+        workersEfficiency = 1 + 5 * (fearFactor) / 100.0;
     }
 
     public int getReligiousFactor() {
@@ -160,16 +176,8 @@ public class Governance {
         return troopDamageRatio;
     }
 
-    public void setTroopDamageRatio(double troopDamageRatio) {
-        this.troopDamageRatio = troopDamageRatio;
-    }
-
     public double getWorkersEfficiency() {
         return workersEfficiency;
-    }
-
-    public void setWorkersEfficiency(double workersEfficiency) {
-        this.workersEfficiency = workersEfficiency;
     }
 
     public void addTrade(Trade trade) {
@@ -196,8 +204,20 @@ public class Governance {
         return resourceConsumptionRate.get(resource);
     }
 
+    public int getFoodConsumption() {
+        return foodConsumption;
+    }
+
+    public void setFoodConsumption(int foodConsumption) {
+        this.foodConsumption = foodConsumption;
+    }
+
     public int getResourceCount(AllResource resource) {
         return allResources.get(resource);
+    }
+
+    public ArrayList<Building> getBuildings() {
+        return buildings;
     }
 
     public String tradeHistory() {
@@ -261,4 +281,21 @@ public class Governance {
         }
     }
 
+    public void updateFood() {
+        totalFood = allResources.get(AllResource.APPLE)
+                + allResources.get(AllResource.BREAD)
+                + allResources.get(AllResource.MEAT)
+                + allResources.get(AllResource.CHEESE);
+    }
+
+    private int foodTypesCount() {
+        int output = 0;
+
+        if (allResources.get(AllResource.APPLE) > 0) output++;
+        if (allResources.get(AllResource.BREAD) > 0) output++;
+        if (allResources.get(AllResource.MEAT) > 0) output++;
+        if (allResources.get(AllResource.CHEESE) > 0) output++;
+
+        return output;
+    }
 }

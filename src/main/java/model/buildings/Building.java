@@ -11,6 +11,7 @@ public abstract class Building {
     protected Governance owner;
     protected int size;
     protected int hitPoint;
+    protected int maxHitPoint;
     protected double goldCost;
     protected AllResource resourceCostType;
     protected int resourceCostNumber;
@@ -42,6 +43,9 @@ public abstract class Building {
         this.hitPoint = hitPoint;
     }
 
+    public int getMaxHitPoint() {
+        return maxHitPoint;
+    }
 
     public Governance getOwner() {
         return owner;
@@ -81,6 +85,10 @@ public abstract class Building {
 
     public String getName() {
         return name;
+    }
+
+    public void repair(){
+        hitPoint = maxHitPoint;
     }
 
     @Override
