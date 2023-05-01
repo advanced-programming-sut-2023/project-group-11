@@ -6,7 +6,6 @@ import model.buildings.*;
 import model.buildings.enums.*;
 import model.map.Map;
 import model.map.Tile;
-import model.resources.AllResource;
 
 public class BuildingUtils {
 
@@ -80,7 +79,7 @@ public class BuildingUtils {
         return true;
     }
 
-    public static Building getBuildingByType(String type){
+    public static Building getBuildingByType(String type) {
         Building building = new Building() {
         };
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
@@ -109,10 +108,12 @@ public class BuildingUtils {
     }
 
     public static void build(Building building, int x, int y, int size) {
-        //TODO: change the production and consumption rate of each resource for a government
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
+        if(building instanceof ProductiveBuilding)
+            ((ProductiveBuilding) building).setGovernanceRates();
+        //TODO: popularityRate
         governance.setGold(governance.getGold() - building.getGoldCost());
         governance.changeResourceAmount(building.getResourceCostType(), -building.getResourceCostNumber());
         if (building instanceof Storage) {

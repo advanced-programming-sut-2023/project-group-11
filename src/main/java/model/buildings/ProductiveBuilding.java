@@ -7,9 +7,10 @@ import java.util.ArrayList;
 
 public class ProductiveBuilding extends Building {
 
-    private ArrayList<AllResource> producedResource;
-    private AllResource requiredResource;
-    private int productionRate,consumptionRate;
+    private final ArrayList<AllResource> producedResource;
+    private final AllResource requiredResource;
+    private final int productionRate;
+    private final int consumptionRate;
 
     public ProductiveBuilding(ProductiveBuildingType productiveBuildingType) {
         name = productiveBuildingType.getName();
@@ -39,11 +40,21 @@ public class ProductiveBuilding extends Building {
         return productionRate;
     }
 
-    public void produce(){
+    public int getConsumptionRate() {
+        return consumptionRate;
+    }
+
+    public void produce() {
         //TODO: implement
     }
 
-    public void oneTurnPass(){
+    public void setGovernanceRates() {
+        for (AllResource resource:producedResource)
+            owner.changeResourceProductionRate(resource,productionRate);
+        owner.changeResourceConsumptionRate(requiredResource,consumptionRate);
+    }
+
+    public void oneTurnPass() {
 
     }
 

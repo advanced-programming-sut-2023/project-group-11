@@ -1,5 +1,6 @@
 package model;
 
+import controller.Utils;
 import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
@@ -57,6 +58,11 @@ public class Governance {
         allResources.put(AllResource.LEATHER_ARMOR, 0);
         allResources.put(AllResource.METAL_ARMOR, 0);
         allResources.put(AllResource.SWORD, 0);
+        for (AllResource resource : AllResource.values()) {
+            if (!Utils.isFood(resource))
+                resourceConsumptionRate.put(resource, 0);
+            resourceProductionRate.put(resource, 0);
+        }
     }
 
 
@@ -202,6 +208,14 @@ public class Governance {
 
     public Integer getResourceConsumptionRate(AllResource resource) {
         return resourceConsumptionRate.get(resource);
+    }
+
+    public void changeResourceProductionRate(AllResource resource, int amount) {
+        resourceProductionRate.put(resource, resourceProductionRate.get(resource) + amount);
+    }
+
+    public void changeResourceConsumptionRate(AllResource resource, int amount) {
+        resourceConsumptionRate.put(resource, resourceConsumptionRate.get(resource) + amount);
     }
 
     public int getFoodConsumption() {
