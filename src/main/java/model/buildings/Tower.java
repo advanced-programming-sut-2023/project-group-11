@@ -5,13 +5,12 @@ import model.people.Units;
 
 import java.util.ArrayList;
 
-public class Tower extends DefensiveBuilding {
+public class Tower extends Climbable {
 
     private int fireRange;
     private int defendRange;
     private int unitCapacity;
-    private boolean isClimbable = false;
-    private boolean isTower;
+    private final boolean isTower;
 
     private ArrayList<Units> units = new ArrayList<>();
 
@@ -31,14 +30,7 @@ public class Tower extends DefensiveBuilding {
         defendRange = towerType.getDefendRange();
         unitCapacity = towerType.getUnitCapacity();
         isTower = towerType.isTower();
-    }
-
-    public boolean isClimbable() {
-        return isClimbable;
-    }
-
-    public void setClimbable(boolean climbable) {
-        this.isClimbable = climbable;
+        isClimbable = false;
     }
 
     public int getFireRange() {
@@ -71,6 +63,10 @@ public class Tower extends DefensiveBuilding {
 
     public void setUnits(ArrayList<Units> units) {
         this.units = units;
+    }
+
+    public boolean isTower() {
+        return isTower;
     }
 
     public void defend() {

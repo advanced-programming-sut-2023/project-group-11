@@ -3,7 +3,7 @@ package model.buildings;
 import model.buildings.enums.GateHouseType;
 import model.Governance;
 
-public class GateHouse extends Building {
+public class GateHouse extends Climbable {
 
     private final int capacity;
     private int filledCapacity;
@@ -26,6 +26,7 @@ public class GateHouse extends Building {
         popularityEffect = gateHouseType.getPopularityEffect();
         capacity = gateHouseType.getCapacity();
         horizontalDirection = gateHouseType.getHorizontalDirection();
+        isClimbable = false;
     }
 
     public Governance getGateController() {

@@ -2,7 +2,7 @@ package model.buildings;
 
 import model.buildings.enums.TrapType;
 
-public class Trap extends DefensiveBuilding {
+public class Trap extends Building {
 
     private final int damage;
 
@@ -23,9 +23,4 @@ public class Trap extends DefensiveBuilding {
     public int getDamage() {
         return damage;
     }
-
-    public void defend() {
-
-    }
-
 }

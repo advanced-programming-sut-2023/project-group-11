@@ -1,6 +1,6 @@
 package model.buildings;
 
-public class DrawBridge extends DefensiveBuilding {
+public class DrawBridge extends Building {
 
     private boolean isOpen;
 
@@ -16,9 +16,4 @@ public class DrawBridge extends DefensiveBuilding {
     public void setOpen(boolean open) {
         isOpen = open;
     }
-
-    public void defend() {
-
-    }
-
 }
