@@ -50,6 +50,24 @@ public class GameMenu {
         }
     }
 
+    private static void nextTurn() {
+
+    }
+
+    public static void checkShowMap(Matcher matcher) {
+        GameMenuMessages message = GameMenuController.checkShowMap(matcher);
+        switch (message) {
+            case INVALID_COMMAND -> System.out.println("Invalid command");
+            case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
+            case SUCCESS -> {
+                System.out.println("Entered Show Map Menu");
+                int x = Integer.parseInt(matcher.group("xCoordinate"));
+                int y = Integer.parseInt(matcher.group("yCoordinate"));
+                ShowMapMenu.run(x, y);
+            }
+        }
+    }
+
     private static void showPopularity(Matcher matcher) {
         System.out.println(GameMenuController.showPopularity(matcher));
     }
@@ -60,7 +78,7 @@ public class GameMenu {
 
     private static void checkChangeFoodRate(Matcher matcher) {
         message = GameMenuController.checkChangeFoodRate(matcher);
-        
+
         switch (message) {
             case INVALID_RATE -> System.out.println("Your rate number must be between -2 and 2!");
             case SUCCESS -> System.out.println("You have successfully changed your food rate!");
@@ -86,7 +104,7 @@ public class GameMenu {
 
     private static void checkChangeFearRate(Matcher matcher) {
         message = GameMenuController.checkChangeFearRate(matcher);
-        
+
         switch (message) {
             case INVALID_RATE -> System.out.println("Your rate number must be between -5 and 5!");
             case SUCCESS -> System.out.println("You have successfully changed your fear rate!");
@@ -137,24 +155,6 @@ public class GameMenu {
                 currentLocation[0] = Integer.parseInt(matcher.group("xCoordinate"));
                 currentLocation[1] = Integer.parseInt(matcher.group("yCoordinate"));
                 SelectUnitMenu.run(currentLocation);
-            }
-        }
-    }
-
-    private static void nextTurn() {
-
-    }
-
-    public static void checkShowMap(Matcher matcher) {
-        GameMenuMessages message = GameMenuController.checkShowMap(matcher);
-        switch (message) {
-            case INVALID_COMMAND -> System.out.println("Invalid command");
-            case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
-            case SUCCESS -> {
-                System.out.println("Entered Show Map Menu");
-                int x = Integer.parseInt(matcher.group("xCoordinate"));
-                int y = Integer.parseInt(matcher.group("yCoordinate"));
-                ShowMapMenu.run(x, y);
             }
         }
     }
