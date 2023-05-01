@@ -12,7 +12,7 @@ public enum TroopTypes {
     KNIGHT,
     TUNNELER,
     LADDERMAN,
-    BLACK_M0NK,
+    BLACK_MONK,
     ARCHER_BOW,
     SLAVES,
     SLINGER,
