@@ -7,7 +7,6 @@ import model.buildings.Trap;
 import model.resources.AllResource;
 import view.enums.messages.GameMenuMessages;
 
-import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class GameMenuController {
@@ -139,7 +138,10 @@ public class GameMenuController {
     }
 
     private static void updatePopulation() {
-
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        int maxPopulation = currentGovernance.getMaxPopulation();
+        int popularity = currentGovernance.getPopularity();
+        currentGovernance.changeCurrentPopulation(Math.min(popularity / 10 - 5, maxPopulation));
     }
 
     private static void updateSoldiers() {
@@ -149,7 +151,6 @@ public class GameMenuController {
     private static void updateGold() {
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
-        int taxRate = currentGovernance.getTaxRate();
         double currentGold = currentGovernance.getGold();
         double taxGold = currentGovernance.getTaxGold();
         currentGovernance.setGold(Math.max(0, currentGold - taxGold));

@@ -11,9 +11,9 @@ public class Governance {
     private final User owner;
     private final Territory territory;
     private double gold = 2000;
-    private int maxPopulation;
-    private int currentPopulation;
-    private int unemployedPopulation;
+    private int maxPopulation = 10;
+    private int currentPopulation = 10;
+    private int unemployedPopulation = 10;
     private int popularity = 100;
     private int foodRate = 0;
     private int foodFactor = 0;
@@ -87,20 +87,21 @@ public class Governance {
         return currentPopulation;
     }
 
-    public void setCurrentPopulation(int currentPopulation) {
-        this.currentPopulation = currentPopulation;
+    public void changeCurrentPopulation(int currentPopulation) {
+        this.currentPopulation += currentPopulation;
+        unemployedPopulation += currentPopulation;
     }
 
     public int getUnemployedPopulation() {
         return unemployedPopulation;
     }
 
-    public ArrayList<Trade> getTradeNotification() {
-        return tradeNotification;
-    }
-
     public void setUnemployedPopulation(int unemployedPopulation) {
         this.unemployedPopulation = unemployedPopulation;
+    }
+
+    public ArrayList<Trade> getTradeNotification() {
+        return tradeNotification;
     }
 
     public int getPopularity() {
