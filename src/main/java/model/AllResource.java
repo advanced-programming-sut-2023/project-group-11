@@ -1,4 +1,4 @@
-package model.resources;
+package model;
 
 public enum AllResource {
 

@@ -2,14 +2,12 @@ package controller;
 
 import model.Game;
 import model.Governance;
-import model.Path;
 import model.Stronghold;
 import model.buildings.Building;
 import model.buildings.Trap;
 import model.map.Map;
-import model.map.Texture;
 import model.map.Tile;
-import model.resources.AllResource;
+import model.AllResource;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.ArrayList;

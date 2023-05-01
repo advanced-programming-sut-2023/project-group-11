@@ -4,7 +4,7 @@ import model.Stronghold;
 import model.people.enums.Damage;
 import model.people.enums.Speed;
 import model.people.enums.TroopTypes;
-import model.resources.AllResource;
+import model.AllResource;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

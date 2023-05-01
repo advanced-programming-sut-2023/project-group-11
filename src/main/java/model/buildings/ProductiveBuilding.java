@@ -1,7 +1,7 @@
 package model.buildings;
 
 import model.buildings.enums.ProductiveBuildingType;
-import model.resources.AllResource;
+import model.AllResource;
 
 import java.util.ArrayList;
 

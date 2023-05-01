@@ -5,8 +5,8 @@ import model.buildings.enums.UnitMakerType;
 public class UnitMaker extends Building {
 
 
-    private boolean isMercenaryMaker;
-    private boolean isEngineerMaker;
+    private final boolean isMercenaryMaker;
+    private final boolean isEngineerMaker;
 
     public UnitMaker(UnitMakerType unitMakerType) {
         name = unitMakerType.getName();
@@ -22,8 +22,15 @@ public class UnitMaker extends Building {
         isEngineerMaker = unitMakerType.isEngineerMaker();
     }
 
-    public void makeUnit(String UnitName){
+    public void makeUnit(String UnitName) {
         //TODO: implementation
     }
 
+    public boolean isMercenaryMaker() {
+        return isMercenaryMaker;
+    }
+
+    public boolean isEngineerMaker() {
+        return isEngineerMaker;
+    }
 }

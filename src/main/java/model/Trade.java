@@ -1,10 +1,5 @@
 package model;
 
-import model.resources.AllResource;
-import view.TradeMenu;
-
-import java.util.ArrayList;
-
 public class Trade {
 
     private final AllResource resourceType;

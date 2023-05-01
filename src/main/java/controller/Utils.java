@@ -6,10 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import model.Stronghold;
 import model.User;
-import model.buildings.enums.*;
 import model.map.Map;
-import model.map.Tile;
-import model.resources.AllResource;
+import model.AllResource;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.awt.*;
@@ -97,11 +95,12 @@ public class Utils {
             throw new RuntimeException(e);
         }
     }
-    public static ArrayList<Object> getDatabaseList(String field){
+
+    public static ArrayList<Object> getDatabaseList(String field) {
         ArrayList<Object> databaseList = new ArrayList<>();
-        switch (field){
-            case "users"-> databaseList.addAll(Stronghold.getUsers());
-            case "maps"-> databaseList.addAll(Stronghold.getMaps());
+        switch (field) {
+            case "users" -> databaseList.addAll(Stronghold.getUsers());
+            case "maps" -> databaseList.addAll(Stronghold.getMaps());
         }
         return databaseList;
     }

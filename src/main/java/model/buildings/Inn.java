@@ -1,6 +1,6 @@
 package model.buildings;
 
-import model.resources.AllResource;
+import model.AllResource;
 
 
 public class Inn extends Building {

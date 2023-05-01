@@ -38,16 +38,14 @@ public class BuildingUtils {
 
     public static boolean isTextureSuitable(String type, int x, int y, int size) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
-        String field;
-        if (type.equals("dairy farm") || type.equals("apple orchard")
-                || type.equals("wheat farm") || type.equals("hops farm")) {
-            field = "farm";
-        } else if (type.equals("quarry"))
-            field = "stone";
-        else if (type.equals("iron mine"))
-            field = "iron";
-        else
-            field = "default";
+
+        String field = switch (type) {
+            case "dairy farm", "apple orchard", "wheat farm", "hops farm" -> "farm";
+            case "quarry" -> "stone";
+            case "iron mine" -> "iron";
+            default -> "default";
+        };
+
         for (int i = x; i < x + size; i++) {
             for (int j = y; j > y - size; j--) {
                 if (!isSuitable(tiles[i][j], field))
@@ -82,7 +80,6 @@ public class BuildingUtils {
     public static Building getBuildingByType(String type) {
         Building building = new Building() {
         };
-        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         if (ChurchType.getChurchTypeByName(type) != null)
             building = new Church(ChurchType.getChurchTypeByName(type));
         if (FillerType.getFillerTypeByName(type) != null)
@@ -111,7 +108,7 @@ public class BuildingUtils {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
-        if(building instanceof ProductiveBuilding)
+        if (building instanceof ProductiveBuilding)
             ((ProductiveBuilding) building).setGovernanceRates();
         //TODO: popularityRate
         governance.setGold(governance.getGold() - building.getGoldCost());

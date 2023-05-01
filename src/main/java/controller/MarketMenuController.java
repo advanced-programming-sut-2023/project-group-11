@@ -2,7 +2,7 @@ package controller;
 
 import model.Governance;
 import model.Stronghold;
-import model.resources.AllResource;
+import model.AllResource;
 import view.MarketMenu;
 import view.enums.messages.MarketMenuMessages;
 
@@ -11,14 +11,15 @@ import java.util.regex.Matcher;
 public class MarketMenuController {
 
     private static Governance currentGovernance;
+
     public static String showPriceList() {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         String output = "";
         int index = 1;
-        for(AllResource item:AllResource.values()){
+        for (AllResource item : AllResource.values()) {
             output += (index++) + "- itemName:" + item.getName() +
-                      " Buy Price: " + item.getPrice() + " Sell Price: " + (item.getPrice()/2) +
-                      " Your Storage Amount: " + currentGovernance.getResourceCount(item) + "\n";
+                    " Buy Price: " + item.getPrice() + " Sell Price: " + (item.getPrice() / 2) +
+                    " Your Storage Amount: " + currentGovernance.getResourceCount(item) + "\n";
         }
         return output;
     }
@@ -27,13 +28,13 @@ public class MarketMenuController {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         AllResource item = AllResource.getAllResourceByName(matcher.group("itemName"));
         int amount = Integer.parseInt(matcher.group("amount"));
-        if(item == null)
+        if (item == null)
             return MarketMenuMessages.INVALID_ITEM;
-        if(currentGovernance.getGold() < item.getPrice() * amount)
+        if (currentGovernance.getGold() < item.getPrice() * amount)
             return MarketMenuMessages.NOT_ENOUGH_GOLD;
-        if(!currentGovernance.hasStorageForItem(item,amount))
+        if (!currentGovernance.hasStorageForItem(item, amount))
             return MarketMenuMessages.NOT_ENOUGH_STORAGE;
-        if(MarketMenu.isSure()) {
+        if (MarketMenu.isSure()) {
             currentGovernance.setGold(currentGovernance.getGold() - item.getPrice() * amount);
             currentGovernance.addToStorage(item, amount);
             return MarketMenuMessages.SUCCESS;
@@ -45,13 +46,13 @@ public class MarketMenuController {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         AllResource item = AllResource.getAllResourceByName(matcher.group("itemName"));
         int amount = Integer.parseInt(matcher.group("amount"));
-        if(item == null)
+        if (item == null)
             return MarketMenuMessages.INVALID_ITEM;
-        if(!currentGovernance.hasEnoughItem(item,amount))
+        if (!currentGovernance.hasEnoughItem(item, amount))
             return MarketMenuMessages.NOT_ENOUGH_STORAGE;
-        if(MarketMenu.isSure()){
-            currentGovernance.setGold(currentGovernance.getGold() + (item.getPrice() * amount) / 2);
-            currentGovernance.removeFromStorage(item,amount);
+        if (MarketMenu.isSure()) {
+            currentGovernance.setGold(currentGovernance.getGold() + (item.getPrice() * amount) / 2.0);
+            currentGovernance.removeFromStorage(item, amount);
             return MarketMenuMessages.SUCCESS;
         }
         return MarketMenuMessages.CANCEL;

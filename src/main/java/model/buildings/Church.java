@@ -2,10 +2,10 @@ package model.buildings;
 
 import model.buildings.enums.ChurchType;
 
-public class Church extends Building{
+public class Church extends Building {
 
-    private boolean isGeneral;
-    private int makeMonkCost;
+    private final boolean isGeneral;
+    private final int makeMonkCost;
 
     public Church(ChurchType churchType) {
         name = churchType.getName();
@@ -31,8 +31,8 @@ public class Church extends Building{
         return makeMonkCost;
     }
 
-    public void makeMonk(){
-        if(!isGeneral)
+    public void makeMonk() {
+        if (!isGeneral)
             return;
         owner.setGold(owner.getGold() - makeMonkCost);
         //TODO : more implementations

@@ -1,11 +1,10 @@
 package controller;
 
-import model.Game;
+import model.AllResource;
 import model.Governance;
 import model.Stronghold;
 import model.Trade;
 import view.enums.messages.TradeMenuMessages;
-import model.resources.*;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -20,21 +19,17 @@ public class TradeMenuController {
                 message = matcher.group("message");
         int resourceAmount = Integer.parseInt(matcher.group("resourceAmount")),
                 price = Integer.parseInt(matcher.group("price"));
-        AllResource resource =  AllResource.getAllResourceByName(resourceType);
+        AllResource resource = AllResource.getAllResourceByName(resourceType);
         if (resource == null)
             return TradeMenuMessages.INVALID_RESOURCE_TYPE;
         new Trade(resource, resourceAmount, price, message, currentGovernance);
         return TradeMenuMessages.SUCCESS;
     }
 
-    public static void setCurrentGovernance(Governance governance) {
-        currentGovernance = governance;
-    }
-
     public static String tradeList() {
         String output = "";
         int index = 1;
-        for (Trade trade:Stronghold.getCurrentGame().getTrades()){
+        for (Trade trade : Stronghold.getCurrentGame().getTrades()) {
             output += (index++) + "-" + trade + "\n";
         }
         return output;
@@ -45,20 +40,20 @@ public class TradeMenuController {
         int id = Integer.parseInt(matcher.group("id"));
         String message = matcher.group("message");
         ArrayList<Trade> trades = Stronghold.getCurrentGame().getTrades();
-        if(trades.size() < id)
+        if (trades.size() < id)
             return TradeMenuMessages.INVALID_ID;
         Trade trade = trades.get(id);
-        if(!trade.isOpen())
+        if (!trade.isOpen())
             return TradeMenuMessages.TRADE_CLOSED;
-        if(currentGovernance.equals(trade.getSender()))
+        if (currentGovernance.equals(trade.getSender()))
             return TradeMenuMessages.CANT_ACCEPT_YOUR_OWN_TRADE;
-        if(currentGovernance.getGold() < trade.getResourceAmount() * trade.getPrice())
+        if (currentGovernance.getGold() < trade.getResourceAmount() * trade.getPrice())
             return TradeMenuMessages.NOT_ENOUGH_GOLD;
-        if(!trade.getSender().hasEnoughItem(trade.getResourceType(), trade.getResourceAmount()))
+        if (!trade.getSender().hasEnoughItem(trade.getResourceType(), trade.getResourceAmount()))
             return TradeMenuMessages.NOT_ENOUGH_AMOUNT;
-        if(!currentGovernance.hasStorageForItem(trade.getResourceType(), trade.getResourceAmount()))
+        if (!currentGovernance.hasStorageForItem(trade.getResourceType(), trade.getResourceAmount()))
             return TradeMenuMessages.NOT_ENOUGH_STORAGE;
-        trade.accept(message,currentGovernance);
+        trade.accept(message, currentGovernance);
         return TradeMenuMessages.SUCCESS;
     }
 
@@ -67,11 +62,11 @@ public class TradeMenuController {
         return currentGovernance.tradeHistory();
     }
 
-    public static String showNotifications(){
+    public static String showNotifications() {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         String output = "";
         int index = 1;
-        for(Trade trade: currentGovernance.getTradeNotification()){
+        for (Trade trade : currentGovernance.getTradeNotification()) {
             output += (index++) + "-" + trade;
         }
         currentGovernance.getTradeNotification().clear();

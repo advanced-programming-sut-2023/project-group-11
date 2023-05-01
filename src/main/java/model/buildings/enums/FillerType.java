@@ -1,6 +1,6 @@
 package model.buildings.enums;
 
-import model.resources.AllResource;
+import model.AllResource;
 
 
 public enum FillerType {

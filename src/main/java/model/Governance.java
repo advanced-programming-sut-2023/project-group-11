@@ -4,7 +4,6 @@ import controller.Utils;
 import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
-import model.resources.AllResource;
 
 import java.util.ArrayList;
 import java.util.HashMap;

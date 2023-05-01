@@ -1,12 +1,12 @@
 package model.buildings;
 
-import model.resources.AllResource;
+import model.AllResource;
 
-public class Hover extends Building{
+public class Hovel extends Building {
 
     private final int capacity;
 
-    public Hover() {
+    public Hovel() {
         capacity = 8;
         name = "hovel";
         size = 5;

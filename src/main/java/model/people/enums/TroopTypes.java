@@ -1,7 +1,5 @@
 package model.people.enums;
 
-import model.resources.AllResource;
-
 public enum TroopTypes {
     ARCHER,
     CROSSBOWMAN,

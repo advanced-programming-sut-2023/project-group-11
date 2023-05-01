@@ -1,9 +1,7 @@
 package model.map;
 
 import model.buildings.Building;
-import model.people.Troops;
 import model.people.Units;
-import model.people.enums.TroopTypes;
 
 import java.util.ArrayList;
 
@@ -76,9 +74,11 @@ public class Tile {
     public boolean isFull() {
         return building != null || units.size() != 0 || tree != null;
     }
-    public boolean hasBuilding(){
+
+    public boolean hasBuilding() {
         return building != null;
     }
+
     @Override
     public String toString() {
         String unitsName = "";

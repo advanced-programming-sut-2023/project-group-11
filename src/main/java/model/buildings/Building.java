@@ -1,7 +1,7 @@
 package model.buildings;
 
 import model.Governance;
-import model.resources.AllResource;
+import model.AllResource;
 import model.people.Engineer;
 
 import java.util.ArrayList;

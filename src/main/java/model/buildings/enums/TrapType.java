@@ -1,25 +1,25 @@
 package model.buildings.enums;
 
-import model.resources.AllResource;
+import model.AllResource;
 
 
 public enum TrapType {
-    KILLING_PIT("killing pit",1,0,0, AllResource.WOOD,6,
-            0,100,true),
-    PITCH_DITCH("pitch ditch",1,0,0,AllResource.PITCH,2,
-            0,100,false),
-    CAGED_WARDOGS("caged wardogs",3,0,100,AllResource.WOOD,10,
-            0,100,false);
+    KILLING_PIT("killing pit", 1, 0, 0, AllResource.WOOD, 6,
+            0, 100, true),
+    PITCH_DITCH("pitch ditch", 1, 0, 0, AllResource.PITCH, 2,
+            0, 100, false),
+    CAGED_WARDOGS("caged wardogs", 3, 0, 100, AllResource.WOOD, 10,
+            0, 100, false);
 
-    private String name;
-    private int size;
-    private int hitPoint;
-    private int goldCost;
-    private AllResource resourceCostType;
-    private int resourceCostNumber;
-    private int workersNumber;
+    private final String name;
+    private final int size;
+    private final int hitPoint;
+    private final int goldCost;
+    private final AllResource resourceCostType;
+    private final int resourceCostNumber;
+    private final int workersNumber;
     private final int damage;
-    private boolean isActive;
+    private final boolean isActive;
 
     public int getDamage() {
         return damage;
@@ -71,9 +71,9 @@ public enum TrapType {
         return name;
     }
 
-    public static TrapType getTrapTypeByName(String name){
+    public static TrapType getTrapTypeByName(String name) {
         for (TrapType trapType : TrapType.values())
-            if(trapType.name.equals(name))
+            if (trapType.name.equals(name))
                 return trapType;
         return null;
     }

@@ -1,54 +1,55 @@
 package model.buildings.enums;
 
-import model.resources.AllResource;
+import model.AllResource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public enum ProductiveBuildingType {
     QUARRY("quarry", 6, 114, 0, AllResource.WOOD, 20,
-            3, true, new ArrayList<>(Arrays.asList(AllResource.STONE)),
+            3, true, new ArrayList<>(List.of(AllResource.STONE)),
             null, 10, 0),
     IRON_MINE("iron mine", 4, 39, 0, AllResource.WOOD, 20,
-            2, true, new ArrayList<>(Arrays.asList(AllResource.IRON)),
+            2, true, new ArrayList<>(List.of(AllResource.IRON)),
             null, 10, 0),
     WOOD_CUTTER("wood cutter", 3, 39, 0, AllResource.WOOD, 3,
-            1, true, new ArrayList<>(Arrays.asList(AllResource.WOOD)),
+            1, true, new ArrayList<>(List.of(AllResource.WOOD)),
             null, 10, 0),
     PITCH_RIG("pitch rig", 4, 39, 0, AllResource.WOOD, 20,
-            1, true, new ArrayList<>(Arrays.asList(AllResource.PITCH)),
+            1, true, new ArrayList<>(List.of(AllResource.PITCH)),
             null, 10, 0),
 
     HUNTERS_POST("hunter's post", 3, 39, 0, AllResource.WOOD, 5,
-            1, true, new ArrayList<>(Arrays.asList(AllResource.MEAT)),
+            1, true, new ArrayList<>(List.of(AllResource.MEAT)),
             null, 10, 0),
     DAIRY_FARM("dairy farm", 10, 39, 0, AllResource.WOOD, 10,
-            1, true, new ArrayList<>(Arrays.asList(AllResource.CHEESE)),
+            1, true, new ArrayList<>(List.of(AllResource.CHEESE)),
             null, 10, 0),
     APPLE_ORCHARD("apple orchard", 11, 39, 0, AllResource.WOOD, 5,
-            1, true, new ArrayList<>(Arrays.asList(AllResource.APPLE)),
+            1, true, new ArrayList<>(List.of(AllResource.APPLE)),
             null, 10, 0),
     WHEAT_FARM("wheat farm", 9, 39, 0, AllResource.WOOD, 15,
-            1, true, new ArrayList<>(Arrays.asList(AllResource.WHEAT)),
+            1, true, new ArrayList<>(List.of(AllResource.WHEAT)),
             null, 10, 0),
     HOPS_FARM("hops farm", 9, 39, 0, AllResource.WOOD, 15,
-            1, true, new ArrayList<>(Arrays.asList(AllResource.HOP)),
+            1, true, new ArrayList<>(List.of(AllResource.HOP)),
             null, 10, 0),
 
     BAKERY("bakery", 4, 114, 0, AllResource.WOOD, 10,
-            1, true, new ArrayList<>(Arrays.asList(AllResource.BREAD)),
+            1, true, new ArrayList<>(List.of(AllResource.BREAD)),
             null, 10, 0),
     BREWERY("brewery", 4, 114, 0, AllResource.WOOD, 10,
-            1, true, new ArrayList<>(Arrays.asList(AllResource.ALE)),
+            1, true, new ArrayList<>(List.of(AllResource.ALE)),
             null, 10, 0),
     MILL("mill", 3, 114, 0, AllResource.WOOD, 20,
-            3, true, new ArrayList<>(Arrays.asList(AllResource.FLOUR)),
+            3, true, new ArrayList<>(List.of(AllResource.FLOUR)),
             null, 10, 0),
 
     SPEAR_WORKSHOP("spear workshop", 4, 114, 100, AllResource.WOOD, 10,
             1, true, new ArrayList<>(Arrays.asList(AllResource.SPEAR, AllResource.PIKE)),
             AllResource.WOOD, 10, 10),
-    BlACKSMITH_WORKSHOP("blacksmith workshop", 4, 114, 100, AllResource.WOOD, 20,
+    BLACKSMITH_WORKSHOP("blacksmith workshop", 4, 114, 100, AllResource.WOOD, 20,
             1, true, new ArrayList<>(Arrays.asList(AllResource.SWORD, AllResource.MACE)),
             AllResource.IRON, 10, 10),
     BOW_WORKSHOP("bow workshop", 4, 114, 100, AllResource.WOOD, 20,
@@ -60,17 +61,18 @@ public enum ProductiveBuildingType {
 
     ;
 
-    private String name;
-    private int size;
-    private int hitPoint;
-    private int goldCost;
-    private AllResource resourceCostType;
-    private int resourceCostNumber;
-    private int workersNumber;
-    private boolean isActive;
+    private final String name;
+    private final int size;
+    private final int hitPoint;
+    private final int goldCost;
+    private final AllResource resourceCostType;
+    private final int resourceCostNumber;
+    private final int workersNumber;
+    private final boolean isActive;
     private final ArrayList<AllResource> producedResource;
-    private AllResource requiredResource;
-    private int productionRate, consumptionRate;
+    private final AllResource requiredResource;
+    private final int productionRate;
+    private final int consumptionRate;
 
 
     ProductiveBuildingType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType,
