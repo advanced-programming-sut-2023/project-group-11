@@ -110,8 +110,6 @@ public class BuildingUtils {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
-        if(building instanceof GateHouse)
-            governance.setMaxPopulation(governance.getMaxPopulation() + ((GateHouse) building).getCapacity());
         if(building instanceof Hovel)
             governance.setMaxPopulation(governance.getMaxPopulation() + ((Hovel) building).getCapacity());
         //TODO: popularityRate
