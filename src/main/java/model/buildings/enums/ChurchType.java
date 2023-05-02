@@ -4,9 +4,9 @@ import model.AllResource;
 
 public enum ChurchType {
 
-    CHAPEL("chapel", 6, 150, 250, null, 0, 0,
+    CHAPEL("chapel", 3, 150, 250, null, 0, 0,
             true, false, 2, false, 0),
-    CATHEDRAL("cathedral", 13, 459, 1000, null, 0, 0,
+    CATHEDRAL("cathedral", 6, 459, 1000, null, 0, 0,
             true, false, 2, true, 5);
 
     private final String name;

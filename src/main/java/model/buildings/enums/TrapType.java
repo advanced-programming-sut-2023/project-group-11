@@ -8,7 +8,7 @@ public enum TrapType {
             0, 100, true),
     PITCH_DITCH("pitch ditch", 1, 0, 0, AllResource.PITCH, 2,
             0, 100, false),
-    CAGED_WARDOGS("caged wardogs", 3, 0, 100, AllResource.WOOD, 10,
+    CAGED_WARDOGS("caged wardogs", 1, 0, 100, AllResource.WOOD, 10,
             0, 100, false);//TODO: it's not a trap!
 
     private final String name;

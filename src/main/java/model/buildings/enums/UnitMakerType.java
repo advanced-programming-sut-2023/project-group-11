@@ -3,11 +3,11 @@ package model.buildings.enums;
 import model.AllResource;
 
 public enum UnitMakerType {
-    MERCENARY_TENT("mercenary tent", 10, 114, 0, AllResource.WOOD, 10,
+    MERCENARY_TENT("mercenary tent", 5, 114, 0, AllResource.WOOD, 10,
             0, true, true, false),
-    BARRACKS("barracks", 10, 189, 0, AllResource.WOOD, 15,
+    BARRACKS("barracks", 5, 189, 0, AllResource.WOOD, 15,
             0, true, false, false),
-    ENGINEER_GUILD("engineer guild", 10, 189, 100, AllResource.WOOD, 10,
+    ENGINEER_GUILD("engineer guild", 5, 189, 100, AllResource.WOOD, 10,
             0, true, false, true);
 
 
