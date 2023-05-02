@@ -15,6 +15,7 @@ public class Machine extends Units {
     public Machine(MachineType machineType) {
         name = machineType.getName();
         speed = machineType.getSpeed();
+        leftMoves = speed.getMovesInEachTurn();
         cost = machineType.getGoldCost();
         hp = machineType.getHitPoint();
         engineersNeededToActivate = machineType.getWorkersNumber();

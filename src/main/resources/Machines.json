@@ -1,0 +1,82 @@
+[
+  {
+    "battering ram": {
+      "engineersNeededToActivate": 4,
+      "engineers": [],
+      "isActive": false,
+      "damage": 250,
+      "name": "battering ram",
+      "range": 1,
+      "hp": 300,
+      "speed": "VERY_LOW",
+      "leftMoves": 1,
+      "cost": 150.0,
+      "unitState": "STANDING"
+    },
+    "trebuchets": {
+      "engineersNeededToActivate": 3,
+      "engineers": [],
+      "isActive": false,
+      "damage": 150,
+      "name": "trebuchets",
+      "range": 10,
+      "hp": 300,
+      "speed": "CONSTANT",
+      "leftMoves": 0,
+      "cost": 150.0,
+      "unitState": "STANDING"
+    },
+    "portable shield": {
+      "engineersNeededToActivate": 1,
+      "engineers": [],
+      "isActive": false,
+      "damage": 0,
+      "name": "portable shield",
+      "range": 0,
+      "hp": 500,
+      "speed": "VERY_HIGH",
+      "leftMoves": 5,
+      "cost": 50.0,
+      "unitState": "STANDING"
+    },
+    "catapults": {
+      "engineersNeededToActivate": 2,
+      "engineers": [],
+      "isActive": false,
+      "damage": 250,
+      "name": "catapults",
+      "range": 15,
+      "hp": 300,
+      "speed": "MEDIUM",
+      "leftMoves": 3,
+      "cost": 150.0,
+      "unitState": "STANDING"
+    },
+    "siege tower": {
+      "engineersNeededToActivate": 4,
+      "engineers": [],
+      "isActive": false,
+      "damage": 0,
+      "name": "siege tower",
+      "range": 0,
+      "hp": 300,
+      "speed": "MEDIUM",
+      "leftMoves": 3,
+      "cost": 150.0,
+      "unitState": "STANDING"
+    },
+    "fire ballista": {
+      "engineersNeededToActivate": 2,
+      "engineers": [],
+      "isActive": false,
+      "damage": 150,
+      "name": "fire ballista",
+      "range": 10,
+      "hp": 300,
+      "speed": "LOW",
+      "leftMoves": 2,
+      "cost": 150.0,
+      "unitState": "STANDING"
+    }
+  }
+]
