@@ -7,7 +7,7 @@ public enum FillerType {
 
     SHOP("shop", 2, 114, 0, AllResource.WOOD, 5, 1,
             true, false, 0),
-    TENT("tent", 1, 0, 0, null, 0, -1,
+    TENT("tent", 1, 1, 0, null, 0, -1,
             true, true, 0),
     STABLE("stable", 3, 114, 400, AllResource.WOOD, 20, 0,
             true, false, 0),
