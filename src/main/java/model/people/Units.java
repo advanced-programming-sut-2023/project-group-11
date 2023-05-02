@@ -7,6 +7,7 @@ import model.people.enums.UnitState;
 public abstract class Units {
     protected int hp;
     protected Speed speed;
+    protected int leftMoves;
     protected double cost;
     protected Governance ownerGovernance;
     protected UnitState unitState = UnitState.STANDING;
@@ -20,7 +21,7 @@ public abstract class Units {
     }
 
     public int getSpeed() {
-        return speed.getMoveInEachTurn();
+        return speed.getMovesInEachTurn();
     }
 
     public UnitState getUnitState() {
@@ -45,5 +46,13 @@ public abstract class Units {
 
     public String getName() {
         return null;
+    }
+
+    public int getLeftMoves() {
+        return leftMoves;
+    }
+
+    public void setLeftMoves(int leftMoves) {
+        this.leftMoves = leftMoves;
     }
 }

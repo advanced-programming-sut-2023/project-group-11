@@ -8,7 +8,6 @@ public class GateHouse extends Climbable {
     private final int capacity;
     private int filledCapacity;
     private Governance gateController;
-    private boolean isOpen = false;
     private final boolean horizontalDirection;
 
 
@@ -47,14 +46,6 @@ public class GateHouse extends Climbable {
 
     public void setFilledCapacity(int filledCapacity) {
         this.filledCapacity = filledCapacity;
-    }
-
-    public void setOpen(boolean open) {
-        isOpen = open;
-    }
-
-    public boolean isOpen() {
-        return isOpen;
     }
 
     public boolean isHorizontalDirection() {

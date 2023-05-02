@@ -9,13 +9,13 @@ public enum Speed {
     HIGH(4),
     VERY_HIGH(5);
 
-    private final int moveInEachTurn;
+    private final int movesInEachTurn;
 
-    Speed(int moveInEachTurn) {
-        this.moveInEachTurn = moveInEachTurn;
+    Speed(int movesInEachTurn) {
+        this.movesInEachTurn = movesInEachTurn;
     }
 
-    public int getMoveInEachTurn() {
-        return moveInEachTurn;
+    public int getMovesInEachTurn() {
+        return movesInEachTurn;
     }
 }

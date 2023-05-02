@@ -2,16 +2,12 @@ package model.buildings.enums;
 
 import model.AllResource;
 
-
-public enum FillerType {
-
-    SHOP("shop", 5, 114, 0, AllResource.WOOD, 5, 1,
-            true, false, 0),
-    TENT("tent", 1, 0, 0, null, 0, -1,
-            true, true, 0),
-    STABLE("stable", 6, 114, 400, AllResource.WOOD, 20, 0,
-            true, false, 0),
-    OX_TETHER("ox tether", 1, 39, 0, AllResource.WOOD, 5, 1,
+public enum WallType {
+    SHORT_WALL("short wall", 1, 72, 0, null, 0,
+            0, true, false, 0),
+    TALL_WALL("tall wall", 1, 144, 0, null, 0,
+            0, true, false, 0),
+    STAIRS("stairs", 1, 72, 0, null, 0, 0,
             true, false, 0);
 
     private final String name;
@@ -25,9 +21,8 @@ public enum FillerType {
     private final boolean areWorkersEngineer;
     private final int popularityEffect;
 
-    FillerType(String name, int size, int hitPoint, double goldCost,
-               AllResource resourceCostType, int resourceCostNumber, int workersNumber, boolean isActive,
-               boolean areWorkersEngineer, int popularityEffect) {
+    WallType(String name, int size, int hitPoint, double goldCost, AllResource resourceCostType, int resourceCostNumber,
+             int workersNumber, boolean isActive, boolean areWorkersEngineer, int popularityEffect) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -38,6 +33,10 @@ public enum FillerType {
         this.isActive = isActive;
         this.areWorkersEngineer = areWorkersEngineer;
         this.popularityEffect = popularityEffect;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getSize() {
@@ -54,10 +53,6 @@ public enum FillerType {
 
     public AllResource getResourceCostType() {
         return resourceCostType;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getResourceCostNumber() {
@@ -78,12 +73,5 @@ public enum FillerType {
 
     public int getPopularityEffect() {
         return popularityEffect;
-    }
-
-    public static FillerType getFillerTypeByName(String name) {
-        for (FillerType fillerType : FillerType.values())
-            if (fillerType.name.equals(name))
-                return fillerType;
-        return null;
     }
 }

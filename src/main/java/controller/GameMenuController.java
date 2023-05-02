@@ -155,7 +155,7 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkSelectUnit(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup", "typeGroup"))
             return GameMenuMessages.INVALID_COMMAND;
 
         int x = Integer.parseInt(matcher.group("xCoordinate"));
@@ -167,7 +167,9 @@ public class GameMenuController {
 
         Tile tile = map.getTile(x, y);
 
-        if (tile.getUnits().size() == 0)
+        if (!Utils.isValidUnitType(Utils.removeDoubleQuotation(matcher.group("type"))))
+            return GameMenuMessages.INVALID_UNIT_TYPE;
+        else if (tile.getUnits().size() == 0)
             return GameMenuMessages.NO_UNIT_HERE;
         else if (!tile.getUnits().get(0).getOwnerGovernance().equals(currentGame.getCurrentGovernance()))
             return GameMenuMessages.NOT_YOUR_UNIT;

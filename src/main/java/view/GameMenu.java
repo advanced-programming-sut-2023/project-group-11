@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameMenuController;
+import controller.Utils;
 import view.enums.commands.GameMenuCommands;
 import view.enums.messages.GameMenuMessages;
 
@@ -148,14 +149,16 @@ public class GameMenu {
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinates!");
+            case INVALID_UNIT_TYPE -> System.out.println("Invalid Unit type");
             case NO_UNIT_HERE -> System.out.println("There's No Unit Here To Select!");
             case NOT_YOUR_UNIT -> System.out.println("It's Not Your Unit!");
             case SUCCESS -> {
-                System.out.println("Unit(s) Selected (Entered SelectUnit Menu)!");
+                System.out.println(Utils.removeDoubleQuotation(matcher.group("type")) +
+                        " Unit(s) Selected (Entered SelectUnit Menu)!");
                 int[] currentLocation = new int[2];
                 currentLocation[0] = Integer.parseInt(matcher.group("xCoordinate"));
                 currentLocation[1] = Integer.parseInt(matcher.group("yCoordinate"));
-                SelectUnitMenu.run(currentLocation);
+                SelectUnitMenu.run(currentLocation, Utils.removeDoubleQuotation(matcher.group("type")));
             }
         }
     }

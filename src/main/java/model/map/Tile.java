@@ -41,6 +41,15 @@ public class Tile {
         return units;
     }
 
+    public ArrayList<Units> getUnitsByType(String unitType) {
+        ArrayList<Units> selectedUnits = new ArrayList<>();
+        for (Units unit : units) {
+            if (unit.getName().equals(unitType))
+                selectedUnits.add(unit);
+        }
+        return selectedUnits;
+    }
+
     public void setUnits(ArrayList<Units> units) {
         this.units = units;
     }
@@ -92,5 +101,9 @@ public class Tile {
         if (getResourceAmount() != null) result += getResourceAmount();
 
         return result;
+    }
+
+    public void clearUnitsByType(ArrayList<Units> selectedUnits) {
+        this.units.removeAll(selectedUnits);
     }
 }

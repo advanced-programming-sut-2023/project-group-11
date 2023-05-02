@@ -7,6 +7,7 @@ public enum GameMenuMessages {
     NO_BUILDING_HERE,
     NO_UNIT_HERE,
     NOT_YOUR_UNIT,
+    INVALID_UNIT_TYPE,
     CANT_BUILD_HERE,
     NOT_YOUR_BUILDING,
     NOT_ENOUGH_MONEY,

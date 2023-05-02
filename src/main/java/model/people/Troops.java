@@ -34,6 +34,7 @@ public class Troops extends Units {
         this.type = TroopTypes.valueOf(name.toUpperCase());
         this.hp = ((Long) troop.get("hp")).intValue();
         this.speed = Speed.valueOf((String) troop.get("speed"));
+        this.leftMoves = speed.getMovesInEachTurn();
         this.weaponType = AllResource.valueOf((String) troop.get("weaponType"));
         this.armorType = AllResource.valueOf((String) troop.get("armorType"));
         this.damage = Damage.valueOf((String) troop.get("damage")).getDamage();
@@ -115,6 +116,6 @@ public class Troops extends Units {
 
     @Override
     public String getName() {
-        return getType().toString().toLowerCase();
+        return getType().toString().toLowerCase().replace("_", " ");
     }
 }

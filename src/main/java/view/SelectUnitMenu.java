@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 public class SelectUnitMenu {
     private static SelectUnitMenuMessages message;
 
-    public static void run(int[] currentLocation) {
+    public static void run(int[] currentLocation, String unitType) {
         Scanner scanner = EntryMenu.getScanner();
         String command;
         Matcher matcher;
@@ -19,12 +19,12 @@ public class SelectUnitMenu {
             command = scanner.nextLine();
 
             if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.MOVE_UNIT)) != null)
-                checkMoveUnit(matcher, currentLocation);
+                checkMoveUnit(matcher, currentLocation, unitType);
         }
     }
 
-    private static void checkMoveUnit(Matcher matcher, int[] currentLocation) {
-        message = SelectUnitMenuController.checkMoveUnit(matcher, currentLocation);
+    private static void checkMoveUnit(Matcher matcher, int[] currentLocation, String unitType) {
+        message = SelectUnitMenuController.checkMoveUnit(matcher, currentLocation, unitType);
 
         switch (message) {
             case SUCCESS -> System.out.println("Units Moved Successfully!");
@@ -32,7 +32,7 @@ public class SelectUnitMenu {
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinates!");
             case INVALID_DESTINATION_TEXTURE -> System.out.println("Invalid Destination: Invalid Texture!");
             case INVALID_DESTINATION_ONCLIMABLE_BUILDING -> System.out.println("Invalid Destination: Invalid Building In Destination!");
-            case INVALID_DESTINATION_DIFFERENT_UNIT -> System.out.println("Invalid Destination: Invalid Unit type in destination!");
+            case INVALID_DESTINATION_DIFFERENT_OWNER_UNIT -> System.out.println("Invalid Destination: Invalid Unit type in destination!");
             case INVALID_DISTANCE -> System.out.println("Invalid Destination: Too Far For Going There, Based On Unit's Speed!");
         }
     }
