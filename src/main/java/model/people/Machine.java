@@ -1,7 +1,13 @@
 package model.people;
 
-import model.people.enums.MachineType;
+import model.people.enums.Speed;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Machine extends Units {
@@ -9,18 +15,19 @@ public class Machine extends Units {
     private final ArrayList<Engineer> engineers = new ArrayList<>();
     private boolean isActive = false;
     private final int damage;
-    private final String name;
     private final int range;
 
-    public Machine(MachineType machineType) {
-        name = machineType.getName();
-        speed = machineType.getSpeed();
+    public Machine(String name) {
+        JSONObject machine = getMachineFromDictionary(name);
+
+        this.name = name;
+        speed = Speed.valueOf((String) machine.get("speed"));
         leftMoves = speed.getMovesInEachTurn();
-        cost = machineType.getGoldCost();
-        hp = machineType.getHitPoint();
-        engineersNeededToActivate = machineType.getWorkersNumber();
-        damage = machineType.getDamage();
-        range = machineType.getRange();
+        cost = ((Long) machine.get("cost")).intValue();
+        hp = ((Long) machine.get("hp")).intValue();
+        engineersNeededToActivate = ((Long) machine.get("engineersNeededToActivate")).intValue();
+        damage = ((Long) machine.get("damage")).intValue();
+        range = ((Long) machine.get("range")).intValue();
     }
 
     public int getEngineersNeededToActivate() {
@@ -47,8 +54,15 @@ public class Machine extends Units {
         isActive = active;
     }
 
-    @Override
-    public String getName() {
-        return name;
+    private JSONObject getMachineFromDictionary(String name) {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject machine = new JSONObject();
+
+        try (FileReader reader = new FileReader("src/main/resources/Machines.json")) {
+            machine = (JSONObject) ((JSONObject) ((JSONArray) jsonParser.parse(reader)).get(0)).get(name);
+        } catch (IOException | ParseException ignored) {
+        }
+
+        return machine;
     }
 }

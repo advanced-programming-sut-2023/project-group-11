@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Rewrite Machine Constructor">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Engineer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Engineer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Units.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Units.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/MachineType.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +46,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2OT1PI8Q02cnKX6wIVxdqs3bExz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -189,7 +197,7 @@
       <workItem from="1682923380840" duration="3158000" />
       <workItem from="1682927054108" duration="10024000" />
       <workItem from="1682963565727" duration="10814000" />
-      <workItem from="1683015782145" duration="16815000" />
+      <workItem from="1683015782145" duration="18500000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -457,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683036855975</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Make MachineTypes as Json dictionary">
+      <created>1683037265292</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1683037265292</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -499,7 +514,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Map edit menu updated &amp; Main menu added incompletely" />
     <MESSAGE value="Remove &quot;s functiona dded &amp; game menu &amp; map edit menu regexes edited" />
     <MESSAGE value="Main menu ended &amp; remove &quot;s updated" />
     <MESSAGE value="People classes compressed and finished" />
@@ -524,7 +538,8 @@
     <MESSAGE value="Update move + Climbable buildings added&#10;(move upto handling Climbable building)" />
     <MESSAGE value="Update move (except climbing building)" />
     <MESSAGE value="Machines rebuilt + try to make MachineType as Json" />
-    <option name="LAST_COMMIT_MESSAGE" value="Machines rebuilt + try to make MachineType as Json" />
+    <MESSAGE value="Make MachineTypes as Json dictionary" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make MachineTypes as Json dictionary" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

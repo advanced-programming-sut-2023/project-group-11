@@ -5,6 +5,7 @@ import model.people.enums.Speed;
 import model.people.enums.UnitState;
 
 public abstract class Units {
+    protected String name;
     protected int hp;
     protected Speed speed;
     protected int leftMoves;
@@ -44,7 +45,9 @@ public abstract class Units {
         return ownerGovernance;
     }
 
-    public abstract String getName();
+    public String getName() {
+        return name;
+    }
 
     public int getLeftMoves() {
         return leftMoves;

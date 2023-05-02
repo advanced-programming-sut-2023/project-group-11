@@ -10,6 +10,7 @@ public class Engineer extends Units {
     private boolean emptyPail = true;
 
     public Engineer() {
+        this.name = "engineer";
         this.hp = Hp.VERY_LOW.getHp();
         this.cost = 30;
         this.speed = Speed.HIGH;
@@ -38,10 +39,5 @@ public class Engineer extends Units {
 
     public void setEmptyPail(boolean emptyPail) {
         this.emptyPail = emptyPail;
-    }
-
-    @Override
-    public String getName() {
-        return "engineer";
     }
 }

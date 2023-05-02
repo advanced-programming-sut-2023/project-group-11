@@ -133,7 +133,9 @@ public class SelectUnitMenuController {
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         Building previousBuilding = map.getTile(previousX, previousY).getBuilding();
 
-        if (currentBuilding instanceof GateHouse) {
+        if (Utils.isValidUnitTypeForClimbing(unitType))
+            return true;
+        else if (currentBuilding instanceof GateHouse) {
             if (currentGovernance.equals(((GateHouse) currentBuilding).getGateController()))
                 return true;
             else if (previousBuilding instanceof Climbable) // TODO: change gate controller end of choosing path
