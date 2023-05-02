@@ -4,20 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Update move + Climbable buildings added&#10;(move upto handling Climbable building)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/SiegeDamage.java" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Wall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/WallType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/WallType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/RangedMachine.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Units.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Units.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/Damage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/TroopDamage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/Hp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/Hp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/MachineType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/enums/MachineType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/enums/RangedMachineType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Path.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/DefensiveBuilding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Climbable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/DrawBridge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/DrawBridge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Trap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/FillerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/FillerType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +51,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2OT1PI8Q02cnKX6wIVxdqs3bExz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -85,9 +86,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
-      <recent name="controller.Utils" />
       <recent name="model.Stronghold" />
       <recent name="controller.MainMenuController" />
+      <recent name="controller.Utils" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -200,8 +201,7 @@
       <workItem from="1682884745507" duration="875000" />
       <workItem from="1682923380840" duration="3158000" />
       <workItem from="1682927054108" duration="10024000" />
-      <workItem from="1682963565727" duration="10814000" />
-      <workItem from="1683015782145" duration="16406000" />
+      <workItem from="1682963565727" duration="10546000" />
     </task>
     <task id="LOCAL-00001" summary="Replacing Phase 0's Files">
       <created>1681570516912</created>
@@ -448,21 +448,7 @@
       <option name="project" value="LOCAL" />
       <updated>1682957895684</updated>
     </task>
-    <task id="LOCAL-00036" summary="Update move + Climbable buildings added&#10;(move upto handling Climbable building)">
-      <created>1682978113420</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1682978113420</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Update move (except climbing building)">
-      <created>1683026316777</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1683026316777</updated>
-    </task>
-    <option name="localTasksCounter" value="38" />
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,6 +490,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Map read from database ended" />
+    <MESSAGE value="Making a new map in map edit menu &amp; Add map to database" />
     <MESSAGE value="Edit adding to database &amp; save maps completed" />
     <MESSAGE value="Map edit menu updated &amp; Main menu added incompletely" />
     <MESSAGE value="Remove &quot;s functiona dded &amp; game menu &amp; map edit menu regexes edited" />
@@ -527,9 +515,7 @@
     <MESSAGE value="Start SelectUnit Menu + MoveUnit added incompletly" />
     <MESSAGE value="Heavy Conflict Handled" />
     <MESSAGE value="Update building for a bit" />
-    <MESSAGE value="Update move + Climbable buildings added&#10;(move upto handling Climbable building)" />
-    <MESSAGE value="Update move (except climbing building)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update move (except climbing building)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update building for a bit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
