@@ -5,12 +5,15 @@ import model.Governance;
 import model.Stronghold;
 import model.buildings.Building;
 import model.buildings.ProductiveBuilding;
+import model.buildings.enums.FillerType;
+import model.buildings.enums.ProductiveBuildingType;
 import model.map.Map;
 import model.map.Tile;
 import model.AllResource;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.regex.Matcher;
 
 public class GameMenuController {
@@ -240,23 +243,34 @@ public class GameMenuController {
 
     private static void updateAllResources(Governance currentGovernance) {
         ArrayList<Building> buildings = currentGovernance.getBuildings();
+        int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("ox tether"));
 
-        for (Building building : buildings) {
+        for (Building building : buildings)
             if (building instanceof ProductiveBuilding productiveBuilding) {
                 double workersEfficiency = currentGovernance.getWorkersEfficiency();
-                AllResource requiredResource = productiveBuilding.getRequiredResource();
-                int consumptionRate = (int) (productiveBuilding.getConsumptionRate() * workersEfficiency);
-                ArrayList<AllResource> producedResources = productiveBuilding.getProducedResource();
-                int productionRate = (int) (productiveBuilding.getProductionRate() * workersEfficiency);
+                int consumptionRate = (int) Math.ceil((productiveBuilding.getConsumptionRate() * workersEfficiency));
+                int productionRate = (int) Math.ceil(productiveBuilding.getProductionRate() * workersEfficiency);
 
-                for (AllResource producedResource : producedResources)
-                    if (requiredResource != null && currentGovernance.hasEnoughItem(requiredResource, consumptionRate))
-                        if (currentGovernance.hasStorageForItem(producedResource, productionRate)) {
-                            currentGovernance.changeResourceAmount(producedResource, productionRate);
-                            currentGovernance.changeResourceAmount(requiredResource, -consumptionRate);
-                        }
+                if (building.getName().equals("quarry")) productionRate = Math.min(oxTetherNumber, 3) * productionRate;
+
+                int consumed = 0;
+                AllResource requiredResource = productiveBuilding.getRequiredResource();
+                ArrayList<AllResource> producedResources = productiveBuilding.getProducedResource();
+
+                for (AllResource producedResource : producedResources) {
+                    if (consumptionRate == 0 && currentGovernance.hasStorageForItem(producedResource, productionRate))
+                        currentGovernance.addToStorage(producedResource, productionRate);
+                    else while (consumed < consumptionRate
+                            && currentGovernance.hasEnoughItem(requiredResource, 1)
+                            && currentGovernance.hasStorageForItem(producedResource, productionRate)) {
+
+                        currentGovernance.removeFromStorage(requiredResource, 1);
+                        currentGovernance.addToStorage(producedResource, productionRate);
+                        consumed++;
+                    }
+                    consumed = 0;
+                }
             }
-        }
     }
 
     private static void updatePopularityRate() {
