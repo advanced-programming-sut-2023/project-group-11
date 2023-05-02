@@ -48,11 +48,6 @@ public class ProductiveBuilding extends Building {
         //TODO: implement
     }
 
-    public void setGovernanceRates() {//TODO: in controller?
-        for (AllResource resource : producedResource) owner.changeResourceProductionRate(resource, productionRate);
-        owner.changeResourceConsumptionRate(requiredResource, consumptionRate);
-    }
-
     public void oneTurnPass() {
 
     }
