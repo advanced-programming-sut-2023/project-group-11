@@ -32,8 +32,8 @@ public class SelectUnitMenuController {
         else if (!isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_DIFFERENT_OWNER_UNIT;
         else if (BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) &&
-                map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable &&
-                !((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable()) // TODO: make a recursive method for making climbablity true for walls & etc
+                map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable climbable &&
+                !climbable.isClimbable()) // TODO: make a recursive method for making climbability true for walls & etc
             return SelectUnitMenuMessages.INVALID_DESTINATION_ONCLIMABLE_BUILDING;
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
@@ -139,8 +139,8 @@ public class SelectUnitMenuController {
 
         if (currentBuilding instanceof Trap)
             return true;
-        else if (currentBuilding instanceof GateHouse) { // TODO: change gate controller end of choosing path
-            if (currentGovernance.equals(((GateHouse) currentBuilding).getGateController()))
+        else if (currentBuilding instanceof GateHouse gateHouse) { // TODO: change gate controller end of choosing path
+            if (currentGovernance.equals(gateHouse.getGateController()))
                 return true;
             else if (previousBuilding instanceof Climbable && !previousBuilding.getName().equals("stairs"))
                 return true;
@@ -149,11 +149,9 @@ public class SelectUnitMenuController {
             else if (previousTile.getUnitsByType("ladderman").size() != 0)
                 return true;
             else return previousTile.getUnitsByType("siege tower").size() != 0;
-        }
-        else if (currentBuilding instanceof Tower) {
+        } else if (currentBuilding instanceof Tower) {
             return previousBuilding instanceof Climbable;
-        }
-        else {
+        } else {
             if (previousBuilding instanceof Climbable)
                 return true;
             else if (unitType.equals("assassin"))
@@ -178,8 +176,8 @@ public class SelectUnitMenuController {
         else if (unitType.equals("assassin"))
             return true;
         else
-            return previousTile.getBuilding() instanceof GateHouse &&
-                    ((GateHouse) previousTile.getBuilding()).getGateController().equals(currentGovernance);
+            return previousTile.getBuilding() instanceof GateHouse gateHouse &&
+                    gateHouse.getGateController().equals(currentGovernance);
     }
 
     private static int minimumSpeed(ArrayList<Units> units) {
@@ -221,11 +219,12 @@ public class SelectUnitMenuController {
 
     private static void applyPathEffects(Map map, Path shortestPath, ArrayList<Units> selectedUnits) {
         Building currentBuilding;
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         for (int[] location : shortestPath.getPath()) {
-            if ((currentBuilding = map.getTile(location[0], location[1]).getBuilding()) instanceof GateHouse)
-                ((GateHouse) currentBuilding).setGateController(Stronghold.getCurrentGame().getCurrentGovernance());
-            else if (currentBuilding instanceof Trap)
-                applyTrapDamage(selectedUnits, (Trap) currentBuilding);
+            if ((currentBuilding = map.getTile(location[0], location[1]).getBuilding()) instanceof GateHouse gateHouse)
+                gateHouse.setGateController(Stronghold.getCurrentGame().getCurrentGovernance());
+            else if (currentBuilding instanceof Trap trap && !trap.getOwner().equals(currentGovernance))
+                applyTrapDamage(selectedUnits, trap);
 
             if (selectedUnits.size() == 0) return;
         }

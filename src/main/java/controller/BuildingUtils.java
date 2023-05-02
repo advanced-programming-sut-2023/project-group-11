@@ -112,13 +112,13 @@ public class BuildingUtils {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
-        if(building instanceof Hovel)
-            governance.setMaxPopulation(governance.getMaxPopulation() + ((Hovel) building).getCapacity());
+        if(building instanceof Hovel hovel)
+            governance.setMaxPopulation(governance.getMaxPopulation() + hovel.getCapacity());
         //TODO: popularityRate
         governance.setGold(governance.getGold() - building.getGoldCost());
         governance.changeResourceAmount(building.getResourceCostType(), -building.getResourceCostNumber());
-        if (building instanceof Storage) {
-            building.getOwner().getStorages().add((Storage) building);
+        if (building instanceof Storage storage) {
+            building.getOwner().getStorages().add(storage);
         }
 
         for (int i = x; i < x + size; i++) {

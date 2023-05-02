@@ -4,6 +4,7 @@ import com.diogonunes.jcolor.Ansi;
 import com.diogonunes.jcolor.Attribute;
 import model.Governance;
 import model.Stronghold;
+import model.buildings.Climbable;
 import model.map.Color;
 import model.map.Map;
 import model.map.Tile;
@@ -88,7 +89,9 @@ public class ShowMapMenuController {
 
                     if (isSoldierInTile(tile)) output += (Ansi.colorize("S", textColor, backgroundColor));
                     else if (BuildingUtils.isBuildingInTile(tile.getBuilding()))
-                        output += (Ansi.colorize("B", textColor, backgroundColor));
+                        if (tile.getBuilding() instanceof Climbable)
+                            output += (Ansi.colorize("W", textColor, backgroundColor));
+                        else output += (Ansi.colorize("B", textColor, backgroundColor));
                     else if (tile.getTree() != null) output += (Ansi.colorize("T", textColor, backgroundColor));
                     else output += (Ansi.colorize("#", textColor, backgroundColor));
                 }
