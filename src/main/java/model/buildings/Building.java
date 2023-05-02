@@ -26,10 +26,9 @@ public abstract class Building {
         this.owner = owner;
     }
 
-    public ArrayList<model.people.Engineer> getEngineer() {
+    public ArrayList<Engineer> getEngineer() {
         return engineers;
     }
-
 
     public void setActive(boolean active) {
         isActive = active;

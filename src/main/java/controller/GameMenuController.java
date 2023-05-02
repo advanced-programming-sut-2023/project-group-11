@@ -6,7 +6,6 @@ import model.Stronghold;
 import model.buildings.Building;
 import model.buildings.ProductiveBuilding;
 import model.buildings.enums.FillerType;
-import model.buildings.enums.ProductiveBuildingType;
 import model.map.Map;
 import model.map.Tile;
 import model.AllResource;
@@ -152,11 +151,10 @@ public class GameMenuController {
         //TODO: select building after commands need a structure to implement...
     }
 
-    public static String selectBuildingDetails(Matcher matcher) {
+    public static Building selectBuildingDetails(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
-        Building building = currentGame.getMap().getTile(x, y).getBuilding();
-        return building.toString();
+        return currentGame.getMap().getTile(x, y).getBuilding();
     }
 
     public static GameMenuMessages checkSelectUnit(Matcher matcher) {
@@ -228,12 +226,12 @@ public class GameMenuController {
     }
 
     private static void updateFood(Governance currentGovernance) {
-        int foodConsumption = currentGovernance.getFoodConsumption();
         double foodRatio = currentGovernance.getFoodRate() / 2.0 + 1;
+        int foodConsumption = (int) (currentGovernance.getCurrentPopulation() * foodRatio);
         int totalFoodRemoved = 0;
         for (AllResource resource : AllResource.values())
             if (Utils.isFood(resource))
-                while (totalFoodRemoved < foodConsumption * foodRatio) {//TODO: foodConsumption * foodRatio * population?
+                while (totalFoodRemoved < foodConsumption) {
                     if (!currentGovernance.hasEnoughItem(resource, 1)) continue;
                     currentGovernance.removeFromStorage(resource, 1);
                     totalFoodRemoved++;
@@ -251,7 +249,10 @@ public class GameMenuController {
                 int consumptionRate = (int) Math.ceil((productiveBuilding.getConsumptionRate() * workersEfficiency));
                 int productionRate = (int) Math.ceil(productiveBuilding.getProductionRate() * workersEfficiency);
 
-                if (building.getName().equals("quarry")) productionRate = Math.min(oxTetherNumber, 3) * productionRate;
+                if (building.getName().equals("quarry")) {
+                    productionRate = Math.min(oxTetherNumber, 3) * productionRate;
+                    oxTetherNumber -= Math.min(oxTetherNumber, 3);
+                }
 
                 int consumed = 0;
                 AllResource requiredResource = productiveBuilding.getRequiredResource();

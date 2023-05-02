@@ -69,8 +69,4 @@ public class Tower extends Climbable {
         return isTower;
     }
 
-    public void defend() {
-
-    }
-
 }

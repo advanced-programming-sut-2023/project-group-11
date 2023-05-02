@@ -1,6 +1,8 @@
 package view;
 
+import controller.BuildingUtils;
 import controller.GameMenuController;
+import controller.SelectBuildingMenuController;
 import controller.Utils;
 import view.enums.commands.GameMenuCommands;
 import view.enums.messages.GameMenuMessages;
@@ -139,6 +141,7 @@ public class GameMenu {
             case NOT_YOUR_BUILDING -> System.out.println("It's Not Your Building!");
             case SUCCESS -> {//TODO: implementation needed for create unit and repair
                 System.out.println(GameMenuController.selectBuildingDetails(matcher));
+                SelectBuildingMenu.run(matcher);
             }
         }
     }

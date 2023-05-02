@@ -43,13 +43,4 @@ public class ProductiveBuilding extends Building {
     public int getConsumptionRate() {
         return consumptionRate;
     }
-
-    public void produce() {
-        //TODO: implement
-    }
-
-    public void oneTurnPass() {
-
-    }
-
 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.BuildingUtils;
 import controller.SelectBuildingMenuController;
 import view.enums.commands.SelectBuildingMenuCommands;
 import view.enums.messages.SelectBuildingMenuMessages;
@@ -9,7 +10,7 @@ import java.util.regex.Matcher;
 
 public class SelectBuildingMenu {
     public static void run(Matcher matcher) {
-        System.out.println(SelectBuildingMenuController.selectBuildingDetails(matcher));
+        System.out.println(BuildingUtils.getBuilding(matcher).toString());
         if (!SelectBuildingMenuController.hasCommand(matcher)) return;
         Scanner scanner = EntryMenu.getScanner();
         String command;
@@ -43,6 +44,7 @@ public class SelectBuildingMenu {
             case CANT_REPAIR -> System.out.println("Can't Repair This Building!");
             case NO_NEED_TO_REPAIR -> System.out.println("There's No Need To Repair This Building!");
             case NOT_ENOUGH_RESOURCE -> System.out.println("You Don't Have Enough Resource To Repair!");
+            case ENEMY_AROUND -> System.out.println("There is enemy around and ypu can't repair this building!");
             case SUCCESS -> System.out.println("Building Has Been Repaired Successfully!");
         }
     }

@@ -6,7 +6,6 @@ public class Trap extends Building {
 
     private final int damage;
 
-
     public Trap(TrapType trapType) {
         name = trapType.getName();
         size = trapType.getSize();

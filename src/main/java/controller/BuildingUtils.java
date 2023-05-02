@@ -7,6 +7,8 @@ import model.buildings.enums.*;
 import model.map.Map;
 import model.map.Tile;
 
+import java.util.regex.Matcher;
+
 public class BuildingUtils {
 
     public static boolean isValidCoordinates(Map map, int x, int y, int size) {
@@ -131,5 +133,11 @@ public class BuildingUtils {
 
         if (building == null) return false;
         return building.getOwner().equals(governance) || !(building instanceof Trap);
+    }
+
+    public static Building getBuilding(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("xGroup"));
+        int y = Integer.parseInt(matcher.group("yGroup"));
+        return Stronghold.getCurrentGame().getMap().getTile(x, y).getBuilding();
     }
 }

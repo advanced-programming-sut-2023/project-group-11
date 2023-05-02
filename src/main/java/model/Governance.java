@@ -1,6 +1,5 @@
 package model;
 
-import controller.Utils;
 import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
@@ -19,7 +18,6 @@ public class Governance {
     private int foodRate = 0;
     private int foodFactor = 0;
     private int totalFood;
-    private int foodConsumption;
     private int taxRate = 0;
     private int taxFactor = 0;
     private double taxGold = 0;
@@ -194,14 +192,6 @@ public class Governance {
         return allResources;
     }
 
-    public int getFoodConsumption() {
-        return foodConsumption;
-    }
-
-    public void setFoodConsumption(int foodConsumption) {
-        this.foodConsumption = foodConsumption;
-    }
-
     public int getResourceCount(AllResource resource) {
         return allResources.get(resource);
     }
@@ -223,8 +213,7 @@ public class Governance {
         for (Storage storage : storages) {
             if (storage.getStorage().containsKey(item)) {
                 capacity += storage.getCurrentCapacity();
-                if (capacity >= amount)
-                    return true;
+                if (capacity >= amount) return true;
             }
         }
         return false;
@@ -238,8 +227,7 @@ public class Governance {
         changeResourceAmount(item, amount);
         for (Storage storage : storages) {
             if (storage.getStorage().containsKey(item)) {
-                if (amount == 0)
-                    break;
+                if (amount == 0) break;
                 if (storage.getCurrentCapacity() <= amount) {
                     amount -= storage.getCurrentCapacity();
                     storage.addToStorage(item, storage.getCurrentCapacity());
@@ -255,8 +243,7 @@ public class Governance {
         changeResourceAmount(item, -amount);
         for (Storage storage : storages) {
             if (storage.getStorage().containsKey(item)) {
-                if (amount == 0)
-                    break;
+                if (amount == 0) break;
                 int storageRemaining = storage.getStorage().get(item);
                 if (storageRemaining <= amount) {
                     amount -= storageRemaining;

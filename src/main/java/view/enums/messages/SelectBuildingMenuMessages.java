@@ -10,7 +10,8 @@ public enum SelectBuildingMenuMessages {
     CANT_CREATE_HERE,
     NO_NEED_TO_REPAIR,
     NOT_ENOUGH_RESOURCE,
-    CANT_REPAIR
+    CANT_REPAIR,
+    ENEMY_AROUND,
     ;
 
 }
