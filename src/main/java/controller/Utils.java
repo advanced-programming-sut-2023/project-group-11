@@ -153,9 +153,8 @@ public class Utils {
     static boolean isValidUnitTypeForClimbing(String type) {
         return type.equals("archer") || type.equals("crossbowman") || type.equals("spearman") ||
                 type.equals("pikeman") || type.equals("maceman") || type.equals("swordsman") ||
-                type.equals("tunneler") || type.equals("ladderman") || type.equals("black monk") ||
-                type.equals("archer bow") || type.equals("slaves") || type.equals("slinger") ||
-                type.equals("assassin") || type.equals("arabian swordsman") ||
-                type.equals("fire thrower") || type.equals("portable shield");
+                type.equals("tunneler") || type.equals("black monk") || type.equals("archer bow") ||
+                type.equals("slaves") || type.equals("slinger") || type.equals("assassin") ||
+                type.equals("arabian swordsman") || type.equals("fire thrower") || type.equals("portable shield");
     }
 }

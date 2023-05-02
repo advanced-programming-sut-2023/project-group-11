@@ -13,15 +13,15 @@ public class Path {
         return path;
     }
 
-    public void addLocationToPath(int[] location) {
+    public void addToPath(int[] location) {
         path.add(location);
+    }
+
+    public void removeFromPath(int[] location) {
+        this.path.remove(location);
     }
 
     public int getLength() {
         return path.size();
-    }
-
-    public void removePath(Path path) {
-        this.path.remove(path);
     }
 }

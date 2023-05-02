@@ -3,9 +3,7 @@ package controller;
 import model.Governance;
 import model.Path;
 import model.Stronghold;
-import model.buildings.Building;
-import model.buildings.Climbable;
-import model.buildings.GateHouse;
+import model.buildings.*;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
@@ -35,7 +33,7 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.INVALID_DESTINATION_DIFFERENT_OWNER_UNIT;
         else if (BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) &&
                 map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable &&
-                !((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable())
+                !((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable()) // TODO: make a recursive method for making climbablity true for walls & etc
             return SelectUnitMenuMessages.INVALID_DESTINATION_ONCLIMABLE_BUILDING;
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
@@ -49,12 +47,12 @@ public class SelectUnitMenuController {
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
         ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
-
-        for (Units unit : selectedUnits) {
-            unit.setLeftMoves(unit.getLeftMoves() - (shortestPath.getLength() - 1));
-        }
-        map.getTile(destinationX, destinationY).getUnits().addAll(selectedUnits);
         map.getTile(currentX, currentY).clearUnitsByType(selectedUnits);
+
+        setLeftMoves(shortestPath, selectedUnits);
+        applyPathEffects(map, shortestPath, selectedUnits);
+
+        map.getTile(destinationX, destinationY).getUnits().addAll(selectedUnits);
         currentLocation[0] = destinationX;
         currentLocation[1] = destinationY;
     }
@@ -98,22 +96,26 @@ public class SelectUnitMenuController {
     }
 
     private static void pathDFS(Map map, String unitType, int currentX, int currentY, int destinationX, int destinationY, int speed, ArrayList<Path> paths, Path path) {
+        int[] previousLocation = path.getPath().get(path.getLength() - 1);
         int[] currentLocation = {currentX, currentY};
         int[] destinationLocation = {destinationX, destinationY};
         int leftMoves = speed - path.getLength();
-        Building building = map.getTile(currentX, currentY).getBuilding();
 
         if (!Utils.isValidCoordinates(map, currentX, currentY)) return;
-        else if (!Arrays.equals(currentLocation, destinationLocation) && leftMoves == 0) return;
+        Building building = map.getTile(currentX, currentY).getBuilding();
+
+        if (!Arrays.equals(currentLocation, destinationLocation) && leftMoves == 0) return;
         else if (path.getPath().contains(currentLocation)) return;
         else if (notValidTextureForMoving(map.getTile(currentX, currentY))) return;
         else if (building != null) {
-            if (!(building instanceof Climbable)) return;
-            else if (!canClimbTheBuilding(map, unitType, currentLocation, path.getPath().get(path.getLength() - 2), building))
+            if (!(building instanceof Climbable || building instanceof Trap)) return;
+            else if (!canClimbTheBuilding(map, unitType, previousLocation, building))
                 return;
-        }
+        } else if (map.getTile(previousLocation[0], previousLocation[1]).getBuilding() != null &&
+                !canDescend(map, unitType, currentLocation, path.getPath().get(path.getLength() - 1)))
+            return;
 
-        path.addLocationToPath(currentLocation);
+        path.addToPath(currentLocation);
         if (Arrays.equals(currentLocation, destinationLocation)) {
             paths.add(path);
         } else {
@@ -122,30 +124,62 @@ public class SelectUnitMenuController {
             pathDFS(map, unitType, currentX, currentY + 1, destinationX, destinationY, speed, paths, path);
             pathDFS(map, unitType, currentX, currentY - 1, destinationX, destinationY, speed, paths, path);
         }
-        path.removePath(path);
+        path.removeFromPath(currentLocation);
     }
 
-    private static boolean canClimbTheBuilding(Map map, String unitType, int[] currentLocation, int[] previousLocation, Building currentBuilding) {
-        int currentX = currentLocation[0];
-        int currentY = currentLocation[1];
+    private static boolean canClimbTheBuilding(Map map, String unitType, int[] previousLocation, Building currentBuilding) {
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         int previousX = previousLocation[0];
         int previousY = previousLocation[1];
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        Building previousBuilding = map.getTile(previousX, previousY).getBuilding();
+        Tile previousTile = map.getTile(previousX, previousY);
+        Building previousBuilding = previousTile.getBuilding();
 
-        if (Utils.isValidUnitTypeForClimbing(unitType))
+        if (!Utils.isValidUnitTypeForClimbing(unitType))
+            return false;
+
+        if (currentBuilding instanceof Trap)
             return true;
-        else if (currentBuilding instanceof GateHouse) {
+        else if (currentBuilding instanceof GateHouse) { // TODO: change gate controller end of choosing path
             if (currentGovernance.equals(((GateHouse) currentBuilding).getGateController()))
                 return true;
-            else if (previousBuilding instanceof Climbable) // TODO: change gate controller end of choosing path
+            else if (previousBuilding instanceof Climbable && !previousBuilding.getName().equals("stairs"))
                 return true;
-            else if (map.getTile(previousX, previousY).getUnits().get(0).getName().equals("assassin"))
+            else if (unitType.equals("assassin"))
                 return true;
-//            else if (map.getTile(previousX, previousY).getUnits())
+            else if (previousTile.getUnitsByType("ladderman").size() != 0)
+                return true;
+            else return previousTile.getUnitsByType("siege tower").size() != 0;
         }
+        else if (currentBuilding instanceof Tower) {
+            return previousBuilding instanceof Climbable;
+        }
+        else {
+            if (previousBuilding instanceof Climbable)
+                return true;
+            else if (unitType.equals("assassin"))
+                return true;
+            else if (previousTile.getUnitsByType("ladderman").size() != 0)
+                return true;
+            else return previousTile.getUnitsByType("siege tower").size() != 0;
+        }
+    }
 
-        return false;
+    private static boolean canDescend(Map map, String unitType, int[] currentLocation, int[] previousLocation) {
+        Tile previousTile = map.getTile(previousLocation[0], previousLocation[1]);
+        Tile currentTile = map.getTile(currentLocation[0], currentLocation[1]);
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+
+        if (previousTile.getBuilding().getName().equals("stairs"))
+            return true;
+        else if (currentTile.getUnitsByType("ladderman").size() != 0)
+            return true;
+        else if (currentTile.getUnitsByType("siege tower").size() != 0)
+            return true;
+        else if (unitType.equals("assassin"))
+            return true;
+        else
+            return previousTile.getBuilding() instanceof GateHouse &&
+                    ((GateHouse) previousTile.getBuilding()).getGateController().equals(currentGovernance);
     }
 
     private static int minimumSpeed(ArrayList<Units> units) {
@@ -177,6 +211,37 @@ public class SelectUnitMenuController {
 
     private static boolean isValidDestinationSameOwnerUnits(Tile currentTile, Tile destination) {
         return currentTile.getUnits().get(0).getOwnerGovernance().equals(destination.getUnits().get(0).getOwnerGovernance());
+    }
+
+    private static void setLeftMoves(Path shortestPath, ArrayList<Units> selectedUnits) {
+        for (Units unit : selectedUnits) {
+            unit.setLeftMoves(unit.getLeftMoves() - (shortestPath.getLength() - 1));
+        }
+    }
+
+    private static void applyPathEffects(Map map, Path shortestPath, ArrayList<Units> selectedUnits) {
+        Building currentBuilding;
+        for (int[] location : shortestPath.getPath()) {
+            if ((currentBuilding = map.getTile(location[0], location[1]).getBuilding()) instanceof GateHouse)
+                ((GateHouse) currentBuilding).setGateController(Stronghold.getCurrentGame().getCurrentGovernance());
+            else if (currentBuilding instanceof Trap)
+                applyTrapDamage(selectedUnits, (Trap) currentBuilding);
+
+            if (selectedUnits.size() == 0) return;
+        }
+    }
+
+    private static void applyTrapDamage(ArrayList<Units> selectedUnits, Trap currentBuilding) {
+        for (Units unit : selectedUnits) {
+            unit.setHp(unit.getHp() - currentBuilding.getDamage());
+        }
+        int size = selectedUnits.size();
+        for (int i = 0, j = 0; i < size; i++, j++) {
+            if (selectedUnits.get(j).getHp() <= 0) {
+                selectedUnits.remove(j);
+                j--;
+            }
+        }
     }
 
     private static void attackMachine() {
