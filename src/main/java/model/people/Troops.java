@@ -14,7 +14,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Troops extends Units {
-    protected final TroopTypes type;
     protected AllResource weaponType;
     protected AllResource armorType;
     protected int damage;
@@ -31,7 +30,7 @@ public class Troops extends Units {
     public Troops(String name) {
         JSONObject troop = getTroopFromDictionary(name);
 
-        this.type = TroopTypes.valueOf(name.toUpperCase());
+        this.name = name;
         this.hp = ((Long) troop.get("hp")).intValue();
         this.speed = Speed.valueOf((String) troop.get("speed"));
         this.leftMoves = speed.getMovesInEachTurn();
@@ -60,10 +59,6 @@ public class Troops extends Units {
         }
 
         return troop;
-    }
-
-    public TroopTypes getType() {
-        return type;
     }
 
     public AllResource getWeaponType() {
@@ -112,10 +107,5 @@ public class Troops extends Units {
 
     public void setRevealed(boolean revealed) {
         this.revealed = revealed;
-    }
-
-    @Override
-    public String getName() {
-        return getType().toString().toLowerCase().replace("_", " ");
     }
 }
