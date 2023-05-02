@@ -31,8 +31,6 @@ public class Governance {
     private final ArrayList<Trade> tradeNotification = new ArrayList<>();
     //popularity = taxFactor + fearFactor + foodFactor + religiousFactor
     private final HashMap<AllResource, Integer> allResources = new HashMap<>();
-    private final HashMap<AllResource, Integer> resourceProductionRate = new HashMap<>();
-    private final HashMap<AllResource, Integer> resourceConsumptionRate = new HashMap<>();
     private final ArrayList<Storage> storages = new ArrayList<>();
     private final ArrayList<Building> buildings = new ArrayList<>();
 
@@ -57,11 +55,6 @@ public class Governance {
         allResources.put(AllResource.LEATHER_ARMOR, 0);
         allResources.put(AllResource.METAL_ARMOR, 0);
         allResources.put(AllResource.SWORD, 0);
-        for (AllResource resource : AllResource.values()) {
-            if (!Utils.isFood(resource))
-                resourceConsumptionRate.put(resource, 0);
-            resourceProductionRate.put(resource, 0);
-        }
     }
 
 
@@ -201,22 +194,6 @@ public class Governance {
         return allResources;
     }
 
-    public Integer getResourceProductionRate(AllResource resource) {
-        return resourceProductionRate.get(resource);
-    }
-
-    public Integer getResourceConsumptionRate(AllResource resource) {
-        return resourceConsumptionRate.get(resource);
-    }
-
-    public void changeResourceProductionRate(AllResource resource, int amount) {
-        resourceProductionRate.put(resource, resourceProductionRate.get(resource) + amount);
-    }
-
-    public void changeResourceConsumptionRate(AllResource resource, int amount) {
-        resourceConsumptionRate.put(resource, resourceConsumptionRate.get(resource) + amount);
-    }
-
     public int getFoodConsumption() {
         return foodConsumption;
     }
@@ -254,9 +231,7 @@ public class Governance {
     }
 
     public boolean hasEnoughItem(AllResource item, int amount) {
-        if (allResources.get(item) >= amount)
-            return true;
-        return false;
+        return allResources.get(item) >= amount;
     }
 
     public void addToStorage(AllResource item, int amount) {

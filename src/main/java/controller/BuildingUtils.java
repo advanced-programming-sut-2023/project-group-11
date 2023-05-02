@@ -108,8 +108,7 @@ public class BuildingUtils {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
-        if (building instanceof ProductiveBuilding)
-            ((ProductiveBuilding) building).setGovernanceRates();
+
         //TODO: popularityRate
         governance.setGold(governance.getGold() - building.getGoldCost());
         governance.changeResourceAmount(building.getResourceCostType(), -building.getResourceCostNumber());

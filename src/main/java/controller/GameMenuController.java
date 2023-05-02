@@ -4,6 +4,7 @@ import model.Game;
 import model.Governance;
 import model.Stronghold;
 import model.buildings.Building;
+import model.buildings.ProductiveBuilding;
 import model.map.Map;
 import model.map.Tile;
 import model.AllResource;
@@ -117,7 +118,8 @@ public class GameMenuController {
 
         int size = building.getSize();
 
-        if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size)) return GameMenuMessages.INVALID_COORDINATE;
+        if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size))
+            return GameMenuMessages.INVALID_COORDINATE;
         if (!BuildingUtils.isMapEmpty(x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
         if (!BuildingUtils.isTextureSuitable(type, x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
         if (building.getGoldCost() > currentGovernance.getGold()) return GameMenuMessages.NOT_ENOUGH_MONEY;
@@ -222,7 +224,7 @@ public class GameMenuController {
 
     private static void updateFood(Governance currentGovernance) {
         int foodConsumption = currentGovernance.getFoodConsumption();
-        int foodRatio = currentGovernance.getFoodRate() / 2 + 1;
+        double foodRatio = currentGovernance.getFoodRate() / 2.0 + 1;
         int totalFoodRemoved = 0;
         for (AllResource resource : AllResource.values())
             if (Utils.isFood(resource))
@@ -235,18 +237,22 @@ public class GameMenuController {
     }
 
     private static void updateAllResources(Governance currentGovernance) {
-        for (AllResource resource : AllResource.values()) {
-            int productionRate = currentGovernance.getResourceProductionRate(resource);
-            double workersEfficiency = currentGovernance.getWorkersEfficiency();
+        ArrayList<Building> buildings = currentGovernance.getBuildings();
 
-            if (currentGovernance.hasStorageForItem(resource, productionRate))
-                currentGovernance.addToStorage(resource, (int) (productionRate * workersEfficiency));
+        for (Building building : buildings) {
+            if (building instanceof ProductiveBuilding productiveBuilding) {
+                double workersEfficiency = currentGovernance.getWorkersEfficiency();
+                AllResource requiredResource = productiveBuilding.getRequiredResource();
+                int consumptionRate = (int) (productiveBuilding.getConsumptionRate() * workersEfficiency);
+                ArrayList<AllResource> producedResources = productiveBuilding.getProducedResource();
+                int productionRate = (int) (productiveBuilding.getProductionRate() * workersEfficiency);
 
-            if (!Utils.isFood(resource)) {
-                int consumptionRate = currentGovernance.getResourceConsumptionRate(resource);
-
-                if (currentGovernance.hasEnoughItem(resource, consumptionRate))
-                    currentGovernance.removeFromStorage(resource, consumptionRate);
+                for (AllResource producedResource : producedResources)
+                    if (requiredResource != null && currentGovernance.hasEnoughItem(requiredResource, consumptionRate))
+                        if (currentGovernance.hasStorageForItem(producedResource, productionRate)) {
+                            currentGovernance.changeResourceAmount(producedResource, productionRate);
+                            currentGovernance.changeResourceAmount(requiredResource, -consumptionRate);
+                        }
             }
         }
     }
