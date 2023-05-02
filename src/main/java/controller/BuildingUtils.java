@@ -100,6 +100,8 @@ public class BuildingUtils {
             building = new Inn();
         if (type.equals("draw bridge"))
             building = new DrawBridge(true);
+        if(type.equals("hovel"))
+            building = new Hovel();
 
         return building;
     }
@@ -108,7 +110,8 @@ public class BuildingUtils {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
-
+        if(building instanceof Hovel)
+            governance.setMaxPopulation(governance.getMaxPopulation() + ((Hovel) building).getCapacity());
         //TODO: popularityRate
         governance.setGold(governance.getGold() - building.getGoldCost());
         governance.changeResourceAmount(building.getResourceCostType(), -building.getResourceCostNumber());

@@ -4,15 +4,15 @@ import model.AllResource;
 
 
 public enum TowerType {
-    LOOKOUT_TOWER("lookout tower",3,1000,0, AllResource.STONE,10,
+    LOOKOUT_TOWER("lookout tower",1,1000,0, AllResource.STONE,10,
             0,true,false,0,10,10,10,false),
-    PERIMETER_TURRET("perimeter turret",4,1000,0,AllResource.STONE,10,
+    PERIMETER_TURRET("perimeter turret",2,1000,0,AllResource.STONE,10,
             0,true,false,0,10,10,10,false),
-    DEFENCE_TURRET("defence turret",5,1000,0,AllResource.STONE,15,
+    DEFENCE_TURRET("defence turret",2,1000,0,AllResource.STONE,15,
             0,true,false,0,10,10,10,false),
-    SQUARE_TOWER("square tower",6,1000,0,AllResource.STONE,35,
+    SQUARE_TOWER("square tower",3,1000,0,AllResource.STONE,35,
             0,true,false,0,10,10,10,true),
-    ROUND_TOWER("round tower",3,1000,0,AllResource.STONE,40,
+    ROUND_TOWER("round tower",1,1000,0,AllResource.STONE,40,
             0,true,false,0,10,10,10,true);
 
 

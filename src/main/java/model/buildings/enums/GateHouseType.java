@@ -5,13 +5,13 @@ import model.AllResource;
 
 public enum GateHouseType {
 
-    SMALL_HORIZONTAL("small gatehouse",5,114,0,null,0,0,
+    SMALL_HORIZONTAL("small gatehouse",2,400,10,AllResource.STONE,0,0,
             true,false,0,8,true),
-    LARGE_HORIZONTAL("large gatehouse",7,150,0, AllResource.STONE,20,0,
+    LARGE_HORIZONTAL("large gatehouse",3,500,0, AllResource.STONE,20,0,
             true,false,0,10,true),
-    SMALL_VERTICAL("small gatehouse",5,114,0,null,0,0,
+    SMALL_VERTICAL("small gatehouse",2,400,10,AllResource.STONE,0,0,
                              true,false,0,8,false),
-    LARGE_VERTICAL("large gatehouse",7,150,0,AllResource.STONE,20,0,
+    LARGE_VERTICAL("large gatehouse",3,500,0,AllResource.STONE,20,0,
             true,false,0,10,false);
 
     private final String name;
