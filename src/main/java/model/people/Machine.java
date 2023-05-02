@@ -5,35 +5,49 @@ import model.people.enums.MachineType;
 import java.util.ArrayList;
 
 public class Machine extends Units {
-
-//    portable-shield * battering-rams * siege-tower * catapults * trebuchets * fire-ballista
-    protected int size;
-    protected int workersNumber;
-    protected boolean isActive;
-    protected ArrayList<Engineer> engineers;
-    protected int damage;
-    private MachineType machineType;
-
-
-    public void move(){
-
-    }
+    private final int engineersNeededToActivate;
+    private final ArrayList<Engineer> engineers = new ArrayList<>();
+    private boolean isActive = false;
+    private final int damage;
+    private final String name;
+    private final int range;
 
     public Machine(MachineType machineType) {
-        this.machineType = machineType;
+        name = machineType.getName();
         speed = machineType.getSpeed();
         cost = machineType.getGoldCost();
-        size = machineType.getSize();
         hp = machineType.getHitPoint();
-        workersNumber = machineType.getWorkersNumber();
-        isActive = machineType.isActive();
+        engineersNeededToActivate = machineType.getWorkersNumber();
         damage = machineType.getDamage();
+        range = machineType.getRange();
     }
 
-    public Machine() {
+    public int getEngineersNeededToActivate() {
+        return engineersNeededToActivate;
     }
 
-    public void damage(){
+    public ArrayList<Engineer> getEngineers() {
+        return engineers;
+    }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

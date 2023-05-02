@@ -1,6 +1,5 @@
 package model.buildings;
 
-import model.buildings.enums.FillerType;
 import model.buildings.enums.WallType;
 
 public class Wall extends Climbable{

@@ -1,7 +1,7 @@
 package model.people;
 
 import model.Stronghold;
-import model.people.enums.Damage;
+import model.people.enums.TroopDamage;
 import model.people.enums.Speed;
 import model.people.enums.TroopTypes;
 import model.AllResource;
@@ -37,7 +37,7 @@ public class Troops extends Units {
         this.leftMoves = speed.getMovesInEachTurn();
         this.weaponType = AllResource.valueOf((String) troop.get("weaponType"));
         this.armorType = AllResource.valueOf((String) troop.get("armorType"));
-        this.damage = Damage.valueOf((String) troop.get("damage")).getDamage();
+        this.damage = TroopDamage.valueOf((String) troop.get("damage")).getDamage();
         this.hasHorse = (Boolean) troop.get("hasHorse");
         this.isArab = (Boolean) troop.get("isArab");
         this.hasFiringWeapon = (Boolean) troop.get("hasFiringWeapon");

@@ -44,9 +44,7 @@ public abstract class Units {
         return ownerGovernance;
     }
 
-    public String getName() {
-        return null;
-    }
+    public abstract String getName();
 
     public int getLeftMoves() {
         return leftMoves;

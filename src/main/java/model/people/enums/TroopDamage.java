@@ -1,6 +1,6 @@
 package model.people.enums;
 
-public enum Damage {
+public enum TroopDamage {
     NO_ATTACK(0),
     VERY_LOW(20),
     LOW(30),
@@ -10,7 +10,7 @@ public enum Damage {
 
     private final int damage;
 
-    Damage(int damage) {
+    TroopDamage(int damage) {
         this.damage = damage;
     }
 
