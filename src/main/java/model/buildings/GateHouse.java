@@ -25,7 +25,7 @@ public class GateHouse extends Climbable {
         popularityEffect = gateHouseType.getPopularityEffect();
         capacity = gateHouseType.getCapacity();
         horizontalDirection = gateHouseType.getHorizontalDirection();
-        isClimbable = false;
+        isClimbable = true;
     }
 
     public Governance getGateController() {

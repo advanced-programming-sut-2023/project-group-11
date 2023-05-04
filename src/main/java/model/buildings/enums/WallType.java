@@ -74,4 +74,11 @@ public enum WallType {
     public int getPopularityEffect() {
         return popularityEffect;
     }
+
+    public static WallType getWallTypeByName(String name) {
+        for (WallType wallType : WallType.values())
+            if (wallType.name.equals(name))
+                return wallType;
+        return null;
+    }
 }

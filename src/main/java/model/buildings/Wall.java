@@ -15,5 +15,6 @@ public class Wall extends Climbable{
         isActive = wallType.isActive();
         areWorkersEngineer = wallType.areWorkersEngineer();
         popularityEffect = wallType.getPopularityEffect();
+        isClimbable = name.equals("stairs");
     }
 }

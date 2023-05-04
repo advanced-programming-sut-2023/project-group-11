@@ -98,11 +98,13 @@ public class BuildingUtils {
             building = new Trap(TrapType.getTrapTypeByName(type));
         if (UnitMakerType.getUnitMakerTypeByName(type) != null)
             building = new UnitMaker(UnitMakerType.getUnitMakerTypeByName(type));
+        if (WallType.getWallTypeByName(type) != null)
+            building = new Wall(WallType.getWallTypeByName(type));
         if (type.equals("inn"))
             building = new Inn();
         if (type.equals("draw bridge"))
             building = new DrawBridge(true);
-        if(type.equals("hovel"))
+        if (type.equals("hovel"))
             building = new Hovel();
 
         return building;
@@ -112,9 +114,18 @@ public class BuildingUtils {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
-        if(building instanceof Hovel hovel)
+        if (building instanceof Hovel hovel)
             governance.setMaxPopulation(governance.getMaxPopulation() + hovel.getCapacity());
         //TODO: popularityRate
+//        if(building instanceof Church)
+
+        if (building instanceof Climbable) {
+            if(((Climbable) building).isClimbable())
+                makeClimbable(building,x,y,size,tiles);
+            else
+                ((Climbable) building).setClimbable(isClimbable(building, x, y, size));
+        }
+
         governance.setGold(governance.getGold() - building.getGoldCost());
         governance.changeResourceAmount(building.getResourceCostType(), -building.getResourceCostNumber());
         if (building instanceof Storage storage) {
@@ -124,6 +135,40 @@ public class BuildingUtils {
         for (int i = x; i < x + size; i++) {
             for (int j = y; j > y - size; j--) {
                 tiles[i][j].setBuilding(building);
+            }
+        }
+    }
+
+    private static boolean isClimbable(Building building, int x, int y, int size) {
+        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
+        for (int i = x - 1; i < x + size + 1; i++) {
+            for (int j = y + 1; j > y - size - 1; j--) {
+                Building targetBuilding = tiles[i][j].getBuilding();
+                if (targetBuilding.equals(building))
+                    continue;
+                if ((i == x - 1 && (j == y + 1 || j == y - size)) || (i == x + size && (j == y + 1 || j == y - size)))
+                    continue;
+                if ((targetBuilding instanceof Climbable))
+                    if ((((Climbable) targetBuilding).isClimbable()))
+                        return true;
+            }
+        }
+        return false;
+    }
+
+    private static void makeClimbable(Building building, int x, int y, int size,Tile[][] tiles) {
+        for (int i = x - 1; i < x + size + 1; i++) {
+            for (int j = y + 1; j > y - size - 1; j--) {
+                Building targetBuilding = tiles[i][j].getBuilding();
+                if (targetBuilding.equals(building))
+                    continue;
+                if ((i == x - 1 && (j == y + 1 || j == y - size)) || (i == x + size && (j == y + 1 || j == y - size)))
+                    continue;
+                if(targetBuilding instanceof Climbable && !((Climbable) targetBuilding).isClimbable()){
+                    ((Climbable) targetBuilding).setClimbable(true);
+                    makeClimbable(targetBuilding, targetBuilding.getXCoordinate(),
+                            targetBuilding.getYCoordinate(), targetBuilding.getSize(), tiles);
+                }
             }
         }
     }

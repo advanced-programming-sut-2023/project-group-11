@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public abstract class Building {
 
+    protected int xCoordinate,yCoordinate;
     protected Governance owner;
     protected int size;
     protected int hitPoint;
@@ -88,6 +89,22 @@ public abstract class Building {
 
     public void repair() {
         hitPoint = maxHitPoint;
+    }
+
+    public int getXCoordinate() {
+        return xCoordinate;
+    }
+
+    public void setXCoordinate(int xCoordinate) {
+        this.xCoordinate = xCoordinate;
+    }
+
+    public int getYCoordinate() {
+        return yCoordinate;
+    }
+
+    public void setYCoordinate(int yCoordinate) {
+        this.yCoordinate = yCoordinate;
     }
 
     @Override
