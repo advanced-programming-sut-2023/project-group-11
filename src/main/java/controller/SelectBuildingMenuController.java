@@ -1,5 +1,6 @@
 package controller;
 
+import model.AllResource;
 import model.Governance;
 import model.Stronghold;
 import model.buildings.*;
@@ -8,7 +9,6 @@ import model.map.Tile;
 import model.people.Engineer;
 import model.people.Troops;
 import model.people.enums.TroopTypes;
-import model.AllResource;
 import view.enums.messages.SelectBuildingMenuMessages;
 
 import java.util.regex.Matcher;
@@ -24,7 +24,7 @@ public class SelectBuildingMenuController {
         if (!Utils.isValidCommandTags(matcher, "typeGroup", "countGroup"))
             return SelectBuildingMenuMessages.INVALID_COMMAND;
 
-        String type = matcher.group("type");
+        String type = Utils.removeDoubleQuotation(matcher.group("type"));
         int count = Integer.parseInt(matcher.group("count"));
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         Building building = BuildingUtils.getBuilding(buildingMatcher);

@@ -20,18 +20,20 @@ public class GameMenuController {
     private static Governance currentGovernance;
 
     private static void nextTurn() {
-        int currentTurn = getCurrentGame().getTurn();
         ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
+        int currentTurn = currentGame.getTurn();
         int totalGovernances = governances.size();
         currentGovernance = governances.get(currentTurn % totalGovernances);
         currentGame.setCurrentGovernance(currentGovernance);
         currentGame.plusTurnCounter();
 
-        updateSoldiers();
-        updateGold();
-        updateStorages();
-        updatePopulation();
-        updatePopularityRate();
+        if (currentGame.getTurn() > totalGovernances) {
+            updateSoldiers();
+            updateGold();
+            updateStorages();
+            updatePopulation();
+            updatePopularityRate();
+        }
     }
 
     public static GameMenuMessages checkShowMap(Matcher matcher) {
@@ -287,19 +289,11 @@ public class GameMenuController {
         currentGovernance.setPopularity(totalFactor);
     }
 
-    private static void fight() {
-
-    }
-
-    public static Game getCurrentGame() {
-        return currentGame;
-    }
-
     public static void setCurrentGame() {
         GameMenuController.currentGame = Stronghold.getCurrentGame();
     }
 
     public static int getCurrentTurn() {
-        return Math.ceilDiv(currentGame.getTurn() - 1, currentGame.getGovernances().size());
+        return Math.ceilDiv(currentGame.getTurn(), currentGame.getGovernances().size());
     }
 }

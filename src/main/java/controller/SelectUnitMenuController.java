@@ -81,22 +81,22 @@ public class SelectUnitMenuController {
     }
 
     public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
-        if(!unitType.equals("engineer"))
+        if (!unitType.equals("engineer"))
             return SelectUnitMenuMessages.INVALID_COMMAND;
         String machineType = matcher.group("machineType");
         try {
-            MachineTypes.valueOf(machineType.replace(" ","_").toUpperCase());
-        }catch (IllegalArgumentException e){
+            MachineTypes.valueOf(machineType.replace(" ", "_").toUpperCase());
+        } catch (IllegalArgumentException e) {
             return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
         }
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         Machine machine = new Machine(machineType);
-        if(governance.getGold() < machine.getCost())
+        if (governance.getGold() < machine.getCost())
             return SelectUnitMenuMessages.NOT_ENOUGH_GOLD;
-        Tile tile = Stronghold.getCurrentGame().getMap().getTile(currentLocation[0],currentLocation[1]);
-        if(tile.getUnitsByType("engineer").size() < machine.getEngineersNeededToActivate())
+        Tile tile = Stronghold.getCurrentGame().getMap().getTile(currentLocation[0], currentLocation[1]);
+        if (tile.getUnitsByType("engineer").size() < machine.getEngineersNeededToActivate())
             return SelectUnitMenuMessages.NOT_ENOUGH_ENGINEERS;
-        buildMachine(machine,tile,governance);
+        buildMachine(machine, tile, governance);
         return SelectUnitMenuMessages.SUCCESS;
     }
 
@@ -262,18 +262,19 @@ public class SelectUnitMenuController {
         }
     }
 
-    private static void buildMachine(Machine machine,Tile tile,Governance governance){
+    private static void buildMachine(Machine machine, Tile tile, Governance governance) {
         governance.setGold(governance.getGold() - machine.getCost());
         machine.setOwnerGovernance(governance);
         machine.setActive(true);
         //TODO: add to governance units
-        for (int i =0;i < machine.getEngineersNeededToActivate();i++){
+        for (int i = 0; i < machine.getEngineersNeededToActivate(); i++) {
             Engineer engineer = (Engineer) tile.getUnitsByType("engineer").get(0);
             machine.getEngineers().add(engineer);
             tile.getUnits().remove(engineer);
         }
         tile.addUnit(machine);
     }
+
     private static void attackMachine() {
 
     }

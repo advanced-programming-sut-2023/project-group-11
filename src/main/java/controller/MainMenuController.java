@@ -43,6 +43,6 @@ public class MainMenuController {
         for (String name : list) {
             result += Utils.removeDoubleQuotation(name) + "-";
         }
-        return result.substring(0, result.length()-1);
+        return result.substring(0, result.length() - 1);
     }
 }

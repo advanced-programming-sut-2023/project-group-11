@@ -7,8 +7,7 @@ public enum SelectBuildingMenuCommands {
     BACK("back"),
     CREATE_UNIT("createunit((?<typeGroup> -t (?<type>\"[^\"]+\"|\\S+))" +
             "|(?<countGroup> -c (?<count>\\d+))){2}"),
-    REPAIR("repair")
-    ;
+    REPAIR("repair");
 
     private final String regex;
 

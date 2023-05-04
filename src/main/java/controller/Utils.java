@@ -4,10 +4,10 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import model.AllResource;
 import model.Stronghold;
 import model.User;
 import model.map.Map;
-import model.AllResource;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.awt.*;

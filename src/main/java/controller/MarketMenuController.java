@@ -1,8 +1,8 @@
 package controller;
 
+import model.AllResource;
 import model.Governance;
 import model.Stronghold;
-import model.AllResource;
 import view.MarketMenu;
 import view.enums.messages.MarketMenuMessages;
 

@@ -2,7 +2,7 @@ package model.buildings;
 
 import model.buildings.enums.WallType;
 
-public class Wall extends Climbable{
+public class Wall extends Climbable {
     public Wall(WallType wallType) {
         name = wallType.getName();
         size = wallType.getSize();

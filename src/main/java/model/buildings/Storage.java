@@ -1,7 +1,7 @@
 package model.buildings;
 
-import model.buildings.enums.StorageType;
 import model.AllResource;
+import model.buildings.enums.StorageType;
 
 import java.util.HashMap;
 import java.util.Map;

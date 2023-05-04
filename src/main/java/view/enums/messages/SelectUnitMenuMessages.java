@@ -10,6 +10,5 @@ public enum SelectUnitMenuMessages {
     INVALID_DISTANCE,
     INVALID_MACHINE_TYPE,
     NOT_ENOUGH_GOLD,
-    NOT_ENOUGH_ENGINEERS
-    ;
+    NOT_ENOUGH_ENGINEERS;
 }

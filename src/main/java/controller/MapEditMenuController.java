@@ -210,7 +210,7 @@ public class MapEditMenuController {
 
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
-        if (!Utils.isValidCoordinates(currentMap, x , y))
+        if (!Utils.isValidCoordinates(currentMap, x, y))
             return MapEditMenuMessages.INVALID_COORDINATE;
 
         return MapEditMenuMessages.SUCCESS;

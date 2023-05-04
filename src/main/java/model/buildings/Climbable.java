@@ -1,6 +1,6 @@
 package model.buildings;
 
-public abstract class Climbable extends Building{
+public abstract class Climbable extends Building {
     protected boolean isClimbable;
 
     public boolean isClimbable() {

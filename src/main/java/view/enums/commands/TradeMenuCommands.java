@@ -13,8 +13,7 @@ public enum TradeMenuCommands {
     TRADE_HISTORY("trade history"),
     SHOW_CURRENT_MENU("show current menu"),
     BACK("back"),
-    END("end")
-    ;
+    END("end");
 
     private final String regex;
 

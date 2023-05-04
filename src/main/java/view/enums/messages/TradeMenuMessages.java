@@ -9,6 +9,5 @@ public enum TradeMenuMessages {
     CANT_ACCEPT_YOUR_OWN_TRADE,
     NOT_ENOUGH_GOLD,
     NOT_ENOUGH_AMOUNT,
-    NOT_ENOUGH_STORAGE
-    ;
+    NOT_ENOUGH_STORAGE;
 }

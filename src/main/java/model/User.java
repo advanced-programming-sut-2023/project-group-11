@@ -1,8 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-
-public class User implements Comparable<User>{
+public class User implements Comparable<User> {
     private String username;
     private String password;
     private String nickname;
