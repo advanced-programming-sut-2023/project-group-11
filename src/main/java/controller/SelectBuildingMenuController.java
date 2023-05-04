@@ -37,7 +37,7 @@ public class SelectBuildingMenuController {
             return SelectBuildingMenuMessages.SUCCESS;
         }
         try {
-            TroopTypes.valueOf(type.replace(" ","_").toUpperCase());
+            TroopTypes.valueOf(type.replace(" ", "_").toUpperCase());
         } catch (IllegalArgumentException e) {
             return SelectBuildingMenuMessages.INVALID_TYPE;
         }
@@ -81,7 +81,8 @@ public class SelectBuildingMenuController {
 
         if (!isRepairable(building)) return SelectBuildingMenuMessages.CANT_REPAIR;
         if (building.getHitPoint() == building.getMaxHitPoint()) return SelectBuildingMenuMessages.NO_NEED_TO_REPAIR;
-        if (isEnemyAround()) return SelectBuildingMenuMessages.ENEMY_AROUND;
+        if (isEnemyAround(governance, building.getXCoordinate(), building.getYCoordinate(), building.getSize()))
+            return SelectBuildingMenuMessages.ENEMY_AROUND;
 
         int stoneNeededForRepair = (building.getMaxHitPoint() - building.getHitPoint()) / 10;
 
@@ -94,11 +95,23 @@ public class SelectBuildingMenuController {
         return SelectBuildingMenuMessages.SUCCESS;
     }
 
-    private static boolean isEnemyAround() {
-        //TODO: implement
+    private static boolean isEnemyAround(Governance governance, int X, int Y, int size) {
+        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
+        int range = 3;
+        for (int x = X; x < X + size; x++) {
+            for (int y = Y; y < Y + size; y++) {
+                for (int i = -range; i <= range; i++) {
+                    for (int j = -Math.abs(range - i); j <= Math.abs(range - i); j++) {
+                        if(Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(),x+i,y+j)){
+                            if(tiles[x+i][y+j].hasEnemy(governance))
+                                return true;
+                        }
+                    }
+                }
+            }
+        }
         return false;
     }
-
     private static boolean createUnit(UnitMaker unitMaker, Troops troop, int count) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         setUnitCoordinates(unitMaker);

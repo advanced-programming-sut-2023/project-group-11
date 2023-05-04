@@ -1,6 +1,7 @@
 package model.map;
 
 import controller.BuildingUtils;
+import model.Governance;
 import model.buildings.Building;
 import model.people.Troops;
 import model.people.Units;
@@ -80,6 +81,14 @@ public class Tile {
         this.building = null;
         this.tree = null;
         this.units = new ArrayList<>();
+    }
+
+    public boolean hasEnemy(Governance governance){
+        for (Units units:units){
+            if(!units.getOwnerGovernance().equals(governance))
+                return true;
+        }
+        return false;
     }
 
     public boolean isFull() {

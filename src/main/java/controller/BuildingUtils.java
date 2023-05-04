@@ -30,7 +30,7 @@ public class BuildingUtils {
     public static boolean isMapEmpty(int x, int y, int size) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         for (int i = x; i < x + size; i++) {
-            for (int j = y; j > y - size; j--) {
+            for (int j = y; j < y + size; j++) {
                 if (tiles[i][j].isFull())
                     return false;
             }
@@ -49,7 +49,7 @@ public class BuildingUtils {
         };
 
         for (int i = x; i < x + size; i++) {
-            for (int j = y; j > y - size; j--) {
+            for (int j = y; j < y + size; j++) {
                 if (!isSuitable(tiles[i][j], field))
                     return false;
             }
@@ -133,7 +133,7 @@ public class BuildingUtils {
         }
 
         for (int i = x; i < x + size; i++) {
-            for (int j = y; j > y - size; j--) {
+            for (int j = y; j < y + size; j++) {
                 tiles[i][j].setBuilding(building);
             }
         }
@@ -142,7 +142,9 @@ public class BuildingUtils {
     private static boolean isClimbable(Building building, int x, int y, int size) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         for (int i = x - 1; i < x + size + 1; i++) {
-            for (int j = y + 1; j > y - size - 1; j--) {
+            for (int j = y - 1; j < y + size + 1; j++) {
+                if(!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(),i,j))
+                    continue;
                 Building targetBuilding = tiles[i][j].getBuilding();
                 if (targetBuilding.equals(building))
                     continue;
@@ -158,7 +160,9 @@ public class BuildingUtils {
 
     private static void makeClimbable(Building building, int x, int y, int size, Tile[][] tiles) {
         for (int i = x - 1; i < x + size + 1; i++) {
-            for (int j = y + 1; j > y - size - 1; j--) {
+            for (int j = y - 1; j < y + size + 1; j++) {
+                if(!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(),i,j))
+                    continue;
                 Building targetBuilding = tiles[i][j].getBuilding();
                 if (targetBuilding.equals(building))
                     continue;
