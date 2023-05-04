@@ -49,8 +49,4 @@ public class SelectBuildingMenu {
             case SUCCESS -> System.out.println("Building Has Been Repaired Successfully!");
         }
     }
-
-    private static void attackMachine() {
-
-    }
 }

@@ -1,7 +1,7 @@
 package view;
 
-import controller.Utils;
 import controller.SignupMenuController;
+import controller.Utils;
 import view.enums.commands.SignupMenuCommands;
 import view.enums.messages.SignupMenuMessages;
 

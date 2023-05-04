@@ -27,7 +27,6 @@ public class Governance {
     private double workersEfficiency = 1;
     private final ArrayList<Trade> previousTrades = new ArrayList<>();
     private final ArrayList<Trade> tradeNotification = new ArrayList<>();
-    //popularity = taxFactor + fearFactor + foodFactor + religiousFactor
     private final HashMap<AllResource, Integer> allResources = new HashMap<>();
     private final ArrayList<Storage> storages = new ArrayList<>();
     private final ArrayList<Building> buildings = new ArrayList<>();
@@ -54,7 +53,6 @@ public class Governance {
         allResources.put(AllResource.METAL_ARMOR, 0);
         allResources.put(AllResource.SWORD, 0);
     }
-
 
     public Governance(User owner, int area) {
         this.owner = owner;

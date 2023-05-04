@@ -119,31 +119,25 @@ public class BuildingUtils {
         //TODO: popularityRate
 //        if(building instanceof Church)
 
-        if (building instanceof Climbable climbable) {
-            if (climbable.isClimbable())
-                makeClimbable(building, x, y, size, tiles);
-            else
-                climbable.setClimbable(isClimbable(building, x, y, size));
-        }
+        if (building instanceof Climbable climbable)
+            if (climbable.isClimbable()) makeClimbable(building, x, y, size, tiles);
+            else climbable.setClimbable(isClimbable(building, x, y, size));
 
         governance.setGold(governance.getGold() - building.getGoldCost());
         governance.changeResourceAmount(building.getResourceCostType(), -building.getResourceCostNumber());
-        if (building instanceof Storage storage) {
-            building.getOwner().getStorages().add(storage);
-        }
 
-        for (int i = x; i < x + size; i++) {
-            for (int j = y; j < y + size; j++) {
+        if (building instanceof Storage storage) building.getOwner().getStorages().add(storage);
+
+        for (int i = x; i < x + size; i++)
+            for (int j = y; j < y + size; j++)
                 tiles[i][j].setBuilding(building);
-            }
-        }
     }
 
     private static boolean isClimbable(Building building, int x, int y, int size) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         for (int i = x - 1; i < x + size + 1; i++) {
             for (int j = y - 1; j < y + size + 1; j++) {
-                if(!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(),i,j))
+                if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), i, j))
                     continue;
                 Building targetBuilding = tiles[i][j].getBuilding();
                 if (targetBuilding.equals(building))
@@ -161,7 +155,7 @@ public class BuildingUtils {
     private static void makeClimbable(Building building, int x, int y, int size, Tile[][] tiles) {
         for (int i = x - 1; i < x + size + 1; i++) {
             for (int j = y - 1; j < y + size + 1; j++) {
-                if(!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(),i,j))
+                if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), i, j))
                     continue;
                 Building targetBuilding = tiles[i][j].getBuilding();
                 if (targetBuilding.equals(building))

@@ -4,16 +4,16 @@ import model.AllResource;
 
 
 public enum TowerType {
-    LOOKOUT_TOWER("lookout tower",1,1000,0, AllResource.STONE,10,
-            0,true,false,0,10,10,10,false),
-    PERIMETER_TURRET("perimeter turret",2,1000,0,AllResource.STONE,10,
-            0,true,false,0,10,10,10,false),
-    DEFENCE_TURRET("defence turret",2,1000,0,AllResource.STONE,15,
-            0,true,false,0,10,10,10,false),
-    SQUARE_TOWER("square tower",3,1000,0,AllResource.STONE,35,
-            0,true,false,0,10,10,10,true),
-    ROUND_TOWER("round tower",1,1000,0,AllResource.STONE,40,
-            0,true,false,0,10,10,10,true);
+    LOOKOUT_TOWER("lookout tower", 1, 1000, 0, AllResource.STONE, 10,
+            0, true, false, 0, 10, 10, 10, false),
+    PERIMETER_TURRET("perimeter turret", 2, 1000, 0, AllResource.STONE, 10,
+            0, true, false, 0, 10, 10, 10, false),
+    DEFENCE_TURRET("defence turret", 2, 1000, 0, AllResource.STONE, 15,
+            0, true, false, 0, 10, 10, 10, false),
+    SQUARE_TOWER("square tower", 3, 1000, 0, AllResource.STONE, 35,
+            0, true, false, 0, 10, 10, 10, true),
+    ROUND_TOWER("round tower", 1, 1000, 0, AllResource.STONE, 40,
+            0, true, false, 0, 10, 10, 10, true);
 
 
     private final String name;
@@ -45,9 +45,9 @@ public enum TowerType {
     }
 
 
-    TowerType(String name,int size, int hitPoint, int goldCost, AllResource resourceCostType, int resourceCostNumber,
+    TowerType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType, int resourceCostNumber,
               int workersNumber, boolean isActive, boolean areWorkersEngineer, int popularityEffect,
-              int fireRange, int defendRange, int unitCapacity,boolean isTower) {
+              int fireRange, int defendRange, int unitCapacity, boolean isTower) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -108,9 +108,9 @@ public enum TowerType {
         return popularityEffect;
     }
 
-    public static TowerType getTowerTypeByName(String name){
+    public static TowerType getTowerTypeByName(String name) {
         for (TowerType towerType : TowerType.values())
-            if(towerType.name.equals(name))
+            if (towerType.name.equals(name))
                 return towerType;
         return null;
     }

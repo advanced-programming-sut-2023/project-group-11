@@ -98,20 +98,16 @@ public class SelectBuildingMenuController {
     private static boolean isEnemyAround(Governance governance, int X, int Y, int size) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         int range = 3;
-        for (int x = X; x < X + size; x++) {
-            for (int y = Y; y < Y + size; y++) {
-                for (int i = -range; i <= range; i++) {
-                    for (int j = -Math.abs(range - i); j <= Math.abs(range - i); j++) {
-                        if(Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(),x+i,y+j)){
-                            if(tiles[x+i][y+j].hasEnemy(governance))
+        for (int x = X; x < X + size; x++)
+            for (int y = Y; y < Y + size; y++)
+                for (int i = -range; i <= range; i++)
+                    for (int j = -Math.abs(range - i); j <= Math.abs(range - i); j++)
+                        if (Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), x + i, y + j))
+                            if (tiles[x + i][y + j].hasEnemy(governance))
                                 return true;
-                        }
-                    }
-                }
-            }
-        }
         return false;
     }
+
     private static boolean createUnit(UnitMaker unitMaker, Troops troop, int count) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         setUnitCoordinates(unitMaker);

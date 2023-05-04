@@ -5,14 +5,14 @@ import model.AllResource;
 
 public enum GateHouseType {
 
-    SMALL_HORIZONTAL("small gatehouse",2,400,10,AllResource.STONE,0,0,
-            true,false,0,8,true),
-    LARGE_HORIZONTAL("large gatehouse",3,500,0, AllResource.STONE,20,0,
-            true,false,0,10,true),
-    SMALL_VERTICAL("small gatehouse",2,400,10,AllResource.STONE,0,0,
-                             true,false,0,8,false),
-    LARGE_VERTICAL("large gatehouse",3,500,0,AllResource.STONE,20,0,
-            true,false,0,10,false);
+    SMALL_HORIZONTAL("small gatehouse", 2, 400, 10, AllResource.STONE, 0, 0,
+            true, false, 0, 8, true),
+    LARGE_HORIZONTAL("large gatehouse", 3, 500, 0, AllResource.STONE, 20, 0,
+            true, false, 0, 10, true),
+    SMALL_VERTICAL("small gatehouse", 2, 400, 10, AllResource.STONE, 0, 0,
+            true, false, 0, 8, false),
+    LARGE_VERTICAL("large gatehouse", 3, 500, 0, AllResource.STONE, 20, 0,
+            true, false, 0, 10, false);
 
     private final String name;
     private final int size;
@@ -28,10 +28,10 @@ public enum GateHouseType {
     private final boolean horizontalDirection;
 
 
-    GateHouseType(String name,int size, int hitPoint, double goldCost,
+    GateHouseType(String name, int size, int hitPoint, double goldCost,
                   AllResource resourceCostType, int resourceCostNumber, int workersNumber,
                   boolean isActive, boolean areWorkersEngineer,
-                  int popularityEffect, int capacity,boolean horizontalDirection) {
+                  int popularityEffect, int capacity, boolean horizontalDirection) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -95,9 +95,9 @@ public enum GateHouseType {
         return horizontalDirection;
     }
 
-    public static GateHouseType getGateHouseTypeByName(String name){
+    public static GateHouseType getGateHouseTypeByName(String name) {
         for (GateHouseType gateHouseType : GateHouseType.values())
-            if(gateHouseType.name.equals(name))
+            if (gateHouseType.name.equals(name))
                 return gateHouseType;
         return null;
     }

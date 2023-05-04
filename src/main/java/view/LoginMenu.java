@@ -18,8 +18,7 @@ public class LoginMenu {
             else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.BACK) != null) {
                 System.out.println("Entered Entry Menu");
                 return;
-            }
-            else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.SHOW_CURRENT_MENU) != null)
+            } else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Login Menu!");
             else if ((matcher = LoginMenuCommands.getMatcher(command, LoginMenuCommands.LOGIN)) != null) {
                 if (checkLogin(matcher) == LoginMenuMessages.SUCCESS) return;
