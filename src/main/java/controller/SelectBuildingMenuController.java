@@ -28,9 +28,8 @@ public class SelectBuildingMenuController {
             createEngineer((UnitMaker) building, count);
             return SelectBuildingMenuMessages.SUCCESS;
         }
-        type = type.replace(" ","_");
         try {
-            TroopTypes.valueOf(type.toUpperCase());
+            TroopTypes.valueOf(type.replace(" ","_").toUpperCase());
         } catch (IllegalArgumentException e) {
             return SelectBuildingMenuMessages.INVALID_TYPE;
         }

@@ -8,6 +8,7 @@ import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
 import model.people.Units;
+import model.people.enums.MachineTypes;
 import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class SelectUnitMenuController {
         else if (BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) &&
                 map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable climbable &&
                 !climbable.isClimbable())
-            return SelectUnitMenuMessages.INVALID_DESTINATION_ONCLIMABLE_BUILDING;
+            return SelectUnitMenuMessages.INVALID_DESTINATION_UNCLIMBABLE_BUILDING;
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
 
@@ -77,8 +78,16 @@ public class SelectUnitMenuController {
         return null;
     }
 
-    private static SelectUnitMenuMessages checkBuildMachine(Matcher matcher) {
-        return null;
+    public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
+        if(!unitType.equals("engineer"))
+            return SelectUnitMenuMessages.INVALID_COMMAND;
+        String machineType = matcher.group("machineType");
+        try {
+            MachineTypes.valueOf(machineType.replace(" ","_").toUpperCase());
+        }catch (IllegalArgumentException e){
+            return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
+        }
+        return SelectUnitMenuMessages.SUCCESS;
     }
 
     private static SelectUnitMenuMessages disbandUnit() {
