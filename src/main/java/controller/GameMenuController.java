@@ -23,14 +23,15 @@ public class GameMenuController {
         int currentTurn = getCurrentGame().getTurn();
         ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
         int totalGovernances = governances.size();
-
-        currentGame.setCurrentGovernance(governances.get(currentTurn % totalGovernances));
+        currentGovernance = governances.get(currentTurn % totalGovernances);
+        currentGame.setCurrentGovernance(currentGovernance);
         currentGame.plusTurnCounter();
-        currentGovernance = currentGame.getCurrentGovernance();
-        updatePopularityRate();
+
+        updateSoldiers();
         updateGold();
-        updatePopulation();
         updateStorages();
+        updatePopulation();
+        updatePopularityRate();
     }
 
     public static GameMenuMessages checkShowMap(Matcher matcher) {
