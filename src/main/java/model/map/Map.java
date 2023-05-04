@@ -4,26 +4,26 @@ import model.Stronghold;
 
 public class Map {
     private final String name;
-    private final Tile[][] map;
+    private final Tile[][] tiles;
     private final int size;
 
     public Map(String name, int size) {
         this.name = name;
         this.size = size;
 
-        this.map  = new Tile[size][size];
+        this.tiles = new Tile[size][size];
         for (int i = 0; i < size; i++) {
-            map[i] = new Tile[size];
+            tiles[i] = new Tile[size];
             for (int j = 0; j < size; j++) {
-                map[i][j] = new Tile();
+                tiles[i][j] = new Tile();
             }
         }
         Stronghold.addMap(this);
     }
 
-    public Map(String name, Tile[][] map, int size) {
+    public Map(String name, Tile[][] tiles, int size) {
         this.name = name;
-        this.map = map;
+        this.tiles = tiles;
         this.size = size;
         Stronghold.addMap(this);
     }
@@ -36,11 +36,11 @@ public class Map {
         return size;
     }
 
-    public Tile[][] getMap() {
-        return map;
+    public Tile[][] getTiles() {
+        return tiles;
     }
 
     public Tile getTile(int x, int y) {
-        return map[x][y];
+        return tiles[x][y];
     }
 }

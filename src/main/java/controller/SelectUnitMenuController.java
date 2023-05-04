@@ -142,7 +142,7 @@ public class SelectUnitMenuController {
         else if (currentBuilding instanceof GateHouse gateHouse) { // TODO: change gate controller end of choosing path
             if (currentGovernance.equals(gateHouse.getGateController()))
                 return true;
-            else if (previousBuilding instanceof Climbable && !previousBuilding.getName().equals("stairs"))
+            else if (previousBuilding instanceof Climbable climbable && climbable.getName().equals("stairs"))
                 return true;
             else if (unitType.equals("assassin"))
                 return true;

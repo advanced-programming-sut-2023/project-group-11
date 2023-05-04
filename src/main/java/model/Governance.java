@@ -220,6 +220,7 @@ public class Governance {
     }
 
     public boolean hasEnoughItem(AllResource item, int amount) {
+        if (item.equals(AllResource.NONE)) return true;
         return allResources.get(item) >= amount;
     }
 

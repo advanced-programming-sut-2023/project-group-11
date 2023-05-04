@@ -1,6 +1,8 @@
 package model.map;
 
+import controller.BuildingUtils;
 import model.buildings.Building;
+import model.people.Troops;
 import model.people.Units;
 
 import java.util.ArrayList;
@@ -92,13 +94,18 @@ public class Tile {
     public String toString() {
         String unitsName = "";
         String result = "";
-        for (Units unit : units) unitsName += unit.getName() + ", ";
+        int i = 1;
+
+        for (Units unit : units)
+            if (unit instanceof Troops troop && troop.isRevealed())
+                unitsName += (i++) + unit.getName() + "HP: " + unit.getHp() + '\n';
 
         result += "Texture: " + texture.getName() + '\n';
-        if (building != null) result += "Building: " + building.getName() + '\n';
-        if (units.size() > 0) result += "Units: " + unitsName + '\n';
-        if (tree != null) result += "Tree: " + tree.getName();
-        if (getResourceAmount() != null) result += getResourceAmount();
+        if (BuildingUtils.isBuildingInTile(building))
+            result += "Building: " + building.getName() + "HP: " + building.getHitPoint() + '\n';
+        if (units.size() > 0) result += "Units: " + unitsName;
+        if (tree != null) result += "Tree: " + tree.getName() + '\n';
+        if (getResourceAmount() != null) result += getResourceAmount() + '\n';
 
         return result;
     }

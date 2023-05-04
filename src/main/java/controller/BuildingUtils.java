@@ -28,7 +28,7 @@ public class BuildingUtils {
     }
 
     public static boolean isMapEmpty(int x, int y, int size) {
-        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
+        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         for (int i = x; i < x + size; i++) {
             for (int j = y; j > y - size; j--) {
                 if (tiles[i][j].isFull())
@@ -39,7 +39,7 @@ public class BuildingUtils {
     }
 
     public static boolean isTextureSuitable(String type, int x, int y, int size) {
-        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
+        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
 
         String field = switch (type) {
             case "dairy farm", "apple orchard", "wheat farm", "hops farm" -> "farm";
@@ -111,7 +111,7 @@ public class BuildingUtils {
     }
 
     public static void build(Building building, int x, int y, int size) {
-        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
+        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
         if (building instanceof Hovel hovel)
@@ -119,11 +119,11 @@ public class BuildingUtils {
         //TODO: popularityRate
 //        if(building instanceof Church)
 
-        if (building instanceof Climbable) {
-            if(((Climbable) building).isClimbable())
-                makeClimbable(building,x,y,size,tiles);
+        if (building instanceof Climbable climbable) {
+            if (climbable.isClimbable())
+                makeClimbable(building, x, y, size, tiles);
             else
-                ((Climbable) building).setClimbable(isClimbable(building, x, y, size));
+                climbable.setClimbable(isClimbable(building, x, y, size));
         }
 
         governance.setGold(governance.getGold() - building.getGoldCost());
@@ -140,7 +140,7 @@ public class BuildingUtils {
     }
 
     private static boolean isClimbable(Building building, int x, int y, int size) {
-        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getMap();
+        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         for (int i = x - 1; i < x + size + 1; i++) {
             for (int j = y + 1; j > y - size - 1; j--) {
                 Building targetBuilding = tiles[i][j].getBuilding();
@@ -148,15 +148,15 @@ public class BuildingUtils {
                     continue;
                 if ((i == x - 1 && (j == y + 1 || j == y - size)) || (i == x + size && (j == y + 1 || j == y - size)))
                     continue;
-                if ((targetBuilding instanceof Climbable))
-                    if ((((Climbable) targetBuilding).isClimbable()))
+                if ((targetBuilding instanceof Climbable climbable))
+                    if (climbable.isClimbable())
                         return true;
             }
         }
         return false;
     }
 
-    private static void makeClimbable(Building building, int x, int y, int size,Tile[][] tiles) {
+    private static void makeClimbable(Building building, int x, int y, int size, Tile[][] tiles) {
         for (int i = x - 1; i < x + size + 1; i++) {
             for (int j = y + 1; j > y - size - 1; j--) {
                 Building targetBuilding = tiles[i][j].getBuilding();
@@ -164,10 +164,10 @@ public class BuildingUtils {
                     continue;
                 if ((i == x - 1 && (j == y + 1 || j == y - size)) || (i == x + size && (j == y + 1 || j == y - size)))
                     continue;
-                if(targetBuilding instanceof Climbable && !((Climbable) targetBuilding).isClimbable()){
-                    ((Climbable) targetBuilding).setClimbable(true);
-                    makeClimbable(targetBuilding, targetBuilding.getXCoordinate(),
-                            targetBuilding.getYCoordinate(), targetBuilding.getSize(), tiles);
+                if (targetBuilding instanceof Climbable climbable && !climbable.isClimbable()) {
+                    climbable.setClimbable(true);
+                    makeClimbable(targetBuilding, climbable.getXCoordinate(),
+                            climbable.getYCoordinate(), climbable.getSize(), tiles);
                 }
             }
         }
