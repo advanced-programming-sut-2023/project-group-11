@@ -4,7 +4,6 @@ import model.Governance;
 import model.Stronghold;
 import model.buildings.*;
 import model.people.Troops;
-import model.people.enums.TroopTypes;
 import model.AllResource;
 import view.enums.messages.SelectBuildingMenuMessages;
 
@@ -28,11 +27,9 @@ public class SelectBuildingMenuController {
             createEngineer((UnitMaker) building, count);
             return SelectBuildingMenuMessages.SUCCESS;
         }
-        try {
-            TroopTypes.valueOf(type.replace(" ","_").toUpperCase());
-        } catch (IllegalArgumentException e) {
+
+        if (!Utils.isValidUnitType(type))
             return SelectBuildingMenuMessages.INVALID_TYPE;
-        }
 
         Troops troop = new Troops(type);
 

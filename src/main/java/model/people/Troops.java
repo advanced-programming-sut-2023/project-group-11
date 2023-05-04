@@ -3,7 +3,6 @@ package model.people;
 import model.Stronghold;
 import model.people.enums.TroopDamage;
 import model.people.enums.Speed;
-import model.people.enums.TroopTypes;
 import model.AllResource;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -7,6 +7,7 @@ import model.buildings.*;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
+import model.people.Troops;
 import model.people.Units;
 import model.people.enums.MachineTypes;
 import view.enums.messages.SelectUnitMenuMessages;
@@ -44,6 +45,87 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
+    public static SelectUnitMenuMessages checkAirAttack(Matcher matcher, int[] currentLocation, String unitType) {
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
+            return SelectUnitMenuMessages.INVALID_COMMAND;
+
+        Map map = Stronghold.getCurrentGame().getMap();
+        int targetX = Integer.parseInt(matcher.group("xCoordinate"));
+        int targetY = Integer.parseInt(matcher.group("yCoordinate"));
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        Tile targetTile = map.getTile(targetX, targetY);
+
+        if (!Utils.isValidCoordinates(map, targetX, targetY))
+            return SelectUnitMenuMessages.INVALID_COORDINATE;
+        else if (!isValidUnitForAirAttack(unitType))
+            return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_ATTACK;
+        else if (((Troops) selectedUnits.get(0)).getRange() < Math.abs(currentX - targetX) ||
+                ((Troops) selectedUnits.get(0)).getRange() < Math.abs(currentY - targetY))
+            return SelectUnitMenuMessages.OUT_OF_RANGE;
+        else if (noAttackLeft(selectedUnits))
+            return SelectUnitMenuMessages.NO_ATTACK_LEFT;
+        else if (targetTile.getUnits().size() == 0 &&
+                targetTile.getBuilding() == null)
+            return SelectUnitMenuMessages.EMPTY_TILE;
+        else if (targetTile.getUnits().get(0).getOwner().equals(selectedUnits.get(0).getOwner()) ||
+                targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
+            return SelectUnitMenuMessages.FRIENDLY_ATTACK;
+
+        if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
+        else attackUnits(selectedUnits, targetTile);
+
+        return SelectUnitMenuMessages.SUCCESS;
+    }
+
+    private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
+        ArrayList<Units> removings = new ArrayList<>();
+        for (int i = 0; i < selectedUnits.size(); i++) {
+            if (selectedUnits.get(i).hasAttacked())
+                removings.add(selectedUnits.get(i));
+        }
+        selectedUnits.removeAll(removings);
+
+        return selectedUnits.size() == 0;
+    }
+
+    public static SelectUnitMenuMessages checkGroundAttack(Matcher matcher) {
+        return null;
+    }
+
+    public static SelectUnitMenuMessages checkPatrolUnit(Matcher matcher) {
+        return null;
+    }
+
+    public static SelectUnitMenuMessages checkSetUnitState(Matcher matcher) {
+        return null;
+    }
+
+    public static SelectUnitMenuMessages checkPourOil(Matcher matcher) {
+        return null;
+    }
+
+    public static SelectUnitMenuMessages checkDigTunnel(Matcher matcher) {
+        return null;
+    }
+
+    public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
+        if (!unitType.equals("engineer"))
+            return SelectUnitMenuMessages.INVALID_COMMAND;
+        String machineType = matcher.group("machineType");
+        try {
+            MachineTypes.valueOf(machineType.replace(" ", "_").toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
+        }
+        return SelectUnitMenuMessages.SUCCESS;
+    }
+
+    private static SelectUnitMenuMessages disbandUnit() {
+        return null;
+    }
+
     private static void moveUnits(Map map, String unitType, Path shortestPath, int[] currentLocation, int destinationX, int destinationY) {
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
@@ -58,42 +140,6 @@ public class SelectUnitMenuController {
         currentLocation[1] = destinationY;
     }
 
-    private static SelectUnitMenuMessages checkPatrolUnit(Matcher matcher) {
-        return null;
-    }
-
-    private static SelectUnitMenuMessages checkSetUnitState(Matcher matcher) {
-        return null;
-    }
-
-    private static SelectUnitMenuMessages checkAttackUnit(Matcher matcher) {
-        return null;
-    }
-
-    private static SelectUnitMenuMessages checkPourOil(Matcher matcher) {
-        return null;
-    }
-
-    private static SelectUnitMenuMessages checkDigTunnel(Matcher matcher) {
-        return null;
-    }
-
-    public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
-        if(!unitType.equals("engineer"))
-            return SelectUnitMenuMessages.INVALID_COMMAND;
-        String machineType = matcher.group("machineType");
-        try {
-            MachineTypes.valueOf(machineType.replace(" ","_").toUpperCase());
-        }catch (IllegalArgumentException e){
-            return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
-        }
-        return SelectUnitMenuMessages.SUCCESS;
-    }
-
-    private static SelectUnitMenuMessages disbandUnit() {
-        return null;
-    }
-
     private static Path findRootToDestination(Map map, String unitType, int currentX, int currentY, int destinationX, int destinationY) {
         int speed = minimumSpeed(map.getTile(currentX, currentY).getUnitsByType(unitType));
         ArrayList<Path> paths = new ArrayList<>();
@@ -101,7 +147,7 @@ public class SelectUnitMenuController {
         pathDFS(map, unitType, currentX, currentY, destinationX, destinationY, speed, paths, new Path());
 
         if (paths.size() == 0) return null;
-        else return shortestPath(paths);
+        else return getShortestPath(paths);
     }
 
     private static void pathDFS(Map map, String unitType, int currentX, int currentY, int destinationX, int destinationY, int speed, ArrayList<Path> paths, Path path) {
@@ -143,7 +189,7 @@ public class SelectUnitMenuController {
         Tile previousTile = map.getTile(previousX, previousY);
         Building previousBuilding = previousTile.getBuilding();
 
-        if (!Utils.isValidUnitTypeForClimbing(unitType))
+        if (notValidUnitTypeForClimbing(unitType))
             return false;
 
         if (currentBuilding instanceof Trap)
@@ -192,13 +238,13 @@ public class SelectUnitMenuController {
     private static int minimumSpeed(ArrayList<Units> units) {
         int minimumSpeed = 5 + 1;
         for (Units unit : units) {
-            if (unit.getSpeed() < minimumSpeed)
-                minimumSpeed = unit.getSpeed();
+            if (unit.getLeftMoves() < minimumSpeed)
+                minimumSpeed = unit.getLeftMoves();
         }
         return minimumSpeed;
     }
 
-    private static Path shortestPath(ArrayList<Path> paths) {
+    private static Path getShortestPath(ArrayList<Path> paths) {
         int length = 6 + 1;
         Path shortestPath = new Path();
         for (Path path : paths) {
@@ -210,6 +256,12 @@ public class SelectUnitMenuController {
         return shortestPath;
     }
 
+    static boolean notValidUnitTypeForClimbing(String type) {
+        return type.equals("knight") || type.equals("ladderman") || type.equals("horse archer") ||
+                type.equals("siege tower") || type.equals("battering ram") || type.equals("trebuchets") ||
+                type.equals("fire ballista") || type.equals("catapults");
+    }
+
     private static boolean notValidTextureForMoving(Tile destination) {
         return destination.getTexture().equals(Texture.MARSH) || destination.getTexture().equals(Texture.RIVER) ||
                 destination.getTexture().equals(Texture.SEA) || destination.getTexture().equals(Texture.SMALL_LAKE) ||
@@ -217,7 +269,7 @@ public class SelectUnitMenuController {
     }
 
     private static boolean isValidDestinationSameOwnerUnits(Tile currentTile, Tile destination) {
-        return currentTile.getUnits().get(0).getOwnerGovernance().equals(destination.getUnits().get(0).getOwnerGovernance());
+        return currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
     }
 
     private static void setLeftMoves(Path shortestPath, ArrayList<Units> selectedUnits) {
@@ -252,7 +304,23 @@ public class SelectUnitMenuController {
         }
     }
 
-    private static void attackMachine() {
+    private static boolean isValidUnitForAirAttack(String type) {
+        return type.equals("archer") ||
+                type.equals("archer bow") || type.equals("horse archer") || type.equals("fire thrower") ||
+                type.equals("trebuchets") || type.equals("fire ballista") || type.equals("catapults");
+    }
+
+    private static void attackBuilding(ArrayList<Units> selectedUnits, Tile targetTile) {
+        Building targetBuilding = targetTile.getBuilding();
+        targetBuilding.setHitPoint(targetBuilding.getHitPoint() - selectedUnits.size()*((Troops) selectedUnits.get(0)).getDamage());
+
+        for (Units unit : selectedUnits)
+            unit.setAttacked(true);
+        // destroy building
+
+    }
+
+    private static void attackUnits(ArrayList<Units> selectedUnits, Tile targetTile) {
 
     }
 }

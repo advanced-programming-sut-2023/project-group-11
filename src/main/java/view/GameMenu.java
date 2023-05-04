@@ -82,7 +82,7 @@ public class GameMenu {
 
     private static void checkChangeFoodRate(Matcher matcher) {
         message = GameMenuController.checkChangeFoodRate(matcher);
-        
+
         switch (message) {
             case INVALID_RATE -> System.out.println("Your rate number must be between -2 and 2!");
             case SUCCESS -> System.out.println("You have successfully changed your food rate!");
@@ -108,7 +108,7 @@ public class GameMenu {
 
     private static void checkChangeFearRate(Matcher matcher) {
         message = GameMenuController.checkChangeFearRate(matcher);
-        
+
         switch (message) {
             case INVALID_RATE -> System.out.println("Your rate number must be between -5 and 5!");
             case SUCCESS -> System.out.println("You have successfully changed your fear rate!");
@@ -158,9 +158,10 @@ public class GameMenu {
             case SUCCESS -> {
                 System.out.println(Utils.removeDoubleQuotation(matcher.group("type")) +
                         " Unit(s) Selected (Entered SelectUnit Menu)!");
-                int[] currentLocation = new int[2];
-                currentLocation[0] = Integer.parseInt(matcher.group("xCoordinate"));
-                currentLocation[1] = Integer.parseInt(matcher.group("yCoordinate"));
+                int[] currentLocation = {
+                        Integer.parseInt(matcher.group("xCoordinate")),
+                        Integer.parseInt(matcher.group("yCoordinate"))
+                };
                 SelectUnitMenu.run(currentLocation, Utils.removeDoubleQuotation(matcher.group("type")));
             }
         }

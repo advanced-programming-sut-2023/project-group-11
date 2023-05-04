@@ -118,7 +118,7 @@ public class ShowMapMenuController {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         for (Units unit : tile.getUnits())
             if (unit instanceof Machine) return true;
-            else if (((Troops) unit).isRevealed() || unit.getOwnerGovernance().equals(governance)) return true;
+            else if (((Troops) unit).isRevealed() || unit.getOwner().equals(governance)) return true;
 
         return false;
     }

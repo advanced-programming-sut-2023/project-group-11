@@ -173,7 +173,7 @@ public class GameMenuController {
             return GameMenuMessages.INVALID_UNIT_TYPE;
         else if (tile.getUnits().size() == 0)
             return GameMenuMessages.NO_UNIT_HERE;
-        else if (!tile.getUnits().get(0).getOwnerGovernance().equals(currentGame.getCurrentGovernance()))
+        else if (!tile.getUnits().get(0).getOwner().equals(currentGame.getCurrentGovernance()))
             return GameMenuMessages.NOT_YOUR_UNIT;
 
         return GameMenuMessages.SUCCESS;

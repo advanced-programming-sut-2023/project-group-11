@@ -9,6 +9,7 @@ public abstract class Units {
     protected int hp;
     protected Speed speed;
     protected int leftMoves;
+    protected boolean attacked = false;
     protected double cost;
     protected Governance ownerGovernance;
     protected UnitState unitState = UnitState.STANDING;
@@ -41,7 +42,7 @@ public abstract class Units {
         return cost;
     }
 
-    public Governance getOwnerGovernance() {
+    public Governance getOwner() {
         return ownerGovernance;
     }
 
@@ -55,5 +56,13 @@ public abstract class Units {
 
     public void setLeftMoves(int leftMoves) {
         this.leftMoves = leftMoves;
+    }
+
+    public boolean hasAttacked() {
+        return attacked;
+    }
+
+    public void setAttacked(boolean attacked) {
+        this.attacked = attacked;
     }
 }
