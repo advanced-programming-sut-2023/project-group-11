@@ -41,7 +41,7 @@ public class Game {
     }
 
     public void plusTurnCounter() {
-        this.turn =+ 1;
+        this.turn += 1;
     }
 
     public Governance getCurrentGovernance() {

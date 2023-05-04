@@ -34,6 +34,7 @@ public class SelectBuildingMenu {
             case CANT_CREATE_HERE -> System.out.println("Can't Create Unit Here!");
             case NOT_ENOUGH_GOLD -> System.out.println("You Don't Have Enough Gold!");
             case NOT_ENOUGH_RESOURCE -> System.out.println("You don't have enough equipment!");
+            case BAD_UNIT_MAKER_PLACE -> System.out.println("No places are around the unit maker to put the unit(s)!");
             case SUCCESS -> System.out.println("Troop created successfully!");
         }
     }
@@ -47,9 +48,5 @@ public class SelectBuildingMenu {
             case ENEMY_AROUND -> System.out.println("There is enemy around and ypu can't repair this building!");
             case SUCCESS -> System.out.println("Building Has Been Repaired Successfully!");
         }
-    }
-
-    private static void attackMachine() {
-
     }
 }

@@ -85,8 +85,7 @@ public class ProfileMenuController {
             result += "Rank = " + Stronghold.getRankByUsername(user.getUsername());
             if (user.getSlogan() != null)
                 result += "\nSlogan = " + user.getSlogan();
-        }
-        else {
+        } else {
             switch (field) {
                 case "highscore" -> result = "HighScore = " + user.getHighScore();
                 case "rank" -> result = "Rank = " + Stronghold.getRankByUsername(user.getUsername());

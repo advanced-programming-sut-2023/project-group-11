@@ -1,15 +1,14 @@
 import controller.EntryMenuController;
 import controller.SignupMenuController;
 import controller.Utils;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import view.enums.commands.SignupMenuCommands;
 import view.enums.messages.SignupMenuMessages;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import java.util.regex.Matcher;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SignupMenuTest {
     private Matcher matcher;
@@ -139,8 +138,9 @@ public class SignupMenuTest {
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.SUCCESS, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
+
     @Test
-    public void createUserTest(){
+    public void createUserTest() {
         matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali@daee.com -p Amir123# Amir123# -s \"hello all\"");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.SUCCESS, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));

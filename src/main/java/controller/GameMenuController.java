@@ -1,5 +1,6 @@
 package controller;
 
+import model.AllResource;
 import model.Game;
 import model.Governance;
 import model.Stronghold;
@@ -8,7 +9,6 @@ import model.buildings.ProductiveBuilding;
 import model.buildings.enums.FillerType;
 import model.map.Map;
 import model.map.Tile;
-import model.AllResource;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.ArrayList;
@@ -17,8 +17,23 @@ import java.util.regex.Matcher;
 
 public class GameMenuController {
     private static Game currentGame;
+    private static Governance currentGovernance;
 
     private static void nextTurn() {
+        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
+        int currentTurn = currentGame.getTurn();
+        int totalGovernances = governances.size();
+        currentGovernance = governances.get(currentTurn % totalGovernances);
+        currentGame.setCurrentGovernance(currentGovernance);
+        currentGame.plusTurnCounter();
+
+        if (currentGame.getTurn() > totalGovernances) {
+            updateSoldiers();
+            updateGold();
+            updateStorages();
+            updatePopulation();
+            updatePopularityRate();
+        }
     }
 
     public static GameMenuMessages checkShowMap(Matcher matcher) {
@@ -32,7 +47,6 @@ public class GameMenuController {
     }
 
     public static String showPopularity(Matcher matcher) {
-        Governance currentGovernance = currentGame.getCurrentGovernance();
         String output = "";
 
         if (matcher.group("factors") == null) output += currentGovernance.getPopularity();
@@ -47,7 +61,6 @@ public class GameMenuController {
     }
 
     public static String showFoodList() {
-        Governance currentGovernance = currentGame.getCurrentGovernance();
         String output = "";
 
         output += "Bread: " + currentGovernance.getAllResources().get(AllResource.BREAD) + '\n';
@@ -59,7 +72,6 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkChangeFoodRate(Matcher matcher) {
-        Governance currentGovernance = currentGame.getCurrentGovernance();
         int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
 
         if (rateNumber < -2 || rateNumber > 2) return GameMenuMessages.INVALID_RATE;
@@ -70,12 +82,10 @@ public class GameMenuController {
     }
 
     public static String showFoodRate() {
-        Governance currentGovernance = currentGame.getCurrentGovernance();
         return "Food rate: " + currentGovernance.getFoodRate();
     }
 
     public static GameMenuMessages checkChangeTaxRate(Matcher matcher) {
-        Governance currentGovernance = currentGame.getCurrentGovernance();
         int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
 
         if (rateNumber < -3 || rateNumber > 8) return GameMenuMessages.INVALID_RATE;
@@ -86,12 +96,10 @@ public class GameMenuController {
     }
 
     public static String showTaxRate() {
-        Governance currentGovernance = currentGame.getCurrentGovernance();
         return "Tax rate: " + currentGovernance.getTaxRate();
     }
 
     public static GameMenuMessages checkChangeFearRate(Matcher matcher) {
-        Governance currentGovernance = currentGame.getCurrentGovernance();
         int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
 
         if (rateNumber < -5 || rateNumber > 5) return GameMenuMessages.INVALID_RATE;
@@ -102,7 +110,6 @@ public class GameMenuController {
     }
 
     public static String showFearRate() {
-        Governance currentGovernance = currentGame.getCurrentGovernance();
         return "Fear rate: " + currentGovernance.getFearFactor();
     }
 
@@ -113,7 +120,6 @@ public class GameMenuController {
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
         String type = matcher.group("typeGroup");
-        Governance currentGovernance = currentGame.getCurrentGovernance();
         Building building = BuildingUtils.getBuildingByType(type);
 
         if (!BuildingUtils.isValidBuildingType(type)) return GameMenuMessages.INVALID_BUILDING_TYPE;
@@ -143,10 +149,9 @@ public class GameMenuController {
         if (!Utils.isValidCoordinates(currentGame.getMap(), x, y)) return GameMenuMessages.INVALID_COORDINATE;
 
         Building building = currentGame.getMap().getTile(x, y).getBuilding();
-        Governance governance = currentGame.getCurrentGovernance();
 
         if (!BuildingUtils.isBuildingInTile(building)) return GameMenuMessages.NO_BUILDING_HERE;
-        if (!building.getOwner().equals(governance)) return GameMenuMessages.NOT_YOUR_BUILDING;
+        if (!building.getOwner().equals(currentGovernance)) return GameMenuMessages.NOT_YOUR_BUILDING;
         return GameMenuMessages.SUCCESS;
     }
 
@@ -180,7 +185,6 @@ public class GameMenuController {
     }
 
     private static void updatePopulation() {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         ArrayList<Building> buildings = currentGovernance.getBuildings();
         int currentPopulation = currentGovernance.getCurrentPopulation();
         int maxPopulation = currentGovernance.getMaxPopulation();
@@ -207,24 +211,20 @@ public class GameMenuController {
     }
 
     private static void updateGold() {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-
         double currentGold = currentGovernance.getGold();
         double taxGold = currentGovernance.getTaxGold();
         currentGovernance.setGold(Math.max(0, currentGold - taxGold));
     }
 
-    private static void updateStorage() {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-
+    private static void updateStorages() {
         //increase foods, troop equipments, resources & decrease troop equipments, resources
-        updateAllResources(currentGovernance);
+        updateAllResources();
 
         //decrease foods
-        updateFood(currentGovernance);
+        updateFood();
     }
 
-    private static void updateFood(Governance currentGovernance) {
+    private static void updateFood() {
         double foodRatio = currentGovernance.getFoodRate() / 2.0 + 1;
         int foodConsumption = (int) (currentGovernance.getCurrentPopulation() * foodRatio);
         int totalFoodRemoved = 0;
@@ -238,7 +238,7 @@ public class GameMenuController {
         currentGovernance.updateFood();
     }
 
-    private static void updateAllResources(Governance currentGovernance) {
+    private static void updateAllResources() {
         ArrayList<Building> buildings = currentGovernance.getBuildings();
         int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("ox tether"));
 
@@ -274,8 +274,6 @@ public class GameMenuController {
     }
 
     private static void updatePopularityRate() {
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-
         if (currentGovernance.getTotalFood() == 0) currentGovernance.setFoodRate(-2);
         if (currentGovernance.getGold() < currentGovernance.getTaxGold()) currentGovernance.setTaxRate(0);
 
@@ -291,15 +289,11 @@ public class GameMenuController {
         currentGovernance.setPopularity(totalFactor);
     }
 
-    private static void fight() {
-
-    }
-
-    public static Game getCurrentGame() {
-        return currentGame;
-    }
-
     public static void setCurrentGame() {
         GameMenuController.currentGame = Stronghold.getCurrentGame();
+    }
+
+    public static int getCurrentTurn() {
+        return Math.ceilDiv(currentGame.getTurn(), currentGame.getGovernances().size());
     }
 }

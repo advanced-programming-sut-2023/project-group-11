@@ -1,7 +1,7 @@
 package model.buildings;
 
-import model.buildings.enums.GateHouseType;
 import model.Governance;
+import model.buildings.enums.GateHouseType;
 
 public class GateHouse extends Climbable {
 

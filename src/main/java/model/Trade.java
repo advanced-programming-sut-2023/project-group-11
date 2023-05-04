@@ -23,9 +23,9 @@ public class Trade {
         tradeNotify(this);
     }
 
-    private void tradeNotify(Trade trade){
-        for(Governance governance : Stronghold.getCurrentGame().getGovernances()){
-            if(trade.sender.equals(governance))
+    private void tradeNotify(Trade trade) {
+        for (Governance governance : Stronghold.getCurrentGame().getGovernances()) {
+            if (trade.sender.equals(governance))
                 continue;
             governance.getTradeNotification().add(trade);
         }
@@ -60,14 +60,14 @@ public class Trade {
         return sender;
     }
 
-    public void accept(String message,Governance receiver){
+    public void accept(String message, Governance receiver) {
         isOpen = false;
         receiverMessage = message;
         double transfer = price * resourceAmount;
         sender.setGold(sender.getGold() + transfer);
-        sender.removeFromStorage(resourceType,resourceAmount);
+        sender.removeFromStorage(resourceType, resourceAmount);
         receiver.setGold(receiver.getGold() - transfer);
-        receiver.addToStorage(resourceType,resourceAmount);
+        receiver.addToStorage(resourceType, resourceAmount);
         this.receiver = receiver;
         receiver.addTrade(this);
     }
@@ -76,15 +76,14 @@ public class Trade {
     public String toString() {
         String status = isOpen ? "Open" : "Closed";
         String receiverMessage = "";
-        if(status.equals("Closed")) {
+        if (status.equals("Closed")) {
             receiverMessage = " ReceiverMessage: " + receiverMessage +
-                              " Receiver: " + receiver.getOwner().getUsername();
+                    " Receiver: " + receiver.getOwner().getUsername();
         }
         return " ResourceType: " + resourceType.name() + " Amount: " + resourceAmount +
                 " price: " + price + " SenderMessage: " + senderMessage + " Sender: " +
                 sender.getOwner().getUsername() + receiverMessage + " Status: " + status + "\n";
     }
-
 
 
 }

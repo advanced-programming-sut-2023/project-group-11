@@ -4,7 +4,7 @@ public enum AllResource {
 
     BOW("bow", 31),
     CROSSBOW("crossbow", 58),
-    SPEAR("spear",20),
+    SPEAR("spear", 20),
     PIKE("pike", 36),
     MACE("mace", 58),
     SWORD("sword", 58),
@@ -36,9 +36,9 @@ public enum AllResource {
         return name;
     }
 
-    public static AllResource getAllResourceByName(String name){
+    public static AllResource getAllResourceByName(String name) {
         for (AllResource allResource : AllResource.values())
-            if(allResource.name.equals(name)) return allResource;
+            if (allResource.name.equals(name)) return allResource;
         return null;
     }
 

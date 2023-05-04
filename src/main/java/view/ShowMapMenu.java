@@ -44,7 +44,7 @@ public class ShowMapMenu {
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
-            case SUCCESS -> System.out.println(ShowMapMenuController.showMapDetails(xCoordinate, yCoordinate));
+            case SUCCESS -> System.out.print(ShowMapMenuController.showMapDetails(xCoordinate, yCoordinate));
         }
     }
 

@@ -1,14 +1,14 @@
 package model.buildings;
 
-import model.Governance;
 import model.AllResource;
+import model.Governance;
 import model.people.Engineer;
 
 import java.util.ArrayList;
 
 public abstract class Building {
 
-    protected int xCoordinate,yCoordinate;
+    protected int xCoordinate, yCoordinate;
     protected Governance owner;
     protected int size;
     protected int hitPoint;

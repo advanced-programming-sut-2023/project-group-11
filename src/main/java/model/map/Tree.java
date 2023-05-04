@@ -22,6 +22,10 @@ public class Tree {
     }
 
     public static boolean isTreeName(String name) {
-        return name.equals("small") || name.equals("date") ||name.equals("coconut") ||name.equals("cherry") || name.equals("olive");
+        return name.equals("small")
+                || name.equals("date")
+                || name.equals("coconut")
+                || name.equals("cherry")
+                || name.equals("olive");
     }
 }

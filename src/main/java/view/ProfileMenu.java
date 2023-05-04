@@ -53,7 +53,8 @@ public class ProfileMenu {
         profileMenuMessage = ProfileMenuController.checkChangeUsername(matcher);
 
         switch (profileMenuMessage) {
-            case SUCCESS -> System.out.println("Your username changed to: " + Utils.removeDoubleQuotation(matcher.group("field")));
+            case SUCCESS ->
+                    System.out.println("Your username changed to: " + Utils.removeDoubleQuotation(matcher.group("field")));
             case USERNAME_EXIST -> System.out.println("Username exists!");
             case INVALID_USERNAME -> System.out.println("Invalid username format!");
         }
@@ -88,10 +89,13 @@ public class ProfileMenu {
             }
             case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INCORRECT_PASSWORD -> System.out.println("Incorrect password!");
-            case SAME_PASSWORD -> System.out.println("Invalid new password: New password is same as the previous password!");
+            case SAME_PASSWORD ->
+                    System.out.println("Invalid new password: New password is same as the previous password!");
             case NO_NUMBER -> System.out.println("Weak password: Password must have one number at least!");
-            case NO_LOWERCASE -> System.out.println("Weak password: Password must have an lowercase character at least!");
-            case NO_UPPERCASE -> System.out.println("Weak password: Password must have an uppercase character at least!");
+            case NO_LOWERCASE ->
+                    System.out.println("Weak password: Password must have an lowercase character at least!");
+            case NO_UPPERCASE ->
+                    System.out.println("Weak password: Password must have an uppercase character at least!");
             case SHORT_PASSWORD -> System.out.println("Weak password: Password must be more than 6 characters!");
             case NO_SPECIAL -> System.out.println("Weak password: Password must have a special character at least!");
         }

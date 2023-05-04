@@ -5,21 +5,20 @@ import model.AllResource;
 
 public enum StorageType {
 
-    STOCKPILE("stockpile",2,114,0,null,0,
-            0,true,100),
-    ARMOURY("armoury",2,196,0,AllResource.WOOD,5,
-            0,true,50),
-    GRANARY("granary",2,114,0,AllResource.WOOD,5,
-            0,true,250);
-    ;
-    private String name;
-    private int size;
-    private int hitPoint;
-    private int goldCost;
-    private AllResource resourceCostType;
-    private int resourceCostNumber;
-    private int workersNumber;
-    private boolean isActive;
+    STOCKPILE("stockpile", 2, 114, 0, null, 0,
+            0, true, 100),
+    ARMOURY("armoury", 2, 196, 0, AllResource.WOOD, 5,
+            0, true, 50),
+    GRANARY("granary", 2, 114, 0, AllResource.WOOD, 5,
+            0, true, 250);
+    private final String name;
+    private final int size;
+    private final int hitPoint;
+    private final int goldCost;
+    private final AllResource resourceCostType;
+    private final int resourceCostNumber;
+    private final int workersNumber;
+    private final boolean isActive;
     private final int capacity;
 
     public int getSize() {
@@ -51,7 +50,6 @@ public enum StorageType {
     }
 
 
-
     StorageType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType,
                 int resourceCostNumber, int workersNumber, boolean isActive, int capacity) {
         this.name = name;
@@ -73,9 +71,9 @@ public enum StorageType {
         return capacity;
     }
 
-    public static StorageType getStorageTypeByName(String name){
+    public static StorageType getStorageTypeByName(String name) {
         for (StorageType storageType : StorageType.values())
-            if(storageType.name.equals(name))
+            if (storageType.name.equals(name))
                 return storageType;
         return null;
     }
