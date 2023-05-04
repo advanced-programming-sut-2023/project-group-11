@@ -148,7 +148,6 @@ public class GameMenuController {
         if (!BuildingUtils.isBuildingInTile(building)) return GameMenuMessages.NO_BUILDING_HERE;
         if (!building.getOwner().equals(governance)) return GameMenuMessages.NOT_YOUR_BUILDING;
         return GameMenuMessages.SUCCESS;
-        //TODO: select building after commands need a structure to implement...
     }
 
     public static Building selectBuildingDetails(Matcher matcher) {

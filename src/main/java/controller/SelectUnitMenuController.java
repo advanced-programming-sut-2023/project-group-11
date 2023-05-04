@@ -33,7 +33,7 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.INVALID_DESTINATION_DIFFERENT_OWNER_UNIT;
         else if (BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) &&
                 map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable climbable &&
-                !climbable.isClimbable()) // TODO: make a recursive method for making climbability true for walls & etc
+                !climbable.isClimbable())
             return SelectUnitMenuMessages.INVALID_DESTINATION_ONCLIMABLE_BUILDING;
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;

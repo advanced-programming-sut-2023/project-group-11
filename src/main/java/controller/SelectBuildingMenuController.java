@@ -28,6 +28,7 @@ public class SelectBuildingMenuController {
             createEngineer((UnitMaker) building, count);
             return SelectBuildingMenuMessages.SUCCESS;
         }
+        type = type.replace(" ","_");
         try {
             TroopTypes.valueOf(type.toUpperCase());
         } catch (IllegalArgumentException e) {
@@ -100,13 +101,11 @@ public class SelectBuildingMenuController {
             governance.changeResourceAmount(troop.getArmorType(), -count);
         if (troop.getWeaponType().equals(AllResource.NONE))
             governance.changeResourceAmount(troop.getWeaponType(), -count);
-        //TODO: initialize units coordinates
     }
 
     private static void createEngineer(UnitMaker unitMaker, int count) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         governance.setGold(governance.getGold() - 30 * count);
-        //TODO: initialize units coordinates
 
     }
 }
