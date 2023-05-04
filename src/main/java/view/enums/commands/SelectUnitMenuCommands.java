@@ -7,7 +7,7 @@ public enum SelectUnitMenuCommands {
     MOVE_UNIT("move unit to((?<xGroup> -x (?<xCoordinate>\\d+))|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
     AIR_ATTACK("attack((?<xGroup> -x (?<xCoordinate>\\d+))|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
     GROUND_ATTACK("attack -e (?<xCoordinate>\\d+) (?<yCoordinate>\\d+)"),
-    BUILD("build -q (?<machineType>\"[^\"]+\"|\\S+)");
+    BUILD_MACHINE("build -q (?<machineType>\"[^\"]+\"|\\S+)");
 
     private final String regex;
 
