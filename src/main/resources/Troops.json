@@ -64,7 +64,7 @@
       "speed": "HIGH",
       "cost": 12
     },
-    "arabian_swordsman": {
+    "arabian swordsman": {
       "weaponType": "NONE",
       "armorType": "NONE",
       "damage": "HIGH",
@@ -128,7 +128,7 @@
       "speed": "MEDIUM",
       "cost": 60
     },
-    "horse_archer": {
+    "horse archer": {
       "weaponType": "NONE",
       "armorType": "NONE",
       "damage": "LOW",
@@ -160,7 +160,7 @@
       "speed": "HIGH",
       "cost": 4
     },
-    "fire_thrower": {
+    "fire thrower": {
       "weaponType": "NONE",
       "armorType": "NONE",
       "damage": "HIGH",
@@ -224,7 +224,7 @@
       "speed": "VERY_HIGH",
       "cost": 40
     },
-    "archer_bow": {
+    "archer bow": {
       "weaponType": "NONE",
       "armorType": "NONE",
       "damage": "LOW",
@@ -240,7 +240,7 @@
       "speed": "HIGH",
       "cost": 75
     },
-    "black_monk": {
+    "black monk": {
       "weaponType": "NONE",
       "armorType": "NONE",
       "damage": "MEDIUM",

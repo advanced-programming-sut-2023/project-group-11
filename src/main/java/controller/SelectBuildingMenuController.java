@@ -36,9 +36,8 @@ public class SelectBuildingMenuController {
             if (!createEngineer((UnitMaker) building, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
             return SelectBuildingMenuMessages.SUCCESS;
         }
-        type = type.replace(" ", "_");
         try {
-            TroopTypes.valueOf(type.toUpperCase());
+            TroopTypes.valueOf(type.replace(" ","_").toUpperCase());
         } catch (IllegalArgumentException e) {
             return SelectBuildingMenuMessages.INVALID_TYPE;
         }

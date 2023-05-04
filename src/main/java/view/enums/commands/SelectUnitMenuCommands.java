@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public enum SelectUnitMenuCommands {
     MOVE_UNIT("move unit to((?<xGroup> -x (?<xCoordinate>\\d+))|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
-    ;
+    BUILD_MACHINE("build -q (?<machineType>\"[^\"]+\"|\\S+)");
 
     private final String regex;
 

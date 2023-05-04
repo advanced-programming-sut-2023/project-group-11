@@ -7,7 +7,10 @@ import model.buildings.*;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
+import model.people.Engineer;
+import model.people.Machine;
 import model.people.Units;
+import model.people.enums.MachineTypes;
 import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class SelectUnitMenuController {
         else if (BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) &&
                 map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable climbable &&
                 !climbable.isClimbable())
-            return SelectUnitMenuMessages.INVALID_DESTINATION_ONCLIMABLE_BUILDING;
+            return SelectUnitMenuMessages.INVALID_DESTINATION_UNCLIMBABLE_BUILDING;
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
 
@@ -77,8 +80,24 @@ public class SelectUnitMenuController {
         return null;
     }
 
-    private static SelectUnitMenuMessages checkBuildMachine(Matcher matcher) {
-        return null;
+    public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
+        if(!unitType.equals("engineer"))
+            return SelectUnitMenuMessages.INVALID_COMMAND;
+        String machineType = matcher.group("machineType");
+        try {
+            MachineTypes.valueOf(machineType.replace(" ","_").toUpperCase());
+        }catch (IllegalArgumentException e){
+            return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
+        }
+        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Machine machine = new Machine(machineType);
+        if(governance.getGold() < machine.getCost())
+            return SelectUnitMenuMessages.NOT_ENOUGH_GOLD;
+        Tile tile = Stronghold.getCurrentGame().getMap().getTile(currentLocation[0],currentLocation[1]);
+        if(tile.getUnitsByType("engineer").size() < machine.getEngineersNeededToActivate())
+            return SelectUnitMenuMessages.NOT_ENOUGH_ENGINEERS;
+        buildMachine(machine,tile,governance);
+        return SelectUnitMenuMessages.SUCCESS;
     }
 
     private static SelectUnitMenuMessages disbandUnit() {
@@ -243,6 +262,18 @@ public class SelectUnitMenuController {
         }
     }
 
+    private static void buildMachine(Machine machine,Tile tile,Governance governance){
+        governance.setGold(governance.getGold() - machine.getCost());
+        machine.setOwnerGovernance(governance);
+        machine.setActive(true);
+        //TODO: add to governance units
+        for (int i =0;i < machine.getEngineersNeededToActivate();i++){
+            Engineer engineer = (Engineer) tile.getUnitsByType("engineer").get(0);
+            machine.getEngineers().add(engineer);
+            tile.getUnits().remove(engineer);
+        }
+        tile.addUnit(machine);
+    }
     private static void attackMachine() {
 
     }

@@ -20,6 +20,8 @@ public class SelectUnitMenu {
 
             if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.MOVE_UNIT)) != null)
                 checkMoveUnit(matcher, currentLocation, unitType);
+            if((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.BUILD_MACHINE)) != null)
+                checkBuildMachine(matcher,currentLocation,unitType);
         }
     }
 
@@ -31,9 +33,21 @@ public class SelectUnitMenu {
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinates!");
             case INVALID_DESTINATION_TEXTURE -> System.out.println("Invalid Destination: Invalid Texture!");
-            case INVALID_DESTINATION_ONCLIMABLE_BUILDING -> System.out.println("Invalid Destination: Invalid Building In Destination!");
+            case INVALID_DESTINATION_UNCLIMBABLE_BUILDING -> System.out.println("Invalid Destination: Invalid Building In Destination!");
             case INVALID_DESTINATION_DIFFERENT_OWNER_UNIT -> System.out.println("Invalid Destination: Invalid Unit type in destination!");
             case INVALID_DISTANCE -> System.out.println("Invalid Destination: Too Far For Going There, Based On Unit's Speed!");
+        }
+    }
+
+    private static void checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType){
+        message = SelectUnitMenuController.checkBuildMachine(matcher, currentLocation, unitType);
+
+        switch (message){
+            case INVALID_COMMAND -> System.out.println("Invalid Command!");
+            case INVALID_MACHINE_TYPE -> System.out.println("Invalid Machine Type!");
+            case NOT_ENOUGH_GOLD -> System.out.println("Not Enough Gold!");
+            case NOT_ENOUGH_ENGINEERS -> System.out.println("There's Not Enough Engineers To Build!");
+            case SUCCESS -> System.out.println("Machine Has Been Built Successfully!");
         }
     }
 
@@ -57,9 +71,6 @@ public class SelectUnitMenu {
 
     }
 
-    private static void checkBuildMachine(Matcher matcher) {
-
-    }
 
     private static void disbandUnit() {
 
