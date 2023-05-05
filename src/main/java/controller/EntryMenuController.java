@@ -18,7 +18,7 @@ public class EntryMenuController {
     }
 
     private static void parseUsers() {
-        try (FileReader reader = new FileReader("src/main/resources/users.json")) {
+        try (FileReader reader = new FileReader("src/main/resources/JSON/users.json")) {
             Type userDatabaseType = new TypeToken<ArrayList<User>>() {
             }.getType();
             Stronghold.getUsers().addAll(new Gson().fromJson(reader, userDatabaseType));
@@ -27,7 +27,7 @@ public class EntryMenuController {
     }
 
     private static void parseMaps() {
-        try (FileReader reader = new FileReader("src/main/resources/maps.json")) {
+        try (FileReader reader = new FileReader("src/main/resources/JSON/maps.json")) {
             Type mapDatabaseType = new TypeToken<ArrayList<Map>>() {
             }.getType();
             Stronghold.getMaps().addAll(new Gson().fromJson(reader, mapDatabaseType));

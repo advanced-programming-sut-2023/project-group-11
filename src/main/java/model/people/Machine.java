@@ -58,7 +58,7 @@ public class Machine extends Units {
         JSONParser jsonParser = new JSONParser();
         JSONObject machine = new JSONObject();
 
-        try (FileReader reader = new FileReader("src/main/resources/Machines.json")) {
+        try (FileReader reader = new FileReader("src/main/resources/JSON/Machines.json")) {
             machine = (JSONObject) ((JSONObject) ((JSONArray) jsonParser.parse(reader)).get(0)).get(name);
         } catch (IOException | ParseException ignored) {
         }

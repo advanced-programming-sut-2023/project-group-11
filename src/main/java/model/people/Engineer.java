@@ -13,7 +13,7 @@ public class Engineer extends Units {
         this.name = "engineer";
         this.hp = Hp.VERY_LOW.getHp();
         this.cost = 30;
-        this.speed = Speed.HIGH;
+        this.speed = Speed.VERY_HIGH;
         this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
     }
 
