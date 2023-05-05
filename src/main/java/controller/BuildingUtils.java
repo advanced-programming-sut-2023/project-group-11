@@ -153,6 +153,7 @@ public class BuildingUtils {
     }
 
     private static void makeClimbable(Building building, int x, int y, int size, Tile[][] tiles) {
+        //TODO: handle ladderMan
         for (int i = x - 1; i < x + size + 1; i++) {
             for (int j = y - 1; j < y + size + 1; j++) {
                 if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), i, j))

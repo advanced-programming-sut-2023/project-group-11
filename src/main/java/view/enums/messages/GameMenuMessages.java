@@ -12,6 +12,8 @@ public enum GameMenuMessages {
     NOT_YOUR_BUILDING,
     NOT_ENOUGH_MONEY,
     NOT_ENOUGH_RESOURCE,
+    NOT_ENOUGH_SPACE,
     INVALID_RATE,
+    INVALID_TEXTURE,
     SUCCESS,
 }

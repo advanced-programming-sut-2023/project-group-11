@@ -39,6 +39,10 @@ public enum Texture {
                 this.equals(SEA) || this.equals(SHALLOW_WATER) || this.equals(RIVER) || this.equals(BEACH);
     }
 
+    public boolean isSuitableForUnit(){
+        return (!isWater() || this.equals(MARSH)) && !isStone() && !isIron();
+    }
+
     public boolean isStone() {
         return this.equals(ROCK) || this.equals(STONE) || this.equals(CLIFF);
     }

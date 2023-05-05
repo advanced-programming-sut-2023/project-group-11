@@ -149,4 +149,9 @@ public class Utils {
                 type.equals("portable shield") || type.equals("battering ram") || type.equals("trebuchets") ||
                 type.equals("fire ballista") || type.equals("catapults") || type.equals("engineer");
     }
+    static boolean isValidMachineType(String type) {
+        return type.equals("siege tower") || type.equals("portable shield") ||
+                type.equals("battering ram") || type.equals("trebuchets") ||
+                type.equals("fire ballista") || type.equals("catapults");
+    }
 }

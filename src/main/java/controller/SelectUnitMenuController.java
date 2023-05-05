@@ -115,12 +115,9 @@ public class SelectUnitMenuController {
     public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
         if (!unitType.equals("engineer"))
             return SelectUnitMenuMessages.INVALID_COMMAND;
-        String machineType = matcher.group("machineType");
-        try {
-            MachineTypes.valueOf(machineType.replace(" ", "_").toUpperCase());
-        } catch (IllegalArgumentException e) {
+        String machineType = Utils.removeDoubleQuotation(matcher.group("machineType"));
+        if (!Utils.isValidMachineType(machineType))
             return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
-        }
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         Machine machine = new Machine(machineType);
         if (governance.getGold() < machine.getCost())
@@ -322,7 +319,7 @@ public class SelectUnitMenuController {
 
     private static void attackBuilding(ArrayList<Units> selectedUnits, Tile targetTile) {
         Building targetBuilding = targetTile.getBuilding();
-        targetBuilding.setHitPoint(targetBuilding.getHitPoint() - selectedUnits.size()*((Troops) selectedUnits.get(0)).getDamage());
+        targetBuilding.setHitPoint(targetBuilding.getHitPoint() - selectedUnits.size() * ((Troops) selectedUnits.get(0)).getDamage());
 
         for (Units unit : selectedUnits)
             unit.setAttacked(true);

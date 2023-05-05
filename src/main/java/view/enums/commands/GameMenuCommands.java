@@ -24,6 +24,10 @@ public enum GameMenuCommands {
     SELECT_UNIT("select unit((?<xGroup> -x (?<xCoordinate>\\d+))" +
             "|(?<yGroup> -y (?<yCoordinate>\\d+))" +
             "|(?<typeGroup> -type (?<type>\"[^\"]+\"|\\S+))){3}"),
+    DROP_UNIT("dropunit(( -x (?<xCoordinate>\\d+))" +
+            "|( -y (?<yCoordinate>\\d+))" +
+            "|( -t (?<type>\"[^\"]+\"|\\S+))" +
+            "|( -c (?<count>\\d+))){4}"),
     ;
 
     private final String regex;

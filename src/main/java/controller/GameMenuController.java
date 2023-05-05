@@ -9,6 +9,10 @@ import model.buildings.ProductiveBuilding;
 import model.buildings.enums.FillerType;
 import model.map.Map;
 import model.map.Tile;
+import model.people.Engineer;
+import model.people.Machine;
+import model.people.Troops;
+import model.people.Units;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.ArrayList;
@@ -182,6 +186,46 @@ public class GameMenuController {
             return GameMenuMessages.NOT_YOUR_UNIT;
 
         return GameMenuMessages.SUCCESS;
+    }
+
+    public static GameMenuMessages checkDropUnit(Matcher matcher) {
+        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate", "type", "count"))
+            return GameMenuMessages.INVALID_COMMAND;
+        int x = Integer.parseInt(matcher.group("xCoordinate"));
+        int y = Integer.parseInt(matcher.group("yCoordinate"));
+        int count = Integer.parseInt(matcher.group("count"));
+        String type = Utils.removeDoubleQuotation(matcher.group("type"));
+        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
+            return GameMenuMessages.INVALID_COORDINATE;
+        Tile tile = currentGame.getMap().getTile(x, y);
+        if (tile.getUnits().size() + count > 12)
+            return GameMenuMessages.NOT_ENOUGH_SPACE;
+        if (!Utils.isValidUnitType(type))
+            return GameMenuMessages.INVALID_UNIT_TYPE;
+        if (!tile.getTexture().isSuitableForUnit())
+            return GameMenuMessages.INVALID_TEXTURE;
+        dropUnit(x,y,count,type);
+        return GameMenuMessages.SUCCESS;
+    }
+
+    private static void dropUnit(int x, int y, int count, String type) {
+        Tile tile = currentGame.getMap().getTile(x, y);
+        for (int i = 0; i < count; i++) {
+            Units unit;
+            if (Utils.isValidMachineType(type)) {
+                unit = new Machine(type);
+                for (int j = 0; j < ((Machine) unit).getEngineersNeededToActivate(); j++) {
+                    Engineer engineer = new Engineer();
+                    ((Machine) unit).getEngineers().add(engineer);
+                }
+            }
+            if (type.equals("engineer")) {
+                unit = new Engineer();
+            } else
+                unit = new Troops(type);
+            unit.setOwnerGovernance(currentGovernance);
+            tile.addUnit(unit);
+        }
     }
 
     private static void updatePopulation() {
