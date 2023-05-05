@@ -216,7 +216,7 @@ public class SelectUnitMenuController {
 
         if (currentBuilding instanceof Trap)
             return true;
-        else if (currentBuilding instanceof GateHouse gateHouse) { // TODO: change gate controller end of choosing path
+        else if (currentBuilding instanceof GateHouse gateHouse) {
             if (currentGovernance.equals(gateHouse.getGateController()))
                 return true;
             else if (previousBuilding instanceof Climbable climbable && climbable.getName().equals("stairs"))
@@ -356,7 +356,10 @@ public class SelectUnitMenuController {
 
         targetBuilding.setHitPoint(targetBuilding.getHitPoint() - selectedUnits.size() * ((Troops) selectedUnits.get(0)).getDamage());
         setAttackedTrue(selectedUnits);
-        if (targetBuilding.getHitPoint() <= 0) destroyBuilding(map, targetBuilding);
+        if (targetBuilding.getHitPoint() <= 0) {
+            destroyBuilding(map, targetBuilding);
+            //TODO: rearrange the climbablity
+        }
     }
 
     private static void destroyBuilding(Map map, Building building) {
