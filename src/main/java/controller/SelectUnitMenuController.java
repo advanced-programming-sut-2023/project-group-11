@@ -81,17 +81,6 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
-        ArrayList<Units> removings = new ArrayList<>();
-        for (int i = 0; i < selectedUnits.size(); i++) {
-            if (selectedUnits.get(i).hasAttacked())
-                removings.add(selectedUnits.get(i));
-        }
-        selectedUnits.removeAll(removings);
-
-        return selectedUnits.size() == 0;
-    }
-
     public static SelectUnitMenuMessages checkGroundAttack(Matcher matcher) {
         return null;
     }
@@ -317,18 +306,54 @@ public class SelectUnitMenuController {
                 type.equals("trebuchets") || type.equals("fire ballista") || type.equals("catapults");
     }
 
+    private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
+        ArrayList<Units> removings = new ArrayList<>();
+        for (int i = 0; i < selectedUnits.size(); i++) {
+            if (selectedUnits.get(i).hasAttacked())
+                removings.add(selectedUnits.get(i));
+        }
+        selectedUnits.removeAll(removings);
+
+        return selectedUnits.size() == 0;
+    }
+
     private static void attackBuilding(ArrayList<Units> selectedUnits, Tile targetTile) {
         Building targetBuilding = targetTile.getBuilding();
+        Map map = Stronghold.getCurrentGame().getMap();
+
         targetBuilding.setHitPoint(targetBuilding.getHitPoint() - selectedUnits.size() * ((Troops) selectedUnits.get(0)).getDamage());
+        setAttackedTrue(selectedUnits);
+        if (targetBuilding.getHitPoint() <= 0) destroyBuilding(map, targetBuilding);
+    }
 
-        for (Units unit : selectedUnits)
-            unit.setAttacked(true);
-        // destroy building
+    private static void destroyBuilding(Map map, Building building) {
+        int buildingX = building.getXCoordinate();
+        int buildingY = building.getYCoordinate();
+        int buildingSize = building.getSize();
 
+        for (int i = 0; i < buildingSize; i++)
+            for (int j = 0; j < buildingSize; j++)
+                map.getTile(buildingX + i, buildingY + j).setBuilding(null);
     }
 
     private static void attackUnits(ArrayList<Units> selectedUnits, Tile targetTile) {
+        for (Units unit : targetTile.getUnits())
+            unit.setHp(unit.getHp() - ((Troops) selectedUnits.get(0)).getDamage() * selectedUnits.size());
+        setAttackedTrue(selectedUnits);
+        removeDeadUnits(targetTile);
+        //TODO: set reacting to attacks
+    }
 
+    private static void removeDeadUnits(Tile targetTile) {
+        ArrayList<Units> removings = new ArrayList<>();
+        for (int i = 0; i < targetTile.getUnits().size(); i++)
+            if (targetTile.getUnits().get(i).getHp() <= 0)
+                removings.add(targetTile.getUnits().get(i));
+        targetTile.getUnits().removeAll(removings);
+    }
+
+    private static void setAttackedTrue(ArrayList<Units> selectedUnits) {
+        for (Units unit : selectedUnits) unit.setAttacked(true);
     }
 
     private static void buildMachine(Machine machine, Tile tile, Governance governance) {
