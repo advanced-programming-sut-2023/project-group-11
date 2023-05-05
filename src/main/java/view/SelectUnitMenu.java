@@ -55,14 +55,24 @@ public class SelectUnitMenu {
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinate!");
             case INVALID_UNIT_TYPE_TO_ATTACK -> System.out.println("Cannot Air-Attack With This Unit!");
             case OUT_OF_RANGE -> System.out.println("Target is Out Of Range!");
-            case NO_ATTACK_LEFT -> System.out.println("You Attacked Once This Round!");
+            case NO_ATTACK_LEFT -> System.out.println("You Attacked Once This Round With This Unit!");
             case EMPTY_TILE -> System.out.println("There Is No One In Target-Tile!");
             case FRIENDLY_ATTACK -> System.out.println("You Can't Attack To Your Own Troops And Building!");
         }
     }
 
     private static void checkGroundAttackUnit(Matcher matcher, int[] currentLocation, String unitType) {
+        message = SelectUnitMenuController.checkGroundAttack(matcher, currentLocation, unitType);
 
+        switch (message) {
+            case SUCCESS -> System.out.println("Air Attack done Successfully!");
+            case INVALID_COMMAND -> System.out.println("Invalid Command!");
+            case INVALID_COORDINATE -> System.out.println("Invalid Coordinate!");
+            case INVALID_UNIT_TYPE_TO_ATTACK -> System.out.println("Cannot Ground-Attack With This Unit!");
+            case NO_ATTACK_LEFT -> System.out.println("You Attacked Once This Round With This Unit!");
+            case EMPTY_TILE -> System.out.println("There Is No One In Target-Tile!");
+            case FRIENDLY_ATTACK -> System.out.println("You Can't Attack To Your Own Troops And Building!");
+        }
     }
 
     private static void checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {

@@ -11,7 +11,6 @@ import model.people.Troops;
 import model.people.Engineer;
 import model.people.Machine;
 import model.people.Units;
-import model.people.enums.MachineTypes;
 import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
@@ -81,8 +80,35 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static SelectUnitMenuMessages checkGroundAttack(Matcher matcher) {
-        return null;
+    public static SelectUnitMenuMessages checkGroundAttack(Matcher matcher, int[] currentLocation, String unitType) {
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
+            return SelectUnitMenuMessages.INVALID_COMMAND;
+
+        Map map = Stronghold.getCurrentGame().getMap();
+        int targetX = Integer.parseInt(matcher.group("xCoordinate"));
+        int targetY = Integer.parseInt(matcher.group("yCoordinate"));
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        Tile targetTile = map.getTile(targetX, targetY);
+
+        if (!Utils.isValidCoordinates(map, targetX, targetY))
+            return SelectUnitMenuMessages.INVALID_COORDINATE;
+        else if (!isValidUnitForGroundAttack(unitType))
+            return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_ATTACK;
+        else if (noAttackLeft(selectedUnits))
+            return SelectUnitMenuMessages.NO_ATTACK_LEFT;
+        else if (targetTile.getUnits().size() == 0 && targetTile.getBuilding() == null)
+            return SelectUnitMenuMessages.EMPTY_TILE;
+        else if (targetTile.getUnits().size() != 0 && targetTile.getUnits().get(0).getOwner().equals(selectedUnits.get(0).getOwner()) ||
+                targetTile.getBuilding() != null && targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
+            return SelectUnitMenuMessages.FRIENDLY_ATTACK;
+
+        if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
+        else attackUnits(selectedUnits, targetTile);
+
+
+        return SelectUnitMenuMessages.SUCCESS;
     }
 
     public static SelectUnitMenuMessages checkPatrolUnit(Matcher matcher) {
@@ -301,9 +327,16 @@ public class SelectUnitMenuController {
     }
 
     private static boolean isValidUnitForAirAttack(String type) {
-        return type.equals("archer") ||
-                type.equals("archer bow") || type.equals("horse archer") || type.equals("fire thrower") ||
+        return type.equals("archer") || type.equals("archer bow") ||
+                type.equals("slinger") || type.equals("horse archer") || type.equals("fire thrower") ||
                 type.equals("trebuchets") || type.equals("fire ballista") || type.equals("catapults");
+    }
+
+    private static boolean isValidUnitForGroundAttack(String type) {
+        return type.equals("spearman") || type.equals("pikeman") || type.equals("maceman") ||
+                type.equals("swordsman") || type.equals("knight") || type.equals("black monk") ||
+                type.equals("slaves") || type.equals("assassin") || type.equals("arabian swordsman") ||
+                type.equals("battering ram");
     }
 
     private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
