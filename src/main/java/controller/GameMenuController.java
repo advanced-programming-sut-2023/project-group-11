@@ -5,6 +5,7 @@ import model.Game;
 import model.Governance;
 import model.Stronghold;
 import model.buildings.Building;
+import model.buildings.Climbable;
 import model.buildings.ProductiveBuilding;
 import model.buildings.enums.FillerType;
 import model.map.Map;
@@ -204,6 +205,8 @@ public class GameMenuController {
             return GameMenuMessages.INVALID_UNIT_TYPE;
         if (!tile.getTexture().isSuitableForUnit())
             return GameMenuMessages.INVALID_TEXTURE;
+        if(tile.hasBuilding() && !(tile.getBuilding() instanceof Climbable))
+            return GameMenuMessages.CANT_DROP_IN_BULDING;
         dropUnit(x,y,count,type);
         return GameMenuMessages.SUCCESS;
     }

@@ -47,6 +47,8 @@ public class GameMenu {
                 checkSelectBuilding(matcher);
             else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SELECT_UNIT)) != null)
                 checkSelectUnit(matcher);
+            else if((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.DROP_UNIT)) != null)
+                checkDropUnit(matcher);
             else System.out.println("Invalid command!");
         }
     }
@@ -162,6 +164,20 @@ public class GameMenu {
                 };
                 SelectUnitMenu.run(currentLocation, Utils.removeDoubleQuotation(matcher.group("type")));
             }
+        }
+    }
+
+    private static void checkDropUnit(Matcher matcher){
+        message = GameMenuController.checkDropUnit(matcher);
+
+        switch (message){
+            case INVALID_COMMAND -> System.out.println("Invalid Command!");
+            case INVALID_COORDINATE -> System.out.println("Invalid Coordinate!");
+            case NOT_ENOUGH_SPACE -> System.out.println("There's Not Enough Space For Unit!");
+            case INVALID_UNIT_TYPE -> System.out.println("Invalid Unit Type!");
+            case INVALID_TEXTURE -> System.out.println("Can't Drop Units In This Texture!");
+            case CANT_DROP_IN_BULDING -> System.out.println("Can't Drop Units In This Building!");
+            case SUCCESS -> System.out.println("Units Have Been Dropped Successfully!");
         }
     }
 }

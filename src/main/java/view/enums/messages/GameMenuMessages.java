@@ -15,5 +15,6 @@ public enum GameMenuMessages {
     NOT_ENOUGH_SPACE,
     INVALID_RATE,
     INVALID_TEXTURE,
+    CANT_DROP_IN_BULDING,
     SUCCESS,
 }
