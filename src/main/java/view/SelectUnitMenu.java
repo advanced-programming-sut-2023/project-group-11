@@ -26,6 +26,9 @@ public class SelectUnitMenu {
                 checkAttackUnit(matcher,  currentLocation, unitType, "ground attack");
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.BUILD_MACHINE)) != null)
                 checkBuildMachine(matcher, currentLocation, unitType);
+            else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DESELECT) != null)
+                return;
+            else System.out.println("Invalid Command!");
         }
     }
 

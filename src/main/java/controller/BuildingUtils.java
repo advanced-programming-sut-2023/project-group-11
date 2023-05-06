@@ -126,6 +126,8 @@ public class BuildingUtils {
         if (building instanceof Storage storage) building.getOwner().getStorages().add(storage);
 
 
+        building.setXCoordinate(x);
+        building.setYCoordinate(y);
         for (int i = x; i < x + size; i++)
             for (int j = y; j < y + size; j++)
                 tiles[i][j].setBuilding(building);
@@ -151,7 +153,7 @@ public class BuildingUtils {
     }
 
     private static void makeClimbable(Building building, int x, int y, int size, Tile[][] tiles) {
-        //TODO: handle ladderMan
+        //TODO:1 handle ladderMan (siege tower?)
         for (int i = x - 1; i < x + size + 1; i++) {
             for (int j = y - 1; j < y + size + 1; j++) {
                 if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), i, j))

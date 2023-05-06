@@ -18,6 +18,8 @@ public class SelectBuildingMenuController {
     private static final int[] unitCreationCoordinates = new int[2];
 
     public static SelectBuildingMenuMessages checkCreateUnit(Matcher matcher, int x, int y) {
+        //TODO:1 decrease population (current - unemployed) in troop making
+        //TODO:1 add troop to governance arrayList
         unitCreationTile = null;
         unitCreationFlag = false;
 
@@ -119,6 +121,7 @@ public class SelectBuildingMenuController {
         governance.setGold(governance.getGold() - troop.getCost() * count);
         governance.removeFromStorage(troop.getWeaponType(), count);
         governance.removeFromStorage(troop.getArmorType(), count);
+        //TODO:3 handle "NONE" resource
 
         for (int i = 0; i < count; i++) unitCreationTile.getUnits().add(new Troops(unitType));
 

@@ -32,8 +32,8 @@
     },
     "crossbowman": {
       "weaponType": "CROSSBOW",
-      "armorType": "NONE",
-      "damage": "LOW",
+      "armorType": "LEATHER_ARMOR",
+      "damage": "MEDIUM",
       "hasHorse": false,
       "isArab": false,
       "hasFiringWeapon": false,

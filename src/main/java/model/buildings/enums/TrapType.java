@@ -9,7 +9,7 @@ public enum TrapType {
     PITCH_DITCH("pitch ditch", 1, 0, 0, AllResource.PITCH, 2,
             0, 100, false),
     CAGED_WARDOGS("caged wardogs", 1, 0, 100, AllResource.WOOD, 10,
-            0, 100, false);//TODO: it's not a trap!
+            0, 100, false);//TODO:1 it's not a trap (update traps in move)!
 
     private final String name;
     private final int size;

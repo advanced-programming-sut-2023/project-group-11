@@ -74,12 +74,12 @@ public class SelectUnitMenuController {
                 targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
-        //TODO: set damaging concepts
-        //TODO: attack both building and units
+        //TODO:1 attack both building and units
+        //TODO:1 set damaging concepts (Fire - throwing path - building damaging - Armor damaging - multi-unit damaging - tower increasing range)
         if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
         else attackUnits(selectedUnits, targetTile);
 
-        //TODO: reset leftMoves and attacked for units in next turn
+        //TODO:1 reset leftMoves and attacked for units in next turn (unit arrayList for governance)
 
         return SelectUnitMenuMessages.SUCCESS;
     }
@@ -287,6 +287,8 @@ public class SelectUnitMenuController {
     }
 
     private static void applyTrapDamage(ArrayList<Units> selectedUnits, Trap currentBuilding) {
+        // TODO:1 remove dead units from governance unit arrayList
+        // TODO:1 remove traps from governance building arrayList
         for (Units unit : selectedUnits) {
             unit.setHp(unit.getHp() - currentBuilding.getDamage());
         }
@@ -314,9 +316,9 @@ public class SelectUnitMenuController {
 
     private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
         ArrayList<Units> removings = new ArrayList<>();
-        for (int i = 0; i < selectedUnits.size(); i++) {
-            if (((Attacker) selectedUnits.get(i)).hasAttacked())
-                removings.add(selectedUnits.get(i));
+        for (Units unit : selectedUnits) {
+            if (((Attacker) unit).hasAttacked())
+                removings.add(unit);
         }
         selectedUnits.removeAll(removings);
 
@@ -329,18 +331,19 @@ public class SelectUnitMenuController {
         int targetHp = targetBuilding.getHitPoint();
         int attackerDamage = selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage();
 
-        if (targetBuilding instanceof GateHouse && selectedUnits.get(0).getName().equals("battle ram"))
+        if (targetBuilding instanceof GateHouse && selectedUnits.get(0).getName().equals("battle ram")) //TODO:1 battle ram don't damage units
             targetBuilding.setHitPoint(targetHp - 3 * attackerDamage);
         else
             targetBuilding.setHitPoint(targetHp - attackerDamage);
         setAttackedTrue(selectedUnits);
         if (targetBuilding.getHitPoint() <= 0) {
             destroyBuilding(map, targetBuilding);
-            //TODO: rearrange the climbablity
+            //TODO:2 rearrange the climbablity
         }
     }
 
     private static void destroyBuilding(Map map, Building building) {
+        //TODO:1 increase unemployed population
         int buildingX = building.getXCoordinate();
         int buildingY = building.getYCoordinate();
         int buildingSize = building.getSize();
@@ -358,9 +361,9 @@ public class SelectUnitMenuController {
             unit.setHp(unit.getHp() - attackerDamage);
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
-        //TODO: set reacting to attacks
-        //TODO: kill engineers in siege machines
-        //TODO: apply troops' dying in population
+        //TODO:1 set reacting to attacks
+        //TODO:1 remove dead units from governance arrayList
+        //TODO:1 remove engineers in destroyed siege machines
     }
 
     private static void removeDeadUnits(Tile targetTile) {
@@ -379,7 +382,7 @@ public class SelectUnitMenuController {
         governance.setGold(governance.getGold() - machine.getCost());
         machine.setOwnerGovernance(governance);
         machine.setActive(true);
-        //TODO: add to governance units
+        //TODO:1 add to governance units
         for (int i = 0; i < machine.getEngineersNeededToActivate(); i++) {
             Engineer engineer = (Engineer) tile.getUnitsByType("engineer").get(0);
             machine.getEngineers().add(engineer);
