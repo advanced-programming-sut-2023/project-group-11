@@ -7,8 +7,6 @@ import model.buildings.enums.*;
 import model.map.Map;
 import model.map.Tile;
 
-import java.util.regex.Matcher;
-
 public class BuildingUtils {
 
     public static boolean isValidCoordinates(Map map, int x, int y, int size) {
@@ -124,7 +122,7 @@ public class BuildingUtils {
             else climbable.setClimbable(isClimbable(building, x, y, size));
 
         governance.setGold(governance.getGold() - building.getGoldCost());
-        governance.changeResourceAmount(building.getResourceCostType(), -building.getResourceCostNumber());
+        governance.removeFromStorage(building.getResourceCostType(), building.getResourceCostNumber());
 
         if (building instanceof Storage storage) building.getOwner().getStorages().add(storage);
 
@@ -179,9 +177,7 @@ public class BuildingUtils {
         return building.getOwner().equals(governance) || !(building instanceof Trap);
     }
 
-    public static Building getBuilding(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("xGroup"));
-        int y = Integer.parseInt(matcher.group("yGroup"));
+    public static Building getBuilding(int x, int y) {
         return Stronghold.getCurrentGame().getMap().getTile(x, y).getBuilding();
     }
 }

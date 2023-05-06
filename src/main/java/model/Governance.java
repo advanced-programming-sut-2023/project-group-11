@@ -182,7 +182,7 @@ public class Governance {
         return storages;
     }
 
-    public void changeResourceAmount(AllResource allResource, int count) {
+    private void changeResourceAmount(AllResource allResource, int count) {
         allResources.put(allResource, allResources.get(allResource) + count);
     }
 

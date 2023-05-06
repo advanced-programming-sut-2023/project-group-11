@@ -8,7 +8,6 @@ import model.map.Map;
 import model.map.Tile;
 import model.people.Engineer;
 import model.people.Troops;
-import model.AllResource;
 import view.enums.messages.SelectBuildingMenuMessages;
 
 import java.util.regex.Matcher;
@@ -16,48 +15,49 @@ import java.util.regex.Matcher;
 public class SelectBuildingMenuController {
     private static Tile unitCreationTile = null;
     private static boolean unitCreationFlag = false;
+    private static final int[] unitCreationCoordinates = new int[2];
 
-    public static SelectBuildingMenuMessages checkCreateUnit(Matcher matcher, Matcher buildingMatcher) {
+    public static SelectBuildingMenuMessages checkCreateUnit(Matcher matcher, String type, int count, int x, int y) {
         unitCreationTile = null;
         unitCreationFlag = false;
 
         if (!Utils.isValidCommandTags(matcher, "typeGroup", "countGroup"))
             return SelectBuildingMenuMessages.INVALID_COMMAND;
 
-        String type = Utils.removeDoubleQuotation(matcher.group("type"));
-        int count = Integer.parseInt(matcher.group("count"));
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
-        Building building = BuildingUtils.getBuilding(buildingMatcher);
+        Building building = BuildingUtils.getBuilding(x, y);
 
         if (!isUnitMaker(building)) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
+
+        UnitMaker unitMaker = (UnitMaker) building;
+
         if (type.equals("engineer")) {
-            if (!building.getName().equals("engineer guild")) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-            if (governance.getGold() < count * 30) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
-            if (!createEngineer((UnitMaker) building, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
+            Engineer engineer = new Engineer();
+            if (!unitMaker.isEngineerMaker()) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
+            if (governance.getGold() < engineer.getCost() * 30) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+            if (!createEngineer(unitMaker, engineer, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
             return SelectBuildingMenuMessages.SUCCESS;
         }
 
-        if (!Utils.isValidUnitType(type))
-            return SelectBuildingMenuMessages.INVALID_TYPE;
+        if (!Utils.isValidUnitType(type)) return SelectBuildingMenuMessages.INVALID_TYPE;
 
         Troops troop = new Troops(type);
 
-        if ((troop.isArab() && !building.getName().equals("mercenary tent")) || !building.getName().equals("barracks"))
+        if ((troop.isArab() && !unitMaker.isMercenaryMaker()) || !building.getName().equals("barracks"))
             return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-        if (governance.getGold() < count * troop.getCost())
-            return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+        if (governance.getGold() < count * troop.getCost()) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
 
         AllResource armor = troop.getArmorType();
         AllResource weapon = troop.getWeaponType();
 
         if (!governance.hasEnoughItem(armor, count) || !governance.hasEnoughItem(weapon, count))
             return SelectBuildingMenuMessages.NOT_ENOUGH_RESOURCE;
-        if (!createUnit((UnitMaker) building, troop, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
+        if (!createUnit(unitMaker, troop, type, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
         return SelectBuildingMenuMessages.SUCCESS;
     }
 
-    public static boolean hasCommand(Matcher matcher) {
-        Building building = BuildingUtils.getBuilding(matcher);
+    public static boolean hasCommand(int x, int y) {
+        Building building = BuildingUtils.getBuilding(x, y);
         return building instanceof UnitMaker
                 || building instanceof Tower
                 || building instanceof GateHouse
@@ -73,8 +73,8 @@ public class SelectBuildingMenuController {
                 || building instanceof GateHouse;
     }
 
-    public static SelectBuildingMenuMessages checkRepair(Matcher buildingMatcher) {
-        Building building = BuildingUtils.getBuilding(buildingMatcher);
+    public static SelectBuildingMenuMessages checkRepair(int x, int y) {
+        Building building = BuildingUtils.getBuilding(x, y);
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
 
         if (!isRepairable(building)) return SelectBuildingMenuMessages.CANT_REPAIR;
@@ -95,7 +95,7 @@ public class SelectBuildingMenuController {
 
     private static boolean isEnemyAround(Governance governance, int X, int Y, int size) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
-        int range = 3;
+        int range = 7;
         for (int x = X; x < X + size; x++)
             for (int y = Y; y < Y + size; y++)
                 for (int i = -range; i <= range; i++)
@@ -106,7 +106,7 @@ public class SelectBuildingMenuController {
         return false;
     }
 
-    private static boolean createUnit(UnitMaker unitMaker, Troops troop, int count) {
+    private static boolean createUnit(UnitMaker unitMaker, Troops troop, String unitType, int count) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         setUnitCoordinates(unitMaker);
 
@@ -116,21 +116,20 @@ public class SelectBuildingMenuController {
         governance.removeFromStorage(troop.getWeaponType(), count);
         governance.removeFromStorage(troop.getArmorType(), count);
 
-        unitCreationTile.getUnits().add(troop);
+        for (int i = 0; i < count; i++) unitCreationTile.getUnits().add(new Troops(unitType));
 
         return true;
     }
 
-    private static boolean createEngineer(UnitMaker unitMaker, int count) {
+    private static boolean createEngineer(UnitMaker unitMaker, Engineer engineer, int count) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         setUnitCoordinates(unitMaker);
 
         if (unitCreationTile == null) return false;
 
-        Engineer engineer = new Engineer();
-
         governance.setGold(governance.getGold() - engineer.getCost() * count);
-        unitCreationTile.getUnits().add(engineer);
+
+        for (int i = 0; i < count; i++) unitCreationTile.getUnits().add(new Engineer());
 
         return true;
     }
@@ -141,21 +140,40 @@ public class SelectBuildingMenuController {
         int unitMakerYCoordinate = unitMaker.getYCoordinate();
         int unitMakerSize = unitMaker.getSize();
 
-        findUnitCreationCoordinates(map, unitMakerXCoordinate, unitMakerYCoordinate, unitMakerSize);
-        findUnitCreationCoordinates(map, unitMakerYCoordinate, unitMakerXCoordinate, unitMakerSize);
+        findUnitCreationCoordinatesXConstant(map, unitMakerXCoordinate, unitMakerYCoordinate, unitMakerSize);
+        findUnitCreationCoordinatesXConstant(map, unitMakerXCoordinate + unitMakerSize + 1,
+                unitMakerYCoordinate, unitMakerSize);
+
+        findUnitCreationCoordinatesYConstant(map, unitMakerYCoordinate, unitMakerXCoordinate, unitMakerSize);
+        findUnitCreationCoordinatesYConstant(map, unitMakerYCoordinate + unitMakerSize + 1,
+                unitMakerXCoordinate, unitMakerSize);
     }
 
-    private static void findUnitCreationCoordinates(Map map, int constantCoordination, int changingCoordination, int unitMakerSize) {
-        for (int i = changingCoordination - 1; i < changingCoordination + unitMakerSize && !unitCreationFlag; i++)
+    private static void findUnitCreationCoordinatesXConstant(Map map, int constantCoordination, int changingCoordination, int unitMakerSize) {
+        for (int i = changingCoordination - 1; i <= changingCoordination + unitMakerSize + 1 && !unitCreationFlag; i++)
             if (Utils.isValidCoordinates(map, constantCoordination - 1, i)) {
                 unitCreationTile = map.getTile(constantCoordination - 1, i);
-                if (!BuildingUtils.isBuildingInTile(unitCreationTile.getBuilding())) unitCreationFlag = true;
+                if (!BuildingUtils.isBuildingInTile(unitCreationTile.getBuilding())) {
+                    unitCreationFlag = true;
+                    unitCreationCoordinates[0] = constantCoordination;
+                    unitCreationCoordinates[1] = i;
+                }
             }
+    }
 
-        for (int i = changingCoordination - 1; i < changingCoordination + unitMakerSize && !unitCreationFlag; i++)
-            if (Utils.isValidCoordinates(map, constantCoordination + unitMakerSize, i)) {
-                unitCreationTile = map.getTile(constantCoordination + unitMakerSize, i);
-                if (!BuildingUtils.isBuildingInTile(unitCreationTile.getBuilding())) unitCreationFlag = true;
+    private static void findUnitCreationCoordinatesYConstant(Map map, int constantCoordination, int changingCoordination, int unitMakerSize) {
+        for (int i = changingCoordination - 1; i <= changingCoordination + unitMakerSize + 1 && !unitCreationFlag; i++)
+            if (Utils.isValidCoordinates(map, i, constantCoordination - 1)) {
+                unitCreationTile = map.getTile(i, constantCoordination - 1);
+                if (!BuildingUtils.isBuildingInTile(unitCreationTile.getBuilding())) {
+                    unitCreationFlag = true;
+                    unitCreationCoordinates[0] = i;
+                    unitCreationCoordinates[1] = constantCoordination;
+                }
             }
+    }
+
+    public static int[] getUnitCreationCoordinates() {
+        return unitCreationCoordinates;
     }
 }

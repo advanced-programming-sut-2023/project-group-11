@@ -1,5 +1,6 @@
 package view;
 
+import controller.BuildingUtils;
 import controller.GameMenuController;
 import controller.Utils;
 import view.enums.commands.GameMenuCommands;
@@ -47,7 +48,7 @@ public class GameMenu {
                 checkSelectBuilding(matcher);
             else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SELECT_UNIT)) != null)
                 checkSelectUnit(matcher);
-            else if((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.DROP_UNIT)) != null)
+            else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.DROP_UNIT)) != null)
                 checkDropUnit(matcher);
             else System.out.println("Invalid command!");
         }
@@ -77,7 +78,7 @@ public class GameMenu {
     }
 
     private static void showFoodList() {
-        System.out.println(GameMenuController.showFoodList());
+        System.out.print(GameMenuController.showFoodList());
     }
 
     private static void checkChangeFoodRate(Matcher matcher) {
@@ -132,16 +133,18 @@ public class GameMenu {
     }
 
     private static void checkSelectBuilding(Matcher matcher) {
-        message = GameMenuController.checkSelectBuilding(matcher);
+        int xCoordinate = Integer.parseInt(matcher.group("xCoordinate"));
+        int yCoordinate = Integer.parseInt(matcher.group("yCoordinate"));
+        message = GameMenuController.checkSelectBuilding(matcher, xCoordinate, yCoordinate);
 
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinates!");
             case NO_BUILDING_HERE -> System.out.println("There's No Building Here To Select!");
             case NOT_YOUR_BUILDING -> System.out.println("It's Not Your Building!");
-            case SUCCESS -> {//TODO: implementation needed for create unit and repair
-                System.out.println(GameMenuController.selectBuildingDetails(matcher));
-                SelectBuildingMenu.run(matcher);
+            case SUCCESS -> {
+                System.out.println(BuildingUtils.getBuilding(xCoordinate, yCoordinate));
+                SelectBuildingMenu.run(xCoordinate, yCoordinate);
             }
         }
     }
@@ -167,10 +170,10 @@ public class GameMenu {
         }
     }
 
-    private static void checkDropUnit(Matcher matcher){
+    private static void checkDropUnit(Matcher matcher) {
         message = GameMenuController.checkDropUnit(matcher);
 
-        switch (message){
+        switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinate!");
             case NOT_ENOUGH_SPACE -> System.out.println("There's Not Enough Space For Unit!");

@@ -84,10 +84,9 @@ public class Tile {
     }
 
     public boolean hasEnemy(Governance governance) {
-        for (Units units : units) {
+        for (Units units : units)
             if (!units.getOwner().equals(governance))
                 return true;
-        }
         return false;
     }
 

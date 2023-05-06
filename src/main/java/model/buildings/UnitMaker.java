@@ -20,10 +20,6 @@ public class UnitMaker extends Building {
         isEngineerMaker = unitMakerType.isEngineerMaker();
     }
 
-    public void makeUnit(String unitName) {
-        //TODO: implementation
-    }
-
     public boolean isMercenaryMaker() {
         return isMercenaryMaker;
     }
