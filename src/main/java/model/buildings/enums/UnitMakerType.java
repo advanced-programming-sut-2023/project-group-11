@@ -5,7 +5,7 @@ import model.AllResource;
 public enum UnitMakerType {
     MERCENARY_TENT("mercenary tent", 5, 114, 0, AllResource.WOOD, 10,
             0, true, true, false),
-    BARRACKS("barracks", 5, 189, 0, AllResource.WOOD, 15,
+    BARRACKS("barracks", 5, 189, 0, AllResource.STONE, 15,
             0, true, false, false),
     ENGINEER_GUILD("engineer guild", 5, 189, 100, AllResource.WOOD, 10,
             0, true, false, true);
@@ -83,5 +83,4 @@ public enum UnitMakerType {
                 return unitMakerType;
         return null;
     }
-
 }

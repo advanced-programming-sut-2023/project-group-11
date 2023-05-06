@@ -133,9 +133,7 @@ public class GameMenu {
     }
 
     private static void checkSelectBuilding(Matcher matcher) {
-        int xCoordinate = Integer.parseInt(matcher.group("xCoordinate"));
-        int yCoordinate = Integer.parseInt(matcher.group("yCoordinate"));
-        message = GameMenuController.checkSelectBuilding(matcher, xCoordinate, yCoordinate);
+        message = GameMenuController.checkSelectBuilding(matcher);
 
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
@@ -143,6 +141,8 @@ public class GameMenu {
             case NO_BUILDING_HERE -> System.out.println("There's No Building Here To Select!");
             case NOT_YOUR_BUILDING -> System.out.println("It's Not Your Building!");
             case SUCCESS -> {
+                int xCoordinate = Integer.parseInt(matcher.group("xCoordinate"));
+                int yCoordinate = Integer.parseInt(matcher.group("yCoordinate"));
                 System.out.println(BuildingUtils.getBuilding(xCoordinate, yCoordinate));
                 SelectBuildingMenu.run(xCoordinate, yCoordinate);
             }

@@ -112,11 +112,10 @@ public class BuildingUtils {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
+
         if (building instanceof Hovel hovel)
             governance.setMaxPopulation(governance.getMaxPopulation() + hovel.getCapacity());
-        //TODO: popularityRate
-//        if(building instanceof Church)
-
+        if (building instanceof Church) governance.changeReligiousFactor(2);
         if (building instanceof Climbable climbable)
             if (climbable.isClimbable()) makeClimbable(building, x, y, size, tiles);
             else climbable.setClimbable(isClimbable(building, x, y, size));
@@ -125,6 +124,7 @@ public class BuildingUtils {
         governance.removeFromStorage(building.getResourceCostType(), building.getResourceCostNumber());
 
         if (building instanceof Storage storage) building.getOwner().getStorages().add(storage);
+
 
         for (int i = x; i < x + size; i++)
             for (int j = y; j < y + size; j++)

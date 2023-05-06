@@ -1,6 +1,5 @@
 package controller;
 
-import model.people.Attacker;
 import model.Governance;
 import model.Path;
 import model.Stronghold;
@@ -8,6 +7,7 @@ import model.buildings.*;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
+import model.people.Attacker;
 import model.people.Engineer;
 import model.people.Machine;
 import model.people.Units;
@@ -68,8 +68,7 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.OUT_OF_RANGE;
         else if (noAttackLeft(selectedUnits))
             return SelectUnitMenuMessages.NO_ATTACK_LEFT;
-        else if (targetTile.getUnits().size() == 0 &&
-                targetTile.getBuilding() == null)
+        else if (targetTile.getUnits().size() == 0 && targetTile.getBuilding() == null)
             return SelectUnitMenuMessages.EMPTY_TILE;
         else if (targetTile.getUnits().get(0).getOwner().equals(selectedUnits.get(0).getOwner()) ||
                 targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))

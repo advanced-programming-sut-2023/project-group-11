@@ -28,9 +28,7 @@ public class SelectBuildingMenu {
     }
 
     private static void checkCreateUnit(Matcher matcher, int x, int y) {
-        String type = Utils.removeDoubleQuotation(matcher.group("typeGroup"));
-        int count = Integer.parseInt(matcher.group("countGroup"));
-        SelectBuildingMenuMessages message = SelectBuildingMenuController.checkCreateUnit(matcher, type, count, x, y);
+        SelectBuildingMenuMessages message = SelectBuildingMenuController.checkCreateUnit(matcher, x, y);
 
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
@@ -39,7 +37,7 @@ public class SelectBuildingMenu {
             case NOT_ENOUGH_GOLD -> System.out.println("You Don't Have Enough Gold!");
             case NOT_ENOUGH_RESOURCE -> System.out.println("You don't have enough equipment!");
             case BAD_UNIT_MAKER_PLACE -> System.out.println("No places are around the unit maker to put the unit(s)!");
-            case SUCCESS -> System.out.println("You created " + count + " Troop(s) in "
+            case SUCCESS -> System.out.println("You created " + matcher.group("count") + " Troop(s) in "
                     + "x: " + SelectBuildingMenuController.getUnitCreationCoordinates()[0]
                     + "y: " + SelectBuildingMenuController.getUnitCreationCoordinates()[1]
                     + "coordinates successfully!");

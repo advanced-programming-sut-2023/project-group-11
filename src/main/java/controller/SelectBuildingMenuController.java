@@ -17,16 +17,19 @@ public class SelectBuildingMenuController {
     private static boolean unitCreationFlag = false;
     private static final int[] unitCreationCoordinates = new int[2];
 
-    public static SelectBuildingMenuMessages checkCreateUnit(Matcher matcher, String type, int count, int x, int y) {
+    public static SelectBuildingMenuMessages checkCreateUnit(Matcher matcher, int x, int y) {
         unitCreationTile = null;
         unitCreationFlag = false;
 
         if (!Utils.isValidCommandTags(matcher, "typeGroup", "countGroup"))
             return SelectBuildingMenuMessages.INVALID_COMMAND;
 
+        String type = Utils.removeDoubleQuotation(matcher.group("typeGroup"));
+        int count = Integer.parseInt(matcher.group("countGroup"));
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         Building building = BuildingUtils.getBuilding(x, y);
 
+        if (!Utils.isValidUnitType(type)) return SelectBuildingMenuMessages.INVALID_TYPE;
         if (!isUnitMaker(building)) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
 
         UnitMaker unitMaker = (UnitMaker) building;
@@ -34,12 +37,13 @@ public class SelectBuildingMenuController {
         if (type.equals("engineer")) {
             Engineer engineer = new Engineer();
             if (!unitMaker.isEngineerMaker()) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-            if (governance.getGold() < engineer.getCost() * 30) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+            if (governance.getGold() < engineer.getCost() * count) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
             if (!createEngineer(unitMaker, engineer, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
             return SelectBuildingMenuMessages.SUCCESS;
         }
 
-        if (!Utils.isValidUnitType(type)) return SelectBuildingMenuMessages.INVALID_TYPE;
+        if (type.equals("black monk") && !building.getName().equals("cathedral"))
+            return SelectBuildingMenuMessages.CANT_CREATE_HERE;
 
         Troops troop = new Troops(type);
 
@@ -65,7 +69,7 @@ public class SelectBuildingMenuController {
     }
 
     public static boolean isUnitMaker(Building building) {
-        return building instanceof UnitMaker;
+        return building instanceof UnitMaker || building.getName().equals("cathedral");
     }
 
     public static boolean isRepairable(Building building) {

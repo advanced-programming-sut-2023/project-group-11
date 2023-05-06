@@ -29,17 +29,12 @@ public class SignupMenu {
         }
     }
 
-    private static void checkRegister(Matcher registerMatcher) {
-        String username = registerMatcher.group("username");
+    private static void checkRegister(Matcher registerMatcher) {//TODO: check invalid command in view?
+        String username = Utils.removeDoubleQuotation(registerMatcher.group("username"));
         String password = registerMatcher.group("password");
         String email = registerMatcher.group("email");
         String nickname = Utils.removeDoubleQuotation(registerMatcher.group("nickname"));
         String slogan = Utils.removeDoubleQuotation(registerMatcher.group("slogan"));
-
-        username = Utils.removeDoubleQuotation(username);
-        slogan = Utils.removeDoubleQuotation(slogan);
-        nickname = Utils.removeDoubleQuotation(nickname);
-
         SignupMenuMessages message = SignupMenuController.checkRegister(registerMatcher, username, password, email, nickname, slogan);
 
         switch (message) {

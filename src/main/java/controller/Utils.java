@@ -145,10 +145,9 @@ public class Utils {
                 type.equals("knight") || type.equals("tunneler") || type.equals("ladderman") ||
                 type.equals("black monk") || type.equals("archer bow") || type.equals("slaves") ||
                 type.equals("slinger") || type.equals("assassin") || type.equals("horse archer") ||
-                type.equals("arabian swordsman") || type.equals("fire thrower") || type.equals("siege tower") ||
-                type.equals("portable shield") || type.equals("battering ram") || type.equals("trebuchets") ||
-                type.equals("fire ballista") || type.equals("catapults") || type.equals("engineer");
+                type.equals("arabian swordsman") || type.equals("fire thrower") || type.equals("engineer");
     }
+
     static boolean isValidMachineType(String type) {
         return type.equals("siege tower") || type.equals("portable shield") ||
                 type.equals("battering ram") || type.equals("trebuchets") ||

@@ -1,10 +1,10 @@
 package model.map;
 
 import controller.BuildingUtils;
-import model.Governance;
 import model.buildings.Building;
 import model.people.Troops;
 import model.people.Units;
+import model.Governance;
 
 import java.util.ArrayList;
 

@@ -44,8 +44,10 @@ public class GameMenuController {
     public static GameMenuMessages checkShowMap(Matcher matcher) {
         if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
             return GameMenuMessages.INVALID_COMMAND;
+
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
+
         if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
             return GameMenuMessages.INVALID_COORDINATE;
         return GameMenuMessages.SUCCESS;
@@ -141,15 +143,21 @@ public class GameMenuController {
                 return GameMenuMessages.NOT_ENOUGH_RESOURCE;
 
         BuildingUtils.build(building, x, y, size);
+        currentGovernance.addBuilding(building);
 
         return GameMenuMessages.SUCCESS;
     }
 
-    public static GameMenuMessages checkSelectBuilding(Matcher matcher, int x, int y) {
+    public static GameMenuMessages checkSelectBuilding(Matcher matcher) {
         if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup")) return GameMenuMessages.INVALID_COMMAND;
-        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y)) return GameMenuMessages.INVALID_COORDINATE;
 
-        Building building = currentGame.getMap().getTile(x, y).getBuilding();
+        int xCoordinate = Integer.parseInt(matcher.group("xCoordinate"));
+        int yCoordinate = Integer.parseInt(matcher.group("yCoordinate"));
+
+        if (!Utils.isValidCoordinates(currentGame.getMap(), xCoordinate, yCoordinate))
+            return GameMenuMessages.INVALID_COORDINATE;
+
+        Building building = currentGame.getMap().getTile(xCoordinate, yCoordinate).getBuilding();
 
         if (!BuildingUtils.isBuildingInTile(building)) return GameMenuMessages.NO_BUILDING_HERE;
         if (!building.getOwner().equals(currentGovernance)) return GameMenuMessages.NOT_YOUR_BUILDING;
@@ -162,14 +170,14 @@ public class GameMenuController {
 
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
+        String type = Utils.removeDoubleQuotation(matcher.group("type"));
         Map map = currentGame.getMap();
 
-        if (!Utils.isValidCoordinates(map, x, y))
-            return GameMenuMessages.INVALID_COORDINATE;
+        if (!Utils.isValidCoordinates(map, x, y)) return GameMenuMessages.INVALID_COORDINATE;
 
         Tile tile = map.getTile(x, y);
 
-        if (!Utils.isValidUnitType(Utils.removeDoubleQuotation(matcher.group("type"))))
+        if (!(Utils.isValidUnitType(type) || Utils.isValidMachineType(type)))
             return GameMenuMessages.INVALID_UNIT_TYPE;
         else if (tile.getUnits().size() == 0)
             return GameMenuMessages.NO_UNIT_HERE;
@@ -182,13 +190,17 @@ public class GameMenuController {
     public static GameMenuMessages checkDropUnit(Matcher matcher) {
         if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate", "type", "count"))
             return GameMenuMessages.INVALID_COMMAND;
+
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
         int count = Integer.parseInt(matcher.group("count"));
         String type = Utils.removeDoubleQuotation(matcher.group("type"));
+
         if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
             return GameMenuMessages.INVALID_COORDINATE;
+
         Tile tile = currentGame.getMap().getTile(x, y);
+
         if (tile.getUnits().size() + count > 12)
             return GameMenuMessages.NOT_ENOUGH_SPACE;
         if (!Utils.isValidUnitType(type))
@@ -197,6 +209,7 @@ public class GameMenuController {
             return GameMenuMessages.INVALID_TEXTURE;
         if (tile.hasBuilding() && !(tile.getBuilding() instanceof Climbable))
             return GameMenuMessages.CANT_DROP_IN_BULDING;
+
         dropUnit(x, y, count, type);
         return GameMenuMessages.SUCCESS;
     }

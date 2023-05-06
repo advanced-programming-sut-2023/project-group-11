@@ -162,8 +162,8 @@ public class Governance {
         return religiousFactor;
     }
 
-    public void setReligiousFactor(int religiousFactor) {
-        this.religiousFactor = religiousFactor;
+    public void changeReligiousFactor(int religiousFactor) {
+        this.religiousFactor += religiousFactor;
     }
 
     public double getTroopDamageRatio() {
@@ -196,6 +196,9 @@ public class Governance {
 
     public ArrayList<Building> getBuildings() {
         return buildings;
+    }
+    public void addBuilding(Building building){
+        buildings.add(building);
     }
 
     public String tradeHistory() {
