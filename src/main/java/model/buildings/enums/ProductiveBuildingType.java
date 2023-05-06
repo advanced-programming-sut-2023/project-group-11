@@ -9,32 +9,35 @@ import java.util.List;
 public enum ProductiveBuildingType {
     QUARRY("quarry", 1, 114, 0, AllResource.WOOD, 20,
             3, true, new ArrayList<>(List.of(AllResource.STONE)),
-            null, 12, 0),
+            AllResource.NONE, 12, 0),
     IRON_MINE("iron mine", 2, 39, 0, AllResource.WOOD, 20,
             2, true, new ArrayList<>(List.of(AllResource.IRON)),
-            null, 4, 0),
+            AllResource.NONE, 4, 0),
     WOOD_CUTTER("wood cutter", 1, 39, 0, AllResource.WOOD, 3,
             1, true, new ArrayList<>(List.of(AllResource.WOOD)),
-            null, 20, 0),
+            AllResource.NONE, 20, 0),
     PITCH_RIG("pitch rig", 2, 39, 0, AllResource.WOOD, 20,
             1, true, new ArrayList<>(List.of(AllResource.PITCH)),
-            null, 5, 0),
+            AllResource.NONE, 5, 0),
 
     HUNTERS_POST("hunter's post", 1, 39, 0, AllResource.WOOD, 5,
             1, true, new ArrayList<>(List.of(AllResource.MEAT)),
-            null, 5, 0),
+            AllResource.NONE, 5, 0),
     DAIRY_FARM("dairy farm", 5, 39, 0, AllResource.WOOD, 10,
             1, true, new ArrayList<>(List.of(AllResource.CHEESE)),
-            null, 5, 0),
+            AllResource.NONE, 5, 0),
     APPLE_ORCHARD("apple orchard", 5, 39, 0, AllResource.WOOD, 5,
             1, true, new ArrayList<>(List.of(AllResource.APPLE)),
-            null, 5, 0),
+            AllResource.NONE, 5, 0),
     WHEAT_FARM("wheat farm", 4, 39, 0, AllResource.WOOD, 15,
             1, true, new ArrayList<>(List.of(AllResource.WHEAT)),
-            null, 5, 0),
+            AllResource.NONE, 5, 0),
     HOPS_FARM("hops farm", 4, 39, 0, AllResource.WOOD, 15,
             1, true, new ArrayList<>(List.of(AllResource.HOP)),
-            null, 5, 0),
+            AllResource.NONE, 5, 0),
+    INN("inn", 2, 114, 100, AllResource.WOOD, 20,
+            1, true, new ArrayList<>(List.of(AllResource.NONE)),
+            AllResource.ALE, 1, 1),
 
     BAKERY("bakery", 2, 114, 0, AllResource.WOOD, 10,
             1, true, new ArrayList<>(List.of(AllResource.BREAD)),
@@ -72,7 +75,6 @@ public enum ProductiveBuildingType {
     private final AllResource requiredResource;
     private final int productionRate;
     private final int consumptionRate;
-
 
     ProductiveBuildingType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType,
                            int resourceCostNumber, int workersNumber, boolean isActive, ArrayList<AllResource> producedResource,

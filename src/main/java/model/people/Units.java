@@ -56,4 +56,8 @@ public abstract class Units {
     public void setLeftMoves(int leftMoves) {
         this.leftMoves = leftMoves;
     }
+
+    public String toString() {
+        return "Unit Type: " + name + " HP: " + hp;
+    }
 }

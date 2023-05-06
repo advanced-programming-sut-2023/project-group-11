@@ -13,8 +13,6 @@ public class Wall extends Climbable {
         resourceCostNumber = wallType.getResourceCostNumber();
         workersNumber = wallType.getWorkersNumber();
         isActive = wallType.isActive();
-        areWorkersEngineer = wallType.areWorkersEngineer();
-        popularityEffect = wallType.getPopularityEffect();
         isClimbable = name.equals("stairs");
     }
 }

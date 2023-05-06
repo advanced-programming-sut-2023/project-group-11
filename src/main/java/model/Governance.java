@@ -23,6 +23,7 @@ public class Governance {
     private double taxGold = 0;
     private int fearFactor = 0;
     private int religiousFactor = 0;
+    private int aleFactor = 0;
     private double troopDamageRatio = 1;
     private double workersEfficiency = 1;
     private final ArrayList<Trade> previousTrades = new ArrayList<>();
@@ -166,6 +167,18 @@ public class Governance {
         this.religiousFactor += religiousFactor;
     }
 
+    public int getAleFactor() {
+        return aleFactor;
+    }
+
+    public void increaseAleFactor() {
+        aleFactor += Math.ceilDiv(10, currentPopulation);
+    }
+
+    public void resetAleFactor() {
+        aleFactor = 0;
+    }
+
     public double getTroopDamageRatio() {
         return troopDamageRatio;
     }
@@ -197,7 +210,8 @@ public class Governance {
     public ArrayList<Building> getBuildings() {
         return buildings;
     }
-    public void addBuilding(Building building){
+
+    public void addBuilding(Building building) {
         buildings.add(building);
     }
 

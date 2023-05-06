@@ -138,9 +138,8 @@ public class GameMenuController {
         if (!BuildingUtils.isMapEmpty(x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
         if (!BuildingUtils.isTextureSuitable(type, x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
         if (building.getGoldCost() > currentGovernance.getGold()) return GameMenuMessages.NOT_ENOUGH_MONEY;
-        if (building.getResourceCostType() != null)
-            if (!currentGovernance.hasEnoughItem(building.getResourceCostType(), building.getResourceCostNumber()))
-                return GameMenuMessages.NOT_ENOUGH_RESOURCE;
+        if (!currentGovernance.hasEnoughItem(building.getResourceCostType(), building.getResourceCostNumber()))
+            return GameMenuMessages.NOT_ENOUGH_RESOURCE;
 
         BuildingUtils.build(building, x, y, size);
         currentGovernance.addBuilding(building);
@@ -278,6 +277,7 @@ public class GameMenuController {
         double foodRatio = currentGovernance.getFoodRate() / 2.0 + 1;
         int foodConsumption = (int) (currentGovernance.getCurrentPopulation() * foodRatio);
         int totalFoodRemoved = 0;
+
         for (AllResource resource : AllResource.values())
             if (Utils.isFood(resource))
                 while (totalFoodRemoved < foodConsumption) {
@@ -285,6 +285,7 @@ public class GameMenuController {
                     currentGovernance.removeFromStorage(resource, 1);
                     totalFoodRemoved++;
                 }
+
         currentGovernance.updateFood();
     }
 
@@ -293,7 +294,7 @@ public class GameMenuController {
         int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("ox tether"));
 
         for (Building building : buildings)
-            if (building instanceof ProductiveBuilding productiveBuilding) {
+            if (building instanceof ProductiveBuilding productiveBuilding && productiveBuilding.isActive()) {
                 double workersEfficiency = currentGovernance.getWorkersEfficiency();
                 int consumptionRate = (int) Math.ceil((productiveBuilding.getConsumptionRate() * workersEfficiency));
                 int productionRate = (int) Math.ceil(productiveBuilding.getProductionRate() * workersEfficiency);
@@ -316,6 +317,9 @@ public class GameMenuController {
 
                         currentGovernance.removeFromStorage(requiredResource, 1);
                         currentGovernance.addToStorage(producedResource, productionRate);
+
+                        if (productiveBuilding.getName().equals("inn")) currentGovernance.increaseAleFactor();
+
                         consumed++;
                     }
                     consumed = 0;
@@ -331,12 +335,15 @@ public class GameMenuController {
         int currentFearFactor = currentGovernance.getFearFactor();
         int currentTaxFactor = currentGovernance.getTaxFactor();
         int currentReligiousFactor = currentGovernance.getReligiousFactor();
-        int totalFactor = currentReligiousFactor + currentFoodFactor + currentFearFactor + currentTaxFactor;
+        int currentAleFactor = currentGovernance.getAleFactor();
+        int totalFactor = currentFoodFactor + currentFearFactor
+                + currentTaxFactor + currentReligiousFactor + currentAleFactor;
 
         totalFactor = Math.min(totalFactor + currentGovernance.getPopularity(), 100);
         totalFactor = Math.max(totalFactor, 0);
 
         currentGovernance.setPopularity(totalFactor);
+        currentGovernance.resetAleFactor();
     }
 
     public static void setCurrentGame() {

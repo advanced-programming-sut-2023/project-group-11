@@ -3,12 +3,12 @@ package model.buildings.enums;
 import model.AllResource;
 
 public enum WallType {
-    SHORT_WALL("short wall", 1, 300, 0, null, 0,
-            0, true, false, 0),
-    TALL_WALL("tall wall", 1, 500, 0, null, 0,
-            0, true, false, 0),
-    STAIRS("stairs", 1, 300, 0, null, 0, 0,
-            true, false, 0);
+    SHORT_WALL("short wall", 1, 300, 0, AllResource.NONE, 0,
+            0, true),
+    TALL_WALL("tall wall", 1, 500, 0, AllResource.NONE, 0,
+            0, true),
+    STAIRS("stairs", 1, 300, 0, AllResource.NONE, 0,
+            0, true);
 
     private final String name;
     private final int size;
@@ -18,11 +18,9 @@ public enum WallType {
     private final int resourceCostNumber;
     private final int workersNumber;
     private final boolean isActive;
-    private final boolean areWorkersEngineer;
-    private final int popularityEffect;
 
     WallType(String name, int size, int hitPoint, double goldCost, AllResource resourceCostType, int resourceCostNumber,
-             int workersNumber, boolean isActive, boolean areWorkersEngineer, int popularityEffect) {
+             int workersNumber, boolean isActive) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -31,8 +29,6 @@ public enum WallType {
         this.resourceCostNumber = resourceCostNumber;
         this.workersNumber = workersNumber;
         this.isActive = isActive;
-        this.areWorkersEngineer = areWorkersEngineer;
-        this.popularityEffect = popularityEffect;
     }
 
     public String getName() {
@@ -65,14 +61,6 @@ public enum WallType {
 
     public boolean isActive() {
         return isActive;
-    }
-
-    public boolean areWorkersEngineer() {
-        return areWorkersEngineer;
-    }
-
-    public int getPopularityEffect() {
-        return popularityEffect;
     }
 
     public static WallType getWallTypeByName(String name) {

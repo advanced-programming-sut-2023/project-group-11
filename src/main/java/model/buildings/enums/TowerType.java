@@ -4,16 +4,16 @@ import model.AllResource;
 
 
 public enum TowerType {
-    LOOKOUT_TOWER("lookout tower", 1, 1000, 0, AllResource.STONE, 10,
-            0, true, false, 0, 10, 10, 10, false),
-    PERIMETER_TURRET("perimeter turret", 2, 1000, 0, AllResource.STONE, 10,
-            0, true, false, 0, 10, 10, 10, false),
+    LOOKOUT_TOWER("lookout tower", 1, 250, 0, AllResource.STONE, 10,
+            0, true, 10, 5, false),
+    PERIMETER_TURRET("perimeter turret", 2, 600, 0, AllResource.STONE, 10,
+            0, true, 7, 10, false),
     DEFENCE_TURRET("defence turret", 2, 1000, 0, AllResource.STONE, 15,
-            0, true, false, 0, 10, 10, 10, false),
-    SQUARE_TOWER("square tower", 3, 1000, 0, AllResource.STONE, 35,
-            0, true, false, 0, 10, 10, 10, true),
-    ROUND_TOWER("round tower", 1, 1000, 0, AllResource.STONE, 40,
-            0, true, false, 0, 10, 10, 10, true);
+            0, true, 7, 15, false),
+    SQUARE_TOWER("square tower", 3, 2000, 0, AllResource.STONE, 35,
+            0, true, 8, 35, true),
+    ROUND_TOWER("round tower", 1, 2500, 0, AllResource.STONE, 40,
+            0, true, 8, 40, true);
 
 
     private final String name;
@@ -24,30 +24,13 @@ public enum TowerType {
     private final int resourceCostNumber;
     private final int workersNumber;
     private final boolean isActive;
-    private final boolean areWorkersEngineer;
-    private final int popularityEffect;
-    private final int fireRange;
-    private final int defendRange;
+    private final int rangeIncrement;
     private final int unitCapacity;
-    private final boolean isTower;
+    private final boolean canHaveSiegeEquipment;
 
-
-    public int getFireRange() {
-        return fireRange;
-    }
-
-    public int getDefendRange() {
-        return defendRange;
-    }
-
-    public int getUnitCapacity() {
-        return unitCapacity;
-    }
-
-
-    TowerType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType, int resourceCostNumber,
-              int workersNumber, boolean isActive, boolean areWorkersEngineer, int popularityEffect,
-              int fireRange, int defendRange, int unitCapacity, boolean isTower) {
+    TowerType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType,
+              int resourceCostNumber, int workersNumber, boolean isActive,
+              int rangeIncrement, int unitCapacity, boolean canHaveSiegeEquipment) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -56,16 +39,22 @@ public enum TowerType {
         this.resourceCostNumber = resourceCostNumber;
         this.workersNumber = workersNumber;
         this.isActive = isActive;
-        this.areWorkersEngineer = areWorkersEngineer;
-        this.popularityEffect = popularityEffect;
-        this.fireRange = fireRange;
-        this.defendRange = defendRange;
+        this.rangeIncrement = rangeIncrement;
         this.unitCapacity = unitCapacity;
-        this.isTower = isTower;
+        this.canHaveSiegeEquipment = canHaveSiegeEquipment;
     }
 
-    public boolean isTower() {
-        return isTower;
+    public boolean canHaveSiegeEquipment() {
+        return canHaveSiegeEquipment;
+    }
+
+
+    public int getRangeIncrement() {
+        return rangeIncrement;
+    }
+
+    public int getUnitCapacity() {
+        return unitCapacity;
     }
 
     public String getName() {
@@ -100,19 +89,10 @@ public enum TowerType {
         return isActive;
     }
 
-    public boolean AreWorkersEngineer() {
-        return areWorkersEngineer;
-    }
-
-    public int getPopularityEffect() {
-        return popularityEffect;
-    }
-
     public static TowerType getTowerTypeByName(String name) {
         for (TowerType towerType : TowerType.values())
             if (towerType.name.equals(name))
                 return towerType;
         return null;
     }
-
 }

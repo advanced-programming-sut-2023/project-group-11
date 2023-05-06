@@ -4,12 +4,11 @@ import model.Governance;
 import model.buildings.enums.GateHouseType;
 
 public class GateHouse extends Climbable {
-
     private final int capacity;
     private int filledCapacity;
     private Governance gateController;
     private final boolean horizontalDirection;
-
+    private boolean isOpen;
 
     public GateHouse(GateHouseType gateHouseType) {
         name = gateHouseType.getName();
@@ -21,11 +20,10 @@ public class GateHouse extends Climbable {
         resourceCostNumber = gateHouseType.getResourceCostNumber();
         workersNumber = gateHouseType.getWorkersNumber();
         isActive = gateHouseType.isActive();
-        areWorkersEngineer = gateHouseType.areWorkersEngineer();
-        popularityEffect = gateHouseType.getPopularityEffect();
         capacity = gateHouseType.getCapacity();
         horizontalDirection = gateHouseType.getHorizontalDirection();
         isClimbable = true;
+        isOpen = true;
     }
 
     public Governance getGateController() {
@@ -34,6 +32,14 @@ public class GateHouse extends Climbable {
 
     public void setGateController(Governance gateController) {
         this.gateController = gateController;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
     }
 
     public int getCapacity() {

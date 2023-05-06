@@ -14,10 +14,7 @@ public class Church extends Building {
         goldCost = churchType.getGoldCost();
         resourceCostType = churchType.getResourceCostType();
         resourceCostNumber = churchType.getResourceCostNumber();
-        workersNumber = churchType.getWorkersNumber();
         isActive = churchType.isActive();
-        areWorkersEngineer = churchType.AreWorkersEngineer();
-        popularityEffect = churchType.getPopularityEffect();
         isGeneral = churchType.isGeneral();
     }
 

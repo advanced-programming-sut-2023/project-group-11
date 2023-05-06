@@ -1,10 +1,10 @@
 package model.map;
 
 import controller.BuildingUtils;
+import model.Governance;
 import model.buildings.Building;
 import model.people.Troops;
 import model.people.Units;
-import model.Governance;
 
 import java.util.ArrayList;
 
@@ -106,11 +106,10 @@ public class Tile {
 
         for (Units unit : units)
             if (unit instanceof Troops troop && troop.isRevealed())
-                unitsName += (i++) + unit.getName() + "HP: " + unit.getHp() + '\n';
+                unitsName += (i++) + ". " + troop.toString() + '\n';
 
         result += "Texture: " + texture.getName() + '\n';
-        if (BuildingUtils.isBuildingInTile(building))
-            result += "Building: " + building.getName() + "HP: " + building.getHitPoint() + '\n';
+        if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
         if (units.size() > 0) result += "Units: " + unitsName;
         if (tree != null) result += "Tree: " + tree.getName() + '\n';
         if (getResourceAmount() != null) result += getResourceAmount() + '\n';

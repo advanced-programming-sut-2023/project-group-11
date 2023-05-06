@@ -5,14 +5,14 @@ import model.AllResource;
 
 public enum GateHouseType {
 
-    SMALL_HORIZONTAL("small gatehouse", 2, 400, 10, AllResource.STONE, 0, 0,
-            true, false, 0, 8, true),
-    LARGE_HORIZONTAL("large gatehouse", 3, 500, 0, AllResource.STONE, 20, 0,
-            true, false, 0, 10, true),
-    SMALL_VERTICAL("small gatehouse", 2, 400, 10, AllResource.STONE, 0, 0,
-            true, false, 0, 8, false),
-    LARGE_VERTICAL("large gatehouse", 3, 500, 0, AllResource.STONE, 20, 0,
-            true, false, 0, 10, false);
+    SMALL_HORIZONTAL("small gatehouse", 2, 400, 0, AllResource.STONE, 10,
+            0, true, 15, true),
+    SMALL_VERTICAL("small gatehouse", 2, 400, 0, AllResource.STONE, 10,
+            0, true, 15, false),
+    LARGE_HORIZONTAL("large gatehouse", 3, 500, 0, AllResource.STONE, 20,
+            0, true, 25, true),
+    LARGE_VERTICAL("large gatehouse", 3, 500, 0, AllResource.STONE, 20,
+            0, true, 25, false);
 
     private final String name;
     private final int size;
@@ -22,16 +22,12 @@ public enum GateHouseType {
     private final int resourceCostNumber;
     private final int workersNumber;
     private final boolean isActive;
-    private final boolean areWorkersEngineer;
-    private final int popularityEffect;
     private final int capacity;
     private final boolean horizontalDirection;
 
-
     GateHouseType(String name, int size, int hitPoint, double goldCost,
                   AllResource resourceCostType, int resourceCostNumber, int workersNumber,
-                  boolean isActive, boolean areWorkersEngineer,
-                  int popularityEffect, int capacity, boolean horizontalDirection) {
+                  boolean isActive, int capacity, boolean horizontalDirection) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -40,8 +36,6 @@ public enum GateHouseType {
         this.resourceCostNumber = resourceCostNumber;
         this.workersNumber = workersNumber;
         this.isActive = isActive;
-        this.areWorkersEngineer = areWorkersEngineer;
-        this.popularityEffect = popularityEffect;
         this.capacity = capacity;
         this.horizontalDirection = horizontalDirection;
     }
@@ -76,15 +70,6 @@ public enum GateHouseType {
 
     public boolean isActive() {
         return isActive;
-    }
-
-    public boolean areWorkersEngineer() {
-        return areWorkersEngineer;
-    }
-
-
-    public int getPopularityEffect() {
-        return popularityEffect;
     }
 
     public int getCapacity() {

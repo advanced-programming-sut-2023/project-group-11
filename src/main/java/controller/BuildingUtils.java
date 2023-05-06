@@ -98,12 +98,8 @@ public class BuildingUtils {
             building = new UnitMaker(UnitMakerType.getUnitMakerTypeByName(type));
         if (WallType.getWallTypeByName(type) != null)
             building = new Wall(WallType.getWallTypeByName(type));
-        if (type.equals("inn"))
-            building = new Inn();
         if (type.equals("draw bridge"))
             building = new DrawBridge(true);
-        if (type.equals("hovel"))
-            building = new Hovel();
 
         return building;
     }
@@ -113,8 +109,8 @@ public class BuildingUtils {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
 
-        if (building instanceof Hovel hovel)
-            governance.setMaxPopulation(governance.getMaxPopulation() + hovel.getCapacity());
+        if (building.getName().equals("hovel"))
+            governance.setMaxPopulation(governance.getMaxPopulation() + 8);
         if (building instanceof Church) governance.changeReligiousFactor(2);
         if (building instanceof Climbable climbable)
             if (climbable.isClimbable()) makeClimbable(building, x, y, size, tiles);
@@ -122,9 +118,9 @@ public class BuildingUtils {
 
         governance.setGold(governance.getGold() - building.getGoldCost());
         governance.removeFromStorage(building.getResourceCostType(), building.getResourceCostNumber());
+        governance.setUnemployedPopulation(governance.getUnemployedPopulation() + building.getWorkersNumber());
 
         if (building instanceof Storage storage) building.getOwner().getStorages().add(storage);
-
 
         building.setXCoordinate(x);
         building.setYCoordinate(y);

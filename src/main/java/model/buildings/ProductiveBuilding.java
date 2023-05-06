@@ -6,7 +6,6 @@ import model.buildings.enums.ProductiveBuildingType;
 import java.util.ArrayList;
 
 public class ProductiveBuilding extends Building {
-
     private final ArrayList<AllResource> producedResource;
     private final AllResource requiredResource;
     private final int productionRate;

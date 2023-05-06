@@ -7,11 +7,9 @@ import java.util.ArrayList;
 
 public class Tower extends Climbable {
 
-    private int fireRange;
-    private int defendRange;
+    private int rangeIncrement;
     private int unitCapacity;
-    private final boolean isTower;
-
+    private final boolean canHaveSiegeEquipment;
     private ArrayList<Units> units = new ArrayList<>();
 
     public Tower(TowerType towerType) {
@@ -24,29 +22,18 @@ public class Tower extends Climbable {
         resourceCostNumber = towerType.getResourceCostNumber();
         workersNumber = towerType.getWorkersNumber();
         isActive = towerType.isActive();
-        areWorkersEngineer = towerType.AreWorkersEngineer();
-        popularityEffect = towerType.getPopularityEffect();
-        fireRange = towerType.getFireRange();
-        defendRange = towerType.getDefendRange();
+        rangeIncrement = towerType.getRangeIncrement();
         unitCapacity = towerType.getUnitCapacity();
-        isTower = towerType.isTower();
+        canHaveSiegeEquipment = towerType.canHaveSiegeEquipment();
         isClimbable = false;
     }
 
-    public int getFireRange() {
-        return fireRange;
+    public int getRangeIncrement() {
+        return rangeIncrement;
     }
 
-    public void setFireRange(int fireRange) {
-        this.fireRange = fireRange;
-    }
-
-    public int getDefendRange() {
-        return defendRange;
-    }
-
-    public void setDefendRange(int defendRange) {
-        this.defendRange = defendRange;
+    public void setRangeIncrement(int rangeIncrement) {
+        this.rangeIncrement = rangeIncrement;
     }
 
     public int getUnitCapacity() {
@@ -65,8 +52,8 @@ public class Tower extends Climbable {
         this.units = units;
     }
 
-    public boolean isTower() {
-        return isTower;
+    public boolean canHaveSiegeEquipment() {
+        return canHaveSiegeEquipment;
     }
 
 }
