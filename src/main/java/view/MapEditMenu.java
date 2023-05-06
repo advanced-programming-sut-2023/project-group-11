@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
 
 public class MapEditMenu {
     //TODO: make 8 areas
-    //TODO: make drop building and unit
 
     private static MapEditMenuMessages mapEditMenuMessage;
 

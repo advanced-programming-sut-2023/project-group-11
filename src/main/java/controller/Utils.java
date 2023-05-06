@@ -89,7 +89,7 @@ public class Utils {
 
     public static void updateDatabase(String field) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter("src/main/resources/" + field + ".json")) {
+        try (FileWriter writer = new FileWriter("src/main/resources/JSON/" + field + ".json")) {
             gson.toJson(getDatabaseList(field), writer);
         } catch (IOException e) {
             throw new RuntimeException(e);

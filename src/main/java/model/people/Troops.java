@@ -22,7 +22,6 @@ public class Troops extends Units {
     protected final boolean canScaleWall;
     protected final boolean canDigKhandagh;
     protected final int range;
-    protected final double damageRatioOnArmor;
     protected boolean revealed;
 
 
@@ -40,7 +39,6 @@ public class Troops extends Units {
         this.isArab = (Boolean) troop.get("isArab");
         this.hasFiringWeapon = (Boolean) troop.get("hasFiringWeapon");
         this.range = ((Long) troop.get("range")).intValue();
-        this.damageRatioOnArmor = (Double) troop.get("damageRatioOnArmor");
         this.canScaleWall = (Boolean) troop.get("canScaleWall");
         this.canDigKhandagh = (Boolean) troop.get("canDigKhandagh");
         this.revealed = (Boolean) troop.get("revealed");
@@ -52,7 +50,7 @@ public class Troops extends Units {
         JSONParser jsonParser = new JSONParser();
         JSONObject troop = new JSONObject();
 
-        try (FileReader reader = new FileReader("src/main/resources/Troops.json")) {
+        try (FileReader reader = new FileReader("src/main/resources/JSON/Troops.json")) {
             troop = (JSONObject) ((JSONObject) ((JSONArray) jsonParser.parse(reader)).get(0)).get(name);
         } catch (IOException | ParseException ignored) {
         }
@@ -94,10 +92,6 @@ public class Troops extends Units {
 
     public int getRange() {
         return range;
-    }
-
-    public double getDamageRatioOnArmor() {
-        return damageRatioOnArmor;
     }
 
     public boolean isRevealed() {

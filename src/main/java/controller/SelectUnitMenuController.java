@@ -11,7 +11,6 @@ import model.people.Troops;
 import model.people.Engineer;
 import model.people.Machine;
 import model.people.Units;
-import model.people.enums.MachineTypes;
 import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
@@ -81,19 +80,35 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
-        ArrayList<Units> removings = new ArrayList<>();
-        for (int i = 0; i < selectedUnits.size(); i++) {
-            if (selectedUnits.get(i).hasAttacked())
-                removings.add(selectedUnits.get(i));
-        }
-        selectedUnits.removeAll(removings);
+    public static SelectUnitMenuMessages checkGroundAttack(Matcher matcher, int[] currentLocation, String unitType) {
+        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
+            return SelectUnitMenuMessages.INVALID_COMMAND;
 
-        return selectedUnits.size() == 0;
-    }
+        Map map = Stronghold.getCurrentGame().getMap();
+        int targetX = Integer.parseInt(matcher.group("xCoordinate"));
+        int targetY = Integer.parseInt(matcher.group("yCoordinate"));
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        Tile targetTile = map.getTile(targetX, targetY);
 
-    public static SelectUnitMenuMessages checkGroundAttack(Matcher matcher) {
-        return null;
+        if (!Utils.isValidCoordinates(map, targetX, targetY))
+            return SelectUnitMenuMessages.INVALID_COORDINATE;
+        else if (!isValidUnitForGroundAttack(unitType))
+            return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_ATTACK;
+        else if (noAttackLeft(selectedUnits))
+            return SelectUnitMenuMessages.NO_ATTACK_LEFT;
+        else if (targetTile.getUnits().size() == 0 && targetTile.getBuilding() == null)
+            return SelectUnitMenuMessages.EMPTY_TILE;
+        else if (targetTile.getUnits().size() != 0 && targetTile.getUnits().get(0).getOwner().equals(selectedUnits.get(0).getOwner()) ||
+                targetTile.getBuilding() != null && targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
+            return SelectUnitMenuMessages.FRIENDLY_ATTACK;
+
+        if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
+        else attackUnits(selectedUnits, targetTile);
+
+
+        return SelectUnitMenuMessages.SUCCESS;
     }
 
     public static SelectUnitMenuMessages checkPatrolUnit(Matcher matcher) {
@@ -201,7 +216,7 @@ public class SelectUnitMenuController {
 
         if (currentBuilding instanceof Trap)
             return true;
-        else if (currentBuilding instanceof GateHouse gateHouse) { // TODO: change gate controller end of choosing path
+        else if (currentBuilding instanceof GateHouse gateHouse) {
             if (currentGovernance.equals(gateHouse.getGateController()))
                 return true;
             else if (previousBuilding instanceof Climbable climbable && climbable.getName().equals("stairs"))
@@ -312,23 +327,69 @@ public class SelectUnitMenuController {
     }
 
     private static boolean isValidUnitForAirAttack(String type) {
-        return type.equals("archer") ||
-                type.equals("archer bow") || type.equals("horse archer") || type.equals("fire thrower") ||
+        return type.equals("archer") || type.equals("archer bow") ||
+                type.equals("slinger") || type.equals("horse archer") || type.equals("fire thrower") ||
                 type.equals("trebuchets") || type.equals("fire ballista") || type.equals("catapults");
+    }
+
+    private static boolean isValidUnitForGroundAttack(String type) {
+        return type.equals("spearman") || type.equals("pikeman") || type.equals("maceman") ||
+                type.equals("swordsman") || type.equals("knight") || type.equals("black monk") ||
+                type.equals("slaves") || type.equals("assassin") || type.equals("arabian swordsman") ||
+                type.equals("battering ram");
+    }
+
+    private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
+        ArrayList<Units> removings = new ArrayList<>();
+        for (int i = 0; i < selectedUnits.size(); i++) {
+            if (selectedUnits.get(i).hasAttacked())
+                removings.add(selectedUnits.get(i));
+        }
+        selectedUnits.removeAll(removings);
+
+        return selectedUnits.size() == 0;
     }
 
     private static void attackBuilding(ArrayList<Units> selectedUnits, Tile targetTile) {
         Building targetBuilding = targetTile.getBuilding();
+        Map map = Stronghold.getCurrentGame().getMap();
+
         targetBuilding.setHitPoint(targetBuilding.getHitPoint() - selectedUnits.size() * ((Troops) selectedUnits.get(0)).getDamage());
+        setAttackedTrue(selectedUnits);
+        if (targetBuilding.getHitPoint() <= 0) {
+            destroyBuilding(map, targetBuilding);
+            //TODO: rearrange the climbablity
+        }
+    }
 
-        for (Units unit : selectedUnits)
-            unit.setAttacked(true);
-        // destroy building
+    private static void destroyBuilding(Map map, Building building) {
+        int buildingX = building.getXCoordinate();
+        int buildingY = building.getYCoordinate();
+        int buildingSize = building.getSize();
 
+        for (int i = 0; i < buildingSize; i++)
+            for (int j = 0; j < buildingSize; j++)
+                map.getTile(buildingX + i, buildingY + j).setBuilding(null);
     }
 
     private static void attackUnits(ArrayList<Units> selectedUnits, Tile targetTile) {
+        for (Units unit : targetTile.getUnits())
+            unit.setHp(unit.getHp() - ((Troops) selectedUnits.get(0)).getDamage() * selectedUnits.size());
+        setAttackedTrue(selectedUnits);
+        removeDeadUnits(targetTile);
+        //TODO: set reacting to attacks
+    }
 
+    private static void removeDeadUnits(Tile targetTile) {
+        ArrayList<Units> removings = new ArrayList<>();
+        for (int i = 0; i < targetTile.getUnits().size(); i++)
+            if (targetTile.getUnits().get(i).getHp() <= 0)
+                removings.add(targetTile.getUnits().get(i));
+        targetTile.getUnits().removeAll(removings);
+    }
+
+    private static void setAttackedTrue(ArrayList<Units> selectedUnits) {
+        for (Units unit : selectedUnits) unit.setAttacked(true);
     }
 
     private static void buildMachine(Machine machine, Tile tile, Governance governance) {
