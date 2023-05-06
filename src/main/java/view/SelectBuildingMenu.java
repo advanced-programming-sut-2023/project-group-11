@@ -2,6 +2,7 @@ package view;
 
 import controller.BuildingUtils;
 import controller.SelectBuildingMenuController;
+import controller.Utils;
 import view.enums.commands.SelectBuildingMenuCommands;
 import view.enums.messages.SelectBuildingMenuMessages;
 
@@ -9,25 +10,28 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class SelectBuildingMenu {
-    public static void run(Matcher matcher) {
-        System.out.println(BuildingUtils.getBuilding(matcher).toString());
-        if (!SelectBuildingMenuController.hasCommand(matcher)) return;
+    public static void run(int x, int y) {
+        System.out.println(BuildingUtils.getBuilding(x, y).toString());
+        if (!SelectBuildingMenuController.hasCommand(x, y)) return;
         Scanner scanner = EntryMenu.getScanner();
         String command;
-        Matcher matcher2;
+        Matcher matcher;
         while (true) {
             command = scanner.nextLine();
             if (SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.BACK) != null) return;
-            else if ((matcher2 = SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.CREATE_UNIT)) != null)
-                checkCreateUnit(matcher2, matcher);
+            else if ((matcher = SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.CREATE_UNIT)) != null)
+                checkCreateUnit(matcher, x, y);
             else if (SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.REPAIR) != null)
-                checkRepair(matcher);
+                checkRepair(x, y);
             else System.out.println("Invalid Command!");
         }
     }
 
-    private static void checkCreateUnit(Matcher matcher, Matcher buildingMatcher) {
-        SelectBuildingMenuMessages message = SelectBuildingMenuController.checkCreateUnit(matcher, buildingMatcher);
+    private static void checkCreateUnit(Matcher matcher, int x, int y) {
+        String type = Utils.removeDoubleQuotation(matcher.group("typeGroup"));
+        int count = Integer.parseInt(matcher.group("countGroup"));
+        SelectBuildingMenuMessages message = SelectBuildingMenuController.checkCreateUnit(matcher, type, count, x, y);
+
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
             case INVALID_TYPE -> System.out.println("Invalid Type!");
@@ -35,12 +39,16 @@ public class SelectBuildingMenu {
             case NOT_ENOUGH_GOLD -> System.out.println("You Don't Have Enough Gold!");
             case NOT_ENOUGH_RESOURCE -> System.out.println("You don't have enough equipment!");
             case BAD_UNIT_MAKER_PLACE -> System.out.println("No places are around the unit maker to put the unit(s)!");
-            case SUCCESS -> System.out.println("Troop created successfully!");
+            case SUCCESS -> System.out.println("You created " + count + " Troop(s) in "
+                    + "x: " + SelectBuildingMenuController.getUnitCreationCoordinates()[0]
+                    + "y: " + SelectBuildingMenuController.getUnitCreationCoordinates()[1]
+                    + "coordinates successfully!");
         }
     }
 
-    private static void checkRepair(Matcher buildingMatcher) {
-        SelectBuildingMenuMessages message = SelectBuildingMenuController.checkRepair(buildingMatcher);
+    private static void checkRepair(int x, int y) {
+        SelectBuildingMenuMessages message = SelectBuildingMenuController.checkRepair(x, y);
+
         switch (message) {
             case CANT_REPAIR -> System.out.println("Can't Repair This Building!");
             case NO_NEED_TO_REPAIR -> System.out.println("There's No Need To Repair This Building!");

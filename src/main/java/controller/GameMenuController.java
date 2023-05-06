@@ -145,12 +145,8 @@ public class GameMenuController {
         return GameMenuMessages.SUCCESS;
     }
 
-    public static GameMenuMessages checkSelectBuilding(Matcher matcher) {
+    public static GameMenuMessages checkSelectBuilding(Matcher matcher, int x, int y) {
         if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup")) return GameMenuMessages.INVALID_COMMAND;
-
-        int x = Integer.parseInt(matcher.group("xGroup"));
-        int y = Integer.parseInt(matcher.group("yGroup"));
-
         if (!Utils.isValidCoordinates(currentGame.getMap(), x, y)) return GameMenuMessages.INVALID_COORDINATE;
 
         Building building = currentGame.getMap().getTile(x, y).getBuilding();
@@ -158,12 +154,6 @@ public class GameMenuController {
         if (!BuildingUtils.isBuildingInTile(building)) return GameMenuMessages.NO_BUILDING_HERE;
         if (!building.getOwner().equals(currentGovernance)) return GameMenuMessages.NOT_YOUR_BUILDING;
         return GameMenuMessages.SUCCESS;
-    }
-
-    public static Building selectBuildingDetails(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("xGroup"));
-        int y = Integer.parseInt(matcher.group("yGroup"));
-        return currentGame.getMap().getTile(x, y).getBuilding();
     }
 
     public static GameMenuMessages checkSelectUnit(Matcher matcher) {
@@ -205,9 +195,9 @@ public class GameMenuController {
             return GameMenuMessages.INVALID_UNIT_TYPE;
         if (!tile.getTexture().isSuitableForUnit())
             return GameMenuMessages.INVALID_TEXTURE;
-        if(tile.hasBuilding() && !(tile.getBuilding() instanceof Climbable))
+        if (tile.hasBuilding() && !(tile.getBuilding() instanceof Climbable))
             return GameMenuMessages.CANT_DROP_IN_BULDING;
-        dropUnit(x,y,count,type);
+        dropUnit(x, y, count, type);
         return GameMenuMessages.SUCCESS;
     }
 
