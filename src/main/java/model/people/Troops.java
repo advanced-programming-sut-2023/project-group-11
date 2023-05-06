@@ -12,17 +12,15 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Troops extends Units {
-    protected AllResource weaponType;
-    protected AllResource armorType;
-    protected int damage;
-    protected boolean hasHorse;
-    protected boolean isArab;
-    protected boolean hasFiringWeapon;
-    protected final boolean canScaleWall;
-    protected final boolean canDigKhandagh;
-    protected final int range;
-    protected boolean revealed;
+public class Troops extends Attacker {
+    private final AllResource weaponType;
+    private final AllResource armorType;
+    private final boolean hasHorse;
+    private final boolean isArab;
+    private final boolean hasFiringWeapon;
+    private final boolean canScaleWall;
+    private final boolean canDigKhandagh;
+    private boolean revealed;
 
 
     public Troops(String name) {
@@ -31,14 +29,14 @@ public class Troops extends Units {
         this.name = name;
         this.hp = ((Long) troop.get("hp")).intValue();
         this.speed = Speed.valueOf((String) troop.get("speed"));
+        this.damage = TroopDamage.valueOf((String) troop.get("damage")).getDamage();
+        this.range = ((Long) troop.get("range")).intValue();
         this.leftMoves = speed.getMovesInEachTurn();
         this.weaponType = AllResource.valueOf((String) troop.get("weaponType"));
         this.armorType = AllResource.valueOf((String) troop.get("armorType"));
-        this.damage = TroopDamage.valueOf((String) troop.get("damage")).getDamage();
         this.hasHorse = (Boolean) troop.get("hasHorse");
         this.isArab = (Boolean) troop.get("isArab");
         this.hasFiringWeapon = (Boolean) troop.get("hasFiringWeapon");
-        this.range = ((Long) troop.get("range")).intValue();
         this.canScaleWall = (Boolean) troop.get("canScaleWall");
         this.canDigKhandagh = (Boolean) troop.get("canDigKhandagh");
         this.revealed = (Boolean) troop.get("revealed");
@@ -66,10 +64,6 @@ public class Troops extends Units {
         return armorType;
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
     public boolean hasHorse() {
         return hasHorse;
     }
@@ -88,10 +82,6 @@ public class Troops extends Units {
 
     public boolean canDigKhandagh() {
         return canDigKhandagh;
-    }
-
-    public int getRange() {
-        return range;
     }
 
     public boolean isRevealed() {

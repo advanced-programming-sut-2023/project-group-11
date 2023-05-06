@@ -10,12 +10,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Machine extends Units {
+public class Machine extends Attacker {
     private final int engineersNeededToActivate;
     private final ArrayList<Engineer> engineers = new ArrayList<>();
     private boolean isActive = false;
-    private final int damage;
-    private final int range;
 
     public Machine(String name) {
         JSONObject machine = getMachineFromDictionary(name);
@@ -40,14 +38,6 @@ public class Machine extends Units {
 
     public boolean isActive() {
         return isActive;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getRange() {
-        return range;
     }
 
     public void setActive(boolean active) {

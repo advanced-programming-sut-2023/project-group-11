@@ -1,5 +1,6 @@
 package controller;
 
+import model.people.Attacker;
 import model.Governance;
 import model.Path;
 import model.Stronghold;
@@ -7,7 +8,6 @@ import model.buildings.*;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
-import model.people.Troops;
 import model.people.Engineer;
 import model.people.Machine;
 import model.people.Units;
@@ -46,7 +46,7 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static SelectUnitMenuMessages checkAirAttack(Matcher matcher, int[] currentLocation, String unitType) {
+    public static SelectUnitMenuMessages checkAttack(Matcher matcher, int[] currentLocation, String unitType, String attackType) {
         if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
             return SelectUnitMenuMessages.INVALID_COMMAND;
 
@@ -60,10 +60,11 @@ public class SelectUnitMenuController {
 
         if (!Utils.isValidCoordinates(map, targetX, targetY))
             return SelectUnitMenuMessages.INVALID_COORDINATE;
-        else if (!isValidUnitForAirAttack(unitType))
+        else if ((attackType.equals("air attack") && !isValidUnitForAirAttack(unitType)) ||
+                (attackType.equals("ground attack") && !isValidUnitForGroundAttack(unitType)))
             return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_ATTACK;
-        else if (((Troops) selectedUnits.get(0)).getRange() < Math.abs(currentX - targetX) ||
-                ((Troops) selectedUnits.get(0)).getRange() < Math.abs(currentY - targetY))
+        else if (((Attacker) selectedUnits.get(0)).getRange() < Math.abs(currentX - targetX) ||
+                ((Attacker) selectedUnits.get(0)).getRange() < Math.abs(currentY - targetY))
             return SelectUnitMenuMessages.OUT_OF_RANGE;
         else if (noAttackLeft(selectedUnits))
             return SelectUnitMenuMessages.NO_ATTACK_LEFT;
@@ -74,39 +75,12 @@ public class SelectUnitMenuController {
                 targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
+        //TODO: set damaging concepts
+        //TODO: attack both building and units
         if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
         else attackUnits(selectedUnits, targetTile);
 
-        return SelectUnitMenuMessages.SUCCESS;
-    }
-
-    public static SelectUnitMenuMessages checkGroundAttack(Matcher matcher, int[] currentLocation, String unitType) {
-        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
-            return SelectUnitMenuMessages.INVALID_COMMAND;
-
-        Map map = Stronghold.getCurrentGame().getMap();
-        int targetX = Integer.parseInt(matcher.group("xCoordinate"));
-        int targetY = Integer.parseInt(matcher.group("yCoordinate"));
-        int currentX = currentLocation[0];
-        int currentY = currentLocation[1];
-        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
-        Tile targetTile = map.getTile(targetX, targetY);
-
-        if (!Utils.isValidCoordinates(map, targetX, targetY))
-            return SelectUnitMenuMessages.INVALID_COORDINATE;
-        else if (!isValidUnitForGroundAttack(unitType))
-            return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_ATTACK;
-        else if (noAttackLeft(selectedUnits))
-            return SelectUnitMenuMessages.NO_ATTACK_LEFT;
-        else if (targetTile.getUnits().size() == 0 && targetTile.getBuilding() == null)
-            return SelectUnitMenuMessages.EMPTY_TILE;
-        else if (targetTile.getUnits().size() != 0 && targetTile.getUnits().get(0).getOwner().equals(selectedUnits.get(0).getOwner()) ||
-                targetTile.getBuilding() != null && targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
-            return SelectUnitMenuMessages.FRIENDLY_ATTACK;
-
-        if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
-        else attackUnits(selectedUnits, targetTile);
-
+        //TODO: reset leftMoves and attacked for units in next turn
 
         return SelectUnitMenuMessages.SUCCESS;
     }
@@ -342,7 +316,7 @@ public class SelectUnitMenuController {
     private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
         ArrayList<Units> removings = new ArrayList<>();
         for (int i = 0; i < selectedUnits.size(); i++) {
-            if (selectedUnits.get(i).hasAttacked())
+            if (((Attacker) selectedUnits.get(i)).hasAttacked())
                 removings.add(selectedUnits.get(i));
         }
         selectedUnits.removeAll(removings);
@@ -353,8 +327,13 @@ public class SelectUnitMenuController {
     private static void attackBuilding(ArrayList<Units> selectedUnits, Tile targetTile) {
         Building targetBuilding = targetTile.getBuilding();
         Map map = Stronghold.getCurrentGame().getMap();
+        int targetHp = targetBuilding.getHitPoint();
+        int attackerDamage = selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage();
 
-        targetBuilding.setHitPoint(targetBuilding.getHitPoint() - selectedUnits.size() * ((Troops) selectedUnits.get(0)).getDamage());
+        if (targetBuilding instanceof GateHouse && selectedUnits.get(0).getName().equals("battle ram"))
+            targetBuilding.setHitPoint(targetHp - 3 * attackerDamage);
+        else
+            targetBuilding.setHitPoint(targetHp - attackerDamage);
         setAttackedTrue(selectedUnits);
         if (targetBuilding.getHitPoint() <= 0) {
             destroyBuilding(map, targetBuilding);
@@ -367,17 +346,22 @@ public class SelectUnitMenuController {
         int buildingY = building.getYCoordinate();
         int buildingSize = building.getSize();
 
+        building.getOwner().getBuildings().remove(building);
         for (int i = 0; i < buildingSize; i++)
             for (int j = 0; j < buildingSize; j++)
                 map.getTile(buildingX + i, buildingY + j).setBuilding(null);
     }
 
     private static void attackUnits(ArrayList<Units> selectedUnits, Tile targetTile) {
+        int attackerDamage = selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage();
+
         for (Units unit : targetTile.getUnits())
-            unit.setHp(unit.getHp() - ((Troops) selectedUnits.get(0)).getDamage() * selectedUnits.size());
+            unit.setHp(unit.getHp() - attackerDamage);
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
         //TODO: set reacting to attacks
+        //TODO: kill engineers in siege machines
+        //TODO: apply troops' dying in population
     }
 
     private static void removeDeadUnits(Tile targetTile) {
@@ -389,7 +373,7 @@ public class SelectUnitMenuController {
     }
 
     private static void setAttackedTrue(ArrayList<Units> selectedUnits) {
-        for (Units unit : selectedUnits) unit.setAttacked(true);
+        for (Units unit : selectedUnits) ((Attacker) unit).setAttacked(true);
     }
 
     private static void buildMachine(Machine machine, Tile tile, Governance governance) {
