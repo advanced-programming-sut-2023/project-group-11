@@ -49,7 +49,6 @@ public enum StorageType {
         return isActive;
     }
 
-
     StorageType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType,
                 int resourceCostNumber, int workersNumber, boolean isActive, int capacity) {
         this.name = name;

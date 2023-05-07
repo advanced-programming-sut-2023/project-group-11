@@ -22,7 +22,6 @@ public class Troops extends Attacker {
     private final boolean canDigKhandagh;
     private boolean revealed;
 
-
     public Troops(String name) {
         JSONObject troop = getTroopFromDictionary(name);
 
@@ -42,6 +41,7 @@ public class Troops extends Attacker {
         this.revealed = (Boolean) troop.get("revealed");
         this.cost = ((Long) troop.get("cost")).intValue();
         this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        this.ownerGovernance.addUnit(this);
     }
 
     private JSONObject getTroopFromDictionary(String name) {

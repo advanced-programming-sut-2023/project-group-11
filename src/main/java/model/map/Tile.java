@@ -2,6 +2,7 @@ package model.map;
 
 import controller.BuildingUtils;
 import model.Governance;
+import model.Stronghold;
 import model.buildings.Building;
 import model.people.Troops;
 import model.people.Units;
@@ -53,10 +54,6 @@ public class Tile {
         return selectedUnits;
     }
 
-    public void setUnits(ArrayList<Units> units) {
-        this.units = units;
-    }
-
     public String getResourceAmount() {
         String result = null;
         if (this.tree != null) result = "Wood: " + tree.getLeftWood();
@@ -71,10 +68,6 @@ public class Tile {
 
     public void setTree(Tree tree) {
         this.tree = tree;
-    }
-
-    public void addUnit(Units unit) {
-        this.units.add(unit);
     }
 
     public void clear() {
@@ -105,7 +98,7 @@ public class Tile {
         int i = 1;
 
         for (Units unit : units)
-            if (unit instanceof Troops troop && troop.isRevealed())
+            if (unit instanceof Troops troop && (troop.isRevealed() || troop.isForCurrentGovernance()))
                 unitsName += (i++) + ". " + troop.toString() + '\n';
 
         result += "Texture: " + texture.getName() + '\n';

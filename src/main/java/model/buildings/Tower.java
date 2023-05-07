@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Tower extends Climbable {
 
-    private int rangeIncrement;
-    private int unitCapacity;
+    private final int rangeIncrement;
+    private final int unitCapacity;
     private final boolean canHaveSiegeEquipment;
     private ArrayList<Units> units = new ArrayList<>();
 
@@ -32,16 +32,8 @@ public class Tower extends Climbable {
         return rangeIncrement;
     }
 
-    public void setRangeIncrement(int rangeIncrement) {
-        this.rangeIncrement = rangeIncrement;
-    }
-
     public int getUnitCapacity() {
         return unitCapacity;
-    }
-
-    public void setUnitCapacity(int unitCapacity) {
-        this.unitCapacity = unitCapacity;
     }
 
     public ArrayList<Units> getUnits() {

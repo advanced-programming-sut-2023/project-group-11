@@ -15,6 +15,7 @@ public class Engineer extends Units {
         this.cost = 30;
         this.speed = Speed.VERY_HIGH;
         this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        this.ownerGovernance.addUnit(this);
     }
 
     public boolean isInWork() {

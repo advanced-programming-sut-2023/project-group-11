@@ -103,16 +103,21 @@ public class SelectUnitMenuController {
     public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
         if (!unitType.equals("engineer"))
             return SelectUnitMenuMessages.INVALID_COMMAND;
+
         String machineType = Utils.removeDoubleQuotation(matcher.group("machineType"));
-        if (!Utils.isValidMachineType(machineType))
-            return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+
+        if (!Utils.isValidMachineType(machineType)) return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
+
         Machine machine = new Machine(machineType);
-        if (governance.getGold() < machine.getCost())
-            return SelectUnitMenuMessages.NOT_ENOUGH_GOLD;
+
+        if (governance.getGold() < machine.getCost()) return SelectUnitMenuMessages.NOT_ENOUGH_GOLD;
+
         Tile tile = Stronghold.getCurrentGame().getMap().getTile(currentLocation[0], currentLocation[1]);
+
         if (tile.getUnitsByType("engineer").size() < machine.getEngineersNeededToActivate())
             return SelectUnitMenuMessages.NOT_ENOUGH_ENGINEERS;
+
         buildMachine(machine, tile, governance);
         return SelectUnitMenuMessages.SUCCESS;
     }
@@ -287,18 +292,14 @@ public class SelectUnitMenuController {
     }
 
     private static void applyTrapDamage(ArrayList<Units> selectedUnits, Trap currentBuilding) {
-        // TODO:1 remove dead units from governance unit arrayList
-        // TODO:1 remove traps from governance building arrayList
         for (Units unit : selectedUnits) {
             unit.setHp(unit.getHp() - currentBuilding.getDamage());
-        }
-        int size = selectedUnits.size();
-        for (int i = 0, j = 0; i < size; i++, j++) {
-            if (selectedUnits.get(j).getHp() <= 0) {
-                selectedUnits.remove(j);
-                j--;
+            if (unit.getHp() <= 0) {
+                selectedUnits.remove(unit);
+                Stronghold.getCurrentGame().getCurrentGovernance().removeUnit(unit);
             }
         }
+        Stronghold.getCurrentGame().getCurrentGovernance().getBuildings().remove(currentBuilding);
     }
 
     private static boolean isValidUnitForAirAttack(String type) {
@@ -382,12 +383,12 @@ public class SelectUnitMenuController {
         governance.setGold(governance.getGold() - machine.getCost());
         machine.setOwnerGovernance(governance);
         machine.setActive(true);
-        //TODO:1 add to governance units
+
         for (int i = 0; i < machine.getEngineersNeededToActivate(); i++) {
             Engineer engineer = (Engineer) tile.getUnitsByType("engineer").get(0);
-            machine.getEngineers().add(engineer);
+            machine.addEngineer(engineer);
             tile.getUnits().remove(engineer);
         }
-        tile.addUnit(machine);
+        tile.getUnits().add(machine);
     }
 }

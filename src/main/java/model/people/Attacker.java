@@ -1,7 +1,5 @@
 package model.people;
 
-import model.people.Units;
-
 public class Attacker extends Units {
     protected int damage;
     protected int range;

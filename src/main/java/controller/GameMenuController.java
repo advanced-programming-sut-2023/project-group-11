@@ -142,8 +142,6 @@ public class GameMenuController {
             return GameMenuMessages.NOT_ENOUGH_RESOURCE;
 
         BuildingUtils.build(building, x, y, size);
-        currentGovernance.addBuilding(building);
-
         return GameMenuMessages.SUCCESS;
     }
 
@@ -215,21 +213,20 @@ public class GameMenuController {
 
     private static void dropUnit(int x, int y, int count, String type) {
         Tile tile = currentGame.getMap().getTile(x, y);
+
         for (int i = 0; i < count; i++) {
             Units unit;
+
             if (Utils.isValidMachineType(type)) {
                 unit = new Machine(type);
-                for (int j = 0; j < ((Machine) unit).getEngineersNeededToActivate(); j++) {
-                    Engineer engineer = new Engineer();
-                    ((Machine) unit).getEngineers().add(engineer);
-                }
+                for (int j = 0; j < ((Machine) unit).getEngineersNeededToActivate(); j++)
+                    ((Machine) unit).addEngineer(new Engineer());
             }
-            if (type.equals("engineer")) {
-                unit = new Engineer();
-            } else
-                unit = new Troops(type);
-            unit.setOwnerGovernance(currentGovernance);
-            tile.addUnit(unit);
+
+            if (type.equals("engineer")) unit = new Engineer();
+            else unit = new Troops(type);
+
+            tile.getUnits().add(unit);
         }
     }
 

@@ -108,22 +108,21 @@ public class BuildingUtils {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
+        governance.addBuilding(building);
 
-        if (building.getName().equals("hovel"))
-            governance.setMaxPopulation(governance.getMaxPopulation() + 8);
-        if (building instanceof Church) governance.changeReligiousFactor(2);
+        if (building.getName().equals("hovel")) governance.changeMaxPopulation(+8);
+        if (building instanceof Church) governance.changeReligiousFactor(+2);
         if (building instanceof Climbable climbable)
             if (climbable.isClimbable()) makeClimbable(building, x, y, size, tiles);
             else climbable.setClimbable(isClimbable(building, x, y, size));
+        if (building instanceof Storage storage) building.getOwner().addStorage(storage);
 
         governance.setGold(governance.getGold() - building.getGoldCost());
         governance.removeFromStorage(building.getResourceCostType(), building.getResourceCostNumber());
-        governance.setUnemployedPopulation(governance.getUnemployedPopulation() + building.getWorkersNumber());
-
-        if (building instanceof Storage storage) building.getOwner().getStorages().add(storage);
-
+        governance.setUnemployedPopulation(governance.getUnemployedPopulation() - building.getWorkersNumber());
         building.setXCoordinate(x);
         building.setYCoordinate(y);
+
         for (int i = x; i < x + size; i++)
             for (int j = y; j < y + size; j++)
                 tiles[i][j].setBuilding(building);

@@ -3,6 +3,7 @@ package model;
 import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
+import model.people.Units;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class Governance {
     private final HashMap<AllResource, Integer> allResources = new HashMap<>();
     private final ArrayList<Storage> storages = new ArrayList<>();
     private final ArrayList<Building> buildings = new ArrayList<>();
+    private final ArrayList<Units> units = new ArrayList<>();
 
     {
         allResources.put(AllResource.WOOD, 100);
@@ -76,8 +78,8 @@ public class Governance {
         return maxPopulation;
     }
 
-    public void setMaxPopulation(int maxPopulation) {
-        this.maxPopulation = maxPopulation;
+    public void changeMaxPopulation(int maxPopulation) {
+        this.maxPopulation += maxPopulation;
     }
 
     public int getCurrentPopulation() {
@@ -191,8 +193,16 @@ public class Governance {
         previousTrades.add(trade);
     }
 
-    public ArrayList<Storage> getStorages() {
-        return storages;
+    public void addUnit(Units unit) {
+        units.add(unit);
+    }
+
+    public void removeUnit(Units unit) {
+        units.remove(unit);
+    }
+
+    public void addStorage(Storage storage) {
+        storages.add(storage);
     }
 
     private void changeResourceAmount(AllResource allResource, int count) {

@@ -1,6 +1,7 @@
 package model.people;
 
 import model.Governance;
+import model.Stronghold;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
 
@@ -55,6 +56,10 @@ public abstract class Units {
 
     public void setLeftMoves(int leftMoves) {
         this.leftMoves = leftMoves;
+    }
+
+    public boolean isForCurrentGovernance() {
+        return ownerGovernance.equals(Stronghold.getCurrentGame().getCurrentGovernance());
     }
 
     public String toString() {
