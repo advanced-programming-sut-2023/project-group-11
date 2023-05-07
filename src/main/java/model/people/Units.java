@@ -13,6 +13,9 @@ public abstract class Units {
     protected double cost;
     protected Governance ownerGovernance;
     protected UnitState unitState = UnitState.STANDING;
+    protected int[] patrolOrigin;
+    protected int[] patrolDestination;
+    protected boolean isPatrolling = false;
 
     public int getHp() {
         return hp;
@@ -56,6 +59,36 @@ public abstract class Units {
 
     public void setLeftMoves(int leftMoves) {
         this.leftMoves = leftMoves;
+    }
+
+    public int[] getPatrolOrigin() {
+        return patrolOrigin;
+    }
+
+    public void setPatrolOrigin(int[] patrolOrigin) {
+        this.patrolOrigin = patrolOrigin;
+        isPatrolling = true;
+    }
+
+    public int[] getPatrolDestination() {
+        return patrolDestination;
+    }
+
+    public void setPatrolDestination(int[] patrolDestination) {
+        this.patrolDestination = patrolDestination;
+    }
+
+    public void unPatrol() {
+        patrolOrigin[0] = patrolOrigin[1] = patrolDestination[0] = patrolDestination[1] = -1;
+        isPatrolling = false;
+    }
+
+    public boolean isPatrolling() {
+        return isPatrolling;
+    }
+
+    public void setPatrolling(boolean patrolling) {
+        isPatrolling = patrolling;
     }
 
     public boolean isForCurrentGovernance() {

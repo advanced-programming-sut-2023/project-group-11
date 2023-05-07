@@ -16,5 +16,6 @@ public enum SelectUnitMenuMessages {
     FRIENDLY_ATTACK,
     OUT_OF_RANGE,
     NO_ATTACK_LEFT,
+    NOT_PATROLLING,
     ;
 }

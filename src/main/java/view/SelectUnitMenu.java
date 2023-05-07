@@ -20,10 +20,12 @@ public class SelectUnitMenu {
 
             if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.MOVE_UNIT)) != null)
                 checkMoveUnit(matcher, currentLocation, unitType);
+            else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.PATROL_UNIT)) != null)
+                checkPatrolUnit(matcher, currentLocation, unitType);
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.AIR_ATTACK)) != null)
                 checkAttackUnit(matcher, currentLocation, unitType, "air attack");
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.GROUND_ATTACK)) != null)
-                checkAttackUnit(matcher,  currentLocation, unitType, "ground attack");
+                checkAttackUnit(matcher, currentLocation, unitType, "ground attack");
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.BUILD_MACHINE)) != null)
                 checkBuildMachine(matcher, currentLocation, unitType);
             else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DESELECT) != null)
@@ -56,7 +58,8 @@ public class SelectUnitMenu {
             case SUCCESS -> System.out.println(attackType.toUpperCase() + " Done Successfully!");
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinate!");
-            case INVALID_UNIT_TYPE_TO_ATTACK -> System.out.println("Cannot \"" + attackType.toUpperCase() + "\" With This Unit!");
+            case INVALID_UNIT_TYPE_TO_ATTACK ->
+                    System.out.println("Cannot \"" + attackType.toUpperCase() + "\" With This Unit!");
             case OUT_OF_RANGE -> System.out.println("Target is Out Of Range!");
             case NO_ATTACK_LEFT -> System.out.println("You Attacked Once This Round With This Unit!");
             case EMPTY_TILE -> System.out.println("There Is No One In Target-Tile!");
@@ -76,8 +79,19 @@ public class SelectUnitMenu {
         }
     }
 
-    private static void checkPatrolUnit(Matcher matcher) {
+    private static void checkPatrolUnit(Matcher matcher, int[] currentLocation, String unitType) {
+        checkMoveUnit(matcher, currentLocation, unitType);
+        if (message.equals(SelectUnitMenuMessages.SUCCESS))
+            SelectUnitMenuController.patrolUnit(matcher, currentLocation, unitType);
+    }
 
+    private static void stopPatrol(int[] currentLocation, String unitType) {
+        message = SelectUnitMenuController.stopPatrol(currentLocation, unitType);
+
+        switch (message) {
+            case NOT_PATROLLING -> System.out.println("Selected units are not patrolling!");
+            case SUCCESS -> System.out.println("Selected units successfully are now fixed in current position!");
+        }
     }
 
     private static void checkSetUnitState(Matcher matcher) {
@@ -91,7 +105,6 @@ public class SelectUnitMenu {
     private static void checkDigTunnel(Matcher matcher) {
 
     }
-
 
     private static void disbandUnit() {
 

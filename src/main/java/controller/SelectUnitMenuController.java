@@ -19,7 +19,8 @@ import java.util.regex.Matcher;
 
 public class SelectUnitMenuController {
     public static SelectUnitMenuMessages checkMoveUnit(Matcher matcher, int[] currentLocation, String unitType) {
-        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup")) return SelectUnitMenuMessages.INVALID_COMMAND;
+        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
+            return SelectUnitMenuMessages.INVALID_COMMAND;
 
         Map map = Stronghold.getCurrentGame().getMap();
         Path shortestPath;
@@ -84,8 +85,32 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static SelectUnitMenuMessages checkPatrolUnit(Matcher matcher) {
-        return null;
+    public static void patrolUnit(Matcher matcher, int[] currentLocation, String unitType) {
+        Map map = Stronghold.getCurrentGame().getMap();
+        int destinationX = Integer.parseInt(matcher.group("xCoordinate"));
+        int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        ArrayList<Units> selectedUnits = map.getTile(destinationX, destinationY).getUnitsByType(unitType);
+        //TODO:2 units in destination of the same type should not patrol
+
+        for (Units unit : selectedUnits) {
+            unit.setPatrolOrigin(new int[]{destinationX, destinationY});
+            unit.setPatrolDestination(new int[]{currentX, currentY});
+        }
+    }
+
+    public static SelectUnitMenuMessages stopPatrol(int[] currentLocation, String unitType) {
+        Map map = Stronghold.getCurrentGame().getMap();
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+
+        if (!selectedUnits.get(0).isPatrolling()) return SelectUnitMenuMessages.NOT_PATROLLING;
+
+        for (Units unit : selectedUnits) unit.unPatrol();
+
+        return SelectUnitMenuMessages.SUCCESS;
     }
 
     public static SelectUnitMenuMessages checkSetUnitState(Matcher matcher) {
