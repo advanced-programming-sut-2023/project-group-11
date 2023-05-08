@@ -16,7 +16,7 @@ public enum Territory {
         return area;
     }
 
-    public Territory getTerritoryByArea(int area) {
+    public static Territory getTerritoryByArea(int area) {
         for (Territory value : values())
             if (value.getArea() == area) return value;
         return null;

@@ -10,8 +10,6 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MapEditMenu {
-    //TODO:1 make 8 areas
-
     private static MapEditMenuMessages mapEditMenuMessage;
 
 

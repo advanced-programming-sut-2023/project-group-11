@@ -6,7 +6,9 @@ public enum Hp {
     MEDIUM(100),
     HIGH(120),
     SIEGE_HP(300),
-    SHIELD_HP(500);
+    SHIELD_HP(500),
+    LORD_HP(500),
+    ;
 
 
     private final int hp;

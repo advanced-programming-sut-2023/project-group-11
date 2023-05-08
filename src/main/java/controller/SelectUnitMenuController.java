@@ -37,8 +37,8 @@ public class SelectUnitMenuController {
         else if (!isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_DIFFERENT_OWNER_UNIT;
         else if (BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) &&
-                map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable climbable &&
-                !climbable.isClimbable())
+                (!(map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable) ||
+                        !((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable()))
             return SelectUnitMenuMessages.INVALID_DESTINATION_UNCLIMBABLE_BUILDING;
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
@@ -178,6 +178,7 @@ public class SelectUnitMenuController {
         map.getTile(currentX, currentY).clearUnitsByType(selectedUnits);
 
         setLeftMoves(shortestPath, selectedUnits);
+        //TODO:1 setLocation for units
         applyPathEffects(map, shortestPath, selectedUnits);
 
         map.getTile(destinationX, destinationY).getUnits().addAll(selectedUnits);
@@ -188,10 +189,16 @@ public class SelectUnitMenuController {
     private static Path findRootToDestination(Map map, String unitType, int currentX, int currentY, int destinationX, int destinationY) {
         int speed = minimumSpeed(map.getTile(currentX, currentY).getUnitsByType(unitType));
         ArrayList<Path> paths = new ArrayList<>();
+        Path path = new Path();
 
-        pathDFS(map, unitType, currentX, currentY, destinationX, destinationY, speed, paths, new Path());
+        path.addToPath(new int[]{currentX, currentY});
 
-        if (paths.size() == 0) return null;
+        pathDFS(map, unitType, currentX + 1, currentY, destinationX, destinationY, speed, paths, path);
+        pathDFS(map, unitType, currentX - 1, currentY, destinationX, destinationY, speed, paths, path);
+        pathDFS(map, unitType, currentX, currentY + 1, destinationX, destinationY, speed, paths, path);
+        pathDFS(map, unitType, currentX, currentY - 1, destinationX, destinationY, speed, paths, path);
+
+        if (paths.size() == 1) return null;
         else return getShortestPath(paths);
     }
 
@@ -237,7 +244,7 @@ public class SelectUnitMenuController {
         if (notValidUnitTypeForClimbing(unitType))
             return false;
 
-        if (currentBuilding instanceof Trap)
+        if (currentBuilding instanceof Trap || currentBuilding instanceof Keep)
             return true;
         else if (currentBuilding instanceof GateHouse gateHouse) {
             if (currentGovernance.equals(gateHouse.getGateController()))
@@ -265,19 +272,19 @@ public class SelectUnitMenuController {
     private static boolean canDescend(Map map, String unitType, int[] currentLocation, int[] previousLocation) {
         Tile previousTile = map.getTile(previousLocation[0], previousLocation[1]);
         Tile currentTile = map.getTile(currentLocation[0], currentLocation[1]);
-        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
         if (previousTile.getBuilding().getName().equals("stairs"))
+            return true;
+        else if (previousTile.getBuilding() instanceof GateHouse)
+            return true;
+        else if (previousTile.getBuilding() instanceof Keep)
             return true;
         else if (currentTile.getUnitsByType("ladderman").size() != 0)
             return true;
         else if (currentTile.getUnitsByType("siege tower").size() != 0)
             return true;
-        else if (unitType.equals("assassin"))
-            return true;
         else
-            return previousTile.getBuilding() instanceof GateHouse gateHouse &&
-                    gateHouse.getGateController().equals(currentGovernance);
+            return unitType.equals("assassin");
     }
 
     private static int minimumSpeed(ArrayList<Units> units) {
@@ -379,13 +386,15 @@ public class SelectUnitMenuController {
         int targetHp = targetBuilding.getHitPoint();
         int attackerDamage = selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage();
 
-        if (targetBuilding instanceof GateHouse && selectedUnits.get(0).getName().equals("battle ram")) //TODO:1 battle ram don't damage units
+        //TODO:1 battle ram don't damage units
+        if (targetBuilding instanceof GateHouse && selectedUnits.get(0).getName().equals("battle ram"))
             targetBuilding.setHitPoint(targetHp - 3 * attackerDamage);
         else
             targetBuilding.setHitPoint(targetHp - attackerDamage);
         setAttackedTrue(selectedUnits);
         if (targetBuilding.getHitPoint() <= 0) {
             destroyBuilding(map, targetBuilding);
+            //TODO:1 apply the building's destruction effects (workers, popularity, ...)
             //TODO:2 rearrange the climbablity
         }
     }

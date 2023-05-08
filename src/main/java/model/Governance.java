@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class Governance {
     private final User owner;
-    private final Territory territory;
+    private Territory territory;
     private double gold = 2000;
     private int maxPopulation = 10;
     private int currentPopulation = 10;
@@ -59,9 +59,8 @@ public class Governance {
         allResources.put(AllResource.SWORD, 0);
     }
 
-    public Governance(User owner, int area) {
+    public Governance(User owner) {
         this.owner = owner;
-        this.territory = Territory.DOWN_LEFT.getTerritoryByArea(area);
     }
 
     public User getOwner() {

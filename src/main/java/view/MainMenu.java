@@ -5,12 +5,15 @@ import controller.Utils;
 import view.enums.commands.MainMenuCommands;
 import view.enums.messages.MainMenuMessages;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MainMenu {
+    private static Scanner scanner;
+
     public static void run() {
-        Scanner scanner = EntryMenu.getScanner();
+        scanner = EntryMenu.getScanner();
         String input;
         Matcher matcher;
         while (true) {
@@ -40,6 +43,7 @@ public class MainMenu {
 
         switch (mainMenuMessage) {
             case SUCCESS -> {
+                initializeAreas(MainMenuController.makeListOfPlayers(matcher.group("guests")));
                 System.out.println("Game started with :" + MainMenuController.makeListOfPlayers(matcher.group("guests")));
                 GameMenu.run();
             }
@@ -47,5 +51,37 @@ public class MainMenu {
             case MAP_NOT_EXIST -> System.out.println("Map does not exist!");
             case USER_NOT_EXIST -> System.out.println("At least one of the users does not exist!");
         }
+    }
+
+    private static void initializeAreas(String guests) {
+        String[] players = guests.split("-");
+        ArrayList<Integer> areas = new ArrayList<>();
+        int selectedArea;
+
+        for (int i = 1; i <= 8; i++) {
+            areas.add(i);
+        }
+
+        selectedArea = getSelectedArea("Yourself", areas);
+        MainMenuController.initializeAreas(null, areas, selectedArea);
+
+        for (String player : players) {
+            selectedArea = getSelectedArea(player, areas);
+            MainMenuController.initializeAreas(player, areas, selectedArea);
+        }
+    }
+
+    private static int getSelectedArea(String player, ArrayList<Integer> areas) {
+        int selectedArea;
+        System.out.println("Choose area for :" + player);
+        System.out.println("From: " + areas);
+        selectedArea = scanner.nextInt();
+        while (!areas.contains(selectedArea)) {
+            System.out.println("Invalid area!");
+            System.out.println("Choose area for :" + player);
+            System.out.println("From: " + areas);
+            selectedArea = scanner.nextInt();
+        }
+        return selectedArea;
     }
 }

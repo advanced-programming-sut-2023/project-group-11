@@ -104,9 +104,8 @@ public class BuildingUtils {
         return building;
     }
 
-    public static void build(Building building, int x, int y, int size) {
+    public static void build(Governance governance, Building building, int x, int y, int size) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
-        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         building.setOwner(governance);
         governance.addBuilding(building);
 

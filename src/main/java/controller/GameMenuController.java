@@ -143,7 +143,7 @@ public class GameMenuController {
         if (!currentGovernance.hasEnoughPopulation(building.getWorkersNumber()))
             return GameMenuMessages.NOT_ENOUGH_POPULATION;
 
-        BuildingUtils.build(building, x, y, size);
+        BuildingUtils.build(Stronghold.getCurrentGame().getCurrentGovernance(), building, x, y, size);
         return GameMenuMessages.SUCCESS;
     }
 
@@ -209,11 +209,11 @@ public class GameMenuController {
         if (tile.hasBuilding() && !(tile.getBuilding() instanceof Climbable))
             return GameMenuMessages.CANT_DROP_IN_BULDING;
 
-        dropUnit(x, y, count, type);
+        dropUnit(currentGame.getCurrentGovernance(), x, y, count, type);
         return GameMenuMessages.SUCCESS;
     }
 
-    private static void dropUnit(int x, int y, int count, String type) {
+    private static void dropUnit(Governance currentGovernance, int x, int y, int count, String type) {
         Tile tile = currentGame.getMap().getTile(x, y);
 
         for (int i = 0; i < count; i++) {
@@ -227,11 +227,12 @@ public class GameMenuController {
                     engineer.setLocation(new int[]{x, y});
                 }
             }
-
-            if (type.equals("engineer")) unit = new Engineer();
+            else if (type.equals("engineer")) unit = new Engineer();
             else unit = new Troops(type);
+
             unit.setLocation(new int[]{x, y});
             tile.getUnits().add(unit);
+            currentGovernance.addUnit(unit);
         }
     }
 
