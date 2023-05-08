@@ -198,6 +198,10 @@ public class Governance {
         previousTrades.add(trade);
     }
 
+    public ArrayList<Units> getUnits() {
+        return units;
+    }
+
     public void addUnit(Units unit) {
         units.add(unit);
     }

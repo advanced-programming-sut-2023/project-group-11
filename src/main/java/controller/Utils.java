@@ -139,6 +139,11 @@ public class Utils {
                 || resource.equals(AllResource.APPLE);
     }
 
+    public static boolean isValidToMove() {
+        //TODO:1 implement (used for patrol)
+        return true;
+    }
+
     static boolean isValidUnitType(String type) {
         return type.equals("archer") || type.equals("crossbowman") || type.equals("spearman") ||
                 type.equals("pikeman") || type.equals("maceman") || type.equals("swordsman") ||

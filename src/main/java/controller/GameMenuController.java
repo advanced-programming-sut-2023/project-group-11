@@ -259,6 +259,11 @@ public class GameMenuController {
     }
 
     private static void updateSoldiers() {
+        ArrayList<Units> units = currentGovernance.getUnits();
+        ArrayList<Units> patrollingUnits = new ArrayList<>();
+        for (Units unit : units) if (unit.isPatrolling())
+            patrollingUnits.add(unit);
+        SelectUnitMenuController.patrolUnit(patrollingUnits);
         currentGovernance.resetUnitAbilities();
     }
 
@@ -295,6 +300,7 @@ public class GameMenuController {
     private static void updateAllResources() {
         ArrayList<Building> buildings = currentGovernance.getBuildings();
         int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("ox tether"));
+        currentGovernance.resetAleFactor();
 
         for (Building building : buildings)
             if (building instanceof ProductiveBuilding productiveBuilding && productiveBuilding.isActive()) {
@@ -346,7 +352,6 @@ public class GameMenuController {
         totalFactor = Math.max(totalFactor, 0);
 
         currentGovernance.setPopularity(totalFactor);
-        currentGovernance.resetAleFactor();
     }
 
     public static void setCurrentGame() {
