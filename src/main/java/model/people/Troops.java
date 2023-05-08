@@ -1,9 +1,8 @@
 package model.people;
 
 import model.AllResource;
-import model.Stronghold;
-import model.people.enums.TroopDamage;
 import model.people.enums.Speed;
+import model.people.enums.TroopDamage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -40,8 +39,7 @@ public class Troops extends Attacker {
         this.canDigKhandagh = (Boolean) troop.get("canDigKhandagh");
         this.revealed = (Boolean) troop.get("revealed");
         this.cost = ((Long) troop.get("cost")).intValue();
-        this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        this.ownerGovernance.addUnit(this);
+        this.setOwnerGovernance();
     }
 
     private JSONObject getTroopFromDictionary(String name) {

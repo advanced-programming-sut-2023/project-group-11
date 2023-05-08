@@ -90,8 +90,11 @@ public abstract class Building {
     }
 
     public void removeFromGame(Map map, Governance owner) {
+        if (this.name.equals("hovel")) owner.changeMaxPopulation(-8);
+
         owner.getBuildings().remove(this);
-        owner.setUnemployedPopulation(owner.getUnemployedPopulation() + this.size);
+        owner.setUnemployedPopulation(owner.getUnemployedPopulation() + workersNumber);
+
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size; j++)
                 map.getTile(xCoordinate + i, yCoordinate + j).setBuilding(null);

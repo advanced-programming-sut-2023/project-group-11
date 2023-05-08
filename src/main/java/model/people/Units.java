@@ -43,8 +43,10 @@ public abstract class Units {
         return unitState;
     }
 
-    public void setOwnerGovernance(Governance ownerGovernance) {
-        this.ownerGovernance = ownerGovernance;
+    protected void setOwnerGovernance() {
+        this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        this.ownerGovernance.addUnit(this);
+        this.ownerGovernance.changeCurrentPopulation(-1);
     }
 
     public void setUnitState(UnitState unitState) {

@@ -10,9 +10,9 @@ public enum TowerType {
             0, true, 7, 10, false),
     DEFENCE_TURRET("defence turret", 2, 1000, 0, AllResource.STONE, 15,
             0, true, 7, 15, false),
-    SQUARE_TOWER("square tower", 3, 2000, 0, AllResource.STONE, 35,
+    SQUARE_TOWER("square tower", 3, 1500, 0, AllResource.STONE, 35,
             0, true, 8, 35, true),
-    ROUND_TOWER("round tower", 1, 2500, 0, AllResource.STONE, 40,
+    ROUND_TOWER("round tower", 1, 2000, 0, AllResource.STONE, 40,
             0, true, 8, 40, true);
 
 

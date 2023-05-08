@@ -99,6 +99,26 @@ public class SelectUnitMenuController {
         }
     }
 
+    public static void patrolUnit(ArrayList<Units> units) {
+        Map map = Stronghold.getCurrentGame().getMap();
+        Units unit = units.get(0);
+        String unitType = unit.getName();
+        Path shortestPath;
+        int currentX = unit.getPatrolOrigin()[0];
+        int currentY = unit.getPatrolOrigin()[1];
+        int destinationX = unit.getPatrolDestination()[0];
+        int destinationY = unit.getPatrolDestination()[1];
+
+        if (!isValidForMoving(map, currentX, currentY, destinationX, destinationY)) unPatrol(units);
+        if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) != null) {
+            for (Units unit1 : units) {
+                unit1.setPatrolOrigin(new int[]{destinationX, destinationY});
+                unit1.setPatrolDestination(new int[]{currentX, currentY});
+            }
+            moveUnits(map, unitType, shortestPath, unit.getPatrolOrigin(), destinationX, destinationY);
+        } else unPatrol(units);
+    }
+
     public static SelectUnitMenuMessages checkStopPatrol(int[] currentLocation, String unitType) {
         Map map = Stronghold.getCurrentGame().getMap();
         int currentX = currentLocation[0];
@@ -107,9 +127,12 @@ public class SelectUnitMenuController {
 
         if (!selectedUnits.get(0).isPatrolling()) return SelectUnitMenuMessages.NOT_PATROLLING;
 
-        for (Units unit : selectedUnits) unit.unPatrol();
-
+        unPatrol(selectedUnits);
         return SelectUnitMenuMessages.SUCCESS;
+    }
+
+    private static void unPatrol(ArrayList<Units> units) {
+        for (Units unit : units) unit.unPatrol();
     }
 
     public static SelectUnitMenuMessages checkSetUnitState(Matcher matcher, int[] currentLocation, String unitType) {
@@ -144,7 +167,6 @@ public class SelectUnitMenuController {
         Machine machine = new Machine(machineType);
         machine.setLocation(currentLocation);
 
-
         if (governance.getGold() < machine.getCost()) return SelectUnitMenuMessages.NOT_ENOUGH_GOLD;
 
         Tile tile = Stronghold.getCurrentGame().getMap().getTile(currentLocation[0], currentLocation[1]);
@@ -164,11 +186,11 @@ public class SelectUnitMenuController {
         ArrayList<Units> selectedUnits = tile.getUnitsByType(unitType);
         Governance governance = selectedUnits.get(0).getOwner();
         int currentPopulation = governance.getCurrentPopulation();
-        int unemployedPopulation = governance.getUnemployedPopulation();
+        int maxPopulation = governance.getMaxPopulation();
 
         for (Units unit : selectedUnits) unit.removeFromGame(tile, governance);
 
-        governance.setUnemployedPopulation(Math.min(unemployedPopulation + selectedUnits.size(), currentPopulation));
+        governance.changeCurrentPopulation(Math.min(selectedUnits.size(), maxPopulation - currentPopulation));
     }
 
     private static void moveUnits(Map map, String unitType, Path shortestPath, int[] currentLocation, int destinationX, int destinationY) {
@@ -337,8 +359,9 @@ public class SelectUnitMenuController {
     }
 
     private static void applyTrapDamage(ArrayList<Units> selectedUnits, Trap currentBuilding) {
+        Map map = Stronghold.getCurrentGame().getMap();
+
         for (Units unit : selectedUnits) {
-            Map map = Stronghold.getCurrentGame().getMap();
             Tile tile = map.getTile(currentBuilding.getXCoordinate(), currentBuilding.getYCoordinate());
             unit.setHp(unit.getHp() - currentBuilding.getDamage());
             if (unit.getHp() <= 0) {
@@ -346,7 +369,7 @@ public class SelectUnitMenuController {
                 selectedUnits.remove(unit);
             }
         }
-        Stronghold.getCurrentGame().getCurrentGovernance().getBuildings().remove(currentBuilding);
+        currentBuilding.removeFromGame(map, currentBuilding.getOwner());
     }
 
     private static boolean isValidUnitForAirAttack(String type) {
@@ -417,7 +440,6 @@ public class SelectUnitMenuController {
 
     private static void buildMachine(Machine machine, Tile tile, Governance governance) {
         governance.setGold(governance.getGold() - machine.getCost());
-        machine.setOwnerGovernance(governance);
         machine.setActive(true);
 
         for (int i = 0; i < machine.getEngineersNeededToActivate(); i++) {
@@ -426,5 +448,10 @@ public class SelectUnitMenuController {
             tile.getUnits().remove(engineer);
         }
         tile.getUnits().add(machine);
+    }
+
+    private static boolean isValidForMoving(Map map, int currentX, int currentY, int destinationX, int destinationY) {
+        return (!notValidTextureForMoving(map.getTile(destinationX, destinationY)) &&
+                isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)));
     }
 }

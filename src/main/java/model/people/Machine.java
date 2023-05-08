@@ -1,6 +1,5 @@
 package model.people;
 
-import model.Stronghold;
 import model.people.enums.Speed;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,17 +26,17 @@ public class Machine extends Attacker {
         engineersNeededToActivate = ((Long) machine.get("engineersNeededToActivate")).intValue();
         damage = ((Long) machine.get("damage")).intValue();
         range = ((Long) machine.get("range")).intValue();
-        ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        ownerGovernance.addUnit(this);
-
+        setOwnerGovernance();
     }
 
-    public void addEngineer(Engineer engineer){
+    public void addEngineer(Engineer engineer) {
         engineers.add(engineer);
     }
-    public void removeEngineer(Engineer engineer){
+
+    public void removeEngineer(Engineer engineer) {
         engineers.remove(engineer);
     }
+
     public int getEngineersNeededToActivate() {
         return engineersNeededToActivate;
     }
