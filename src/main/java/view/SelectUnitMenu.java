@@ -22,6 +22,10 @@ public class SelectUnitMenu {
                 checkMoveUnit(matcher, currentLocation, unitType);
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.PATROL_UNIT)) != null)
                 checkPatrolUnit(matcher, currentLocation, unitType);
+            else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.STOP_PATROL) != null)
+                checkStopPatrol(currentLocation, unitType);
+            else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.SET_UNIT_STATE)) != null)
+                checkSetUnitState(matcher, currentLocation, unitType);
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.AIR_ATTACK)) != null)
                 checkAttackUnit(matcher, currentLocation, unitType, "air attack");
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.GROUND_ATTACK)) != null)
@@ -30,6 +34,8 @@ public class SelectUnitMenu {
                 checkBuildMachine(matcher, currentLocation, unitType);
             else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DESELECT) != null)
                 return;
+            else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DISBAND) != null)
+                disbandUnit(currentLocation, unitType);
             else System.out.println("Invalid Command!");
         }
     }
@@ -38,7 +44,7 @@ public class SelectUnitMenu {
         message = SelectUnitMenuController.checkMoveUnit(matcher, currentLocation, unitType);
 
         switch (message) {
-            case SUCCESS -> System.out.println("Units Moved Successfully!");
+            case SUCCESS -> System.out.println("Units Moved (patrolled) Successfully!");
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinates!");
             case INVALID_DESTINATION_TEXTURE -> System.out.println("Invalid Destination: Invalid Texture!");
@@ -81,12 +87,13 @@ public class SelectUnitMenu {
 
     private static void checkPatrolUnit(Matcher matcher, int[] currentLocation, String unitType) {
         checkMoveUnit(matcher, currentLocation, unitType);
+
         if (message.equals(SelectUnitMenuMessages.SUCCESS))
             SelectUnitMenuController.patrolUnit(matcher, currentLocation, unitType);
     }
 
-    private static void stopPatrol(int[] currentLocation, String unitType) {
-        message = SelectUnitMenuController.stopPatrol(currentLocation, unitType);
+    private static void checkStopPatrol(int[] currentLocation, String unitType) {
+        message = SelectUnitMenuController.checkStopPatrol(currentLocation, unitType);
 
         switch (message) {
             case NOT_PATROLLING -> System.out.println("Selected units are not patrolling!");
@@ -94,8 +101,14 @@ public class SelectUnitMenu {
         }
     }
 
-    private static void checkSetUnitState(Matcher matcher) {
+    private static void checkSetUnitState(Matcher matcher, int[] currentLocation, String unitType) {
+        message = SelectUnitMenuController.checkSetUnitState(matcher, currentLocation, unitType);
 
+        switch (message) {
+            case INVALID_STATE -> System.out.println("Only these states are valid! standing, defensive, offensive ");
+            case SUCCESS ->
+                    System.out.println("you have successfully set selected unit state to " + matcher.group("state"));
+        }
     }
 
     private static void checkPourOil(Matcher matcher) {
@@ -106,7 +119,8 @@ public class SelectUnitMenu {
 
     }
 
-    private static void disbandUnit() {
-
+    private static void disbandUnit(int[] currentLocation, String unitType) {
+        SelectUnitMenuController.disbandUnit(currentLocation,unitType);
+        System.out.println("Units disbanded successfully");
     }
 }

@@ -3,7 +3,9 @@ package model;
 import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
+import model.people.Attacker;
 import model.people.Units;
+import model.people.enums.UnitState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,6 +99,10 @@ public class Governance {
 
     public void setUnemployedPopulation(int unemployedPopulation) {
         this.unemployedPopulation = unemployedPopulation;
+    }
+
+    public boolean hasEnoughPopulation(int neededPopulation) {
+        return neededPopulation <= unemployedPopulation;
     }
 
     public ArrayList<Trade> getTradeNotification() {
@@ -298,5 +304,14 @@ public class Governance {
         if (allResources.get(AllResource.CHEESE) > 0) output++;
 
         return output;
+    }
+
+    public void resetUnitAbilities() {
+        for (Units unit : units) {
+            Attacker attacker = (Attacker) unit;
+            attacker.setLeftMoves(unit.getSpeed());
+            attacker.setAttacked(false);
+            attacker.setUnitState(UnitState.STANDING);
+        }
     }
 }

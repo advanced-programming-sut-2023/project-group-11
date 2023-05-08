@@ -11,6 +11,7 @@ import model.people.Attacker;
 import model.people.Engineer;
 import model.people.Machine;
 import model.people.Units;
+import model.people.enums.UnitState;
 import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
@@ -80,8 +81,6 @@ public class SelectUnitMenuController {
         if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
         else attackUnits(selectedUnits, targetTile);
 
-        //TODO:1 reset leftMoves and attacked for units in next turn (unit arrayList for governance)
-
         return SelectUnitMenuMessages.SUCCESS;
     }
 
@@ -100,7 +99,7 @@ public class SelectUnitMenuController {
         }
     }
 
-    public static SelectUnitMenuMessages stopPatrol(int[] currentLocation, String unitType) {
+    public static SelectUnitMenuMessages checkStopPatrol(int[] currentLocation, String unitType) {
         Map map = Stronghold.getCurrentGame().getMap();
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
@@ -113,8 +112,16 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static SelectUnitMenuMessages checkSetUnitState(Matcher matcher) {
-        return null;
+    public static SelectUnitMenuMessages checkSetUnitState(Matcher matcher, int[] currentLocation, String unitType) {
+        Map map = Stronghold.getCurrentGame().getMap();
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        String state = matcher.group("state");
+
+        if (!state.matches("standing|defensive|offensive")) return SelectUnitMenuMessages.INVALID_STATE;
+        for (Units unit : selectedUnits) unit.setUnitState(UnitState.valueOf(state.toUpperCase()));
+        return SelectUnitMenuMessages.SUCCESS;
     }
 
     public static SelectUnitMenuMessages checkPourOil(Matcher matcher) {
@@ -149,8 +156,19 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    private static SelectUnitMenuMessages disbandUnit() {
-        return null;
+    public static void disbandUnit(int[] currentLocation, String unitType) {
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        Map map = Stronghold.getCurrentGame().getMap();
+        Tile tile = map.getTile(currentX, currentY);
+        ArrayList<Units> selectedUnits = tile.getUnitsByType(unitType);
+        Governance governance = selectedUnits.get(0).getOwner();
+        int currentPopulation = governance.getCurrentPopulation();
+        int unemployedPopulation = governance.getUnemployedPopulation();
+
+        for (Units unit : selectedUnits) unit.removeFromGame(tile, governance);
+
+        governance.setUnemployedPopulation(Math.min(unemployedPopulation + selectedUnits.size(), currentPopulation));
     }
 
     private static void moveUnits(Map map, String unitType, Path shortestPath, int[] currentLocation, int destinationX, int destinationY) {
@@ -320,10 +338,12 @@ public class SelectUnitMenuController {
 
     private static void applyTrapDamage(ArrayList<Units> selectedUnits, Trap currentBuilding) {
         for (Units unit : selectedUnits) {
+            Map map = Stronghold.getCurrentGame().getMap();
+            Tile tile = map.getTile(currentBuilding.getXCoordinate(), currentBuilding.getYCoordinate());
             unit.setHp(unit.getHp() - currentBuilding.getDamage());
             if (unit.getHp() <= 0) {
+                unit.removeFromGame(tile, unit.getOwner());
                 selectedUnits.remove(unit);
-                Stronghold.getCurrentGame().getCurrentGovernance().removeUnit(unit);
             }
         }
         Stronghold.getCurrentGame().getCurrentGovernance().getBuildings().remove(currentBuilding);
@@ -371,15 +391,7 @@ public class SelectUnitMenuController {
     }
 
     private static void destroyBuilding(Map map, Building building) {
-        //TODO:1 increase unemployed population
-        int buildingX = building.getXCoordinate();
-        int buildingY = building.getYCoordinate();
-        int buildingSize = building.getSize();
-
-        building.getOwner().getBuildings().remove(building);
-        for (int i = 0; i < buildingSize; i++)
-            for (int j = 0; j < buildingSize; j++)
-                map.getTile(buildingX + i, buildingY + j).setBuilding(null);
+        building.removeFromGame(map, building.getOwner());
     }
 
     private static void attackUnits(ArrayList<Units> selectedUnits, Tile targetTile) {
@@ -395,11 +407,8 @@ public class SelectUnitMenuController {
     }
 
     private static void removeDeadUnits(Tile targetTile) {
-        ArrayList<Units> removings = new ArrayList<>();
-        for (int i = 0; i < targetTile.getUnits().size(); i++)
-            if (targetTile.getUnits().get(i).getHp() <= 0)
-                removings.add(targetTile.getUnits().get(i));
-        targetTile.getUnits().removeAll(removings);
+        for (Units unit : targetTile.getUnits())
+            if (unit.getHp() <= 0) unit.removeFromGame(targetTile, unit.getOwner());
     }
 
     private static void setAttackedTrue(ArrayList<Units> selectedUnits) {

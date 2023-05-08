@@ -2,6 +2,7 @@ package model.people;
 
 import model.Governance;
 import model.Stronghold;
+import model.map.Tile;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
 
@@ -102,6 +103,11 @@ public abstract class Units {
 
     public boolean isForCurrentGovernance() {
         return ownerGovernance.equals(Stronghold.getCurrentGame().getCurrentGovernance());
+    }
+
+    public void removeFromGame(Tile tile, Governance owner) {
+        tile.getUnits().remove(this);
+        owner.removeUnit(this);
     }
 
     public String toString() {

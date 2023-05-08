@@ -140,6 +140,8 @@ public class GameMenuController {
         if (building.getGoldCost() > currentGovernance.getGold()) return GameMenuMessages.NOT_ENOUGH_MONEY;
         if (!currentGovernance.hasEnoughItem(building.getResourceCostType(), building.getResourceCostNumber()))
             return GameMenuMessages.NOT_ENOUGH_RESOURCE;
+        if (!currentGovernance.hasEnoughPopulation(building.getWorkersNumber()))
+            return GameMenuMessages.NOT_ENOUGH_POPULATION;
 
         BuildingUtils.build(building, x, y, size);
         return GameMenuMessages.SUCCESS;
@@ -222,13 +224,13 @@ public class GameMenuController {
                 for (int j = 0; j < ((Machine) unit).getEngineersNeededToActivate(); j++) {
                     Engineer engineer = new Engineer();
                     ((Machine) unit).addEngineer(engineer);
-                    engineer.setLocation(new int[]{x,y});
+                    engineer.setLocation(new int[]{x, y});
                 }
             }
 
             if (type.equals("engineer")) unit = new Engineer();
             else unit = new Troops(type);
-            unit.setLocation(new int[]{x,y});
+            unit.setLocation(new int[]{x, y});
             tile.getUnits().add(unit);
         }
     }
@@ -256,7 +258,7 @@ public class GameMenuController {
     }
 
     private static void updateSoldiers() {
-
+        currentGovernance.resetUnitAbilities();
     }
 
     private static void updateGold() {

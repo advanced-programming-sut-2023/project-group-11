@@ -17,5 +17,6 @@ public enum SelectUnitMenuMessages {
     OUT_OF_RANGE,
     NO_ATTACK_LEFT,
     NOT_PATROLLING,
+    INVALID_STATE,
     ;
 }

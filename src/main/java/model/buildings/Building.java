@@ -2,6 +2,7 @@ package model.buildings;
 
 import model.AllResource;
 import model.Governance;
+import model.map.Map;
 
 public abstract class Building {
     protected int xCoordinate, yCoordinate;
@@ -86,6 +87,14 @@ public abstract class Building {
 
     public void setYCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
+    }
+
+    public void removeFromGame(Map map, Governance owner) {
+        owner.getBuildings().remove(this);
+        owner.setUnemployedPopulation(owner.getUnemployedPopulation() + this.size);
+        for (int i = 0; i < size; i++)
+            for (int j = 0; j < size; j++)
+                map.getTile(xCoordinate + i, yCoordinate + j).setBuilding(null);
     }
 
     @Override
