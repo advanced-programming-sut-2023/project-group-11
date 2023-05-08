@@ -40,6 +40,16 @@ public class Map {
         return tiles;
     }
 
+    public int[] getTileLocation(Tile tile){
+        for (int i =0;i<size;i++){
+            for (int j =0;j<size;j++){
+                if(tiles[i][j].equals(tile))
+                    return new int[]{i,j};
+            }
+        }
+        return null;
+    }
+
     public Tile getTile(int x, int y) {
         return tiles[x][y];
     }

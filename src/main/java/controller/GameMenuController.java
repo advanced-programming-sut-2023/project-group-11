@@ -219,13 +219,16 @@ public class GameMenuController {
 
             if (Utils.isValidMachineType(type)) {
                 unit = new Machine(type);
-                for (int j = 0; j < ((Machine) unit).getEngineersNeededToActivate(); j++)
-                    ((Machine) unit).addEngineer(new Engineer());
+                for (int j = 0; j < ((Machine) unit).getEngineersNeededToActivate(); j++) {
+                    Engineer engineer = new Engineer();
+                    ((Machine) unit).addEngineer(engineer);
+                    engineer.setLocation(new int[]{x,y});
+                }
             }
 
             if (type.equals("engineer")) unit = new Engineer();
             else unit = new Troops(type);
-
+            unit.setLocation(new int[]{x,y});
             tile.getUnits().add(unit);
         }
     }

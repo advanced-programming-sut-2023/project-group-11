@@ -13,6 +13,7 @@ public abstract class Units {
     protected double cost;
     protected Governance ownerGovernance;
     protected UnitState unitState = UnitState.STANDING;
+    protected int[] location;
     protected int[] patrolOrigin;
     protected int[] patrolDestination;
     protected boolean isPatrolling = false;
@@ -27,6 +28,14 @@ public abstract class Units {
 
     public int getSpeed() {
         return speed.getMovesInEachTurn();
+    }
+
+    public int[] getLocation() {
+        return location;
+    }
+
+    public void setLocation(int[] location) {
+        this.location = location;
     }
 
     public UnitState getUnitState() {

@@ -135,6 +135,8 @@ public class SelectUnitMenuController {
         if (!Utils.isValidMachineType(machineType)) return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
 
         Machine machine = new Machine(machineType);
+        machine.setLocation(currentLocation);
+
 
         if (governance.getGold() < machine.getCost()) return SelectUnitMenuMessages.NOT_ENOUGH_GOLD;
 
