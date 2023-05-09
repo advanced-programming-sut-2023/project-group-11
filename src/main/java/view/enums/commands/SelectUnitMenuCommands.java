@@ -10,7 +10,7 @@ public enum SelectUnitMenuCommands {
     SET_UNIT_STATE("set -s (?<state>\\S+)"),
     AIR_ATTACK("attack((?<xGroup> -x (?<xCoordinate>\\d+))|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
     GROUND_ATTACK("attack -e (?<xCoordinate>\\d+) (?<yCoordinate>\\d+)"),
-    DIG_TUNNEL("dig tunnel(( -x (?<xCoordinate>\\d+))|( -y (?<yCoordinate>\\d+))){2}"),
+    DIG_TUNNEL("dig tunnel -d (?<direction>(\\S+))"),
     BUILD_MACHINE("build -q (?<machineType>\"[^\"]+\"|\\S+)"),
     DISBAND("disband unit"),
     DESELECT("deselect|back");

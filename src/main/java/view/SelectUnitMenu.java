@@ -30,6 +30,8 @@ public class SelectUnitMenu {
                 checkAttackUnit(matcher, currentLocation, unitType, "air attack");
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.GROUND_ATTACK)) != null)
                 checkAttackUnit(matcher, currentLocation, unitType, "ground attack");
+            else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DIG_TUNNEL)) != null)
+                checkDigTunnel(matcher, currentLocation, unitType);
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.BUILD_MACHINE)) != null)
                 checkBuildMachine(matcher, currentLocation, unitType);
             else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DESELECT) != null)
@@ -115,12 +117,18 @@ public class SelectUnitMenu {
 
     }
 
-    private static void checkDigTunnel(Matcher matcher) {
+    private static void checkDigTunnel(Matcher matcher, int[] currentLocation, String unitType) {
+        message = SelectUnitMenuController.checkDigTunnel(matcher, currentLocation, unitType);
 
+        switch (message) {
+            case INVALID_UNIT_TYPE_TO_DIG_TUNNEL -> System.out.println("Only tunnelers can dig tunnel!");
+            case INVALID_DIRECTION -> System.out.println("Direction must be up or left or down or right!");
+            case SUCCESS -> System.out.println("tunnel dug successfully!");
+        }
     }
 
     private static void disbandUnit(int[] currentLocation, String unitType) {
-        SelectUnitMenuController.disbandUnit(currentLocation,unitType);
+        SelectUnitMenuController.disbandUnit(currentLocation, unitType);
         System.out.println("Units disbanded successfully");
     }
 }

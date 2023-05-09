@@ -149,8 +149,57 @@ public class SelectUnitMenuController {
         return null;
     }
 
-    public static SelectUnitMenuMessages checkDigTunnel(Matcher matcher) {
-        return null;
+    public static SelectUnitMenuMessages checkDigTunnel(Matcher matcher, int[] currentLocation, String unitType) {
+        Map map = Stronghold.getCurrentGame().getMap();
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        Units unit = map.getTile(currentX, currentY).getUnitsByType(unitType).get(0);
+
+        String direction = matcher.group("direction");
+        if (!unit.getName().equals("tunneler")) return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_DIG_TUNNEL;
+        if (!(direction.equals("right") ||
+                direction.equals("up") ||
+                direction.equals("left") ||
+                direction.equals("down"))) return SelectUnitMenuMessages.INVALID_DIRECTION;
+
+
+        digTunnel(map, unit, currentX, currentY, direction);
+        return SelectUnitMenuMessages.SUCCESS;
+    }
+
+    private static void digTunnel(Map map, Units tunneler, int currentX, int currentY, String direction) {
+        Tile currentTile = map.getTile(currentX, currentY);
+        tunneler.removeFromGame(currentTile, tunneler.getOwner());
+
+        //TODO:1 make cleaner
+        //up
+        for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX + i, currentY); i++) {
+            currentTile = map.getTile(currentX + i, currentY);
+            Building building = currentTile.getBuilding();
+            if (!building.getOwner().equals(tunneler.getOwner()))
+                destroyBuilding(map, building);
+        }
+        //down
+        for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX - i, currentY); i++) {
+            currentTile = map.getTile(currentX - i, currentY);
+            Building building = currentTile.getBuilding();
+            if (!building.getOwner().equals(tunneler.getOwner()))
+                destroyBuilding(map, building);
+        }
+        //right
+        for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX, currentY + i); i++) {
+            currentTile = map.getTile(currentX, currentY + i);
+            Building building = currentTile.getBuilding();
+            if (!building.getOwner().equals(tunneler.getOwner()))
+                destroyBuilding(map, building);
+        }
+        //left
+        for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX, currentY - i); i++) {
+            currentTile = map.getTile(currentX, currentY - i);
+            Building building = currentTile.getBuilding();
+            if (!building.getOwner().equals(tunneler.getOwner()))
+                destroyBuilding(map, building);
+        }
     }
 
     public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
