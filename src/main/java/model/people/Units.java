@@ -110,9 +110,6 @@ public abstract class Units {
     public void removeFromGame(Tile tile, Governance owner) {
         tile.getUnits().remove(this);
         owner.removeUnit(this);
-        if (this instanceof Machine machine) {
-            machine.removeEngineer();
-        }
     }
 
     public String toString() {
