@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troops.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/Machines.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/Machines.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/Troops.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/Troops.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,14 +211,7 @@
       <workItem from="1683546614283" duration="228000" />
       <workItem from="1683547295608" duration="14000" />
       <workItem from="1683582424393" duration="6781000" />
-      <workItem from="1683634070020" duration="2534000" />
-    </task>
-    <task id="LOCAL-00002" summary="Replacing Phase 0's Files second try">
-      <created>1681570555346</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1681570555346</updated>
+      <workItem from="1683634070020" duration="3243000" />
     </task>
     <task id="LOCAL-00003" summary="Add test Folder">
       <created>1681590276999</created>
@@ -561,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683588625188</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Attack priority set&#10;(armor effect &amp; throwing path ignored)">
+      <created>1683636926402</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1683636926402</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -603,7 +598,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Profie menu finished" />
     <MESSAGE value="isMapName problem fixed" />
     <MESSAGE value="Captcha Updated" />
     <MESSAGE value="Show map added in MapEditMenu" />
@@ -628,7 +622,8 @@
     <MESSAGE value="Attack updated(duplication removed) + important TODOs added" />
     <MESSAGE value="TODOs Updated" />
     <MESSAGE value="Add (Areas + Lord + Keep)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add (Areas + Lord + Keep)" />
+    <MESSAGE value="Attack priority set&#10;(armor effect &amp; throwing path ignored)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Attack priority set&#10;(armor effect &amp; throwing path ignored)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

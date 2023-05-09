@@ -62,4 +62,8 @@ public class Machine extends Attacker {
 
         return machine;
     }
+
+    public ArrayList<Engineer> getEngineers() {
+        return engineers;
+    }
 }

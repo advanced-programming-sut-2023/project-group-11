@@ -430,7 +430,6 @@ public class SelectUnitMenuController {
         int targetHp = targetBuilding.getHitPoint();
         int attackerDamage = selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage();
 
-        //TODO:1 battle ram don't damage units
         if (targetBuilding instanceof GateHouse && selectedUnits.get(0).getName().equals("battle ram"))
             targetBuilding.setHitPoint(targetHp - 3 * attackerDamage);
         else
@@ -455,13 +454,17 @@ public class SelectUnitMenuController {
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
         //TODO:1 set reacting to attacks
-        //TODO:1 remove dead units from governance arrayList
-        //TODO:1 remove engineers in destroyed siege machines
     }
 
     private static void removeDeadUnits(Tile targetTile) {
         for (Units unit : targetTile.getUnits())
-            if (unit.getHp() <= 0) unit.removeFromGame(targetTile, unit.getOwner());
+            if (unit.getHp() <= 0) {
+                if (unit instanceof Machine machine) {
+                    for (Engineer engineer : machine.getEngineers())
+                        engineer.getOwner().removeUnit(engineer);
+                }
+                unit.removeFromGame(targetTile, unit.getOwner());
+            }
     }
 
     private static void setAttackedTrue(ArrayList<Units> selectedUnits) {
