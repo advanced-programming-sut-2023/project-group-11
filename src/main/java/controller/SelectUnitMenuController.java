@@ -76,10 +76,8 @@ public class SelectUnitMenuController {
                 targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
-        //TODO:1 attack both building and units
-        //TODO:1 set damaging concepts (Fire - throwing path - building damaging - Armor damaging - multi-unit damaging - tower increasing range)
-        if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
-        else attackUnits(selectedUnits, targetTile);
+        //TODO:1 set damaging concepts (Fire - building damaging - multi-unit damaging - tower increasing range)
+        attack(selectedUnits, unitType,  targetTile);
 
         return SelectUnitMenuMessages.SUCCESS;
     }
@@ -401,6 +399,29 @@ public class SelectUnitMenuController {
         selectedUnits.removeAll(removings);
 
         return selectedUnits.size() == 0;
+    }
+
+    private static void attack(ArrayList<Units> selectedUnits, String unitType, Tile targetTile) {
+        boolean onlyBuilding = false;
+        boolean onlyUnits = false;
+
+        if (isValidUnitForGroundAttack(unitType)) {
+            if (targetTile.getBuilding() != null) onlyBuilding = true;
+            else if (!unitType.equals("battle ram")) onlyUnits = true;
+        } else {
+            if (unitType.equals("trebuchets") || unitType.equals("catapults")) {
+                if (targetTile.getBuilding() != null) onlyBuilding = true;
+                else onlyUnits = true;
+            } else {
+                if (targetTile.getUnits().size() != 0) onlyUnits = true;
+            }
+        }
+
+        if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
+        else attackUnits(selectedUnits, targetTile);
+
+        if (onlyBuilding) attackBuilding(selectedUnits, targetTile);
+        else if (onlyUnits) attackUnits(selectedUnits, targetTile);
     }
 
     private static void attackBuilding(ArrayList<Units> selectedUnits, Tile targetTile) {

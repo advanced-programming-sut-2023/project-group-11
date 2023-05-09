@@ -11,7 +11,7 @@
       "canDigKhandagh": false,
       "range": 1,
       "revealed": true,
-      "hp": 60,
+      "hp": "VERY_LOW",
       "speed": "HIGH",
       "cost": 30
     },
@@ -26,7 +26,7 @@
       "canDigKhandagh": true,
       "range": 1,
       "revealed": true,
-      "hp": 60,
+      "hp": "VERY_LOW",
       "speed": "HIGH",
       "cost": 5
     },
@@ -41,7 +41,7 @@
       "canDigKhandagh": false,
       "range": 3,
       "revealed": true,
-      "hp": 100,
+      "hp": "MEDIUM",
       "speed": "LOW",
       "cost": 20
     },
@@ -56,7 +56,7 @@
       "canDigKhandagh": false,
       "range": 2,
       "revealed": true,
-      "hp": 60,
+      "hp": "VERY_LOW",
       "speed": "HIGH",
       "cost": 12
     },
@@ -71,7 +71,7 @@
       "canDigKhandagh": false,
       "range": 1,
       "revealed": true,
-      "hp": 120,
+      "hp": "HIGH",
       "speed": "LOW",
       "cost": 80
     },
@@ -86,7 +86,7 @@
       "canDigKhandagh": true,
       "range": 1,
       "revealed": true,
-      "hp": 60,
+      "hp": "VERY_LOW",
       "speed": "MEDIUM",
       "cost": 8
     },
@@ -101,7 +101,7 @@
       "canDigKhandagh": true,
       "range": 1,
       "revealed": true,
-      "hp": 100,
+      "hp": "MEDIUM",
       "speed": "HIGH",
       "cost": 20
     },
@@ -116,7 +116,7 @@
       "canDigKhandagh": false,
       "range": 1,
       "revealed": false,
-      "hp": 100,
+      "hp": "MEDIUM",
       "speed": "MEDIUM",
       "cost": 60
     },
@@ -131,7 +131,7 @@
       "canDigKhandagh": false,
       "range": 5,
       "revealed": true,
-      "hp": 100,
+      "hp": "MEDIUM",
       "speed": "VERY_HIGH",
       "cost": 80
     },
@@ -146,7 +146,7 @@
       "canDigKhandagh": false,
       "range": 0,
       "revealed": true,
-      "hp": 60,
+      "hp": "VERY_LOW",
       "speed": "HIGH",
       "cost": 4
     },
@@ -161,7 +161,7 @@
       "canDigKhandagh": false,
       "range": 3,
       "revealed": true,
-      "hp": 80,
+      "hp": "LOW",
       "speed": "MEDIUM",
       "cost": 100
     },
@@ -176,7 +176,7 @@
       "canDigKhandagh": true,
       "range": 5,
       "revealed": true,
-      "hp": 80,
+      "hp": "LOW",
       "speed": "HIGH",
       "cost": 12
     },
@@ -191,7 +191,7 @@
       "canDigKhandagh": false,
       "range": 1,
       "revealed": true,
-      "hp": 120,
+      "hp": "HIGH",
       "speed": "VERY_LOW",
       "cost": 40
     },
@@ -206,7 +206,7 @@
       "canDigKhandagh": false,
       "range": 1,
       "revealed": true,
-      "hp": 120,
+      "hp": "HIGH",
       "speed": "VERY_HIGH",
       "cost": 40
     },
@@ -221,7 +221,7 @@
       "canDigKhandagh": true,
       "range": 5,
       "revealed": true,
-      "hp": 80,
+      "hp": "LOW",
       "speed": "HIGH",
       "cost": 75
     },
@@ -236,7 +236,7 @@
       "canDigKhandagh": false,
       "range": 1,
       "revealed": true,
-      "hp": 100,
+      "hp": "MEDIUM",
       "speed": "LOW",
       "cost": 10
     },
@@ -251,7 +251,7 @@
       "canDigKhandagh": true,
       "range": 1,
       "revealed": true,
-      "hp": 120,
+      "hp": "HIGH",
       "speed": "LOW",
       "cost": 20
     }

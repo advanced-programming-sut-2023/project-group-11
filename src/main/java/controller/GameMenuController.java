@@ -209,11 +209,11 @@ public class GameMenuController {
         if (tile.hasBuilding() && !(tile.getBuilding() instanceof Climbable))
             return GameMenuMessages.CANT_DROP_IN_BULDING;
 
-        dropUnit(currentGame.getCurrentGovernance(), x, y, count, type);
+        dropUnit(x, y, count, type);
         return GameMenuMessages.SUCCESS;
     }
 
-    private static void dropUnit(Governance currentGovernance, int x, int y, int count, String type) {
+    private static void dropUnit(int x, int y, int count, String type) {
         Tile tile = currentGame.getMap().getTile(x, y);
 
         for (int i = 0; i < count; i++) {
@@ -232,7 +232,6 @@ public class GameMenuController {
 
             unit.setLocation(new int[]{x, y});
             tile.getUnits().add(unit);
-            currentGovernance.addUnit(unit);
         }
     }
 

@@ -1,5 +1,7 @@
 package model.people;
 
+import model.people.enums.Hp;
+import model.people.enums.SiegeDamage;
 import model.people.enums.Speed;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,9 +24,9 @@ public class Machine extends Attacker {
         speed = Speed.valueOf((String) machine.get("speed"));
         leftMoves = speed.getMovesInEachTurn();
         cost = ((Long) machine.get("cost")).intValue();
-        hp = ((Long) machine.get("hp")).intValue();
+        hp = Hp.valueOf((String) machine.get("hp")).getHp();
         engineersNeededToActivate = ((Long) machine.get("engineersNeededToActivate")).intValue();
-        damage = ((Long) machine.get("damage")).intValue();
+        damage = SiegeDamage.valueOf((String) machine.get("damage")).getDamage();
         range = ((Long) machine.get("range")).intValue();
         setOwnerGovernance();
     }

@@ -1,6 +1,7 @@
 package model.people;
 
 import model.AllResource;
+import model.people.enums.Hp;
 import model.people.enums.Speed;
 import model.people.enums.TroopDamage;
 import org.json.simple.JSONArray;
@@ -25,11 +26,11 @@ public class Troops extends Attacker {
         JSONObject troop = getTroopFromDictionary(name);
 
         this.name = name;
-        this.hp = ((Long) troop.get("hp")).intValue();
+        this.hp = Hp.valueOf((String) troop.get("hp")).getHp();
         this.speed = Speed.valueOf((String) troop.get("speed"));
+        this.leftMoves = speed.getMovesInEachTurn();
         this.damage = TroopDamage.valueOf((String) troop.get("damage")).getDamage();
         this.range = ((Long) troop.get("range")).intValue();
-        this.leftMoves = speed.getMovesInEachTurn();
         this.weaponType = AllResource.valueOf((String) troop.get("weaponType"));
         this.armorType = AllResource.valueOf((String) troop.get("armorType"));
         this.hasHorse = (Boolean) troop.get("hasHorse");
