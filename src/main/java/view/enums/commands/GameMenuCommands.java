@@ -23,7 +23,7 @@ public enum GameMenuCommands {
     SHOW_FEAR_RATE("fear rate show"),
     SELECT_UNIT("select unit((?<xGroup> -x (?<xCoordinate>\\d+))" +
             "|(?<yGroup> -y (?<yCoordinate>\\d+))" +
-            "|(?<typeGroup> -type (?<type>\"[^\"]+\"|\\S+))){3}"),
+            "|(?<typeGroup> -t (?<type>\"[^\"]+\"|\\S+))){3}"),
     DROP_UNIT("dropunit(( -x (?<xCoordinate>\\d+))" +
             "|( -y (?<yCoordinate>\\d+))" +
             "|( -t (?<type>\"[^\"]+\"|\\S+))" +

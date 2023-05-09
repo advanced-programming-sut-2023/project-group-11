@@ -77,6 +77,7 @@ public class MainMenu {
         int selectedArea;
         System.out.println("Choose area for :" + player);
         System.out.println("From: " + areas);
+        //TODO:3 error handling for nextInt
         selectedArea = scanner.nextInt();
         while (!areas.contains(selectedArea)) {
             System.out.println("Invalid area!");

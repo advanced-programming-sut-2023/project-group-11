@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Keep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Keep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,21 +214,7 @@
       <workItem from="1683547295608" duration="14000" />
       <workItem from="1683582424393" duration="6781000" />
       <workItem from="1683634070020" duration="3336000" />
-      <workItem from="1683665627327" duration="4196000" />
-    </task>
-    <task id="LOCAL-00005" summary="Add Gson Lib">
-      <created>1681852319346</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1681852319346</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Add JArgs lib &amp; change JUnit jupiter">
-      <created>1681932295836</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1681932295837</updated>
+      <workItem from="1683665627327" duration="4827000" />
     </task>
     <task id="LOCAL-00007" summary="People completed &amp; Packages' names corrected">
       <created>1681941438123</created>
@@ -568,7 +545,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683666563632</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Start game debugged (map initialization + minor changes)">
+      <created>1683669887248</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1683669887248</updated>
+    </task>
+    <task id="LOCAL-00055" summary="error resolved">
+      <created>1683669953803</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1683669953803</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,8 +601,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Show map added in MapEditMenu" />
-    <MESSAGE value="Use validCommandTags in MapEditMenuController" />
     <MESSAGE value="Troop Dictionary added" />
     <MESSAGE value="Terrotories added + game capacity initialized (2-4)" />
     <MESSAGE value="Start SelectUnit Menu + MoveUnit added incompletly" />
@@ -635,7 +624,9 @@
     <MESSAGE value="Attack priority set&#10;(armor effect &amp; throwing path ignored)" />
     <MESSAGE value="Dead machine -&gt; remove engineer" />
     <MESSAGE value="setLocation for units" />
-    <option name="LAST_COMMIT_MESSAGE" value="setLocation for units" />
+    <MESSAGE value="Start game debugged (map initialization + minor changes)" />
+    <MESSAGE value="error resolved" />
+    <option name="LAST_COMMIT_MESSAGE" value="error resolved" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

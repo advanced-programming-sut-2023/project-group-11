@@ -390,7 +390,8 @@ public class SelectUnitMenuController {
     }
 
     private static boolean isValidDestinationSameOwnerUnits(Tile currentTile, Tile destination) {
-        return currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
+        return destination.getUnits().size() != 0 &&
+                currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
     }
 
     private static void setLeftMoves(Path shortestPath, ArrayList<Units> selectedUnits) {
