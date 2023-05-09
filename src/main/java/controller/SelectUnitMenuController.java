@@ -82,7 +82,7 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static void patrolUnit(Matcher matcher, int[] currentLocation, String unitType) {
+    public static void setPatrolUnit(Matcher matcher, int[] currentLocation, String unitType) {
         Map map = Stronghold.getCurrentGame().getMap();
         int destinationX = Integer.parseInt(matcher.group("xCoordinate"));
         int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
@@ -107,14 +107,14 @@ public class SelectUnitMenuController {
         int destinationX = unit.getPatrolDestination()[0];
         int destinationY = unit.getPatrolDestination()[1];
 
-        if (!isValidForMoving(map, currentX, currentY, destinationX, destinationY)) unPatrol(units);
+        if (!isValidForMoving(map, currentX, currentY, destinationX, destinationY)) stopPatrol(units);
         if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) != null) {
             for (Units unit1 : units) {
                 unit1.setPatrolOrigin(new int[]{destinationX, destinationY});
                 unit1.setPatrolDestination(new int[]{currentX, currentY});
             }
             moveUnits(map, unitType, shortestPath, unit.getPatrolOrigin(), destinationX, destinationY);
-        } else unPatrol(units);
+        } else stopPatrol(units);
     }
 
     public static SelectUnitMenuMessages checkStopPatrol(int[] currentLocation, String unitType) {
@@ -125,12 +125,12 @@ public class SelectUnitMenuController {
 
         if (!selectedUnits.get(0).isPatrolling()) return SelectUnitMenuMessages.NOT_PATROLLING;
 
-        unPatrol(selectedUnits);
+        stopPatrol(selectedUnits);
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    private static void unPatrol(ArrayList<Units> units) {
-        for (Units unit : units) unit.unPatrol();
+    private static void stopPatrol(ArrayList<Units> units) {
+        for (Units unit : units) unit.stopPatrol();
     }
 
     public static SelectUnitMenuMessages checkSetUnitState(Matcher matcher, int[] currentLocation, String unitType) {
@@ -171,7 +171,7 @@ public class SelectUnitMenuController {
         Tile currentTile = map.getTile(currentX, currentY);
         tunneler.removeFromGame(currentTile, tunneler.getOwner());
 
-        //TODO:1 make cleaner
+        //TODO:1 make the function cleaner
         //up
         for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX + i, currentY); i++) {
             currentTile = map.getTile(currentX + i, currentY);
@@ -247,7 +247,7 @@ public class SelectUnitMenuController {
         map.getTile(currentX, currentY).clearUnitsByType(selectedUnits);
 
         setLeftMoves(shortestPath, selectedUnits);
-        //TODO:1 setLocation for units
+        setLocation(selectedUnits, destinationX, destinationY);
         applyPathEffects(map, shortestPath, selectedUnits);
 
         map.getTile(destinationX, destinationY).getUnits().addAll(selectedUnits);
@@ -397,6 +397,11 @@ public class SelectUnitMenuController {
         for (Units unit : selectedUnits) {
             unit.setLeftMoves(unit.getLeftMoves() - (shortestPath.getLength() - 1));
         }
+    }
+
+    private static void setLocation(ArrayList<Units> selectedUnits, int destinationX, int destinationY) {
+        for (Units unit : selectedUnits)
+            unit.setLocation(new int[]{destinationX, destinationY});
     }
 
     private static void applyPathEffects(Map map, Path shortestPath, ArrayList<Units> selectedUnits) {

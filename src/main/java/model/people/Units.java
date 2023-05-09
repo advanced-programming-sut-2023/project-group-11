@@ -90,7 +90,7 @@ public abstract class Units {
         this.patrolDestination = patrolDestination;
     }
 
-    public void unPatrol() {
+    public void stopPatrol() {
         patrolOrigin[0] = patrolOrigin[1] = patrolDestination[0] = patrolDestination[1] = -1;
         isPatrolling = false;
     }

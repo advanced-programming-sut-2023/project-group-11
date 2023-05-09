@@ -91,7 +91,7 @@ public class SelectUnitMenu {
         checkMoveUnit(matcher, currentLocation, unitType);
 
         if (message.equals(SelectUnitMenuMessages.SUCCESS))
-            SelectUnitMenuController.patrolUnit(matcher, currentLocation, unitType);
+            SelectUnitMenuController.setPatrolUnit(matcher, currentLocation, unitType);
     }
 
     private static void checkStopPatrol(int[] currentLocation, String unitType) {
