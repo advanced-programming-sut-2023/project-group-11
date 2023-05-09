@@ -13,5 +13,6 @@ public enum SelectBuildingMenuMessages {
     CANT_REPAIR,
     ENEMY_AROUND,
     BAD_UNIT_MAKER_PLACE,
+    NOT_ENOUGH_POPULATION,
     ;
 }

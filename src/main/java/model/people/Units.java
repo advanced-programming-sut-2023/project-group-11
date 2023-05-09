@@ -46,7 +46,7 @@ public abstract class Units {
     protected void setOwnerGovernance() {
         this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         this.ownerGovernance.addUnit(this);
-        this.ownerGovernance.changeCurrentPopulation(-1);
+        if (!(this instanceof Machine)) this.ownerGovernance.changeCurrentPopulation(-1);
     }
 
     public void setUnitState(UnitState unitState) {
@@ -110,6 +110,9 @@ public abstract class Units {
     public void removeFromGame(Tile tile, Governance owner) {
         tile.getUnits().remove(this);
         owner.removeUnit(this);
+        if (this instanceof Machine machine) {
+            machine.removeEngineer();
+        }
     }
 
     public String toString() {

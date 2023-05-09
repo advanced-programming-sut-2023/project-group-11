@@ -18,8 +18,6 @@ public class SelectBuildingMenuController {
     private static final int[] unitCreationCoordinates = new int[2];
 
     public static SelectBuildingMenuMessages checkCreateUnit(Matcher matcher, int x, int y) {
-        //TODO:1 decrease population (current - unemployed) in troop making
-        //TODO:1 add troop to governance arrayList
         unitCreationTile = null;
         unitCreationFlag = false;
 
@@ -28,10 +26,11 @@ public class SelectBuildingMenuController {
 
         String type = Utils.removeDoubleQuotation(matcher.group("typeGroup"));
         int count = Integer.parseInt(matcher.group("countGroup"));
-        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         Building building = BuildingUtils.getBuilding(x, y);
 
         if (!Utils.isValidUnitType(type)) return SelectBuildingMenuMessages.INVALID_TYPE;
+        if (!currentGovernance.hasEnoughPopulation(count)) return SelectBuildingMenuMessages.NOT_ENOUGH_POPULATION;
         if (!isUnitMaker(building)) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
 
         UnitMaker unitMaker = (UnitMaker) building;
@@ -40,7 +39,7 @@ public class SelectBuildingMenuController {
             Engineer engineer = new Engineer();
             engineer.setLocation(new int[]{x,y});
             if (!unitMaker.isEngineerMaker()) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-            if (governance.getGold() < engineer.getCost() * count) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+            if (currentGovernance.getGold() < engineer.getCost() * count) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
             if (!createEngineer(unitMaker, engineer, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
             return SelectBuildingMenuMessages.SUCCESS;
         }
@@ -52,12 +51,12 @@ public class SelectBuildingMenuController {
 
         if ((troop.isArab() && !unitMaker.isMercenaryMaker()) || !building.getName().equals("barracks"))
             return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-        if (governance.getGold() < count * troop.getCost()) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+        if (currentGovernance.getGold() < count * troop.getCost()) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
 
         AllResource armor = troop.getArmorType();
         AllResource weapon = troop.getWeaponType();
 
-        if (!governance.hasEnoughItem(armor, count) || !governance.hasEnoughItem(weapon, count))
+        if (!currentGovernance.hasEnoughItem(armor, count) || !currentGovernance.hasEnoughItem(weapon, count))
             return SelectBuildingMenuMessages.NOT_ENOUGH_RESOURCE;
         if (!createUnit(unitMaker, troop, type, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
         return SelectBuildingMenuMessages.SUCCESS;

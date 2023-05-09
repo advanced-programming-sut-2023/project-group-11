@@ -32,7 +32,7 @@ public class GameMenuController {
         currentGame.setCurrentGovernance(currentGovernance);
         currentGame.plusTurnCounter();
 
-        if (currentGame.getTurn() > totalGovernances) {
+        if (getCurrentTurn() > 1) {
             updateSoldiers();
             updateGold();
             updateStorages();
@@ -143,7 +143,7 @@ public class GameMenuController {
         if (!currentGovernance.hasEnoughPopulation(building.getWorkersNumber()))
             return GameMenuMessages.NOT_ENOUGH_POPULATION;
 
-        BuildingUtils.build(Stronghold.getCurrentGame().getCurrentGovernance(), building, x, y, size);
+        BuildingUtils.build(currentGovernance, building, x, y, size);
         return GameMenuMessages.SUCCESS;
     }
 
@@ -226,8 +226,7 @@ public class GameMenuController {
                     ((Machine) unit).addEngineer(engineer);
                     engineer.setLocation(new int[]{x, y});
                 }
-            }
-            else if (type.equals("engineer")) unit = new Engineer();
+            } else if (type.equals("engineer")) unit = new Engineer();
             else unit = new Troops(type);
 
             unit.setLocation(new int[]{x, y});
@@ -260,8 +259,9 @@ public class GameMenuController {
     private static void updateSoldiers() {
         ArrayList<Units> units = currentGovernance.getUnits();
         ArrayList<Units> patrollingUnits = new ArrayList<>();
-        for (Units unit : units) if (unit.isPatrolling())
-            patrollingUnits.add(unit);
+        for (Units unit : units)
+            if (unit.isPatrolling())
+                patrollingUnits.add(unit);
         SelectUnitMenuController.patrolUnit(patrollingUnits);
         currentGovernance.resetUnitAbilities();
     }

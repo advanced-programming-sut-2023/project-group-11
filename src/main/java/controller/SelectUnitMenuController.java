@@ -77,7 +77,7 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
         //TODO:1 set damaging concepts (Fire - building damaging - multi-unit damaging - tower increasing range)
-        attack(selectedUnits, unitType,  targetTile);
+        attack(selectedUnits, unitType, targetTile);
 
         return SelectUnitMenuMessages.SUCCESS;
     }
@@ -417,9 +417,6 @@ public class SelectUnitMenuController {
             }
         }
 
-        if (targetTile.getBuilding() != null) attackBuilding(selectedUnits, targetTile);
-        else attackUnits(selectedUnits, targetTile);
-
         if (onlyBuilding) attackBuilding(selectedUnits, targetTile);
         else if (onlyUnits) attackUnits(selectedUnits, targetTile);
     }
@@ -437,7 +434,6 @@ public class SelectUnitMenuController {
         setAttackedTrue(selectedUnits);
         if (targetBuilding.getHitPoint() <= 0) {
             destroyBuilding(map, targetBuilding);
-            //TODO:1 apply the building's destruction effects (workers, popularity, ...)
             //TODO:2 rearrange the climbablity
         }
     }
@@ -459,10 +455,9 @@ public class SelectUnitMenuController {
     private static void removeDeadUnits(Tile targetTile) {
         for (Units unit : targetTile.getUnits())
             if (unit.getHp() <= 0) {
-                if (unit instanceof Machine machine) {
+                if (unit instanceof Machine machine)
                     for (Engineer engineer : machine.getEngineers())
                         engineer.getOwner().removeUnit(engineer);
-                }
                 unit.removeFromGame(targetTile, unit.getOwner());
             }
     }

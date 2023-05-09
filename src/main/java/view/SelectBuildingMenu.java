@@ -2,7 +2,6 @@ package view;
 
 import controller.BuildingUtils;
 import controller.SelectBuildingMenuController;
-import controller.Utils;
 import view.enums.commands.SelectBuildingMenuCommands;
 import view.enums.messages.SelectBuildingMenuMessages;
 
@@ -37,6 +36,7 @@ public class SelectBuildingMenu {
             case NOT_ENOUGH_GOLD -> System.out.println("You Don't Have Enough Gold!");
             case NOT_ENOUGH_RESOURCE -> System.out.println("You don't have enough equipment!");
             case BAD_UNIT_MAKER_PLACE -> System.out.println("No places are around the unit maker to put the unit(s)!");
+            case NOT_ENOUGH_POPULATION -> System.out.println("You don't have enough population!");
             case SUCCESS -> System.out.println("You created " + matcher.group("count") + " Troop(s) in "
                     + "x: " + SelectBuildingMenuController.getUnitCreationCoordinates()[0]
                     + "y: " + SelectBuildingMenuController.getUnitCreationCoordinates()[1]

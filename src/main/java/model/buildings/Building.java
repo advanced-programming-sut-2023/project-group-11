@@ -91,6 +91,7 @@ public abstract class Building {
 
     public void removeFromGame(Map map, Governance owner) {
         if (this.name.equals("hovel")) owner.changeMaxPopulation(-8);
+        if (this instanceof Church) owner.changeReligiousFactor(-2);
 
         owner.getBuildings().remove(this);
         owner.setUnemployedPopulation(owner.getUnemployedPopulation() + workersNumber);
