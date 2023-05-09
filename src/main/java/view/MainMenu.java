@@ -69,6 +69,8 @@ public class MainMenu {
             selectedArea = getSelectedArea(player, areas);
             MainMenuController.initializeAreas(player, areas, selectedArea);
         }
+
+        scanner.nextLine();
     }
 
     private static int getSelectedArea(String player, ArrayList<Integer> areas) {

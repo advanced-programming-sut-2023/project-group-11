@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommands {
-
+    SHOW_CURRENT_MENU("show current menu"),
     NEXT_TURN("next turn"),
     SHOW_MAP("show map(( -x (?<xCoordinate>\\d+))" +
             "|( -y (?<yCoordinate>\\d+))){2}"),

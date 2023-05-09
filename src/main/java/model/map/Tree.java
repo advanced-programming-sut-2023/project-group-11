@@ -1,8 +1,11 @@
 package model.map;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Tree {
     private final String name;
+    @JsonIgnore
     private int leftWood = 2000;
 
     public Tree(String name) {

@@ -8,9 +8,7 @@ import model.buildings.Climbable;
 import model.map.Color;
 import model.map.Map;
 import model.map.Tile;
-import model.people.Machine;
-import model.people.Troops;
-import model.people.Units;
+import model.people.*;
 import org.apache.commons.lang3.StringUtils;
 import view.ShowMapMenu;
 import view.enums.messages.ShowMapMenuMessages;
@@ -117,7 +115,7 @@ public class ShowMapMenuController {
     public static boolean isSoldierInTile(Tile tile) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         for (Units unit : tile.getUnits())
-            if (unit instanceof Machine) return true;
+            if (unit instanceof Machine || unit instanceof Engineer || unit instanceof Lord) return true;
             else if (((Troops) unit).isRevealed() || unit.getOwner().equals(governance)) return true;
 
         return false;

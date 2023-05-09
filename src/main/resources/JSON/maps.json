@@ -2090,10 +2090,7 @@
         {
           "texture": "ROCK",
           "units": [],
-          "tree": {
-            "name": "olive",
-            "leftWood": 2000
-          }
+          "tree": "olive"
         },
         {
           "texture": "ROCK",

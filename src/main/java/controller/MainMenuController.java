@@ -4,6 +4,8 @@ import model.Game;
 import model.Governance;
 import model.Stronghold;
 import model.buildings.Keep;
+import model.map.Map;
+import model.map.Texture;
 import model.map.Tile;
 import model.people.Lord;
 import view.enums.messages.MainMenuMessages;
@@ -64,14 +66,26 @@ public class MainMenuController {
         }
 
         Lord lord = new Lord(currentGovernance);
-        Keep keep = new Keep();
+        Keep keep = new Keep(currentGovernance);
         x = getXYBySelectedArea(selectedArea, mapSize)[0];
         y = getXYBySelectedArea(selectedArea, mapSize)[1];
 
-        BuildingUtils.build(currentGovernance, keep, x, y, keep.getSize());
+        buildKeep(keep, x, y);
         dropLord(currentGovernance, lord, x, y);
 
         areas.remove(Integer.valueOf(selectedArea));
+    }
+
+    private static void buildKeep(Keep keep, int x, int y) {
+        int size = keep.getSize();
+        Map map = Stronghold.getCurrentGame().getMap();
+        Tile[][] tiles = map.getTiles();
+
+        for (int i = 0; i < size; i++)
+            for (int j = 0; j < size; j++) {
+                tiles[x + i][y + j].setBuilding(keep);
+                tiles[x + i][y + j].setTexture(Texture.SAND);
+            }
     }
 
     private static void dropLord(Governance currentGovernance, Lord lord, int x, int y) {

@@ -5,6 +5,13 @@ import com.google.gson.reflect.TypeToken;
 import model.Stronghold;
 import model.User;
 import model.map.Map;
+import model.map.Texture;
+import model.map.Tile;
+import model.map.Tree;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,12 +34,47 @@ public class EntryMenuController {
     }
 
     private static void parseMaps() {
+        JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader("src/main/resources/JSON/maps.json")) {
-            Type mapDatabaseType = new TypeToken<ArrayList<Map>>() {
-            }.getType();
-            Stronghold.getMaps().addAll(new Gson().fromJson(reader, mapDatabaseType));
-        } catch (IOException ignored) {
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+            jsonArray.forEach(map -> parseMapObject((JSONObject) map));
+        } catch (ParseException | IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+
+    private static void parseMapObject(JSONObject map) {
+        String name = (String) map.get("name");
+        long size = (Long) map.get("size");
+        JSONArray mapTiles = (JSONArray) map.get("map");
+
+        new Map(name, convertTo2DTileArray(mapTiles, (int) size), (int) size);
+    }
+
+    private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int size) {
+        Tile[][] result = new Tile[size][];
+        for (int i = 0; i < size; i++) {
+            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), size);
+        }
+        return result;
+    }
+
+    private static Tile[] convertToTileArray(JSONArray tiles, int size) {
+        Tile[] result = new Tile[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = parseTileObject((JSONObject) tiles.get(i));
+        }
+        return result;
+    }
+
+    private static Tile parseTileObject(JSONObject tile) {
+        Texture texture = Texture.valueOf(((String) tile.get("texture")));
+        Tree tree = null;
+        if ((String) tile.get("tree") != null)
+            tree = new Tree((String) tile.get("tree"));
+
+        return new Tile(texture, tree);
     }
 
     public static User getStayLoggedIn() {

@@ -22,7 +22,9 @@ public class GameMenu {
         while (true) {
             command = scanner.nextLine();
 
-            if (GameMenuCommands.getMatcher(command, GameMenuCommands.NEXT_TURN) != null)
+            if (GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_CURRENT_MENU) != null)
+                System.out.println("Game Menu");
+            else if (GameMenuCommands.getMatcher(command, GameMenuCommands.NEXT_TURN) != null)
                 nextTurn();
             else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_MAP)) != null)
                 checkShowMap(matcher);
