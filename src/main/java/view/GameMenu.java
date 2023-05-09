@@ -3,6 +3,7 @@ package view;
 import controller.BuildingUtils;
 import controller.GameMenuController;
 import controller.Utils;
+import model.Game;
 import view.enums.commands.GameMenuCommands;
 import view.enums.messages.GameMenuMessages;
 
@@ -57,7 +58,7 @@ public class GameMenu {
     }
 
     private static void nextTurn() {
-
+        System.out.println(GameMenuController.nextTurn());
     }
 
     public static void checkShowMap(Matcher matcher) {

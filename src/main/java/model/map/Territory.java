@@ -1,10 +1,15 @@
 package model.map;
 
 public enum Territory {
-    UP_RIGHT(1),
-    UP_LEFT(2),
-    DOWN_LEFT(3),
-    DOWN_RIGHT(4);
+    UP_LEFT(1),
+    UP(2),
+    UP_RIGHT(3),
+    LEFT(4),
+    RIGHT(5),
+    DOWN_LEFT(6),
+    DOWN(7),
+    DOWN_RIGHT(8),
+    ;
 
     private final int area;
 

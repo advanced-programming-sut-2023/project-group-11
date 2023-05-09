@@ -34,11 +34,12 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.INVALID_COORDINATE;
         else if (notValidTextureForMoving(map.getTile(destinationX, destinationY)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_TEXTURE;
-        else if (!isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
+        else if (map.getTile(destinationX, destinationY).getUnits().size() != 0 &&
+                !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_DIFFERENT_OWNER_UNIT;
         else if (BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) &&
                 (!(map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable) ||
-                        !((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable()))
+                !((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable()))
             return SelectUnitMenuMessages.INVALID_DESTINATION_UNCLIMBABLE_BUILDING;
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
@@ -76,7 +77,7 @@ public class SelectUnitMenuController {
                 targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
-        //TODO:1 set damaging concepts (Fire - building damaging - multi-unit damaging - tower increasing range)
+        //TODO:1 set damaging concepts (Fire - building damaging - multi-unit damaging - tower increasing range - fear rate impact)
         attack(selectedUnits, unitType, targetTile);
 
         return SelectUnitMenuMessages.SUCCESS;
@@ -390,8 +391,7 @@ public class SelectUnitMenuController {
     }
 
     private static boolean isValidDestinationSameOwnerUnits(Tile currentTile, Tile destination) {
-        return destination.getUnits().size() != 0 &&
-                currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
+        return  currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
     }
 
     private static void setLeftMoves(Path shortestPath, ArrayList<Units> selectedUnits) {

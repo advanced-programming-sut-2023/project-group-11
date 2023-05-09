@@ -5,6 +5,7 @@ import model.Governance;
 import model.Stronghold;
 import model.buildings.Keep;
 import model.map.Map;
+import model.map.Territory;
 import model.map.Texture;
 import model.map.Tile;
 import model.people.Lord;
@@ -72,6 +73,7 @@ public class MainMenuController {
 
         buildKeep(keep, x, y);
         dropLord(currentGovernance, lord, x, y);
+        currentGovernance.setTerritory(Territory.getTerritoryByArea(selectedArea));
 
         areas.remove(Integer.valueOf(selectedArea));
     }

@@ -24,7 +24,7 @@ public class GameMenuController {
     private static Game currentGame;
     private static Governance currentGovernance;
 
-    private static void nextTurn() {
+    public static String nextTurn() {
         ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
         int currentTurn = currentGame.getTurn();
         int totalGovernances = governances.size();
@@ -39,6 +39,10 @@ public class GameMenuController {
             updatePopulation();
             updatePopularityRate();
         }
+
+        return "Current Turn = " + getCurrentTurn() +
+                "\nCurrent Governance = " + currentGovernance.getOwner().getUsername() +
+                "\nArea = " + currentGovernance.getTerritory();
     }
 
     public static GameMenuMessages checkShowMap(Matcher matcher) {
