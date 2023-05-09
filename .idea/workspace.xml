@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Keep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Keep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +87,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="controller.GameMenuController" />
       <recent name="controller.SelectUnitMenuController" />
       <recent name="controller.Utils" />
       <recent name="model.Stronghold" />
@@ -211,21 +222,8 @@
       <workItem from="1683546614283" duration="228000" />
       <workItem from="1683547295608" duration="14000" />
       <workItem from="1683582424393" duration="6781000" />
-      <workItem from="1683634070020" duration="3243000" />
-    </task>
-    <task id="LOCAL-00003" summary="Add test Folder">
-      <created>1681590276999</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1681590276999</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Solve plugins problems">
-      <created>1681832494809</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1681832494809</updated>
+      <workItem from="1683634070020" duration="3336000" />
+      <workItem from="1683665627327" duration="4196000" />
     </task>
     <task id="LOCAL-00005" summary="Add Gson Lib">
       <created>1681852319346</created>
@@ -556,7 +554,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683636926402</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Dead machine -&gt; remove engineer">
+      <created>1683637401496</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1683637401496</updated>
+    </task>
+    <task id="LOCAL-00053" summary="setLocation for units">
+      <created>1683666563631</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1683666563632</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -598,8 +610,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="isMapName problem fixed" />
-    <MESSAGE value="Captcha Updated" />
     <MESSAGE value="Show map added in MapEditMenu" />
     <MESSAGE value="Use validCommandTags in MapEditMenuController" />
     <MESSAGE value="Troop Dictionary added" />
@@ -623,7 +633,9 @@
     <MESSAGE value="TODOs Updated" />
     <MESSAGE value="Add (Areas + Lord + Keep)" />
     <MESSAGE value="Attack priority set&#10;(armor effect &amp; throwing path ignored)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Attack priority set&#10;(armor effect &amp; throwing path ignored)" />
+    <MESSAGE value="Dead machine -&gt; remove engineer" />
+    <MESSAGE value="setLocation for units" />
+    <option name="LAST_COMMIT_MESSAGE" value="setLocation for units" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -639,12 +651,17 @@
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/MainMenu.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/src/main/java/view/GameMenu.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="model.map.Map" memberName="tiles" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -42,7 +42,7 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkShowMap(Matcher matcher) {
-s        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
+        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
             return GameMenuMessages.INVALID_COMMAND;
 
         int x = Integer.parseInt(matcher.group("xCoordinate"));
