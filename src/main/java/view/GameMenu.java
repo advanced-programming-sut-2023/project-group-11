@@ -3,7 +3,6 @@ package view;
 import controller.BuildingUtils;
 import controller.GameMenuController;
 import controller.Utils;
-import model.Game;
 import view.enums.commands.GameMenuCommands;
 import view.enums.messages.GameMenuMessages;
 
@@ -164,6 +163,7 @@ public class GameMenu {
             case INVALID_UNIT_TYPE -> System.out.println("Invalid Unit type");
             case NO_UNIT_HERE -> System.out.println("There's No Unit Here To Select!");
             case NOT_YOUR_UNIT -> System.out.println("It's Not Your Unit!");
+            case NO_UNIT_HERE_WITH_THIS_TYPE -> System.out.println("There's No Unit With This Type Here To Select!");
             case SUCCESS -> {
                 System.out.println(Utils.removeDoubleQuotation(matcher.group("type")) +
                         " Unit(s) Selected (Entered SelectUnit Menu)!");
@@ -185,7 +185,9 @@ public class GameMenu {
             case NOT_ENOUGH_SPACE -> System.out.println("There's Not Enough Space For Unit!");
             case INVALID_UNIT_TYPE -> System.out.println("Invalid Unit Type!");
             case INVALID_TEXTURE -> System.out.println("Can't Drop Units In This Texture!");
-            case CANT_DROP_IN_BULDING -> System.out.println("Can't Drop Units In This Building!");
+            case CANT_DROP_IN_BUILDING -> System.out.println("Can't Drop Units In This Building!");
+            case INVALID_LOCATION_DIFFERENT_OWNER_UNIT ->
+                    System.out.println("Invalid Location: Invalid Unit type in Location!");
             case SUCCESS -> System.out.println("Units Have Been Dropped Successfully!");
         }
     }

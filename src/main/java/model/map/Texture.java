@@ -39,8 +39,8 @@ public enum Texture {
                 this.equals(SEA) || this.equals(SHALLOW_WATER) || this.equals(RIVER) || this.equals(BEACH);
     }
 
-    public boolean isSuitableForUnit(){
-        return (!isWater() || this.equals(MARSH)) && !isStone() && !isIron();
+    public boolean isSuitableForUnit() {
+        return (!isWater() || this.equals(MARSH));
     }
 
     public boolean isStone() {
@@ -56,7 +56,7 @@ public enum Texture {
     }
 
     public boolean isBuildable() {
-        return !(isStone() || isIron() || isWater());
+        return !isWater();
     }
 
     public String getName() {

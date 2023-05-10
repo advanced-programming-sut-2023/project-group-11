@@ -6,15 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Path.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Units.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Units.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShowMapMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShowMapMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/GameMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/GameMenuMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,14 +220,7 @@
       <workItem from="1683634070020" duration="3336000" />
       <workItem from="1683665627327" duration="6891000" />
       <workItem from="1683707729171" duration="2944000" />
-      <workItem from="1683710697630" duration="13030000" />
-    </task>
-    <task id="LOCAL-00010" summary="Tree edited &amp; users.json added in resources folder">
-      <created>1682096864991</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1682096864991</updated>
+      <workItem from="1683710697630" duration="20808000" />
     </task>
     <task id="LOCAL-00011" summary="Map read from database ended">
       <created>1682106171018</created>
@@ -568,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683719571877</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Debugging move almost Done">
+      <created>1683725943636</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1683725943636</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,7 +607,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Heavy Conflict Handled" />
     <MESSAGE value="Update building for a bit" />
     <MESSAGE value="Update move + Climbable buildings added&#10;(move upto handling Climbable building)" />
     <MESSAGE value="Update move (except climbing building)" />
@@ -635,7 +631,8 @@
     <MESSAGE value="debugging started (start game + show map + select unit + move)" />
     <MESSAGE value="Next turn added" />
     <MESSAGE value="Make the &quot;original&quot; map" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make the &quot;original&quot; map" />
+    <MESSAGE value="Debugging move almost Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debugging move almost Done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -649,6 +646,21 @@
           <url>file://$PROJECT_DIR$/src/main/java/view/EntryMenu.java</url>
           <line>24</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controller/GameMenuController.java</url>
+          <line>216</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

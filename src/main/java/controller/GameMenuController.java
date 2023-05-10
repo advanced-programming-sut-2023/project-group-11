@@ -183,6 +183,8 @@ public class GameMenuController {
             return GameMenuMessages.NO_UNIT_HERE;
         else if (!tile.getUnits().get(0).getOwner().equals(currentGame.getCurrentGovernance()))
             return GameMenuMessages.NOT_YOUR_UNIT;
+        else if (tile.getUnitsByType(type).size() == 0)
+            return GameMenuMessages.NO_UNIT_HERE_WITH_THIS_TYPE;
 
         return GameMenuMessages.SUCCESS;
     }
@@ -191,6 +193,7 @@ public class GameMenuController {
         if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate", "type", "count"))
             return GameMenuMessages.INVALID_COMMAND;
 
+        currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
         int count = Integer.parseInt(matcher.group("count"));
@@ -208,7 +211,9 @@ public class GameMenuController {
         if (!tile.getTexture().isSuitableForUnit())
             return GameMenuMessages.INVALID_TEXTURE;
         if (tile.hasBuilding() && !(tile.getBuilding() instanceof Climbable))
-            return GameMenuMessages.CANT_DROP_IN_BULDING;
+            return GameMenuMessages.CANT_DROP_IN_BUILDING;
+        if (tile.getUnits().size() > 0 && !currentGovernance.equals(tile.getUnits().get(0).getOwner()))
+            return GameMenuMessages.INVALID_LOCATION_DIFFERENT_OWNER_UNIT;
 
         dropUnit(x, y, count, type);
         return GameMenuMessages.SUCCESS;

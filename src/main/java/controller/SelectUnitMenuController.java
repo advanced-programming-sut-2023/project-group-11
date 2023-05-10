@@ -55,7 +55,7 @@ public class SelectUnitMenuController {
     }
 
     public static SelectUnitMenuMessages checkAttack(Matcher matcher, int[] currentLocation, String unitType, String attackType) {
-        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup"))
+        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
             return SelectUnitMenuMessages.INVALID_COMMAND;
 
         Map map = Stronghold.getCurrentGame().getMap();
@@ -76,10 +76,12 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.OUT_OF_RANGE;
         else if (noAttackLeft(selectedUnits))
             return SelectUnitMenuMessages.NO_ATTACK_LEFT;
-        else if (targetTile.getUnits().size() == 0 || targetTile.getBuilding() == null)
+        else if (targetTile.getUnits().size() == 0 && targetTile.getBuilding() == null)
             return SelectUnitMenuMessages.EMPTY_TILE;
-        else if (targetTile.getUnits().get(0).getOwner().equals(selectedUnits.get(0).getOwner()) ||
-                targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
+        else if ((targetTile.getUnits().size() != 0 &&
+                targetTile.getUnits().get(0).getOwner().equals(selectedUnits.get(0).getOwner())) ||
+                (targetTile.getBuilding() != null &&
+                targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner())))
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
         //TODO:1 set damaging concepts (Fire - building damaging - multi-unit damaging - tower increasing range - fear rate impact)
@@ -349,6 +351,9 @@ public class SelectUnitMenuController {
         if (!Arrays.equals(currentLocation, destinationLocation) && leftMoves <= 0) return;
         else if (path.getPath().contains(currentLocation)) return;
         else if (notValidTextureForMoving(map.getTile(currentX, currentY))) return;
+        else if (map.getTile(currentLocation).getUnits().size() != 0 &&
+                !isValidDestinationSameOwnerUnits(map.getTile(path.getPath().get(0)), map.getTile(currentLocation)))
+            return;
         else if (building != null) {
             if (!(building instanceof Climbable || building instanceof Trap)) return;
             else if (!canClimbTheBuilding(map, unitType, previousLocation, building))
@@ -507,7 +512,7 @@ public class SelectUnitMenuController {
         return type.equals("spearman") || type.equals("pikeman") || type.equals("maceman") ||
                 type.equals("swordsman") || type.equals("knight") || type.equals("black monk") ||
                 type.equals("slaves") || type.equals("assassin") || type.equals("arabian swordsman") ||
-                type.equals("battering ram");
+                type.equals("battering ram") || type.equals("lord");
     }
 
     private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
@@ -565,8 +570,17 @@ public class SelectUnitMenuController {
     private static void attackUnits(ArrayList<Units> selectedUnits, Tile targetTile) {
         int attackerDamage = selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage();
 
-        for (Units unit : targetTile.getUnits())
-            unit.setHp(unit.getHp() - attackerDamage);
+        for (int i = 0; ; i++) {
+            Units unit = targetTile.getUnits().get(i);
+            if (unit.getHp() > attackerDamage) {
+                unit.setHp(unit.getHp() - attackerDamage);
+                break;
+            } else {
+                attackerDamage -= unit.getHp();
+                unit.setHp(0);
+            }
+        }
+
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
         //TODO:1 set reacting to attacks
@@ -577,7 +591,7 @@ public class SelectUnitMenuController {
             if (unit.getHp() <= 0) {
                 if (unit instanceof Machine machine)
                     for (Engineer engineer : machine.getEngineers())
-                        engineer.getOwner().removeUnit(engineer);
+                    engineer.getOwner().removeUnit(engineer);
                 unit.removeFromGame(targetTile, unit.getOwner());
             }
     }

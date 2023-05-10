@@ -36,11 +36,12 @@ public class SelectUnitMenu {
                 checkBuildMachine(matcher, currentLocation, unitType);
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.POUR_OIL)) != null)
                 checkPourOil(matcher, currentLocation, unitType);
-            else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DESELECT) != null)
-                return;
             else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DISBAND) != null)
                 disbandUnit(currentLocation, unitType);
-            else System.out.println("Invalid Command!");
+            else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DESELECT) != null) {
+                System.out.println("Entered Game Menu");
+                return;
+            } else System.out.println("Invalid Command!");
         }
     }
 
@@ -117,10 +118,10 @@ public class SelectUnitMenu {
         }
     }
 
-    private static void checkPourOil(Matcher matcher,int[] currentLocation,String unitType) {
+    private static void checkPourOil(Matcher matcher, int[] currentLocation, String unitType) {
         message = SelectUnitMenuController.checkPourOil(matcher, currentLocation, unitType);
 
-        switch (message){
+        switch (message) {
             case INVALID_UNIT_TYPE -> System.out.println("Selected Unit Type Is Invalid!");
             case NOT_ENOUGH_ENGINEERS -> System.out.println("There Are Not Enough Engineers Here!");
             case JUST_ONE_ENGINEER -> System.out.println("There Should Be Just One Engineer!");
