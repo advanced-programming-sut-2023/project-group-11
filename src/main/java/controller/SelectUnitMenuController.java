@@ -151,8 +151,82 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static SelectUnitMenuMessages checkPourOil(Matcher matcher) {
-        return null;
+    public static SelectUnitMenuMessages checkPourOil(Matcher matcher, int[] currentLocation, String unitType) {
+        String direction = matcher.group("direction");
+        if (!unitType.equals("engineer"))
+            return SelectUnitMenuMessages.INVALID_UNIT_TYPE;
+        Tile tile = Stronghold.getCurrentGame().getMap().getTile(currentLocation);
+        ArrayList<Units> engineers = tile.getUnitsByType("engineer");
+        if (engineers.size() == 0)
+            return SelectUnitMenuMessages.NOT_ENOUGH_ENGINEERS;
+        if (engineers.size() > 1)
+            return SelectUnitMenuMessages.JUST_ONE_ENGINEER;
+        Engineer engineer = (Engineer) tile.getUnitsByType("engineer").get(0);
+        if (!engineer.hasOilPail())
+            return SelectUnitMenuMessages.ENGINEER_WITHOUT_PAIL;
+        if (engineer.isEmptyPail())
+            return SelectUnitMenuMessages.ENGINEER_EMPTY_PAIL;
+        if(!pourOil(engineers, direction, currentLocation))
+            return SelectUnitMenuMessages.CANT_REFILL_THE_PAIL;
+        return SelectUnitMenuMessages.SUCCESS;
+    }
+
+    private static boolean pourOil(ArrayList<Units> engineer,String direction,int[] location){
+        int currentX = location[0];
+        int currentY = location[1];
+        Map map = Stronghold.getCurrentGame().getMap();
+        switch (direction){
+            case "up" -> {
+                pourOil(currentX-1,currentY);
+                pourOil(currentX-2,currentY);
+            }
+            case "down" -> {
+                pourOil(currentX+1,currentY);
+                pourOil(currentX+2,currentY);
+            }
+            case "left" -> {
+                pourOil(currentX,currentY-1);
+                pourOil(currentX,currentY-2);
+            }
+            case "right" -> {
+                pourOil(currentX,currentY+1);
+                pourOil(currentX,currentY+2);
+            }
+        }
+        Path shortestPath;
+        for (int i = -5;i<=5;i++){
+            for (int j = Math.abs(i)-5;j<=5-Math.abs(i);j++){
+                if(!Utils.isValidCoordinates(map,currentX+i,currentY+j))
+                    continue;
+                Tile tile = map.getTile(currentX+i,currentY+j);
+                if(tile.getBuilding() != null && tile.getBuilding().getName().equals("oil smelter")){
+                    if((shortestPath = findRootToDestination(map,"engineer",currentX,currentY,currentX+i,currentY+j)) != null
+                            && shortestPath.getLength() <= 5) {
+                        moveUnits(map,"engineer",shortestPath,location,currentX+i,currentY+j);
+                        if(map.getTile(currentX+i,currentY+j).getUnitsByType("engineer").size() == 1) {
+                            shortestPath = findRootToDestination(map,"engineer",currentX+i,currentY+j,currentX,currentY);
+                            moveUnits(map, "engineer", shortestPath, new int[]{currentX+i,currentY+j}, currentX, currentY);
+                            if(tile.getUnitsByType("engineer").size() == 1) return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private static void pourOil(int x,int y){
+        Map map = Stronghold.getCurrentGame().getMap();
+        if(!Utils.isValidCoordinates(map,x,y))
+            return;
+        Tile tile = map.getTile(x,y);
+        if(tile.hasBuilding())
+            return;
+        ArrayList<Units> units = tile.getUnits();
+        if(!units.get(0).getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()))
+            return;
+        for (Units unit:units)
+            unit.setHp(unit.getHp() - 50);
     }
 
     public static SelectUnitMenuMessages checkDigTunnel(Matcher matcher, int[] currentLocation, String unitType) {

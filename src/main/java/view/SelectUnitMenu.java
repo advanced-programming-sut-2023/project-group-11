@@ -34,6 +34,8 @@ public class SelectUnitMenu {
                 checkDigTunnel(matcher, currentLocation, unitType);
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.BUILD_MACHINE)) != null)
                 checkBuildMachine(matcher, currentLocation, unitType);
+            else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.POUR_OIL)) != null)
+                checkPourOil(matcher, currentLocation, unitType);
             else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DESELECT) != null)
                 return;
             else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DISBAND) != null)
@@ -115,8 +117,18 @@ public class SelectUnitMenu {
         }
     }
 
-    private static void checkPourOil(Matcher matcher) {
+    private static void checkPourOil(Matcher matcher,int[] currentLocation,String unitType) {
+        message = SelectUnitMenuController.checkPourOil(matcher, currentLocation, unitType);
 
+        switch (message){
+            case INVALID_UNIT_TYPE -> System.out.println("Selected Unit Type Is Invalid!");
+            case NOT_ENOUGH_ENGINEERS -> System.out.println("There Are Not Enough Engineers Here!");
+            case JUST_ONE_ENGINEER -> System.out.println("There Should Be Just One Engineer!");
+            case ENGINEER_WITHOUT_PAIL -> System.out.println("This Engineer Hasn't Pail!");
+            case ENGINEER_EMPTY_PAIL -> System.out.println("This Engineer's Pail Is Empty!");
+            case CANT_REFILL_THE_PAIL -> System.out.println("Oil Has Been Poured But Couldn't Refill The Pail!");
+            case SUCCESS -> System.out.println("Oil Has Been Poured And Pail Has Been Repaired!");
+        }
     }
 
     private static void checkDigTunnel(Matcher matcher, int[] currentLocation, String unitType) {
