@@ -365,18 +365,20 @@ public class GameMenuController {
 
     private static void updateState() {
         for (Units unit : currentGovernance.getUnits()) {
+            if(unit instanceof Engineer)
+                continue;
             switch (unit.getUnitState()) {
                 case STANDING -> {
-                    if (isValidUnitForAirAttack(unit.getName()) && !((Attacker) unit).isStateUpdated()) {
+                    if (isValidUnitForAirAttack(unit.getName()) && !((Attacker) unit).hasAttacked()) {
                         unitUpdate(unit,0);
                     }
                 }
                 case DEFENSIVE -> {
-                    if (isValidUnitForAirAttack(unit.getName()) && !((Attacker) unit).isStateUpdated())
+                    if (!((Attacker) unit).hasAttacked())
                         unitUpdate(unit,7);
                 }
                 case OFFENSIVE -> {
-                    if (isValidUnitForAirAttack(unit.getName()) && !((Attacker) unit).isStateUpdated())
+                    if (!((Attacker) unit).hasAttacked())
                         unitUpdate(unit,15);
                 }
             }
@@ -417,7 +419,7 @@ public class GameMenuController {
 
     private static void setUnitUpdateState(ArrayList<Units> units) {
         for (Units unit : units)
-            ((Attacker) unit).setStateUpdated(true);
+            ((Attacker) unit).setAttacked(true);
     }
 
     private static boolean attackNearestEnemy(int destinationX, int destinationY, int currentX, int currentY,

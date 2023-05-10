@@ -314,6 +314,7 @@ public class Governance {
             Attacker attacker = (Attacker) unit;
             attacker.setLeftMoves(unit.getSpeed());
             attacker.setAttacked(false);
+            attacker.setUnitState(UnitState.STANDING);
         }
     }
 
