@@ -242,7 +242,7 @@ public class SelectUnitMenuController {
         currentLocation[1] = destinationY;
     }
 
-    private static Path findRootToDestination(Map map, String unitType, int currentX, int currentY, int destinationX, int destinationY) {
+    public static Path findRootToDestination(Map map, String unitType, int currentX, int currentY, int destinationX, int destinationY) {
         int speed = minimumSpeed(map.getTile(currentX, currentY).getUnitsByType(unitType));
         ArrayList<Path> paths = new ArrayList<>();
         Path path = new Path();
@@ -386,12 +386,12 @@ public class SelectUnitMenuController {
         }
     }
 
-    private static void setLocation(ArrayList<Units> selectedUnits, int destinationX, int destinationY) {
+    public static void setLocation(ArrayList<Units> selectedUnits, int destinationX, int destinationY) {
         for (Units unit : selectedUnits)
             unit.setLocation(new int[]{destinationX, destinationY});
     }
 
-    private static void applyPathEffects(Map map, Path shortestPath, ArrayList<Units> selectedUnits) {
+    public static void applyPathEffects(Map map, Path shortestPath, ArrayList<Units> selectedUnits) {
         Building currentBuilding;
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         for (int[] location : shortestPath.getPath()) {
