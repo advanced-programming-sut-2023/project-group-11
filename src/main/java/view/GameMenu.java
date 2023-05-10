@@ -52,6 +52,8 @@ public class GameMenu {
                 checkSelectUnit(matcher);
             else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.DROP_UNIT)) != null)
                 checkDropUnit(matcher);
+            else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_RESOURCE_LEFT)) != null)
+                checkShowResource(matcher);
             else System.out.println("Invalid command!");
         }
     }
@@ -189,6 +191,15 @@ public class GameMenu {
             case INVALID_LOCATION_DIFFERENT_OWNER_UNIT ->
                     System.out.println("Invalid Location: Invalid Unit type in Location!");
             case SUCCESS -> System.out.println("Units Have Been Dropped Successfully!");
+        }
+    }
+
+    private static void checkShowResource(Matcher matcher) {
+        message = GameMenuController.checkShowResource(matcher);
+
+        switch (message) {
+            case INVALID_RESOURCE_TYPE -> System.out.println("This is not a resource name!");
+            case SUCCESS -> System.out.print(GameMenuController.showResource(matcher.group("resource")));
         }
     }
 }

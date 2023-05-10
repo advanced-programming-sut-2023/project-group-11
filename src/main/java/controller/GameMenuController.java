@@ -19,7 +19,7 @@ import static controller.SelectUnitMenuController.*;
 
 public class GameMenuController {
     private static Game currentGame;
-    private static Governance currentGovernance;
+    private static Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
 
     public static String nextTurn() {
         ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
@@ -217,6 +217,25 @@ public class GameMenuController {
 
         dropUnit(x, y, count, type);
         return GameMenuMessages.SUCCESS;
+    }
+
+    public static GameMenuMessages checkShowResource(Matcher matcher) {
+        String resourceName = Utils.removeDoubleQuotation(matcher.group("resource"));
+
+        if (!resourceName.equals("all") && !isValidResourceName(resourceName))
+            return GameMenuMessages.INVALID_RESOURCE_TYPE;
+        return GameMenuMessages.SUCCESS;
+    }
+
+    public static String showResource(String resourceName) {
+        final String[] output = {""};
+        if (resourceName.equals("all"))
+            currentGovernance.getAllResources().forEach((allResource, integer) ->
+                    output[0] += allResource.getName() + '=' + integer + '\n');
+        else output[0] += resourceName + '=' +
+                currentGovernance.getAllResources().get(AllResource.valueOf(resourceName.toUpperCase())) + '\n';
+
+        return output[0];
     }
 
     private static void dropUnit(int x, int y, int count, String type) {
@@ -486,4 +505,11 @@ public class GameMenuController {
 
         map.getTile(destinationX, destinationY).getUnits().addAll(units);
     }
+
+    private static boolean isValidResourceName(String resourceName) {
+        for (AllResource resource : AllResource.values())
+            if (resourceName.equals(resource.getName())) return true;
+        return false;
+    }
+
 }

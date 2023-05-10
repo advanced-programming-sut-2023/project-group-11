@@ -57,7 +57,7 @@ public class ShowMapMenu {
         switch (message) {
             case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INVALID_COORDINATE -> System.out.println("Invalid move! You wil be out of the map");
-            case SUCCESS -> System.out.println("You moved!");
+            case SUCCESS -> System.out.println("You moved to x=" + xCoordinate + " y=" + yCoordinate + '!');
         }
     }
 }
