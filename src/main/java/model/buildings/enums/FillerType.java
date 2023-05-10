@@ -14,7 +14,9 @@ public enum FillerType {
     OX_TETHER("ox tether", 1, 39, 0, AllResource.WOOD, 5, 1,
             true, false),
     HOVEL("hovel", 2, 39, 0, AllResource.WOOD, 6, 0,
-            true, false);
+            true, false),
+    OIL_SMELTER("oil smelter",1,39,0,AllResource.IRON,5,0,
+            true,false);
 
     private final String name;
     private final int size;

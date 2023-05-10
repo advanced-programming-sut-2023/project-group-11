@@ -13,7 +13,8 @@ public enum SelectUnitMenuCommands {
     DIG_TUNNEL("dig tunnel -d (?<direction>(\\S+))"),
     BUILD_MACHINE("build -q (?<machineType>\"[^\"]+\"|\\S+)"),
     DISBAND("disband unit"),
-    DESELECT("deselect|back");
+    DESELECT("deselect|back"),
+    POUR_OIL("pour oil -d (?<direction>(up)|(down)|(left)|(right))");
 
     private final String regex;
 

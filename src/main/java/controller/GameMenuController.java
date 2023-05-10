@@ -365,21 +365,21 @@ public class GameMenuController {
 
     private static void updateState() {
         for (Units unit : currentGovernance.getUnits()) {
-            if(unit instanceof Engineer)
+            if (unit instanceof Engineer)
                 continue;
             switch (unit.getUnitState()) {
                 case STANDING -> {
                     if (isValidUnitForAirAttack(unit.getName()) && !((Attacker) unit).hasAttacked()) {
-                        unitUpdate(unit,0);
+                        unitUpdate(unit, 0);
                     }
                 }
                 case DEFENSIVE -> {
                     if (!((Attacker) unit).hasAttacked())
-                        unitUpdate(unit,7);
+                        unitUpdate(unit, 7);
                 }
                 case OFFENSIVE -> {
                     if (!((Attacker) unit).hasAttacked())
-                        unitUpdate(unit,15);
+                        unitUpdate(unit, 15);
                 }
             }
         }
@@ -391,9 +391,9 @@ public class GameMenuController {
         int currentX = unit.getLocation()[0];
         int currentY = unit.getLocation()[1];
         int finalRange = isValidUnitForGroundAttack(unit.getName()) ? ((Attacker) unit).getRange() : range;
-        attackNearestEnemy(currentX,currentY,currentX,currentY,0,finalRange,currentGame.getMap(),units);
-        if(unit.getUnitState().equals(UnitState.OFFENSIVE))
-            for(Units unit1:units)
+        attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
+        if (unit.getUnitState().equals(UnitState.OFFENSIVE))
+            for (Units unit1 : units)
                 unit1.setUnitState(UnitState.DEFENSIVE);
     }
 
@@ -431,34 +431,38 @@ public class GameMenuController {
         if (canUnitMove(destinationX, destinationY, currentX, currentY, units.get(0).getName())
                 || isValidUnitForAirAttack(units.get(0).getName())) {
             if (map.getTile(destinationX + 1, destinationY).hasEnemy(currentGovernance)) {
-                if(!isValidUnitForAirAttack(units.get(0).getName())) moveUnits(map,units,currentX,currentY,destinationX,destinationY);
-                if(units.size() > 0) {
+                if (!isValidUnitForAirAttack(units.get(0).getName()))
+                    moveUnits(map, units, currentX, currentY, destinationX, destinationY);
+                if (units.size() > 0) {
                     attack(units, units.get(0).getName(), map.getTile(destinationX + 1, destinationY));
                     return true;
                 }
             }
             if (map.getTile(destinationX - 1, destinationY).hasEnemy(currentGovernance)) {
-                if(!isValidUnitForAirAttack(units.get(0).getName())) moveUnits(map,units,currentX,currentY,destinationX,destinationY);
-                if(units.size() > 0) {
+                if (!isValidUnitForAirAttack(units.get(0).getName()))
+                    moveUnits(map, units, currentX, currentY, destinationX, destinationY);
+                if (units.size() > 0) {
                     attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY));
                     return true;
                 }
             }
             if (map.getTile(destinationX, destinationY + 1).hasEnemy(currentGovernance)) {
-                if(!isValidUnitForAirAttack(units.get(0).getName())) moveUnits(map,units,currentX,currentY,destinationX,destinationY);
-                if(units.size() > 0) {
+                if (!isValidUnitForAirAttack(units.get(0).getName()))
+                    moveUnits(map, units, currentX, currentY, destinationX, destinationY);
+                if (units.size() > 0) {
                     attack(units, units.get(0).getName(), map.getTile(destinationX, destinationY + 1));
                     return true;
                 }
             }
             if (map.getTile(destinationX, destinationY - 1).hasEnemy(currentGovernance)) {
-                if(!isValidUnitForAirAttack(units.get(0).getName())) moveUnits(map,units,currentX,currentY,destinationX,destinationY);
-                if(units.size() > 0) {
+                if (!isValidUnitForAirAttack(units.get(0).getName()))
+                    moveUnits(map, units, currentX, currentY, destinationX, destinationY);
+                if (units.size() > 0) {
                     attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY));
                     return true;
                 }
             }
-        }else return false;
+        } else return false;
         if (attackNearestEnemy(destinationX + 1, destinationY, currentX, currentY, currentRange + 1, maxRange, map, units))
             return true;
         if (attackNearestEnemy(destinationX - 1, destinationY, currentX, currentY, currentRange + 1, maxRange, map, units))
@@ -468,7 +472,7 @@ public class GameMenuController {
         return attackNearestEnemy(destinationX, destinationY - 1, currentX, currentY, currentRange + 1, maxRange, map, units);
     }
 
-    private static void moveUnits(Map map, ArrayList<Units> units, int currentX,int currentY, int destinationX, int destinationY){
+    private static void moveUnits(Map map, ArrayList<Units> units, int currentX, int currentY, int destinationX, int destinationY) {
         Path shortestPath = findRootToDestination(map, units.get(0).getName(), currentX, currentY, destinationX, destinationY);
         map.getTile(currentX, currentY).clearUnitsByType(units);
 
