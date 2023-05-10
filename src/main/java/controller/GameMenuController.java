@@ -1,6 +1,9 @@
 package controller;
 
-import model.*;
+import model.AllResource;
+import model.Game;
+import model.Governance;
+import model.Stronghold;
 import model.buildings.Building;
 import model.buildings.Climbable;
 import model.buildings.ProductiveBuilding;
@@ -8,9 +11,7 @@ import model.buildings.enums.FillerType;
 import model.map.Map;
 import model.map.Tile;
 import model.people.*;
-import model.people.enums.UnitState;
 import view.enums.messages.GameMenuMessages;
-import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Collections;

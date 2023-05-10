@@ -98,7 +98,7 @@ public class Tile {
         int i = 1;
 
         for (Units unit : units)
-            if (!(unit instanceof Troops troop && !(troop.isRevealed() || troop.isForCurrentGovernance())))
+            if (!(unit instanceof Troops troop) || troop.isRevealed() || troop.isForCurrentGovernance())
                 unitsName += (i++) + ". " + unit.toString() + '\n';
 
         result += "Texture: " + texture.getName() + '\n';

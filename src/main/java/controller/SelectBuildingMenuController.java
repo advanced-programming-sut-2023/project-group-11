@@ -37,9 +37,10 @@ public class SelectBuildingMenuController {
 
         if (type.equals("engineer")) {
             Engineer engineer = new Engineer();
-            engineer.setLocation(new int[]{x,y});
+            engineer.setLocation(new int[]{x, y});
             if (!unitMaker.isEngineerMaker()) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-            if (currentGovernance.getGold() < engineer.getCost() * count) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+            if (currentGovernance.getGold() < engineer.getCost() * count)
+                return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
             if (!createEngineer(unitMaker, engineer, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
             return SelectBuildingMenuMessages.SUCCESS;
         }
@@ -123,9 +124,12 @@ public class SelectBuildingMenuController {
         governance.removeFromStorage(troop.getArmorType(), count);
         //TODO:3 handle "NONE" resource
 
-        Troops troops =  new Troops(unitType);
-        troops.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(unitCreationTile));
-        for (int i = 0; i < count; i++) unitCreationTile.getUnits().add(troops);
+
+        for (int i = 0; i < count; i++) {
+            Troops troops = new Troops(unitType);
+            troops.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(unitCreationTile));
+            unitCreationTile.getUnits().add(troops);
+        }
 
         return true;
     }
@@ -138,10 +142,10 @@ public class SelectBuildingMenuController {
 
         governance.setGold(governance.getGold() - engineer.getCost() * count);
 
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             engineer = new Engineer();
-            unitCreationTile.getUnits().add(engineer);
             engineer.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(unitCreationTile));
+            unitCreationTile.getUnits().add(engineer);
         }
 
         return true;

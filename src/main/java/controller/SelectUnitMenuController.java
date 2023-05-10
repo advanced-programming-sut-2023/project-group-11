@@ -38,8 +38,8 @@ public class SelectUnitMenuController {
                 !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_DIFFERENT_OWNER_UNIT;
         else if (BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) &&
-                (!(map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable) ||
-                !((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable()))
+                (!(map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable climbable) ||
+                        !(climbable.isClimbable())))
             return SelectUnitMenuMessages.INVALID_DESTINATION_UNCLIMBABLE_BUILDING;
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
@@ -158,11 +158,7 @@ public class SelectUnitMenuController {
 
         String direction = matcher.group("direction");
         if (!unit.getName().equals("tunneler")) return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_DIG_TUNNEL;
-        if (!(direction.equals("right") ||
-                direction.equals("up") ||
-                direction.equals("left") ||
-                direction.equals("down"))) return SelectUnitMenuMessages.INVALID_DIRECTION;
-
+        if (!isValidDirection(direction)) return SelectUnitMenuMessages.INVALID_DIRECTION;
 
         digTunnel(map, unit, currentX, currentY, direction);
         return SelectUnitMenuMessages.SUCCESS;
@@ -172,35 +168,25 @@ public class SelectUnitMenuController {
         Tile currentTile = map.getTile(currentX, currentY);
         tunneler.removeFromGame(currentTile, tunneler.getOwner());
 
-        //TODO:1 make the function cleaner
-        //up
-        for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX + i, currentY); i++) {
-            currentTile = map.getTile(currentX + i, currentY);
-            Building building = currentTile.getBuilding();
-            if (!building.getOwner().equals(tunneler.getOwner()))
-                destroyBuilding(map, building);
-        }
-        //down
-        for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX - i, currentY); i++) {
-            currentTile = map.getTile(currentX - i, currentY);
-            Building building = currentTile.getBuilding();
-            if (!building.getOwner().equals(tunneler.getOwner()))
-                destroyBuilding(map, building);
-        }
-        //right
-        for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX, currentY + i); i++) {
-            currentTile = map.getTile(currentX, currentY + i);
-            Building building = currentTile.getBuilding();
-            if (!building.getOwner().equals(tunneler.getOwner()))
-                destroyBuilding(map, building);
-        }
-        //left
-        for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX, currentY - i); i++) {
-            currentTile = map.getTile(currentX, currentY - i);
-            Building building = currentTile.getBuilding();
-            if (!building.getOwner().equals(tunneler.getOwner()))
-                destroyBuilding(map, building);
-        }
+        if ("up".equals(direction))
+            for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX + i, currentY); i++)
+                digTunnel(map, tunneler, currentX + i, currentY);
+        else if ("down".equals(direction))
+            for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX - i, currentY); i++)
+                digTunnel(map, tunneler, currentX - i, currentY);
+        else if ("right".equals(direction))
+            for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX, currentY + i); i++)
+                digTunnel(map, tunneler, currentX, currentY + i);
+        else if ("left".equals(direction))
+            for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX, currentY - i); i++)
+                digTunnel(map, tunneler, currentX, currentY - i);
+    }
+
+    private static void digTunnel(Map map, Units tunneler, int currentX, int currentY) {
+        Tile currentTile = map.getTile(currentX, currentY);
+        Building building = currentTile.getBuilding();
+
+        if (building != null && !building.getOwner().equals(tunneler.getOwner())) destroyBuilding(map, building);
     }
 
     public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
@@ -391,7 +377,7 @@ public class SelectUnitMenuController {
     }
 
     public static boolean isValidDestinationSameOwnerUnits(Tile currentTile, Tile destination) {
-        return  currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
+        return currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
     }
 
     private static void setLeftMoves(Path shortestPath, ArrayList<Units> selectedUnits) {
@@ -536,5 +522,12 @@ public class SelectUnitMenuController {
     private static boolean isValidForMoving(Map map, int currentX, int currentY, int destinationX, int destinationY) {
         return (!notValidTextureForMoving(map.getTile(destinationX, destinationY)) &&
                 isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)));
+    }
+
+    private static boolean isValidDirection(String direction) {
+        return direction.equals("right") ||
+                direction.equals("up") ||
+                direction.equals("left") ||
+                direction.equals("down");
     }
 }
