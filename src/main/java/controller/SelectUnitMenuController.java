@@ -384,13 +384,13 @@ public class SelectUnitMenuController {
                 type.equals("fire ballista") || type.equals("catapults");
     }
 
-    private static boolean notValidTextureForMoving(Tile destination) {
+    public static boolean notValidTextureForMoving(Tile destination) {
         return destination.getTexture().equals(Texture.MARSH) || destination.getTexture().equals(Texture.RIVER) ||
                 destination.getTexture().equals(Texture.SEA) || destination.getTexture().equals(Texture.SMALL_LAKE) ||
                 destination.getTexture().equals(Texture.BIG_LAKE) || destination.getTexture().equals(Texture.CLIFF);
     }
 
-    private static boolean isValidDestinationSameOwnerUnits(Tile currentTile, Tile destination) {
+    public static boolean isValidDestinationSameOwnerUnits(Tile currentTile, Tile destination) {
         return  currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
     }
 
@@ -432,7 +432,7 @@ public class SelectUnitMenuController {
         currentBuilding.removeFromGame(map, currentBuilding.getOwner());
     }
 
-    private static boolean isValidUnitForAirAttack(String type) {
+    public static boolean isValidUnitForAirAttack(String type) {
         return type.equals("archer") || type.equals("archer bow") ||
                 type.equals("slinger") || type.equals("horse archer") || type.equals("fire thrower") ||
                 type.equals("trebuchets") || type.equals("fire ballista") || type.equals("catapults");
@@ -456,7 +456,7 @@ public class SelectUnitMenuController {
         return selectedUnits.size() == 0;
     }
 
-    private static void attack(ArrayList<Units> selectedUnits, String unitType, Tile targetTile) {
+    public static void attack(ArrayList<Units> selectedUnits, String unitType, Tile targetTile) {
         boolean onlyBuilding = false;
         boolean onlyUnits = false;
 

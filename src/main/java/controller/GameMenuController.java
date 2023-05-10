@@ -1,24 +1,22 @@
 package controller;
 
-import model.AllResource;
-import model.Game;
-import model.Governance;
-import model.Stronghold;
+import model.*;
 import model.buildings.Building;
 import model.buildings.Climbable;
 import model.buildings.ProductiveBuilding;
 import model.buildings.enums.FillerType;
 import model.map.Map;
 import model.map.Tile;
-import model.people.Engineer;
-import model.people.Machine;
-import model.people.Troops;
-import model.people.Units;
+import model.people.*;
+import model.people.enums.UnitState;
 import view.enums.messages.GameMenuMessages;
+import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Matcher;
+
+import static controller.SelectUnitMenuController.*;
 
 public class GameMenuController {
     private static Game currentGame;
@@ -363,5 +361,71 @@ public class GameMenuController {
 
     public static int getCurrentTurn() {
         return Math.ceilDiv(currentGame.getTurn(), currentGame.getGovernances().size());
+    }
+
+    private static void updateState() {
+        for (Units unit : currentGovernance.getUnits()) {
+            switch (unit.getUnitState()) {
+                case STANDING -> {
+                    if (isValidUnitForAirAttack(unit.getName()) && !((Attacker) unit).isStateUpdated()) {
+                        ArrayList<Units> units = getAllSameUnitsOfTile(unit);
+                        setUnitUpdateState(units);
+                        airSearchAttack(units);
+                    }
+                }
+                case DEFENSIVE -> {
+                }
+                case OFFENSIVE -> {
+
+                }
+            }
+        }
+    }
+
+    private static Boolean canUnitMove(int[] destination, int[] currentLocation, String unitType) {
+
+        Map map = currentGame.getMap();
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        int destinationX = destination[0];
+        int destinationY = destination[1];
+
+        if (!Utils.isValidCoordinates(map, destinationX, destinationY))
+            return false;
+        else if (notValidTextureForMoving(map.getTile(destinationX, destinationY)))
+            return false;
+        else if (map.getTile(destinationX, destinationY).getUnits().size() != 0 &&
+                !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
+            return false;
+        else return !BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) ||
+                    (map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable &&
+                            ((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable());
+    }
+
+    private static ArrayList<Units> getAllSameUnitsOfTile(Units unit) {
+        return currentGame.getMap().getTile(unit.getLocation()).getUnitsByType(unit.getName());
+    }
+
+    private static void setUnitUpdateState(ArrayList<Units> units) {
+        for (Units unit : units)
+            ((Attacker) unit).setStateUpdated(true);
+    }
+
+    private static void airSearchAttack(ArrayList<Units> units) {
+        int range = ((Attacker) units.get(0)).getRange();
+        int currentX = units.get(0).getLocation()[0];
+        int currentY = units.get(0).getLocation()[1];
+        Map map = currentGame.getMap();
+        for (int i = -range; i <= range; i++) {
+            for (int j = -range; j <= range; j++) {
+                if ((i == j && i == 0) || !Utils.isValidCoordinates(map, currentX + i, currentY + j))
+                    continue;
+                Tile tile = map.getTile(currentX+i,currentY+j);
+                if(tile.hasEnemy(currentGovernance)){
+                    attack(units, units.get(0).getName(),tile);
+                    return;
+                }
+            }
+        }
     }
 }

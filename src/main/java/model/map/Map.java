@@ -53,4 +53,7 @@ public class Map {
     public Tile getTile(int x, int y) {
         return tiles[x][y];
     }
+    public Tile getTile(int[] location) {
+        return tiles[location[0]][location[1]];
+    }
 }
