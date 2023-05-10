@@ -438,7 +438,7 @@ public class SelectUnitMenuController {
                 type.equals("trebuchets") || type.equals("fire ballista") || type.equals("catapults");
     }
 
-    private static boolean isValidUnitForGroundAttack(String type) {
+    public static boolean isValidUnitForGroundAttack(String type) {
         return type.equals("spearman") || type.equals("pikeman") || type.equals("maceman") ||
                 type.equals("swordsman") || type.equals("knight") || type.equals("black monk") ||
                 type.equals("slaves") || type.equals("assassin") || type.equals("arabian swordsman") ||
