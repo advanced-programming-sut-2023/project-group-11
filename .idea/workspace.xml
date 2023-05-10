@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="debugging started (start game + show map + select unit + move)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ProductiveBuildingType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ProductiveBuildingType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShowMapMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShowMapMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/MapEditMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/MapEditMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,11 +86,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="controller.MapEditMenuController" />
       <recent name="controller.GameMenuController" />
       <recent name="controller.SelectUnitMenuController" />
       <recent name="controller.Utils" />
       <recent name="model.Stronghold" />
-      <recent name="controller.MainMenuController" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Sadegh\Documents\Codes\Java\Intellij\ProjectAP\src\main\resources\JSON" />
@@ -214,21 +222,9 @@
       <workItem from="1683547295608" duration="14000" />
       <workItem from="1683582424393" duration="6781000" />
       <workItem from="1683634070020" duration="3336000" />
-      <workItem from="1683665627327" duration="4827000" />
-    </task>
-    <task id="LOCAL-00007" summary="People completed &amp; Packages' names corrected">
-      <created>1681941438123</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1681941438123</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Map edited &amp; Map edit menu completed upto drop cliff(rock)">
-      <created>1682026744751</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1682026744752</updated>
+      <workItem from="1683665627327" duration="6891000" />
+      <workItem from="1683707729171" duration="2944000" />
+      <workItem from="1683710697630" duration="6676000" />
     </task>
     <task id="LOCAL-00009" summary="Map edit menu ended without saving in database">
       <created>1682029951979</created>
@@ -559,7 +555,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683669953803</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="debugging started (start game + show map + select unit + move)">
+      <created>1683670809465</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1683670809465</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Next turn added">
+      <created>1683672415568</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1683672415568</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,8 +611,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Troop Dictionary added" />
-    <MESSAGE value="Terrotories added + game capacity initialized (2-4)" />
     <MESSAGE value="Start SelectUnit Menu + MoveUnit added incompletly" />
     <MESSAGE value="Heavy Conflict Handled" />
     <MESSAGE value="Update building for a bit" />
@@ -626,7 +634,9 @@
     <MESSAGE value="setLocation for units" />
     <MESSAGE value="Start game debugged (map initialization + minor changes)" />
     <MESSAGE value="error resolved" />
-    <option name="LAST_COMMIT_MESSAGE" value="error resolved" />
+    <MESSAGE value="debugging started (start game + show map + select unit + move)" />
+    <MESSAGE value="Next turn added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Next turn added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -643,7 +653,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/view/GameMenu.java</url>
-          <line>24</line>
+          <line>25</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>

@@ -1,9 +1,9 @@
 package controller;
 
+import com.diogonunes.jcolor.Ansi;
+import com.diogonunes.jcolor.Attribute;
 import model.Stronghold;
-import model.map.Map;
-import model.map.Texture;
-import model.map.Tree;
+import model.map.*;
 import view.enums.messages.MapEditMenuMessages;
 
 import java.util.Random;
@@ -183,7 +183,7 @@ public class MapEditMenuController {
     public static String getMapsList() {
         StringBuilder result = new StringBuilder();
         for (Map map : Stronghold.getMaps())
-            result.append("* ").append(map.getName());
+            result.append("* ").append(map.getName()).append('\n');
         return result.toString();
     }
 
@@ -204,21 +204,34 @@ public class MapEditMenuController {
         Utils.updateDatabase("maps");
     }
 
-    public static MapEditMenuMessages checkShowMap(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "x", "y"))
-            return MapEditMenuMessages.INVALID_COMMAND;
-
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
-        if (!Utils.isValidCoordinates(currentMap, x, y))
-            return MapEditMenuMessages.INVALID_COORDINATE;
-
-        return MapEditMenuMessages.SUCCESS;
+    public static String showMap() {
+        return showMapForEditing(currentMap, currentMap.getSize() / 2, currentMap.getSize() / 2);
     }
 
-    public static String showMap(Matcher matcher) {
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
-        return ShowMapMenuController.showMap(currentMap.getName(), x, y);
+    public static String showMapForEditing(Map map, int x, int y) {
+        String output = "";
+        Attribute backgroundColor;
+        Attribute textColor;
+        for (int i = 0, k = 0; i < map.getSize(); i++, k++) {
+            for (int j = 0, l = 0; j < map.getSize(); j++, l++) {
+                if (l % 8 == 0) {
+                    output += "|";
+                    j--;
+                } else if (k % 4 == 0) output += "-";
+                else {
+                    Tile tile = map.getTile(i, j);
+                    backgroundColor = tile.getTexture().getColor().getColor();
+
+                    if (i == x && j == y) textColor = Color.RED_TEXT.getColor();
+                    else textColor = Color.WHITE_TEXT.getColor();
+
+                    if (tile.getTree() != null) output += (Ansi.colorize("T", textColor, backgroundColor));
+                    else output += (Ansi.colorize("#", textColor, backgroundColor));
+                }
+            }
+            if (k % 4 == 0) i--;
+            output += '\n';
+        }
+        return output;
     }
 }

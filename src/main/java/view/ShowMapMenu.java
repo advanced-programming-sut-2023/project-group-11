@@ -17,7 +17,7 @@ public class ShowMapMenu {
         String command;
         xCoordinate = x;
         yCoordinate = y;
-        System.out.println(ShowMapMenuController.showMap(ShowMapMenuController.getCurrentMapName(), xCoordinate, yCoordinate));
+        System.out.println(ShowMapMenuController.showMap(xCoordinate, yCoordinate));
 
         command = scanner.nextLine();
 
@@ -34,7 +34,7 @@ public class ShowMapMenu {
                 checkShowDetails(matcher);
             else System.out.println("Invalid command!");
 
-            System.out.println(ShowMapMenuController.showMap(ShowMapMenuController.getCurrentMapName(), xCoordinate, yCoordinate));
+            System.out.println(ShowMapMenuController.showMap(xCoordinate, yCoordinate));
             command = scanner.nextLine();
         }
     }

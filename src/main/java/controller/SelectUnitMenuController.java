@@ -371,7 +371,7 @@ public class SelectUnitMenuController {
     }
 
     public static boolean notValidTextureForMoving(Tile destination) {
-        return destination.getTexture().equals(Texture.MARSH) || destination.getTexture().equals(Texture.RIVER) ||
+        return destination.getTexture().equals(Texture.RIVER) ||
                 destination.getTexture().equals(Texture.SEA) || destination.getTexture().equals(Texture.SMALL_LAKE) ||
                 destination.getTexture().equals(Texture.BIG_LAKE) || destination.getTexture().equals(Texture.CLIFF);
     }

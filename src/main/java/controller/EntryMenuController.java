@@ -47,7 +47,7 @@ public class EntryMenuController {
     private static void parseMapObject(JSONObject map) {
         String name = (String) map.get("name");
         long size = (Long) map.get("size");
-        JSONArray mapTiles = (JSONArray) map.get("map");
+        JSONArray mapTiles = (JSONArray) map.get("tiles");
 
         new Map(name, convertTo2DTileArray(mapTiles, (int) size), (int) size);
     }
@@ -71,8 +71,8 @@ public class EntryMenuController {
     private static Tile parseTileObject(JSONObject tile) {
         Texture texture = Texture.valueOf(((String) tile.get("texture")));
         Tree tree = null;
-        if ((String) tile.get("tree") != null)
-            tree = new Tree((String) tile.get("tree"));
+        if (tile.get("tree") != null)
+            tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
 
         return new Tile(texture, tree);
     }

@@ -20,7 +20,7 @@ public class MapEditMenu {
 
         while (true) {
             System.out.println("Maps:");
-            System.out.println(MapEditMenuController.getMapsList());
+            System.out.print(MapEditMenuController.getMapsList());
             System.out.println("Please choose your map name:");
             System.out.println("(Type \"back\" for going back to main menu)");
             System.out.println("(Type \"new map\" for making a new map)");
@@ -58,8 +58,8 @@ public class MapEditMenu {
             while (true) {
                 input = scanner.nextLine();
 
-                if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.SHOW_MAP)) != null)
-                    checkShowMap(matcher);
+                if (MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.SHOW_MAP) != null)
+                    checkShowMap();
                 else if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.SET_TEXTURE)) != null)
                     checkSetTexture(matcher);
                 else if ((matcher = MapEditMenuCommands.getMatcher(input, MapEditMenuCommands.CLEAR)) != null)
@@ -77,14 +77,8 @@ public class MapEditMenu {
         }
     }
 
-    private static void checkShowMap(Matcher matcher) {
-        mapEditMenuMessage = MapEditMenuController.checkShowMap(matcher);
-
-        switch (mapEditMenuMessage) {
-            case SUCCESS -> System.out.println(MapEditMenuController.showMap(matcher));
-            case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
-            case INVALID_COMMAND -> System.out.println("Invalid command");
-        }
+    private static void checkShowMap() {
+        System.out.println(MapEditMenuController.showMap());
     }
 
     private static void clear(Matcher matcher) {

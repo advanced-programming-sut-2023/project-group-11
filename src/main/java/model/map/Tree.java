@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Tree {
     private final String name;
     @JsonIgnore
-    private int leftWood = 2000;
+    private int leftWood = 200;
 
     public Tree(String name) {
         this.name = name;

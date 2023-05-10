@@ -67,9 +67,9 @@ public class ShowMapMenuController {
                 StringUtils.countMatches(command, "left") <= 1;
     }
 
-    public static String showMap(String name, int x, int y) {
+    public static String showMap(int x, int y) {
         String output = "";
-        Map map = Stronghold.getMapByName(name);
+        Map map = Stronghold.getCurrentGame().getMap();
         Attribute backgroundColor;
         Attribute textColor;
         for (int i = (Math.max(x - 7, 0)), k = (Math.max(x - 7, 0)); i < x + 7 && i < map.getSize(); i++, k++) {
