@@ -7,8 +7,6 @@ import view.enums.messages.ProfileMenuMessages;
 import java.util.regex.Matcher;
 
 public class ProfileMenuController {
-
-
     public static ProfileMenuMessages checkChangeUsername(Matcher matcher) {
         String username = Utils.removeDoubleQuotation(matcher.group("field"));
 
@@ -44,12 +42,13 @@ public class ProfileMenuController {
     }
 
     public static ProfileMenuMessages checkChangePassword(Matcher matcher) {
+        if (!Utils.isValidCommandTags(matcher, "new", "old"))
+            return ProfileMenuMessages.INVALID_COMMAND;
+
         String newPassword = matcher.group("new");
         String oldPassword = matcher.group("old");
 
-        if (oldPassword == null || newPassword == null)
-            return ProfileMenuMessages.INVALID_COMMAND;
-        else if (!Stronghold.getCurrentUser().isPasswordCorrect(Utils.encryptField(oldPassword)))
+        if (!Stronghold.getCurrentUser().isPasswordCorrect(Utils.encryptField(oldPassword)))
             return ProfileMenuMessages.INCORRECT_PASSWORD;
         else if (oldPassword.equals(newPassword))
             return ProfileMenuMessages.SAME_PASSWORD;

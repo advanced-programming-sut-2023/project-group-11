@@ -18,8 +18,8 @@ import java.util.regex.Matcher;
 import static controller.SelectUnitMenuController.*;
 
 public class GameMenuController {
-    private static Game currentGame;
-    private static Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+    private static Game currentGame = Stronghold.getCurrentGame();
+    private static Governance currentGovernance = currentGame.getCurrentGovernance();
 
     public static String nextTurn() {
         ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
@@ -127,7 +127,7 @@ public class GameMenuController {
 
         int x = Integer.parseInt(matcher.group("xGroup"));
         int y = Integer.parseInt(matcher.group("yGroup"));
-        String type = matcher.group("typeGroup");
+        String type = Utils.removeDoubleQuotation(matcher.group("typeGroup"));
         Building building = BuildingUtils.getBuildingByType(type);
 
         if (!BuildingUtils.isValidBuildingType(type)) return GameMenuMessages.INVALID_BUILDING_TYPE;

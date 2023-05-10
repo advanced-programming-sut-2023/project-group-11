@@ -19,7 +19,7 @@ public class MainMenuController {
         if (!Utils.isValidCommandTags(matcher, "mapName", "guests"))
             return MainMenuMessages.INVALID_COMMAND;
 
-        String mapName = matcher.group("mapName");
+        String mapName = Utils.removeDoubleQuotation(matcher.group("mapName"));
         String[] listOfPlayers = makeListOfPlayers(matcher.group("guests")).split("-");
 
         if (!Stronghold.isMapName(mapName))

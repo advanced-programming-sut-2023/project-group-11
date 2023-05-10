@@ -15,11 +15,12 @@ public class TradeMenuController {
 
     public static TradeMenuMessages checkTrade(Matcher matcher) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        String resourceType = matcher.group("resourceType"),
-                message = matcher.group("message");
-        int resourceAmount = Integer.parseInt(matcher.group("resourceAmount")),
-                price = Integer.parseInt(matcher.group("price"));
+        String resourceType = Utils.removeDoubleQuotation(matcher.group("resourceType"));
+        String message = Utils.removeDoubleQuotation(matcher.group("message"));
+        int resourceAmount = Integer.parseInt(matcher.group("resourceAmount"));
+        int price = Integer.parseInt(matcher.group("price"));
         AllResource resource = AllResource.getAllResourceByName(resourceType);
+
         if (resource == null)
             return TradeMenuMessages.INVALID_RESOURCE_TYPE;
         new Trade(resource, resourceAmount, price, message, currentGovernance);
@@ -38,7 +39,7 @@ public class TradeMenuController {
     public static TradeMenuMessages checkAcceptTrade(Matcher matcher) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         int id = Integer.parseInt(matcher.group("id"));
-        String message = matcher.group("message");
+        String message = Utils.removeDoubleQuotation(matcher.group("message"));
         ArrayList<Trade> trades = Stronghold.getCurrentGame().getTrades();
         if (trades.size() < id)
             return TradeMenuMessages.INVALID_ID;
