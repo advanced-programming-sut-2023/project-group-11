@@ -8,6 +8,9 @@ public class Path {
     public Path() {
         this.path = new ArrayList<>();
     }
+    private Path(ArrayList<int[]> path) {
+        this.path = new ArrayList<>(path);
+    }
 
     public ArrayList<int[]> getPath() {
         return path;
@@ -23,5 +26,9 @@ public class Path {
 
     public int getLength() {
         return path.size();
+    }
+
+    public Path clone() {
+        return new Path(this.getPath());
     }
 }

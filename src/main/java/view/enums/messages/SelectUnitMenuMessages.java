@@ -20,5 +20,5 @@ public enum SelectUnitMenuMessages {
     NO_ATTACK_LEFT,
     NOT_PATROLLING,
     INVALID_STATE,
-    ;
+    NO_MOVES_NEEDED, NO_MOVES_LEFT;
 }

@@ -72,7 +72,7 @@ public class ShowMapMenuController {
         Map map = Stronghold.getCurrentGame().getMap();
         Attribute backgroundColor;
         Attribute textColor;
-        for (int i = (Math.max(x - 7, 0)), k = (Math.max(x - 7, 0)); i < x + 7 && i < map.getSize(); i++, k++) {
+        for (int i = (Math.max(x - 12, 0)), k = (Math.max(x - 12, 0)); i < x + 12 && i < map.getSize(); i++, k++) {
             for (int j = (Math.max(y - 50, 0)), l = (Math.max(y - 50, 0)); j < y + 50 && j < map.getSize(); j++, l++) {
                 if (l % 8 == 0) {
                     output += "|";
@@ -85,7 +85,10 @@ public class ShowMapMenuController {
                     if (i == x && j == y) textColor = Color.RED_TEXT.getColor();
                     else textColor = Color.WHITE_TEXT.getColor();
 
-                    if (isSoldierInTile(tile)) output += (Ansi.colorize("S", textColor, backgroundColor));
+                    if (isSoldierInTile(tile))
+                        if (tile.getUnitsByType("lord").size() != 0)
+                            output += (Ansi.colorize("L", textColor, backgroundColor));
+                        else output += (Ansi.colorize("S", textColor, backgroundColor));
                     else if (BuildingUtils.isBuildingInTile(tile.getBuilding()))
                         if (tile.getBuilding() instanceof Climbable)
                             output += (Ansi.colorize("W", textColor, backgroundColor));

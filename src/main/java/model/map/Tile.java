@@ -103,7 +103,7 @@ public class Tile {
 
         result += "Texture: " + texture.getName() + '\n';
         if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
-        if (units.size() > 0) result += "Units: " + unitsName;
+        if (units.size() > 0) result += "Units:\n" + unitsName;
         if (tree != null) result += "Tree: " + tree.getName() + '\n';
         if (getResourceAmount() != null) result += getResourceAmount() + '\n';
 

@@ -50,6 +50,8 @@ public class SelectUnitMenu {
             case INVALID_COMMAND -> System.out.println("Invalid Command!");
             case INVALID_COORDINATE -> System.out.println("Invalid Coordinates!");
             case INVALID_DESTINATION_TEXTURE -> System.out.println("Invalid Destination: Invalid Texture!");
+            case NO_MOVES_NEEDED -> System.out.println("No Move Is Needed!");
+            case NO_MOVES_LEFT -> System.out.println("No Moves Left!");
             case INVALID_DESTINATION_UNCLIMBABLE_BUILDING ->
                     System.out.println("Invalid Destination: Invalid Building In Destination!");
             case INVALID_DESTINATION_DIFFERENT_OWNER_UNIT ->

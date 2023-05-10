@@ -44,7 +44,7 @@ public class MainMenu {
         switch (mainMenuMessage) {
             case SUCCESS -> {
                 initializeAreas(MainMenuController.makeListOfPlayers(matcher.group("guests")));
-                System.out.println("Game started with :" + MainMenuController.makeListOfPlayers(matcher.group("guests")));
+                System.out.println("Game started with: " + MainMenuController.makeListOfPlayers(matcher.group("guests")));
                 GameMenu.run();
             }
             case INVALID_COMMAND -> System.out.println("Invalid command!");

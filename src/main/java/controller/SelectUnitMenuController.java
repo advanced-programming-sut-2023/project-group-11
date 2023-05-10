@@ -11,6 +11,7 @@ import model.people.Attacker;
 import model.people.Engineer;
 import model.people.Machine;
 import model.people.Units;
+import model.people.enums.Speed;
 import model.people.enums.UnitState;
 import view.enums.messages.SelectUnitMenuMessages;
 
@@ -34,6 +35,10 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.INVALID_COORDINATE;
         else if (notValidTextureForMoving(map.getTile(destinationX, destinationY)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_TEXTURE;
+        else if (currentX == destinationX && currentY == destinationY)
+            return SelectUnitMenuMessages.NO_MOVES_NEEDED;
+        else if (minimumSpeed(map.getTile(currentLocation).getUnitsByType(unitType)) <= 0)
+            return SelectUnitMenuMessages.NO_MOVES_LEFT;
         else if (map.getTile(destinationX, destinationY).getUnits().size() != 0 &&
                 !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_DIFFERENT_OWNER_UNIT;
@@ -71,7 +76,7 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.OUT_OF_RANGE;
         else if (noAttackLeft(selectedUnits))
             return SelectUnitMenuMessages.NO_ATTACK_LEFT;
-        else if (targetTile.getUnits().size() == 0 && targetTile.getBuilding() == null)
+        else if (targetTile.getUnits().size() == 0 || targetTile.getBuilding() == null)
             return SelectUnitMenuMessages.EMPTY_TILE;
         else if (targetTile.getUnits().get(0).getOwner().equals(selectedUnits.get(0).getOwner()) ||
                 targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner()))
@@ -244,18 +249,18 @@ public class SelectUnitMenuController {
 
     public static Path findRootToDestination(Map map, String unitType, int currentX, int currentY, int destinationX, int destinationY) {
         int speed = minimumSpeed(map.getTile(currentX, currentY).getUnitsByType(unitType));
-        ArrayList<Path> paths = new ArrayList<>();
+        ArrayList<Path> allPaths = new ArrayList<>();
         Path path = new Path();
 
         path.addToPath(new int[]{currentX, currentY});
 
-        pathDFS(map, unitType, currentX + 1, currentY, destinationX, destinationY, speed, paths, path);
-        pathDFS(map, unitType, currentX - 1, currentY, destinationX, destinationY, speed, paths, path);
-        pathDFS(map, unitType, currentX, currentY + 1, destinationX, destinationY, speed, paths, path);
-        pathDFS(map, unitType, currentX, currentY - 1, destinationX, destinationY, speed, paths, path);
+        pathDFS(map, unitType, currentX + 1, currentY, destinationX, destinationY, speed, allPaths, path);
+        pathDFS(map, unitType, currentX - 1, currentY, destinationX, destinationY, speed, allPaths, path);
+        pathDFS(map, unitType, currentX, currentY + 1, destinationX, destinationY, speed, allPaths, path);
+        pathDFS(map, unitType, currentX, currentY - 1, destinationX, destinationY, speed, allPaths, path);
 
-        if (paths.size() == 1) return null;
-        else return getShortestPath(paths);
+        if (allPaths.size() == 0) return null;
+        else return getShortestPath(allPaths);
     }
 
     private static void pathDFS(Map map, String unitType, int currentX, int currentY, int destinationX, int destinationY, int speed, ArrayList<Path> paths, Path path) {
@@ -267,7 +272,7 @@ public class SelectUnitMenuController {
         if (!Utils.isValidCoordinates(map, currentX, currentY)) return;
         Building building = map.getTile(currentX, currentY).getBuilding();
 
-        if (!Arrays.equals(currentLocation, destinationLocation) && leftMoves == 0) return;
+        if (!Arrays.equals(currentLocation, destinationLocation) && leftMoves <= 0) return;
         else if (path.getPath().contains(currentLocation)) return;
         else if (notValidTextureForMoving(map.getTile(currentX, currentY))) return;
         else if (building != null) {
@@ -280,7 +285,7 @@ public class SelectUnitMenuController {
 
         path.addToPath(currentLocation);
         if (Arrays.equals(currentLocation, destinationLocation)) {
-            paths.add(path);
+            paths.add(path.clone());
         } else {
             pathDFS(map, unitType, currentX + 1, currentY, destinationX, destinationY, speed, paths, path);
             pathDFS(map, unitType, currentX - 1, currentY, destinationX, destinationY, speed, paths, path);
@@ -344,7 +349,7 @@ public class SelectUnitMenuController {
     }
 
     private static int minimumSpeed(ArrayList<Units> units) {
-        int minimumSpeed = 5 + 1;
+        int minimumSpeed = Speed.VERY_HIGH.getMovesInEachTurn() + 1;
         for (Units unit : units) {
             if (unit.getLeftMoves() < minimumSpeed)
                 minimumSpeed = unit.getLeftMoves();
@@ -353,7 +358,7 @@ public class SelectUnitMenuController {
     }
 
     private static Path getShortestPath(ArrayList<Path> paths) {
-        int length = 6 + 1;
+        int length = Speed.VERY_HIGH.getMovesInEachTurn() + 2;
         Path shortestPath = new Path();
         for (Path path : paths) {
             if (path.getLength() < length) {
