@@ -7,6 +7,7 @@ import model.buildings.ProductiveBuilding;
 import model.buildings.enums.FillerType;
 import model.map.Map;
 import model.map.Tile;
+import model.map.Tree;
 import model.people.*;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
@@ -330,7 +331,7 @@ public class GameMenuController {
 
         for (Building building : buildings) {
             if(building.getName().equals("wood cutter")){
-
+                building.setActive(cutTree(building));
             }
             if (building instanceof ProductiveBuilding productiveBuilding && productiveBuilding.isActive()) {
                 double workersEfficiency = currentGovernance.getWorkersEfficiency();
@@ -369,12 +370,19 @@ public class GameMenuController {
     private static boolean cutTree(Building building){
         int x = building.getXCoordinate();
         int y = building.getYCoordinate();
-        int range = 10;
+        int range = 10,cutRate=20;
         for(int i = -range;i<=range;i++){
             for(int j = -range;j<=range;j++){
                 if(!Utils.isValidCoordinates(currentGame.getMap(),x,y))
                     continue;
                 Tile tile = currentGame.getMap().getTile(x,y);
+                Tree tree = tile.getTree();
+                if(tree != null && tree.getLeftWood()>=cutRate) {
+                    tree.setLeftWood(tree.getLeftWood() - cutRate);
+                    if(tree.getLeftWood() <=0)
+                        tile.setTree(null);
+                    return true;
+                }
             }
         }
         return false;
