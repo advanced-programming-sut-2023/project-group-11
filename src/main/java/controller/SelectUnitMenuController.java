@@ -7,10 +7,7 @@ import model.buildings.*;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
-import model.people.Attacker;
-import model.people.Engineer;
-import model.people.Machine;
-import model.people.Units;
+import model.people.*;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
 import view.enums.messages.SelectUnitMenuMessages;
@@ -563,7 +560,8 @@ public class SelectUnitMenuController {
         Building targetBuilding = targetTile.getBuilding();
         Map map = Stronghold.getCurrentGame().getMap();
         int targetHp = targetBuilding.getHitPoint();
-        int attackerDamage = selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage();
+        int attackerDamage = (int) (selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage() *
+                (1 + selectedUnits.get(0).getOwner().getFearFactor() * 0.05));
 
         if (targetBuilding instanceof GateHouse && selectedUnits.get(0).getName().equals("battle ram"))
             targetBuilding.setHitPoint(targetHp - 3 * attackerDamage);
@@ -581,7 +579,8 @@ public class SelectUnitMenuController {
     }
 
     private static void attackUnits(ArrayList<Units> selectedUnits, Tile targetTile) {
-        int attackerDamage = selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage();
+        int attackerDamage = (int) (selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage() *
+                (1 + selectedUnits.get(0).getOwner().getFearFactor() * 0.05));
 
         for (int i = 0; ; i++) {
             Units unit = targetTile.getUnits().get(i);
@@ -600,17 +599,22 @@ public class SelectUnitMenuController {
     }
 
     private static void removeDeadUnits(Tile targetTile) {
-        for (Units unit : targetTile.getUnits())
+        for (Units unit : targetTile.getUnits()) {
             if (unit.getHp() <= 0) {
-                if (unit instanceof Machine machine)
+                if (unit instanceof Machine machine) {
                     for (Engineer engineer : machine.getEngineers())
                         engineer.getOwner().removeUnit(engineer);
+                }
                 unit.removeFromGame(targetTile, unit.getOwner());
-            }
+            } else if (unit.getName().equals("assassin")) ((Troops) unit).setRevealed(true);
+        }
     }
 
     private static void setAttackedTrue(ArrayList<Units> selectedUnits) {
-        for (Units unit : selectedUnits) ((Attacker) unit).setAttacked(true);
+        for (Units unit : selectedUnits) {
+            ((Attacker) unit).setAttacked(true);
+            if (unit.getName().equals("assassin")) ((Troops) unit).setRevealed(true);
+        }
     }
 
     private static void buildMachine(Machine machine, Tile tile, Governance governance) {

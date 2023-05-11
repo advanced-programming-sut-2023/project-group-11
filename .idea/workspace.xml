@@ -4,18 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Remove Climbablity + Building range Increment applied">
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/mavenExecutorSetting.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Climbable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Climbable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/GateHouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Keep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Keep.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Tower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Wall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/GateHouseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/GateHouseType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/WallType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/WallType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Attacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Attacker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,14 +219,8 @@
       <workItem from="1683707729171" duration="2944000" />
       <workItem from="1683710697630" duration="22917000" />
       <workItem from="1683760663649" duration="4000" />
-      <workItem from="1683817649729" duration="4034000" />
-    </task>
-    <task id="LOCAL-00013" summary="Edit adding to database &amp; save maps completed">
-      <created>1682110405717</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1682110405717</updated>
+      <workItem from="1683817649729" duration="4783000" />
+      <workItem from="1683844746168" duration="1140000" />
     </task>
     <task id="LOCAL-00014" summary="Map edit menu updated &amp; Main menu added incompletely">
       <created>1682170102764</created>
@@ -571,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683819331530</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Remove Climbablity + Building range Increment applied">
+      <created>1683824437446</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1683824437446</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,7 +607,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update move (except climbing building)" />
     <MESSAGE value="Machines rebuilt + try to make MachineType as Json" />
     <MESSAGE value="Make MachineTypes as Json dictionary" />
     <MESSAGE value="Rewrite Machine Constructor" />
@@ -638,7 +631,8 @@
     <MESSAGE value="Debugging move almost Done" />
     <MESSAGE value="Attack debugged" />
     <MESSAGE value="Attack &amp; Start game debugged (need correction)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Attack &amp; Start game debugged (need correction)" />
+    <MESSAGE value="Remove Climbablity + Building range Increment applied" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove Climbablity + Building range Increment applied" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -655,13 +649,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controller/GameMenuController.java</url>
-          <line>217</line>
+          <line>219</line>
           <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java</url>
