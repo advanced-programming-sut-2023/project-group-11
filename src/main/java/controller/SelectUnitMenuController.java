@@ -81,7 +81,7 @@ public class SelectUnitMenuController {
         else if ((targetTile.getUnits().size() != 0 &&
                 targetTile.getUnits().get(0).getOwner().equals(selectedUnits.get(0).getOwner())) ||
                 (targetTile.getBuilding() != null &&
-                targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner())))
+                        targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner())))
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
         //TODO:1 set damaging concepts (Fire - building damaging - multi-unit damaging - tower increasing range - fear rate impact)
@@ -168,47 +168,53 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.ENGINEER_WITHOUT_PAIL;
         if (engineer.isEmptyPail())
             return SelectUnitMenuMessages.ENGINEER_EMPTY_PAIL;
-        if(!pourOil(engineers, direction, currentLocation))
+        if (!pourOil(engineers, direction, currentLocation))
             return SelectUnitMenuMessages.CANT_REFILL_THE_PAIL;
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    private static boolean pourOil(ArrayList<Units> engineer,String direction,int[] location){
+    private static boolean pourOil(ArrayList<Units> engineer, String direction, int[] location) {
         int currentX = location[0];
         int currentY = location[1];
         Map map = Stronghold.getCurrentGame().getMap();
-        switch (direction){
+        Engineer realEngineer = (Engineer) engineer.get(0);
+        switch (direction) {
             case "up" -> {
-                pourOil(currentX-1,currentY);
-                pourOil(currentX-2,currentY);
+                if (pourOil(currentX - 1, currentY) || pourOil(currentX - 2, currentY))
+                    realEngineer.setEmptyPail(true);
             }
             case "down" -> {
-                pourOil(currentX+1,currentY);
-                pourOil(currentX+2,currentY);
+                if (pourOil(currentX + 1, currentY) || pourOil(currentX + 2, currentY))
+                    realEngineer.setEmptyPail(true);
             }
             case "left" -> {
-                pourOil(currentX,currentY-1);
-                pourOil(currentX,currentY-2);
+                if (pourOil(currentX, currentY - 1) || pourOil(currentX, currentY - 2))
+                    realEngineer.setEmptyPail(true);
             }
             case "right" -> {
-                pourOil(currentX,currentY+1);
-                pourOil(currentX,currentY+2);
+                if (pourOil(currentX, currentY + 1) || pourOil(currentX, currentY + 2))
+                    realEngineer.setEmptyPail(true);
             }
         }
+        if(!realEngineer.isEmptyPail())
+            return true;
         Path shortestPath;
-        for (int i = -5;i<=5;i++){
-            for (int j = Math.abs(i)-5;j<=5-Math.abs(i);j++){
-                if(!Utils.isValidCoordinates(map,currentX+i,currentY+j))
+        for (int i = -5; i <= 5; i++) {
+            for (int j = Math.abs(i) - 5; j <= 5 - Math.abs(i); j++) {
+                if (!Utils.isValidCoordinates(map, currentX + i, currentY + j))
                     continue;
-                Tile tile = map.getTile(currentX+i,currentY+j);
-                if(tile.getBuilding() != null && tile.getBuilding().getName().equals("oil smelter")){
-                    if((shortestPath = findRootToDestination(map,"engineer",currentX,currentY,currentX+i,currentY+j)) != null
+                Tile tile = map.getTile(currentX + i, currentY + j);
+                if (tile.getBuilding() != null && tile.getBuilding().getName().equals("oil smelter")) {
+                    if ((shortestPath = findRootToDestination(map, "engineer", currentX, currentY, currentX + i, currentY + j)) != null
                             && shortestPath.getLength() <= 5) {
-                        moveUnits(map,"engineer",shortestPath,location,currentX+i,currentY+j);
-                        if(map.getTile(currentX+i,currentY+j).getUnitsByType("engineer").size() == 1) {
-                            shortestPath = findRootToDestination(map,"engineer",currentX+i,currentY+j,currentX,currentY);
-                            moveUnits(map, "engineer", shortestPath, new int[]{currentX+i,currentY+j}, currentX, currentY);
-                            if(tile.getUnitsByType("engineer").size() == 1) return true;
+                        moveUnits(map, "engineer", shortestPath, location, currentX + i, currentY + j);
+                        if (map.getTile(currentX + i, currentY + j).getUnitsByType("engineer").size() == 1) {
+                            shortestPath = findRootToDestination(map, "engineer", currentX + i, currentY + j, currentX, currentY);
+                            moveUnits(map, "engineer", shortestPath, new int[]{currentX + i, currentY + j}, currentX, currentY);
+                            if (tile.getUnitsByType("engineer").size() == 1){
+                                ((Engineer)tile.getUnitsByType("engineer").get(0)).setEmptyPail(false);
+                                return true;
+                            }
                         }
                     }
                 }
@@ -217,18 +223,22 @@ public class SelectUnitMenuController {
         return false;
     }
 
-    private static void pourOil(int x,int y){
+    private static boolean pourOil(int x, int y) {
         Map map = Stronghold.getCurrentGame().getMap();
-        if(!Utils.isValidCoordinates(map,x,y))
-            return;
-        Tile tile = map.getTile(x,y);
-        if(tile.hasBuilding())
-            return;
+        if (!Utils.isValidCoordinates(map, x, y))
+            return false;
+        Tile tile = map.getTile(x, y);
+        if (tile.hasBuilding())
+            return false;
         ArrayList<Units> units = tile.getUnits();
-        if(!units.get(0).getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()))
-            return;
-        for (Units unit:units)
+        if (!units.get(0).getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()) || units.size() == 0)
+            return false;
+        for (Units unit : units) {
             unit.setHp(unit.getHp() - 50);
+            if (unit.getHp() <= 0)
+                unit.removeFromGame(tile, unit.getOwner());
+        }
+        return true;
     }
 
     public static SelectUnitMenuMessages checkDigTunnel(Matcher matcher, int[] currentLocation, String unitType) {
@@ -591,7 +601,7 @@ public class SelectUnitMenuController {
             if (unit.getHp() <= 0) {
                 if (unit instanceof Machine machine)
                     for (Engineer engineer : machine.getEngineers())
-                    engineer.getOwner().removeUnit(engineer);
+                        engineer.getOwner().removeUnit(engineer);
                 unit.removeFromGame(targetTile, unit.getOwner());
             }
     }
