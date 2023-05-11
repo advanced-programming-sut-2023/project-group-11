@@ -7,7 +7,9 @@ import model.buildings.ProductiveBuilding;
 import model.buildings.enums.FillerType;
 import model.map.Map;
 import model.map.Tile;
+import model.map.Tree;
 import model.people.*;
+import model.people.enums.Speed;
 import model.people.enums.UnitState;
 import view.enums.messages.GameMenuMessages;
 
@@ -327,7 +329,10 @@ public class GameMenuController {
         int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("ox tether"));
         currentGovernance.resetAleFactor();
 
-        for (Building building : buildings)
+        for (Building building : buildings) {
+            if(building.getName().equals("wood cutter")){
+                building.setActive(cutTree(building));
+            }
             if (building instanceof ProductiveBuilding productiveBuilding && productiveBuilding.isActive()) {
                 double workersEfficiency = currentGovernance.getWorkersEfficiency();
                 int consumptionRate = (int) Math.ceil((productiveBuilding.getConsumptionRate() * workersEfficiency));
@@ -359,6 +364,28 @@ public class GameMenuController {
                     consumed = 0;
                 }
             }
+        }
+    }
+
+    private static boolean cutTree(Building building){
+        int x = building.getXCoordinate();
+        int y = building.getYCoordinate();
+        int range = 10,cutRate=20;
+        for(int i = -range;i<=range;i++){
+            for(int j = -range;j<=range;j++){
+                if(!Utils.isValidCoordinates(currentGame.getMap(),x,y))
+                    continue;
+                Tile tile = currentGame.getMap().getTile(x,y);
+                Tree tree = tile.getTree();
+                if(tree != null && tree.getLeftWood()>=cutRate) {
+                    tree.setLeftWood(tree.getLeftWood() - cutRate);
+                    if(tree.getLeftWood() <=0)
+                        tile.setTree(null);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static void updatePopularityRate() {
@@ -399,11 +426,11 @@ public class GameMenuController {
                 }
                 case DEFENSIVE -> {
                     if (!((Attacker) unit).hasAttacked())
-                        unitUpdate(unit, 7);
+                        unitUpdate(unit, Speed.MEDIUM.getMovesInEachTurn());
                 }
                 case OFFENSIVE -> {
                     if (!((Attacker) unit).hasAttacked())
-                        unitUpdate(unit, 15);
+                        unitUpdate(unit, Speed.VERY_HIGH.getMovesInEachTurn());
                 }
             }
         }
@@ -411,10 +438,11 @@ public class GameMenuController {
 
     private static void unitUpdate(Units unit, int range) {
         ArrayList<Units> units = getAllSameUnitsOfTile(unit);
+        Map map = currentGame.getMap();
         setUnitUpdateState(units);
         int currentX = unit.getLocation()[0];
         int currentY = unit.getLocation()[1];
-        int finalRange = isValidUnitForGroundAttack(unit.getName()) ? ((Attacker) unit).getRange() : range;
+        int finalRange = isValidUnitForGroundAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
         attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
         if (unit.getUnitState().equals(UnitState.OFFENSIVE))
             for (Units unit1 : units)
@@ -422,7 +450,6 @@ public class GameMenuController {
     }
 
     private static Boolean canUnitMove(int destinationX, int destinationY, int currentX, int currentY, String unitType) {
-
         Map map = currentGame.getMap();
 
         if (!Utils.isValidCoordinates(map, destinationX, destinationY))
@@ -433,8 +460,7 @@ public class GameMenuController {
                 !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return false;
         else return !BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) ||
-                    (map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable &&
-                            ((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable());
+                    (map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable);
     }
 
     private static ArrayList<Units> getAllSameUnitsOfTile(Units unit) {
@@ -458,7 +484,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX + 1, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX + 1, destinationY),map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
@@ -466,7 +492,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY),map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
@@ -474,7 +500,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX, destinationY + 1));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX, destinationY + 1),map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
@@ -482,7 +508,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY),map.getTile(destinationX, destinationY));
                     return true;
                 }
             }

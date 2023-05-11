@@ -24,9 +24,11 @@ public class MainMenuController {
 
         if (!Stronghold.isMapName(mapName))
             return MainMenuMessages.MAP_NOT_EXIST;
-
         for (String name : listOfPlayers)
             if (!Stronghold.usernameExist(name)) return MainMenuMessages.USER_NOT_EXIST;
+        for (String name: listOfPlayers)
+            if (Stronghold.getUserByUsername(name).equals(Stronghold.getCurrentUser().getUsername()))
+                return MainMenuMessages.OWNER_IN_GUESTS;
 
 
         Stronghold.setCurrentGame(new Game(makeGovernances(listOfPlayers), Stronghold.getMapByName(mapName)));

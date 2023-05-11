@@ -6,13 +6,13 @@ import model.AllResource;
 public enum GateHouseType {
 
     SMALL_HORIZONTAL("small gatehouse", 2, 400, 0, AllResource.STONE, 10,
-            0, true, 15, true),
+            0, true, 15, true, 3),
     SMALL_VERTICAL("small gatehouse", 2, 400, 0, AllResource.STONE, 10,
-            0, true, 15, false),
+            0, true, 15, false, 3),
     LARGE_HORIZONTAL("large gatehouse", 3, 500, 0, AllResource.STONE, 20,
-            0, true, 25, true),
+            0, true, 25, true, 5),
     LARGE_VERTICAL("large gatehouse", 3, 500, 0, AllResource.STONE, 20,
-            0, true, 25, false);
+            0, true, 25, false, 5);
 
     private final String name;
     private final int size;
@@ -24,10 +24,11 @@ public enum GateHouseType {
     private final boolean isActive;
     private final int capacity;
     private final boolean horizontalDirection;
+    private final int rangeIncrement;
 
     GateHouseType(String name, int size, int hitPoint, double goldCost,
                   AllResource resourceCostType, int resourceCostNumber, int workersNumber,
-                  boolean isActive, int capacity, boolean horizontalDirection) {
+                  boolean isActive, int capacity, boolean horizontalDirection, int rangeIncrement) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -38,6 +39,7 @@ public enum GateHouseType {
         this.isActive = isActive;
         this.capacity = capacity;
         this.horizontalDirection = horizontalDirection;
+        this.rangeIncrement = rangeIncrement;
     }
 
     public int getSize() {
@@ -78,6 +80,10 @@ public enum GateHouseType {
 
     public boolean getHorizontalDirection() {
         return horizontalDirection;
+    }
+
+    public int getRangeIncrement() {
+        return rangeIncrement;
     }
 
     public static GateHouseType getGateHouseTypeByName(String name) {

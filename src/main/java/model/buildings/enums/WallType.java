@@ -4,11 +4,11 @@ import model.AllResource;
 
 public enum WallType {
     SHORT_WALL("short wall", 1, 300, 0, AllResource.NONE, 0,
-            0, true),
+            0, true, 3),
     TALL_WALL("tall wall", 1, 500, 0, AllResource.NONE, 0,
-            0, true),
+            0, true, 5),
     STAIRS("stairs", 1, 300, 0, AllResource.NONE, 0,
-            0, true);
+            0, true, 2);
 
     private final String name;
     private final int size;
@@ -18,9 +18,10 @@ public enum WallType {
     private final int resourceCostNumber;
     private final int workersNumber;
     private final boolean isActive;
+    private final int rangeIncrement;
 
     WallType(String name, int size, int hitPoint, double goldCost, AllResource resourceCostType, int resourceCostNumber,
-             int workersNumber, boolean isActive) {
+             int workersNumber, boolean isActive, int rangeIncrement) {
         this.name = name;
         this.size = size;
         this.hitPoint = hitPoint;
@@ -29,6 +30,7 @@ public enum WallType {
         this.resourceCostNumber = resourceCostNumber;
         this.workersNumber = workersNumber;
         this.isActive = isActive;
+        this.rangeIncrement = rangeIncrement;
     }
 
     public String getName() {
@@ -61,6 +63,10 @@ public enum WallType {
 
     public boolean isActive() {
         return isActive;
+    }
+
+    public int getRangeIncrement() {
+        return rangeIncrement;
     }
 
     public static WallType getWallTypeByName(String name) {

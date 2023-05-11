@@ -1,13 +1,9 @@
 package model.buildings;
 
 public abstract class Climbable extends Building {
-    protected boolean isClimbable;
+    protected int rangeIncrement;
 
-    public boolean isClimbable() {
-        return isClimbable;
-    }
-
-    public void setClimbable(boolean climbable) {
-        isClimbable = climbable;
+    public int getRangeIncrement() {
+        return rangeIncrement;
     }
 }

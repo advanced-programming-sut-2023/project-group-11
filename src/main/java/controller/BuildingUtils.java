@@ -111,9 +111,6 @@ public class BuildingUtils {
 
         if (building.getName().equals("hovel")) governance.changeMaxPopulation(+8);
         if (building instanceof Church) governance.changeReligiousFactor(+2);
-        if (building instanceof Climbable climbable)
-            if (climbable.isClimbable()) makeClimbable(building, x, y, size, tiles);
-            else climbable.setClimbable(isClimbable(building, x, y, size));
         if (building instanceof Storage storage) building.getOwner().addStorage(storage);
 
         governance.setGold(governance.getGold() - building.getGoldCost());
@@ -125,45 +122,6 @@ public class BuildingUtils {
         for (int i = x; i < x + size; i++)
             for (int j = y; j < y + size; j++)
                 tiles[i][j].setBuilding(building);
-    }
-
-    private static boolean isClimbable(Building building, int x, int y, int size) {
-        Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
-        for (int i = x - 1; i < x + size + 1; i++) {
-            for (int j = y - 1; j < y + size + 1; j++) {
-                if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), i, j))
-                    continue;
-                Building targetBuilding = tiles[i][j].getBuilding();
-                if (targetBuilding.equals(building))
-                    continue;
-                if ((i == x - 1 && (j == y + 1 || j == y - size)) || (i == x + size && (j == y + 1 || j == y - size)))
-                    continue;
-                if ((targetBuilding instanceof Climbable climbable))
-                    if (climbable.isClimbable())
-                        return true;
-            }
-        }
-        return false;
-    }
-
-    private static void makeClimbable(Building building, int x, int y, int size, Tile[][] tiles) {
-        //TODO:1 handle ladderMan (siege tower?)
-        for (int i = x - 1; i < x + size + 1; i++) {
-            for (int j = y - 1; j < y + size + 1; j++) {
-                if (!Utils.isValidCoordinates(Stronghold.getCurrentGame().getMap(), i, j))
-                    continue;
-                Building targetBuilding = tiles[i][j].getBuilding();
-                if (targetBuilding.equals(building))
-                    continue;
-                if ((i == x - 1 && (j == y + 1 || j == y - size)) || (i == x + size && (j == y + 1 || j == y - size)))
-                    continue;
-                if (targetBuilding instanceof Climbable climbable && !climbable.isClimbable()) {
-                    climbable.setClimbable(true);
-                    makeClimbable(targetBuilding, climbable.getXCoordinate(),
-                            climbable.getYCoordinate(), climbable.getSize(), tiles);
-                }
-            }
-        }
     }
 
     public static boolean isBuildingInTile(Building building) {

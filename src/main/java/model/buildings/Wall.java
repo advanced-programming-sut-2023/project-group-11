@@ -13,6 +13,6 @@ public class Wall extends Climbable {
         resourceCostNumber = wallType.getResourceCostNumber();
         workersNumber = wallType.getWorkersNumber();
         isActive = wallType.isActive();
-        isClimbable = name.equals("stairs");
+        rangeIncrement = wallType.getRangeIncrement();
     }
 }
