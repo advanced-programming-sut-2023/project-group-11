@@ -8,6 +8,7 @@ import model.buildings.enums.FillerType;
 import model.map.Map;
 import model.map.Tile;
 import model.people.*;
+import model.people.enums.Speed;
 import model.people.enums.UnitState;
 import view.enums.messages.GameMenuMessages;
 
@@ -327,7 +328,10 @@ public class GameMenuController {
         int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("ox tether"));
         currentGovernance.resetAleFactor();
 
-        for (Building building : buildings)
+        for (Building building : buildings) {
+            if(building.getName().equals("wood cutter")){
+
+            }
             if (building instanceof ProductiveBuilding productiveBuilding && productiveBuilding.isActive()) {
                 double workersEfficiency = currentGovernance.getWorkersEfficiency();
                 int consumptionRate = (int) Math.ceil((productiveBuilding.getConsumptionRate() * workersEfficiency));
@@ -359,6 +363,21 @@ public class GameMenuController {
                     consumed = 0;
                 }
             }
+        }
+    }
+
+    private static boolean cutTree(Building building){
+        int x = building.getXCoordinate();
+        int y = building.getYCoordinate();
+        int range = 10;
+        for(int i = -range;i<=range;i++){
+            for(int j = -range;j<=range;j++){
+                if(!Utils.isValidCoordinates(currentGame.getMap(),x,y))
+                    continue;
+                Tile tile = currentGame.getMap().getTile(x,y);
+            }
+        }
+        return false;
     }
 
     private static void updatePopularityRate() {
@@ -399,11 +418,11 @@ public class GameMenuController {
                 }
                 case DEFENSIVE -> {
                     if (!((Attacker) unit).hasAttacked())
-                        unitUpdate(unit, 7);
+                        unitUpdate(unit, Speed.MEDIUM.getMovesInEachTurn());
                 }
                 case OFFENSIVE -> {
                     if (!((Attacker) unit).hasAttacked())
-                        unitUpdate(unit, 15);
+                        unitUpdate(unit, Speed.VERY_HIGH.getMovesInEachTurn());
                 }
             }
         }
@@ -458,7 +477,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX + 1, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX + 1, destinationY),map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
@@ -466,7 +485,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY),map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
@@ -474,7 +493,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX, destinationY + 1));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX, destinationY + 1),map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
@@ -482,7 +501,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY),map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
