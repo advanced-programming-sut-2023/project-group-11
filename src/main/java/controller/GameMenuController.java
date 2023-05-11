@@ -15,6 +15,7 @@ import view.enums.messages.GameMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 
 import static controller.SelectUnitMenuController.*;
@@ -284,7 +285,6 @@ public class GameMenuController {
     }
 
     private static void updateSoldiers() {
-        updateState();
         ArrayList<Units> units = currentGovernance.getUnits();
         ArrayList<Units> patrollingUnits = new ArrayList<>();
         for (Units unit : units)
@@ -292,6 +292,7 @@ public class GameMenuController {
                 patrollingUnits.add(unit);
         SelectUnitMenuController.patrolUnit(patrollingUnits);
         currentGovernance.resetUnitAbilities();
+        updateState();
     }
 
     private static void updateGold() {
@@ -330,7 +331,7 @@ public class GameMenuController {
         currentGovernance.resetAleFactor();
 
         for (Building building : buildings) {
-            if(building.getName().equals("wood cutter")){
+            if (building.getName().equals("wood cutter")) {
                 building.setActive(cutTree(building));
             }
             if (building instanceof ProductiveBuilding productiveBuilding && productiveBuilding.isActive()) {
@@ -367,19 +368,19 @@ public class GameMenuController {
         }
     }
 
-    private static boolean cutTree(Building building){
+    private static boolean cutTree(Building building) {
         int x = building.getXCoordinate();
         int y = building.getYCoordinate();
-        int range = 10,cutRate=20;
-        for(int i = -range;i<=range;i++){
-            for(int j = -range;j<=range;j++){
-                if(!Utils.isValidCoordinates(currentGame.getMap(),x,y))
+        int range = 10, cutRate = 20;
+        for (int i = -range; i <= range; i++) {
+            for (int j = -range; j <= range; j++) {
+                if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
                     continue;
-                Tile tile = currentGame.getMap().getTile(x,y);
+                Tile tile = currentGame.getMap().getTile(x + i, y + j);
                 Tree tree = tile.getTree();
-                if(tree != null && tree.getLeftWood()>=cutRate) {
+                if (tree != null && tree.getLeftWood() >= cutRate) {
                     tree.setLeftWood(tree.getLeftWood() - cutRate);
-                    if(tree.getLeftWood() <=0)
+                    if (tree.getLeftWood() <= 0)
                         tile.setTree(null);
                     return true;
                 }
@@ -416,20 +417,23 @@ public class GameMenuController {
 
     private static void updateState() {
         for (Units unit : currentGovernance.getUnits()) {
-            if (unit instanceof Engineer)
-                continue;
             switch (unit.getUnitState()) {
                 case STANDING -> {
-                    if (isValidUnitForAirAttack(unit.getName()) && !((Attacker) unit).hasAttacked()) {
+                    if (unit instanceof Engineer)
+                        continue;
+                    if (isValidUnitForAirAttack(unit.getName()) && !((Attacker) unit).hasAttacked())
                         unitUpdate(unit, 0);
-                    }
                 }
                 case DEFENSIVE -> {
-                    if (!((Attacker) unit).hasAttacked())
+                    if (unit instanceof Engineer)
+                        updateEngineer((Engineer) unit, 3);
+                    else if (!((Attacker) unit).hasAttacked())
                         unitUpdate(unit, Speed.MEDIUM.getMovesInEachTurn());
                 }
                 case OFFENSIVE -> {
-                    if (!((Attacker) unit).hasAttacked())
+                    if (unit instanceof Engineer)
+                        updateEngineer((Engineer) unit, 1);
+                    else if (!((Attacker) unit).hasAttacked())
                         unitUpdate(unit, Speed.VERY_HIGH.getMovesInEachTurn());
                 }
             }
@@ -444,9 +448,54 @@ public class GameMenuController {
         int currentY = unit.getLocation()[1];
         int finalRange = isValidUnitForGroundAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
         attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
-        if (unit.getUnitState().equals(UnitState.OFFENSIVE))
+        if (unit.getUnitState() == UnitState.OFFENSIVE) {
             for (Units unit1 : units)
                 unit1.setUnitState(UnitState.DEFENSIVE);
+        } else {
+            for (Units unit1 : units)
+                unit1.setUnitState(UnitState.STANDING);
+        }
+    }
+
+    private static void updateEngineer(Engineer engineer, int enemyNeededToPourOil) {
+        if (!engineer.hasOilPail() || engineer.isEmptyPail())
+            return;
+        int range = 2;
+        int enemyNumberUp = 0;
+        int enemyNumberDown = 0;
+        int enemyNumberLeft = 0;
+        int enemyNumberRight = 0;
+        ArrayList<Units> engineers = new ArrayList<>(List.of(engineer));
+        int x = engineer.getLocation()[0];
+        int y = engineer.getLocation()[1];
+        for (int i = -range; i <= range; i++) {
+            for (int j = range; j <= range; j++) {
+                if (!Utils.isValidCoordinates(currentGame.getMap(), x + i, y + j))
+                    continue;
+                if (i != 0 && j != 0)
+                    continue;
+                Tile tile = currentGame.getMap().getTile(x + i, x + j);
+//                Tile tile = currentGame.getMap().getTile(x+i,y+j);
+                if (tile.hasEnemy(currentGovernance)) {
+                    if (j > 0)
+                        enemyNumberRight += tile.getUnits().size();
+                    if (j < 0)
+                        enemyNumberLeft += tile.getUnits().size();
+                    if (i > 0)
+                        enemyNumberDown += tile.getUnits().size();
+                    if (i < 0)
+                        enemyNumberUp += tile.getUnits().size();
+                }
+            }
+        }
+        if (enemyNumberUp >= enemyNeededToPourOil)
+            pourOil(engineers, "up", engineer.getLocation());
+        if (enemyNumberDown >= enemyNeededToPourOil)
+            pourOil(engineers, "down", engineer.getLocation());
+        if (enemyNumberLeft >= enemyNeededToPourOil)
+            pourOil(engineers, "left", engineer.getLocation());
+        if (enemyNumberRight >= enemyNeededToPourOil)
+            pourOil(engineers, "right", engineer.getLocation());
     }
 
     private static Boolean canUnitMove(int destinationX, int destinationY, int currentX, int currentY, String unitType) {
@@ -484,7 +533,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX + 1, destinationY),map.getTile(destinationX, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX + 1, destinationY), map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
@@ -492,7 +541,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY),map.getTile(destinationX, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY), map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
@@ -500,7 +549,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX, destinationY + 1),map.getTile(destinationX, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX, destinationY + 1), map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
@@ -508,7 +557,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(units.get(0).getName()))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY),map.getTile(destinationX, destinationY));
+                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY), map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
