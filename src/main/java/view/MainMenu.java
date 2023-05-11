@@ -50,6 +50,7 @@ public class MainMenu {
             case INVALID_COMMAND -> System.out.println("Invalid command!");
             case MAP_NOT_EXIST -> System.out.println("Map does not exist!");
             case USER_NOT_EXIST -> System.out.println("At least one of the users does not exist!");
+            case OWNER_IN_GUESTS -> System.out.println("You can't start game with yourself!");
         }
     }
 

@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Attack debugged">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/GameMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/GameMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TrapType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/TrapType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/MainMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MainMenuMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,14 +219,9 @@
       <workItem from="1683634070020" duration="3336000" />
       <workItem from="1683665627327" duration="6891000" />
       <workItem from="1683707729171" duration="2944000" />
-      <workItem from="1683710697630" duration="20808000" />
-    </task>
-    <task id="LOCAL-00011" summary="Map read from database ended">
-      <created>1682106171018</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1682106171018</updated>
+      <workItem from="1683710697630" duration="22917000" />
+      <workItem from="1683760663649" duration="4000" />
+      <workItem from="1683817649729" duration="1628000" />
     </task>
     <task id="LOCAL-00012" summary="Making a new map in map edit menu &amp; Add map to database">
       <created>1682108940934</created>
@@ -565,7 +559,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683725943636</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Attack debugged">
+      <created>1683742507356</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1683742507356</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -607,7 +608,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Update building for a bit" />
     <MESSAGE value="Update move + Climbable buildings added&#10;(move upto handling Climbable building)" />
     <MESSAGE value="Update move (except climbing building)" />
     <MESSAGE value="Machines rebuilt + try to make MachineType as Json" />
@@ -632,7 +632,8 @@
     <MESSAGE value="Next turn added" />
     <MESSAGE value="Make the &quot;original&quot; map" />
     <MESSAGE value="Debugging move almost Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Debugging move almost Done" />
+    <MESSAGE value="Attack debugged" />
+    <option name="LAST_COMMIT_MESSAGE" value="Attack debugged" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

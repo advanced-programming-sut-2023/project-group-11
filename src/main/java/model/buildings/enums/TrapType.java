@@ -6,8 +6,6 @@ import model.AllResource;
 public enum TrapType {
     KILLING_PIT("killing pit", 1, 0, 0, AllResource.WOOD, 6,
             0, 100, true),
-    PITCH_DITCH("pitch ditch", 1, 0, 0, AllResource.PITCH, 2,
-            0, 100, false),
     CAGED_WARDOGS("caged wardogs", 1, 0, 100, AllResource.WOOD, 10,
             0, 100, false);//TODO:1 it's not a trap (update traps in move)!
 
