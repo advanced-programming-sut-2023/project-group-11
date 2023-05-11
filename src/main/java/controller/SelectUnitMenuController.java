@@ -173,7 +173,7 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    private static boolean pourOil(ArrayList<Units> engineer, String direction, int[] location) {
+    public static boolean pourOil(ArrayList<Units> engineer, String direction, int[] location) {
         int currentX = location[0];
         int currentY = location[1];
         Map map = Stronghold.getCurrentGame().getMap();
@@ -196,7 +196,7 @@ public class SelectUnitMenuController {
                     realEngineer.setEmptyPail(true);
             }
         }
-        if(!realEngineer.isEmptyPail())
+        if (!realEngineer.isEmptyPail())
             return true;
         Path shortestPath;
         for (int i = -5; i <= 5; i++) {
@@ -211,8 +211,8 @@ public class SelectUnitMenuController {
                         if (map.getTile(currentX + i, currentY + j).getUnitsByType("engineer").size() == 1) {
                             shortestPath = findRootToDestination(map, "engineer", currentX + i, currentY + j, currentX, currentY);
                             moveUnits(map, "engineer", shortestPath, new int[]{currentX + i, currentY + j}, currentX, currentY);
-                            if (tile.getUnitsByType("engineer").size() == 1){
-                                ((Engineer)tile.getUnitsByType("engineer").get(0)).setEmptyPail(false);
+                            if (tile.getUnitsByType("engineer").size() == 1) {
+                                ((Engineer) tile.getUnitsByType("engineer").get(0)).setEmptyPail(false);
                                 return true;
                             }
                         }
@@ -545,8 +545,7 @@ public class SelectUnitMenuController {
                 if (currentTile.getBuilding() != null && targetTile.getUnits().size() != 0)
                     onlyUnits = true;
                 else onlyBuilding = true;
-            }
-            else if (!unitType.equals("battle ram")) onlyUnits = true;
+            } else if (!unitType.equals("battle ram")) onlyUnits = true;
         } else {
             if (unitType.equals("trebuchets") || unitType.equals("catapults")) {
                 if (targetTile.getBuilding() != null) onlyBuilding = true;
