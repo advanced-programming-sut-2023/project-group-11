@@ -34,27 +34,22 @@ public class LoginMenuTest {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     public void checkLogin_IncorrectPassword() {
         matcher = getMatcher("user login -p Amir -u amir", LoginMenuCommands.LOGIN);
         assertEquals(LoginMenuMessages.INCORRECT_PASSWORD, LoginMenuController.checkLogin(matcher));
     }
 
     @Test
-    @Order(2)
+    @Order(3)
     public void checkLogin_LockedAccount() {
         matcher = getMatcher("user login -p Amir12* -u amir", LoginMenuCommands.LOGIN);
         assertEquals(LoginMenuMessages.LOCKED_ACCOUNT, LoginMenuController.checkLogin(matcher));
     }
 
     @Test
-    @Disabled
+    @Order(1)
     public void checkLogin_Success() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         matcher = getMatcher("user login -p Amir12* -u amir", LoginMenuCommands.LOGIN);
         assertEquals(LoginMenuMessages.SUCCESS, LoginMenuController.checkLogin(matcher));
     }
