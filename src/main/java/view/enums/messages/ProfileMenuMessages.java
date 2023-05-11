@@ -14,6 +14,7 @@ public enum ProfileMenuMessages {
     NO_LOWERCASE,
     NO_NUMBER,
     NO_SPECIAL,
+    INVALID_FIELD_TO_DISPLAY,
     EMPTY_SLOGAN,
     ;
 }

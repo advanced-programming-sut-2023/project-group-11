@@ -67,7 +67,7 @@ public class ProfileMenuController {
         String field = matcher.group("field");
 
         if (!(field == null || field.equals("highscore") || field.equals("slogan") || field.equals("rank")))
-            return ProfileMenuMessages.INVALID_COMMAND;
+            return ProfileMenuMessages.INVALID_FIELD_TO_DISPLAY;
         else if (field != null && field.equals("slogan") && Stronghold.getCurrentUser().getSlogan() == null)
             return ProfileMenuMessages.EMPTY_SLOGAN;
 

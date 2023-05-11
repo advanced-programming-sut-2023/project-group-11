@@ -106,7 +106,7 @@ public class ProfileMenu {
 
         switch (profileMenuMessage) {
             case SUCCESS -> System.out.println(ProfileMenuController.displayProfile(matcher.group("field")));
-            case INVALID_COMMAND -> System.out.println("Invalid command!");
+            case INVALID_FIELD_TO_DISPLAY -> System.out.println("Enter a valid field!");
             case EMPTY_SLOGAN -> System.out.println("Slogan is empty!");
         }
     }
