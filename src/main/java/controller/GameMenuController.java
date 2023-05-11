@@ -411,6 +411,7 @@ public class GameMenuController {
         GameMenuController.currentGame = Stronghold.getCurrentGame();
     }
 
+    // TODO:1 Repair showing current turn when a governance dyes
     public static int getCurrentTurn() {
         return Math.ceilDiv(currentGame.getTurn(), currentGame.getGovernances().size());
     }

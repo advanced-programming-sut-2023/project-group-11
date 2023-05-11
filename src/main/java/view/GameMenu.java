@@ -19,6 +19,8 @@ public class GameMenu {
 
         GameMenuController.setCurrentGame();
 
+        // TODO:1 End Game
+        // TODO:1 Scores???
         while (true) {
             command = scanner.nextLine();
 

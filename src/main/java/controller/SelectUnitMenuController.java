@@ -81,7 +81,8 @@ public class SelectUnitMenuController {
                         targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner())))
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
-        //TODO:1 set damaging concepts (Fire - tower increasing range - fear rate impact)
+        //TODO:1 set damaging concepts (Fire)
+        //TODO:1 destroy the governance by dying its lord
         attack(selectedUnits, unitType, targetTile, currentTile);
 
         return SelectUnitMenuMessages.SUCCESS;
@@ -595,7 +596,6 @@ public class SelectUnitMenuController {
 
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
-        //TODO:1 set reacting to attacks
     }
 
     private static void removeDeadUnits(Tile targetTile) {
