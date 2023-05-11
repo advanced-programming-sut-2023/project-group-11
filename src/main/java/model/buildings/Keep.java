@@ -14,7 +14,7 @@ public class Keep extends Climbable {
         this.resourceCostNumber = 0;
         this.workersNumber = 0;
         this.isActive = true;
-        this.isClimbable = true;
+        this.rangeIncrement = 3;
         this.owner = currentGovernance;
     }
 }

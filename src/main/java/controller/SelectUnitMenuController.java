@@ -43,8 +43,7 @@ public class SelectUnitMenuController {
                 !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_DIFFERENT_OWNER_UNIT;
         else if (BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) &&
-                (!(map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable climbable) ||
-                        !(climbable.isClimbable())))
+                (!(map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_UNCLIMBABLE_BUILDING;
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
@@ -72,8 +71,8 @@ public class SelectUnitMenuController {
         else if ((attackType.equals("air attack") && !isValidUnitForAirAttack(unitType)) ||
                 (attackType.equals("ground attack") && !isValidUnitForGroundAttack(unitType)))
             return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_ATTACK;
-        else if (((Attacker) selectedUnits.get(0)).getRange() < Math.abs(currentX - targetX) ||
-                ((Attacker) selectedUnits.get(0)).getRange() < Math.abs(currentY - targetY))
+        else if (((Attacker) selectedUnits.get(0)).getRange(currentTile) < Math.abs(currentX - targetX) ||
+                ((Attacker) selectedUnits.get(0)).getRange(currentTile) < Math.abs(currentY - targetY))
             return SelectUnitMenuMessages.OUT_OF_RANGE;
         else if (noAttackLeft(selectedUnits))
             return SelectUnitMenuMessages.NO_ATTACK_LEFT;

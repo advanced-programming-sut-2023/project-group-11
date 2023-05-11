@@ -430,10 +430,11 @@ public class GameMenuController {
 
     private static void unitUpdate(Units unit, int range) {
         ArrayList<Units> units = getAllSameUnitsOfTile(unit);
+        Map map = currentGame.getMap();
         setUnitUpdateState(units);
         int currentX = unit.getLocation()[0];
         int currentY = unit.getLocation()[1];
-        int finalRange = isValidUnitForGroundAttack(unit.getName()) ? ((Attacker) unit).getRange() : range;
+        int finalRange = isValidUnitForGroundAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
         attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
         if (unit.getUnitState().equals(UnitState.OFFENSIVE))
             for (Units unit1 : units)
@@ -441,7 +442,6 @@ public class GameMenuController {
     }
 
     private static Boolean canUnitMove(int destinationX, int destinationY, int currentX, int currentY, String unitType) {
-
         Map map = currentGame.getMap();
 
         if (!Utils.isValidCoordinates(map, destinationX, destinationY))
@@ -452,8 +452,7 @@ public class GameMenuController {
                 !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return false;
         else return !BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) ||
-                    (map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable &&
-                            ((Climbable) map.getTile(destinationX, destinationY).getBuilding()).isClimbable());
+                    (map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable);
     }
 
     private static ArrayList<Units> getAllSameUnitsOfTile(Units unit) {

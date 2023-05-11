@@ -22,7 +22,7 @@ public class GateHouse extends Climbable {
         isActive = gateHouseType.isActive();
         capacity = gateHouseType.getCapacity();
         horizontalDirection = gateHouseType.getHorizontalDirection();
-        isClimbable = true;
+        rangeIncrement = gateHouseType.getRangeIncrement();
         isOpen = true;
     }
 
