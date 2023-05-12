@@ -46,7 +46,7 @@ public abstract class Unit {
     protected void setOwnerGovernance() {
         this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         this.ownerGovernance.addUnit(this);
-        if (!(this instanceof Machine)) this.ownerGovernance.changeCurrentPopulation(-1);
+        if (!(this instanceof Machine || this instanceof Lord)) this.ownerGovernance.changeCurrentPopulation(-1);
     }
 
     public void setUnitState(UnitState unitState) {

@@ -226,18 +226,20 @@ public class GameMenuController {
     public static GameMenuMessages checkShowResource(Matcher matcher) {
         String resourceName = Utils.removeDoubleQuotation(matcher.group("resource"));
 
-        if (!resourceName.equals("all") && !isValidResourceName(resourceName))
+        if (!resourceName.equals("all") && (!resourceName.equals("gold")) && !isValidResourceName(resourceName))
             return GameMenuMessages.INVALID_RESOURCE_TYPE;
         return GameMenuMessages.SUCCESS;
     }
 
     public static String showResource(String resourceName) {
         final String[] output = {""};
-        if (resourceName.equals("all"))
+        if (resourceName.equals("all")) {
             currentGovernance.getAllResources().forEach((allResource, integer) ->
                     output[0] += allResource.getName() + '=' + integer + '\n');
+            output[0] += "gold=" + currentGovernance.getGold() + "\n";
+        } else if (resourceName.equals("gold")) output[0] += "gold=" + currentGovernance.getGold() + "\n";
         else output[0] += resourceName + '=' +
-                currentGovernance.getAllResources().get(AllResource.valueOf(resourceName.toUpperCase())) + '\n';
+                    currentGovernance.getAllResources().get(AllResource.valueOf(resourceName.toUpperCase())) + '\n';
 
         return output[0];
     }
@@ -364,9 +366,6 @@ public class GameMenuController {
         currentGovernance.resetAleFactor();
 
         for (Building building : buildings) {
-            if (building.getName().equals("wood cutter")) {
-                building.setActive(cutTree(building));
-            }
             if (building instanceof ProductiveBuilding productiveBuilding && productiveBuilding.isActive()) {
                 double workersEfficiency = currentGovernance.getWorkersEfficiency();
                 int consumptionRate = (int) Math.ceil((productiveBuilding.getConsumptionRate() * workersEfficiency));
@@ -376,6 +375,7 @@ public class GameMenuController {
                     productionRate = Math.min(oxTetherNumber, 3) * productionRate;
                     oxTetherNumber -= Math.min(oxTetherNumber, 3);
                 }
+                if (building.getName().equals("wood cutter")) building.setActive(cutTree(building));
 
                 int consumed = 0;
                 AllResource requiredResource = productiveBuilding.getRequiredResource();
@@ -579,8 +579,8 @@ public class GameMenuController {
     }
 
     private static boolean hasSameOriginAndDestinationForPatrol(Unit firstUnit, Unit unit) {
-        return firstUnit.getPatrolOrigin() == unit.getPatrolOrigin() &&
-                firstUnit.getPatrolDestination() == unit.getPatrolDestination();
+        return Arrays.equals(firstUnit.getPatrolOrigin(), unit.getPatrolOrigin()) &&
+                Arrays.equals(firstUnit.getPatrolDestination(), unit.getPatrolDestination());
     }
 
     private static void setUnitUpdateState(ArrayList<Unit> units) {

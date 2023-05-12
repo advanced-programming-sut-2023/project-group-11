@@ -121,11 +121,9 @@ public class SelectUnitMenuController {
     }
 
     private static void setPatrolDestination(int destinationX, int destinationY, int currentX, int currentY, ArrayList<Unit> selectedUnits) {
-        int[] patrolOrigin = new int[]{destinationX, destinationY};
-        int[] patrolDestination = new int[]{currentX, currentY};
         for (Unit unit : selectedUnits) {
-            unit.setPatrolOrigin(patrolOrigin);
-            unit.setPatrolDestination(patrolDestination);
+            unit.setPatrolOrigin(new int[]{destinationX, destinationY});
+            unit.setPatrolDestination(new int[]{currentX, currentY});
         }
     }
 

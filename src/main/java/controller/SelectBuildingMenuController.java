@@ -126,7 +126,6 @@ public class SelectBuildingMenuController {
         governance.removeFromStorage(troop.getArmorType(), count);
         //TODO:3 handle "NONE" resource
 
-
         for (int i = 0; i < count; i++) {
             Troop troops = new Troop(unitType);
             troops.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(unitCreationTile));
@@ -194,5 +193,13 @@ public class SelectBuildingMenuController {
 
     public static int[] getUnitCreationCoordinates() {
         return unitCreationCoordinates;
+    }
+
+    private static boolean canCreateUnit() {
+        return unitCreationTile.getTexture().isSuitableForUnit() &&
+                !SelectUnitMenuController.notValidTextureForMoving(unitCreationTile) &&
+                (unitCreationTile.getUnits().size() == 0 ||
+                        unitCreationTile.getUnits().get(0).getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()));
+
     }
 }
