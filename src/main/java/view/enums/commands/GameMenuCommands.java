@@ -31,6 +31,8 @@ public enum GameMenuCommands {
     SHOW_RESOURCE_LEFT("show resource -r (?<resource>\"[^\"]+\"|\\S+)"),
     SHOW_DETAILS("show details(( -x (?<xCoordinate>\\d+))" +
                          "|( -y (?<yCoordinate>\\d+))){2}"),
+    OPEN_TRADE_MENU("enter trade menu"),
+    OPEN_MARKET_MENU("enter market menu"),
     SHOW_GOLD("show gold");
 
     private final String regex;
