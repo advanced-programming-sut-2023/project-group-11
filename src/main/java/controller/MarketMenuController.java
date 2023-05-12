@@ -17,9 +17,11 @@ public class MarketMenuController {
         String output = "";
         int index = 1;
         for (AllResource item : AllResource.values()) {
+            if(item.equals(AllResource.NONE))
+                continue;
             output += (index++) + "- itemName:" + item.getName() +
                     " Buy Price: " + item.getPrice() + " Sell Price: " + (item.getPrice() / 2) +
-                    " Your Storage Amount: " + currentGovernance.getResourceCount(item) + "\n";
+                    " Your Storage Amount: " + currentGovernance.getAllResources().get(item) + "\n";
         }
         return output;
     }

@@ -24,6 +24,7 @@ public class MarketMenu {
                 if (Utils.isValidCommandTags(matcher, "itemName", "amount")) checkSellItem(matcher);
                 else System.out.println("Invalid Command!");
             } else System.out.println("Invalid Command!");
+            command = scanner.nextLine();
         }
 
     }
