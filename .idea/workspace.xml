@@ -95,8 +95,10 @@
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="project-group-11-fixed" />
+      <module name="ProjectAP" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -147,10 +149,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SignupMenuTest" />
         <item itemvalue="JUnit.LoginMenuTest" />
         <item itemvalue="JUnit.ProfileMenuTest" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SignupMenuTest.wrongAnswerConfirmationTest" />
       </list>
     </recent_temporary>
