@@ -8,8 +8,6 @@ public enum MapEditMenuCommands {
     SHOW_CURRENT_MENU("show current menu"),
     NEW_MAP("new\\s*map"),
     SAVE("save"),
-    SHOW_MAP("show\\s*map"),
-    SET_TEXTURE("set\\s*texture(( -x (?<x>-?\\d+)| -y (?<y>-?\\d+)| -t (?<type>\"[^\"]+\"|\\S+)){3}|" +
     SHOW_MAP("show map"),
     SET_TEXTURE("set\\s*texture(( -x (?<x>-?\\d+)| -y (?<y>-?\\d+)| -t (?<type>\"[^\"]+\"|\\S+)){3}|" +
             "( -x1 (?<x1>-?\\d+)| -y1 (?<y1>-?\\d+)| -x2 (?<x2>-?\\d+)| -y2 (?<y2>-?\\d+)| -t (?<type1>\"[^\"]+\"|\\S+)){5})"),

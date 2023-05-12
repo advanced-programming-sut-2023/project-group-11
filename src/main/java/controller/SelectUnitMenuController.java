@@ -293,14 +293,14 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.INVALID_DIRECTION;
         else if (!(selectedUnits.get(0) instanceof Troop troop && troop.canDigPitch()))
             return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_DIG_PITCH;
-        else if (!isValidDestinationForDigging(map, currentX, currentY, direction, length))
+        else if (!isValidDestinationForDiggingPitch(map, currentX, currentY, direction, length))
             return SelectUnitMenuMessages.INVALID_LENGTH;
-        else if (notValidAreaForDigging(map, currentX, currentY, length, direction))
+        else if (notValidAreaForDiggingPitch(map, currentX, currentY, length, direction))
             return SelectUnitMenuMessages.INVALID_AREA_FOR_DIGGING_PITCH;
 
         ArrayList<Tile> selectedTiles = getSelectedTiles(map, currentX, currentY, minimumSpeed(selectedUnits), direction);
-        setDiggingForUnits(selectedUnits, length, direction, minimumSpeed(selectedUnits));
-        moveUnitsForDigging(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits));
+        setDiggingPitchForUnits(selectedUnits, length, direction, minimumSpeed(selectedUnits));
+        moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits));
         digPitch(selectedTiles);
 
         return SelectUnitMenuMessages.SUCCESS;
@@ -680,16 +680,9 @@ public class SelectUnitMenuController {
                 direction.equals("down");
     }
 
-    private static boolean isValidDestinationForDigging(Map map, int currentX, int currentY, String direction, int length) {
-        int destinationX = currentX;
-        int destinationY = currentY;
-
-        switch (direction) {
-            case "left" -> destinationY -= length;
-            case "right" -> destinationY += length;
-            case "up" -> destinationX -= length;
-            case "down" -> destinationX += length;
-        }
+    private static boolean isValidDestinationForDiggingPitch(Map map, int currentX, int currentY, String direction, int length) {
+        int destinationX = getDestinationForDigging(direction, currentX, currentY, length)[0];
+        int destinationY = getDestinationForDigging(direction, currentX, currentY, length)[1];
 
         return Utils.isValidCoordinates(map, destinationX, destinationY) &&
                 !notValidTextureForMoving(map.getTile(destinationX, destinationY)) &&
@@ -698,7 +691,7 @@ public class SelectUnitMenuController {
                 ;
     }
 
-    private static boolean notValidAreaForDigging(Map map, int x, int y, int length, String direction) {
+    private static boolean notValidAreaForDiggingPitch(Map map, int x, int y, int length, String direction) {
         ArrayList<Tile> tilesToBeDigged = getSelectedTiles(map, x, y, length, direction);
         for (Tile tile : tilesToBeDigged) {
             if (tile.getBuilding() != null || tile.getUnits().size() != 0 || !tile.getTexture().isSuitableForPitch())
@@ -730,7 +723,7 @@ public class SelectUnitMenuController {
         return selectedTiles;
     }
 
-    private static void setDiggingForUnits(ArrayList<Unit> selectedUnits, int length, String direction, int leftMoves) {
+    private static void setDiggingPitchForUnits(ArrayList<Unit> selectedUnits, int length, String direction, int leftMoves) {
         for (Unit unit : selectedUnits) {
             ((Troop) unit).setDigging(true);
             ((Troop) unit).setDiggingDirection(direction);
@@ -740,18 +733,11 @@ public class SelectUnitMenuController {
         }
     }
 
-    private static void moveUnitsForDigging(Map map, int[] currentLocation, String unitType, String direction, int leftMoves) {
+    private static void moveUnitsForDiggingPitch(Map map, int[] currentLocation, String unitType, String direction, int leftMoves) {
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        int destinationX = currentX;
-        int destinationY = currentY;
-
-        switch (direction) {
-            case "left" -> destinationY -= leftMoves;
-            case "right" -> destinationY += leftMoves;
-            case "up" -> destinationX -= leftMoves;
-            case "down" -> destinationX += leftMoves;
-        }
+        int destinationX = getDestinationForDigging(direction, currentX, currentY, leftMoves)[0];
+        int destinationY = getDestinationForDigging(direction, currentX, currentY, leftMoves)[1];
 
         moveUnits(map, unitType, findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY),
                 currentLocation, destinationX, destinationY);
@@ -761,5 +747,31 @@ public class SelectUnitMenuController {
         for (Tile tile : selectedTiles) {
             tile.setTexture(Texture.PITCH);
         }
+    }
+
+
+    public static void digPitchInNextTurn(ArrayList<Unit> units) {
+        Map map = Stronghold.getCurrentGame().getMap();
+        Unit unit = units.get(0);
+        String unitType = unit.getName();
+        Path shortestPath;
+        int currentX = unit.getPatrolOrigin()[0];
+        int currentY = unit.getPatrolOrigin()[1];
+        int destinationX = unit.getPatrolDestination()[0];
+        int destinationY = unit.getPatrolDestination()[1];
+    }
+
+    private static int[] getDestinationForDigging(String direction, int currentX, int currentY, int length) {
+        int destinationX = currentX;
+        int destinationY = currentY;
+
+        switch (direction) {
+            case "left" -> destinationY -= length;
+            case "right" -> destinationY += length;
+            case "up" -> destinationX -= length;
+            case "down" -> destinationX += length;
+        }
+
+        return new int[]{destinationX, destinationY};
     }
 }

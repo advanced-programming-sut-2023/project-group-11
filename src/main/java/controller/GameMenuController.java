@@ -290,10 +290,17 @@ public class GameMenuController {
     private static void updateSoldiers() {
         ArrayList<Unit> units = currentGovernance.getUnits();
         ArrayList<Unit> patrollingUnits = new ArrayList<>();
-        for (Unit unit : units)
+        ArrayList<Unit> diggingUnits = new ArrayList<>();
+
+        for (Unit unit : units) {
             if (unit.isPatrolling())
                 patrollingUnits.add(unit);
+            else if (unit instanceof Troop troop && troop.isDigging())
+                diggingUnits.add(troop);
+        }
+
         SelectUnitMenuController.patrolUnit(patrollingUnits);
+        SelectUnitMenuController.digPitchInNextTurn(diggingUnits);
         currentGovernance.resetUnitAbilities();
         updateState();
     }
