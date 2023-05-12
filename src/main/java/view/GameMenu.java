@@ -19,7 +19,6 @@ public class GameMenu {
 
         GameMenuController.setCurrentGame();
 
-        // TODO:1 add Scores???
         while (true) {
             if (GameMenuController.gameHasEnded()) {
                 endGame();

@@ -14,6 +14,7 @@ public class Governance {
     private Territory territory;
     private int score = 0;
     private double gold = 2000;
+    private double totalGold = gold;
     private int maxPopulation = 10;
     private int currentPopulation = 10;
     private int unemployedPopulation = 10;
@@ -72,6 +73,8 @@ public class Governance {
     }
 
     public void setGold(double gold) {
+        if (gold - this.gold > 0)
+            this.totalGold += gold - this.gold;
         this.gold = gold;
     }
 
@@ -331,5 +334,9 @@ public class Governance {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public double getTotalGold() {
+        return totalGold;
     }
 }
