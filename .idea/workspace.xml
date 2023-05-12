@@ -95,7 +95,7 @@
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="ProjectAP" />
+      <module name="project-group-11-fixed" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -139,6 +139,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.SignupMenuTest.invalidQuestionNumberTest" />
+      <item itemvalue="JUnit.SignupMenuTest.validTagQuestionPickTest" />
+      <item itemvalue="JUnit.SignupMenuTest.wrongAnswerConfirmationTest" />
+      <item itemvalue="JUnit.SignupMenuTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />

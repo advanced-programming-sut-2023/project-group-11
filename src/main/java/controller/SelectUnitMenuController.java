@@ -234,9 +234,8 @@ public class SelectUnitMenuController {
             return false;
         for (Unit unit : units) {
             unit.setHp(unit.getHp() - 50);
-            if (unit.getHp() <= 0)
-                unit.removeFromGame(tile, unit.getOwner());
         }
+        removeDeadUnits(tile);
         return true;
     }
 
@@ -598,7 +597,7 @@ public class SelectUnitMenuController {
         removeDeadUnits(targetTile);
     }
 
-    private static void removeDeadUnits(Tile targetTile) {
+    public static void removeDeadUnits(Tile targetTile) {
         for (Unit unit : targetTile.getUnits()) {
             if (unit.getHp() <= 0) {
                 if (unit instanceof Lord) {

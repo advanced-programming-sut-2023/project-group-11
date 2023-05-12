@@ -24,12 +24,13 @@ public class GameMenuController {
 
     public static String nextTurn() {
         ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
-        int currentTurn = currentGame.getTurn();
+        int turn = currentGame.getTurn();
         int totalGovernances = governances.size();
-        currentGovernance = governances.get(currentTurn % totalGovernances);
+        currentGovernance = governances.get(turn % totalGovernances);
         currentGame.setCurrentGovernance(currentGovernance);
         currentGame.plusTurnCounter();
         currentGovernance.setScore((int) ((getCurrentTurn() - 1) * currentGovernance.getTotalGold()));
+        if (currentGovernance == governances.get(0)) currentGame.plusCurrentTurnCounter();
 
         if (getCurrentTurn() > 1) {
             updateSoldiers();
@@ -37,6 +38,7 @@ public class GameMenuController {
             updateStorages();
             updatePopulation();
             updatePopularityRate();
+            updateBuildingStuff();
         }
 
         return "Current Turn = " + getCurrentTurn() +
@@ -325,6 +327,31 @@ public class GameMenuController {
         currentGovernance.updateFood();
     }
 
+    private static void updateBuildingStuff() {
+        for (Building building : currentGovernance.getBuildings()) {
+            cagedWardog(building);
+        }
+    }
+
+    private static void cagedWardog(Building building) {
+        if (building.getName().equals("caged_wardogs")) {
+            int x = building.getXCoordinate();
+            int y = building.getYCoordinate();
+            int range = 3, damage = 20;
+            for (int i = -range; i <= range; i++) {
+                for (int j = -range; j <= range; j++) {
+                    if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
+                        continue;
+                    Tile tile = currentGame.getMap().getTile(x, y);
+                    if (tile.hasEnemy(currentGovernance))
+                        for (Unit unit : tile.getUnits())
+                            unit.setHp(unit.getHp() - damage);
+                    removeDeadUnits(tile);
+                }
+            }
+        }
+    }
+
     private static void updateAllResources() {
         ArrayList<Building> buildings = currentGovernance.getBuildings();
         int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("ox tether"));
@@ -412,9 +439,8 @@ public class GameMenuController {
         currentGovernance = currentGame.getCurrentGovernance();
     }
 
-    // TODO:1 Repair showing current turn when a governance dyes
     public static int getCurrentTurn() {
-        return Math.ceilDiv(currentGame.getTurn(), currentGame.getGovernances().size());
+        return currentGame.getCurrentTurn();
     }
 
     private static void updateState() {
@@ -645,5 +671,13 @@ public class GameMenuController {
         currentGame = null;
         currentGovernance = null;
         Stronghold.setCurrentGame(null);
+    }
+
+    public static String showMapDetails(int x, int y) {
+        String output = "";
+        Map map = Stronghold.getCurrentGame().getMap();
+        Tile tile = map.getTile(x, y);
+        output += tile.toString();
+        return output;
     }
 }

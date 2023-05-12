@@ -103,14 +103,6 @@ public class ShowMapMenuController {
         return output;
     }
 
-    public static String showMapDetails(int x, int y) {
-        String output = "";
-        Map map = Stronghold.getCurrentGame().getMap();
-        Tile tile = map.getTile(x, y);
-        output += tile.toString();
-        return output;
-    }
-
     public static String getCurrentMapName() {
         return Stronghold.getCurrentGame().getMap().getName();
     }

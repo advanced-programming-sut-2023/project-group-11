@@ -12,14 +12,14 @@ public class Game {
     private final ArrayList<Trade> trades = new ArrayList<>();
     private Governance currentGovernance;
     private final Map map;
-    private int turn;
+    private int turn = 1;
+    private int currentTurn = 1;
 
     public Game(ArrayList<Governance> governances, Map map) {
         this.owner = Stronghold.getCurrentUser();
         this.governances = governances;
         this.currentGovernance = governances.get(0);
         this.map = map;
-        this.turn = 1;
     }
 
     public ArrayList<Trade> getTrades() {
@@ -42,8 +42,16 @@ public class Game {
         return turn;
     }
 
+    public int getCurrentTurn() {
+        return currentTurn;
+    }
+
     public void plusTurnCounter() {
         this.turn += 1;
+    }
+
+    public void plusCurrentTurnCounter() {
+        this.currentTurn += 1;
     }
 
     public HashMap<Governance, Integer> getScores() {
