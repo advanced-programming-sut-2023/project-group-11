@@ -17,3 +17,8 @@
 
 لینک مخزن کامیت های اولیه (فاز صفر):
 https://github.com/Sepehr-Noori/src-Fixed.git
+
+_____
+SignupMenu
+user create -u [username] -p [password] [password confirmation] -e [email] -n [nickname] -s [slogan]
+ساخت کاربر
