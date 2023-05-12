@@ -18,6 +18,7 @@ public enum Texture {
     BIG_LAKE("big lake", Color.BLUE_BACKGROUND),
     SEA("sea", Color.DARK_BLUE_BACKGROUND),
     BEACH("beach", Color.BEIGE_BACKGROUND),
+    PITCH("pitch", Color.BLACK_BACKGROUND)             // unbuildable
     ;
 
     private final String name;
@@ -36,15 +37,19 @@ public enum Texture {
 
     public boolean isWater() {
         return this.equals(OIL) || this.equals(MARSH) || this.equals(SMALL_LAKE) || this.equals(BIG_LAKE) ||
-                this.equals(SEA) || this.equals(SHALLOW_WATER) || this.equals(RIVER) || this.equals(BEACH);
+                this.equals(SEA) || this.equals(SHALLOW_WATER) || this.equals(RIVER);
     }
 
     public boolean isSuitableForUnit() {
-        return !isWater() || this.equals(MARSH) || this.equals(CLIFF);
+        return !(isWater() || (this.equals(CLIFF) || this.equals(PITCH))) ||
+                this.equals(MARSH) || this.equals(SHALLOW_WATER) || this.equals(OIL);
+    }
+    public boolean isSuitableForPitch() {
+        return this.equals(SAND_DUNE) || this.equals(SAND) || this.equals(BEACH);
     }
 
     public boolean isStone() {
-        return this.equals(ROCK) || this.equals(STONE) || this.equals(CLIFF);
+        return this.equals(STONE);
     }
 
     public boolean isIron() {
@@ -52,11 +57,11 @@ public enum Texture {
     }
 
     public boolean isGrass() {
-        return this.equals(GRASS) || this.equals(GRASSLAND) || this.equals(DENSE_GRASSLAND);
+        return this.equals(GRASS) || this.equals(DENSE_GRASSLAND);
     }
 
     public boolean isBuildable() {
-        return !isWater();
+        return !(isWater() || this.equals(CLIFF) || this.equals(ROCK) || this.equals(PITCH));
     }
 
     public String getName() {

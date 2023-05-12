@@ -37,9 +37,12 @@ public class SelectUnitMenu {
                 checkBuildMachine(matcher, currentLocation, unitType);
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.POUR_OIL)) != null)
                 checkPourOil(matcher, currentLocation, unitType);
-            else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DISBAND) != null)
+            else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DIG_PITCH)) != null)
+                checkDigPitch(matcher, currentLocation, unitType);
+            else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DISBAND) != null) {
                 disbandUnit(currentLocation, unitType);
-            else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DESELECT) != null) {
+                return;
+            } else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DESELECT) != null) {
                 System.out.println("Entered Game Menu");
                 return;
             } else System.out.println("Invalid Command!");
@@ -146,5 +149,18 @@ public class SelectUnitMenu {
     private static void disbandUnit(int[] currentLocation, String unitType) {
         SelectUnitMenuController.disbandUnit(currentLocation, unitType);
         System.out.println("Units disbanded successfully");
+    }
+
+    private static void checkDigPitch(Matcher matcher, int[] currentLocation, String unitType) {
+        message = SelectUnitMenuController.checkDigPitch(matcher, currentLocation, unitType);
+
+        switch (message) {
+            case SUCCESS -> System.out.println("Digging Pitch Started!");
+            case INVALID_COMMAND -> System.out.println("Invalid Command!");
+            case INVALID_DIRECTION -> System.out.println("Invalid Direction!");
+            case INVALID_LENGTH -> System.out.println("Invalid Final Destination Based On Digging Length!");
+            case INVALID_UNIT_TYPE_TO_DIG_PITCH -> System.out.println("This Units Cannot Dig Pitch!");
+            case INVALID_AREA_FOR_DIGGING_PITCH -> System.out.println("Invalid Area For Digging Pitch!");
+        }
     }
 }

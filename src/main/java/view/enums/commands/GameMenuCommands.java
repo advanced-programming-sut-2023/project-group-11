@@ -6,25 +6,25 @@ import java.util.regex.Pattern;
 public enum GameMenuCommands {
     SHOW_CURRENT_MENU("show current menu"),
     NEXT_TURN("next turn"),
-    SHOW_MAP("show map(( -x (?<xCoordinate>\\d+))" +
+    SHOW_MAP("show\\s*map(( -x (?<xCoordinate>\\d+))" +
             "|( -y (?<yCoordinate>\\d+))){2}"),
-    DROP_BUILDING("dropbuilding((?<xGroup> -x (?<xCoordinate>\\d+))" +
+    DROP_BUILDING("drop\\s*building((?<xGroup> -x (?<xCoordinate>\\d+))" +
             "|(?<yGroup> -y (?<yCoordinate>\\d+))" +
             "|(?<typeGroup> -type (?<type>\"[^\"]+\"|\\S+))){3}"),
-    SELECT_BUILDING("select building((?<xGroup> -x (?<xCoordinate>\\d+))" +
+    SELECT_BUILDING("select\\s*building((?<xGroup> -x (?<xCoordinate>\\d+))" +
             "|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
     SHOW_POPULARITY("show popularity( (?<factors>factors))?"),
     SHOW_FOOD_LIST("show food list"),
-    CHANGE_FOOD_RATE("food rate -r (?<rateNumber>\\d+)"),
-    SHOW_FOOD_RATE("food rate show"),
-    CHANGE_TAX_RATE("tax rate -r (?<rateNumber>\\d+)"),
-    SHOW_TAX_RATE("tax rate show"),
-    CHANGE_FEAR_RATE("fear rate -r (?<rateNumber>\\d+)"),
-    SHOW_FEAR_RATE("fear rate show"),
-    SELECT_UNIT("select unit((?<xGroup> -x (?<xCoordinate>\\d+))" +
+    CHANGE_FOOD_RATE("food\\s*rate -r (?<rateNumber>\\d+)"),
+    SHOW_FOOD_RATE("food\\s*rate show"),
+    CHANGE_TAX_RATE("tax\\s*rate -r (?<rateNumber>\\d+)"),
+    SHOW_TAX_RATE("tax\\s*rate show"),
+    CHANGE_FEAR_RATE("fear\\s*rate -r (?<rateNumber>\\d+)"),
+    SHOW_FEAR_RATE("fear\\s*rate show"),
+    SELECT_UNIT("select\\s*unit((?<xGroup> -x (?<xCoordinate>\\d+))" +
             "|(?<yGroup> -y (?<yCoordinate>\\d+))" +
             "|(?<typeGroup> -t (?<type>\"[^\"]+\"|\\S+))){3}"),
-    DROP_UNIT("dropunit(( -x (?<xCoordinate>\\d+))" +
+    DROP_UNIT("drop\\s*unit(( -x (?<xCoordinate>\\d+))" +
             "|( -y (?<yCoordinate>\\d+))" +
             "|( -t (?<type>\"[^\"]+\"|\\S+))" +
             "|( -c (?<count>\\d+))){4}"),

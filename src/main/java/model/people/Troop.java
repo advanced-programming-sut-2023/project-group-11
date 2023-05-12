@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Map;
 
 public class Troop extends Attacker {
     private final AllResource weaponType;
@@ -18,9 +19,12 @@ public class Troop extends Attacker {
     private final boolean hasHorse;
     private final boolean isArab;
     private final boolean hasFiringWeapon;
-    private final boolean canScaleWall;
-    private final boolean canDigKhandagh;
+    private final boolean canDigPitch;
     private boolean revealed;
+    private boolean isDigging = false;
+    private String diggingDirection;
+    private int leftDiggingLength;
+
 
     public Troop(String name) {
         JSONObject troop = getTroopFromDictionary(name);
@@ -36,8 +40,7 @@ public class Troop extends Attacker {
         this.hasHorse = (Boolean) troop.get("hasHorse");
         this.isArab = (Boolean) troop.get("isArab");
         this.hasFiringWeapon = (Boolean) troop.get("hasFiringWeapon");
-        this.canScaleWall = (Boolean) troop.get("canScaleWall");
-        this.canDigKhandagh = (Boolean) troop.get("canDigKhandagh");
+        this.canDigPitch = (Boolean) troop.get("canDigPitch");
         this.revealed = (Boolean) troop.get("revealed");
         this.cost = ((Long) troop.get("cost")).intValue();
         this.setOwnerGovernance();
@@ -75,12 +78,8 @@ public class Troop extends Attacker {
         return hasFiringWeapon;
     }
 
-    public boolean canScaleWall() {
-        return canScaleWall;
-    }
-
-    public boolean canDigKhandagh() {
-        return canDigKhandagh;
+    public boolean canDigPitch() {
+        return canDigPitch;
     }
 
     public boolean isRevealed() {
@@ -89,5 +88,29 @@ public class Troop extends Attacker {
 
     public void setRevealed(boolean revealed) {
         this.revealed = revealed;
+    }
+
+    public boolean isDigging() {
+        return isDigging;
+    }
+
+    public void setDigging(boolean digging) {
+        isDigging = digging;
+    }
+
+    public String getDiggingDirection() {
+        return diggingDirection;
+    }
+
+    public void setDiggingDirection(String diggingDirection) {
+        this.diggingDirection = diggingDirection;
+    }
+
+    public int getLeftDiggingLength() {
+        return leftDiggingLength;
+    }
+
+    public void setLeftDiggingLength(int leftDiggingLength) {
+        this.leftDiggingLength = leftDiggingLength;
     }
 }

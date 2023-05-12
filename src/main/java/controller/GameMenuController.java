@@ -29,8 +29,8 @@ public class GameMenuController {
         currentGovernance = governances.get(turn % totalGovernances);
         currentGame.setCurrentGovernance(currentGovernance);
         currentGame.plusTurnCounter();
-        currentGovernance.setScore((int) ((getCurrentTurn() - 1) * currentGovernance.getTotalGold()));
         if (currentGovernance == governances.get(0)) currentGame.plusCurrentTurnCounter();
+        currentGovernance.setScore((int) ((getCurrentTurn() - 1) * currentGovernance.getTotalGold()));
 
         if (getCurrentTurn() > 1) {
             updateSoldiers();
