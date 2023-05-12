@@ -7,8 +7,8 @@
     "slogan": "I shall dye for my country",
     "recoveryQuestion": "What is my father's name?",
     "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
-    "highScore": 0,
-    "stayLoggedIn": true
+    "score": 0,
+    "stayLoggedIn": false
   },
   {
     "username": "amir",
@@ -17,7 +17,18 @@
     "email": "amir@gma.co",
     "recoveryQuestion": "What is my best friend's name?",
     "recoveryAnswer": "753bd5b3281c375ac9917f0080e4ced18daa8e6a23d4390c16e05c6038d4d611",
-    "highScore": 0,
+    "score": 0,
+    "stayLoggedIn": false
+  },
+  {
+    "username": "sepehr",
+    "password": "f8e61e178a78738580200c2197e32f8a8fb639ab542bccfe5a583f0fd837dedd",
+    "nickname": "sepehr",
+    "email": "sepehr@go.com",
+    "slogan": "You are clearly no match for my forces! Give in now, my friend!",
+    "recoveryQuestion": "What is my best friend's name?",
+    "recoveryAnswer": "2d73c1f6c77da314c2e3c9060ce798370cdd3bb9f5c7061b834b11784c61bd4d",
+    "score": 0,
     "stayLoggedIn": false
   }
 ]
