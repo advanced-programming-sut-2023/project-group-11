@@ -41,7 +41,7 @@ public enum Texture {
     }
 
     public boolean isSuitableForUnit() {
-        return !(isWater() || (this.equals(CLIFF) || this.equals(PITCH))) ||
+        return !(isWater() || this.equals(CLIFF) || this.equals(PITCH)) ||
                 this.equals(MARSH) || this.equals(SHALLOW_WATER) || this.equals(OIL);
     }
     public boolean isSuitableForPitch() {

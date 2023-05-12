@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Remove Climbablity + Building range Increment applied">
-      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/mavenExecutorSetting.xml" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Lord making resolved + drop unit debugged">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,31 +101,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SignupMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LoginMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProjectAP" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SignupMenuTest" />
+      <option name="MAIN_CLASS_NAME" value="LoginMenuTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SignupMenuTest.invalidQuestionNumberTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProfileMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProjectAP" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SignupMenuTest" />
-      <option name="METHOD_NAME" value="invalidQuestionNumberTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="ProfileMenuTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SignupMenuTest.validTagQuestionPickTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SignupMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProjectAP" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="SignupMenuTest" />
-      <option name="METHOD_NAME" value="validTagQuestionPickTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -141,18 +140,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.SignupMenuTest.invalidQuestionNumberTest" />
-      <item itemvalue="JUnit.SignupMenuTest.validTagQuestionPickTest" />
+      <item itemvalue="JUnit.LoginMenuTest" />
+      <item itemvalue="JUnit.ProfileMenuTest" />
       <item itemvalue="JUnit.SignupMenuTest.wrongAnswerConfirmationTest" />
       <item itemvalue="JUnit.SignupMenuTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SignupMenuTest" />
+        <item itemvalue="JUnit.LoginMenuTest" />
+        <item itemvalue="JUnit.ProfileMenuTest" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SignupMenuTest.wrongAnswerConfirmationTest" />
-        <item itemvalue="JUnit.SignupMenuTest.invalidQuestionNumberTest" />
-        <item itemvalue="JUnit.SignupMenuTest.validTagQuestionPickTest" />
       </list>
     </recent_temporary>
   </component>
@@ -227,56 +226,9 @@
       <workItem from="1683710697630" duration="22917000" />
       <workItem from="1683760663649" duration="4000" />
       <workItem from="1683817649729" duration="4783000" />
-      <workItem from="1683844746168" duration="1140000" />
-    </task>
-    <task id="LOCAL-00014" summary="Map edit menu updated &amp; Main menu added incompletely">
-      <created>1682170102764</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1682170102764</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Remove &quot;s functiona dded &amp; game menu &amp; map edit menu regexes edited">
-      <created>1682173358490</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1682173358490</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Main menu ended &amp; remove &quot;s updated">
-      <created>1682179028493</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1682179028493</updated>
-    </task>
-    <task id="LOCAL-00017" summary="People classes compressed and finished">
-      <created>1682183859761</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1682183859761</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Login menu ended without stay_logged_in &amp; Map edit menu completed but map making has bugs">
-      <created>1682192068717</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1682192068717</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Map constructing debugged">
-      <created>1682193917312</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1682193917312</updated>
-    </task>
-    <task id="LOCAL-00020" summary="First try to read maps">
-      <created>1682196760022</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1682196760023</updated>
+      <workItem from="1683844746168" duration="7014000" />
+      <workItem from="1683884470865" duration="4095000" />
+      <workItem from="1683888696033" duration="20700000" />
     </task>
     <task id="LOCAL-00021" summary="Reading maps complete">
       <created>1682197268065</created>
@@ -572,7 +524,56 @@
       <option name="project" value="LOCAL" />
       <updated>1683824437446</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Assassin's get revealed in fights + Fear effect in damage applied">
+      <created>1683846002394</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1683846002394</updated>
+    </task>
+    <task id="LOCAL-00064" summary="TODOs Updated (CHECK THEM!)">
+      <created>1683846437160</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1683846437160</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Governance dying + End Game added (Only khadagh left)">
+      <created>1683851746161</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1683851746161</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Add score added">
+      <created>1683885475602</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1683885475602</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Lord making resolved + drop unit debugged">
+      <created>1683886614237</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1683886614237</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Start digging pitch added">
+      <created>1683904251428</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1683904251428</updated>
+    </task>
+    <task id="LOCAL-00069" summary="errors resolved">
+      <created>1683910225100</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1683910225100</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -614,13 +615,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Machines rebuilt + try to make MachineType as Json" />
-    <MESSAGE value="Make MachineTypes as Json dictionary" />
-    <MESSAGE value="Rewrite Machine Constructor" />
-    <MESSAGE value="Move ended (need review)" />
-    <MESSAGE value="Attack upto applying damage" />
-    <MESSAGE value="Conflicts resolved" />
-    <MESSAGE value="Make JSON Directory In Resources" />
     <MESSAGE value="Attack ended (check TODOs)" />
     <MESSAGE value="Ground attack added (duplication need to be removed)" />
     <MESSAGE value="TODOs Updated (need to be discussed)" />
@@ -639,7 +633,14 @@
     <MESSAGE value="Attack debugged" />
     <MESSAGE value="Attack &amp; Start game debugged (need correction)" />
     <MESSAGE value="Remove Climbablity + Building range Increment applied" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove Climbablity + Building range Increment applied" />
+    <MESSAGE value="Assassin's get revealed in fights + Fear effect in damage applied" />
+    <MESSAGE value="TODOs Updated (CHECK THEM!)" />
+    <MESSAGE value="Governance dying + End Game added (Only khadagh left)" />
+    <MESSAGE value="Add score added" />
+    <MESSAGE value="Lord making resolved + drop unit debugged" />
+    <MESSAGE value="Start digging pitch added" />
+    <MESSAGE value="errors resolved" />
+    <option name="LAST_COMMIT_MESSAGE" value="errors resolved" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -653,16 +654,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/view/EntryMenu.java</url>
           <line>24</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controller/GameMenuController.java</url>
-          <line>219</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java</url>
-          <line>67</line>
-          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -678,13 +669,15 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noLowerCaseTest.ic" NAME="SignupMenuTest.noLowerCaseTest Coverage Results" MODIFIED="1682819394120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$ProfileMenuTest.ic" NAME="ProfileMenuTest Coverage Results" MODIFIED="1683887713042" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidUsernameFormat.ic" NAME="SignupMenuTest.invalidUsernameFormat Coverage Results" MODIFIED="1682819253264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_shortPasswordTest.ic" NAME="SignupMenuTest.shortPasswordTest Coverage Results" MODIFIED="1682819384415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$LoginMenuTest.ic" NAME="LoginMenuTest Coverage Results" MODIFIED="1683887739009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_wrongAnswerConfirmationTest.ic" NAME="SignupMenuTest.wrongAnswerConfirmationTest Coverage Results" MODIFIED="1682819421975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidEmailFormatTest.ic" NAME="SignupMenuTest.invalidEmailFormatTest Coverage Results" MODIFIED="1682819412108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emailExistTest.ic" NAME="SignupMenuTest.emailExistTest Coverage Results" MODIFIED="1682819409536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_WrongConfirmationTest.ic" NAME="SignupMenuTest.WrongConfirmationTest Coverage Results" MODIFIED="1682819405048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1682864228552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1683887758295" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$Main.ic" NAME="Main Coverage Results" MODIFIED="1682711397956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_randomArgsTest.ic" NAME="SignupMenuTest.randomArgsTest Coverage Results" MODIFIED="1682819201893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noNumberTest.ic" NAME="SignupMenuTest.noNumberTest Coverage Results" MODIFIED="1682819397820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -296,7 +296,8 @@ public class GameMenuController {
                 diggingUnits.add(troop);
         }
 
-        SelectUnitMenuController.digPitchInNextTurn(diggingUnits);
+        if (diggingUnits.size() != 0)
+            SelectUnitMenuController.digPitchInNextTurn(diggingUnits);
         updatePatrol();
         updateState();
         currentGovernance.resetUnitAbilities();
