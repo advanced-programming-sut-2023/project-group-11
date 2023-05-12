@@ -65,6 +65,10 @@ public class GameMenu {
                 showGold();
             else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_DETAILS)) != null)
                 checkShowDetails(matcher);
+            else if(GameMenuCommands.getMatcher(command, GameMenuCommands.OPEN_MARKET_MENU) != null)
+                MarketMenu.run();
+            else if(GameMenuCommands.getMatcher(command, GameMenuCommands.OPEN_TRADE_MENU) != null)
+                TradeMenu.run();
             else System.out.println("Invalid command!");
         }
     }

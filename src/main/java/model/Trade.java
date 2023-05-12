@@ -82,7 +82,7 @@ public class Trade {
         }
         return " ResourceType: " + resourceType.name() + " Amount: " + resourceAmount +
                 " price: " + price + " SenderMessage: " + senderMessage + " Sender: " +
-                sender.getOwner().getNickname() + receiverMessage + " Status: " + status + "\n";
+                sender.getOwner().getNickname() + receiverMessage + " Status: " + status;
     }
 
 
