@@ -42,6 +42,10 @@ public class Game {
         return turn;
     }
 
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
+
     public int getCurrentTurn() {
         return currentTurn;
     }
