@@ -30,7 +30,7 @@ Commands
 
 *LoginMenu*
 
-- user login -u [username] -p [password] (--stay-loggen-in)? --> لاگین
+- user login -u [username] -p [password] (--stay-logged-in)? --> لاگین
 
 - forgot my password -u [username] --> فراموشی رمز عبور
 
