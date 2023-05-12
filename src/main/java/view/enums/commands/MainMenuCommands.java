@@ -6,10 +6,10 @@ import java.util.regex.Pattern;
 public enum MainMenuCommands {
     END("end"),
     LOGOUT("logout"),
-    SHOW_CURRENT_MENU("show current menu"),
-    ENTER_MAP_EDIT_MENU("enter map edit menu"),
-    ENTER_PROFILE_MENU("enter profile menu"),
-    START_GAME("start game( -m (?<mapName>\"[^\"]+\"|\\S+)| -g (?<guests>((\"[^\"]+\"|\\S+) ?)+)){2}"),
+    SHOW_CURRENT_MENU("show\\s*current\\s*menu"),
+    ENTER_MAP_EDIT_MENU("enter\\s*map\\s*edit\\s*menu"),
+    ENTER_PROFILE_MENU("enter\\s*profile\\s*menu"),
+    START_GAME("start\\s*game( -m (?<mapName>\"[^\"]+\"|\\S+)| -g (?<guests>((\"[^\"]+\"|\\S+) ?)+)){2}"),
     ;
 
     private final String regex;

@@ -7,10 +7,10 @@ public enum ProfileMenuCommands {
     BACK("back"),
     END("end"),
     SHOW_CURRENT_MENU("show current menu"),
-    PROFILE_CHANGE("profile change -(?<tag>\\w) (?<field>\"[^\"]+\"|\\S+)"),
-    CHANGE_PASSWORD("profile change password( -o (?<old>\\S+)| -n (?<new>\\S+)){2}"),
-    REMOVE_SLOGAN("profile remove slogan"),
-    PROFILE_DISPLAY("profile display( (?<field>\\S+))?"),
+    PROFILE_CHANGE("profile\\s*change -(?<tag>\\w) (?<field>\"[^\"]+\"|\\S+)"),
+    CHANGE_PASSWORD("profile\\s*change\\s*password( -o (?<old>\\S+)| -n (?<new>\\S+)){2}"),
+    REMOVE_SLOGAN("profile\\s*remove\\s*slogan"),
+    PROFILE_DISPLAY("profile\\s*display( (?<field>\\S+))?"),
     ;
 
     private final String regex;
