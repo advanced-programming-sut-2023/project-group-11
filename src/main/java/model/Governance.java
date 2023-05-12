@@ -4,6 +4,7 @@ import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
 import model.people.Attacker;
+import model.people.Engineer;
 import model.people.Unit;
 
 import java.util.ArrayList;
@@ -314,9 +315,8 @@ public class Governance {
 
     public void resetUnitAbilities() {
         for (Unit unit : units) {
-            Attacker attacker = (Attacker) unit;
-            attacker.setLeftMoves(unit.getSpeed());
-            attacker.setAttacked(false);
+            unit.setLeftMoves(unit.getSpeed());
+            if (!(unit instanceof Engineer)) ((Attacker) unit).setAttacked(false);
         }
     }
 

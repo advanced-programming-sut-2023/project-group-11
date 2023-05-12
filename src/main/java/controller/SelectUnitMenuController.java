@@ -620,6 +620,7 @@ public class SelectUnitMenuController {
         owner.getUnits().forEach(unit -> unit.removeFromGame(map.getTile(unit.getLocation()), owner));
         currentGame.addLoserScore(owner, owner.getScore());
         currentGame.getGovernances().remove(owner);
+        currentGame.setTurn(currentGame.getTurn() - (currentGame.getCurrentTurn() - 1));
     }
 
     private static void setAttackedTrue(ArrayList<Unit> selectedUnits) {
