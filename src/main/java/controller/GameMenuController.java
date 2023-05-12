@@ -36,6 +36,7 @@ public class GameMenuController {
             updateStorages();
             updatePopulation();
             updatePopularityRate();
+            updateBuildingStuff();
         }
 
         return "Current Turn = " + getCurrentTurn() +
@@ -321,6 +322,31 @@ public class GameMenuController {
                 }
 
         currentGovernance.updateFood();
+    }
+
+    private static void updateBuildingStuff(){
+        for (Building building:currentGovernance.getBuildings()){
+            cagedWardog(building);
+        }
+    }
+
+    private static void cagedWardog(Building building) {
+        if(building.getName().equals("caged_wardogs")){
+            int x = building.getXCoordinate();
+            int y = building.getYCoordinate();
+            int range = 3,damage = 20;
+            for(int i =-range;i<=range;i++){
+                for(int j = -range;j<=range;j++){
+                    if(!Utils.isValidCoordinates(currentGame.getMap(),x,y))
+                        continue;
+                    Tile tile = currentGame.getMap().getTile(x,y);
+                    if(tile.hasEnemy(currentGovernance))
+                        for (Unit unit:tile.getUnits())
+                            unit.setHp(unit.getHp() - damage);
+                    removeDeadUnits(tile);
+                }
+            }
+        }
     }
 
     private static void updateAllResources() {
