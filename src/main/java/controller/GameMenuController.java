@@ -132,7 +132,7 @@ public class GameMenuController {
 
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
-        String type = Utils.removeDoubleQuotation(matcher.group("typeGroup"));
+        String type = Utils.removeDoubleQuotation(matcher.group("type"));
         Building building = BuildingUtils.getBuildingByType(type);
 
         if (!BuildingUtils.isValidBuildingType(type)) return GameMenuMessages.INVALID_BUILDING_TYPE;

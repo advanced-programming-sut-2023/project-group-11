@@ -5,19 +5,19 @@ import model.AllResource;
 
 public enum FillerType {
 
-    SHOP("shop", 2, 114, 0, AllResource.WOOD, 5, 0,
+    SHOP("shop", 2, 150, 0, AllResource.WOOD, 5, 0,
             true, false),
     TENT("tent", 1, 1, 0, AllResource.NONE, 0, -1,
             true, true),
-    STABLE("stable", 3, 114, 400, AllResource.WOOD, 20, 0,
+    STABLE("stable", 3, 150, 400, AllResource.WOOD, 20, 0,
             true, false),
-    OX_TETHER("ox tether", 1, 39, 0, AllResource.WOOD, 5, 1,
+    OX_TETHER("ox tether", 1, 70, 0, AllResource.WOOD, 5, 1,
             true, false),
-    HOVEL("hovel", 2, 39, 0, AllResource.WOOD, 6, 0,
+    HOVEL("hovel", 2, 100, 0, AllResource.WOOD, 6, 0,
             true, false),
-    OIL_SMELTER("oil smelter", 1, 39, 0, AllResource.IRON, 5, 0,
+    OIL_SMELTER("oil smelter", 1, 70, 0, AllResource.IRON, 5, 0,
             true, false),
-    CAGED_WARDOGS("caged wardogs", 1, 39, 100, AllResource.WOOD, 10,
+    CAGED_WARDOGS("caged wardogs", 1, 70, 100, AllResource.WOOD, 10,
             0, true, false);
     ;
 
