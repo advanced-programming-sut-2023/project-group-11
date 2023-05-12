@@ -40,7 +40,7 @@ public enum Texture {
     }
 
     public boolean isSuitableForUnit() {
-        return (!isWater() || this.equals(MARSH));
+        return !isWater() || this.equals(MARSH) || this.equals(CLIFF);
     }
 
     public boolean isStone() {

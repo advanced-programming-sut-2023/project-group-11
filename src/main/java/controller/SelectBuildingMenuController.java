@@ -29,7 +29,7 @@ public class SelectBuildingMenuController {
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         Building building = BuildingUtils.getBuilding(x, y);
 
-        if (!Utils.isValidUnitType(type)) return SelectBuildingMenuMessages.INVALID_TYPE;
+        if (!Utils.isValidUnitType(type) || type.equals("lord")) return SelectBuildingMenuMessages.INVALID_TYPE;
         if (!currentGovernance.hasEnoughPopulation(count)) return SelectBuildingMenuMessages.NOT_ENOUGH_POPULATION;
         if (!isUnitMaker(building)) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
 

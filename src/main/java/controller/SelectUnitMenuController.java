@@ -46,6 +46,7 @@ public class SelectUnitMenuController {
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
 
+        //TODO:1 canScaleWall
         moveUnits(map, unitType, shortestPath, currentLocation, destinationX, destinationY);
 
         return SelectUnitMenuMessages.SUCCESS;
