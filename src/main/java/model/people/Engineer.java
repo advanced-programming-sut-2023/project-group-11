@@ -1,10 +1,9 @@
 package model.people;
 
-import model.Stronghold;
 import model.people.enums.Hp;
 import model.people.enums.Speed;
 
-public class Engineer extends Units {
+public class Engineer extends Unit {
     private boolean inWork = false;
     private boolean hasOilPail = false;
     private boolean emptyPail = true;

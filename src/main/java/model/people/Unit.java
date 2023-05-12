@@ -6,7 +6,7 @@ import model.map.Tile;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
 
-public abstract class Units {
+public abstract class Unit {
     protected String name;
     protected int hp;
     protected Speed speed;

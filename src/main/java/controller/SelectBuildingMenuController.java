@@ -7,7 +7,7 @@ import model.buildings.*;
 import model.map.Map;
 import model.map.Tile;
 import model.people.Engineer;
-import model.people.Troops;
+import model.people.Troop;
 import view.enums.messages.SelectBuildingMenuMessages;
 
 import java.util.regex.Matcher;
@@ -48,7 +48,7 @@ public class SelectBuildingMenuController {
         if (type.equals("black monk") && !building.getName().equals("cathedral"))
             return SelectBuildingMenuMessages.CANT_CREATE_HERE;
 
-        Troops troop = new Troops(type);
+        Troop troop = new Troop(type);
 
         if ((troop.isArab() && !unitMaker.isMercenaryMaker()) || !building.getName().equals("barracks"))
             return SelectBuildingMenuMessages.CANT_CREATE_HERE;
@@ -113,7 +113,7 @@ public class SelectBuildingMenuController {
         return false;
     }
 
-    private static boolean createUnit(UnitMaker unitMaker, Troops troop, String unitType, int count) {
+    private static boolean createUnit(UnitMaker unitMaker, Troop troop, String unitType, int count) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         setUnitCoordinates(unitMaker);
 
@@ -126,7 +126,7 @@ public class SelectBuildingMenuController {
 
 
         for (int i = 0; i < count; i++) {
-            Troops troops = new Troops(unitType);
+            Troop troops = new Troop(unitType);
             troops.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(unitCreationTile));
             unitCreationTile.getUnits().add(troops);
         }

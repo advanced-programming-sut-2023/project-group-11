@@ -8,6 +8,7 @@ public class Path {
     public Path() {
         this.path = new ArrayList<>();
     }
+
     private Path(ArrayList<int[]> path) {
         this.path = new ArrayList<>(path);
     }

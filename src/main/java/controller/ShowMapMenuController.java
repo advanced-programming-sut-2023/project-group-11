@@ -117,9 +117,9 @@ public class ShowMapMenuController {
 
     public static boolean isSoldierInTile(Tile tile) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
-        for (Units unit : tile.getUnits())
+        for (Unit unit : tile.getUnits())
             if (unit instanceof Machine || unit instanceof Engineer || unit instanceof Lord) return true;
-            else if (((Troops) unit).isRevealed() || unit.getOwner().equals(governance)) return true;
+            else if (((Troop) unit).isRevealed() || unit.getOwner().equals(governance)) return true;
 
         return false;
     }

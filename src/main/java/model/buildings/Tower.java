@@ -1,7 +1,7 @@
 package model.buildings;
 
 import model.buildings.enums.TowerType;
-import model.people.Units;
+import model.people.Unit;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ public class Tower extends Climbable {
 
     private final int unitCapacity;
     private final boolean canHaveSiegeEquipment;
-    private ArrayList<Units> units = new ArrayList<>();
+    private ArrayList<Unit> units = new ArrayList<>();
 
     public Tower(TowerType towerType) {
         name = towerType.getName();
@@ -30,11 +30,11 @@ public class Tower extends Climbable {
         return unitCapacity;
     }
 
-    public ArrayList<Units> getUnits() {
+    public ArrayList<Unit> getUnits() {
         return units;
     }
 
-    public void setUnits(ArrayList<Units> units) {
+    public void setUnits(ArrayList<Unit> units) {
         this.units = units;
     }
 

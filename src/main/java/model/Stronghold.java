@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Stronghold {
     private final static ArrayList<String> randomSlogans = new ArrayList<>();
     private final static ArrayList<User> users = new ArrayList<>();
-    private final static ArrayList<Map> maps = new ArrayList<>();
+    private static ArrayList<Map> maps = new ArrayList<>();
     private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
     private static User currentUser;
@@ -53,6 +53,10 @@ public class Stronghold {
 
     public static ArrayList<Map> getMaps() {
         return maps;
+    }
+
+    public static void setMaps(ArrayList<Map> maps) {
+        Stronghold.maps = maps;
     }
 
     public static void addMap(Map map) {

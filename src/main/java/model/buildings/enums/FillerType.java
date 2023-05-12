@@ -15,8 +15,8 @@ public enum FillerType {
             true, false),
     HOVEL("hovel", 2, 39, 0, AllResource.WOOD, 6, 0,
             true, false),
-    OIL_SMELTER("oil smelter",1,39,0,AllResource.IRON,5,0,
-            true,false);
+    OIL_SMELTER("oil smelter", 1, 39, 0, AllResource.IRON, 5, 0,
+            true, false);
 
     private final String name;
     private final int size;

@@ -1,5 +1,6 @@
 package controller;
 
+import model.Game;
 import model.Governance;
 import model.Path;
 import model.Stronghold;
@@ -59,7 +60,7 @@ public class SelectUnitMenuController {
         int targetY = Integer.parseInt(matcher.group("yCoordinate"));
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
         Tile targetTile = map.getTile(targetX, targetY);
         Tile currentTile = map.getTile(currentX, currentY);
 
@@ -82,7 +83,6 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
         //TODO:1 set damaging concepts (Fire)
-        //TODO:1 destroy the governance by dying its lord
         attack(selectedUnits, unitType, targetTile, currentTile);
 
         return SelectUnitMenuMessages.SUCCESS;
@@ -94,18 +94,18 @@ public class SelectUnitMenuController {
         int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        ArrayList<Units> selectedUnits = map.getTile(destinationX, destinationY).getUnitsByType(unitType);
+        ArrayList<Unit> selectedUnits = map.getTile(destinationX, destinationY).getUnitsByType(unitType);
         //TODO:2 units in destination of the same type should not patrol
 
-        for (Units unit : selectedUnits) {
+        for (Unit unit : selectedUnits) {
             unit.setPatrolOrigin(new int[]{destinationX, destinationY});
             unit.setPatrolDestination(new int[]{currentX, currentY});
         }
     }
 
-    public static void patrolUnit(ArrayList<Units> units) {
+    public static void patrolUnit(ArrayList<Unit> units) {
         Map map = Stronghold.getCurrentGame().getMap();
-        Units unit = units.get(0);
+        Unit unit = units.get(0);
         String unitType = unit.getName();
         Path shortestPath;
         int currentX = unit.getPatrolOrigin()[0];
@@ -115,7 +115,7 @@ public class SelectUnitMenuController {
 
         if (!isValidForMoving(map, currentX, currentY, destinationX, destinationY)) stopPatrol(units);
         if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) != null) {
-            for (Units unit1 : units) {
+            for (Unit unit1 : units) {
                 unit1.setPatrolOrigin(new int[]{destinationX, destinationY});
                 unit1.setPatrolDestination(new int[]{currentX, currentY});
             }
@@ -127,7 +127,7 @@ public class SelectUnitMenuController {
         Map map = Stronghold.getCurrentGame().getMap();
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
 
         if (!selectedUnits.get(0).isPatrolling()) return SelectUnitMenuMessages.NOT_PATROLLING;
 
@@ -135,19 +135,19 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    private static void stopPatrol(ArrayList<Units> units) {
-        for (Units unit : units) unit.stopPatrol();
+    private static void stopPatrol(ArrayList<Unit> units) {
+        for (Unit unit : units) unit.stopPatrol();
     }
 
     public static SelectUnitMenuMessages checkSetUnitState(Matcher matcher, int[] currentLocation, String unitType) {
         Map map = Stronghold.getCurrentGame().getMap();
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
         String state = matcher.group("state");
 
         if (!state.matches("standing|defensive|offensive")) return SelectUnitMenuMessages.INVALID_STATE;
-        for (Units unit : selectedUnits) unit.setUnitState(UnitState.valueOf(state.toUpperCase()));
+        for (Unit unit : selectedUnits) unit.setUnitState(UnitState.valueOf(state.toUpperCase()));
         return SelectUnitMenuMessages.SUCCESS;
     }
 
@@ -156,7 +156,7 @@ public class SelectUnitMenuController {
         if (!unitType.equals("engineer"))
             return SelectUnitMenuMessages.INVALID_UNIT_TYPE;
         Tile tile = Stronghold.getCurrentGame().getMap().getTile(currentLocation);
-        ArrayList<Units> engineers = tile.getUnitsByType("engineer");
+        ArrayList<Unit> engineers = tile.getUnitsByType("engineer");
         if (engineers.size() == 0)
             return SelectUnitMenuMessages.NOT_ENOUGH_ENGINEERS;
         if (engineers.size() > 1)
@@ -171,7 +171,7 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static boolean pourOil(ArrayList<Units> engineer, String direction, int[] location) {
+    public static boolean pourOil(ArrayList<Unit> engineer, String direction, int[] location) {
         int currentX = location[0];
         int currentY = location[1];
         Map map = Stronghold.getCurrentGame().getMap();
@@ -228,10 +228,10 @@ public class SelectUnitMenuController {
         Tile tile = map.getTile(x, y);
         if (tile.hasBuilding())
             return false;
-        ArrayList<Units> units = tile.getUnits();
+        ArrayList<Unit> units = tile.getUnits();
         if (!units.get(0).getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()) || units.size() == 0)
             return false;
-        for (Units unit : units) {
+        for (Unit unit : units) {
             unit.setHp(unit.getHp() - 50);
             if (unit.getHp() <= 0)
                 unit.removeFromGame(tile, unit.getOwner());
@@ -243,7 +243,7 @@ public class SelectUnitMenuController {
         Map map = Stronghold.getCurrentGame().getMap();
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        Units unit = map.getTile(currentX, currentY).getUnitsByType(unitType).get(0);
+        Unit unit = map.getTile(currentX, currentY).getUnitsByType(unitType).get(0);
 
         String direction = matcher.group("direction");
         if (!unit.getName().equals("tunneler")) return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_DIG_TUNNEL;
@@ -253,7 +253,7 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    private static void digTunnel(Map map, Units tunneler, int currentX, int currentY, String direction) {
+    private static void digTunnel(Map map, Unit tunneler, int currentX, int currentY, String direction) {
         Tile currentTile = map.getTile(currentX, currentY);
         tunneler.removeFromGame(currentTile, tunneler.getOwner());
 
@@ -271,7 +271,7 @@ public class SelectUnitMenuController {
                 digTunnel(map, tunneler, currentX, currentY - i);
     }
 
-    private static void digTunnel(Map map, Units tunneler, int currentX, int currentY) {
+    private static void digTunnel(Map map, Unit tunneler, int currentX, int currentY) {
         Tile currentTile = map.getTile(currentX, currentY);
         Building building = currentTile.getBuilding();
 
@@ -306,12 +306,12 @@ public class SelectUnitMenuController {
         int currentY = currentLocation[1];
         Map map = Stronghold.getCurrentGame().getMap();
         Tile tile = map.getTile(currentX, currentY);
-        ArrayList<Units> selectedUnits = tile.getUnitsByType(unitType);
+        ArrayList<Unit> selectedUnits = tile.getUnitsByType(unitType);
         Governance governance = selectedUnits.get(0).getOwner();
         int currentPopulation = governance.getCurrentPopulation();
         int maxPopulation = governance.getMaxPopulation();
 
-        for (Units unit : selectedUnits) unit.removeFromGame(tile, governance);
+        for (Unit unit : selectedUnits) unit.removeFromGame(tile, governance);
 
         governance.changeCurrentPopulation(Math.min(selectedUnits.size(), maxPopulation - currentPopulation));
     }
@@ -319,7 +319,7 @@ public class SelectUnitMenuController {
     private static void moveUnits(Map map, String unitType, Path shortestPath, int[] currentLocation, int destinationX, int destinationY) {
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        ArrayList<Units> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
         map.getTile(currentX, currentY).clearUnitsByType(selectedUnits);
 
         setLeftMoves(shortestPath, selectedUnits);
@@ -435,9 +435,9 @@ public class SelectUnitMenuController {
             return unitType.equals("assassin");
     }
 
-    private static int minimumSpeed(ArrayList<Units> units) {
+    private static int minimumSpeed(ArrayList<Unit> units) {
         int minimumSpeed = Speed.VERY_HIGH.getMovesInEachTurn() + 1;
-        for (Units unit : units) {
+        for (Unit unit : units) {
             if (unit.getLeftMoves() < minimumSpeed)
                 minimumSpeed = unit.getLeftMoves();
         }
@@ -472,18 +472,18 @@ public class SelectUnitMenuController {
         return currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
     }
 
-    private static void setLeftMoves(Path shortestPath, ArrayList<Units> selectedUnits) {
-        for (Units unit : selectedUnits) {
+    private static void setLeftMoves(Path shortestPath, ArrayList<Unit> selectedUnits) {
+        for (Unit unit : selectedUnits) {
             unit.setLeftMoves(unit.getLeftMoves() - (shortestPath.getLength() - 1));
         }
     }
 
-    public static void setLocation(ArrayList<Units> selectedUnits, int destinationX, int destinationY) {
-        for (Units unit : selectedUnits)
+    public static void setLocation(ArrayList<Unit> selectedUnits, int destinationX, int destinationY) {
+        for (Unit unit : selectedUnits)
             unit.setLocation(new int[]{destinationX, destinationY});
     }
 
-    public static void applyPathEffects(Map map, Path shortestPath, ArrayList<Units> selectedUnits) {
+    public static void applyPathEffects(Map map, Path shortestPath, ArrayList<Unit> selectedUnits) {
         Building currentBuilding;
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         for (int[] location : shortestPath.getPath()) {
@@ -496,10 +496,10 @@ public class SelectUnitMenuController {
         }
     }
 
-    private static void applyTrapDamage(ArrayList<Units> selectedUnits, Trap currentBuilding) {
+    private static void applyTrapDamage(ArrayList<Unit> selectedUnits, Trap currentBuilding) {
         Map map = Stronghold.getCurrentGame().getMap();
 
-        for (Units unit : selectedUnits) {
+        for (Unit unit : selectedUnits) {
             Tile tile = map.getTile(currentBuilding.getXCoordinate(), currentBuilding.getYCoordinate());
             unit.setHp(unit.getHp() - currentBuilding.getDamage());
             if (unit.getHp() <= 0) {
@@ -523,9 +523,9 @@ public class SelectUnitMenuController {
                 type.equals("battering ram") || type.equals("lord");
     }
 
-    private static boolean noAttackLeft(ArrayList<Units> selectedUnits) {
-        ArrayList<Units> removings = new ArrayList<>();
-        for (Units unit : selectedUnits) {
+    private static boolean noAttackLeft(ArrayList<Unit> selectedUnits) {
+        ArrayList<Unit> removings = new ArrayList<>();
+        for (Unit unit : selectedUnits) {
             if (((Attacker) unit).hasAttacked())
                 removings.add(unit);
         }
@@ -534,7 +534,7 @@ public class SelectUnitMenuController {
         return selectedUnits.size() == 0;
     }
 
-    public static void attack(ArrayList<Units> selectedUnits, String unitType, Tile targetTile, Tile currentTile) {
+    public static void attack(ArrayList<Unit> selectedUnits, String unitType, Tile targetTile, Tile currentTile) {
         boolean onlyBuilding = false;
         boolean onlyUnits = false;
 
@@ -557,7 +557,7 @@ public class SelectUnitMenuController {
         else if (onlyUnits) attackUnits(selectedUnits, targetTile);
     }
 
-    private static void attackBuilding(ArrayList<Units> selectedUnits, Tile targetTile) {
+    private static void attackBuilding(ArrayList<Unit> selectedUnits, Tile targetTile) {
         Building targetBuilding = targetTile.getBuilding();
         Map map = Stronghold.getCurrentGame().getMap();
         int targetHp = targetBuilding.getHitPoint();
@@ -571,7 +571,6 @@ public class SelectUnitMenuController {
         setAttackedTrue(selectedUnits);
         if (targetBuilding.getHitPoint() <= 0) {
             destroyBuilding(map, targetBuilding);
-            //TODO:2 rearrange the climbablity
         }
     }
 
@@ -579,12 +578,12 @@ public class SelectUnitMenuController {
         building.removeFromGame(map, building.getOwner());
     }
 
-    private static void attackUnits(ArrayList<Units> selectedUnits, Tile targetTile) {
+    private static void attackUnits(ArrayList<Unit> selectedUnits, Tile targetTile) {
         int attackerDamage = (int) (selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage() *
                 (1 + selectedUnits.get(0).getOwner().getFearFactor() * 0.05));
 
         for (int i = 0; ; i++) {
-            Units unit = targetTile.getUnits().get(i);
+            Unit unit = targetTile.getUnits().get(i);
             if (unit.getHp() > attackerDamage) {
                 unit.setHp(unit.getHp() - attackerDamage);
                 break;
@@ -599,21 +598,34 @@ public class SelectUnitMenuController {
     }
 
     private static void removeDeadUnits(Tile targetTile) {
-        for (Units unit : targetTile.getUnits()) {
+        for (Unit unit : targetTile.getUnits()) {
             if (unit.getHp() <= 0) {
-                if (unit instanceof Machine machine) {
+                if (unit instanceof Lord) {
+                    killGovernance(unit.getOwner());
+                    return;
+                } else if (unit instanceof Machine machine) {
                     for (Engineer engineer : machine.getEngineers())
                         engineer.getOwner().removeUnit(engineer);
                 }
                 unit.removeFromGame(targetTile, unit.getOwner());
-            } else if (unit.getName().equals("assassin")) ((Troops) unit).setRevealed(true);
+            } else if (unit.getName().equals("assassin")) ((Troop) unit).setRevealed(true);
         }
     }
 
-    private static void setAttackedTrue(ArrayList<Units> selectedUnits) {
-        for (Units unit : selectedUnits) {
+    private static void killGovernance(Governance owner) {
+        Game currentGame = Stronghold.getCurrentGame();
+        Map map = currentGame.getMap();
+
+        owner.getBuildings().forEach(building -> building.removeFromGame(map, owner));
+        owner.getUnits().forEach(unit -> unit.removeFromGame(map.getTile(unit.getLocation()), owner));
+        currentGame.addLoserScore(owner, owner.getScore());
+        currentGame.getGovernances().remove(owner);
+    }
+
+    private static void setAttackedTrue(ArrayList<Unit> selectedUnits) {
+        for (Unit unit : selectedUnits) {
             ((Attacker) unit).setAttacked(true);
-            if (unit.getName().equals("assassin")) ((Troops) unit).setRevealed(true);
+            if (unit.getName().equals("assassin")) ((Troop) unit).setRevealed(true);
         }
     }
 

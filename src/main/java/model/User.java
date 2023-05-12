@@ -8,7 +8,7 @@ public class User implements Comparable<User> {
     private String slogan;
     private final String recoveryQuestion;
     private final String recoveryAnswer;
-    private int highScore;
+    private int score;
     private boolean stayLoggedIn;
 
     public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer, String slogan) {
@@ -62,12 +62,12 @@ public class User implements Comparable<User> {
         this.slogan = slogan;
     }
 
-    public int getHighScore() {
-        return highScore;
+    public int getScore() {
+        return score;
     }
 
-    public void setHighScore(int highScore) {
-        this.highScore = highScore;
+    public void addScore(int score) {
+        this.score += score;
     }
 
     public boolean isPasswordCorrect(String password) {
@@ -88,8 +88,8 @@ public class User implements Comparable<User> {
 
     @Override
     public int compareTo(User o) {
-        if (this.highScore < o.highScore) return 1;
-        else if (this.highScore > o.highScore) return -1;
+        if (this.score < o.score) return 1;
+        else if (this.score > o.score) return -1;
         else return this.username.compareTo(o.username);
     }
 }

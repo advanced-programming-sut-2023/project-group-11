@@ -2,17 +2,16 @@ package model.map;
 
 import controller.BuildingUtils;
 import model.Governance;
-import model.Stronghold;
 import model.buildings.Building;
-import model.people.Troops;
-import model.people.Units;
+import model.people.Troop;
+import model.people.Unit;
 
 import java.util.ArrayList;
 
 public class Tile {
     private Texture texture;
     private Building building = null;
-    private ArrayList<Units> units = new ArrayList<>();
+    private ArrayList<Unit> units = new ArrayList<>();
     private Tree tree;
 
     public Tile() {
@@ -41,13 +40,13 @@ public class Tile {
         this.building = building;
     }
 
-    public ArrayList<Units> getUnits() {
+    public ArrayList<Unit> getUnits() {
         return units;
     }
 
-    public ArrayList<Units> getUnitsByType(String unitType) {
-        ArrayList<Units> selectedUnits = new ArrayList<>();
-        for (Units unit : units) {
+    public ArrayList<Unit> getUnitsByType(String unitType) {
+        ArrayList<Unit> selectedUnits = new ArrayList<>();
+        for (Unit unit : units) {
             if (unit.getName().equals(unitType))
                 selectedUnits.add(unit);
         }
@@ -77,8 +76,8 @@ public class Tile {
     }
 
     public boolean hasEnemy(Governance governance) {
-        for (Units units : units)
-            if (!units.getOwner().equals(governance))
+        for (Unit unit : units)
+            if (!unit.getOwner().equals(governance))
                 return true;
         return false;
     }
@@ -97,8 +96,8 @@ public class Tile {
         String result = "";
         int i = 1;
 
-        for (Units unit : units)
-            if (!(unit instanceof Troops troop) || troop.isRevealed() || troop.isForCurrentGovernance())
+        for (Unit unit : units)
+            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
                 unitsName += (i++) + ". " + unit.toString() + '\n';
 
         result += "Texture: " + texture.getName() + '\n';
@@ -110,7 +109,7 @@ public class Tile {
         return result;
     }
 
-    public void clearUnitsByType(ArrayList<Units> selectedUnits) {
+    public void clearUnitsByType(ArrayList<Unit> selectedUnits) {
         this.units.removeAll(selectedUnits);
     }
 }
