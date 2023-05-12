@@ -362,7 +362,7 @@ public class GameMenuController {
 
     private static void updateAllResources() {
         ArrayList<Building> buildings = currentGovernance.getBuildings();
-        int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("ox tether"));
+        int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("OX_TETHER"));
         currentGovernance.resetAleFactor();
 
         for (Building building : buildings) {
@@ -582,41 +582,43 @@ public class GameMenuController {
 
     private static boolean attackNearestEnemy(int destinationX, int destinationY, int currentX, int currentY,
                                               int currentRange, int maxRange, Map map, ArrayList<Unit> units) {
+        System.out.println(destinationX + " " + destinationY);
         if (currentRange > maxRange)
             return false;
         if (!Utils.isValidCoordinates(map, destinationX, destinationY))
             return false;
-        if (canUnitMove(destinationX, destinationY, currentX, currentY, units.get(0).getName())
-                || isValidUnitForAirAttack(units.get(0).getName())) {
+        String unitName = units.get(0).getName();
+        if (canUnitMove(destinationX, destinationY, currentX, currentY, unitName)
+                || isValidUnitForAirAttack(unitName)) {
             if (map.getTile(destinationX + 1, destinationY).hasEnemy(currentGovernance)) {
-                if (!isValidUnitForAirAttack(units.get(0).getName()))
+                if (!isValidUnitForAirAttack(unitName))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX + 1, destinationY), map.getTile(destinationX, destinationY));
+                    attack(units, unitName, map.getTile(destinationX + 1, destinationY), map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
             if (map.getTile(destinationX - 1, destinationY).hasEnemy(currentGovernance)) {
-                if (!isValidUnitForAirAttack(units.get(0).getName()))
+                if (!isValidUnitForAirAttack(unitName))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY), map.getTile(destinationX, destinationY));
+                    attack(units, unitName, map.getTile(destinationX - 1, destinationY), map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
             if (map.getTile(destinationX, destinationY + 1).hasEnemy(currentGovernance)) {
-                if (!isValidUnitForAirAttack(units.get(0).getName()))
+                if (!isValidUnitForAirAttack(unitName))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX, destinationY + 1), map.getTile(destinationX, destinationY));
+                    attack(units, unitName, map.getTile(destinationX, destinationY + 1), map.getTile(destinationX, destinationY));
                     return true;
                 }
             }
             if (map.getTile(destinationX, destinationY - 1).hasEnemy(currentGovernance)) {
-                if (!isValidUnitForAirAttack(units.get(0).getName()))
+                if (!isValidUnitForAirAttack(unitName))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, units.get(0).getName(), map.getTile(destinationX - 1, destinationY), map.getTile(destinationX, destinationY));
+                    attack(units, unitName, map.getTile(destinationX - 1, destinationY), map.getTile(destinationX, destinationY));
                     return true;
                 }
             }

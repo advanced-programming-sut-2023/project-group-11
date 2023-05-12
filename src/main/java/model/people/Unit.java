@@ -113,6 +113,6 @@ public abstract class Unit {
     }
 
     public String toString() {
-        return "UnitType->" + name + " * HP->" + hp + " * Owner->" + ownerGovernance.getOwner().getUsername();
+        return "UnitType->" + name + " * HP->" + hp + " * State->" + unitState + " * Owner->" + ownerGovernance.getOwner().getUsername();
     }
 }
