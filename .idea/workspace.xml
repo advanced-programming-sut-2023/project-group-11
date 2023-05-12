@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="remove TODOs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectUnitMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectUnitMenuCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,14 +230,8 @@
       <workItem from="1683817649729" duration="4783000" />
       <workItem from="1683844746168" duration="7014000" />
       <workItem from="1683884470865" duration="4095000" />
-      <workItem from="1683888696033" duration="31384000" />
-    </task>
-    <task id="LOCAL-00027" summary="isMapName problem fixed">
-      <created>1682278048312</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1682278048312</updated>
+      <workItem from="1683888696033" duration="31944000" />
+      <workItem from="1683924829630" duration="565000" />
     </task>
     <task id="LOCAL-00028" summary="Captcha Updated">
       <created>1682353591245</created>
@@ -576,7 +569,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683923471029</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="remove TODOs">
+      <created>1683924272298</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1683924272298</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,7 +618,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Attack priority set&#10;(armor effect &amp; throwing path ignored)" />
     <MESSAGE value="Dead machine -&gt; remove engineer" />
     <MESSAGE value="setLocation for units" />
     <MESSAGE value="Start game debugged (map initialization + minor changes)" />
@@ -643,7 +642,8 @@
     <MESSAGE value="map edited + cliff debugged" />
     <MESSAGE value="Start game double quote handled" />
     <MESSAGE value="Debug as possible as i could!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Debug as possible as i could!" />
+    <MESSAGE value="remove TODOs" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove TODOs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
