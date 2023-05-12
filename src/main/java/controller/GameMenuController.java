@@ -321,10 +321,10 @@ public class GameMenuController {
         int foodConsumption = (int) (currentGovernance.getCurrentPopulation() * foodRatio);
         int totalFoodRemoved = 0;
 
-        for (AllResource resource : AllResource.values())
+        outer: for (AllResource resource : AllResource.values())
             if (Utils.isFood(resource))
                 while (totalFoodRemoved < foodConsumption) {
-                    if (!currentGovernance.hasEnoughItem(resource, 1)) continue;
+                    if (!currentGovernance.hasEnoughItem(resource, 1)) continue outer;
                     currentGovernance.removeFromStorage(resource, 1);
                     totalFoodRemoved++;
                 }

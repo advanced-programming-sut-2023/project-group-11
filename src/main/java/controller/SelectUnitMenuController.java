@@ -105,6 +105,8 @@ public class SelectUnitMenuController {
     }
 
     public static void patrolUnit(ArrayList<Unit> units) {
+        if(units.size() == 0)
+            return;
         Map map = Stronghold.getCurrentGame().getMap();
         Unit unit = units.get(0);
         String unitType = unit.getName();
