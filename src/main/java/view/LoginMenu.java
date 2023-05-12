@@ -71,7 +71,10 @@ public class LoginMenu {
                 LoginMenuMessages message = LoginMenuController.checkRecoveryAnswer(matcher, recoveryAnswer);
                 switch (message) {
                     case WRONG_RECOVERY_ANSWER -> System.out.println("Wrong recovery answer!");
-                    case SUCCESS -> changePassword(matcher);
+                    case SUCCESS -> {
+                        changePassword(matcher);
+                        return;
+                    }
                 }
             }
             recoveryAnswer = scanner.nextLine();

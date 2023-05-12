@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,9 +151,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.ProfileMenuTest" />
         <item itemvalue="JUnit.SignupMenuTest" />
         <item itemvalue="JUnit.LoginMenuTest" />
-        <item itemvalue="JUnit.ProfileMenuTest" />
         <item itemvalue="JUnit.SignupMenuTest.wrongAnswerConfirmationTest" />
       </list>
     </recent_temporary>
@@ -226,14 +231,7 @@
       <workItem from="1683817649729" duration="4783000" />
       <workItem from="1683844746168" duration="7014000" />
       <workItem from="1683884470865" duration="4095000" />
-      <workItem from="1683888696033" duration="21687000" />
-    </task>
-    <task id="LOCAL-00023" summary="Profile menu ended (not debugged)">
-      <created>1682269825237</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1682269825237</updated>
+      <workItem from="1683888696033" duration="24503000" />
     </task>
     <task id="LOCAL-00024" summary="Remove static fields in Game">
       <created>1682270662266</created>
@@ -571,7 +569,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683913774062</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Remove dead units debugged">
+      <created>1683914547511</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1683914547511</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -613,7 +618,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="TODOs Updated (need to be discussed)" />
     <MESSAGE value="Attack updated(duplication removed) + important TODOs added" />
     <MESSAGE value="TODOs Updated" />
     <MESSAGE value="Add (Areas + Lord + Keep)" />
@@ -638,7 +642,8 @@
     <MESSAGE value="errors resolved" />
     <MESSAGE value="Dig pitch added in nextTurn" />
     <MESSAGE value="nothing special" />
-    <option name="LAST_COMMIT_MESSAGE" value="nothing special" />
+    <MESSAGE value="Remove dead units debugged" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove dead units debugged" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

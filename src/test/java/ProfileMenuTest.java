@@ -137,7 +137,7 @@ public class ProfileMenuTest {
     @Test
     @Order(1)
     public void displayProfile_InvalidField() {
-        matcher = getMatcher("profile display SadeghDr", ProfileMenuCommands.PROFILE_DISPLAY);
+        matcher = getMatcher("profile display Sadegh", ProfileMenuCommands.PROFILE_DISPLAY);
         assertEquals(ProfileMenuMessages.INVALID_FIELD_TO_DISPLAY, ProfileMenuController.checkDisplayProfile(matcher));
     }
 
@@ -152,7 +152,7 @@ public class ProfileMenuTest {
     @Test
     @Order(1)
     public void displayProfile_Success1() {
-        setCurrentUser("SadeghDr");
+        setCurrentUser("Sadegh");
         matcher = getMatcher("profile display slogan", ProfileMenuCommands.PROFILE_DISPLAY);
         assertEquals(ProfileMenuMessages.SUCCESS, ProfileMenuController.checkDisplayProfile(matcher));
     }
@@ -160,15 +160,15 @@ public class ProfileMenuTest {
     @Test
     @Order(1)
     public void displayProfile_Success2() {
-        setCurrentUser("SadeghDr");
-        matcher = getMatcher("profile display highscore", ProfileMenuCommands.PROFILE_DISPLAY);
+        setCurrentUser("Sadegh");
+        matcher = getMatcher("profile display score", ProfileMenuCommands.PROFILE_DISPLAY);
         assertEquals(ProfileMenuMessages.SUCCESS, ProfileMenuController.checkDisplayProfile(matcher));
     }
 
     @Test
     @Order(1)
     public void displayProfile_Success3() {
-        setCurrentUser("SadeghDr");
+        setCurrentUser("Sadegh");
         matcher = getMatcher("profile display rank", ProfileMenuCommands.PROFILE_DISPLAY);
         assertEquals(ProfileMenuMessages.SUCCESS, ProfileMenuController.checkDisplayProfile(matcher));
     }
@@ -176,7 +176,7 @@ public class ProfileMenuTest {
     @Test
     @Order(1)
     public void displayProfile_Success4() {
-        setCurrentUser("SadeghDr");
+        setCurrentUser("Sadegh");
         matcher = getMatcher("profile display", ProfileMenuCommands.PROFILE_DISPLAY);
         assertEquals(ProfileMenuMessages.SUCCESS, ProfileMenuController.checkDisplayProfile(matcher));
     }

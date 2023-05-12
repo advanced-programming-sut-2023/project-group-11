@@ -20528,7 +20528,7 @@
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
@@ -20536,7 +20536,7 @@
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
@@ -20544,7 +20544,7 @@
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
@@ -20930,23 +20930,23 @@
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
@@ -21332,23 +21332,23 @@
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
@@ -21734,23 +21734,23 @@
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
@@ -22136,23 +22136,23 @@
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
@@ -38188,6 +38188,34 @@
           "units": []
         },
         {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
           "texture": "SAND",
           "units": []
         },
@@ -38201,6 +38229,380 @@
         },
         {
           "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        }
+      ],
+      [
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
           "units": []
         },
         {
@@ -38590,6 +38992,34 @@
           "units": []
         },
         {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
           "texture": "SAND",
           "units": []
         },
@@ -38603,6 +39033,380 @@
         },
         {
           "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        }
+      ],
+      [
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "SAND",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
+          "units": []
+        },
+        {
+          "texture": "CLIFF",
           "units": []
         },
         {
@@ -38992,827 +39796,23 @@
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        }
-      ],
-      [
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        }
-      ],
-      [
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
-          "units": []
-        },
-        {
-          "texture": "SAND",
+          "texture": "CLIFF",
           "units": []
         },
         {

@@ -66,7 +66,7 @@ public class ProfileMenuController {
     public static ProfileMenuMessages checkDisplayProfile(Matcher matcher) {
         String field = matcher.group("field");
 
-        if (!(field == null || field.equals("highscore") || field.equals("slogan") || field.equals("rank")))
+        if (!(field == null || field.equals("score") || field.equals("slogan") || field.equals("rank")))
             return ProfileMenuMessages.INVALID_FIELD_TO_DISPLAY;
         else if (field != null && field.equals("slogan") && Stronghold.getCurrentUser().getSlogan() == null)
             return ProfileMenuMessages.EMPTY_SLOGAN;
@@ -80,13 +80,13 @@ public class ProfileMenuController {
 
         if (field == null) {
             result += "** UserName: " + user.getUsername() + " **\n";
-            result += "HighScore = " + user.getScore() + '\n';
+            result += "Score = " + user.getScore() + '\n';
             result += "Rank = " + Stronghold.getRankByUsername(user.getUsername());
             if (user.getSlogan() != null)
                 result += "\nSlogan = " + user.getSlogan();
         } else {
             switch (field) {
-                case "highscore" -> result = "HighScore = " + user.getScore();
+                case "score" -> result = "Score = " + user.getScore();
                 case "rank" -> result = "Rank = " + Stronghold.getRankByUsername(user.getUsername());
                 case "slogan" -> result = "Slogan = " + user.getSlogan();
             }

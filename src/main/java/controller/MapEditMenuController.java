@@ -145,20 +145,20 @@ public class MapEditMenuController {
         }
 
         switch (direction) {
-            case "r" -> {
+            case "d" -> {
                 currentMap.getTile(x + 4, y + 1).setTexture(Texture.SAND);
                 currentMap.getTile(x + 4, y + 3).setTexture(Texture.SAND);
             }
-            case "u" -> {
+            case "l" -> {
                 currentMap.getTile(x + 1, y).setTexture(Texture.SAND);
                 currentMap.getTile(x + 3, y).setTexture(Texture.SAND);
 
             }
-            case "l" -> {
+            case "u" -> {
                 currentMap.getTile(x, y + 1).setTexture(Texture.SAND);
                 currentMap.getTile(x, y + 3).setTexture(Texture.SAND);
             }
-            case "d" -> {
+            case "r" -> {
                 currentMap.getTile(x + 1, y + 4).setTexture(Texture.SAND);
                 currentMap.getTile(x + 3, y + 4).setTexture(Texture.SAND);
             }

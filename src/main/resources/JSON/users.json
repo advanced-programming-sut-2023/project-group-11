@@ -1,14 +1,14 @@
 [
   {
-    "username": "SadeghDr",
-    "password": "ede2195df4b3ec64da8d2610d7d12922b6f7ce890882ce038241bccfd2332696",
+    "username": "Sadegh",
+    "password": "2e3a73b434678a4a6f4b2a2f6a1420a6cd2bb7933fe50229dc90d5093e7eaf9e",
     "nickname": "SadeghViper",
     "email": "sadegh.sg.sn@gmail.com",
     "slogan": "I shall dye for my country",
     "recoveryQuestion": "What is my father's name?",
     "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
     "score": 0,
-    "stayLoggedIn": false
+    "stayLoggedIn": true
   },
   {
     "username": "amir",
@@ -29,6 +29,6 @@
     "recoveryQuestion": "What is my best friend's name?",
     "recoveryAnswer": "2d73c1f6c77da314c2e3c9060ce798370cdd3bb9f5c7061b834b11784c61bd4d",
     "score": 0,
-    "stayLoggedIn": true
+    "stayLoggedIn": false
   }
 ]
