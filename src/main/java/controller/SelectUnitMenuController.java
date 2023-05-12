@@ -627,6 +627,8 @@ public class SelectUnitMenuController {
     }
 
     public static void removeDeadUnits(Tile targetTile) {
+        ArrayList<Unit> removings = new ArrayList<>();
+
         for (Unit unit : targetTile.getUnits()) {
             if (unit.getHp() <= 0) {
                 if (unit instanceof Lord) {
@@ -636,9 +638,11 @@ public class SelectUnitMenuController {
                     for (Engineer engineer : machine.getEngineers())
                         engineer.getOwner().removeUnit(engineer);
                 }
-                unit.removeFromGame(targetTile, unit.getOwner());
+                removings.add(unit);
             } else if (unit.getName().equals("assassin")) ((Troop) unit).setRevealed(true);
         }
+
+        removings.forEach(unit -> unit.removeFromGame(targetTile, unit.getOwner()));
     }
 
     private static void killGovernance(Governance owner) {

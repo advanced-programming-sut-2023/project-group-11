@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Lord making resolved + drop unit debugged">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,21 +226,7 @@
       <workItem from="1683817649729" duration="4783000" />
       <workItem from="1683844746168" duration="7014000" />
       <workItem from="1683884470865" duration="4095000" />
-      <workItem from="1683888696033" duration="20700000" />
-    </task>
-    <task id="LOCAL-00021" summary="Reading maps complete">
-      <created>1682197268065</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1682197268065</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Change profile &amp; change password">
-      <created>1682266533006</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1682266533006</updated>
+      <workItem from="1683888696033" duration="21687000" />
     </task>
     <task id="LOCAL-00023" summary="Profile menu ended (not debugged)">
       <created>1682269825237</created>
@@ -575,7 +557,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683910225100</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="Dig pitch added in nextTurn">
+      <created>1683913571048</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1683913571048</updated>
+    </task>
+    <task id="LOCAL-00071" summary="nothing special">
+      <created>1683913774062</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1683913774062</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,8 +613,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Attack ended (check TODOs)" />
-    <MESSAGE value="Ground attack added (duplication need to be removed)" />
     <MESSAGE value="TODOs Updated (need to be discussed)" />
     <MESSAGE value="Attack updated(duplication removed) + important TODOs added" />
     <MESSAGE value="TODOs Updated" />
@@ -642,7 +636,9 @@
     <MESSAGE value="Lord making resolved + drop unit debugged" />
     <MESSAGE value="Start digging pitch added" />
     <MESSAGE value="errors resolved" />
-    <option name="LAST_COMMIT_MESSAGE" value="errors resolved" />
+    <MESSAGE value="Dig pitch added in nextTurn" />
+    <MESSAGE value="nothing special" />
+    <option name="LAST_COMMIT_MESSAGE" value="nothing special" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
