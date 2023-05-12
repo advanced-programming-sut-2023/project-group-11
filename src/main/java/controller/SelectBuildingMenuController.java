@@ -122,7 +122,6 @@ public class SelectBuildingMenuController {
         governance.setGold(governance.getGold() - troop.getCost() * count);
         governance.removeFromStorage(troop.getWeaponType(), count);
         governance.removeFromStorage(troop.getArmorType(), count);
-        //TODO:3 handle "NONE" resource
 
 
         for (int i = 0; i < count; i++) {

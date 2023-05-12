@@ -46,7 +46,6 @@ public class SelectUnitMenuController {
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
 
-        //TODO:1 canScaleWall
         if (isPatrol) setPatrolUnit(matcher, currentLocation, unitType);
         moveUnits(map, unitType, shortestPath, currentLocation, destinationX, destinationY);
 
@@ -84,7 +83,6 @@ public class SelectUnitMenuController {
                         targetTile.getBuilding().getOwner().equals(selectedUnits.get(0).getOwner())))
             return SelectUnitMenuMessages.FRIENDLY_ATTACK;
 
-        //TODO:1 set damaging concepts (Fire)
         attack(selectedUnits, unitType, targetTile, currentTile);
 
         return SelectUnitMenuMessages.SUCCESS;
