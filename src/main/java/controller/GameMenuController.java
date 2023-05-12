@@ -482,7 +482,7 @@ public class GameMenuController {
         setUnitUpdateState(units);
         int currentX = unit.getLocation()[0];
         int currentY = unit.getLocation()[1];
-        int finalRange = isValidUnitForGroundAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
+        int finalRange = isValidUnitForAirAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
         attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
         if (unit.getUnitState() == UnitState.OFFENSIVE) {
             for (Unit unit1 : units)
@@ -582,7 +582,6 @@ public class GameMenuController {
 
     private static boolean attackNearestEnemy(int destinationX, int destinationY, int currentX, int currentY,
                                               int currentRange, int maxRange, Map map, ArrayList<Unit> units) {
-        System.out.println(destinationX + " " + destinationY);
         if (currentRange > maxRange)
             return false;
         if (!Utils.isValidCoordinates(map, destinationX, destinationY))
