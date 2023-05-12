@@ -342,10 +342,12 @@ public class GameMenuController {
                 for (int j = -range; j <= range; j++) {
                     if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
                         continue;
-                    Tile tile = currentGame.getMap().getTile(x, y);
-                    if (tile.hasEnemy(currentGovernance))
+                    Tile tile = currentGame.getMap().getTile(x,y);
+                    if(tile.hasEnemy(currentGovernance)) {
                         for (Unit unit : tile.getUnits())
                             unit.setHp(unit.getHp() - damage);
+                        building.removeFromGame(currentGame.getMap(),currentGovernance);
+                    }
                     removeDeadUnits(tile);
                 }
             }
