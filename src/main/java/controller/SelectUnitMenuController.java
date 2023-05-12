@@ -102,6 +102,8 @@ public class SelectUnitMenuController {
     }
 
     public static void patrolUnit(ArrayList<Unit> units) {
+        if (units.size() == 0)
+            return;
         Map map = Stronghold.getCurrentGame().getMap();
         Unit unit = units.get(0);
         String unitType = unit.getName();
@@ -302,7 +304,8 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.INVALID_AREA_FOR_DIGGING_PITCH;
 
         ArrayList<Tile> selectedTiles = getSelectedTiles(map, currentX, currentY, minimumSpeed(selectedUnits), direction);
-        setDiggingPitchForUnits(selectedUnits, length, direction, minimumSpeed(selectedUnits));
+
+        setDiggingPitchConseptsForUnits(selectedUnits, currentX, currentY, length, direction, minimumSpeed(selectedUnits));
         moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits));
         digPitch(selectedTiles);
 
@@ -627,6 +630,8 @@ public class SelectUnitMenuController {
     }
 
     public static void removeDeadUnits(Tile targetTile) {
+        ArrayList<Unit> removings = new ArrayList<>();
+
         for (Unit unit : targetTile.getUnits()) {
             if (unit.getHp() <= 0) {
                 if (unit instanceof Lord) {
@@ -636,9 +641,11 @@ public class SelectUnitMenuController {
                     for (Engineer engineer : machine.getEngineers())
                         engineer.getOwner().removeUnit(engineer);
                 }
-                unit.removeFromGame(targetTile, unit.getOwner());
+                removings.add(unit);
             } else if (unit.getName().equals("assassin")) ((Troop) unit).setRevealed(true);
         }
+
+        removings.forEach(unit -> unit.removeFromGame(targetTile, unit.getOwner()));
     }
 
     private static void killGovernance(Governance owner) {
@@ -726,11 +733,12 @@ public class SelectUnitMenuController {
         return selectedTiles;
     }
 
-    private static void setDiggingPitchForUnits(ArrayList<Unit> selectedUnits, int length, String direction, int leftMoves) {
+    private static void setDiggingPitchConseptsForUnits(ArrayList<Unit> selectedUnits, int currentX, int currentY, int length, String direction, int leftMoves) {
         for (Unit unit : selectedUnits) {
             ((Troop) unit).setDigging(true);
             ((Troop) unit).setDiggingDirection(direction);
             ((Troop) unit).setLeftDiggingLength(length - leftMoves);
+            ((Troop) unit).setDiggingDestination(getDestinationForDigging(direction, currentX, currentY, length));
 
             if (((Troop) unit).getLeftDiggingLength() <= 0) ((Troop) unit).setDigging(false);
         }
@@ -752,16 +760,51 @@ public class SelectUnitMenuController {
         }
     }
 
-
     public static void digPitchInNextTurn(ArrayList<Unit> units) {
         Map map = Stronghold.getCurrentGame().getMap();
-        Unit unit = units.get(0);
-        String unitType = unit.getName();
         Path shortestPath;
-        int currentX = unit.getPatrolOrigin()[0];
-        int currentY = unit.getPatrolOrigin()[1];
-        int destinationX = unit.getPatrolDestination()[0];
-        int destinationY = unit.getPatrolDestination()[1];
+        ArrayList<Unit> selectedUnits = new ArrayList<>();
+        ArrayList<Tile> selectedTiles = new ArrayList<>();
+        Troop selected;
+        String unitType;
+        String direction;
+        int[] currentLocation;
+        int diggingLengthLeft;
+        int currentX;
+        int currentY;
+        int destinationX;
+        int destinationY;
+
+        while (units.size() != 0) {
+            selected = (Troop) units.get(0);
+            unitType = selected.getName();
+            for (Unit unit : units) {
+                if (Arrays.equals(((Troop) unit).getDiggingDestination(), selected.getDiggingDestination()) &&
+                        Arrays.equals(unit.getLocation(), selected.getLocation()))
+                    selectedUnits.add(unit);
+            }
+
+            direction = selected.getDiggingDirection();
+            diggingLengthLeft = selected.getLeftDiggingLength();
+            currentLocation = selected.getLocation();
+            currentX = currentLocation[0];
+            currentY = currentLocation[1];
+            destinationX = getDestinationForDigging(direction, currentX, currentY, minimumSpeed(selectedUnits))[0];
+            destinationY = getDestinationForDigging(direction, currentX, currentY, minimumSpeed(selectedUnits))[1];
+            shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY);
+            selectedTiles = getSelectedTiles(map, currentX, currentY, minimumSpeed(selectedUnits), direction);
+
+            if (shortestPath != null) {
+                setDiggingPitchConseptsForUnits(selectedUnits, currentX, currentY, diggingLengthLeft, direction, minimumSpeed(selectedUnits));
+                moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits));
+                digPitch(selectedTiles);
+            } else {
+                for (Unit unit : selectedUnits) ((Troop) unit).setDigging(false);
+            }
+
+            units.removeAll(selectedUnits);
+        }
+
     }
 
     private static int[] getDestinationForDigging(String direction, int currentX, int currentY, int length) {

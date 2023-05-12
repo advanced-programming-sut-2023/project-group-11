@@ -23,6 +23,7 @@ public class Troop extends Attacker {
     private boolean revealed;
     private boolean isDigging = false;
     private String diggingDirection;
+    private int[] diggingDestination;
     private int leftDiggingLength;
 
 
@@ -112,5 +113,13 @@ public class Troop extends Attacker {
 
     public void setLeftDiggingLength(int leftDiggingLength) {
         this.leftDiggingLength = leftDiggingLength;
+    }
+
+    public int[] getDiggingDestination() {
+        return diggingDestination;
+    }
+
+    public void setDiggingDestination(int[] diggingDestination) {
+        this.diggingDestination = diggingDestination;
     }
 }
