@@ -4,7 +4,7 @@ import model.AllResource;
 
 
 public enum TrapType {
-    KILLING_PIT("killing pit", 1, 0, 0, AllResource.WOOD, 6,
+    KILLING_PIT("killing pit", 1, 1, 0, AllResource.WOOD, 6,
             0, 100, true);
 
     private final String name;

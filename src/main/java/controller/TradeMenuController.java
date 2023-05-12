@@ -15,6 +15,8 @@ public class TradeMenuController {
 
     public static TradeMenuMessages checkTrade(Matcher matcher) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        if (!Utils.isValidCommandTags(matcher, "resourceType", "resourceAmount", "price", "message"))
+            return TradeMenuMessages.INVALID_COMMAND;
         String resourceType = Utils.removeDoubleQuotation(matcher.group("resourceType"));
         String message = Utils.removeDoubleQuotation(matcher.group("message"));
         int resourceAmount = Integer.parseInt(matcher.group("resourceAmount"));
@@ -38,12 +40,14 @@ public class TradeMenuController {
 
     public static TradeMenuMessages checkAcceptTrade(Matcher matcher) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        int id = Integer.parseInt(matcher.group("id"));
+        if (!Utils.isValidCommandTags(matcher, "idGroup", "messageGroup"))
+            return TradeMenuMessages.INVALID_COMMAND;
+            int id = Integer.parseInt(matcher.group("id"));
         String message = Utils.removeDoubleQuotation(matcher.group("message"));
         ArrayList<Trade> trades = Stronghold.getCurrentGame().getTrades();
         if (trades.size() < id)
             return TradeMenuMessages.INVALID_ID;
-        Trade trade = trades.get(id);
+        Trade trade = trades.get(id-1);
         if (!trade.isOpen())
             return TradeMenuMessages.TRADE_CLOSED;
         if (currentGovernance.equals(trade.getSender()))
@@ -68,6 +72,8 @@ public class TradeMenuController {
         String output = "";
         int index = 1;
         for (Trade trade : currentGovernance.getTradeNotification()) {
+            if(index == 1)
+                output += "Notifications: \n";
             output += (index++) + "-" + trade;
         }
         currentGovernance.getTradeNotification().clear();
@@ -78,7 +84,7 @@ public class TradeMenuController {
         String output = "";
         int index = 1;
         for (Governance governance:Stronghold.getCurrentGame().getGovernances())
-            output += (index++) + governance.getOwner().getUsername() + "'s Governance\n";
+            output += (index++) + "- " + governance.getOwner().getNickname() + "'s Governance\n";
         return output;
     }
 

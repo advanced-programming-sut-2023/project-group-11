@@ -3,9 +3,9 @@ package model.buildings.enums;
 import model.AllResource;
 
 public enum ChurchType {
-    CHAPEL("chapel", 3, 150, 250, AllResource.NONE,
+    CHAPEL("chapel", 3, 250, 250, AllResource.NONE,
             0, true, false),
-    CATHEDRAL("cathedral", 6, 459, 1000, AllResource.NONE,
+    CATHEDRAL("cathedral", 6, 450, 1000, AllResource.NONE,
             0, true, true);
 
     private final String name;

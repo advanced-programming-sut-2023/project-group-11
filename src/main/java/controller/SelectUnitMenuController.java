@@ -587,6 +587,9 @@ public class SelectUnitMenuController {
 
         if (onlyBuilding) attackBuilding(selectedUnits, targetTile);
         else if (onlyUnits) attackUnits(selectedUnits, targetTile);
+        else {
+            setAttackedTrue(selectedUnits);
+        }
     }
 
     private static void attackBuilding(ArrayList<Unit> selectedUnits, Tile targetTile) {

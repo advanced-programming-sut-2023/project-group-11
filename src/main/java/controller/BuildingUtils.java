@@ -22,7 +22,10 @@ public class BuildingUtils {
                 || StorageType.getStorageTypeByName(type) != null
                 || TowerType.getTowerTypeByName(type) != null
                 || TrapType.getTrapTypeByName(type) != null
-                || UnitMakerType.getUnitMakerTypeByName(type) != null;
+                || UnitMakerType.getUnitMakerTypeByName(type) != null
+                || WallType.getWallTypeByName(type) != null
+                || type.equals("draw bridge")
+                ;
     }
 
     public static boolean isMapEmpty(int x, int y, int size) {

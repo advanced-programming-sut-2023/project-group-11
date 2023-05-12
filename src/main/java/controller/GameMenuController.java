@@ -42,7 +42,7 @@ public class GameMenuController {
         }
 
         return "Current Turn = " + getCurrentTurn() +
-                "\nCurrent Governance = " + currentGovernance.getOwner().getUsername() +
+                "\nCurrent Governance = " + currentGovernance.getOwner().getNickname() +
                 "\nScore = " + currentGovernance.getScore() +
                 "\nArea = " + currentGovernance.getTerritory();
     }
@@ -661,14 +661,14 @@ public class GameMenuController {
     }
 
     public static String getWinnerName() {
-        return currentGame.getGovernances().get(0).getOwner().getUsername();
+        return currentGame.getGovernances().get(0).getOwner().getNickname();
     }
 
     public static String scores() {
         StringBuilder result = new StringBuilder();
         ArrayList<Governance> sortedGovernances = sortGovernances(currentGame.getScores());
         for (Governance governance : sortedGovernances) {
-            result.append(governance.getOwner().getUsername()).append(" -> ")
+            result.append(governance.getOwner().getNickname()).append(" -> ")
                     .append(currentGame.getScores().get(governance)).append('\n');
         }
         return result.toString();
@@ -720,5 +720,9 @@ public class GameMenuController {
         Tile tile = map.getTile(x, y);
         output += tile.toString();
         return output;
+    }
+
+    public static double getGold() {
+        return Stronghold.getCurrentGame().getCurrentGovernance().getGold();
     }
 }
