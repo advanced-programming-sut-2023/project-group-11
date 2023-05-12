@@ -177,6 +177,7 @@ public class GameMenu {
             case SUCCESS -> {
                 int xCoordinate = Integer.parseInt(matcher.group("xCoordinate"));
                 int yCoordinate = Integer.parseInt(matcher.group("yCoordinate"));
+                System.out.println("Entered Select Building Menu");
                 System.out.println(BuildingUtils.getBuilding(xCoordinate, yCoordinate));
                 SelectBuildingMenu.run(xCoordinate, yCoordinate);
             }

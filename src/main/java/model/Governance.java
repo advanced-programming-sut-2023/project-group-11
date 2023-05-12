@@ -41,10 +41,13 @@ public class Governance {
     {
         for (AllResource resource : AllResource.values()) allResources.put(resource, 0);
         allResources.put(AllResource.WOOD, 5);
-        addToStorage(AllResource.WOOD, 100);
-        addToStorage(AllResource.STONE, 50);
+    }
+
+    public void initializeStorages() {
+        addToStorage(AllResource.WOOD, 80);
+        addToStorage(AllResource.STONE, 20);
         addToStorage(AllResource.IRON, 0);
-        addToStorage(AllResource.WHEAT, 10);
+        addToStorage(AllResource.WHEAT, 0);
         addToStorage(AllResource.FLOUR, 0);
         addToStorage(AllResource.HOP, 0);
         addToStorage(AllResource.ALE, 0);
@@ -53,14 +56,6 @@ public class Governance {
         addToStorage(AllResource.APPLE, 0);
         addToStorage(AllResource.MEAT, 0);
         addToStorage(AllResource.CHEESE, 0);
-        addToStorage(AllResource.CROSSBOW, 0);
-        addToStorage(AllResource.SPEAR, 0);
-        addToStorage(AllResource.BOW, 0);
-        addToStorage(AllResource.MACE, 0);
-        addToStorage(AllResource.PIKE, 0);
-        addToStorage(AllResource.LEATHER_ARMOR, 0);
-        addToStorage(AllResource.METAL_ARMOR, 0);
-        addToStorage(AllResource.SWORD, 0);
     }
 
     public Governance(User owner) {
@@ -91,6 +86,10 @@ public class Governance {
 
     public int getCurrentPopulation() {
         return currentPopulation;
+    }
+
+    public void setCurrentPopulation(int currentPopulation) {
+        this.currentPopulation = currentPopulation;
     }
 
     public void changeCurrentPopulation(int changePopulationRate) {
@@ -314,7 +313,7 @@ public class Governance {
         if (allResources.get(AllResource.MEAT) > 0) output++;
         if (allResources.get(AllResource.CHEESE) > 0) output++;
 
-        return output;
+        return output-1;
     }
 
     public void resetUnitAbilities() {

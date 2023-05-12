@@ -5,8 +5,9 @@ import java.util.regex.Pattern;
 
 public enum SelectBuildingMenuCommands {
     BACK("back"),
-    CREATE_UNIT("create\\s*unit((?<typeGroup> -t (?<type>\"[^\"]+\"|\\S+))" +
-            "|(?<countGroup> -c (?<count>\\d+))){2}"),
+    SHOW_CURRENT_MENU("show current menu"),
+    CREATE_UNIT("create\\s*unit(( -t (?<type>\"[^\"]+\"|\\S+))" +
+            "|( -c (?<count>\\d+))){2}"),
     REPAIR("repair");
 
     private final String regex;

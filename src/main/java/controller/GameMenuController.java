@@ -4,7 +4,6 @@ import model.*;
 import model.buildings.Building;
 import model.buildings.Climbable;
 import model.buildings.ProductiveBuilding;
-import model.buildings.enums.FillerType;
 import model.map.Map;
 import model.map.Tile;
 import model.map.Tree;
@@ -272,19 +271,18 @@ public class GameMenuController {
 
         currentGovernance.changeCurrentPopulation(Math.min(popularity / 10 - 5, maxPopulation - currentPopulation));
 
-        int unemployedPopulation = currentGovernance.getUnemployedPopulation();
-
         for (Building building : buildings) {
-            if (building.isActive() && unemployedPopulation < 0) {
+            if (building.isActive() && currentGovernance.getUnemployedPopulation() < 0) {
                 building.setActive(false);
-                unemployedPopulation++;
+                currentGovernance.changeCurrentPopulation(building.getWorkersNumber());
             }
-            if (!building.isActive() && unemployedPopulation > 0) {
+            if (!building.isActive() && currentGovernance.getUnemployedPopulation() - building.getWorkersNumber() > 0) {
                 building.setActive(true);
-                unemployedPopulation--;
+                currentGovernance.changeCurrentPopulation(-building.getWorkersNumber());
             }
         }
-        currentGovernance.setUnemployedPopulation(Math.max(0, unemployedPopulation));
+        currentGovernance.setUnemployedPopulation(Math.max(0, currentGovernance.getUnemployedPopulation()));
+        currentGovernance.setCurrentPopulation(Math.max(0, currentGovernance.getCurrentPopulation()));
     }
 
     private static void updateSoldiers() {
@@ -362,7 +360,7 @@ public class GameMenuController {
 
     private static void updateAllResources() {
         ArrayList<Building> buildings = currentGovernance.getBuildings();
-        int oxTetherNumber = countBuilding(buildings,"ox tether");
+        int oxTetherNumber = countBuilding(buildings, "ox tether");
         currentGovernance.resetAleFactor();
 
         for (Building building : buildings) {
@@ -403,11 +401,12 @@ public class GameMenuController {
         }
     }
 
-    private static int countBuilding(ArrayList<Building> buildings,String buildingName){
+    private static int countBuilding(ArrayList<Building> buildings, String buildingName) {
         int i = 0;
-        for (Building building : buildings) if (building.getName().equals(buildingName)) i++;
+        for (Building building : buildings) if (building.getName().equals(buildingName) && building.isActive()) i++;
         return i;
     }
+
     private static boolean cutTree(Building building) {
         int x = building.getXCoordinate();
         int y = building.getYCoordinate();
@@ -549,7 +548,7 @@ public class GameMenuController {
         else if (map.getTile(destinationX, destinationY).getUnits().size() != 0 &&
                 !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return false;
-        else if(findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY) == null)
+        else if (findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY) == null)
             return false;
         else return !BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) ||
                     (map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable);

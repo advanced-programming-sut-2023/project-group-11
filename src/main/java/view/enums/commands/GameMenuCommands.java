@@ -15,11 +15,11 @@ public enum GameMenuCommands {
             "|( -y (?<yCoordinate>\\d+))){2}"),
     SHOW_POPULARITY("show popularity( (?<factors>factors))?"),
     SHOW_FOOD_LIST("show food list"),
-    CHANGE_FOOD_RATE("food\\s*rate -r (?<rateNumber>\\d+)"),
+    CHANGE_FOOD_RATE("food\\s*rate -r (?<rateNumber>-?\\d+)"),
     SHOW_FOOD_RATE("food\\s*rate show"),
-    CHANGE_TAX_RATE("tax\\s*rate -r (?<rateNumber>\\d+)"),
+    CHANGE_TAX_RATE("tax\\s*rate -r (?<rateNumber>-?\\d+)"),
     SHOW_TAX_RATE("tax\\s*rate show"),
-    CHANGE_FEAR_RATE("fear\\s*rate -r (?<rateNumber>\\d+)"),
+    CHANGE_FEAR_RATE("fear\\s*rate -r (?<rateNumber>-?\\d+)"),
     SHOW_FEAR_RATE("fear\\s*rate show"),
     SELECT_UNIT("select\\s*unit( -x (?<xCoordinate>\\d+)" +
             "|( -y (?<yCoordinate>\\d+))" +

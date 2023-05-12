@@ -3,7 +3,10 @@ package controller;
 import model.AllResource;
 import model.Governance;
 import model.Stronghold;
-import model.buildings.*;
+import model.buildings.Building;
+import model.buildings.GateHouse;
+import model.buildings.Tower;
+import model.buildings.UnitMaker;
 import model.map.Map;
 import model.map.Tile;
 import model.people.Engineer;
@@ -21,17 +24,20 @@ public class SelectBuildingMenuController {
         unitCreationTile = null;
         unitCreationFlag = false;
 
-        if (!Utils.isValidCommandTags(matcher, "typeGroup", "countGroup"))
+        if (!Utils.isValidCommandTags(matcher, "type", "count"))
             return SelectBuildingMenuMessages.INVALID_COMMAND;
 
-        String type = Utils.removeDoubleQuotation(matcher.group("typeGroup"));
-        int count = Integer.parseInt(matcher.group("countGroup"));
+        String type = Utils.removeDoubleQuotation(matcher.group("type"));
+        int count = Integer.parseInt(matcher.group("count"));
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         Building building = BuildingUtils.getBuilding(x, y);
 
         if (!Utils.isValidUnitType(type) || type.equals("lord")) return SelectBuildingMenuMessages.INVALID_TYPE;
         if (!currentGovernance.hasEnoughPopulation(count)) return SelectBuildingMenuMessages.NOT_ENOUGH_POPULATION;
         if (!isUnitMaker(building)) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
+
+        if (type.equals("black monk") && !building.getName().equals("cathedral"))
+            return SelectBuildingMenuMessages.CANT_CREATE_HERE;
 
         UnitMaker unitMaker = (UnitMaker) building;
 
@@ -45,12 +51,9 @@ public class SelectBuildingMenuController {
             return SelectBuildingMenuMessages.SUCCESS;
         }
 
-        if (type.equals("black monk") && !building.getName().equals("cathedral"))
-            return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-
         Troop troop = new Troop(type);
 
-        if ((troop.isArab() && !unitMaker.isMercenaryMaker()) || !building.getName().equals("barracks"))
+        if ((troop.isArab() && !unitMaker.isMercenaryMaker()) || (!troop.isArab() && !building.getName().equals("barracks")))
             return SelectBuildingMenuMessages.CANT_CREATE_HERE;
         if (currentGovernance.getGold() < count * troop.getCost()) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
 
@@ -67,8 +70,7 @@ public class SelectBuildingMenuController {
         Building building = BuildingUtils.getBuilding(x, y);
         return building instanceof UnitMaker
                 || building instanceof Tower
-                || building instanceof GateHouse
-                || building instanceof Trap;
+                || building instanceof GateHouse;
     }
 
     public static boolean isUnitMaker(Building building) {
@@ -170,7 +172,7 @@ public class SelectBuildingMenuController {
         for (int i = changingCoordination - 1; i <= changingCoordination + unitMakerSize + 1 && !unitCreationFlag; i++)
             if (Utils.isValidCoordinates(map, constantCoordination - 1, i)) {
                 unitCreationTile = map.getTile(constantCoordination - 1, i);
-                if (!BuildingUtils.isBuildingInTile(unitCreationTile.getBuilding())) {
+                if (unitCreationTile.getTexture().isSuitableForUnit()) {
                     unitCreationFlag = true;
                     unitCreationCoordinates[0] = constantCoordination;
                     unitCreationCoordinates[1] = i;
@@ -182,7 +184,7 @@ public class SelectBuildingMenuController {
         for (int i = changingCoordination - 1; i <= changingCoordination + unitMakerSize + 1 && !unitCreationFlag; i++)
             if (Utils.isValidCoordinates(map, i, constantCoordination - 1)) {
                 unitCreationTile = map.getTile(i, constantCoordination - 1);
-                if (!BuildingUtils.isBuildingInTile(unitCreationTile.getBuilding())) {
+                if (unitCreationTile.getTexture().isSuitableForUnit()) {
                     unitCreationFlag = true;
                     unitCreationCoordinates[0] = i;
                     unitCreationCoordinates[1] = constantCoordination;

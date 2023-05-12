@@ -26,16 +26,16 @@ public class Storage extends Building {
                 storage.put(AllResource.SWORD, 0);
             }
             case GRANARY -> {
-                storage.put(AllResource.BREAD, 100);
+                storage.put(AllResource.BREAD, 0);
                 storage.put(AllResource.APPLE, 0);
                 storage.put(AllResource.MEAT, 0);
                 storage.put(AllResource.CHEESE, 0);
             }
             case STOCKPILE -> {
-                storage.put(AllResource.WOOD, 100);
-                storage.put(AllResource.STONE, 50);
+                storage.put(AllResource.WOOD, 0);
+                storage.put(AllResource.STONE, 0);
                 storage.put(AllResource.IRON, 0);
-                storage.put(AllResource.WHEAT, 10);
+                storage.put(AllResource.WHEAT, 0);
                 storage.put(AllResource.FLOUR, 0);
                 storage.put(AllResource.HOP, 0);
                 storage.put(AllResource.ALE, 0);
@@ -51,6 +51,7 @@ public class Storage extends Building {
         workersNumber = storageType.getWorkersNumber();
         isActive = storageType.isActive();
         capacity = storageType.getCapacity();
+        currentCapacity = capacity;
     }
 
     public HashMap<AllResource, Integer> getStorage() {

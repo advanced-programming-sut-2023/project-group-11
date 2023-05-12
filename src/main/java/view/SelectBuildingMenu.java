@@ -10,15 +10,19 @@ import java.util.regex.Matcher;
 
 public class SelectBuildingMenu {
     public static void run(int x, int y) {
-        System.out.println(BuildingUtils.getBuilding(x, y).toString());
         if (!SelectBuildingMenuController.hasCommand(x, y)) return;
         Scanner scanner = EntryMenu.getScanner();
         String command;
         Matcher matcher;
         while (true) {
             command = scanner.nextLine();
-            if (SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.BACK) != null) return;
-            else if ((matcher = SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.CREATE_UNIT)) != null)
+            if (SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.BACK) != null) {
+                System.out.println("Entered Game Menu");
+                return;
+            } else if (SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.SHOW_CURRENT_MENU) != null) {
+                System.out.println("Select Building Menu");
+                System.out.println(BuildingUtils.getBuilding(x, y));
+            } else if ((matcher = SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.CREATE_UNIT)) != null)
                 checkCreateUnit(matcher, x, y);
             else if (SelectBuildingMenuCommands.getMatcher(command, SelectBuildingMenuCommands.REPAIR) != null)
                 checkRepair(x, y);
@@ -38,9 +42,9 @@ public class SelectBuildingMenu {
             case BAD_UNIT_MAKER_PLACE -> System.out.println("No places are around the unit maker to put the unit(s)!");
             case NOT_ENOUGH_POPULATION -> System.out.println("You don't have enough population!");
             case SUCCESS -> System.out.println("You created " + matcher.group("count") + " Troop(s) in "
-                    + "x: " + SelectBuildingMenuController.getUnitCreationCoordinates()[0]
-                    + "y: " + SelectBuildingMenuController.getUnitCreationCoordinates()[1]
-                    + "coordinates successfully!");
+                    + "x=" + SelectBuildingMenuController.getUnitCreationCoordinates()[0]
+                    + " and y=" + SelectBuildingMenuController.getUnitCreationCoordinates()[1]
+                    + " coordinates successfully!");
         }
     }
 
