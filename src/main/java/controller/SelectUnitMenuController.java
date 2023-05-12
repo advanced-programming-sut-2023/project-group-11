@@ -826,7 +826,7 @@ public class SelectUnitMenuController {
         Map map = Stronghold.getCurrentGame().getMap();
         ArrayList<Unit> selectedUnits = map.getTile(currentLocation).getUnitsByType(unitType);
 
-        if (!((Troop) selectedUnits.get(0)).isDigging()) return SelectUnitMenuMessages.NOT_DIGGING;
+        if (!(selectedUnits.get(0) instanceof Troop troop && troop.isDigging())) return SelectUnitMenuMessages.NOT_DIGGING;
 
         for (Unit unit : selectedUnits) ((Troop) unit).setDigging(false);
         return SelectUnitMenuMessages.SUCCESS;
