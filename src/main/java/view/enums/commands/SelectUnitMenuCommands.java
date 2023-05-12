@@ -16,7 +16,7 @@ public enum SelectUnitMenuCommands {
     DESELECT("deselect|back"),
     POUR_OIL("pour\\s*oil -d (?<direction>(up)|(down)|(left)|(right))"),
     DIG_PITCH("dig\\s*pitch( -d (?<direction>\\S+)| -l (?<length>\\d+)){2}"),
-    FILL_PITCH("fill\\s*pitch( -x1 (?<x1>\\d+)| -y1 (?<y1>\\d+)| -x2 (?<x2>\\d+)| -y2 (?<y2>\\d+)){4}"),
+    STOP_PITCH("stop dig\\s*pitch"),
     ;
 
     private final String regex;

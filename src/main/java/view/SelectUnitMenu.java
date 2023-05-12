@@ -15,7 +15,6 @@ public class SelectUnitMenu {
         String command;
         Matcher matcher;
 
-        //TODO:1 Dig Khandagh & Fill It
         while (true) {
             command = scanner.nextLine();
 
@@ -39,6 +38,8 @@ public class SelectUnitMenu {
                 checkPourOil(matcher, currentLocation, unitType);
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DIG_PITCH)) != null)
                 checkDigPitch(matcher, currentLocation, unitType);
+            else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.STOP_PITCH) != null)
+                checkStopDigging(currentLocation, unitType);
             else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.DISBAND) != null) {
                 disbandUnit(currentLocation, unitType);
                 return;
@@ -46,6 +47,15 @@ public class SelectUnitMenu {
                 System.out.println("Entered Game Menu");
                 return;
             } else System.out.println("Invalid Command!");
+        }
+    }
+
+    private static void checkStopDigging(int[] currentLocation, String unitType) {
+        message = SelectUnitMenuController.checkStopDigging(currentLocation, unitType);
+
+        switch (message) {
+            case SUCCESS -> System.out.println("Unit Stopped Digging!");
+            case NOT_DIGGING -> System.out.println("This Units Weren't Digging Pitch!");
         }
     }
 

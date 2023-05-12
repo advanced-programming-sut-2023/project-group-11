@@ -29,7 +29,7 @@ public class SignupMenu {
         }
     }
 
-    private static void checkRegister(Matcher registerMatcher) {//TODO:3 check invalid command in view?
+    private static void checkRegister(Matcher registerMatcher) {
         String username = Utils.removeDoubleQuotation(registerMatcher.group("username"));
         String password = registerMatcher.group("password");
         String email = registerMatcher.group("email");
