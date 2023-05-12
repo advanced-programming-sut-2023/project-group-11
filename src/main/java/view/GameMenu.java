@@ -2,9 +2,11 @@ package view;
 
 import controller.BuildingUtils;
 import controller.GameMenuController;
+import controller.ShowMapMenuController;
 import controller.Utils;
 import view.enums.commands.GameMenuCommands;
 import view.enums.messages.GameMenuMessages;
+import view.enums.messages.ShowMapMenuMessages;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -60,6 +62,8 @@ public class GameMenu {
                 checkDropUnit(matcher);
             else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_RESOURCE_LEFT)) != null)
                 checkShowResource(matcher);
+            else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_DETAILS)) != null)
+                checkShowDetails(matcher);
             else System.out.println("Invalid command!");
         }
     }
@@ -216,4 +220,18 @@ public class GameMenu {
             case SUCCESS -> System.out.print(GameMenuController.showResource(matcher.group("resource")));
         }
     }
+
+    private static void checkShowDetails(Matcher matcher) {
+        ShowMapMenuMessages message = ShowMapMenuController.checkShowDetails(matcher);
+        switch (message) {
+            case INVALID_COMMAND -> System.out.println("Invalid command!");
+            case INVALID_COORDINATE -> System.out.println("Invalid coordinate!");
+            case SUCCESS -> {
+                int x = Integer.parseInt(matcher.group("xCoordinate"));
+                int y = Integer.parseInt(matcher.group("yCoordinate"));
+                System.out.print(GameMenuController.showMapDetails(x, y));
+            }
+        }
+    }
+
 }
