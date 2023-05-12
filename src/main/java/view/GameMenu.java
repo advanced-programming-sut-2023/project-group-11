@@ -61,10 +61,16 @@ public class GameMenu {
                 checkDropUnit(matcher);
             else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_RESOURCE_LEFT)) != null)
                 checkShowResource(matcher);
+            else if (GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_GOLD) != null)
+                showGold();
             else if ((matcher = GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_DETAILS)) != null)
                 checkShowDetails(matcher);
             else System.out.println("Invalid command!");
         }
+    }
+
+    private static void showGold() {
+        System.out.println("Gold = " + GameMenuController.getGold());
     }
 
     private static void endGame() {

@@ -42,7 +42,7 @@ public class GameMenuController {
         }
 
         return "Current Turn = " + getCurrentTurn() +
-                "\nCurrent Governance = " + currentGovernance.getOwner().getUsername() +
+                "\nCurrent Governance = " + currentGovernance.getOwner().getNickname() +
                 "\nScore = " + currentGovernance.getScore() +
                 "\nArea = " + currentGovernance.getTerritory();
     }
@@ -130,8 +130,8 @@ public class GameMenuController {
         if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup", "typeGroup"))
             return GameMenuMessages.INVALID_COMMAND;
 
-        int x = Integer.parseInt(matcher.group("xGroup"));
-        int y = Integer.parseInt(matcher.group("yGroup"));
+        int x = Integer.parseInt(matcher.group("xCoordinate"));
+        int y = Integer.parseInt(matcher.group("yCoordinate"));
         String type = Utils.removeDoubleQuotation(matcher.group("typeGroup"));
         Building building = BuildingUtils.getBuildingByType(type);
 
@@ -656,14 +656,14 @@ public class GameMenuController {
     }
 
     public static String getWinnerName() {
-        return currentGame.getGovernances().get(0).getOwner().getUsername();
+        return currentGame.getGovernances().get(0).getOwner().getNickname();
     }
 
     public static String scores() {
         StringBuilder result = new StringBuilder();
         ArrayList<Governance> sortedGovernances = sortGovernances(currentGame.getScores());
         for (Governance governance : sortedGovernances) {
-            result.append(governance.getOwner().getUsername()).append(" -> ")
+            result.append(governance.getOwner().getNickname()).append(" -> ")
                     .append(currentGame.getScores().get(governance)).append('\n');
         }
         return result.toString();
@@ -715,5 +715,9 @@ public class GameMenuController {
         Tile tile = map.getTile(x, y);
         output += tile.toString();
         return output;
+    }
+
+    public static double getGold() {
+        return Stronghold.getCurrentGame().getCurrentGovernance().getGold();
     }
 }

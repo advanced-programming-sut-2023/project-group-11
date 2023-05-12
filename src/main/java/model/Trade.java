@@ -78,11 +78,11 @@ public class Trade {
         String receiverMessage = "";
         if (status.equals("Closed")) {
             receiverMessage = " ReceiverMessage: " + receiverMessage +
-                    " Receiver: " + receiver.getOwner().getUsername();
+                    " Receiver: " + receiver.getOwner().getNickname();
         }
         return " ResourceType: " + resourceType.name() + " Amount: " + resourceAmount +
                 " price: " + price + " SenderMessage: " + senderMessage + " Sender: " +
-                sender.getOwner().getUsername() + receiverMessage + " Status: " + status + "\n";
+                sender.getOwner().getNickname() + receiverMessage + " Status: " + status + "\n";
     }
 
 

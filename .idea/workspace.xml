@@ -6,11 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ProfileMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/BuildingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/BuildingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Unit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/GameMenuCommands.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,14 +233,7 @@
       <workItem from="1683817649729" duration="4783000" />
       <workItem from="1683844746168" duration="7014000" />
       <workItem from="1683884470865" duration="4095000" />
-      <workItem from="1683888696033" duration="24503000" />
-    </task>
-    <task id="LOCAL-00024" summary="Remove static fields in Game">
-      <created>1682270662266</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1682270662266</updated>
+      <workItem from="1683888696033" duration="28026000" />
     </task>
     <task id="LOCAL-00025" summary="Profie menu debugged (without captcha)">
       <created>1682271939013</created>
@@ -576,7 +571,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683914547511</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="map edited + cliff debugged">
+      <created>1683917552836</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1683917552836</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,7 +620,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Attack updated(duplication removed) + important TODOs added" />
     <MESSAGE value="TODOs Updated" />
     <MESSAGE value="Add (Areas + Lord + Keep)" />
     <MESSAGE value="Attack priority set&#10;(armor effect &amp; throwing path ignored)" />
@@ -643,7 +644,8 @@
     <MESSAGE value="Dig pitch added in nextTurn" />
     <MESSAGE value="nothing special" />
     <MESSAGE value="Remove dead units debugged" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove dead units debugged" />
+    <MESSAGE value="map edited + cliff debugged" />
+    <option name="LAST_COMMIT_MESSAGE" value="map edited + cliff debugged" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -47,7 +47,7 @@ public class MainMenuController {
 
     public static String makeListOfPlayers(String guests) {
         String result = "";
-        String[] list = guests.split(" ");
+        String[] list = guests.split(" (?=[^\"]*(?:(?:\"[^\"]*){2})*$)");
         for (String name : list) {
             result += Utils.removeDoubleQuotation(name) + "-";
         }

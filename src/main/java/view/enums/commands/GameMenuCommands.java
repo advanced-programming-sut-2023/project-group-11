@@ -30,7 +30,8 @@ public enum GameMenuCommands {
             "|( -c (?<count>\\d+))){4}"),
     SHOW_RESOURCE_LEFT("show resource -r (?<resource>\"[^\"]+\"|\\S+)"),
     SHOW_DETAILS("show details(( -x (?<xCoordinate>\\d+))" +
-                         "|( -y (?<yCoordinate>\\d+))){2}");
+                         "|( -y (?<yCoordinate>\\d+))){2}"),
+    SHOW_GOLD("show gold");
 
     private final String regex;
 
