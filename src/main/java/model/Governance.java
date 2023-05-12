@@ -39,26 +39,28 @@ public class Governance {
     private final ArrayList<Unit> units = new ArrayList<>();
 
     {
-        allResources.put(AllResource.WOOD, 100);
-        allResources.put(AllResource.STONE, 50);
-        allResources.put(AllResource.IRON, 0);
-        allResources.put(AllResource.WHEAT, 10);
-        allResources.put(AllResource.FLOUR, 0);
-        allResources.put(AllResource.HOP, 0);
-        allResources.put(AllResource.ALE, 0);
-        allResources.put(AllResource.PITCH, 0);
-        allResources.put(AllResource.BREAD, 100);
-        allResources.put(AllResource.APPLE, 0);
-        allResources.put(AllResource.MEAT, 0);
-        allResources.put(AllResource.CHEESE, 0);
-        allResources.put(AllResource.CROSSBOW, 0);
-        allResources.put(AllResource.SPEAR, 0);
-        allResources.put(AllResource.BOW, 0);
-        allResources.put(AllResource.MACE, 0);
-        allResources.put(AllResource.PIKE, 0);
-        allResources.put(AllResource.LEATHER_ARMOR, 0);
-        allResources.put(AllResource.METAL_ARMOR, 0);
-        allResources.put(AllResource.SWORD, 0);
+        for (AllResource resource : AllResource.values()) allResources.put(resource, 0);
+        allResources.put(AllResource.WOOD, 5);
+        addToStorage(AllResource.WOOD, 100);
+        addToStorage(AllResource.STONE, 50);
+        addToStorage(AllResource.IRON, 0);
+        addToStorage(AllResource.WHEAT, 10);
+        addToStorage(AllResource.FLOUR, 0);
+        addToStorage(AllResource.HOP, 0);
+        addToStorage(AllResource.ALE, 0);
+        addToStorage(AllResource.PITCH, 0);
+        addToStorage(AllResource.BREAD, 100);
+        addToStorage(AllResource.APPLE, 0);
+        addToStorage(AllResource.MEAT, 0);
+        addToStorage(AllResource.CHEESE, 0);
+        addToStorage(AllResource.CROSSBOW, 0);
+        addToStorage(AllResource.SPEAR, 0);
+        addToStorage(AllResource.BOW, 0);
+        addToStorage(AllResource.MACE, 0);
+        addToStorage(AllResource.PIKE, 0);
+        addToStorage(AllResource.LEATHER_ARMOR, 0);
+        addToStorage(AllResource.METAL_ARMOR, 0);
+        addToStorage(AllResource.SWORD, 0);
     }
 
     public Governance(User owner) {
@@ -263,6 +265,7 @@ public class Governance {
     }
 
     public void addToStorage(AllResource item, int amount) {
+        if (item.equals(AllResource.NONE)) return;
         changeResourceAmount(item, amount);
         for (Storage storage : storages) {
             if (storage.getStorage().containsKey(item)) {
@@ -279,6 +282,7 @@ public class Governance {
     }
 
     public void removeFromStorage(AllResource item, int amount) {
+        if (item.equals(AllResource.NONE)) return;
         changeResourceAmount(item, -amount);
         for (Storage storage : storages) {
             if (storage.getStorage().containsKey(item)) {
