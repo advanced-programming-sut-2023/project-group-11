@@ -104,6 +104,10 @@ Commands
 
 - show details -x [x] -y [y] --> نمایش جزییات مختصات داده شده در نقشه
 
+- open trade menu --> ورود به منوی ترید
+
+- open market menu --> ورود به منوی مارکت
+
 *ShowMapMenu*
 
 - map [direction] [count] --> حرکت دادن نقشه
