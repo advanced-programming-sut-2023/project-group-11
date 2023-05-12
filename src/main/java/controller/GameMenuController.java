@@ -13,16 +13,14 @@ import model.people.enums.Speed;
 import model.people.enums.UnitState;
 import view.enums.messages.GameMenuMessages;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 
 import static controller.SelectUnitMenuController.*;
 
 public class GameMenuController {
-    private static Game currentGame = Stronghold.getCurrentGame();
-    private static Governance currentGovernance = currentGame.getCurrentGovernance();
+    private static Game currentGame;
+    private static Governance currentGovernance;
 
     public static String nextTurn() {
         ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
@@ -38,6 +36,7 @@ public class GameMenuController {
             updateStorages();
             updatePopulation();
             updatePopularityRate();
+            updateBuildingStuff();
         }
 
         return "Current Turn = " + getCurrentTurn() +
@@ -245,7 +244,7 @@ public class GameMenuController {
         Tile tile = currentGame.getMap().getTile(x, y);
 
         for (int i = 0; i < count; i++) {
-            Units unit;
+            Unit unit;
 
             if (Utils.isValidMachineType(type)) {
                 unit = new Machine(type);
@@ -255,7 +254,7 @@ public class GameMenuController {
                     engineer.setLocation(new int[]{x, y});
                 }
             } else if (type.equals("engineer")) unit = new Engineer();
-            else unit = new Troops(type);
+            else unit = new Troop(type);
 
             unit.setLocation(new int[]{x, y});
             tile.getUnits().add(unit);
@@ -285,9 +284,9 @@ public class GameMenuController {
     }
 
     private static void updateSoldiers() {
-        ArrayList<Units> units = currentGovernance.getUnits();
-        ArrayList<Units> patrollingUnits = new ArrayList<>();
-        for (Units unit : units)
+        ArrayList<Unit> units = currentGovernance.getUnits();
+        ArrayList<Unit> patrollingUnits = new ArrayList<>();
+        for (Unit unit : units)
             if (unit.isPatrolling())
                 patrollingUnits.add(unit);
         SelectUnitMenuController.patrolUnit(patrollingUnits);
@@ -323,6 +322,31 @@ public class GameMenuController {
                 }
 
         currentGovernance.updateFood();
+    }
+
+    private static void updateBuildingStuff(){
+        for (Building building:currentGovernance.getBuildings()){
+            cagedWardog(building);
+        }
+    }
+
+    private static void cagedWardog(Building building) {
+        if(building.getName().equals("caged_wardogs")){
+            int x = building.getXCoordinate();
+            int y = building.getYCoordinate();
+            int range = 3,damage = 20;
+            for(int i =-range;i<=range;i++){
+                for(int j = -range;j<=range;j++){
+                    if(!Utils.isValidCoordinates(currentGame.getMap(),x,y))
+                        continue;
+                    Tile tile = currentGame.getMap().getTile(x,y);
+                    if(tile.hasEnemy(currentGovernance))
+                        for (Unit unit:tile.getUnits())
+                            unit.setHp(unit.getHp() - damage);
+                    removeDeadUnits(tile);
+                }
+            }
+        }
     }
 
     private static void updateAllResources() {
@@ -408,15 +432,17 @@ public class GameMenuController {
     }
 
     public static void setCurrentGame() {
-        GameMenuController.currentGame = Stronghold.getCurrentGame();
+        currentGame = Stronghold.getCurrentGame();
+        currentGovernance = currentGame.getCurrentGovernance();
     }
 
+    // TODO:1 Repair showing current turn when a governance dyes
     public static int getCurrentTurn() {
         return Math.ceilDiv(currentGame.getTurn(), currentGame.getGovernances().size());
     }
 
     private static void updateState() {
-        for (Units unit : currentGovernance.getUnits()) {
+        for (Unit unit : currentGovernance.getUnits()) {
             switch (unit.getUnitState()) {
                 case STANDING -> {
                     if (unit instanceof Engineer)
@@ -440,8 +466,8 @@ public class GameMenuController {
         }
     }
 
-    private static void unitUpdate(Units unit, int range) {
-        ArrayList<Units> units = getAllSameUnitsOfTile(unit);
+    private static void unitUpdate(Unit unit, int range) {
+        ArrayList<Unit> units = getAllSameUnitsOfTile(unit);
         Map map = currentGame.getMap();
         setUnitUpdateState(units);
         int currentX = unit.getLocation()[0];
@@ -449,10 +475,10 @@ public class GameMenuController {
         int finalRange = isValidUnitForGroundAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
         attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
         if (unit.getUnitState() == UnitState.OFFENSIVE) {
-            for (Units unit1 : units)
+            for (Unit unit1 : units)
                 unit1.setUnitState(UnitState.DEFENSIVE);
         } else {
-            for (Units unit1 : units)
+            for (Unit unit1 : units)
                 unit1.setUnitState(UnitState.STANDING);
         }
     }
@@ -465,7 +491,7 @@ public class GameMenuController {
         int enemyNumberDown = 0;
         int enemyNumberLeft = 0;
         int enemyNumberRight = 0;
-        ArrayList<Units> engineers = new ArrayList<>(List.of(engineer));
+        ArrayList<Unit> engineers = new ArrayList<>(List.of(engineer));
         int x = engineer.getLocation()[0];
         int y = engineer.getLocation()[1];
         for (int i = -range; i <= range; i++) {
@@ -512,17 +538,17 @@ public class GameMenuController {
                     (map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable);
     }
 
-    private static ArrayList<Units> getAllSameUnitsOfTile(Units unit) {
+    private static ArrayList<Unit> getAllSameUnitsOfTile(Unit unit) {
         return currentGame.getMap().getTile(unit.getLocation()).getUnitsByType(unit.getName());
     }
 
-    private static void setUnitUpdateState(ArrayList<Units> units) {
-        for (Units unit : units)
+    private static void setUnitUpdateState(ArrayList<Unit> units) {
+        for (Unit unit : units)
             ((Attacker) unit).setAttacked(true);
     }
 
     private static boolean attackNearestEnemy(int destinationX, int destinationY, int currentX, int currentY,
-                                              int currentRange, int maxRange, Map map, ArrayList<Units> units) {
+                                              int currentRange, int maxRange, Map map, ArrayList<Unit> units) {
         if (currentRange > maxRange)
             return false;
         if (!Utils.isValidCoordinates(map, destinationX, destinationY))
@@ -571,7 +597,7 @@ public class GameMenuController {
         return attackNearestEnemy(destinationX, destinationY - 1, currentX, currentY, currentRange + 1, maxRange, map, units);
     }
 
-    private static void moveUnits(Map map, ArrayList<Units> units, int currentX, int currentY, int destinationX, int destinationY) {
+    private static void moveUnits(Map map, ArrayList<Unit> units, int currentX, int currentY, int destinationX, int destinationY) {
         Path shortestPath = findRootToDestination(map, units.get(0).getName(), currentX, currentY, destinationX, destinationY);
         map.getTile(currentX, currentY).clearUnitsByType(units);
 
@@ -587,4 +613,61 @@ public class GameMenuController {
         return false;
     }
 
+    public static boolean gameHasEnded() {
+        return currentGame.getGovernances().size() == 1;
+    }
+
+    public static String getWinnerName() {
+        return currentGame.getGovernances().get(0).getOwner().getUsername();
+    }
+
+    public static String scores() {
+        StringBuilder result = new StringBuilder();
+        ArrayList<Governance> sortedGovernances = sortGovernances(currentGame.getScores());
+        for (Governance governance : sortedGovernances) {
+            result.append(governance.getOwner().getUsername()).append(" -> ")
+                    .append(currentGame.getScores().get(governance)).append('\n');
+        }
+        return result.toString();
+    }
+
+    private static ArrayList<Governance> sortGovernances(HashMap<Governance, Integer> scores) {
+        Set<java.util.Map.Entry<Governance, Integer>> entries = scores.entrySet();
+        List<java.util.Map.Entry<Governance, Integer>> sortedEntries = new ArrayList<>(entries);
+        ArrayList<Governance> result = new ArrayList<>();
+        Comparator<java.util.Map.Entry<Governance, Integer>> comparator = new Comparator<java.util.Map.Entry<Governance, Integer>>() {
+            @Override
+            public int compare(java.util.Map.Entry<Governance, Integer> o1, java.util.Map.Entry<Governance, Integer> o2) {
+                Integer v1 = o1.getValue();
+                Integer v2 = o2.getValue();
+                return v1.compareTo(v2);
+            }
+        };
+
+        sortedEntries.sort(comparator);
+        sortedEntries.forEach(entry -> result.add(entry.getKey()));
+
+        return result;
+    }
+
+    public static void endGame() {
+        addScoresForPlayers();
+        EntryMenuController.parseMaps();
+        nullTheCurrentGames();
+    }
+
+    private static void addScoresForPlayers() {
+        HashMap<Governance, Integer> scores = currentGame.getScores();
+        Governance winner = currentGame.getGovernances().get(0);
+        ArrayList<Governance> losers = new ArrayList<>(scores.keySet());
+
+        winner.getOwner().addScore(scores.get(winner));
+        losers.forEach(loser -> loser.getOwner().addScore(scores.get(loser)));
+    }
+
+    private static void nullTheCurrentGames() {
+        currentGame = null;
+        currentGovernance = null;
+        Stronghold.setCurrentGame(null);
+    }
 }

@@ -3,10 +3,12 @@ package model;
 import model.map.Map;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
     private final User owner;
     private final ArrayList<Governance> governances;
+    private final HashMap<Governance, Integer> scores = new HashMap<>();
     private final ArrayList<Trade> trades = new ArrayList<>();
     private Governance currentGovernance;
     private final Map map;
@@ -42,6 +44,14 @@ public class Game {
 
     public void plusTurnCounter() {
         this.turn += 1;
+    }
+
+    public HashMap<Governance, Integer> getScores() {
+        return scores;
+    }
+
+    public void addLoserScore(Governance governance, int score) {
+        scores.put(governance, score);
     }
 
     public Governance getCurrentGovernance() {

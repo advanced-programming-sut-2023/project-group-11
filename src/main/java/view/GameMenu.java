@@ -19,7 +19,13 @@ public class GameMenu {
 
         GameMenuController.setCurrentGame();
 
+        // TODO:1 add Scores???
         while (true) {
+            if (GameMenuController.gameHasEnded()) {
+                endGame();
+                return;
+            }
+
             command = scanner.nextLine();
 
             if (GameMenuCommands.getMatcher(command, GameMenuCommands.SHOW_CURRENT_MENU) != null)
@@ -56,6 +62,14 @@ public class GameMenu {
                 checkShowResource(matcher);
             else System.out.println("Invalid command!");
         }
+    }
+
+    private static void endGame() {
+        System.out.println("Game Ended!");
+        System.out.println("Winner: " + GameMenuController.getWinnerName() + '\n');
+        System.out.println(GameMenuController.scores());
+        System.out.println("You're In Main Menu Now!");
+        GameMenuController.endGame();
     }
 
     private static void nextTurn() {

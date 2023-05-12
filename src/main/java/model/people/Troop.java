@@ -12,7 +12,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Troops extends Attacker {
+public class Troop extends Attacker {
     private final AllResource weaponType;
     private final AllResource armorType;
     private final boolean hasHorse;
@@ -22,7 +22,7 @@ public class Troops extends Attacker {
     private final boolean canDigKhandagh;
     private boolean revealed;
 
-    public Troops(String name) {
+    public Troop(String name) {
         JSONObject troop = getTroopFromDictionary(name);
 
         this.name = name;

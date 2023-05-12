@@ -4,7 +4,7 @@ import controller.SelectUnitMenuController;
 import model.buildings.Climbable;
 import model.map.Tile;
 
-public class Attacker extends Units {
+public class Attacker extends Unit {
     protected int damage;
     protected int range;
     protected boolean attacked = false;

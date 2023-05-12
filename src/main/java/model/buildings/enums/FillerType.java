@@ -15,8 +15,11 @@ public enum FillerType {
             true, false),
     HOVEL("hovel", 2, 39, 0, AllResource.WOOD, 6, 0,
             true, false),
-    OIL_SMELTER("oil smelter",1,39,0,AllResource.IRON,5,0,
-            true,false);
+    OIL_SMELTER("oil smelter", 1, 39, 0, AllResource.IRON, 5, 0,
+            true, false),
+    CAGED_WARDOGS("caged wardogs", 1, 39, 100, AllResource.WOOD, 10,
+            0, true, false);
+    ;
 
     private final String name;
     private final int size;

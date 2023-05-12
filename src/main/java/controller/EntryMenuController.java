@@ -33,7 +33,8 @@ public class EntryMenuController {
         }
     }
 
-    private static void parseMaps() {
+    public static void parseMaps() {
+        Stronghold.setMaps(new ArrayList<>());
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader("src/main/resources/JSON/maps.json")) {
             JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);

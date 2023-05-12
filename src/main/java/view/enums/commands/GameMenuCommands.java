@@ -28,8 +28,7 @@ public enum GameMenuCommands {
             "|( -y (?<yCoordinate>\\d+))" +
             "|( -t (?<type>\"[^\"]+\"|\\S+))" +
             "|( -c (?<count>\\d+))){4}"),
-    SHOW_RESOURCE_LEFT("show resource -r (?<resource>\"[^\"]+\"|\\S+)")
-    ;
+    SHOW_RESOURCE_LEFT("show resource -r (?<resource>\"[^\"]+\"|\\S+)");
 
     private final String regex;
 

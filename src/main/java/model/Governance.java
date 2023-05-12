@@ -4,8 +4,7 @@ import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
 import model.people.Attacker;
-import model.people.Units;
-import model.people.enums.UnitState;
+import model.people.Unit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +12,7 @@ import java.util.HashMap;
 public class Governance {
     private final User owner;
     private Territory territory;
+    private int score = 0;
     private double gold = 2000;
     private int maxPopulation = 10;
     private int currentPopulation = 10;
@@ -34,7 +34,7 @@ public class Governance {
     private final HashMap<AllResource, Integer> allResources = new HashMap<>();
     private final ArrayList<Storage> storages = new ArrayList<>();
     private final ArrayList<Building> buildings = new ArrayList<>();
-    private final ArrayList<Units> units = new ArrayList<>();
+    private final ArrayList<Unit> units = new ArrayList<>();
 
     {
         allResources.put(AllResource.WOOD, 100);
@@ -198,15 +198,15 @@ public class Governance {
         previousTrades.add(trade);
     }
 
-    public ArrayList<Units> getUnits() {
+    public ArrayList<Unit> getUnits() {
         return units;
     }
 
-    public void addUnit(Units unit) {
+    public void addUnit(Unit unit) {
         units.add(unit);
     }
 
-    public void removeUnit(Units unit) {
+    public void removeUnit(Unit unit) {
         units.remove(unit);
     }
 
@@ -310,7 +310,7 @@ public class Governance {
     }
 
     public void resetUnitAbilities() {
-        for (Units unit : units) {
+        for (Unit unit : units) {
             Attacker attacker = (Attacker) unit;
             attacker.setLeftMoves(unit.getSpeed());
             attacker.setAttacked(false);
@@ -323,5 +323,13 @@ public class Governance {
 
     public void setTerritory(Territory territory) {
         this.territory = territory;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
