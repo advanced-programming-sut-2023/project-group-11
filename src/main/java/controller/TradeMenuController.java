@@ -74,4 +74,12 @@ public class TradeMenuController {
         return output;
     }
 
+    public static String showAllGovernance(){
+        String output = "";
+        int index = 1;
+        for (Governance governance:Stronghold.getCurrentGame().getGovernances())
+            output += (index++) + governance.getOwner().getUsername() + "'s Governance\n";
+        return output;
+    }
+
 }

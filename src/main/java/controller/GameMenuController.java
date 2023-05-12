@@ -544,6 +544,8 @@ public class GameMenuController {
         else if (map.getTile(destinationX, destinationY).getUnits().size() != 0 &&
                 !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)))
             return false;
+        else if(findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY) == null)
+            return false;
         else return !BuildingUtils.isBuildingInTile(map.getTile(destinationX, destinationY).getBuilding()) ||
                     (map.getTile(destinationX, destinationY).getBuilding() instanceof Climbable);
     }

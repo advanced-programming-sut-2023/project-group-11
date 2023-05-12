@@ -13,8 +13,7 @@ public class MarketMenu {
         Matcher matcher;
         String command = scanner.nextLine();
         while (true) {
-            if (MarketMenuCommands.getMatcher(command, MarketMenuCommands.END) != null) Utils.endStronghold();
-            else if (MarketMenuCommands.getMatcher(command, MarketMenuCommands.BACK) != null) return;
+            if (MarketMenuCommands.getMatcher(command, MarketMenuCommands.BACK) != null) return;
             else if (MarketMenuCommands.getMatcher(command, MarketMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Market Menu");
             else if (MarketMenuCommands.getMatcher(command, MarketMenuCommands.SHOW_LIST) != null) showPriceList();

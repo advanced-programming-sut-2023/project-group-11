@@ -12,11 +12,11 @@ public class TradeMenu {
     public static void run() {
         Scanner scanner = EntryMenu.getScanner();
         Matcher matcher;
-        System.out.print(TradeMenuController.showNotifications());
+        System.out.print("Governances: \n" + TradeMenuController.showAllGovernance());
+        System.out.print("Notifications: \n" + TradeMenuController.showNotifications());
         String command = scanner.nextLine();
         while (true) {
             if (TradeMenuCommands.getMatcher(command, TradeMenuCommands.BACK) != null) return;
-            else if (TradeMenuCommands.getMatcher(command, TradeMenuCommands.END) != null) Utils.endStronghold();
             else if (TradeMenuCommands.getMatcher(command, TradeMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Trade Menu");
             else if ((matcher = TradeMenuCommands.getMatcher(command, TradeMenuCommands.TRADE)) != null) {
