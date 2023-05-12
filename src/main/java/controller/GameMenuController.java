@@ -289,20 +289,17 @@ public class GameMenuController {
 
     private static void updateSoldiers() {
         ArrayList<Unit> units = currentGovernance.getUnits();
-        ArrayList<Unit> patrollingUnits = new ArrayList<>();
         ArrayList<Unit> diggingUnits = new ArrayList<>();
 
         for (Unit unit : units) {
-            if (unit.isPatrolling())
-                patrollingUnits.add(unit);
-            else if (unit instanceof Troop troop && troop.isDigging())
+            if (unit instanceof Troop troop && troop.isDigging())
                 diggingUnits.add(troop);
         }
 
-        SelectUnitMenuController.patrolUnit(patrollingUnits);
         SelectUnitMenuController.digPitchInNextTurn(diggingUnits);
-        currentGovernance.resetUnitAbilities();
+        updatePatrol();
         updateState();
+        currentGovernance.resetUnitAbilities();
     }
 
     private static void updateGold() {
@@ -350,11 +347,11 @@ public class GameMenuController {
                 for (int j = -range; j <= range; j++) {
                     if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
                         continue;
-                    Tile tile = currentGame.getMap().getTile(x,y);
-                    if(tile.hasEnemy(currentGovernance)) {
+                    Tile tile = currentGame.getMap().getTile(x, y);
+                    if (tile.hasEnemy(currentGovernance)) {
                         for (Unit unit : tile.getUnits())
                             unit.setHp(unit.getHp() - damage);
-                        building.removeFromGame(currentGame.getMap(),currentGovernance);
+                        building.removeFromGame(currentGame.getMap(), currentGovernance);
                     }
                     removeDeadUnits(tile);
                 }
@@ -552,6 +549,29 @@ public class GameMenuController {
 
     private static ArrayList<Unit> getAllSameUnitsOfTile(Unit unit) {
         return currentGame.getMap().getTile(unit.getLocation()).getUnitsByType(unit.getName());
+    }
+
+    private static void updatePatrol() {
+        ArrayList<Unit> units = currentGovernance.getUnits();
+        ArrayList<Unit> patrollingUnits = new ArrayList<>();
+
+        for (int i = 0; i < units.size(); i++) {
+            Unit firstUnit = units.get(i);
+            if (firstUnit.isPatrolling()) {
+                patrollingUnits.add(firstUnit);
+
+                for (int j = i + 1; j < units.size(); j++) {
+                    Unit unit = units.get(j);
+                    if (hasSameOriginAndDestinationForPatrol(firstUnit, unit)) patrollingUnits.add(unit);
+                }
+            }
+            patrolUnit(patrollingUnits);
+        }
+    }
+
+    private static boolean hasSameOriginAndDestinationForPatrol(Unit firstUnit, Unit unit) {
+        return firstUnit.getPatrolOrigin() == unit.getPatrolOrigin() &&
+                firstUnit.getPatrolDestination() == unit.getPatrolDestination();
     }
 
     private static void setUnitUpdateState(ArrayList<Unit> units) {
