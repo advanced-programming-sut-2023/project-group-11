@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public enum SelectUnitMenuCommands {
     MOVE_UNIT("move\\s*unit to(( -x (?<xCoordinate>\\d+))|( -y (?<yCoordinate>\\d+))){2}"),
-    PATROL_UNIT("patrol\\s*unit(( -x1 (?<xCoordinate>-?\\d+))|( -y1 (?<yCoordinate>-?\\d+))){2}"),
+    PATROL_UNIT("patrol\\s*unit(( -x (?<xCoordinate>-?\\d+))|( -y (?<yCoordinate>-?\\d+))){2}"),
     STOP_PATROL("stop\\s*patrol"),
     SET_UNIT_STATE("set -s (?<state>\\S+)"),
     AIR_ATTACK("attack((?<xGroup> -x (?<xCoordinate>\\d+))|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),

@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 
 public class SelectUnitMenuController {
-    public static SelectUnitMenuMessages checkMoveUnit(Matcher matcher, int[] currentLocation, String unitType) {
+    public static SelectUnitMenuMessages checkMoveUnit(Matcher matcher, int[] currentLocation, String unitType, boolean isPatrol) {
         if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
             return SelectUnitMenuMessages.INVALID_COMMAND;
 
@@ -47,6 +47,7 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.INVALID_DISTANCE;
 
         //TODO:1 canScaleWall
+        if (isPatrol) setPatrolUnit(matcher, currentLocation, unitType);
         moveUnits(map, unitType, shortestPath, currentLocation, destinationX, destinationY);
 
         return SelectUnitMenuMessages.SUCCESS;
@@ -95,13 +96,9 @@ public class SelectUnitMenuController {
         int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        ArrayList<Unit> selectedUnits = map.getTile(destinationX, destinationY).getUnitsByType(unitType);
-        //TODO:2 units in destination of the same type should not patrol
+        ArrayList<Unit> selectedUnits = map.getTile(currentLocation).getUnitsByType(unitType);
 
-        for (Unit unit : selectedUnits) {
-            unit.setPatrolOrigin(new int[]{destinationX, destinationY});
-            unit.setPatrolDestination(new int[]{currentX, currentY});
-        }
+        setPatrolDestination(destinationX, destinationY, currentX, currentY, selectedUnits);
     }
 
     public static void patrolUnit(ArrayList<Unit> units) {
@@ -116,12 +113,18 @@ public class SelectUnitMenuController {
 
         if (!isValidForMoving(map, currentX, currentY, destinationX, destinationY)) stopPatrol(units);
         if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) != null) {
-            for (Unit unit1 : units) {
-                unit1.setPatrolOrigin(new int[]{destinationX, destinationY});
-                unit1.setPatrolDestination(new int[]{currentX, currentY});
-            }
             moveUnits(map, unitType, shortestPath, unit.getPatrolOrigin(), destinationX, destinationY);
+            setPatrolDestination(destinationX, destinationY, currentX, currentY, units);
         } else stopPatrol(units);
+    }
+
+    private static void setPatrolDestination(int destinationX, int destinationY, int currentX, int currentY, ArrayList<Unit> selectedUnits) {
+        int[] patrolOrigin = new int[]{destinationX, destinationY};
+        int[] patrolDestination = new int[]{currentX, currentY};
+        for (Unit unit : selectedUnits) {
+            unit.setPatrolOrigin(patrolOrigin);
+            unit.setPatrolDestination(patrolDestination);
+        }
     }
 
     public static SelectUnitMenuMessages checkStopPatrol(int[] currentLocation, String unitType) {
@@ -491,11 +494,11 @@ public class SelectUnitMenuController {
     }
 
     public static boolean notValidTextureForMoving(Tile destination) {
-        return destination.getTexture().isSuitableForUnit();
+        return !destination.getTexture().isSuitableForUnit();
     }
 
     public static boolean isValidDestinationSameOwnerUnits(Tile currentTile, Tile destination) {
-        return currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
+        return destination.getUnits().size() == 0 || currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
     }
 
     private static void setLeftMoves(Path shortestPath, ArrayList<Unit> selectedUnits) {

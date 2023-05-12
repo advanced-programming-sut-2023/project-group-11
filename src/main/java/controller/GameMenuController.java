@@ -296,7 +296,7 @@ public class GameMenuController {
                 diggingUnits.add(troop);
         }
 
-        SelectUnitMenuController.digPitchInNextTurn(diggingUnits);
+//        SelectUnitMenuController.digPitchInNextTurn(diggingUnits);
         updatePatrol();
         updateState();
         currentGovernance.resetUnitAbilities();
@@ -324,7 +324,7 @@ public class GameMenuController {
         for (AllResource resource : AllResource.values())
             if (Utils.isFood(resource))
                 while (totalFoodRemoved < foodConsumption) {
-                    if (!currentGovernance.hasEnoughItem(resource, 1)) continue;
+                    if (!currentGovernance.hasEnoughItem(resource, 1)) break;
                     currentGovernance.removeFromStorage(resource, 1);
                     totalFoodRemoved++;
                 }
@@ -361,7 +361,7 @@ public class GameMenuController {
 
     private static void updateAllResources() {
         ArrayList<Building> buildings = currentGovernance.getBuildings();
-        int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("ox tether"));
+        int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("OX_TETHER"));
         currentGovernance.resetAleFactor();
 
         for (Building building : buildings) {
@@ -552,7 +552,7 @@ public class GameMenuController {
     }
 
     private static void updatePatrol() {
-        ArrayList<Unit> units = currentGovernance.getUnits();
+        ArrayList<Unit> units = new ArrayList<>(currentGovernance.getUnits());
         ArrayList<Unit> patrollingUnits = new ArrayList<>();
 
         for (int i = 0; i < units.size(); i++) {
@@ -564,8 +564,10 @@ public class GameMenuController {
                     Unit unit = units.get(j);
                     if (hasSameOriginAndDestinationForPatrol(firstUnit, unit)) patrollingUnits.add(unit);
                 }
+                patrolUnit(patrollingUnits);
             }
-            patrolUnit(patrollingUnits);
+            units.removeAll(patrollingUnits);
+            patrollingUnits.clear();
         }
     }
 

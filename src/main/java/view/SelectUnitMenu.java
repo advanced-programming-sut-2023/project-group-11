@@ -20,7 +20,7 @@ public class SelectUnitMenu {
             command = scanner.nextLine();
 
             if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.MOVE_UNIT)) != null)
-                checkMoveUnit(matcher, currentLocation, unitType);
+                checkMoveUnit(matcher, currentLocation, unitType, false);
             else if ((matcher = SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.PATROL_UNIT)) != null)
                 checkPatrolUnit(matcher, currentLocation, unitType);
             else if (SelectUnitMenuCommands.getMatcher(command, SelectUnitMenuCommands.STOP_PATROL) != null)
@@ -49,8 +49,8 @@ public class SelectUnitMenu {
         }
     }
 
-    private static void checkMoveUnit(Matcher matcher, int[] currentLocation, String unitType) {
-        message = SelectUnitMenuController.checkMoveUnit(matcher, currentLocation, unitType);
+    private static void checkMoveUnit(Matcher matcher, int[] currentLocation, String unitType, boolean isPatrol) {
+        message = SelectUnitMenuController.checkMoveUnit(matcher, currentLocation, unitType, isPatrol);
 
         switch (message) {
             case SUCCESS -> System.out.println("Units Moved (patrolled) Successfully!");
@@ -97,10 +97,7 @@ public class SelectUnitMenu {
     }
 
     private static void checkPatrolUnit(Matcher matcher, int[] currentLocation, String unitType) {
-        checkMoveUnit(matcher, currentLocation, unitType);
-
-        if (message.equals(SelectUnitMenuMessages.SUCCESS))
-            SelectUnitMenuController.setPatrolUnit(matcher, currentLocation, unitType);
+        checkMoveUnit(matcher, currentLocation, unitType, true);
     }
 
     private static void checkStopPatrol(int[] currentLocation, String unitType) {
