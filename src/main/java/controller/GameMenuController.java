@@ -127,12 +127,12 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkDropBuilding(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup", "typeGroup"))
+        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate", "type"))
             return GameMenuMessages.INVALID_COMMAND;
 
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
-        String type = Utils.removeDoubleQuotation(matcher.group("typeGroup"));
+        String type = Utils.removeDoubleQuotation(matcher.group("type"));
         Building building = BuildingUtils.getBuildingByType(type);
 
         if (!BuildingUtils.isValidBuildingType(type)) return GameMenuMessages.INVALID_BUILDING_TYPE;
@@ -154,7 +154,7 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkSelectBuilding(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup")) return GameMenuMessages.INVALID_COMMAND;
+        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate")) return GameMenuMessages.INVALID_COMMAND;
 
         int xCoordinate = Integer.parseInt(matcher.group("xCoordinate"));
         int yCoordinate = Integer.parseInt(matcher.group("yCoordinate"));
@@ -170,7 +170,7 @@ public class GameMenuController {
     }
 
     public static GameMenuMessages checkSelectUnit(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xGroup", "yGroup", "typeGroup"))
+        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate", "type"))
             return GameMenuMessages.INVALID_COMMAND;
 
         int x = Integer.parseInt(matcher.group("xCoordinate"));
@@ -362,7 +362,7 @@ public class GameMenuController {
 
     private static void updateAllResources() {
         ArrayList<Building> buildings = currentGovernance.getBuildings();
-        int oxTetherNumber = Collections.frequency(buildings, FillerType.valueOf("OX_TETHER"));
+        int oxTetherNumber = countBuilding(buildings,"ox tether");
         currentGovernance.resetAleFactor();
 
         for (Building building : buildings) {
@@ -403,6 +403,11 @@ public class GameMenuController {
         }
     }
 
+    private static int countBuilding(ArrayList<Building> buildings,String buildingName){
+        int i = 0;
+        for (Building building : buildings) if (building.getName().equals(buildingName)) i++;
+        return i;
+    }
     private static boolean cutTree(Building building) {
         int x = building.getXCoordinate();
         int y = building.getYCoordinate();

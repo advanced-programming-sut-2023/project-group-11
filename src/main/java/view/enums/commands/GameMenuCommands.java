@@ -8,11 +8,11 @@ public enum GameMenuCommands {
     NEXT_TURN("next turn"),
     SHOW_MAP("show\\s*map(( -x (?<xCoordinate>\\d+))" +
             "|( -y (?<yCoordinate>\\d+))){2}"),
-    DROP_BUILDING("drop\\s*building((?<xGroup> -x (?<xCoordinate>\\d+))" +
-            "|(?<yGroup> -y (?<yCoordinate>\\d+))" +
-            "|(?<typeGroup> -type (?<type>\"[^\"]+\"|\\S+))){3}"),
-    SELECT_BUILDING("select\\s*building((?<xGroup> -x (?<xCoordinate>\\d+))" +
-            "|(?<yGroup> -y (?<yCoordinate>\\d+))){2}"),
+    DROP_BUILDING("drop\\s*building( -x (?<xCoordinate>\\d+)" +
+            "|( -y (?<yCoordinate>\\d+))" +
+            "|( -t (?<type>\"[^\"]+\"|\\S+))){3}"),
+    SELECT_BUILDING("select\\s*building( -x (?<xCoordinate>\\d+)" +
+            "|( -y (?<yCoordinate>\\d+))){2}"),
     SHOW_POPULARITY("show popularity( (?<factors>factors))?"),
     SHOW_FOOD_LIST("show food list"),
     CHANGE_FOOD_RATE("food\\s*rate -r (?<rateNumber>\\d+)"),
@@ -21,10 +21,10 @@ public enum GameMenuCommands {
     SHOW_TAX_RATE("tax\\s*rate show"),
     CHANGE_FEAR_RATE("fear\\s*rate -r (?<rateNumber>\\d+)"),
     SHOW_FEAR_RATE("fear\\s*rate show"),
-    SELECT_UNIT("select\\s*unit((?<xGroup> -x (?<xCoordinate>\\d+))" +
-            "|(?<yGroup> -y (?<yCoordinate>\\d+))" +
-            "|(?<typeGroup> -t (?<type>\"[^\"]+\"|\\S+))){3}"),
-    DROP_UNIT("drop\\s*unit(( -x (?<xCoordinate>\\d+))" +
+    SELECT_UNIT("select\\s*unit( -x (?<xCoordinate>\\d+)" +
+            "|( -y (?<yCoordinate>\\d+))" +
+            "|( -t (?<type>\"[^\"]+\"|\\S+))){3}"),
+    DROP_UNIT("drop\\s*unit( -x (?<xCoordinate>\\d+)" +
             "|( -y (?<yCoordinate>\\d+))" +
             "|( -t (?<type>\"[^\"]+\"|\\S+))" +
             "|( -c (?<count>\\d+))){4}"),

@@ -105,4 +105,9 @@ public abstract class Building {
     public String toString() {
         return "Building Type: " + name + " HP: " + hitPoint;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return name == ((Building) obj).getName();
+    }
 }

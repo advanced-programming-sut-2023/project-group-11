@@ -4,6 +4,8 @@ import model.Game;
 import model.Governance;
 import model.Stronghold;
 import model.buildings.Keep;
+import model.buildings.Storage;
+import model.buildings.enums.StorageType;
 import model.map.Map;
 import model.map.Territory;
 import model.map.Texture;
@@ -74,6 +76,8 @@ public class MainMenuController {
         y = getXYBySelectedArea(selectedArea, mapSize)[1];
 
         buildKeep(keep, x, y);
+        BuildingUtils.build(currentGovernance, new Storage(StorageType.STOCKPILE), x - 1, y, 1);
+        BuildingUtils.build(currentGovernance, new Storage(StorageType.GRANARY), x, y - 1, 1);
         dropLord(currentGovernance, lord, x, y);
         currentGovernance.setTerritory(Territory.getTerritoryByArea(selectedArea));
 
