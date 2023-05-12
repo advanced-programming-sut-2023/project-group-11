@@ -211,7 +211,7 @@ public class GameMenuController {
 
         if (tile.getUnits().size() + count > 12)
             return GameMenuMessages.NOT_ENOUGH_SPACE;
-        if (!Utils.isValidUnitType(type) || !Utils.isValidMachineType(type) || type.equals("lord"))
+        if ((!Utils.isValidUnitType(type) && !Utils.isValidMachineType(type)) || type.equals("lord"))
             return GameMenuMessages.INVALID_UNIT_TYPE;
         if (!tile.getTexture().isSuitableForUnit())
             return GameMenuMessages.INVALID_TEXTURE;
