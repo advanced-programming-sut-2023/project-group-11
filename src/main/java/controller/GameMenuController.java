@@ -259,7 +259,7 @@ public class GameMenuController {
             } else if (type.equals("engineer")) unit = new Engineer();
             else unit = new Troop(type);
 
-            unit.initialize(tile);
+            unit.initialize(tile, true);
         }
     }
 

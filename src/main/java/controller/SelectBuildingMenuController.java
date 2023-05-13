@@ -125,7 +125,7 @@ public class SelectBuildingMenuController {
         governance.removeFromStorage(troop.getWeaponType(), count);
         governance.removeFromStorage(troop.getArmorType(), count);
 
-        for (int i = 0; i < count; i++) new Troop(unitType).initialize(unitCreationTile);
+        for (int i = 0; i < count; i++) new Troop(unitType).initialize(unitCreationTile, false);
 
         return true;
     }
@@ -138,7 +138,7 @@ public class SelectBuildingMenuController {
 
         governance.setGold(governance.getGold() - engineer.getCost() * count);
 
-        for (int i = 0; i < count; i++) new Engineer().initialize(unitCreationTile);
+        for (int i = 0; i < count; i++) new Engineer().initialize(unitCreationTile, false);
 
         return true;
     }
