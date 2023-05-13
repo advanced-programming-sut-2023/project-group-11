@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="remove TODOs">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Minor Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SelectUnitMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectUnitMenuCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/commands/SelectUnitMenuCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,21 +229,8 @@
       <workItem from="1683844746168" duration="7014000" />
       <workItem from="1683884470865" duration="4095000" />
       <workItem from="1683888696033" duration="31944000" />
-      <workItem from="1683924829630" duration="565000" />
-    </task>
-    <task id="LOCAL-00028" summary="Captcha Updated">
-      <created>1682353591245</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1682353591245</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Show map added in MapEditMenu">
-      <created>1682434961209</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1682434961209</updated>
+      <workItem from="1683924829630" duration="695000" />
+      <workItem from="1683994204381" duration="4068000" />
     </task>
     <task id="LOCAL-00030" summary="Use validCommandTags in MapEditMenuController">
       <created>1682865467024</created>
@@ -576,7 +561,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683924272298</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Stop Digging">
+      <created>1683925409090</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1683925409090</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Minor Changes">
+      <created>1683925498884</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1683925498884</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,8 +617,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Dead machine -&gt; remove engineer" />
-    <MESSAGE value="setLocation for units" />
     <MESSAGE value="Start game debugged (map initialization + minor changes)" />
     <MESSAGE value="error resolved" />
     <MESSAGE value="debugging started (start game + show map + select unit + move)" />
@@ -643,7 +640,9 @@
     <MESSAGE value="Start game double quote handled" />
     <MESSAGE value="Debug as possible as i could!" />
     <MESSAGE value="remove TODOs" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove TODOs" />
+    <MESSAGE value="Stop Digging" />
+    <MESSAGE value="Minor Changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor Changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -660,8 +659,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controller/GameMenuController.java</url>
-          <line>129</line>
+          <line>128</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/view/GameMenu.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

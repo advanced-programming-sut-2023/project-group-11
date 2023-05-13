@@ -301,7 +301,7 @@ public class SelectUnitMenuController {
 
         ArrayList<Tile> selectedTiles = getSelectedTiles(map, currentX, currentY, minimumSpeed(selectedUnits), direction);
 
-        setDiggingPitchConseptsForUnits(selectedUnits, currentX, currentY, length, direction, minimumSpeed(selectedUnits));
+        setDiggingPitchConceptsForUnits(selectedUnits, currentX, currentY, length, direction, minimumSpeed(selectedUnits));
         moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits));
         digPitch(selectedTiles);
 
@@ -700,8 +700,9 @@ public class SelectUnitMenuController {
 
     private static boolean notValidAreaForDiggingPitch(Map map, int x, int y, int length, String direction) {
         ArrayList<Tile> tilesToBeDigged = getSelectedTiles(map, x, y, length, direction);
-        for (Tile tile : tilesToBeDigged) {
-            if (tile.getBuilding() != null || tile.getUnits().size() != 0 || !tile.getTexture().isSuitableForPitch())
+        for (int i = 1; i < tilesToBeDigged.size(); i++) {
+            if (tilesToBeDigged.get(i).getBuilding() != null || tilesToBeDigged.get(i).getUnits().size() != 0 ||
+                    !tilesToBeDigged.get(i).getTexture().isSuitableForPitch())
                 return true;
         }
         return false;
@@ -730,7 +731,7 @@ public class SelectUnitMenuController {
         return selectedTiles;
     }
 
-    private static void setDiggingPitchConseptsForUnits(ArrayList<Unit> selectedUnits, int currentX, int currentY, int length, String direction, int leftMoves) {
+    private static void setDiggingPitchConceptsForUnits(ArrayList<Unit> selectedUnits, int currentX, int currentY, int length, String direction, int leftMoves) {
         for (Unit unit : selectedUnits) {
             ((Troop) unit).setDigging(true);
             ((Troop) unit).setDiggingDirection(direction);
@@ -792,7 +793,7 @@ public class SelectUnitMenuController {
             selectedTiles = getSelectedTiles(map, currentX, currentY, minimumSpeed(selectedUnits), direction);
 
             if (shortestPath != null) {
-                setDiggingPitchConseptsForUnits(selectedUnits, currentX, currentY, diggingLengthLeft, direction, minimumSpeed(selectedUnits));
+                setDiggingPitchConceptsForUnits(selectedUnits, currentX, currentY, diggingLengthLeft, direction, minimumSpeed(selectedUnits));
                 moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits));
                 digPitch(selectedTiles);
             } else {
@@ -800,6 +801,7 @@ public class SelectUnitMenuController {
             }
 
             units.removeAll(selectedUnits);
+            selectedUnits = new ArrayList<>();
         }
 
     }

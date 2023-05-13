@@ -294,11 +294,11 @@ public class GameMenuController {
                 diggingUnits.add(troop);
         }
 
-        if (diggingUnits.size() != 0)
-            SelectUnitMenuController.digPitchInNextTurn(diggingUnits);
+        currentGovernance.resetUnitAbilities();
         updatePatrol();
         updateState();
-        currentGovernance.resetUnitAbilities();
+        if (diggingUnits.size() != 0)
+            SelectUnitMenuController.digPitchInNextTurn(diggingUnits);
     }
 
     private static void updateGold() {
