@@ -255,13 +255,11 @@ public class GameMenuController {
                 for (int j = 0; j < ((Machine) unit).getEngineersNeededToActivate(); j++) {
                     Engineer engineer = new Engineer();
                     ((Machine) unit).addEngineer(engineer);
-                    engineer.setLocation(new int[]{x, y});
                 }
             } else if (type.equals("engineer")) unit = new Engineer();
             else unit = new Troop(type);
 
-            unit.setLocation(new int[]{x, y});
-            tile.getUnits().add(unit);
+            unit.initialize(tile);
         }
     }
 
@@ -488,13 +486,12 @@ public class GameMenuController {
         int currentY = unit.getLocation()[1];
         int finalRange = isValidUnitForAirAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
         attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
-        if (unit.getUnitState() == UnitState.OFFENSIVE) {
+        if (unit.getUnitState() == UnitState.OFFENSIVE)
             for (Unit unit1 : units)
                 unit1.setUnitState(UnitState.DEFENSIVE);
-        } else {
+        else
             for (Unit unit1 : units)
                 unit1.setUnitState(UnitState.STANDING);
-        }
     }
 
     private static void updateEngineer(Engineer engineer, int enemyNeededToPourOil) {

@@ -43,10 +43,12 @@ public abstract class Unit {
         return unitState;
     }
 
-    protected void setOwnerGovernance() {
+    public void initialize(Tile tile) {
         this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         this.ownerGovernance.addUnit(this);
+        this.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(tile));
         if (!(this instanceof Machine || this instanceof Lord)) this.ownerGovernance.changeCurrentPopulation(-1);
+        tile.getUnits().add(this);
     }
 
     public void setUnitState(UnitState unitState) {

@@ -125,11 +125,7 @@ public class SelectBuildingMenuController {
         governance.removeFromStorage(troop.getWeaponType(), count);
         governance.removeFromStorage(troop.getArmorType(), count);
 
-        for (int i = 0; i < count; i++) {
-            Troop troops = new Troop(unitType);
-            troops.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(unitCreationTile));
-            unitCreationTile.getUnits().add(troops);
-        }
+        for (int i = 0; i < count; i++) new Troop(unitType).initialize(unitCreationTile);
 
         return true;
     }
@@ -142,11 +138,7 @@ public class SelectBuildingMenuController {
 
         governance.setGold(governance.getGold() - engineer.getCost() * count);
 
-        for (int i = 0; i < count; i++) {
-            engineer = new Engineer();
-            engineer.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(unitCreationTile));
-            unitCreationTile.getUnits().add(engineer);
-        }
+        for (int i = 0; i < count; i++) new Engineer().initialize(unitCreationTile);
 
         return true;
     }
@@ -170,7 +162,7 @@ public class SelectBuildingMenuController {
         for (int i = changingCoordination - 1; i <= changingCoordination + unitMakerSize + 1 && !unitCreationFlag; i++)
             if (Utils.isValidCoordinates(map, constantCoordination - 1, i)) {
                 unitCreationTile = map.getTile(constantCoordination - 1, i);
-                if (unitCreationTile.getTexture().isSuitableForUnit()) {
+                if (canCreateUnit()) {
                     unitCreationFlag = true;
                     unitCreationCoordinates[0] = constantCoordination;
                     unitCreationCoordinates[1] = i;
@@ -182,7 +174,7 @@ public class SelectBuildingMenuController {
         for (int i = changingCoordination - 1; i <= changingCoordination + unitMakerSize + 1 && !unitCreationFlag; i++)
             if (Utils.isValidCoordinates(map, i, constantCoordination - 1)) {
                 unitCreationTile = map.getTile(i, constantCoordination - 1);
-                if (unitCreationTile.getTexture().isSuitableForUnit()) {
+                if (canCreateUnit()) {
                     unitCreationFlag = true;
                     unitCreationCoordinates[0] = i;
                     unitCreationCoordinates[1] = constantCoordination;

@@ -583,9 +583,7 @@ public class SelectUnitMenuController {
 
         if (onlyBuilding) attackBuilding(selectedUnits, targetTile);
         else if (onlyUnits) attackUnits(selectedUnits, targetTile);
-        else {
-            setAttackedTrue(selectedUnits);
-        }
+        else setAttackedTrue(selectedUnits);
     }
 
     private static void attackBuilding(ArrayList<Unit> selectedUnits, Tile targetTile) {
@@ -674,7 +672,7 @@ public class SelectUnitMenuController {
             machine.addEngineer(engineer);
             tile.getUnits().remove(engineer);
         }
-        tile.getUnits().add(machine);
+        machine.initialize(tile);
     }
 
     private static boolean isValidForMoving(Map map, int currentX, int currentY, int destinationX, int destinationY) {

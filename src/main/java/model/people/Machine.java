@@ -28,7 +28,6 @@ public class Machine extends Attacker {
         engineersNeededToActivate = ((Long) machine.get("engineersNeededToActivate")).intValue();
         damage = SiegeDamage.valueOf((String) machine.get("damage")).getDamage();
         range = ((Long) machine.get("range")).intValue();
-        setOwnerGovernance();
     }
 
     public void addEngineer(Engineer engineer) {

@@ -44,7 +44,6 @@ public class Troop extends Attacker {
         this.canDigPitch = (Boolean) troop.get("canDigPitch");
         this.revealed = (Boolean) troop.get("revealed");
         this.cost = ((Long) troop.get("cost")).intValue();
-        this.setOwnerGovernance();
     }
 
     private JSONObject getTroopFromDictionary(String name) {

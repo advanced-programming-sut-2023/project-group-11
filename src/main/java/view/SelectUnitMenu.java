@@ -115,7 +115,7 @@ public class SelectUnitMenu {
 
         switch (message) {
             case NOT_PATROLLING -> System.out.println("Selected units are not patrolling!");
-            case SUCCESS -> System.out.println("Selected units successfully are now fixed in current position!");
+            case SUCCESS -> System.out.println("Selected units are now fixed in current position!");
         }
     }
 
@@ -149,7 +149,7 @@ public class SelectUnitMenu {
         switch (message) {
             case INVALID_UNIT_TYPE_TO_DIG_TUNNEL -> System.out.println("Only tunnelers can dig tunnel!");
             case INVALID_DIRECTION -> System.out.println("Direction must be up or left or down or right!");
-            case SUCCESS -> System.out.println("tunnel dug successfully!");
+            case SUCCESS -> System.out.println("Tunnel dug successfully!");
         }
     }
 
