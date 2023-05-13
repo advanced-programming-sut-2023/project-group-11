@@ -657,11 +657,14 @@ public class GameMenuController {
     }
 
     public static String getWinnerName() {
-        return currentGame.getGovernances().get(0).getOwner().getNickname();
+        currentGame.getCurrentGovernance().setScore(currentGame.getCurrentGovernance().getScore() + 1000);
+        return currentGame.getCurrentGovernance().getOwner().getNickname();
     }
 
     public static String scores() {
         StringBuilder result = new StringBuilder();
+        result.append(currentGame.getCurrentGovernance().getOwner().getNickname()).append(" -> ")
+                .append(currentGame.getCurrentGovernance().getScore()).append('\n');
         ArrayList<Governance> sortedGovernances = sortGovernances(currentGame.getScores());
         for (Governance governance : sortedGovernances) {
             result.append(governance.getOwner().getNickname()).append(" -> ")
@@ -679,7 +682,7 @@ public class GameMenuController {
             public int compare(java.util.Map.Entry<Governance, Integer> o1, java.util.Map.Entry<Governance, Integer> o2) {
                 Integer v1 = o1.getValue();
                 Integer v2 = o2.getValue();
-                return v1.compareTo(v2);
+                return v2.compareTo(v1);
             }
         };
 
@@ -700,7 +703,7 @@ public class GameMenuController {
         Governance winner = currentGame.getGovernances().get(0);
         ArrayList<Governance> losers = new ArrayList<>(scores.keySet());
 
-        winner.getOwner().addScore(scores.get(winner));
+        winner.getOwner().addScore(winner.getScore());
         losers.forEach(loser -> loser.getOwner().addScore(scores.get(loser)));
     }
 

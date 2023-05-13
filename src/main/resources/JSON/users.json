@@ -17,7 +17,7 @@
     "email": "amir@gma.co",
     "recoveryQuestion": "What is my best friend's name?",
     "recoveryAnswer": "753bd5b3281c375ac9917f0080e4ced18daa8e6a23d4390c16e05c6038d4d611",
-    "score": 0,
+    "score": 2000,
     "stayLoggedIn": false
   },
   {
@@ -28,7 +28,7 @@
     "slogan": "You are clearly no match for my forces! Give in now, my friend!",
     "recoveryQuestion": "What is my best friend's name?",
     "recoveryAnswer": "2d73c1f6c77da314c2e3c9060ce798370cdd3bb9f5c7061b834b11784c61bd4d",
-    "score": 0,
+    "score": 3000,
     "stayLoggedIn": false
   }
 ]

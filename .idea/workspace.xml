@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Minor Changes">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Dig pitch debugged + resetAbilities debugged">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,21 +229,7 @@
       <workItem from="1683884470865" duration="4095000" />
       <workItem from="1683888696033" duration="31944000" />
       <workItem from="1683924829630" duration="695000" />
-      <workItem from="1683994204381" duration="4068000" />
-    </task>
-    <task id="LOCAL-00030" summary="Use validCommandTags in MapEditMenuController">
-      <created>1682865467024</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1682865467024</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Troop Dictionary added">
-      <created>1682871602800</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1682871602800</updated>
+      <workItem from="1683994204381" duration="6353000" />
     </task>
     <task id="LOCAL-00032" summary="Terrotories added + game capacity initialized (2-4)">
       <created>1682879175229</created>
@@ -575,7 +560,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683925498884</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Dig pitch debugged + resetAbilities debugged">
+      <created>1684012727777</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1684012727777</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Kill Governance &amp; next turn debugged">
+      <created>1684014220065</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1684014220065</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,8 +616,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Start game debugged (map initialization + minor changes)" />
-    <MESSAGE value="error resolved" />
     <MESSAGE value="debugging started (start game + show map + select unit + move)" />
     <MESSAGE value="Next turn added" />
     <MESSAGE value="Make the &quot;original&quot; map" />
@@ -642,7 +639,9 @@
     <MESSAGE value="remove TODOs" />
     <MESSAGE value="Stop Digging" />
     <MESSAGE value="Minor Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor Changes" />
+    <MESSAGE value="Dig pitch debugged + resetAbilities debugged" />
+    <MESSAGE value="Kill Governance &amp; next turn debugged" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kill Governance &amp; next turn debugged" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -663,9 +662,9 @@
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/GameMenu.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java</url>
+          <line>670</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
