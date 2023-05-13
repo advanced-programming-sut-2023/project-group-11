@@ -75,7 +75,7 @@ public class MainMenuController {
         x = getXYBySelectedArea(selectedArea, mapSize)[0];
         y = getXYBySelectedArea(selectedArea, mapSize)[1];
 
-        buildKeep(keep, x, y);
+        buildKeep(currentGovernance, keep, x, y);
         BuildingUtils.build(currentGovernance, new Storage(StorageType.STOCKPILE), x - 1, y, 1);
         BuildingUtils.build(currentGovernance, new Storage(StorageType.GRANARY), x, y - 1, 1);
         currentGovernance.initializeStorages();
@@ -85,7 +85,7 @@ public class MainMenuController {
         areas.remove(Integer.valueOf(selectedArea));
     }
 
-    private static void buildKeep(Keep keep, int x, int y) {
+    private static void buildKeep(Governance currentGovernance, Keep keep, int x, int y) {
         int size = keep.getSize();
         Map map = Stronghold.getCurrentGame().getMap();
         Tile[][] tiles = map.getTiles();
@@ -95,6 +95,10 @@ public class MainMenuController {
                 tiles[x + i][y + j].setBuilding(keep);
                 tiles[x + i][y + j].setTexture(Texture.SAND);
             }
+
+        currentGovernance.addBuilding(keep);
+        keep.setXCoordinate(x);
+        keep.setYCoordinate(y);
     }
 
     private static void dropLord(Governance currentGovernance, Lord lord, int x, int y) {

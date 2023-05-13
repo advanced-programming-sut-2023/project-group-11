@@ -15,6 +15,7 @@ import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.regex.Matcher;
 
 public class SelectUnitMenuController {
@@ -611,7 +612,7 @@ public class SelectUnitMenuController {
         int attackerDamage = (int) (selectedUnits.size() * ((Attacker) selectedUnits.get(0)).getDamage() *
                 (1 + selectedUnits.get(0).getOwner().getFearFactor() * 0.05));
 
-        for (int i = 0; ; i++) {
+        for (int i = 0; i < targetTile.getUnits().size(); i++) {
             Unit unit = targetTile.getUnits().get(i);
             if (unit.getHp() > attackerDamage) {
                 unit.setHp(unit.getHp() - attackerDamage);
@@ -648,12 +649,26 @@ public class SelectUnitMenuController {
     private static void killGovernance(Governance owner) {
         Game currentGame = Stronghold.getCurrentGame();
         Map map = currentGame.getMap();
+        currentGame.plusTurnCounter(-1);
 
-        owner.getBuildings().forEach(building -> building.removeFromGame(map, owner));
-        owner.getUnits().forEach(unit -> unit.removeFromGame(map.getTile(unit.getLocation()), owner));
+
+        removeBuildings(owner, map);
+        removeUnits(owner, map);
         currentGame.addLoserScore(owner, owner.getScore());
         currentGame.getGovernances().remove(owner);
         currentGame.setTurn(currentGame.getTurn() - (currentGame.getCurrentTurn() - 1));
+    }
+
+    private static void removeUnits(Governance owner, Map map) {
+        int size = owner.getUnits().size();
+        for (int i = 0; i < size; i++)
+            owner.getUnits().get(0).removeFromGame(map.getTile(owner.getUnits().get(0).getLocation()), owner);
+    }
+
+    private static void removeBuildings(Governance owner, Map map) {
+        int size = owner.getBuildings().size();
+        for (int i = 0; i < size; i++)
+            owner.getBuildings().get(0).removeFromGame(map, owner);
     }
 
     private static void setAttackedTrue(ArrayList<Unit> selectedUnits) {
@@ -824,7 +839,8 @@ public class SelectUnitMenuController {
         Map map = Stronghold.getCurrentGame().getMap();
         ArrayList<Unit> selectedUnits = map.getTile(currentLocation).getUnitsByType(unitType);
 
-        if (!(selectedUnits.get(0) instanceof Troop troop && troop.isDigging())) return SelectUnitMenuMessages.NOT_DIGGING;
+        if (!(selectedUnits.get(0) instanceof Troop troop && troop.isDigging()))
+            return SelectUnitMenuMessages.NOT_DIGGING;
 
         for (Unit unit : selectedUnits) ((Troop) unit).setDigging(false);
         return SelectUnitMenuMessages.SUCCESS;

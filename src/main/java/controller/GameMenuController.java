@@ -27,7 +27,7 @@ public class GameMenuController {
         int totalGovernances = governances.size();
         currentGovernance = governances.get(turn % totalGovernances);
         currentGame.setCurrentGovernance(currentGovernance);
-        currentGame.plusTurnCounter();
+        currentGame.plusTurnCounter(1);
         if (currentGovernance == governances.get(0)) currentGame.plusCurrentTurnCounter();
         currentGovernance.setScore((int) ((getCurrentTurn() - 1) * currentGovernance.getTotalGold()));
 

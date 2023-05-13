@@ -50,8 +50,8 @@ public class Game {
         return currentTurn;
     }
 
-    public void plusTurnCounter() {
-        this.turn += 1;
+    public void plusTurnCounter(int number) {
+        this.turn += number;
     }
 
     public void plusCurrentTurnCounter() {
