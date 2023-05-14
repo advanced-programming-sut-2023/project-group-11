@@ -42,7 +42,7 @@ public class TradeMenuController {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         if (!Utils.isValidCommandTags(matcher, "idGroup", "messageGroup"))
             return TradeMenuMessages.INVALID_COMMAND;
-            int id = Integer.parseInt(matcher.group("id"));
+        int id = Integer.parseInt(matcher.group("id"));
         String message = Utils.removeDoubleQuotation(matcher.group("message"));
         ArrayList<Trade> trades = Stronghold.getCurrentGame().getTrades();
         if (trades.size() < id)
@@ -74,7 +74,7 @@ public class TradeMenuController {
         for (Trade trade : currentGovernance.getTradeNotification()) {
             if(index == 1)
                 output += "Notifications: \n";
-            output += (index++) + "-" + trade;
+            output += (index++) + "-" + trade + "\n";
         }
         currentGovernance.getTradeNotification().clear();
         return output;

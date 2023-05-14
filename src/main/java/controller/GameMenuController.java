@@ -622,7 +622,7 @@ public class GameMenuController {
                 if (!isValidUnitForAirAttack(unitName))
                     moveUnits(map, units, currentX, currentY, destinationX, destinationY);
                 if (units.size() > 0) {
-                    attack(units, unitName, map.getTile(destinationX - 1, destinationY), map.getTile(destinationX, destinationY));
+                    attack(units, unitName, map.getTile(destinationX, destinationY - 1), map.getTile(destinationX, destinationY));
                     return true;
                 }
             }

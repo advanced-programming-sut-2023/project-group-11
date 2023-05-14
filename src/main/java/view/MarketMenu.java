@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 
 public class MarketMenu {
     public static void run() {
+        System.out.println("entered market menu");
         Scanner scanner = EntryMenu.getScanner();
         Matcher matcher;
         String command = scanner.nextLine();

@@ -12,6 +12,7 @@ public class TradeMenu {
     public static void run() {
         Scanner scanner = EntryMenu.getScanner();
         Matcher matcher;
+        System.out.println("entered trade menu");
         System.out.print("Governances: \n" + TradeMenuController.showAllGovernance());
         System.out.print(TradeMenuController.showNotifications());
         String command = scanner.nextLine();
