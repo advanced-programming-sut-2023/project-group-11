@@ -122,7 +122,7 @@ Commands
 
 - move unit to -x [x] -y [y] --> حرکت دادن یگان
 
-- patrol unit -x1 [x1] -y1 [y1] --> گشت در مختصات داده شده
+- patrol unit -x [x1] -y [y1] --> گشت در مختصات داده شده
 
 - stop patrol --> توقف گشت
 
