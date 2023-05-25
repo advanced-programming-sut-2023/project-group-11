@@ -62,7 +62,7 @@ public class LoginMenuTest {
 
     @Test
     public void checkForgotPassword_Success() {
-        matcher = getMatcher("forgot my password -u SadeghDr", LoginMenuCommands.FORGOT_PASSWORD);
+        matcher = getMatcher("forgot my password -u Sadegh", LoginMenuCommands.FORGOT_PASSWORD);
         assertEquals(LoginMenuMessages.SUCCESS, LoginMenuController.checkForgotPassword(matcher));
     }
 }

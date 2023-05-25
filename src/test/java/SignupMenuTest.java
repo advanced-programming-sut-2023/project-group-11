@@ -50,21 +50,21 @@ public class SignupMenuTest {
 
     @Test
     public void validTagTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -u sadegh -e ali.com -n saeedi");
+        matcher = getRegisterMatcher("user create -u sepehr1 -u sadegh -e ali.com -n saeedi");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.INVALID_COMMAND, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void emptyFieldTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n \"\" -e ali.com -p god god");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n \"\" -e ali.com -p god god");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.EMPTY_FIELD, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void invalidUsernameFormat() {
-        matcher = getRegisterMatcher("user create -u sepehr# -n AmirReza -e ali.com -p god god");
+        matcher = getRegisterMatcher("user create -u sepehr1# -n AmirReza -e ali.com -p god god");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.INVALID_USERNAME_FORMAT, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
@@ -78,70 +78,70 @@ public class SignupMenuTest {
 
     @Test
     public void shortPasswordTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali.com -p god god");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e ali.com -p god god");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.SHORT_PASSWORD, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void noUpperCaseTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali.com -p strong strong");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e ali.com -p strong strong");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.NO_UPPERCASE, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void noLowerCaseTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali.com -p STRONG STRONG");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e ali.com -p STRONG STRONG");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.NO_LOWERCASE, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void noNumberTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali.com -p Strong Strong");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e ali.com -p Strong Strong");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.NO_NUMBER, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void noSpecialTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali.com -p Strong9 Strong9");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e ali.com -p Strong9 Strong9");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.NO_SPECIAL, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void WrongConfirmationTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali.com -p #Strong9 potato");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e ali.com -p #Strong9 potato");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.WRONG_PASSWORD_CONFIRMATION, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void emailExistTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e sadegh.sg.sn@gmail.com -p #Strong9 #Strong9");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e sadegh.sg.sn@gmail.com -p #Strong9 #Strong9");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.EMAIL_EXIST, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void invalidEmailFormatTest() {
-        Matcher matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali.com -p #Strong9 #Strong9");
+        Matcher matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e ali.com -p #Strong9 #Strong9");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.INVALID_EMAIL_FORMAT, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void randomArgsTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali@daee.com -p random -s random");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e ali@daee.com -p random -s random");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.SUCCESS, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }
 
     @Test
     public void createUserTest() {
-        matcher = getRegisterMatcher("user create -u sepehr -n AmirReza -e ali@daee.com -p Amir123# Amir123# -s \"hello all\"");
+        matcher = getRegisterMatcher("user create -u sepehr1 -n AmirReza -e ali@daee.com -p Amir123# Amir123# -s \"hello all\"");
         setCreateUserFields(matcher);
         assertEquals(SignupMenuMessages.SUCCESS, SignupMenuController.checkRegister(matcher, username, password, email, nickname, slogan));
     }

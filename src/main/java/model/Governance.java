@@ -46,16 +46,7 @@ public class Governance {
     public void initializeStorages() {
         addToStorage(AllResource.WOOD, 80);
         addToStorage(AllResource.STONE, 20);
-        addToStorage(AllResource.IRON, 0);
-        addToStorage(AllResource.WHEAT, 0);
-        addToStorage(AllResource.FLOUR, 0);
-        addToStorage(AllResource.HOP, 0);
-        addToStorage(AllResource.ALE, 0);
-        addToStorage(AllResource.PITCH, 0);
         addToStorage(AllResource.BREAD, 100);
-        addToStorage(AllResource.APPLE, 0);
-        addToStorage(AllResource.MEAT, 0);
-        addToStorage(AllResource.CHEESE, 0);
     }
 
     public Governance(User owner) {
