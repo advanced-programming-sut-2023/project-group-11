@@ -1,4 +1,4 @@
-package view;
+package view.commandLineView;
 
 import controller.LoginMenuController;
 import controller.Utils;

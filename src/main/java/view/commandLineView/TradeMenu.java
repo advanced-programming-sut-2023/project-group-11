@@ -1,8 +1,7 @@
-package view;
+package view.commandLineView;
 
 
 import controller.TradeMenuController;
-import controller.Utils;
 import view.enums.commands.TradeMenuCommands;
 
 import java.util.Scanner;

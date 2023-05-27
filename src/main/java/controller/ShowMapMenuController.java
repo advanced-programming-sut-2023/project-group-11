@@ -10,7 +10,7 @@ import model.map.Map;
 import model.map.Tile;
 import model.people.*;
 import org.apache.commons.lang3.StringUtils;
-import view.ShowMapMenu;
+import view.commandLineView.ShowMapMenu;
 import view.enums.messages.ShowMapMenuMessages;
 
 import java.util.regex.Matcher;

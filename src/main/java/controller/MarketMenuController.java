@@ -3,7 +3,7 @@ package controller;
 import model.AllResource;
 import model.Governance;
 import model.Stronghold;
-import view.MarketMenu;
+import view.commandLineView.MarketMenu;
 import view.enums.messages.MarketMenuMessages;
 
 import java.util.regex.Matcher;
