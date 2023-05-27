@@ -8,11 +8,11 @@ import view.enums.messages.LoginMenuMessages;
 import java.util.regex.Matcher;
 
 public class LoginMenuController {
-    public static LoginMenuMessages checkLogin(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "username", "password"))
-            return LoginMenuMessages.INVALID_COMMAND;
-        User user = getUserByUsername(matcher);
-        String password = matcher.group("password");
+    public static LoginMenuMessages checkLogin(String username, String password, boolean stayLoggedIn) {
+        if (username.isEmpty()) return LoginMenuMessages.EMPTY_USERNAME_FIELD;
+        else if (password.isEmpty()) return LoginMenuMessages.EMPTY_PASSWORD_FIELD;
+
+        User user = Stronghold.getUserByUsername(username);
 
         if (user == null) return LoginMenuMessages.USERNAME_NOT_EXIST;
         else if (!user.isPasswordCorrect(Utils.encryptField(password))) {
@@ -30,13 +30,13 @@ public class LoginMenuController {
                 return LoginMenuMessages.LOCKED_ACCOUNT;
         }
 
-        if (matcher.group("stayLoggedIn") != null) user.setStayLoggedIn(true);
+        if (stayLoggedIn) user.setStayLoggedIn(true);
 
         return LoginMenuMessages.SUCCESS;
     }
 
-    public static void loginUser(Matcher matcher) {
-        User user = getUserByUsername(matcher);
+    public static void loginUser(String username) {
+        User user = Stronghold.getUserByUsername(username);
         Stronghold.setCurrentUser(user);
     }
 
@@ -63,13 +63,8 @@ public class LoginMenuController {
         user.setPassword(Utils.encryptField(password));
     }
 
-    public static User getUserByUsername(Matcher matcher) {
-        String username = Utils.removeDoubleQuotation(matcher.group("username"));
-        return Stronghold.getUserByUsername(username);
-    }
-
-    public static long getLeftLockedTime(Matcher matcher) {
-        User user = getUserByUsername(matcher);
+    public static long getLeftLockedTime(String username) {
+        User user = Stronghold.getUserByUsername(username);
         Delay delay = Delay.getDelayByUser(user);
         return (delay.getDelayTime() - System.currentTimeMillis() + delay.getLastLoginCommandTime());
     }
