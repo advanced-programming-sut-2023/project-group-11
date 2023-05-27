@@ -15,7 +15,6 @@ import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.regex.Matcher;
 
 public class SelectUnitMenuController {
@@ -687,7 +686,7 @@ public class SelectUnitMenuController {
             machine.addEngineer(engineer);
             tile.getUnits().remove(engineer);
         }
-        machine.initialize(tile, false);
+        machine.initializeUnit(tile, false);
     }
 
     private static boolean isValidForMoving(Map map, int currentX, int currentY, int destinationX, int destinationY) {

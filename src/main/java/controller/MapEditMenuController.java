@@ -234,4 +234,8 @@ public class MapEditMenuController {
         }
         return output;
     }
+
+    public static boolean isMapName(String input) {
+        return Stronghold.isMapName(input);
+    }
 }

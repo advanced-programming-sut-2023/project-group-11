@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+            prefWidth="1280.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controller.SignupMenuViewController">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane layoutX="195.0" layoutY="50.0" opacity="0.95" prefHeight="618.0" prefWidth="884.0"
+                            style="-fx-background-color: white; -fx-background-radius: 20px;">
+                    <children>
+                        <Label layoutX="360.0" layoutY="21.0" text="Stronghold">
+                            <font>
+                                <Font size="36.0"/>
+                            </font>
+                        </Label>
+                        <Line endX="-100.0" endY="-300.8000183105469" layoutX="545.0" layoutY="380.0" startX="-100.0"
+                              startY="217.60003662109375"/>
+                        <Label layoutX="184.0" layoutY="84.0" text="Signup">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="54.0" layoutY="143.0" text="Username">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <TextField alignment="TOP_LEFT" layoutX="54.0" layoutY="177.0" promptText="username"/>
+                        <Label layoutX="54.0" layoutY="218.0" text="Password">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <PasswordField layoutX="54.0" layoutY="252.0" promptText="password"/>
+                        <Label layoutX="54.0" layoutY="293.0" text="Nickname">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                        <TextField alignment="TOP_LEFT" layoutX="54.0" layoutY="327.0" promptText="nickname"/>
+                        <TextField fx:id="loginUsernameField" alignment="TOP_LEFT" layoutX="547.0" layoutY="200.0"
+                                   prefHeight="30.0" prefWidth="252.0" promptText="Username">
+                            <font>
+                                <Font size="14.0"/>
+                            </font>
+                        </TextField>
+                        <PasswordField fx:id="loginPasswordField" layoutX="547.0" layoutY="239.0" prefHeight="30.0"
+                                       prefWidth="252.0" promptText="Password">
+                            <font>
+                                <Font size="14.0"/>
+                            </font>
+                        </PasswordField>
+                        <Button layoutX="643.0" layoutY="319.0" mnemonicParsing="false" onMouseClicked="#login"
+                                text="Login">
+                            <font>
+                                <Font name="Andalus" size="17.0"/>
+                            </font>
+                        </Button>
+                        <Hyperlink layoutX="547.0" layoutY="274.0" onMouseClicked="#forgotPassword"
+                                   text="Forgot my password"/>
+                        <Label layoutX="644.0" layoutY="84.0" text="Login">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
