@@ -41,6 +41,12 @@ public class SignupMenuController {
         return SignupMenuMessages.SUCCESS;
     }
 
+    public static SignupMenuMessages checkUsername(String username){
+        if(!Utils.isValidUsernameFormat(username)) return SignupMenuMessages.INVALID_USERNAME_FORMAT;
+        if (Stronghold.usernameExist(username)) return SignupMenuMessages.USERNAME_EXIST;
+        return SignupMenuMessages.SUCCESS;
+    }
+
     public static SignupMenuMessages checkPickQuestion(Matcher pickQuestionMatcher, int questionNumber, String recoveryAnswer, String answerConfirmation) {
         if (!Utils.isValidCommandTags(pickQuestionMatcher, "questionNumber", "answer", "answerConfirmation"))
             return SignupMenuMessages.INVALID_COMMAND;
