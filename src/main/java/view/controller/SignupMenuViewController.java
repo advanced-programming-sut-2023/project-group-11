@@ -1,16 +1,16 @@
 package view.controller;
 
 import controller.LoginMenuController;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import view.ForgotPassword;
 import view.MainMenu;
 import view.SignupMenu;
 import view.enums.messages.LoginMenuMessages;
@@ -22,13 +22,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SignupMenuViewController implements Initializable {
-    public PasswordField loginPasswordField;
-    public TextField loginUsernameField;
-    public Label passwordError;
-    public Label usernameError;
-    public CheckBox stayLoggedInCheck;
+    @FXML
+    private PasswordField loginPasswordField;
+    @FXML
+    private TextField loginUsernameField;
+    @FXML
+    private Label passwordError;
+    @FXML
+    private Label usernameError;
+    @FXML
+    private CheckBox stayLoggedInCheck;
 
     private LoginMenuMessages message;
+    private static String username;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,7 +43,7 @@ public class SignupMenuViewController implements Initializable {
 
     public void login() throws Exception {
         boolean stayLoggedIn = stayLoggedInCheck.isSelected();
-
+        ViewUtils.clearLabels(usernameError, passwordError);
         message = LoginMenuController.checkLogin(loginUsernameField.getText(), loginPasswordField.getText(), stayLoggedIn);
 
         switch (message) {
@@ -58,12 +64,20 @@ public class SignupMenuViewController implements Initializable {
     }
 
     public void forgotPassword() throws Exception {
-        Stage stage = new Stage();
-        AnchorPane anchorPane = FXMLLoader.load(
-                new URL(SignupMenu.class.getResource("/FXML/ForgotPassword.fxml").toExternalForm()));
-        Scene scene = new Scene(anchorPane);
-        stage.setScene(scene);
+        ViewUtils.clearLabels(usernameError, passwordError);
+        username = loginUsernameField.getText();
+        message = LoginMenuController.checkForgotPassword(username);
 
-        stage.show();
+        switch (message) {
+            case USERNAME_NOT_EXIST -> ViewUtils.fieldError(usernameError, "Username doesn't exist!");
+            case SUCCESS -> {
+                Stage stage = new Stage();
+                new ForgotPassword().start(stage);
+            }
+        }
+    }
+
+    protected static String getUsername() {
+        return username;
     }
 }

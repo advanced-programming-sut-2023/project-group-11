@@ -40,32 +40,41 @@ public class LoginMenuController {
         Stronghold.setCurrentUser(user);
     }
 
-    public static LoginMenuMessages checkForgotPassword(Matcher matcher) {
-        User user = getUserByUsername(matcher);
+    public static LoginMenuMessages checkForgotPassword(String username) {
+        User user = Stronghold.getUserByUsername(username);
         if (user == null) return LoginMenuMessages.USERNAME_NOT_EXIST;
         return LoginMenuMessages.SUCCESS;
     }
 
-    public static LoginMenuMessages checkRecoveryAnswer(Matcher matcher, String recoveryAnswer) {
-        User user = getUserByUsername(matcher);
+    public static LoginMenuMessages checkRecoveryAnswer(String username, String recoveryAnswer) {
+        if (recoveryAnswer.isEmpty()) return LoginMenuMessages.EMPTY_RECOVERY_ANSWER_FIELD;
+        User user = Stronghold.getUserByUsername(username);
         if (!user.isRecoveryAnswerCorrect(Utils.encryptField(recoveryAnswer)))
             return LoginMenuMessages.WRONG_RECOVERY_ANSWER;
         return LoginMenuMessages.SUCCESS;
     }
 
-    public static String showRecoveryQuestion(Matcher matcher) {
-        User user = getUserByUsername(matcher);
+    public static String showRecoveryQuestion(String username) {
+        User user = Stronghold.getUserByUsername(username);
         return user.getRecoveryQuestion();
-    }
-
-    public static void setNewPassword(Matcher matcher, String password) {
-        User user = getUserByUsername(matcher);
-        user.setPassword(Utils.encryptField(password));
     }
 
     public static long getLeftLockedTime(String username) {
         User user = Stronghold.getUserByUsername(username);
         Delay delay = Delay.getDelayByUser(user);
         return (delay.getDelayTime() - System.currentTimeMillis() + delay.getLastLoginCommandTime());
+    }
+
+    public static LoginMenuMessages checkNewPassword(String username, String password) {
+        if (password.isEmpty()) return LoginMenuMessages.EMPTY_PASSWORD_FIELD;
+        else if (!Utils.isStrongPassword(password)) return LoginMenuMessages.WEAK_PASSWORD;
+
+        setNewPassword(username, password);
+        return LoginMenuMessages.SUCCESS;
+    }
+
+    private static void setNewPassword(String username, String password) {
+        User user = Stronghold.getUserByUsername(username);
+        user.setPassword(Utils.encryptField(password));
     }
 }

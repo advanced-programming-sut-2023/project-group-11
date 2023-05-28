@@ -5,34 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/controller/MainMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/controller/ViewUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/ForgotPassword.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/MainMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/ForgotPassword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/controller/ForgotPasswordViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/EntryMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/EntryMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/MapEditMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/MarketMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/ProfileMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/SelectBuildingMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/SelectBuildingMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/SelectUnitMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/SelectUnitMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/ShowMapMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/ShowMapMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/commandLineView/TradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/commandLineView/TradeMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/controller/SignupMenuViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/controller/SignupMenuViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/controller/ViewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/controller/ViewUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/LoginMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/LoginMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/SignupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/SignupMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/LoginMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/LoginMenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/SignupMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SignupMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/ForgotPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/ForgotPassword.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +28,8 @@
       <list>
         <option value="package.json" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -268,14 +249,7 @@
       <workItem from="1684758212848" duration="6385000" />
       <workItem from="1684768334733" duration="32000" />
       <workItem from="1684780629768" duration="92000" />
-      <workItem from="1685210866263" duration="10050000" />
-    </task>
-    <task id="LOCAL-00035" summary="Update building for a bit">
-      <created>1682957895684</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1682957895684</updated>
+      <workItem from="1685210866263" duration="15058000" />
     </task>
     <task id="LOCAL-00036" summary="Update move + Climbable buildings added&#10;(move upto handling Climbable building)">
       <created>1682978113420</created>
@@ -613,7 +587,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685218801241</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="Login added">
+      <created>1685225752233</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1685225752233</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -655,7 +636,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Debugging move almost Done" />
     <MESSAGE value="Attack debugged" />
     <MESSAGE value="Attack &amp; Start game debugged (need correction)" />
     <MESSAGE value="Remove Climbablity + Building range Increment applied" />
@@ -680,7 +660,8 @@
     <MESSAGE value="end game debugged" />
     <MESSAGE value="Drop unit modified" />
     <MESSAGE value="add Login part" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Login part" />
+    <MESSAGE value="Login added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
