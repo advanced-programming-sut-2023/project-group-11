@@ -21,7 +21,7 @@ public class LoginMenu {
             } else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.SHOW_CURRENT_MENU) != null)
                 System.out.println("Login Menu!");
             else if ((matcher = LoginMenuCommands.getMatcher(command, LoginMenuCommands.LOGIN)) != null) {
-                if (checkLogin(matcher) == LoginMenuMessages.SUCCESS) return;
+//                if (checkLogin(matcher) == LoginMenuMessages.SUCCESS) return;
             } else if ((matcher = LoginMenuCommands.getMatcher(command, LoginMenuCommands.FORGOT_PASSWORD)) != null)
                 checkForgotPassword(matcher);
             else if (LoginMenuCommands.getMatcher(command, LoginMenuCommands.LOGOUT) != null)
@@ -31,25 +31,25 @@ public class LoginMenu {
         }
     }
 
-    private static LoginMenuMessages checkLogin(Matcher matcher) {
-        LoginMenuMessages message = LoginMenuController.checkLogin(matcher);
-
-        switch (message) {
-            case INVALID_COMMAND -> System.out.println("Invalid command!");
-            case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
-            case INCORRECT_PASSWORD -> System.out.println("Username and password didn't match!");
-            case LOCKED_ACCOUNT -> System.out.println("Your account is locked for " +
-                    LoginMenuController.getLeftLockedTime(matcher) / 1000.0 + " seconds more!");
-            case SUCCESS -> {
-                if (Menu.checkCaptchaConfirmation()) {
-                    LoginMenuController.loginUser(matcher);
-                    System.out.println("Logged in! Entered Main Menu");
-                    MainMenu.run();
-                }
-            }
-        }
-        return message;
-    }
+//    private static LoginMenuMessages checkLogin(Matcher matcher) {
+//        LoginMenuMessages message = LoginMenuController.checkLogin(matcher);
+//
+//        switch (message) {
+//            case INVALID_COMMAND -> System.out.println("Invalid command!");
+//            case USERNAME_NOT_EXIST -> System.out.println("Username doesn't exist!");
+//            case INCORRECT_PASSWORD -> System.out.println("Username and password didn't match!");
+//            case LOCKED_ACCOUNT -> System.out.println("Your account is locked for " +
+//                    LoginMenuController.getLeftLockedTime(matcher) / 1000.0 + " seconds more!");
+//            case SUCCESS -> {
+//                if (Menu.checkCaptchaConfirmation()) {
+//                    LoginMenuController.loginUser(matcher);
+//                    System.out.println("Logged in! Entered view.Main Menu");
+//                    MainMenu.run();
+//                }
+//            }
+//        }
+//        return message;
+//    }
 
     private static void checkForgotPassword(Matcher matcher) {
         LoginMenuMessages message = LoginMenuController.checkForgotPassword(matcher);
@@ -89,11 +89,11 @@ public class LoginMenu {
             if (LoginMenuCommands.getMatcher(newPassword, LoginMenuCommands.END) != null) Utils.endStronghold();
             else if (LoginMenuCommands.getMatcher(newPassword, LoginMenuCommands.BACK) != null) return;
             else if (Utils.isStrongPassword(newPassword)) {
-                if (Menu.checkCaptchaConfirmation()) {
-                    LoginMenuController.setNewPassword(matcher, newPassword);
-                    System.out.println("You have set a new password successfully!");
-                    return;
-                }
+//                if (Menu.checkCaptchaConfirmation()) {
+//                    LoginMenuController.setNewPassword(matcher, newPassword);
+//                    System.out.println("You have set a new password successfully!");
+//                    return;
+//                }
             } else System.out.println("New password is weak! Please try again");
             newPassword = scanner.nextLine();
         }

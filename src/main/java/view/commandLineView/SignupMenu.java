@@ -68,7 +68,7 @@ public class SignupMenu {
                     System.out.println("Your slogan is: " + slogan);
                 }
                 if (password.equals("random")) password = checkRandomPassword();
-                if (password != null) checkPickQuestion(registerMatcher, username, password, slogan);
+//                if (password != null) checkPickQuestion(registerMatcher, username, password, slogan);
             }
         }
     }
@@ -119,37 +119,37 @@ public class SignupMenu {
         return password;
     }
 
-    private static void checkPickQuestion(Matcher registerMatcher, String username, String password, String slogan) {
-        System.out.println("pick a question from the below list:");
-        System.out.print(SignupMenuController.getRecoveryQuestions());
-        Matcher pickQuestionMatcher;
-        Scanner scanner = EntryMenu.getScanner();
-        String command = scanner.nextLine();
-
-        while ((pickQuestionMatcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.PICK_QUESTION)) == null) {
-            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) Utils.endStronghold();
-            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) return;
-            System.out.println("Invalid command");
-            command = scanner.nextLine();
-        }
-
-        int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
-        String recoveryAnswer = pickQuestionMatcher.group("answer");
-        String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
-        SignupMenuMessages message = SignupMenuController.checkPickQuestion(pickQuestionMatcher, questionNumber, recoveryAnswer, answerConfirmation);
-
-        switch (message) {
-            case INVALID_COMMAND -> System.out.println("Invalid command!");
-            case INVALID_QUESTION_NUMBER -> System.out.println("Invalid number!");
-            case WRONG_ANSWER_CONFIRMATION -> System.out.println("answer and its confirmation doesn't match!");
-            case SUCCESS -> {
-                if (Menu.checkCaptchaConfirmation()) {
-                    System.out.println("User created successfully!");
-                    String email = registerMatcher.group("email");
-                    String nickname = registerMatcher.group("nickname");
-                    SignupMenuController.createUser(username, password, email, nickname, slogan, questionNumber, recoveryAnswer);
-                }
-            }
-        }
-    }
+//    private static void checkPickQuestion(Matcher registerMatcher, String username, String password, String slogan) {
+//        System.out.println("pick a question from the below list:");
+//        System.out.print(SignupMenuController.getRecoveryQuestions());
+//        Matcher pickQuestionMatcher;
+//        Scanner scanner = EntryMenu.getScanner();
+//        String command = scanner.nextLine();
+//
+//        while ((pickQuestionMatcher = SignupMenuCommands.getMatcher(command, SignupMenuCommands.PICK_QUESTION)) == null) {
+//            if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.END) != null) Utils.endStronghold();
+//            else if (SignupMenuCommands.getMatcher(command, SignupMenuCommands.BACK) != null) return;
+//            System.out.println("Invalid command");
+//            command = scanner.nextLine();
+//        }
+//
+//        int questionNumber = Integer.parseInt(pickQuestionMatcher.group("questionNumber"));
+//        String recoveryAnswer = pickQuestionMatcher.group("answer");
+//        String answerConfirmation = pickQuestionMatcher.group("answerConfirmation");
+//        SignupMenuMessages message = SignupMenuController.checkPickQuestion(pickQuestionMatcher, questionNumber, recoveryAnswer, answerConfirmation);
+//
+//        switch (message) {
+//            case INVALID_COMMAND -> System.out.println("Invalid command!");
+//            case INVALID_QUESTION_NUMBER -> System.out.println("Invalid number!");
+//            case WRONG_ANSWER_CONFIRMATION -> System.out.println("answer and its confirmation doesn't match!");
+//            case SUCCESS -> {
+//                if (Menu.checkCaptchaConfirmation()) {
+//                    System.out.println("User created successfully!");
+//                    String email = registerMatcher.group("email");
+//                    String nickname = registerMatcher.group("nickname");
+//                    SignupMenuController.createUser(username, password, email, nickname, slogan, questionNumber, recoveryAnswer);
+//                }
+//            }
+//        }
+//    }
 }

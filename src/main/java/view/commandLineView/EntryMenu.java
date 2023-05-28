@@ -13,7 +13,7 @@ public class EntryMenu {
         System.out.println("Wherever you want to exit print \"end\"!");
         EntryMenuController.fillAllFieldsWithPreviousData();
         if (EntryMenuController.getStayLoggedIn() != null) {
-            System.out.println("Entered Main Menu!");
+            System.out.println("Entered view.Main Menu!");
             MainMenu.run();
         }
         while (true) {

@@ -85,7 +85,7 @@ public class ProfileMenu {
 
         switch (profileMenuMessage) {
             case SUCCESS -> {
-                if (Menu.checkCaptchaConfirmation()) System.out.println("Your password changed successfully!");
+//                if (Menu.checkCaptchaConfirmation()) System.out.println("Your password changed successfully!");
             }
             case INVALID_COMMAND -> System.out.println("Invalid command!");
             case INCORRECT_PASSWORD -> System.out.println("Incorrect password!");
