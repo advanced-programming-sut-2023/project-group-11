@@ -14,93 +14,84 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="120.0" layoutY="45.0" opacity="0.85" prefHeight="630.0" prefWidth="1040.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+            <AnchorPane layoutX="120.0" layoutY="45.0" opacity="0.92" prefHeight="630.0" prefWidth="1040.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
                <children>
-                  <Label layoutX="360.0" layoutY="21.0" text="Stronghold">
+                  <CheckBox fx:id="passwordShow" layoutX="593.0" layoutY="229.0" mnemonicParsing="false" onAction="#changeVisibility" text="show password">
+                     <font>
+                        <Font name="Trebuchet MS" size="12.0" />
+                     </font>
+                  </CheckBox>
+                  <Label layoutX="428.0" layoutY="22.0" text="Stronghold">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutX="190.0" layoutY="50.0" text="Signup">
+                  <Label layoutX="60.0" layoutY="75.0" text="Signup">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="60.0" layoutY="80.0" text="Username">
+                  <Label layoutX="60.0" layoutY="116.0" text="Username">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="signupUsername" alignment="TOP_LEFT" layoutX="60.0" layoutY="114.0" prefHeight="26.0" prefWidth="254.0" promptText="username" />
-                  <Label layoutX="60.0" layoutY="155.0" text="Password">
+                  <TextField fx:id="signupUsername" alignment="TOP_LEFT" layoutX="60.0" layoutY="150.0" prefHeight="26.0" prefWidth="254.0" promptText="username" />
+                  <Label layoutX="60.0" layoutY="191.0" text="Password">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="passwordShown" layoutX="60.0" layoutY="189.0" prefHeight="26.0" prefWidth="254.0" />
-                  <PasswordField layoutX="60.0" layoutY="189.0" prefHeight="26.0" prefWidth="254.0" promptText="password" />
-                  <Label layoutX="59.0" layoutY="232.0" text="Nickname">
+                  <TextField fx:id="passwordShown" editable="false" layoutX="60.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" />
+                  <PasswordField fx:id="signupPassword" layoutX="60.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="password" />
+                  <Label layoutX="59.0" layoutY="268.0" text="Nickname">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField alignment="TOP_LEFT" layoutX="59.0" layoutY="266.0" prefHeight="26.0" prefWidth="254.0" promptText="nickname" />
-                  <Label layoutX="333.0" layoutY="232.0" text="Email">
+                  <TextField fx:id="nicknameTextField" alignment="TOP_LEFT" layoutX="59.0" layoutY="302.0" prefHeight="26.0" prefWidth="254.0" promptText="nickname" />
+                  <Label layoutX="333.0" layoutY="268.0" text="Email">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField alignment="TOP_LEFT" layoutX="333.0" layoutY="266.0" prefHeight="26.0" prefWidth="254.0" promptText="email" />
-                  <CheckBox layoutX="322.0" layoutY="191.0" mnemonicParsing="false" text="show password">
-                     <font>
-                        <Font name="Trebuchet MS" size="12.0" />
-                     </font>
-                  </CheckBox>
-                  <Label layoutX="456.0" layoutY="155.0" text="Confirmation">
+                  <TextField fx:id="email" alignment="TOP_LEFT" layoutX="333.0" layoutY="302.0" prefHeight="26.0" prefWidth="254.0" promptText="email" />
+                  <Label layoutX="330.0" layoutY="191.0" text="Confirmation">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <PasswordField layoutX="456.0" layoutY="189.0" prefHeight="26.0" prefWidth="254.0" promptText="confirmation" />
-                  <CheckBox layoutX="718.0" layoutY="191.0" mnemonicParsing="false" text="show password">
-                     <font>
-                        <Font name="Trebuchet MS" size="12.0" />
-                     </font>
-                  </CheckBox>
-                  <Label layoutX="711.0" layoutY="232.0" text="Slogan">
+                  <TextField fx:id="confirmationShown" layoutX="330.0" layoutY="224.0" prefHeight="26.0" prefWidth="254.0" />
+                  <PasswordField fx:id="signupConfirmation" layoutX="330.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="confirmation" />
+                  <Label fx:id="sloganLabel" layoutX="711.0" layoutY="268.0" text="Slogan" visible="false">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField alignment="TOP_LEFT" layoutX="711.0" layoutY="266.0" prefHeight="26.0" prefWidth="254.0" promptText="slogan" />
-                  <CheckBox layoutX="603.0" layoutY="269.0" mnemonicParsing="false" text="choose slogan" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="176.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
+                  <TextField fx:id="sloganTextField" alignment="TOP_LEFT" layoutX="711.0" layoutY="302.0" prefHeight="26.0" prefWidth="254.0" promptText="slogan" visible="false" />
+                  <CheckBox fx:id="chooseSloganBox" layoutX="603.0" layoutY="305.0" mnemonicParsing="false" onAction="#chooseSlogan" text="choose slogan" />
+                  <Label fx:id="signupPasswordError" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="176.0" layoutY="206.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="574.0" layoutY="169.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
+                  <Label fx:id="signupConfirmationError" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="448.0" layoutY="205.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="176.0" layoutY="248.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
+                  <Label fx:id="nicknameError" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="176.0" layoutY="284.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="450.0" layoutY="247.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
+                  <Label fx:id="emailError" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="450.0" layoutY="283.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="829.0" layoutY="246.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="842.0" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" text="Randpm password" />
-                  <Label fx:id="signupUsernameLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="176.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
+                  <Button layoutX="714.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#generateRandomPassword" prefHeight="26.0" text="Random password" />
+                  <Label fx:id="signupUsernameError" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="176.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -131,6 +122,12 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <CheckBox fx:id="randomSloganBox" layoutX="859.0" layoutY="275.0" mnemonicParsing="false" onAction="#randomSlogan" text="Random slogan" visible="false" />
+                  <Button layoutX="856.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#signup" text="Sign up">
+                     <font>
+                        <Font name="Andalus" size="17.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>

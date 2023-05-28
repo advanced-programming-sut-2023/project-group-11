@@ -42,8 +42,15 @@ public class SignupMenuController {
     }
 
     public static SignupMenuMessages checkUsername(String username){
+        if(username.isEmpty()) return SignupMenuMessages.EMPTY_FIELD;
         if(!Utils.isValidUsernameFormat(username)) return SignupMenuMessages.INVALID_USERNAME_FORMAT;
         if (Stronghold.usernameExist(username)) return SignupMenuMessages.USERNAME_EXIST;
+        return SignupMenuMessages.SUCCESS;
+    }
+
+    public static SignupMenuMessages checkEmail(String email){
+        if (Stronghold.emailExist(email)) return SignupMenuMessages.EMAIL_EXIST;
+        if (!Utils.isValidEmailFormat(email)) return SignupMenuMessages.INVALID_EMAIL_FORMAT;
         return SignupMenuMessages.SUCCESS;
     }
 
@@ -70,6 +77,12 @@ public class SignupMenuController {
         ArrayList<String> randomSlogans = Stronghold.getRandomSlogans();
         if (!number.matches("\\d+") || Integer.parseInt(number) > randomSlogans.size()) return null;
         return randomSlogans.get(Integer.parseInt(number) - 1);
+    }
+
+    public static String generateRandomSlogan() {
+        ArrayList<String> randomSlogans = Stronghold.getRandomSlogans();
+        int n = new Random().nextInt(0, randomSlogans.size()-1);
+        return randomSlogans.get(n);
     }
 
     public static String generateRandomPassword() {
@@ -123,6 +136,16 @@ public class SignupMenuController {
         if (!password.matches("(?=.*[0-9]).*")) return SignupMenuMessages.NO_NUMBER;
         if (!password.matches("(?=.*[^A-Za-z0-9]).*")) return SignupMenuMessages.NO_SPECIAL;
         return null;
+    }
+
+    public static int findHowWeakPasswordIs(String password) {
+        int weakness=0;
+        if (password.length() < 6) weakness++;
+        if (!password.matches("(?=.*[A-Z]).*")) weakness++;
+        if (!password.matches("(?=.*[a-z]).*")) weakness++;
+        if (!password.matches("(?=.*[0-9]).*")) weakness++;
+        if (!password.matches("(?=.*[^A-Za-z0-9]).*")) weakness++;
+        return weakness;
     }
 
     public static void createUser(String username, String password, String email, String nickname, String slogan, int questionNumber, String recoveryAnswer) {
