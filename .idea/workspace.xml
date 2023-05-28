@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/ForgotPassword.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/controller/ForgotPasswordViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/controller/SignupMenuViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/controller/SignupMenuViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/controller/ViewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/controller/ViewUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/LoginMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/LoginMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/ForgotPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/ForgotPassword.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,14 +241,7 @@
       <workItem from="1684758212848" duration="6385000" />
       <workItem from="1684768334733" duration="32000" />
       <workItem from="1684780629768" duration="92000" />
-      <workItem from="1685210866263" duration="15058000" />
-    </task>
-    <task id="LOCAL-00036" summary="Update move + Climbable buildings added&#10;(move upto handling Climbable building)">
-      <created>1682978113420</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1682978113420</updated>
+      <workItem from="1685210866263" duration="15370000" />
     </task>
     <task id="LOCAL-00037" summary="Update move (except climbing building)">
       <created>1683026316777</created>
@@ -594,7 +579,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685225752233</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Login ended">
+      <created>1685265402914</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1685265402916</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,7 +628,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Attack debugged" />
     <MESSAGE value="Attack &amp; Start game debugged (need correction)" />
     <MESSAGE value="Remove Climbablity + Building range Increment applied" />
     <MESSAGE value="Assassin's get revealed in fights + Fear effect in damage applied" />
@@ -661,7 +652,8 @@
     <MESSAGE value="Drop unit modified" />
     <MESSAGE value="add Login part" />
     <MESSAGE value="Login added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login added" />
+    <MESSAGE value="Login ended" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login ended" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

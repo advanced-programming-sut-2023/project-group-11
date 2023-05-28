@@ -3,7 +3,6 @@ package controller;
 import model.AllResource;
 import model.Governance;
 import model.Stronghold;
-import view.commandLineView.MarketMenu;
 import view.enums.messages.MarketMenuMessages;
 
 import java.util.regex.Matcher;
@@ -17,7 +16,7 @@ public class MarketMenuController {
         String output = "";
         int index = 1;
         for (AllResource item : AllResource.values()) {
-            if(item.equals(AllResource.NONE))
+            if (item.equals(AllResource.NONE))
                 continue;
             output += (index++) + "- itemName:" + item.getName() +
                     " Buy Price: " + item.getPrice() + " Sell Price: " + (item.getPrice() / 2) +
@@ -36,12 +35,12 @@ public class MarketMenuController {
             return MarketMenuMessages.NOT_ENOUGH_GOLD;
         if (!currentGovernance.hasStorageForItem(item, amount))
             return MarketMenuMessages.NOT_ENOUGH_STORAGE;
-        if (MarketMenu.isSure()) {
-            currentGovernance.setGold(currentGovernance.getGold() - item.getPrice() * amount);
-            currentGovernance.addToStorage(item, amount);
-            return MarketMenuMessages.SUCCESS;
-        }
-        return MarketMenuMessages.CANCEL;
+//        if (MarketMenu.isSure()) {
+        currentGovernance.setGold(currentGovernance.getGold() - item.getPrice() * amount);
+        currentGovernance.addToStorage(item, amount);
+        return MarketMenuMessages.SUCCESS;
+//        }
+//        return MarketMenuMessages.CANCEL;
     }
 
     public static MarketMenuMessages checkSellItem(Matcher matcher) {
@@ -52,11 +51,11 @@ public class MarketMenuController {
             return MarketMenuMessages.INVALID_ITEM;
         if (!currentGovernance.hasEnoughItem(item, amount))
             return MarketMenuMessages.NOT_ENOUGH_STORAGE;
-        if (MarketMenu.isSure()) {
-            currentGovernance.setGold(currentGovernance.getGold() + (item.getPrice() * amount) / 2.0);
-            currentGovernance.removeFromStorage(item, amount);
-            return MarketMenuMessages.SUCCESS;
-        }
-        return MarketMenuMessages.CANCEL;
+//        if (MarketMenu.isSure()) {
+        currentGovernance.setGold(currentGovernance.getGold() + (item.getPrice() * amount) / 2.0);
+        currentGovernance.removeFromStorage(item, amount);
+        return MarketMenuMessages.SUCCESS;
+//        }
+//        return MarketMenuMessages.CANCEL;
     }
 }
