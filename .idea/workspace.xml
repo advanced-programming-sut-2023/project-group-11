@@ -6,17 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ForgotPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ForgotPassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/controller/ForgotPasswordViewController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/controller/MainMenuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/controller/SignupMenuViewController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/controller/ViewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/ForgotPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/ForgotPassword.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CSS/style1.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CSS/style1.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/MainMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/SignupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/SignupMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +27,9 @@
       <list>
         <option value="package.json" />
         <option value="Enum" />
-        <option value="FxmlFile" />
         <option value="Class" />
         <option value="module-info" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -168,7 +164,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="" />
+      <changelist id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="" />
       <created>1681569733616</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -254,13 +250,8 @@
       <workItem from="1684768334733" duration="32000" />
       <workItem from="1684780629768" duration="92000" />
       <workItem from="1685210866263" duration="15370000" />
-    </task>
-    <task id="LOCAL-00039" summary="Make MachineTypes as Json dictionary">
-      <created>1683037265292</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1683037265292</updated>
+      <workItem from="1685271907975" duration="142000" />
+      <workItem from="1685282869485" duration="5922000" />
     </task>
     <task id="LOCAL-00040" summary="Rewrite Machine Constructor">
       <created>1683038870437</created>
@@ -598,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685267994332</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="Merged!">
+      <created>1685272019171</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1685272019171</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -640,7 +638,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Assassin's get revealed in fights + Fear effect in damage applied" />
     <MESSAGE value="TODOs Updated (CHECK THEM!)" />
     <MESSAGE value="Governance dying + End Game added (Only khadagh left)" />
     <MESSAGE value="Add score added" />
@@ -665,7 +662,8 @@
     <MESSAGE value="Login ended" />
     <MESSAGE value="make module" />
     <MESSAGE value="Loggin debugged" />
-    <option name="LAST_COMMIT_MESSAGE" value="Loggin debugged" />
+    <MESSAGE value="Merged!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

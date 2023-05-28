@@ -67,6 +67,10 @@ public class SignupMenu extends Application {
         });
     }
 
+    public static Stage getStage() {
+        return stage;
+    }
+
     protected static String getUsername() {
         return username;
     }

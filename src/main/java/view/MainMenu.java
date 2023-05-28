@@ -1,8 +1,11 @@
 package view;
 
+import controller.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -17,5 +20,22 @@ public class MainMenu extends Application {
         stage.setScene(scene);
 
         stage.show();
+    }
+
+    public void newGame(MouseEvent mouseEvent) {
+
+    }
+
+    public void profileMenu(MouseEvent mouseEvent) {
+
+    }
+
+    public void mapEditMenu(MouseEvent mouseEvent) {
+
+    }
+
+    public void logout() throws Exception {
+        MainMenuController.logout();
+        new SignupMenu().start(SignupMenu.getStage());
     }
 }

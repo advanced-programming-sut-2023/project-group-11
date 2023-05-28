@@ -3,6 +3,7 @@ package controller;
 import model.Game;
 import model.Governance;
 import model.Stronghold;
+import model.User;
 import model.buildings.Keep;
 import model.buildings.Storage;
 import model.buildings.enums.StorageType;
@@ -145,5 +146,11 @@ public class MainMenuController {
             }
         }
         return coordinate;
+    }
+
+    public static void logout() {
+        User currentUser = Stronghold.getCurrentUser();
+        currentUser.setStayLoggedIn(false);
+        Stronghold.setCurrentUser(null);
     }
 }

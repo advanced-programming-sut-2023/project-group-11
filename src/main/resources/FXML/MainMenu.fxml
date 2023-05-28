@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.MainMenu"
-            prefHeight="720.0" prefWidth="1280.0">
-
+<BorderPane prefHeight="720.0" prefWidth="1280.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainMenu">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <AnchorPane layoutX="255.0" layoutY="113.0" opacity="0.92" prefHeight="494.0" prefWidth="770.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+                    <children>
+                        <VBox alignment="CENTER" layoutX="308.0" layoutY="90.0" prefHeight="314.0" prefWidth="154.0" spacing="25.0">
+                            <children>
+                                <Button mnemonicParsing="false" onMouseClicked="#newGame" prefHeight="45.0" prefWidth="101.0" styleClass="menu-button" text="New Game" />
+                                <Button mnemonicParsing="false" onMouseClicked="#profileMenu" prefHeight="45.0" prefWidth="120.0" styleClass="menu-button" text="Proflie Menu">
+                                    <font>
+                                        <Font name="Andalus" size="12.0" />
+                                    </font>
+                                </Button>
+                                <Button mnemonicParsing="false" onMouseClicked="#mapEditMenu" prefHeight="45.0" prefWidth="132.0" styleClass="menu-button" text="MapEdit Menu" />
+                                <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="45.0" prefWidth="70.0" styleClass="menu-button" text="Logout" />
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </center>
 </BorderPane>

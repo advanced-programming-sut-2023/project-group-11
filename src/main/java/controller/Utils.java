@@ -115,13 +115,6 @@ public class Utils {
         return name;
     }
 
-    public static String logout() {
-        User currentUser = Stronghold.getCurrentUser();
-        currentUser.setStayLoggedIn(false);
-        Stronghold.setCurrentUser(null);
-        return "Logged out!";
-    }
-
     public static void endStronghold() {
         updateDatabase("users");
         System.exit(0);
