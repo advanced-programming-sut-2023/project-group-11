@@ -60,6 +60,7 @@ public class ForgotPasswordViewController implements Initializable {
     private void enterNewPassword(Button submitButton) {
         recoveryQuestion.setText("Enter your new password!");
         recoveryAnswer.setPromptText("New password");
+        recoveryAnswer.setText("");
         recoveryAnswerError.setText("");
         submitButton.setText("Confirm");
     }

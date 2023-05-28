@@ -23,13 +23,13 @@ public class SignupMenu extends Application {
         stage.setScene(scene);
 
         stage.show();
-    }
-
-    public static void main(String[] args) throws Exception {
-        launch(args);
 
         EntryMenuController.fillAllFieldsWithPreviousData();
         stage.setOnCloseRequest(windowEvent -> Utils.endStronghold());
         if (EntryMenuController.getStayLoggedIn() != null) new MainMenu().start(stage);
+    }
+
+    public static void main(String[] args) throws Exception {
+        launch(args);
     }
 }

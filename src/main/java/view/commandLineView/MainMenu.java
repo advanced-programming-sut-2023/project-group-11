@@ -22,7 +22,7 @@
 //            if (MainMenuCommands.getMatcher(input, MainMenuCommands.END) != null)
 //                Utils.endStronghold();
 //            else if (MainMenuCommands.getMatcher(input, MainMenuCommands.SHOW_CURRENT_MENU) != null)
-//                System.out.println("Main menu");
+//                System.out.println("view.Main menu");
 //            else if (MainMenuCommands.getMatcher(input, MainMenuCommands.LOGOUT) != null) {
 //                System.out.println(Utils.logout() + " Entered entry menu!");
 //                return;
