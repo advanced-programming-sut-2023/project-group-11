@@ -2,6 +2,8 @@ package view;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
 public class ViewUtils {
@@ -15,6 +17,22 @@ public class ViewUtils {
         for (Label label : labels) {
             label.setText("");
         }
+    }
+
+    public static boolean setEmptyError(PasswordField field,Label error){
+        if(field.getText().isEmpty()){
+            error.setText("must be filled!");
+            return false;
+        }
+        else return error.getText().isEmpty() || error.getText().equals("Strong!");
+    }
+
+    public static boolean setEmptyError(TextField field, Label error){
+        if(field.getText().isEmpty()){
+            error.setText("must be filled!");
+            return false;
+        }
+        else return error.getText().isEmpty() || error.getText().equals("Strong!");
     }
 
     public static void alert(Alert.AlertType TYPE, String header, String content) {

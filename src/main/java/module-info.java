@@ -13,6 +13,5 @@ module ProjectAP {
 
     exports view;
     opens view to javafx.fxml;
-    exports model;
     opens model to com.google.gson;
 }
