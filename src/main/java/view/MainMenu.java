@@ -26,8 +26,8 @@ public class MainMenu extends Application {
 
     }
 
-    public void profileMenu(MouseEvent mouseEvent) {
-
+    public void profileMenu() throws Exception {
+        new ProfileMenu().start(SignupMenu.getStage());
     }
 
     public void mapEditMenu(MouseEvent mouseEvent) {

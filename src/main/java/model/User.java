@@ -6,6 +6,7 @@ public class User implements Comparable<User> {
     private String nickname;
     private String email;
     private String slogan;
+    private String avatarPath;
     private final String recoveryQuestion;
     private final String recoveryAnswer;
     private int score;
@@ -48,6 +49,14 @@ public class User implements Comparable<User> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
     }
 
     public String getRecoveryQuestion() {

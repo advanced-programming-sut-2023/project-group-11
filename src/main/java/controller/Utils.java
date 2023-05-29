@@ -4,14 +4,16 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.WritableImage;
 import model.AllResource;
 import model.Stronghold;
 import model.User;
 import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 
-//import java.awt.*;
-//import java.awt.image.BufferedImage;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,35 +55,32 @@ public class Utils {
         return true;
     }
 
-//    public static String generateCaptcha(int captchaNumber) {
-//        Random random = new Random();
-//        int width = 150;
-//        int height = 30;
-//
-//        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-//        Graphics graphics2D = image.getGraphics();
-//        graphics2D.setFont(new Font("SansSerif", Font.BOLD, 22));
-//        Graphics2D graphics = (Graphics2D) graphics2D;
-//        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-//                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-//
-//        StringBuilder captcha = new StringBuilder();
-//        graphics.drawString(Integer.toString(captchaNumber), 15, 25);
-//
-//        for (int y = 0; y < height; y++) {
-//            StringBuilder captchaLine = new StringBuilder();
-//            for (int x = 0; x < width; x++) {
-//                int randomNumber = random.nextInt(8);
-//                if (image.getRGB(x, y) == -16777216 || (x + y) % 8 == randomNumber) captchaLine.append(" ");
-//                else captchaLine.append("*");
-//            }
-//            if (captchaLine.toString().trim().isEmpty()) {
-//                continue;
-//            }
-//            captcha.append(captchaLine).append("\n");
-//        }
-//        return captcha.toString();
-//    }
+    public static WritableImage generateCaptcha(int captchaNumber) {
+        Random random = new Random();
+        int width = 150;
+        int height = 30;
+
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics graphics2D = image.getGraphics();
+        graphics2D.setFont(new Font("SansSerif", Font.BOLD, 22));
+        Graphics2D graphics = (Graphics2D) graphics2D;
+        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        StringBuilder captcha = new StringBuilder();
+        graphics.drawString(Integer.toString(captchaNumber), 15, 25);
+
+        for (int y = 0; y < height; y++) {
+            StringBuilder captchaLine = new StringBuilder();
+            for (int x = 0; x < width; x++) {
+                int randomNumber = random.nextInt(8);
+                if (image.getRGB(x, y) == -16777216 || (x + y) % 8 == randomNumber) captchaLine.append(" ");
+                else captchaLine.append("*");
+            }
+            if (captchaLine.toString().trim().isEmpty()) continue;
+            captcha.append(captchaLine).append("\n");
+        }
+        return SwingFXUtils.toFXImage(image, null);
+    }
 
     public static boolean checkCaptchaConfirmation(int enteredCaptcha, int captchaNumber) {
         return captchaNumber == enteredCaptcha;

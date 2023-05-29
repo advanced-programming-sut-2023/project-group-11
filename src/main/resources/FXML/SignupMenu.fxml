@@ -44,6 +44,13 @@
                   </Label>
                   <TextField fx:id="passwordShown" editable="false" layoutX="60.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" />
                   <PasswordField fx:id="signupPassword" layoutX="60.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="password" />
+                  <Label layoutX="330.0" layoutY="191.0" text="Confirmation">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="confirmationShown" layoutX="330.0" layoutY="224.0" prefHeight="26.0" prefWidth="254.0" />
+                  <PasswordField fx:id="signupConfirmation" layoutX="330.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="confirmation" />
                   <Label layoutX="59.0" layoutY="268.0" text="Nickname">
                      <font>
                         <Font size="24.0" />
@@ -56,13 +63,6 @@
                      </font>
                   </Label>
                   <TextField fx:id="email" alignment="TOP_LEFT" layoutX="333.0" layoutY="302.0" prefHeight="26.0" prefWidth="254.0" promptText="email" />
-                  <Label layoutX="330.0" layoutY="191.0" text="Confirmation">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="confirmationShown" layoutX="330.0" layoutY="224.0" prefHeight="26.0" prefWidth="254.0" />
-                  <PasswordField fx:id="signupConfirmation" layoutX="330.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="confirmation" />
                   <Label fx:id="sloganLabel" layoutX="711.0" layoutY="268.0" text="Slogan" visible="false">
                      <font>
                         <Font size="24.0" />

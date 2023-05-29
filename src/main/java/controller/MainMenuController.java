@@ -30,7 +30,7 @@ public class MainMenuController {
         for (String name : listOfPlayers)
             if (!Stronghold.usernameExist(name)) return MainMenuMessages.USER_NOT_EXIST;
         for (String name : listOfPlayers)
-            if (Stronghold.getUserByUsername(name).equals(Stronghold.getCurrentUser().getUsername()))
+            if (Stronghold.getCurrentUser().equals(Stronghold.getUserByUsername(name)))
                 return MainMenuMessages.OWNER_IN_GUESTS;
 
 

@@ -10,6 +10,7 @@ module ProjectAP {
     requires java.desktop;
     requires org.apache.commons.lang3;
     requires com.fasterxml.jackson.annotation;
+    requires javafx.swing;
 
     exports view;
     opens view to javafx.fxml;

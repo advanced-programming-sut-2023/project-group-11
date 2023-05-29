@@ -12,6 +12,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ import view.enums.messages.LoginMenuMessages;
 import view.enums.messages.SignupMenuMessages;
 
 import java.net.URL;
+import java.util.Random;
 
 public class SignupMenu extends Application {
     @FXML
@@ -198,6 +200,7 @@ public class SignupMenu extends Application {
                                     LoginMenuController.getLeftLockedTime(loginUsernameField.getText()) / 1000.0 +
                                     " seconds more!");
             case SUCCESS -> {
+//                WritableImage captcha = Utils.generateCaptcha(new Random().nextInt(10,1000));
                 LoginMenuController.loginUser(loginUsernameField.getText());
                 new MainMenu().start(SignupMenu.stage);
             }

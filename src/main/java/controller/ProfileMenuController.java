@@ -7,16 +7,20 @@ import view.enums.messages.ProfileMenuMessages;
 import java.util.regex.Matcher;
 
 public class ProfileMenuController {
-    public static ProfileMenuMessages checkChangeUsername(Matcher matcher) {
-        String username = Utils.removeDoubleQuotation(matcher.group("field"));
+    public static ProfileMenuMessages checkChangeUsername(String username) {
+//        String username = Utils.removeDoubleQuotation(matcher.group("field"));
 
         if (!Utils.isValidUsernameFormat(username))
             return ProfileMenuMessages.INVALID_USERNAME;
         else if (Stronghold.usernameExist(username))
             return ProfileMenuMessages.USERNAME_EXIST;
 
-        Stronghold.getCurrentUser().setUsername(username);
+//        changeUsername(Stronghold.getCurrentUser(), username);
         return ProfileMenuMessages.SUCCESS;
+    }
+
+    public static void changeUsername(User user, String username) {
+        user.setUsername(username);
     }
 
     public static void changeNickname(Matcher matcher) {
@@ -41,12 +45,12 @@ public class ProfileMenuController {
         Stronghold.getCurrentUser().setSlogan(slogan);
     }
 
-    public static ProfileMenuMessages checkChangePassword(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "new", "old"))
-            return ProfileMenuMessages.INVALID_COMMAND;
-
-        String newPassword = matcher.group("new");
-        String oldPassword = matcher.group("old");
+    public static ProfileMenuMessages checkChangePassword(String oldPassword,String newPassword) {
+//        if (!Utils.isValidCommandTags(matcher, "new", "old"))
+//            return ProfileMenuMessages.INVALID_COMMAND;
+//
+//        String newPassword = matcher.group("new");
+//        String oldPassword = matcher.group("old");
 
         if (!Stronghold.getCurrentUser().isPasswordCorrect(Utils.encryptField(oldPassword)))
             return ProfileMenuMessages.INCORRECT_PASSWORD;
