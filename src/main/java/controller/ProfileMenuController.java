@@ -23,21 +23,27 @@ public class ProfileMenuController {
         user.setUsername(username);
     }
 
+    public static void changeAvatar(User user, String path){
+        user.setAvatarPath(path);
+    }
     public static void changeNickname(Matcher matcher) {
         String nickname = Utils.removeDoubleQuotation(matcher.group("field"));
         Stronghold.getCurrentUser().setNickname(nickname);
     }
 
-    public static ProfileMenuMessages checkChangeEmail(Matcher matcher) {
-        String email = Utils.removeDoubleQuotation(matcher.group("field"));
+    public static ProfileMenuMessages checkChangeEmail(String email) {
+//        String email = Utils.removeDoubleQuotation(matcher.group("field"));
 
         if (!Utils.isValidEmailFormat(email))
             return ProfileMenuMessages.INVALID_EMAIL;
         else if (Stronghold.emailExist(email))
             return ProfileMenuMessages.EMAIL_EXIST;
 
-        Stronghold.getCurrentUser().setEmail(email);
         return ProfileMenuMessages.SUCCESS;
+    }
+
+    private static void changeEmail(String email) {
+        Stronghold.getCurrentUser().setEmail(email);
     }
 
     public static void changeSlogan(Matcher matcher) {

@@ -10,13 +10,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Stronghold;
 import model.User;
 import view.enums.messages.ProfileMenuMessages;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 public class ProfileMenu extends Application {
@@ -44,20 +50,22 @@ public class ProfileMenu extends Application {
     @FXML
     private TextField newSlogan;
     @FXML
+    private TextField newEmail;
+    @FXML
     private TextField newNickname;
     @FXML
     private Label newEmailError;
-    @FXML
-    private TextField newEmail;
     private User currentUser;
     private ProfileMenuMessages message;
 
     @FXML
     public void initialize() {
         currentUser = Stronghold.getCurrentUser();
+        slogan.setWrapText(true);
         updateDefaultLabels();
         updateNewUsernameLabel();
         updatePasswordLabel();
+        updateEmailLabel();
     }
 
     private void updateDefaultLabels() {
@@ -66,28 +74,37 @@ public class ProfileMenu extends Application {
         email.setText("Email: " + currentUser.getEmail());
         if (currentUser.getSlogan() != null) slogan.setText("Slogan : " + currentUser.getSlogan());
         else slogan.setText("Slogan: " + "empty!");
-//        avatar.setImage(new Image(getClass().getResource(currentUser.getAvatarPath()).toExternalForm()));
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        ProfileMenu.stage = stage;
-        BorderPane borderPane = FXMLLoader.load(
-                new URL(SignupMenu.class.getResource("/FXML/ProfileMenu.fxml").toExternalForm()));
-        Scene scene = new Scene(borderPane);
-        stage.setScene(scene);
-
-        stage.show();
+        updateAvatar();
     }
 
     public void updateNewUsernameLabel() {
         newUsername.textProperty().addListener(((observableValue, oldText, newText) -> {
+
             message = ProfileMenuController.checkChangeUsername(newText);
-            switch (message) {
+            if (newText.isEmpty()) newUsernameError.setText("");
+            else switch (message) {
                 case INVALID_USERNAME -> newUsernameError.setText("Invalid format");
                 case USERNAME_EXIST -> newUsernameError.setText("Username exists");
+                case SUCCESS -> newUsernameError.setText("");
             }
         }));
+    }
+
+    public void changeUsername() {
+        message = ProfileMenuController.checkChangeUsername(newUsername.getText());
+
+        switch (message) {
+            case USERNAME_EXIST -> ViewUtils.alert(Alert.AlertType.ERROR, "Change Username Failed",
+                    "Username Already exists!");
+            case INVALID_USERNAME -> ViewUtils.alert(Alert.AlertType.ERROR, "Change Username Failed",
+                    "Invalid username format!");
+            case SUCCESS -> {
+                ProfileMenuController.changeUsername(currentUser, newUsername.getText());
+                username.setText("Username: " + newUsername.getText());
+                ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Username Successful",
+                        "You have successfully changed your username!");
+            }
+        }
     }
 
     private void updatePasswordLabel() {
@@ -107,10 +124,119 @@ public class ProfileMenu extends Application {
         });
     }
 
-    public void changeUsername() {
-        ProfileMenuController.changeUsername(currentUser, newUsername.getText());
-        username.setText("Username: " + newUsername.getText());
-        ViewUtils.alert(Alert.AlertType.INFORMATION,"Change Username",
-                "You have successfully changed your password");
+    @FXML
+    private void createAvatarChooser() {
+        FileChooser avatarChooser = new FileChooser();
+
+        configureFileChooser(avatarChooser);
+        File selectedFile = avatarChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            ProfileMenuController.changeAvatar(currentUser, selectedFile.getPath());
+            ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Avatar Successful",
+                    "You have successfully changed your avatar!");
+            updateAvatar();
+        }
+    }
+
+    private void configureFileChooser(FileChooser fileChooser) {
+        try {
+            fileChooser.setInitialDirectory(new File(getClass().getResource("/IMG/avatars").toURI()));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(
+                "images", "*.jpg", "*.jpeg", "*.png"));
+    }
+
+    public void changeAvatar(DragEvent dragEvent) {
+        if (dragEvent.getDragboard().hasFiles()) {
+            dragEvent.acceptTransferModes(TransferMode.COPY);
+            String path = dragEvent.getDragboard().getFiles().get(0).getPath();
+            if (isImage(path)) {
+                ProfileMenuController.changeAvatar(currentUser, path);
+                updateAvatar();
+            }
+        }
+        dragEvent.consume();
+        //TODO: needs debug (on drag dropped or over or ...)
+    }
+
+    private boolean isImage(String path) {
+        return isValidExtension(getExtension(path));
+    }
+
+    private String getExtension(String path) {
+        int dotIndex = path.lastIndexOf(".");
+        return path.substring(dotIndex + 1);
+    }
+
+    private boolean isValidExtension(String extension) {
+        return extension.equals("jpg") || extension.equals("png") || extension.equals("jpeg");
+    }
+
+    private void updateAvatar() {
+        avatar.setImage(new Image(currentUser.getAvatarPath()));
+    }
+
+    public void changeSlogan() {
+        currentUser.setSlogan(newSlogan.getText());
+        slogan.setText("Slogan: " + newSlogan.getText());
+    }
+
+    public void generateRandomSlogan() {
+        String randomSlogan = SignupMenuController.generateRandomSlogan();
+        currentUser.setSlogan(randomSlogan);
+        slogan.setText("Slogan: " + randomSlogan);
+    }
+
+    public void removeSlogan() {
+        currentUser.setSlogan(null);
+        slogan.setText("Slogan: empty!");
+    }
+
+    private void updateEmailLabel() {
+        newEmail.textProperty().addListener((observableValue, oldText, newText) -> {
+            message = ProfileMenuController.checkChangeEmail(newText);
+
+            if (newText.isEmpty()) newEmailError.setText("");
+            else switch (message) {
+                case INVALID_EMAIL -> newEmailError.setText("Invalid format!");
+                case EMAIL_EXIST -> newEmailError.setText("Email exists!");
+                case SUCCESS -> newEmailError.setText("");
+            }
+        });
+    }
+
+    public void changeEmail() {
+        message = ProfileMenuController.checkChangeEmail(email.getText());
+
+        switch (message) {
+            case EMAIL_EXIST -> ViewUtils.alert(Alert.AlertType.ERROR, "Change Email Failed",
+                    "Email already exist!");
+            case INVALID_EMAIL -> ViewUtils.alert(Alert.AlertType.ERROR, "Change Email Failed",
+                    "Invalid email format!");
+            case SUCCESS -> {
+                ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Email Successful",
+                        "You have successfully changed your email!");
+                email.setText("Email: " + newEmail.getText());
+            }
+        }
+    }
+
+    public void changeNickname() {
+        ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Nickname Successful",
+                "You have successfully changed your nickname!");
+        nickname.setText("Nickname: " + newNickname.getText());
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        ProfileMenu.stage = stage;
+        BorderPane borderPane = FXMLLoader.load(
+                new URL(SignupMenu.class.getResource("/FXML/ProfileMenu.fxml").toExternalForm()));
+        Scene scene = new Scene(borderPane);
+        stage.setScene(scene);
+
+        stage.show();
     }
 }
