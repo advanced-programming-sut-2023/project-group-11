@@ -1,35 +1,37 @@
 [
   {
+    "recoveryQuestion": "What is my father's name?",
+    "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
     "username": "Sadegh",
     "password": "2e3a73b434678a4a6f4b2a2f6a1420a6cd2bb7933fe50229dc90d5093e7eaf9e",
     "nickname": "SadeghViper",
     "email": "sadegh.sg.sn@gmail.com",
     "slogan": "I shall dye for my country",
-    "recoveryQuestion": "What is my father's name?",
-    "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
+    "avatarFileName": "8.png",
     "score": 0,
     "stayLoggedIn": false
   },
   {
+    "recoveryQuestion": "What is my best friend's name?",
+    "recoveryAnswer": "753bd5b3281c375ac9917f0080e4ced18daa8e6a23d4390c16e05c6038d4d611",
     "username": "amir",
     "password": "5b91ecdc23d788fc7860dc388077ad6fdd240f33ff81159d53c1031b3e57c2b5",
     "nickname": "RSamirRS",
     "email": "amir@gma.co",
-    "slogan": "w",
-    "avatarPath": "C:\\Users\\amir\\IdeaProjects\\project-group-11-fixed\\target\\classes\\IMG\\avatars\\8.png",
-    "recoveryQuestion": "What is my best friend's name?",
-    "recoveryAnswer": "753bd5b3281c375ac9917f0080e4ced18daa8e6a23d4390c16e05c6038d4d611",
+    "slogan": "I shall have my revenge, in this life or the next",
+    "avatarFileName": "8.png",
     "score": 2000,
     "stayLoggedIn": true
   },
   {
+    "recoveryQuestion": "What is my best friend's name?",
+    "recoveryAnswer": "2d73c1f6c77da314c2e3c9060ce798370cdd3bb9f5c7061b834b11784c61bd4d",
     "username": "sepehr",
     "password": "abbef919a2490df1c146a193fff9d3d1db2da959e0a55b6286a3d18d4528c8ca",
     "nickname": "sepehr",
     "email": "sepehr@go.com",
     "slogan": "You are clearly no match for my forces! Give in now, my friend!",
-    "recoveryQuestion": "What is my best friend's name?",
-    "recoveryAnswer": "2d73c1f6c77da314c2e3c9060ce798370cdd3bb9f5c7061b834b11784c61bd4d",
+    "avatarFileName": "8.png",
     "score": 3000,
     "stayLoggedIn": false
   }

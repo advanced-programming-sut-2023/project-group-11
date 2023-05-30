@@ -4,6 +4,9 @@ import model.Stronghold;
 import model.User;
 import view.enums.messages.ProfileMenuMessages;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.regex.Matcher;
 
 public class ProfileMenuController {
@@ -23,9 +26,16 @@ public class ProfileMenuController {
         user.setUsername(username);
     }
 
-    public static void changeAvatar(User user, String path){
-        user.setAvatarPath(path);
+    public static void changeAvatar(User user, File avatar) {
+        File databaseFile = new File("src/main/resources/IMG/avatars/" + avatar.getName());
+        try {
+            if (!databaseFile.exists()) Files.copy(avatar.toPath(), databaseFile.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        user.setAvatarFileName(avatar.getName());
     }
+
     public static void changeNickname(Matcher matcher) {
         String nickname = Utils.removeDoubleQuotation(matcher.group("field"));
         Stronghold.getCurrentUser().setNickname(nickname);
@@ -51,7 +61,7 @@ public class ProfileMenuController {
         Stronghold.getCurrentUser().setSlogan(slogan);
     }
 
-    public static ProfileMenuMessages checkChangePassword(String oldPassword,String newPassword) {
+    public static ProfileMenuMessages checkChangePassword(String oldPassword, String newPassword) {
 //        if (!Utils.isValidCommandTags(matcher, "new", "old"))
 //            return ProfileMenuMessages.INVALID_COMMAND;
 //

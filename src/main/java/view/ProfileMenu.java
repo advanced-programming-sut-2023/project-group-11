@@ -3,6 +3,7 @@ package view;
 import controller.ProfileMenuController;
 import controller.SignupMenuController;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
@@ -69,11 +69,11 @@ public class ProfileMenu extends Application {
     }
 
     private void updateDefaultLabels() {
-        username.setText("Username: " + currentUser.getUsername());
-        nickname.setText("Nickname: " + currentUser.getNickname());
-        email.setText("Email: " + currentUser.getEmail());
-        if (currentUser.getSlogan() != null) slogan.setText("Slogan : " + currentUser.getSlogan());
-        else slogan.setText("Slogan: " + "empty!");
+        username.setText(currentUser.getUsername());
+        nickname.setText(currentUser.getNickname());
+        email.setText(currentUser.getEmail());
+        if (currentUser.getSlogan() != null) slogan.setText(currentUser.getSlogan());
+        else slogan.setText("empty!");
         updateAvatar();
     }
 
@@ -100,7 +100,7 @@ public class ProfileMenu extends Application {
                     "Invalid username format!");
             case SUCCESS -> {
                 ProfileMenuController.changeUsername(currentUser, newUsername.getText());
-                username.setText("Username: " + newUsername.getText());
+                username.setText(newUsername.getText());
                 ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Username Successful",
                         "You have successfully changed your username!");
             }
@@ -131,7 +131,7 @@ public class ProfileMenu extends Application {
         configureFileChooser(avatarChooser);
         File selectedFile = avatarChooser.showOpenDialog(stage);
         if (selectedFile != null) {
-            ProfileMenuController.changeAvatar(currentUser, selectedFile.getPath());
+            ProfileMenuController.changeAvatar(currentUser, selectedFile);
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Avatar Successful",
                     "You have successfully changed your avatar!");
             updateAvatar();
@@ -151,9 +151,9 @@ public class ProfileMenu extends Application {
     public void changeAvatar(DragEvent dragEvent) {
         if (dragEvent.getDragboard().hasFiles()) {
             dragEvent.acceptTransferModes(TransferMode.COPY);
-            String path = dragEvent.getDragboard().getFiles().get(0).getPath();
-            if (isImage(path)) {
-                ProfileMenuController.changeAvatar(currentUser, path);
+            File avatarFile = dragEvent.getDragboard().getFiles().get(0);
+            if (isImage(avatarFile.getPath())) {
+                ProfileMenuController.changeAvatar(currentUser, avatarFile);
                 updateAvatar();
             }
         }
@@ -175,23 +175,23 @@ public class ProfileMenu extends Application {
     }
 
     private void updateAvatar() {
-        avatar.setImage(new Image(currentUser.getAvatarPath()));
-    }
-
-    public void changeSlogan() {
-        currentUser.setSlogan(newSlogan.getText());
-        slogan.setText("Slogan: " + newSlogan.getText());
+        avatar.setImage(currentUser.getAvatar());
     }
 
     public void generateRandomSlogan() {
-        String randomSlogan = SignupMenuController.generateRandomSlogan();
-        currentUser.setSlogan(randomSlogan);
-        slogan.setText("Slogan: " + randomSlogan);
+        newSlogan.setText(SignupMenuController.generateRandomSlogan());
     }
 
     public void removeSlogan() {
         currentUser.setSlogan(null);
-        slogan.setText("Slogan: empty!");
+        slogan.setText("empty!");
+    }
+
+    public void changeSlogan() {
+        ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Slogan",
+                "You have successfully changed your slogan!");
+        currentUser.setSlogan(newSlogan.getText());
+        slogan.setText(newSlogan.getText());
     }
 
     private void updateEmailLabel() {
@@ -208,7 +208,7 @@ public class ProfileMenu extends Application {
     }
 
     public void changeEmail() {
-        message = ProfileMenuController.checkChangeEmail(email.getText());
+        message = ProfileMenuController.checkChangeEmail(newEmail.getText());
 
         switch (message) {
             case EMAIL_EXIST -> ViewUtils.alert(Alert.AlertType.ERROR, "Change Email Failed",
@@ -218,7 +218,7 @@ public class ProfileMenu extends Application {
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Email Successful",
                         "You have successfully changed your email!");
-                email.setText("Email: " + newEmail.getText());
+                email.setText(newEmail.getText());
             }
         }
     }
@@ -226,7 +226,11 @@ public class ProfileMenu extends Application {
     public void changeNickname() {
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Nickname Successful",
                 "You have successfully changed your nickname!");
-        nickname.setText("Nickname: " + newNickname.getText());
+        nickname.setText(newNickname.getText());
+    }
+
+    public void showScoreboard(ActionEvent actionEvent) {
+
     }
 
     @Override

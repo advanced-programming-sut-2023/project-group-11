@@ -1,14 +1,16 @@
 package model;
 
+import javafx.scene.image.Image;
+
 public class User implements Comparable<User> {
+    private final String recoveryQuestion;
+    private final String recoveryAnswer;
     private String username;
     private String password;
     private String nickname;
     private String email;
     private String slogan;
-    private String avatarPath;
-    private final String recoveryQuestion;
-    private final String recoveryAnswer;
+    private String avatarFileName = "1.png";
     private int score;
     private boolean stayLoggedIn;
 
@@ -51,12 +53,12 @@ public class User implements Comparable<User> {
         this.email = email;
     }
 
-    public String getAvatarPath() {
-        return avatarPath;
+    public Image getAvatar() {
+        return new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/avatars/" + avatarFileName);
     }
 
-    public void setAvatarPath(String avatarPath) {
-        this.avatarPath = avatarPath;
+    public void setAvatarFileName(String avatarFileName) {
+        this.avatarFileName = avatarFileName;
     }
 
     public String getRecoveryQuestion() {
