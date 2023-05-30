@@ -7,10 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
@@ -24,9 +21,10 @@ import view.enums.messages.ProfileMenuMessages;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Optional;
 
 public class ProfileMenu extends Application {
-    public static Stage stage;
+    private static Stage stage;
     @FXML
     private Label username;
     @FXML
@@ -41,12 +39,6 @@ public class ProfileMenu extends Application {
     private Label newUsernameError;
     @FXML
     private TextField newUsername;
-    @FXML
-    private PasswordField oldPassword;
-    @FXML
-    private Label newPasswordError;
-    @FXML
-    private PasswordField newPassword;
     @FXML
     private TextField newSlogan;
     @FXML
@@ -64,7 +56,6 @@ public class ProfileMenu extends Application {
         slogan.setWrapText(true);
         updateDefaultLabels();
         updateNewUsernameLabel();
-        updatePasswordLabel();
         updateEmailLabel();
     }
 
@@ -105,23 +96,6 @@ public class ProfileMenu extends Application {
                         "You have successfully changed your username!");
             }
         }
-    }
-
-    private void updatePasswordLabel() {
-        newPassword.textProperty().addListener((observable, oldText, newText) -> {//TODO: duplicate
-            int weakness = SignupMenuController.findHowWeakPasswordIs(newText);
-            if (newText.isEmpty()) newPasswordError.setText("");
-            else if (weakness == 0) {
-                newPasswordError.setStyle("-fx-text-fill: green;");
-                newPasswordError.setText("Strong!");
-            } else if (weakness <= 2) {
-                newPasswordError.setStyle("-fx-text-fill: orange;");
-                newPasswordError.setText("Weak!");
-            } else {
-                newPasswordError.setStyle("-fx-text-fill: red;");
-                newPasswordError.setText("Very weak!");
-            }
-        });
     }
 
     @FXML
@@ -229,8 +203,12 @@ public class ProfileMenu extends Application {
         nickname.setText(newNickname.getText());
     }
 
-    public void showScoreboard(ActionEvent actionEvent) {
+    public void showScoreboard() throws Exception {
+        new Scoreboard().start(new Stage());
+    }
 
+    public void back() throws Exception {
+        new MainMenu().start(stage);
     }
 
     @Override
@@ -242,5 +220,13 @@ public class ProfileMenu extends Application {
         stage.setScene(scene);
 
         stage.show();
+    }
+
+    public void changePassword() throws Exception {
+//        Alert alert = ViewUtils.alert(Alert.AlertType.CONFIRMATION, "Change Password",
+//                "Fill the fields");
+        TextInputDialog dialog = new TextInputDialog();
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(s -> System.out.println("Your name: " + s));
     }
 }

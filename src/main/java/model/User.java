@@ -12,6 +12,7 @@ public class User implements Comparable<User> {
     private String slogan;
     private String avatarFileName = "1.png";
     private int score;
+    private int rank;
     private boolean stayLoggedIn;
 
     public User(String username, String password, String email, String nickname, String recoveryQuestion, String recoveryAnswer, String slogan) {
@@ -95,6 +96,14 @@ public class User implements Comparable<User> {
 
     public void setStayLoggedIn(boolean stayLoggedIn) {
         this.stayLoggedIn = stayLoggedIn;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     @Override
