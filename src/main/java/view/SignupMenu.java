@@ -12,15 +12,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.enums.messages.LoginMenuMessages;
 import view.enums.messages.SignupMenuMessages;
 
 import java.net.URL;
-import java.util.Random;
 
 public class SignupMenu extends Application {
     @FXML
@@ -52,7 +49,7 @@ public class SignupMenu extends Application {
     @FXML
     private Label signupConfirmationError;
     @FXML
-    private TextField email;
+    private TextField emailTextField;
     @FXML
     private Label emailError;
     @FXML
@@ -107,12 +104,12 @@ public class SignupMenu extends Application {
     }
 
     private void updateEmailLabel() {
-        email.textProperty().addListener((observable, oldText, newText)->{
+        emailTextField.textProperty().addListener((observable, oldText, newText)->{
             if(newText.isEmpty()){
                 emailError.setText("");
             }else {
                 switch (SignupMenuController.checkEmail(newText)) {
-                    case EMAIL_EXIST -> emailError.setText("email exists!");
+                    case EMAIL_EXIST -> emailError.setText("emailTextField exists!");
                     case INVALID_EMAIL_FORMAT -> emailError.setText("invalid format!");
                     default -> emailError.setText("");
                 }
@@ -249,13 +246,18 @@ public class SignupMenu extends Application {
         }
     }
 
-    public void signup() {
+    public void signup() throws Exception {
         if(ViewUtils.setEmptyError(signupUsername,signupUsernameError)&
         ViewUtils.setEmptyError(signupPassword,signupPasswordError)&
         ViewUtils.setEmptyError(signupConfirmation,signupConfirmationError)&
         ViewUtils.setEmptyError(nicknameTextField,nicknameError)&
-        ViewUtils.setEmptyError(email,emailError)){
-
+        ViewUtils.setEmptyError(emailTextField,emailError)){
+            Stage stage = new Stage();
+            SignupCompletion signupCompletion = new SignupCompletion();
+            signupCompletion.setVariables(signupUsername.getText(),signupPassword.getText(),
+                    emailTextField.getText(),nicknameTextField.getText(),sloganTextField.getText());
+            signupCompletion.start(stage);
+            ViewUtils.clearFields(signupUsername,signupPassword,signupConfirmation, emailTextField,nicknameTextField,sloganTextField);
         }
 
     }

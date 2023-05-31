@@ -62,7 +62,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="email" alignment="TOP_LEFT" layoutX="333.0" layoutY="302.0" prefHeight="26.0" prefWidth="254.0" promptText="email" />
+                  <TextField fx:id="emailTextField" alignment="TOP_LEFT" layoutX="333.0" layoutY="302.0" prefHeight="26.0" prefWidth="254.0" promptText="email" />
                   <Label fx:id="sloganLabel" layoutX="711.0" layoutY="268.0" text="Slogan" visible="false">
                      <font>
                         <Font size="24.0" />
@@ -104,7 +104,7 @@
                      </font>
                   </Button>
                   <Hyperlink layoutX="839.0" layoutY="525.0" onMouseClicked="#forgotPassword" text="Forgot my password" />
-                  <Label layoutX="197.0" layoutY="383.0" text="Login">
+                  <Label layoutX="60.0" layoutY="383.0" text="Login">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>

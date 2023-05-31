@@ -65,8 +65,8 @@ public class SignupMenuController {
         return SignupMenuMessages.SUCCESS;
     }
 
-    public static String getRecoveryQuestions() {
-        return Stronghold.printRecoveryQuestions();
+    public static ArrayList<String> getRecoveryQuestions() {
+        return Stronghold.getRecoveryQuestions();
     }
 
     public static String printRandomSlogans() {
@@ -156,6 +156,12 @@ public class SignupMenuController {
         recoveryAnswer = Utils.encryptField(recoveryAnswer);
         password = Utils.encryptField(password);
 
+        new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
+    }
+
+    public static void createUser(String username, String password, String email, String nickname, String slogan, String recoveryQuestion, String recoveryAnswer) {
+        recoveryAnswer = Utils.encryptField(recoveryAnswer);
+        password = Utils.encryptField(password);
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
     }
 }

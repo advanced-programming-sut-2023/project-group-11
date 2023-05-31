@@ -6,6 +6,20 @@
     -fx-font-family: "Trebuchet MS";
 }
 
+.button {
+    -fx-font-family: "Trebuchet MS";
+    -fx-text-fill: black;
+    -fx-border-radius: 8px;
+}
+
+.text-field{
+    -fx-font-family: "Trebuchet MS";
+}
+
+.password-field{
+    -fx-font-family: "Trebuchet MS";
+}
+
 .menu-button{
     -fx-font-family: andalus;
     -fx-font-size: 17px;

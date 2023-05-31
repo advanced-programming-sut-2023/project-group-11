@@ -18,14 +18,12 @@ public class ViewUtils {
             label.setText("");
         }
     }
-
-    public static boolean setEmptyError(PasswordField field,Label error){
-        if(field.getText().isEmpty()){
-            error.setText("must be filled!");
-            return false;
+    public static void clearFields(TextField... fields) {
+        for (TextField field : fields) {
+            field.setText("");
         }
-        else return error.getText().isEmpty() || error.getText().equals("Strong!");
     }
+
 
     public static boolean setEmptyError(TextField field, Label error){
         if(field.getText().isEmpty()){
