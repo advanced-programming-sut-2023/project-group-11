@@ -91,7 +91,7 @@ public class SignupMenu extends Application {
 
         stage.show();
 
-        EntryMenuController.fillAllFieldsWithPreviousData();
+//        EntryMenuController.fillAllFieldsWithPreviousData();
         stage.setOnCloseRequest(windowEvent -> Utils.endStronghold());
         if (EntryMenuController.getStayLoggedIn() != null) new MainMenu().start(stage);
     }

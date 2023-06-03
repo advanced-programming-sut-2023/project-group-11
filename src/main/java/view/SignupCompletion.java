@@ -81,7 +81,6 @@ public class SignupCompletion extends Application {
             }
         });
     }
-    @FXML
     public void finishSignup() throws URISyntaxException {
         if (!answerField.getText().isEmpty()) {
             if(!captchaField.getText().equals(captchaNumber)){
