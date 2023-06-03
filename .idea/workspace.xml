@@ -4,10 +4,62 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Signup without Captcha">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Captcha added to Signup">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/1181.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/1381.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/1491.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/1722.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/1959.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/2163.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/2177.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/2723.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/2785.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/3541.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/3847.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/3855.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/3876.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/3967.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/4185.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/4310.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/4487.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/4578.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/4602.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/4681.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/4924.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/5326.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/5463.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/5771.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/5849.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/6426.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/6553.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/6601.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/6733.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/6960.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/7415.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/7609.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/7755.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/7825.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/7905.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8070.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8368.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8455.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8506.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8555.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8583.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8692.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8776.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8972.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/8996.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/9061.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/9386.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/9582.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/captcha/9633.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupCompletion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupCompletion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/SignupCompletion.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/SignupCompletion.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CSS/style1.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CSS/style1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/SignupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/SignupMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +159,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.SignupMenu">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="19" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -166,8 +218,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.SignupMenu" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ProfileMenuTest" />
         <item itemvalue="JUnit.SignupMenuTest" />
         <item itemvalue="JUnit.LoginMenuTest" />
@@ -258,14 +310,7 @@
       <workItem from="1685639944832" duration="240000" />
       <workItem from="1685695651845" duration="3132000" />
       <workItem from="1685733521146" duration="43000" />
-      <workItem from="1685811626729" duration="2240000" />
-    </task>
-    <task id="LOCAL-00037" summary="Update move (except climbing building)">
-      <created>1683026316777</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1683026316777</updated>
+      <workItem from="1685811626729" duration="3904000" />
     </task>
     <task id="LOCAL-00038" summary="Machines rebuilt + try to make MachineType as Json">
       <created>1683036855975</created>
@@ -603,7 +648,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685525303495</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Captcha added to Signup">
+      <created>1685814186142</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1685814186142</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +697,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Attack debugged" />
     <MESSAGE value="Attack &amp; Start game debugged (need correction)" />
     <MESSAGE value="Remove Climbablity + Building range Increment applied" />
     <MESSAGE value="Assassin's get revealed in fights + Fear effect in damage applied" />
@@ -670,7 +721,8 @@
     <MESSAGE value="signup incomplete + adaptation with javafx" />
     <MESSAGE value="signup complete except for question &amp; captcha" />
     <MESSAGE value="Signup without Captcha" />
-    <option name="LAST_COMMIT_MESSAGE" value="Signup without Captcha" />
+    <MESSAGE value="Captcha added to Signup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Captcha added to Signup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

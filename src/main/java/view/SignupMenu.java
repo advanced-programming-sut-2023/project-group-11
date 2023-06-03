@@ -12,12 +12,17 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.enums.messages.LoginMenuMessages;
 import view.enums.messages.SignupMenuMessages;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Random;
 
 public class SignupMenu extends Application {
     @FXML
@@ -32,6 +37,12 @@ public class SignupMenu extends Application {
     private Label passwordError;
     @FXML
     private Label usernameError;
+    @FXML
+    private TextField captchaField;
+    @FXML
+    private Label captchaError;
+    @FXML
+    private ImageView captchaImageView;
     @FXML
     private CheckBox stayLoggedInCheck;
     @FXML
@@ -68,6 +79,7 @@ public class SignupMenu extends Application {
     private SignupMenuMessages signupMessage;
     private static String username;
     public static Stage stage;
+    private static String captchaNumber;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -89,12 +101,13 @@ public class SignupMenu extends Application {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() throws URISyntaxException {
         updateSignupLabel();
         updatePasswordLabel();
         updateConfirmationLabel();
         updateEmailLabel();
         updateNicknameLabel();
+        reloadCaptcha();
     }
 
     private void updateNicknameLabel() {
@@ -198,8 +211,13 @@ public class SignupMenu extends Application {
                                     " seconds more!");
             case SUCCESS -> {
 //                WritableImage captcha = Utils.generateCaptcha(new Random().nextInt(10,1000));
-                LoginMenuController.loginUser(loginUsernameField.getText());
-                new MainMenu().start(SignupMenu.stage);
+                if(!captchaField.getText().equals(captchaNumber)){
+                    ViewUtils.fieldError(captchaError,"Wrong captcha!");
+                    reloadCaptcha();
+                }else {
+                    LoginMenuController.loginUser(loginUsernameField.getText());
+                    new MainMenu().start(SignupMenu.stage);
+                }
             }
         }
     }
@@ -260,5 +278,12 @@ public class SignupMenu extends Application {
             ViewUtils.clearFields(signupUsername,signupPassword,signupConfirmation, emailTextField,nicknameTextField,sloganTextField);
         }
 
+    }
+
+    public void reloadCaptcha() throws URISyntaxException {
+        File[] files = new File(SignupCompletion.class.getResource("/IMG/captcha").toURI()).listFiles();
+        File captcha = files[new Random().nextInt(files.length)];
+        captchaNumber = captcha.getName().substring(0,4);
+        captchaImageView.setImage(new Image(captcha.getPath()));
     }
 }
