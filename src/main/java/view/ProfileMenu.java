@@ -2,26 +2,26 @@ package view;
 
 import controller.ProfileMenuController;
 import controller.SignupMenuController;
+import controller.Utils;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Stronghold;
-import model.User;
 import view.enums.messages.ProfileMenuMessages;
 
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Optional;
 
 public class ProfileMenu extends Application {
     private static Stage stage;
@@ -47,23 +47,37 @@ public class ProfileMenu extends Application {
     private TextField newNickname;
     @FXML
     private Label newEmailError;
-    private User currentUser;
     private ProfileMenuMessages message;
+    private String currentUsername;
+    private String currentNickname;
+    private String currentEmail;
+    private String currentSlogan;
+    private String currentRecoveryQuestion;
+    private String currentAvatarAddress;
 
     @FXML
     public void initialize() {
-        currentUser = Stronghold.getCurrentUser();
+        setUserFields(Utils.getCurrentUserFields());
         slogan.setWrapText(true);
         updateDefaultLabels();
         updateNewUsernameLabel();
         updateEmailLabel();
     }
 
+    private void setUserFields(String[] userFields) {
+        currentUsername = userFields[0];
+        currentEmail = userFields[1];
+        currentRecoveryQuestion = userFields[2];
+        currentNickname = userFields[3];
+        currentSlogan = userFields[4];
+        currentAvatarAddress = userFields[5];
+    }
+
     private void updateDefaultLabels() {
-        username.setText(currentUser.getUsername());
-        nickname.setText(currentUser.getNickname());
-        email.setText(currentUser.getEmail());
-        if (currentUser.getSlogan() != null) slogan.setText(currentUser.getSlogan());
+        username.setText(currentUsername);
+        email.setText(currentEmail);
+        nickname.setText(currentNickname);
+        if (currentSlogan != null) slogan.setText(currentSlogan);
         else slogan.setText("empty!");
         updateAvatar();
     }
@@ -90,10 +104,10 @@ public class ProfileMenu extends Application {
             case INVALID_USERNAME -> ViewUtils.alert(Alert.AlertType.ERROR, "Change Username Failed",
                     "Invalid username format!");
             case SUCCESS -> {
-                ProfileMenuController.changeUsername(currentUser, newUsername.getText());
-                username.setText(newUsername.getText());
                 ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Username Successful",
                         "You have successfully changed your username!");
+                ProfileMenuController.changeUsername(newUsername.getText());
+                username.setText(newUsername.getText());
             }
         }
     }
@@ -105,7 +119,7 @@ public class ProfileMenu extends Application {
         configureFileChooser(avatarChooser);
         File selectedFile = avatarChooser.showOpenDialog(stage);
         if (selectedFile != null) {
-            ProfileMenuController.changeAvatar(currentUser, selectedFile);
+            ProfileMenuController.changeAvatar(selectedFile);
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Avatar Successful",
                     "You have successfully changed your avatar!");
             updateAvatar();
@@ -127,7 +141,7 @@ public class ProfileMenu extends Application {
             dragEvent.acceptTransferModes(TransferMode.COPY);
             File avatarFile = dragEvent.getDragboard().getFiles().get(0);
             if (isImage(avatarFile.getPath())) {
-                ProfileMenuController.changeAvatar(currentUser, avatarFile);
+                ProfileMenuController.changeAvatar(avatarFile);
                 updateAvatar();
             }
         }
@@ -149,7 +163,7 @@ public class ProfileMenu extends Application {
     }
 
     private void updateAvatar() {
-        avatar.setImage(currentUser.getAvatar());
+        avatar.setImage(new Image(currentAvatarAddress));
     }
 
     public void generateRandomSlogan() {
@@ -157,14 +171,16 @@ public class ProfileMenu extends Application {
     }
 
     public void removeSlogan() {
-        currentUser.setSlogan(null);
+        ProfileMenuController.removeSlogan();
+        currentSlogan = null;
         slogan.setText("empty!");
     }
 
     public void changeSlogan() {
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Slogan",
                 "You have successfully changed your slogan!");
-        currentUser.setSlogan(newSlogan.getText());
+        ProfileMenuController.changeSlogan(newSlogan.getText());
+        currentSlogan = newSlogan.getText();
         slogan.setText(newSlogan.getText());
     }
 
@@ -193,6 +209,7 @@ public class ProfileMenu extends Application {
                 ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Email Successful",
                         "You have successfully changed your email!");
                 email.setText(newEmail.getText());
+                ProfileMenuController.changeEmail(newEmail.getText());
             }
         }
     }
@@ -201,6 +218,7 @@ public class ProfileMenu extends Application {
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Nickname Successful",
                 "You have successfully changed your nickname!");
         nickname.setText(newNickname.getText());
+        ProfileMenuController.changeNickname(newNickname.getText());
     }
 
     public void showScoreboard() throws Exception {
@@ -223,10 +241,6 @@ public class ProfileMenu extends Application {
     }
 
     public void changePassword() throws Exception {
-//        Alert alert = ViewUtils.alert(Alert.AlertType.CONFIRMATION, "Change Password",
-//                "Fill the fields");
-        TextInputDialog dialog = new TextInputDialog();
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(s -> System.out.println("Your name: " + s));
+        new ChangePassword().start(new Stage());
     }
 }

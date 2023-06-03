@@ -146,4 +146,10 @@ public class Utils {
                 type.equals("battering ram") || type.equals("trebuchets") ||
                 type.equals("fire ballista") || type.equals("catapults");
     }
+
+    public static String[] getCurrentUserFields() {
+        User user = Stronghold.getCurrentUser();
+        return new String[]{user.getUsername(), user.getEmail(), user.getRecoveryQuestion(),
+                user.getNickname(), user.getSlogan(), user.getAvatar()};
+    }
 }

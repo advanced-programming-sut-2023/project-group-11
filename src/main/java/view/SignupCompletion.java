@@ -13,14 +13,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.net.URISyntaxException;
-import java.util.Random;
 
 public class SignupCompletion extends Application {
 
@@ -81,26 +78,28 @@ public class SignupCompletion extends Application {
             }
         });
     }
+
     public void finishSignup() throws URISyntaxException {
         if (!answerField.getText().isEmpty()) {
-            if(!captchaField.getText().equals(captchaNumber)){
+            if (!captchaField.getText().equals(captchaNumber)) {
                 captchaError.setText("wrong captcha");
                 reloadCaptcha();
                 return;
             }
             SignupMenuController.createUser(username, password, email, nickname, slogan, chosenQuestion, answerField.getText());
             stage.close();
-            ViewUtils.alert(Alert.AlertType.INFORMATION,"Congratulation!","User created successfully!");
-        }else{
+            ViewUtils.alert(Alert.AlertType.INFORMATION, "Congratulation!", "User created successfully!");
+        } else {
             answerError.setText("must be filled!");
         }
 
     }
 
     public void reloadCaptcha() throws URISyntaxException {
-        File[] files = new File(SignupCompletion.class.getResource("/IMG/captcha").toURI()).listFiles();
-        File captcha = files[new Random().nextInt(files.length)];
-        captchaNumber = captcha.getName().substring(0,4);
-        captchaImageView.setImage(new Image(captcha.getPath()));
+        captchaNumber = ViewUtils.reloadCaptcha(captchaNumber, captchaImageView);
+//        File[] files = new File(SignupCompletion.class.getResource("/IMG/captcha").toURI()).listFiles();
+//        File captcha = files[new Random().nextInt(files.length)];
+//        captchaNumber = captcha.getName().substring(0, 4);
+//        captchaImageView.setImage(new Image(captcha.getPath()));
     }
 }

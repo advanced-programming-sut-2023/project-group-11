@@ -22,22 +22,22 @@ public class ProfileMenuController {
         return ProfileMenuMessages.SUCCESS;
     }
 
-    public static void changeUsername(User user, String username) {
-        user.setUsername(username);
+    public static void changeUsername(String username) {
+        Stronghold.getCurrentUser().setUsername(username);
     }
 
-    public static void changeAvatar(User user, File avatar) {
+    public static void changeAvatar(File avatar) {
         File databaseFile = new File("src/main/resources/IMG/avatars/" + avatar.getName());
         try {
             if (!databaseFile.exists()) Files.copy(avatar.toPath(), databaseFile.toPath());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        user.setAvatarFileName(avatar.getName());
+        Stronghold.getCurrentUser().setAvatarFileName(avatar.getName());
     }
 
-    public static void changeNickname(Matcher matcher) {
-        String nickname = Utils.removeDoubleQuotation(matcher.group("field"));
+    public static void changeNickname(String nickname) {
+//        String nickname = Utils.removeDoubleQuotation(matcher.group("field"));
         Stronghold.getCurrentUser().setNickname(nickname);
     }
 
@@ -52,12 +52,12 @@ public class ProfileMenuController {
         return ProfileMenuMessages.SUCCESS;
     }
 
-    private static void changeEmail(String email) {
+    public static void changeEmail(String email) {
         Stronghold.getCurrentUser().setEmail(email);
     }
 
-    public static void changeSlogan(Matcher matcher) {
-        String slogan = Utils.removeDoubleQuotation(matcher.group("field"));
+    public static void changeSlogan(String slogan) {
+//        String slogan = Utils.removeDoubleQuotation(matcher.group("field"));
         Stronghold.getCurrentUser().setSlogan(slogan);
     }
 
@@ -72,11 +72,15 @@ public class ProfileMenuController {
             return ProfileMenuMessages.INCORRECT_PASSWORD;
         else if (oldPassword.equals(newPassword))
             return ProfileMenuMessages.SAME_PASSWORD;
-        else if (findWeakPartOfPassword(newPassword) != null)
-            return findWeakPartOfPassword(newPassword);
+//        else if (findWeakPartOfPassword(newPassword) != null)
+//            return findWeakPartOfPassword(newPassword);
 
-        Stronghold.getCurrentUser().setPassword(Utils.encryptField(newPassword));
+        changePassword(newPassword);
         return ProfileMenuMessages.SUCCESS;
+    }
+
+    private static void changePassword(String newPassword) {
+        Stronghold.getCurrentUser().setPassword(Utils.encryptField(newPassword));
     }
 
     public static void removeSlogan() {
