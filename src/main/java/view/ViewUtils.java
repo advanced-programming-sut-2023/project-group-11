@@ -1,7 +1,9 @@
 package view;
 
+import controller.SignupMenuController;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,11 +48,29 @@ public class ViewUtils {
         alert.showAndWait();
     }
 
-    public static String reloadCaptcha(String captchaNumber, ImageView captchaImageView) throws URISyntaxException {
+    public static String reloadCaptcha(ImageView captchaImageView) throws URISyntaxException {
         File[] files = new File(SignupCompletion.class.getResource("/IMG/captcha").toURI()).listFiles();
         File captcha = files[new Random().nextInt(files.length)];
-        captchaNumber =  captcha.getName().substring(0, 4);
+        String captchaNumber = captcha.getName().substring(0, 4);
         captchaImageView.setImage(new Image(captcha.getPath()));
         return captchaNumber;
+    }
+
+    static void livePasswordError(PasswordField newPassword, Label newPasswordError) {
+        newPassword.textProperty().addListener((observable, oldText, newText) -> {
+            int weakness = SignupMenuController.findHowWeakPasswordIs(newText);
+            if (newText.isEmpty()) {
+                newPasswordError.setText("");
+            } else if (weakness == 0) {
+                newPasswordError.setStyle("-fx-text-fill: green;");
+                newPasswordError.setText("Strong!");
+            } else if (weakness <= 2) {
+                newPasswordError.setStyle("-fx-text-fill: orange;");
+                newPasswordError.setText("Weak!");
+            } else {
+                newPasswordError.setStyle("-fx-text-fill: red;");
+                newPasswordError.setText("Very weak!");
+            }
+        });
     }
 }

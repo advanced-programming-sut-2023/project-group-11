@@ -1,7 +1,6 @@
 package view;
 
 import controller.ProfileMenuController;
-import controller.SignupMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,26 +73,11 @@ public class ChangePassword extends Application {
     }
 
     private void updatePasswordLabel() {
-        newPassword.textProperty().addListener((observable, oldText, newText) -> {
-            int weakness = SignupMenuController.findHowWeakPasswordIs(newText);
-            if (newText.isEmpty()) {
-                newPasswordError.setText("");
-            } else if (weakness == 0) {
-                newPasswordError.setStyle("-fx-text-fill: green;");
-                newPasswordError.setText("Strong!");
-            } else if (weakness <= 2) {
-                newPasswordError.setStyle("-fx-text-fill: orange;");
-                newPasswordError.setText("Weak!");
-            } else {
-                newPasswordError.setStyle("-fx-text-fill: red;");
-                newPasswordError.setText("Very weak!");
-            }
-        });
-        //TODO: duplicate
+        ViewUtils.livePasswordError(newPassword, newPasswordError);
     }
 
     public void reloadCaptcha() throws URISyntaxException {
-        captchaNumber = ViewUtils.reloadCaptcha(captchaNumber, captchaImageView);
+        captchaNumber = ViewUtils.reloadCaptcha(captchaImageView);
     }
 
     @Override

@@ -4,7 +4,12 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.WritableImage;
 import model.AllResource;
 import model.Stronghold;
@@ -17,6 +22,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.regex.Matcher;
 
@@ -151,5 +157,26 @@ public class Utils {
         User user = Stronghold.getCurrentUser();
         return new String[]{user.getUsername(), user.getEmail(), user.getRecoveryQuestion(),
                 user.getNickname(), user.getSlogan(), user.getAvatar()};
+    }
+
+    public static void sortUsers() {
+        ArrayList<User> users = Stronghold.getUsers();
+        Collections.sort(users);
+        setRanks(users);
+    }
+
+    private static void setRanks(ArrayList<User> users) {
+        for (int i = 0; i < users.size(); i++) users.get(i).setRank(i + 1);
+    }
+
+    public static ObservableList<Object> getObservable() {
+        ArrayList<User> users = Stronghold.getUsers();
+        return FXCollections.observableArrayList(users);
+    }
+
+    public static void columnMaker(TableView scoreboard, String field) {
+        TableColumn<User, String> tableColumn = new TableColumn<>(field);
+        tableColumn.setCellValueFactory(new PropertyValueFactory<>(field.toLowerCase()));
+        scoreboard.getColumns().add(tableColumn);
     }
 }

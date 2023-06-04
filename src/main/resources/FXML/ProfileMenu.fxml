@@ -90,9 +90,10 @@
                     <VBox prefHeight="200.0" prefWidth="250.0" spacing="10.0">
                         <TitledPane animated="false" text="change avatar">
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="200.0">
-                                <Button layoutX="19.0" layoutY="81.0" mnemonicParsing="false"
-                                        onAction="#createAvatarChooser" onDragExited="#changeAvatar" prefHeight="25.0"
-                                        prefWidth="200.0" styleClass="menu-button" text="choose or drag avatar"/>
+                                <Button layoutX="19.0" layoutY="81.0" prefHeight="25.0" prefWidth="200.0"
+                                        mnemonicParsing="false" onDragOver="#setTransferModes"
+                                        onDragDropped="#changeAvatar" onAction="#createAvatarChooser"
+                                        styleClass="menu-button" text="choose or drag avatar"/>
                             </AnchorPane>
                         </TitledPane>
                         <TitledPane animated="false" text="change slogan">

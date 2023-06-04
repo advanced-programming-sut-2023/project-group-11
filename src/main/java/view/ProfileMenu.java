@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -24,6 +25,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class ProfileMenu extends Application {
+    //TODO: copy other users' avatars for current user
     private static Stage stage;
     @FXML
     private Label username;
@@ -136,17 +138,22 @@ public class ProfileMenu extends Application {
                 "images", "*.jpg", "*.jpeg", "*.png"));
     }
 
+    public void setTransferModes(DragEvent dragEvent) {
+        dragEvent.acceptTransferModes(TransferMode.COPY);
+        dragEvent.consume();
+    }
+
     public void changeAvatar(DragEvent dragEvent) {
-        if (dragEvent.getDragboard().hasFiles()) {
-            dragEvent.acceptTransferModes(TransferMode.COPY);
-            File avatarFile = dragEvent.getDragboard().getFiles().get(0);
+        Dragboard dragboard = dragEvent.getDragboard();
+
+        if (dragboard.hasFiles() && dragboard.getFiles().size() == 1) {
+            File avatarFile = dragboard.getFiles().get(0);
             if (isImage(avatarFile.getPath())) {
                 ProfileMenuController.changeAvatar(avatarFile);
                 updateAvatar();
             }
         }
         dragEvent.consume();
-        //TODO: needs debug (on drag dropped or over or ...)
     }
 
     private boolean isImage(String path) {
@@ -163,6 +170,7 @@ public class ProfileMenu extends Application {
     }
 
     private void updateAvatar() {
+        currentAvatarAddress = Utils.getCurrentUserFields()[5];
         avatar.setImage(new Image(currentAvatarAddress));
     }
 
@@ -243,4 +251,5 @@ public class ProfileMenu extends Application {
     public void changePassword() throws Exception {
         new ChangePassword().start(new Stage());
     }
+
 }

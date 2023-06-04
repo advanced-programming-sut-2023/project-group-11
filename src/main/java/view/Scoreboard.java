@@ -1,27 +1,21 @@
 package view;
 
+import controller.Utils;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.Stronghold;
-import model.User;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class Scoreboard extends Application {
+    //TODO: add lazy loading to scoreboard
     private static Stage stage;
     @FXML
-    private TableView<User> scoreboard;
+    private TableView<Object> scoreboard;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -36,11 +30,8 @@ public class Scoreboard extends Application {
 
     @FXML
     public void initialize() {
-        ArrayList<User> users = Stronghold.getUsers();
-        Collections.sort(users);
-        ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
-        setRanks(users);
-        scoreboard.setItems(observableUsers);
+        Utils.sortUsers();
+        scoreboard.setItems(Utils.getObservable());
         addColumns();
     }
 
@@ -50,14 +41,9 @@ public class Scoreboard extends Application {
         columnMaker("Score");
     }
 
-    private void setRanks(ArrayList<User> users) {
-        for (int i = 0; i < users.size(); i++) users.get(i).setRank(i + 1);
-    }
 
     private void columnMaker(String field) {
-        TableColumn<User, String> tableColumn = new TableColumn<>(field);
-        tableColumn.setCellValueFactory(new PropertyValueFactory<>(field.toLowerCase()));
-        scoreboard.getColumns().add(tableColumn);
+        Utils.columnMaker(scoreboard, field);
     }
 
     public void back() throws Exception {

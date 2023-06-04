@@ -2,8 +2,6 @@ package view;
 
 import controller.SignupMenuController;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +20,7 @@ import java.net.URISyntaxException;
 public class SignupCompletion extends Application {
 
     @FXML
-    private ChoiceBox questionBox;
+    private ChoiceBox<String> questionBox;
     @FXML
     private TextField answerField;
     @FXML
@@ -71,12 +69,7 @@ public class SignupCompletion extends Application {
     private void initializeQuestionBox() {
         questionBox.setValue("Pick a Question");
         questionBox.setItems(questions);
-        questionBox.valueProperty().addListener(new ChangeListener() {
-            @Override
-            public void changed(ObservableValue observableValue, Object o, Object t1) {
-                chosenQuestion = ((String) questionBox.getValue());
-            }
-        });
+        questionBox.valueProperty().addListener((observableValue, o, t1) -> chosenQuestion = questionBox.getValue());
     }
 
     public void finishSignup() throws URISyntaxException {
@@ -96,7 +89,7 @@ public class SignupCompletion extends Application {
     }
 
     public void reloadCaptcha() throws URISyntaxException {
-        captchaNumber = ViewUtils.reloadCaptcha(captchaNumber, captchaImageView);
+        captchaNumber = ViewUtils.reloadCaptcha(captchaImageView);
 //        File[] files = new File(SignupCompletion.class.getResource("/IMG/captcha").toURI()).listFiles();
 //        File captcha = files[new Random().nextInt(files.length)];
 //        captchaNumber = captcha.getName().substring(0, 4);

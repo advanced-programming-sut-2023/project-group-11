@@ -111,9 +111,7 @@ public class SignupMenu extends Application {
     }
 
     private void updateNicknameLabel() {
-        nicknameTextField.textProperty().addListener((observable, oldText, newText)->{
-           nicknameError.setText("");
-        });
+        nicknameTextField.textProperty().addListener((observable, oldText, newText)-> nicknameError.setText(""));
     }
 
     private void updateEmailLabel() {
@@ -140,23 +138,7 @@ public class SignupMenu extends Application {
     }
 
     private void updatePasswordLabel() {
-        signupPassword.textProperty().addListener((observable, oldText, newText)-> {
-            int weakness = SignupMenuController.findHowWeakPasswordIs(newText);
-            if(newText.isEmpty()){
-                signupPasswordError.setText("");
-            }
-            else if(weakness == 0){
-                signupPasswordError.setStyle("-fx-text-fill: green;");
-                signupPasswordError.setText("Strong!");
-            }
-            else if(weakness <= 2){
-                signupPasswordError.setStyle("-fx-text-fill: orange;");
-                signupPasswordError.setText("Weak!");
-            }else{
-                signupPasswordError.setStyle("-fx-text-fill: red;");
-                signupPasswordError.setText("Very weak!");
-            }
-        });
+        ViewUtils.livePasswordError(signupPassword, signupPasswordError);
     }
 
     public void changeVisibility(){
@@ -210,7 +192,6 @@ public class SignupMenu extends Application {
                                     LoginMenuController.getLeftLockedTime(loginUsernameField.getText()) / 1000.0 +
                                     " seconds more!");
             case SUCCESS -> {
-//                WritableImage captcha = Utils.generateCaptcha(new Random().nextInt(10,1000));
                 if(!captchaField.getText().equals(captchaNumber)){
                     ViewUtils.fieldError(captchaError,"Wrong captcha!");
                     reloadCaptcha();
