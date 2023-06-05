@@ -49,7 +49,7 @@ public class MapEditMenu extends Application {
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
     private void showMap(int xTile, int yTile) {
-        double time = System.currentTimeMillis();
+//        double time = System.currentTimeMillis();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
         Tile[][] mapTiles = ShowMapMenuController.getTiles(xTile, yTile, rowsCount, columnCount);
@@ -69,8 +69,7 @@ public class MapEditMenu extends Application {
             yCoordinate += tileSize;
             xCoordinate = xTile * tileSize;
         }
-        System.out.println((System.currentTimeMillis() - time) / 1000);
-        System.out.println("x: " + xCoordinate + "   y: " + yCoordinate);
+//        System.out.println((System.currentTimeMillis() - time) / 1000);
     }
 
     public void back() throws Exception {

@@ -1,7 +1,6 @@
 package model.map;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public enum Texture {
     SAND("sand", "desert"),
@@ -26,6 +25,7 @@ public enum Texture {
 
     private final String name;
     private final String textureImageName;
+    private Image image;
 
     Texture(String name, String textureImageName) {
         this.name = name;
@@ -47,6 +47,7 @@ public enum Texture {
         return !(isWater() || this.equals(CLIFF) || this.equals(PITCH)) ||
                 this.equals(MARSH) || this.equals(SHALLOW_WATER) || this.equals(OIL);
     }
+
     public boolean isSuitableForPitch() {
         return this.equals(SAND_DUNE) || this.equals(SAND) || this.equals(BEACH);
     }
@@ -72,6 +73,8 @@ public enum Texture {
     }
 
     public Image getImage() {
-        return new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Textures/" + textureImageName + ".png");
+        if (image == null)
+            image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Textures/" + textureImageName + ".png");
+        return image;
     }
 }
