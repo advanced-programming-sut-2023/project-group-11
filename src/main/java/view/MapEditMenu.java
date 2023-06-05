@@ -17,6 +17,7 @@ public class MapEditMenu extends Application {
     @FXML
     private AnchorPane mapPane;
     private int tileSize = 30;
+    private int mapSize;
     private int xTile = 0;
     private int yTile = 0;
     private final int mapPaneHeight = 720;
@@ -37,6 +38,7 @@ public class MapEditMenu extends Application {
     @FXML
     public void initialize() {
         showMap();
+        mapSize = ShowMapMenuController.getCurrentMap().getSize();
     }
 
     // ---------------------------------- Getter/Setter -------------------------------------------
@@ -91,10 +93,10 @@ public class MapEditMenu extends Application {
 
     public void moveMapClick(MouseEvent mouseEvent) throws InterruptedException {
         if (Math.abs(mouseEvent.getX() - mapPaneWidth) < tileSize) {
-            if (mapPaneWidth / tileSize > xTile + 1) xTile += 1;
+            if (mapSize - (mapPaneWidth / tileSize) > xTile) xTile += 1;
             showMap();
         } else if (Math.abs(mouseEvent.getY() - mapPaneHeight) < tileSize) {
-            if (mapPaneHeight / tileSize > yTile + 1) yTile += 1;
+            if (mapSize - (mapPaneHeight / tileSize) > yTile) yTile += 1;
             showMap();
         } else if (mouseEvent.getX() < tileSize) {
             if (xTile > 0) xTile -= 1;
