@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.map.Tile;
@@ -16,6 +17,9 @@ public class MapEditMenu extends Application {
     @FXML
     private AnchorPane mapPane;
     private int tileSize = 30;
+    private int mapSize;
+    private int xTile = 0;
+    private int yTile = 0;
     private final int mapPaneHeight = 720;
     private final int mapPaneWidth = 990;
 
@@ -33,7 +37,8 @@ public class MapEditMenu extends Application {
 
     @FXML
     public void initialize() {
-        showMap(0, 0);
+        showMap();
+        mapSize = ShowMapMenuController.getCurrentMap().getSize();
     }
 
     // ---------------------------------- Getter/Setter -------------------------------------------
@@ -48,32 +53,61 @@ public class MapEditMenu extends Application {
 
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
-    private void showMap(int xTile, int yTile) {
+    private void showMap() {
         double time = System.currentTimeMillis();
+
+        mapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
         Tile[][] mapTiles = ShowMapMenuController.getTiles(xTile, yTile, rowsCount, columnCount);
 
-        int xCoordinate = xTile * tileSize, yCoordinate = yTile * tileSize;
+        int xCoordinate = 0, yCoordinate = 0;
 
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
-                ImageView imageView = new ImageView(tile.getTexture().getImage());
-                imageView.setLayoutX(xCoordinate);
-                imageView.setLayoutY(yCoordinate);
-                imageView.setFitWidth(30);
-                imageView.setFitHeight(30);
-                mapPane.getChildren().add(imageView);
+                ImageView texture = new ImageView(tile.getTexture().getImage());
+                texture.setLayoutX(xCoordinate);
+                texture.setLayoutY(yCoordinate);
+                texture.setFitWidth(30);
+                texture.setFitHeight(30);
+                mapPane.getChildren().add(texture);
+                if (tile.getTree() != null) {
+                    ImageView tree = new ImageView((tile.getTree().getImage()));
+                    tree.setLayoutX(xCoordinate);
+                    tree.setLayoutY(yCoordinate);
+                    tree.setFitWidth(30);
+                    tree.setFitHeight(30);
+                    mapPane.getChildren().add(tree);
+                }
                 xCoordinate += tileSize;
             }
             yCoordinate += tileSize;
-            xCoordinate = xTile * tileSize;
+            xCoordinate = 0;
         }
         System.out.println((System.currentTimeMillis() - time) / 1000);
-        System.out.println("x: " + xCoordinate + "   y: " + yCoordinate);
     }
 
     public void back() throws Exception {
         new MainMenu().start(SignupMenu.getStage());
+    }
+
+    public void moveMapClick(MouseEvent mouseEvent) throws InterruptedException {
+        if (Math.abs(mouseEvent.getX() - mapPaneWidth) < tileSize) {
+            if (mapSize - (mapPaneWidth / tileSize) > xTile) xTile += 1;
+            showMap();
+        } else if (Math.abs(mouseEvent.getY() - mapPaneHeight) < tileSize) {
+            if (mapSize - (mapPaneHeight / tileSize) > yTile) yTile += 1;
+            showMap();
+        } else if (mouseEvent.getX() < tileSize) {
+            if (xTile > 0) xTile -= 1;
+            showMap();
+        } else if (mouseEvent.getY() < tileSize) {
+            if (yTile > 0) yTile -= 1;
+            showMap();
+        }
+    }
+
+    public void moveMapMove(MouseEvent mouseEvent) {
+
     }
 }
