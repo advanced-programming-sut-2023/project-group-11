@@ -4,32 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="MainMenu added!">
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/MapEditMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/MapSelection.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/cliff.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/desert.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/grass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/grassland.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/iron.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/marsh.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/pitch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/rock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/shallow_water.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/stone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/water.png" afterDir="false" />
+    <list default="true" id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="improve mapLoading">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Tree/cherry.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Tree/coconut.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Tree/date.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Tree/olive.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Tree/small.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/CSS/style1.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CSS/style1.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/MainMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/desert.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,28 +264,7 @@
       <workItem from="1685700643291" duration="15000" />
       <workItem from="1685706508571" duration="31000" />
       <workItem from="1685867115847" duration="3378000" />
-      <workItem from="1685956789263" duration="10287000" />
-    </task>
-    <task id="LOCAL-00041" summary="Move ended (need review)">
-      <created>1683055338770</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1683055338770</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Attack upto applying damage">
-      <created>1683234033791</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1683234033791</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Conflicts resolved">
-      <created>1683234790483</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1683234790483</updated>
+      <workItem from="1685956789263" duration="14087000" />
     </task>
     <task id="LOCAL-00044" summary="Make JSON Directory In Resources">
       <created>1683320435897</created>
@@ -624,7 +588,28 @@
       <option name="project" value="LOCAL" />
       <updated>1685304788618</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Add primitive showMap">
+      <created>1685975375809</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1685975375810</updated>
+    </task>
+    <task id="LOCAL-00091" summary="fixed bugs">
+      <created>1685976610633</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1685976610633</updated>
+    </task>
+    <task id="LOCAL-00092" summary="improve mapLoading">
+      <created>1685979177855</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1685979177855</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,9 +651,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Governance dying + End Game added (Only khadagh left)" />
-    <MESSAGE value="Add score added" />
-    <MESSAGE value="Lord making resolved + drop unit debugged" />
     <MESSAGE value="Start digging pitch added" />
     <MESSAGE value="errors resolved" />
     <MESSAGE value="Dig pitch added in nextTurn" />
@@ -691,7 +673,10 @@
     <MESSAGE value="Loggin debugged" />
     <MESSAGE value="Merged!" />
     <MESSAGE value="MainMenu added!" />
-    <option name="LAST_COMMIT_MESSAGE" value="MainMenu added!" />
+    <MESSAGE value="Add primitive showMap" />
+    <MESSAGE value="fixed bugs" />
+    <MESSAGE value="improve mapLoading" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve mapLoading" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

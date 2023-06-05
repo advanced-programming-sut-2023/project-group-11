@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.map.Tile;
+import model.map.Tree;
 
 import java.net.URL;
 
@@ -58,12 +59,20 @@ public class MapEditMenu extends Application {
 
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
-                ImageView imageView = new ImageView(tile.getTexture().getImage());
-                imageView.setLayoutX(xCoordinate);
-                imageView.setLayoutY(yCoordinate);
-                imageView.setFitWidth(30);
-                imageView.setFitHeight(30);
-                mapPane.getChildren().add(imageView);
+                ImageView texture = new ImageView(tile.getTexture().getImage());
+                texture.setLayoutX(xCoordinate);
+                texture.setLayoutY(yCoordinate);
+                texture.setFitWidth(30);
+                texture.setFitHeight(30);
+                mapPane.getChildren().add(texture);
+                if (tile.getTree() != null) {
+                    ImageView tree = new ImageView((tile.getTree().getImage()));
+                    tree.setLayoutX(xCoordinate);
+                    tree.setLayoutY(yCoordinate);
+                    tree.setFitWidth(30);
+                    tree.setFitHeight(30);
+                    mapPane.getChildren().add(tree);
+                }
                 xCoordinate += tileSize;
             }
             yCoordinate += tileSize;
