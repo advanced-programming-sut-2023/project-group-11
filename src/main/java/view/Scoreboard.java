@@ -31,19 +31,15 @@ public class Scoreboard extends Application {
     @FXML
     public void initialize() {
         Utils.sortUsers();
-        scoreboard.setItems(Utils.getObservable());
+        scoreboard.setItems(Utils.getUserObservable());
         addColumns();
     }
 
     private void addColumns() {
-        columnMaker("Rank");
-        columnMaker("Username");
-        columnMaker("Score");
-    }
-
-
-    private void columnMaker(String field) {
-        Utils.columnMaker(scoreboard, field);
+        Utils.columnMaker(scoreboard, "Avatar", "avatar");
+        Utils.columnMaker(scoreboard, "Rank", "rank");
+        Utils.columnMaker(scoreboard, "Username", "username");
+        Utils.columnMaker(scoreboard, "Score", "score");
     }
 
     public void back() throws Exception {

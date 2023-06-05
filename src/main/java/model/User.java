@@ -1,5 +1,8 @@
 package model;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class User implements Comparable<User> {
     private final String recoveryQuestion;
     private final String recoveryAnswer;
@@ -52,8 +55,12 @@ public class User implements Comparable<User> {
         this.email = email;
     }
 
-    public String getAvatar() {
-        return System.getProperty("user.dir") + "/src/main/resources/IMG/avatars/" + avatarFileName;
+    public ImageView getAvatar() {
+        ImageView imageView = new ImageView(new Image(
+                System.getProperty("user.dir") + "/src/main/resources/IMG/avatars/" + avatarFileName));
+        imageView.setFitHeight(40);
+        imageView.setFitWidth(40);
+        return imageView;
     }
 
     public void setAvatarFileName(String avatarFileName) {

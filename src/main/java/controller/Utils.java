@@ -10,6 +10,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import model.AllResource;
 import model.Stronghold;
@@ -156,7 +157,12 @@ public class Utils {
     public static String[] getCurrentUserFields() {
         User user = Stronghold.getCurrentUser();
         return new String[]{user.getUsername(), user.getEmail(), user.getRecoveryQuestion(),
-                user.getNickname(), user.getSlogan(), user.getAvatar()};
+                user.getNickname(), user.getSlogan()};
+    }
+
+    public static ImageView getCurrentUserAvatar() {
+        User user = Stronghold.getCurrentUser();
+        return user.getAvatar();
     }
 
     public static void sortUsers() {
@@ -169,14 +175,14 @@ public class Utils {
         for (int i = 0; i < users.size(); i++) users.get(i).setRank(i + 1);
     }
 
-    public static ObservableList<Object> getObservable() {
+    public static ObservableList<Object> getUserObservable() {
         ArrayList<User> users = Stronghold.getUsers();
         return FXCollections.observableArrayList(users);
     }
 
-    public static void columnMaker(TableView scoreboard, String field) {
-        TableColumn<User, String> tableColumn = new TableColumn<>(field);
-        tableColumn.setCellValueFactory(new PropertyValueFactory<>(field.toLowerCase()));
+    public static void columnMaker(TableView scoreboard, String header, String userField) {
+        TableColumn<User, String> tableColumn = new TableColumn<>(header);
+        tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
         scoreboard.getColumns().add(tableColumn);
     }
 }

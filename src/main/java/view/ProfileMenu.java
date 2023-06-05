@@ -55,7 +55,6 @@ public class ProfileMenu extends Application {
     private String currentEmail;
     private String currentSlogan;
     private String currentRecoveryQuestion;
-    private String currentAvatarAddress;
 
     @FXML
     public void initialize() {
@@ -72,7 +71,6 @@ public class ProfileMenu extends Application {
         currentRecoveryQuestion = userFields[2];
         currentNickname = userFields[3];
         currentSlogan = userFields[4];
-        currentAvatarAddress = userFields[5];
     }
 
     private void updateDefaultLabels() {
@@ -170,8 +168,7 @@ public class ProfileMenu extends Application {
     }
 
     private void updateAvatar() {
-        currentAvatarAddress = Utils.getCurrentUserFields()[5];
-        avatar.setImage(new Image(currentAvatarAddress));
+        avatar.setImage(Utils.getCurrentUserAvatar().getImage());
     }
 
     public void generateRandomSlogan() {
