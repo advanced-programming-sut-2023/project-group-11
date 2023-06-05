@@ -37,5 +37,18 @@
     "score": 0,
     "rank": 3,
     "stayLoggedIn": false
+  },
+  {
+    "recoveryQuestion": "What is my father's name?",
+    "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
+    "username": "Sadegh2",
+    "password": "3fe3a52eab4a7ab2e0c9bf3e07648aae93e36d01af4bf99a1bac83901476fb28",
+    "nickname": "DarkLork",
+    "email": "Sadegh.sg.snn@gmail.com",
+    "slogan": "A soldier's death... is a noble death.",
+    "avatarFileName": "7.png",
+    "score": 0,
+    "rank": 4,
+    "stayLoggedIn": true
   }
 ]

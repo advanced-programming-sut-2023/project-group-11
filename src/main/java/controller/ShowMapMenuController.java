@@ -1,5 +1,37 @@
-//package controller;
-//
+package controller;
+
+import model.map.Map;
+import model.map.Tile;
+
+public class ShowMapMenuController {
+    private static Map currentMap;
+
+    public static Tile[][] getTiles(int x, int y, int rowsCount, int columnCount) {
+        Tile[][] tiles = new Tile[rowsCount][columnCount];
+        for (int i = 0; i < rowsCount; i++) {
+            tiles[i] = new Tile[columnCount];
+            for (int j = 0; j < columnCount; j++)
+                tiles[i][j] = currentMap.getTile(y + i, x + j); //TODO: Be careful about inverse x & y
+        }
+        return tiles;
+    }
+
+    public static Map getCurrentMap() {
+        return currentMap;
+    }
+
+    public static void setCurrentMap(Map currentMap) {
+        ShowMapMenuController.currentMap = currentMap;
+    }
+}
+
+
+
+
+
+
+
+
 //import com.diogonunes.jcolor.Ansi;
 //import com.diogonunes.jcolor.Attribute;
 //import model.Governance;

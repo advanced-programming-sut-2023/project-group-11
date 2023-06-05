@@ -4,7 +4,6 @@ import controller.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -30,8 +29,8 @@ public class MainMenu extends Application {
         new ProfileMenu().start(SignupMenu.getStage());
     }
 
-    public void mapEditMenu(MouseEvent mouseEvent) {
-
+    public void mapSelection() throws Exception {
+        new MapSelection().start(new Stage());
     }
 
     public void logout() throws Exception {

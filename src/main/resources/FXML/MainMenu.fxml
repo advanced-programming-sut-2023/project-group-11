@@ -20,7 +20,7 @@
                                         <Font name="Andalus" size="12.0" />
                                     </font>
                                 </Button>
-                                <Button mnemonicParsing="false" onMouseClicked="#mapEditMenu" prefHeight="45.0" prefWidth="132.0" styleClass="menu-button" text="MapEdit Menu" />
+                                <Button mnemonicParsing="false" onAction="#mapSelection" prefHeight="45.0" prefWidth="132.0" styleClass="menu-button" text="MapEdit Menu" />
                                 <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="45.0" prefWidth="70.0" styleClass="menu-button" text="Logout" />
                             </children>
                         </VBox>

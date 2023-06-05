@@ -24,3 +24,7 @@
     -fx-font-family: andalus;
     -fx-font-size: 17px;
 }
+
+.mapToolBar{
+    -fx-background-color: #CCCCCC;
+}

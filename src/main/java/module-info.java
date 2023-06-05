@@ -14,6 +14,7 @@ module ProjectAP {
     requires com.fasterxml.jackson.annotation;
 
     exports view;
+    exports model.map;
     opens view to javafx.fxml;
     opens model to com.google.gson, javafx.base;
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MapSelection">
+   <children>
+      <ChoiceBox fx:id="mapsChoiceBox" layoutX="225.0" layoutY="166.0" prefWidth="150.0" />
+      <Button layoutX="277.0" layoutY="219.0" mnemonicParsing="false" onAction="#mapEditMenu" prefHeight="35.0" prefWidth="47.0" styleClass="menu-button" text="Go" />
+   </children>
+</AnchorPane>

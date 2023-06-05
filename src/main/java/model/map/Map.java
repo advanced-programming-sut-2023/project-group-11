@@ -55,4 +55,9 @@ public class Map {
     public Tile getTile(int[] location) {
         return tiles[location[0]][location[1]];
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

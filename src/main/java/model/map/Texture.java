@@ -1,32 +1,35 @@
 package model.map;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public enum Texture {
-    SAND("sand", Color.BEIGE_BACKGROUND),
-    SAND_DUNE("sand dune", Color.BEIGE_BACKGROUND),
-    ROCK("rock", Color.SILVER_BACKGROUND),           // UnBuildable
-    CLIFF("cliff", Color.DARK_GRAY_BACKGROUND),      // UnBuildable - Sakhreh
-    STONE("stone", Color.GRAY_BACKGROUND),
-    IRON("iron", Color.ORANGE_BACKGROUND),
-    GRASS("grass", Color.DARK_GREEN_BACKGROUND),
-    DENSE_GRASSLAND("dense grassland", Color.DARK_GREEN_BACKGROUND),
-    GRASSLAND("grassland", Color.GREEN_BACKGROUND),  // UnBuildable
-    OIL("oil", Color.BEIGE_BACKGROUND),
-    MARSH("marsh", Color.DARK_PURPLE_BACKGROUND),      // Jolge
-    SHALLOW_WATER("shallow water", Color.BRIGHT_BLUE_BACKGROUND),
-    RIVER("river", Color.DARK_BLUE_BACKGROUND),
-    SMALL_LAKE("small lake", Color.BLUE_BACKGROUND),
-    BIG_LAKE("big lake", Color.BLUE_BACKGROUND),
-    SEA("sea", Color.DARK_BLUE_BACKGROUND),
-    BEACH("beach", Color.BEIGE_BACKGROUND),
-    PITCH("pitch", Color.BLACK_BACKGROUND)             // unbuildable
+    SAND("sand", "desert"),
+    SAND_DUNE("sand dune", "desert"),
+    ROCK("rock", "rock"),           // UnBuildable
+    CLIFF("cliff", "cliff"),      // UnBuildable - Sakhreh
+    STONE("stone", "stone"),
+    IRON("iron", "iron"),
+    GRASS("grass", "grass"),
+    DENSE_GRASSLAND("dense grassland", "grass"),
+    GRASSLAND("grassland", "grassland"),  // UnBuildable
+    OIL("oil", "desert"),
+    MARSH("marsh", "marsh"),      // Jolge
+    SHALLOW_WATER("shallow water", "shallow_water"),
+    RIVER("river", "water"),
+    SMALL_LAKE("small lake", "water"),
+    BIG_LAKE("big lake", "water"),
+    SEA("sea", "water"),
+    BEACH("beach", "desert"),
+    PITCH("pitch", "pitch")             // unbuildable
     ;
 
     private final String name;
-    private final Color color;
+    private final String textureImageName;
 
-    Texture(String name, Color color) {
+    Texture(String name, String textureImageName) {
         this.name = name;
-        this.color = color;
+        this.textureImageName = textureImageName;
     }
 
     public static Texture getTextureByName(String name) {
@@ -68,7 +71,7 @@ public enum Texture {
         return name;
     }
 
-    public Color getColor() {
-        return color;
+    public Image getImage() {
+        return new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Textures/" + textureImageName + ".png");
     }
 }
