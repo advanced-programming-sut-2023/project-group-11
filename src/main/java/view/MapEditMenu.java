@@ -49,6 +49,7 @@ public class MapEditMenu extends Application {
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
     private void showMap(int xTile, int yTile) {
+        double time = System.currentTimeMillis();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
         Tile[][] mapTiles = ShowMapMenuController.getTiles(xTile, yTile, rowsCount, columnCount);
@@ -60,11 +61,16 @@ public class MapEditMenu extends Application {
                 ImageView imageView = new ImageView(tile.getTexture().getImage());
                 imageView.setLayoutX(xCoordinate);
                 imageView.setLayoutY(yCoordinate);
+                imageView.setFitWidth(30);
+                imageView.setFitHeight(30);
                 mapPane.getChildren().add(imageView);
                 xCoordinate += tileSize;
             }
             yCoordinate += tileSize;
+            xCoordinate = xTile * tileSize;
         }
+        System.out.println((System.currentTimeMillis() - time) / 1000);
+        System.out.println("x: " + xCoordinate + "   y: " + yCoordinate);
     }
 
     public void back() throws Exception {
