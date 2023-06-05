@@ -58,7 +58,7 @@ public enum ProductiveBuildingType {
     BOW_WORKSHOP("bow workshop", 2, 150, 100, AllResource.WOOD, 20,
             1, true, new ArrayList<>(Arrays.asList(AllResource.BOW, AllResource.CROSSBOW)),
             AllResource.WOOD, 5, 5),
-    ARMOR_WORKSHOP("spear workshop", 2, 150, 100, AllResource.WOOD, 20,
+    ARMOR_WORKSHOP("armor workshop", 2, 150, 100, AllResource.WOOD, 20,
             1, true, new ArrayList<>(Arrays.asList(AllResource.LEATHER_ARMOR, AllResource.METAL_ARMOR)),
             AllResource.IRON, 5, 5),
     ;

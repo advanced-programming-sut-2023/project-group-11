@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.ObservableList;
 import model.Game;
 import model.Governance;
 import model.Stronghold;
@@ -12,33 +13,51 @@ import model.map.Territory;
 import model.map.Texture;
 import model.map.Tile;
 import model.people.Lord;
-import view.enums.messages.MainMenuMessages;
+import view.GameMenu;
+import view.SignupMenu;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 
 public class MainMenuController {
-    public static MainMenuMessages checkStartGame(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "mapName", "guests"))
-            return MainMenuMessages.INVALID_COMMAND;
+//    public static MainMenuMessages checkStartGame(Matcher matcher) {
+//        if (!Utils.isValidCommandTags(matcher, "mapName", "guests"))
+//            return MainMenuMessages.INVALID_COMMAND;
+//
+//        String mapName = Utils.removeDoubleQuotation(matcher.group("mapName"));
+//        String[] listOfPlayers = makeListOfPlayers(matcher.group("guests")).split("-");
+//
+//        if (!Stronghold.isMapName(mapName))
+//            return MainMenuMessages.MAP_NOT_EXIST;
+//        for (String name : listOfPlayers)
+//            if (!Stronghold.usernameExist(name)) return MainMenuMessages.USER_NOT_EXIST;
+//        for (String name : listOfPlayers)
+//            if (Stronghold.getCurrentUser().equals(Stronghold.getUserByUsername(name)))
+//                return MainMenuMessages.OWNER_IN_GUESTS;
+//
+//
+//        Stronghold.setCurrentGame(new Game(makeGovernances(listOfPlayers), Stronghold.getMapByName(mapName)));
+//        return MainMenuMessages.SUCCESS;
+//    }
 
-        String mapName = Utils.removeDoubleQuotation(matcher.group("mapName"));
-        String[] listOfPlayers = makeListOfPlayers(matcher.group("guests")).split("-");
-
-        if (!Stronghold.isMapName(mapName))
-            return MainMenuMessages.MAP_NOT_EXIST;
-        for (String name : listOfPlayers)
-            if (!Stronghold.usernameExist(name)) return MainMenuMessages.USER_NOT_EXIST;
-        for (String name : listOfPlayers)
-            if (Stronghold.getCurrentUser().equals(Stronghold.getUserByUsername(name)))
-                return MainMenuMessages.OWNER_IN_GUESTS;
+    public static void startGame(ObservableList<Integer> selectedIndices, String mapName) {
+        String[] usernames = makeListOfPlayers(new ArrayList<>(selectedIndices));
+        Stronghold.setCurrentGame(new Game(makeGovernances(usernames), Stronghold.getMapByName(mapName)));
+        ArrayList<Integer> areas = new ArrayList<>();
+        for (int i = 1; i <= 8; i++) areas.add(i);
 
 
-        Stronghold.setCurrentGame(new Game(makeGovernances(listOfPlayers), Stronghold.getMapByName(mapName)));
-        return MainMenuMessages.SUCCESS;
+        //TODO: area initialization must be implemented
+        for (int i = 0; i < usernames.length; i++) {
+            initializeAreas(usernames[i], areas,i+1);
+        }
+        try {
+            new GameMenu().start(SignupMenu.getStage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {
+    public static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {
         ArrayList<Governance> governances = new ArrayList<>();
         governances.add(new Governance(Stronghold.getCurrentUser()));
 
@@ -48,13 +67,22 @@ public class MainMenuController {
         return governances;
     }
 
-    public static String makeListOfPlayers(String guests) {
-        String result = "";
-        String[] list = guests.split(" (?=[^\"]*(?:(?:\"[^\"]*){2})*$)");
-        for (String name : list) {
-            result += Utils.removeDoubleQuotation(name) + "-";
-        }
-        return result.substring(0, result.length() - 1);
+//    public static String makeListOfPlayers(String guests) {
+//        String result = "";
+//        String[] list = guests.split(" (?=[^\"]*(?:(?:\"[^\"]*){2})*$)");
+//        for (String name : list) {
+//            result += Utils.removeDoubleQuotation(name) + "-";
+//        }
+//        return result.substring(0, result.length() - 1);
+//    }
+
+    public static String[] makeListOfPlayers(ArrayList<Integer> indices) {
+        ArrayList<String> usernames = new ArrayList<>();
+        ArrayList<User> users = Stronghold.getUsers();
+
+        for (Integer index : indices)
+            usernames.add(users.get(index).getUsername());
+        return usernames.toArray(new String[0]);
     }
 
     public static void initializeAreas(String playerName, ArrayList<Integer> areas, int selectedArea) {
@@ -146,6 +174,12 @@ public class MainMenuController {
             }
         }
         return coordinate;
+    }
+
+
+    public static ObservableList<User> removeCurrentUserFromList(ObservableList<User> userObservableList) {
+        userObservableList.remove(Stronghold.getCurrentUser());
+        return userObservableList;
     }
 
     public static void logout() {

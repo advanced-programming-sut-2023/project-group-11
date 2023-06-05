@@ -15,7 +15,7 @@ public class Scoreboard extends Application {
     //TODO: add lazy loading to scoreboard
     private static Stage stage;
     @FXML
-    private TableView<Object> scoreboard;
+    private TableView scoreboard;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -31,7 +31,7 @@ public class Scoreboard extends Application {
     @FXML
     public void initialize() {
         Utils.sortUsers();
-        scoreboard.setItems(Utils.getUserObservable());
+        scoreboard.setItems(Utils.getUsersObservable());
         addColumns();
     }
 

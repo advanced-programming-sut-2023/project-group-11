@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="710.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewGame">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane layoutX="55.0" layoutY="25.0" opacity="0.92" prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+                <TableView fx:id="users" layoutX="50.0" layoutY="77.0" prefHeight="200.0" prefWidth="200.0" />
+                <Button layoutX="264.0" layoutY="315.0" mnemonicParsing="false" onAction="#startGame" text="start game" />
+                <ChoiceBox fx:id="mapName" layoutX="337.0" layoutY="164.0" prefWidth="150.0" />
+            </AnchorPane>
+        </AnchorPane>
+    </center>
+</BorderPane>

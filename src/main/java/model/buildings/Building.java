@@ -1,5 +1,6 @@
 package model.buildings;
 
+import javafx.scene.image.Image;
 import model.AllResource;
 import model.Governance;
 import model.map.Map;
@@ -16,6 +17,7 @@ public abstract class Building {
     protected int workersNumber;
     protected boolean isActive;
     protected String name;
+    protected Image image;
 
     public void setOwner(Governance owner) {
         this.owner = owner;
@@ -87,6 +89,13 @@ public abstract class Building {
 
     public void setYCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
+    }
+
+    public Image getImage() {
+        if (image == null)
+            image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Building/" +
+                    getClass().getSimpleName() + "/" + name + ".png");
+        return image;
     }
 
     public void removeFromGame(Map map, Governance owner) {

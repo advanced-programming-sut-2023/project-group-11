@@ -12,6 +12,7 @@ public enum StorageType {
     GRANARY("granary", 1, 150, 0, AllResource.WOOD, 5,
             0, true, 250);
     private final String name;
+//    private final String imageName;
     private final int size;
     private final int hitPoint;
     private final int goldCost;
@@ -52,6 +53,7 @@ public enum StorageType {
     StorageType(String name, int size, int hitPoint, int goldCost, AllResource resourceCostType,
                 int resourceCostNumber, int workersNumber, boolean isActive, int capacity) {
         this.name = name;
+//        this.imageName = imageName;
         this.size = size;
         this.hitPoint = hitPoint;
         this.goldCost = goldCost;

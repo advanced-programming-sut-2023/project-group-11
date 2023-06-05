@@ -175,14 +175,14 @@ public class Utils {
         for (int i = 0; i < users.size(); i++) users.get(i).setRank(i + 1);
     }
 
-    public static ObservableList<Object> getUserObservable() {
+    public static ObservableList<User> getUsersObservable() {
         ArrayList<User> users = Stronghold.getUsers();
         return FXCollections.observableArrayList(users);
     }
 
-    public static void columnMaker(TableView scoreboard, String header, String userField) {
+    public static void columnMaker(TableView tableView, String header, String userField) {
         TableColumn<User, String> tableColumn = new TableColumn<>(header);
         tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
-        scoreboard.getColumns().add(tableColumn);
+        tableView.getColumns().add(tableColumn);
     }
 }

@@ -11,11 +11,7 @@
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <AnchorPane layoutX="83.0" layoutY="25.0" opacity="0.92" prefHeight="550.0" prefWidth="900.0"
                         style="-fx-background-color: white; -fx-background-radius: 20px;">
-                <!--                <ScrollPane layoutX="250.0" layoutY="88.0" prefHeight="400.0" prefWidth="400.0">-->
-                <!--                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="400.0">-->
                 <TableView fx:id="scoreboard" layoutX="250.0" layoutY="88.0" prefHeight="400.0" prefWidth="400.0"/>
-                <!--                    </AnchorPane>-->
-                <!--                </ScrollPane>-->
                 <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefWidth="100.0"
                         styleClass="menu-button" text="back"/>
             </AnchorPane>
