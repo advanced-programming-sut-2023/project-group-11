@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -16,7 +18,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.map.Tile;
+import view.enums.Zoom;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +31,7 @@ public class GameMenu extends Application {
     private final int mapPaneHeight = 720;
     private final int mapPaneWidth = 990;
     private int tileSize = 30;
+    private Zoom currentZoom = Zoom.NORMAL;
     private int mapSize;
     private int firstTileX = 0;
     private int firstTileY = 0;
@@ -216,6 +221,26 @@ public class GameMenu extends Application {
         pressedTileY += deltaY;
     }
 
+    public void checkShortcut(KeyEvent keyEvent) {
+        KeyCode keyCode = keyEvent.getCode();
+
+        switch (keyCode) {
+            case ADD -> zoom(true);
+            case SUBTRACT -> zoom(false);
+        }
+    }
+
+    private void zoom(boolean zoomIn) {
+        if (currentZoom.getLevel() < 4 && zoomIn) {
+            currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() + 1);
+            tileSize = currentZoom.getSize();
+        } else if (currentZoom.getLevel() > 0 && !zoomIn) {
+            currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() - 1);
+            tileSize = currentZoom.getSize();
+        } else Toolkit.getDefaultToolkit().beep();
+
+        showMap();
+    }
     @FXML
     private void hover(MouseEvent mouseEvent) {
         initializeToolTip();
@@ -225,7 +250,6 @@ public class GameMenu extends Application {
         if (selectedTiles.size() > 1) tooltip.setText(ShowMapMenuController.getTilesData(selectedTiles));
         else tooltip.setText(tile.toString());
     }
-
     private void initializeToolTip() {
         tooltip = new Tooltip();
         tooltip.setShowDelay(Duration.seconds(1));
