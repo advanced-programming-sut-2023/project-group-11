@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -139,31 +140,40 @@ public class GameMenu extends Application {
     }
 
     public void moveMapMove(MouseEvent mouseEvent) {
-        int endTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
-        int endTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
-        int deltaX = endTileX - selectedTileX;
-        int deltaY = endTileY - selectedTileY;
-        if (deltaX == 0 && deltaY == 0) return;
+        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+            int endTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+            int endTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+            int deltaX = endTileX - selectedTileX;
+            int deltaY = endTileY - selectedTileY;
+            if (deltaX == 0 && deltaY == 0) return;
 
-        if (firstTileX - deltaX >= 0 && firstTileX - deltaX < mapSize - (mapPaneWidth / tileSize)) firstTileX -= deltaX;
-        if (firstTileY - deltaY >= 0 && firstTileY - deltaY < mapSize - (mapPaneHeight / tileSize)) firstTileY -= deltaY;
+            if (firstTileX - deltaX >= 0 && firstTileX - deltaX < mapSize - (mapPaneWidth / tileSize))
+                firstTileX -= deltaX;
+            if (firstTileY - deltaY >= 0 && firstTileY - deltaY < mapSize - (mapPaneHeight / tileSize))
+                firstTileY -= deltaY;
 
-        showMap();
+            showMap();
 
-        selectedTileX = endTileX;
-        selectedTileY = endTileY;
+            selectedTileX = endTileX;
+            selectedTileY = endTileY;
+        }
     }
 
-    public void setSelectedTile(MouseEvent mouseEvent) { //TODO: for clicking
-        setStartCoordinates(mouseEvent);
-        Tile tile = ShowMapMenuController.getSelectedTile(selectedTileX, selectedTileY, firstTileX, firstTileY);
-//        if (tile.equals(selectedTile)) selectedTile = null;
-//        else selectedTile = tile;
-        selectedTile = tile;
+    public void setSelectedTile(MouseEvent mouseEvent) {//TODO: for clicking
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+            selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+            Tile tile = ShowMapMenuController.getSelectedTile(selectedTileX, selectedTileY, firstTileX, firstTileY);
+            if (tile.equals(selectedTile)) selectedTile = null;
+            else selectedTile = tile;
+            showMap();
+        }
     }
 
     public void setStartCoordinates(MouseEvent mouseEvent) { //TODO: for pressing
-        selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
-        selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+            selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+            selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        }
     }
 }
