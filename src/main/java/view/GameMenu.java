@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -12,12 +13,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import model.Game;
-import model.Governance;
-import model.Stronghold;
+import javafx.util.Duration;
 import model.map.Tile;
 
+import javax.swing.*;
 import java.net.URL;
 
 public class GameMenu extends Application {
@@ -32,6 +33,7 @@ public class GameMenu extends Application {
     private int selectedTileX = 0;
     private int selectedTileY = 0;
     private Tile selectedTile;
+    private Tooltip tooltip;
 
     // -------------------------------- Start -----------------------------------------------------
 
@@ -49,9 +51,8 @@ public class GameMenu extends Application {
     public void initialize() {
         showMap();
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
-        for (Governance governance : Stronghold.getCurrentGame().getGovernances()) {
-            System.out.println(governance.getOwner().getUsername());
-        }
+        initializeToolTip();
+//        hover();
     }
 
     // ---------------------------------- Getter/Setter -------------------------------------------
@@ -122,7 +123,8 @@ public class GameMenu extends Application {
     }
 
     private void setTileBuildingImage(Image image, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
-        if (buildingY != firstTileX + (xCoordinate / tileSize) || buildingX != firstTileY + (yCoordinate / tileSize)) return; //TODO: Be careful about inverse x & y
+        if (buildingY != firstTileX + (xCoordinate / tileSize) || buildingX != firstTileY + (yCoordinate / tileSize))
+            return; //TODO: Be careful about inverse x & y
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(xCoordinate);
         imageView.setLayoutY(yCoordinate);
@@ -181,5 +183,22 @@ public class GameMenu extends Application {
             selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
             selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
         }
+    }
+
+    @FXML
+    private void hover(MouseEvent mouseEvent) {
+        initializeToolTip();
+        selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+        selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        Tile tile = ShowMapMenuController.getSelectedTile(selectedTileX, selectedTileY, firstTileX, firstTileY);
+        tooltip.setText(tile.toString());
+    }
+
+    private void initializeToolTip() {
+        tooltip = new Tooltip();
+        tooltip.setShowDelay(Duration.seconds(1));
+        tooltip.setShowDuration(Duration.seconds(3));
+        tooltip.setWrapText(true);
+        Tooltip.install(mapPane, tooltip);
     }
 }

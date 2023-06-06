@@ -4,7 +4,6 @@ import controller.MainMenuController;
 import controller.MapEditMenuController;
 import controller.Utils;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -52,8 +51,8 @@ public class NewGame extends Application {
 
     private void addColumns() {
         Utils.columnMaker(users, "Avatar", "avatar");
-        Utils.columnMaker(users, "Username", "username");
         Utils.columnMaker(users, "Rank", "rank");
+        Utils.columnMaker(users, "Username", "username");
         Utils.columnMaker(users, "Score", "score");
     }
 

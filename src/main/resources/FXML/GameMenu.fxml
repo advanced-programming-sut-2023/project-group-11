@@ -8,6 +8,7 @@
         <Button layoutX="112.0" layoutY="45.0" mnemonicParsing="false" onAction="#back" prefHeight="39.0"
                 prefWidth="52.0" styleClass="menu-button" text="Back"/>
     </AnchorPane>
-    <AnchorPane fx:id="mapPane" onMousePressed="#setStartCoordinates" onMouseClicked="#setSelectedTile" onMouseDragged="#moveMapMove" prefHeight="720.0"
+    <AnchorPane fx:id="mapPane" onMousePressed="#setStartCoordinates" onMouseClicked="#setSelectedTile"
+                onMouseDragged="#moveMapMove" onMouseMoved="#hover" prefHeight="720.0"
                 prefWidth="990.0"/>
 </AnchorPane>
