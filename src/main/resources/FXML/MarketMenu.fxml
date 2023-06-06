@@ -131,7 +131,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <HBox layoutX="187.0" layoutY="78.0" spacing="10.0">
+            <HBox layoutX="139.0" layoutY="78.0" spacing="10.0">
                <children>
                   <Button fx:id="foodbutton" mnemonicParsing="false" onMouseClicked="#showFoodBox" prefHeight="35.0" prefWidth="85.0" text="Food">
                      <font>
@@ -143,7 +143,12 @@
                         <Font name="Trebuchet MS" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="rawButton" mnemonicParsing="false" onMouseClicked="#showRawBox" prefHeight="35.0" prefWidth="85.0" text="Raw material">
+                  <Button fx:id="rawButton" mnemonicParsing="false" onMouseClicked="#showRawBox" prefHeight="35.0" prefWidth="85.0" text="Raw material" textAlignment="CENTER">
+                     <font>
+                        <Font name="Trebuchet MS" size="11.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="tradeButton" layoutX="202.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#tradeMenu" prefHeight="35.0" prefWidth="85.0" text="Trade menu">
                      <font>
                         <Font name="Trebuchet MS" size="11.0" />
                      </font>
@@ -199,6 +204,7 @@
                   </VBox>
                </children>
             </AnchorPane>
+            <Button layoutX="22.0" layoutY="16.0" mnemonicParsing="false" text="Back" />
          </children>
       </AnchorPane>
    </children>
