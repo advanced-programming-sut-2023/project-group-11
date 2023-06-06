@@ -1,8 +1,11 @@
 package controller;
 
+import model.buildings.Building;
+import model.buildings.ProductiveBuilding;
 import model.map.Map;
 import model.map.Tile;
-import view.GameMenu;
+
+import java.util.ArrayList;
 
 public class ShowMapMenuController {
     private static Map currentMap;
@@ -28,13 +31,36 @@ public class ShowMapMenuController {
     public static Tile getSelectedTile(int selectedTileX, int selectedTileY, int firstTileX, int firstTileY) {
         return currentMap.getTile(selectedTileY + firstTileY, selectedTileX + firstTileX);
     }
+
+    public static String getTilesData(ArrayList<Tile> selectedTiles) {
+        int totalSoldiers = 0;
+        int totalProduction = 0;
+        double averageProduction = 0;
+        int maxProduction = 0;
+        int minProduction = 0;
+        int buildingProduction;
+        int buildingCounts = 0;
+
+        for (Tile selectedTile : selectedTiles) {
+            totalSoldiers += selectedTile.getUnits().size();
+            Building building = selectedTile.getBuilding();
+            if (building instanceof ProductiveBuilding productiveBuilding) {
+                buildingProduction = productiveBuilding.getProductionRate();
+                totalProduction += buildingProduction;
+                maxProduction = Math.max(maxProduction, buildingProduction);
+                minProduction = Math.min(minProduction, buildingProduction);
+                buildingCounts++;
+            }
+        }
+
+        if (buildingCounts > 0) averageProduction = (double) totalProduction / buildingCounts;
+
+        return "Total soldiers=" + totalSoldiers +
+                "\nAverage production=" + averageProduction +
+                "\nMaximum production=" + maxProduction +
+                "\nMinimum production=" + minProduction;
+    }
 }
-
-
-
-
-
-
 
 
 //import com.diogonunes.jcolor.Ansi;

@@ -13,12 +13,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.map.Tile;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -217,13 +215,15 @@ public class GameMenu extends Application {
         pressedTileX += deltaX;
         pressedTileY += deltaY;
     }
+
     @FXML
     private void hover(MouseEvent mouseEvent) {
         initializeToolTip();
         selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
         selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
         Tile tile = ShowMapMenuController.getSelectedTile(selectedTileX, selectedTileY, firstTileX, firstTileY);
-        tooltip.setText(tile.toString());
+        if (selectedTiles.size() > 1) tooltip.setText(ShowMapMenuController.getTilesData(selectedTiles));
+        else tooltip.setText(tile.toString());
     }
 
     private void initializeToolTip() {
