@@ -6,5 +6,5 @@ public enum MarketMenuMessages {
     NOT_ENOUGH_GOLD,
     NOT_ENOUGH_STORAGE,
     INVALID_ITEM,
-    CANCEL,
+    CANCEL, INVALID_AMOUNT,
 }
