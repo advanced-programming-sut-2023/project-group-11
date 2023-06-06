@@ -25,30 +25,35 @@ public class MarketMenuController {
         return output;
     }
 
-    public static MarketMenuMessages checkBuyItem(Matcher matcher) {
+    public static MarketMenuMessages checkBuyItem(AllResource item,String amountText) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        AllResource item = AllResource.getAllResourceByName(matcher.group("itemName"));
-        int amount = Integer.parseInt(matcher.group("amount"));
-        if (item == null)
-            return MarketMenuMessages.INVALID_ITEM;
+        int amount;
+        try {
+            amount = Integer.parseInt(amountText);
+        }catch (NumberFormatException e){
+            return MarketMenuMessages.INVALID_AMOUNT;
+        }
         if (currentGovernance.getGold() < item.getPrice() * amount)
             return MarketMenuMessages.NOT_ENOUGH_GOLD;
         if (!currentGovernance.hasStorageForItem(item, amount))
             return MarketMenuMessages.NOT_ENOUGH_STORAGE;
-//        if (MarketMenu.isSure()) {
         currentGovernance.setGold(currentGovernance.getGold() - item.getPrice() * amount);
         currentGovernance.addToStorage(item, amount);
         return MarketMenuMessages.SUCCESS;
-//        }
-//        return MarketMenuMessages.CANCEL;
     }
 
-    public static MarketMenuMessages checkSellItem(Matcher matcher) {
+    public static AllResource getResourceByName(String name){
+        return AllResource.getAllResourceByName(name);
+    }
+
+    public static MarketMenuMessages checkSellItem(AllResource item,String amountText) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        AllResource item = AllResource.getAllResourceByName(matcher.group("itemName"));
-        int amount = Integer.parseInt(matcher.group("amount"));
-        if (item == null)
-            return MarketMenuMessages.INVALID_ITEM;
+        int amount;
+        try {
+            amount = Integer.parseInt(amountText);
+        }catch (NumberFormatException e){
+            return MarketMenuMessages.INVALID_AMOUNT;
+        }
         if (!currentGovernance.hasEnoughItem(item, amount))
             return MarketMenuMessages.NOT_ENOUGH_STORAGE;
 //        if (MarketMenu.isSure()) {

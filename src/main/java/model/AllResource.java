@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.image.Image;
+
 public enum AllResource {
 
     BOW("bow", 31),
@@ -40,6 +42,10 @@ public enum AllResource {
         for (AllResource allResource : AllResource.values())
             if (allResource.name.equals(name)) return allResource;
         return null;
+    }
+
+    public Image getImage(){
+            return new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/AllResource/" + name + ".png");
     }
 
     public int getPrice() {

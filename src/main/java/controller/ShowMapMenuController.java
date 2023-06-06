@@ -23,6 +23,10 @@ public class ShowMapMenuController {
     public static void setCurrentMap(Map currentMap) {
         ShowMapMenuController.currentMap = currentMap;
     }
+
+    public static Tile getSelectedTile(int selectedTileX, int selectedTileY, int firstTileX, int firstTileY) {
+        return currentMap.getTile(selectedTileY + firstTileY, selectedTileX + firstTileX);
+    }
 }
 
 
