@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="">
+    <list default="true" id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="minor changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/enums/Zoom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,10 +22,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="Enum" />
         <option value="module-info" />
         <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -265,21 +267,7 @@
       <workItem from="1685867115847" duration="3378000" />
       <workItem from="1685956789263" duration="17756000" />
       <workItem from="1686027321489" duration="14107000" />
-      <workItem from="1686067312934" duration="9672000" />
-    </task>
-    <task id="LOCAL-00054" summary="Start game debugged (map initialization + minor changes)">
-      <created>1683669887248</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1683669887248</updated>
-    </task>
-    <task id="LOCAL-00055" summary="error resolved">
-      <created>1683669953803</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1683669953803</updated>
+      <workItem from="1686067312934" duration="12053000" />
     </task>
     <task id="LOCAL-00056" summary="debugging started (start game + show map + select unit + move)">
       <created>1683670809465</created>
@@ -610,7 +598,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686080386331</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="select Multiple tiles heavily debugged!!">
+      <created>1686082090760</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1686082090760</updated>
+    </task>
+    <task id="LOCAL-00104" summary="minor changes">
+      <created>1686082483831</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1686082483831</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,8 +654,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Minor Changes" />
-    <MESSAGE value="Dig pitch debugged + resetAbilities debugged" />
     <MESSAGE value="Kill Governance &amp; next turn debugged" />
     <MESSAGE value="end game debugged" />
     <MESSAGE value="Drop unit modified" />
@@ -677,7 +677,9 @@
     <MESSAGE value="show selected Tile" />
     <MESSAGE value="Select tile: Left, Move map: Right_click drag" />
     <MESSAGE value="Select tile: Left, Select Multiple tiles: Drag with Midlle after selecting a tile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Select tile: Left, Select Multiple tiles: Drag with Midlle after selecting a tile" />
+    <MESSAGE value="select Multiple tiles heavily debugged!!" />
+    <MESSAGE value="minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
