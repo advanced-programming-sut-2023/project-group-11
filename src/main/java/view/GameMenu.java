@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import model.map.Tile;
 import view.enums.Zoom;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -232,7 +233,8 @@ public class GameMenu extends Application {
         } else if (currentZoom.getLevel() > 0 && !zoomIn) {
             currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() - 1);
             tileSize = currentZoom.getSize();
-        }
+        } else Toolkit.getDefaultToolkit().beep();
+
         showMap();
     }
 }
