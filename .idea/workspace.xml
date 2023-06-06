@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Keep/keep2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Color.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Keep/keep.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Keep/keep.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,14 +256,7 @@
       <workItem from="1685706508571" duration="31000" />
       <workItem from="1685867115847" duration="3378000" />
       <workItem from="1685956789263" duration="17756000" />
-      <workItem from="1686027321489" duration="2928000" />
-    </task>
-    <task id="LOCAL-00047" summary="TODOs Updated (need to be discussed)">
-      <created>1683322429973</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1683322429973</updated>
+      <workItem from="1686027321489" duration="3255000" />
     </task>
     <task id="LOCAL-00048" summary="Attack updated(duplication removed) + important TODOs added">
       <created>1683360959392</created>
@@ -607,7 +594,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685991651383</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="building with size more than 1 (needs cleaning)">
+      <created>1686030341678</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1686030341678</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -649,7 +643,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="nothing special" />
     <MESSAGE value="Remove dead units debugged" />
     <MESSAGE value="map edited + cliff debugged" />
     <MESSAGE value="Start game double quote handled" />
@@ -674,7 +667,8 @@
     <MESSAGE value="add tree to showMap" />
     <MESSAGE value="move Map with Click!!" />
     <MESSAGE value="small changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="small changes" />
+    <MESSAGE value="building with size more than 1 (needs cleaning)" />
+    <option name="LAST_COMMIT_MESSAGE" value="building with size more than 1 (needs cleaning)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

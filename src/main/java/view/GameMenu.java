@@ -62,6 +62,13 @@ public class GameMenu extends Application {
         int columnCount = mapPaneWidth / tileSize;
         Tile[][] mapTiles = ShowMapMenuController.getTiles(xTile, yTile, rowsCount, columnCount);
 
+        setTextureTreeImages(mapTiles);
+        setBuidingUnitImages(mapTiles);
+
+        System.out.println((System.currentTimeMillis() - time) / 1000);
+    }
+
+    private void setTextureTreeImages(Tile[][] mapTiles) {
         int xCoordinate = 0, yCoordinate = 0;
 
         for (Tile[] tiles : mapTiles) {
@@ -73,23 +80,29 @@ public class GameMenu extends Application {
             yCoordinate += tileSize;
             xCoordinate = 0;
         }
-        yCoordinate = 0;
+    }
+
+    private void setBuidingUnitImages(Tile[][] mapTiles) {
+        int xCoordinate = 0, yCoordinate = 0;
+
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
                 if (tile.getBuilding() != null) {
                     //TODO: needs debug for buildings with size more than 1
-                    setTileImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
+                    setTileBuildingImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
                             tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
+                }
+                if (tile.getUnits().size() != 0) {
+                    //TODO: units Images (working on it)
                 }
                 xCoordinate += tileSize;
             }
             yCoordinate += tileSize;
             xCoordinate = 0;
         }
-        System.out.println((System.currentTimeMillis() - time) / 1000);
     }
 
-    private void setTileImage(Image image, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
+    private void setTileBuildingImage(Image image, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
         if (buildingY != xTile + (xCoordinate / tileSize) || buildingX != yTile + (yCoordinate / tileSize)) return; //TODO: Be careful about inverse x & y
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(xCoordinate);
