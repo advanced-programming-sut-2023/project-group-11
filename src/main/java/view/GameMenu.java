@@ -17,12 +17,15 @@ import java.net.URL;
 public class GameMenu extends Application {
     @FXML
     private AnchorPane mapPane;
-    private int tileSize = 30;
-    private int mapSize;
-    private int xTile = 0;
-    private int yTile = 0;
     private final int mapPaneHeight = 720;
     private final int mapPaneWidth = 990;
+    private int tileSize = 30;
+    private int mapSize;
+    private int firstTileX = 0;
+    private int firstTileY = 0;
+    private int selectedTileX = 0;
+    private int selectedTileY = 0;
+    private Tile selectedTile;
 
     // -------------------------------- Start -----------------------------------------------------
 
@@ -60,7 +63,7 @@ public class GameMenu extends Application {
         mapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
-        Tile[][] mapTiles = ShowMapMenuController.getTiles(xTile, yTile, rowsCount, columnCount);
+        Tile[][] mapTiles = ShowMapMenuController.getTiles(firstTileX, firstTileY, rowsCount, columnCount);
 
         setTextureTreeImages(mapTiles);
         setBuidingUnitImages(mapTiles);
@@ -103,7 +106,7 @@ public class GameMenu extends Application {
     }
 
     private void setTileBuildingImage(Image image, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
-        if (buildingY != xTile + (xCoordinate / tileSize) || buildingX != yTile + (yCoordinate / tileSize)) return; //TODO: Be careful about inverse x & y
+        if (buildingY != firstTileX + (xCoordinate / tileSize) || buildingX != firstTileY + (yCoordinate / tileSize)) return; //TODO: Be careful about inverse x & y
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(xCoordinate);
         imageView.setLayoutY(yCoordinate);
@@ -126,23 +129,25 @@ public class GameMenu extends Application {
         new MainMenu().start(SignupMenu.getStage());
     }
 
-    public void moveMapClick(MouseEvent mouseEvent) throws InterruptedException {
-        if (Math.abs(mouseEvent.getX() - mapPaneWidth) < tileSize) {
-            if (mapSize - (mapPaneWidth / tileSize) > xTile) xTile += 1;
-            showMap();
-        } else if (Math.abs(mouseEvent.getY() - mapPaneHeight) < tileSize) {
-            if (mapSize - (mapPaneHeight / tileSize) > yTile) yTile += 1;
-            showMap();
-        } else if (mouseEvent.getX() < tileSize) {
-            if (xTile > 0) xTile -= 1;
-            showMap();
-        } else if (mouseEvent.getY() < tileSize) {
-            if (yTile > 0) yTile -= 1;
-            showMap();
-        }
+    public void moveMapMove(MouseEvent mouseEvent) {
+        int endTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+        int endTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        int deltaX = endTileX - selectedTileX;
+        int deltaY = endTileY - selectedTileY;
+        if (deltaX == 0 && deltaY == 0) return;
+
+        if (firstTileX - deltaX >= 0 && firstTileX - deltaX < mapSize - (mapPaneWidth / tileSize)) firstTileX -= deltaX;
+        if (firstTileY - deltaY >= 0 && firstTileY - deltaY < mapSize - (mapPaneHeight / tileSize)) firstTileY -= deltaY;
+
+        showMap();
+
+        selectedTileX = endTileX;
+        selectedTileY = endTileY;
     }
 
-    public void moveMapMove(MouseEvent mouseEvent) {
-
+    public void setSelectedTile(MouseEvent mouseEvent) {
+        selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+        selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        selectedTile = ShowMapMenuController.getSelectedTile(selectedTileX, selectedTileY, firstTileX, firstTileY);
     }
 }
