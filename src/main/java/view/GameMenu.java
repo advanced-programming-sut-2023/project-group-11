@@ -69,9 +69,7 @@ public class GameMenu extends Application {
                 setTileImage(tile.getTexture().getImage(), xCoordinate, yCoordinate);
                 if (tile.getTree() != null) setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate);
                 if (tile.getBuilding() != null) {
-                    ImageView imageView = new ImageView(tile.getBuilding().getImage());
-//                    imageView.
-//                    imageView.setStart
+                    //TODO: needs debug for buildings with size more than 1
                     setTileImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate);
                 }
                 xCoordinate += tileSize;

@@ -48,7 +48,7 @@ public class MainMenuController {
 
         //TODO: area initialization must be implemented
         for (int i = 0; i < usernames.length; i++) {
-            initializeAreas(usernames[i], areas,i+1);
+            initializeAreas(usernames[i], areas, i + 1);
         }
         try {
             new GameMenu().start(SignupMenu.getStage());
@@ -80,6 +80,7 @@ public class MainMenuController {
         ArrayList<String> usernames = new ArrayList<>();
         ArrayList<User> users = Stronghold.getUsers();
 
+        usernames.add(Stronghold.getCurrentUser().getUsername());
         for (Integer index : indices)
             usernames.add(users.get(index).getUsername());
         return usernames.toArray(new String[0]);
