@@ -68,15 +68,15 @@ public class MapEditMenu extends Application {
                 ImageView texture = new ImageView(tile.getTexture().getImage());
                 texture.setLayoutX(xCoordinate);
                 texture.setLayoutY(yCoordinate);
-                texture.setFitWidth(30);
-                texture.setFitHeight(30);
+                texture.setFitWidth(tileSize);
+                texture.setFitHeight(tileSize);
                 mapPane.getChildren().add(texture);
                 if (tile.getTree() != null) {
                     ImageView tree = new ImageView((tile.getTree().getImage()));
                     tree.setLayoutX(xCoordinate);
                     tree.setLayoutY(yCoordinate);
-                    tree.setFitWidth(30);
-                    tree.setFitHeight(30);
+                    tree.setFitWidth(tileSize);
+                    tree.setFitHeight(tileSize);
                     mapPane.getChildren().add(tree);
                 }
                 xCoordinate += tileSize;

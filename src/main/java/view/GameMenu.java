@@ -68,9 +68,18 @@ public class GameMenu extends Application {
             for (Tile tile : tiles) {
                 setTileImage(tile.getTexture().getImage(), xCoordinate, yCoordinate);
                 if (tile.getTree() != null) setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate);
+                xCoordinate += tileSize;
+            }
+            yCoordinate += tileSize;
+            xCoordinate = 0;
+        }
+        yCoordinate = 0;
+        for (Tile[] tiles : mapTiles) {
+            for (Tile tile : tiles) {
                 if (tile.getBuilding() != null) {
                     //TODO: needs debug for buildings with size more than 1
-                    setTileImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate);
+                    setTileImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
+                            tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
                 }
                 xCoordinate += tileSize;
             }
@@ -80,12 +89,23 @@ public class GameMenu extends Application {
         System.out.println((System.currentTimeMillis() - time) / 1000);
     }
 
+    private void setTileImage(Image image, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
+        if (buildingY != xTile + (xCoordinate / tileSize) || buildingX != yTile + (yCoordinate / tileSize)) return; //TODO: Be careful about inverse x & y
+        ImageView imageView = new ImageView(image);
+        imageView.setLayoutX(xCoordinate);
+        imageView.setLayoutY(yCoordinate);
+        imageView.setFitWidth(tileSize * buildingSize);
+        imageView.setFitHeight(tileSize * buildingSize);
+        imageView.setPreserveRatio(false);
+        mapPane.getChildren().add(imageView);
+    }
+
     private void setTileImage(Image image, int xCoordinate, int yCoordinate) {
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(xCoordinate);
         imageView.setLayoutY(yCoordinate);
-        imageView.setFitWidth(30);
-        imageView.setFitHeight(30);
+        imageView.setFitWidth(tileSize);
+        imageView.setFitHeight(tileSize);
         mapPane.getChildren().add(imageView);
     }
 

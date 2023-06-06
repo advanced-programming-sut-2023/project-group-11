@@ -8,13 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.map.Map;
 
 import java.net.URL;
 
 public class MapSelection extends Application {
     @FXML
-    private ChoiceBox<Map> mapsChoiceBox;
+    private ChoiceBox mapsChoiceBox;
     private static Stage stage;
 
     @Override

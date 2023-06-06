@@ -4,60 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="user avatar shown in Scoreboard but can't be copied">
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/NewGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/NewGame.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Church/cathedral.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Church/chapel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Filler/caged wardogs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Filler/hovel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Filler/oil smelter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Filler/ox tether.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Filler/shop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Filler/stable.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Filler/tent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/sc_gameinfo_buildings_22c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/sc_gameinfo_buildings_2a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Keep/keep(alternative).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Keep/keep.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/apple orchard.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/armor workshop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/bakery.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/blacksmith workshop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/bow workshop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/brewery.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/dairy farm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/hops farm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/hunter's post.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/inn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/iron mine.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/mill.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/pitch rig.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/quarry.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/spear workshop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/wheat farm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/wood cutter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Storage/armoury.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Storage/granary.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Storage/stockpile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/UnitMaker/mercenary tent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/UnitMaker/sc_gameinfo_buildings_mercenary.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/collection55.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/sc_gameinfo_buildings_3e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/well.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/avatars/9633.png" afterDir="false" />
+    <list default="true" id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Keep/keep2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ProductiveBuildingType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/ProductiveBuildingType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/StorageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/StorageType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Scoreboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Scoreboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/Scoreboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/Scoreboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Textures.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Color.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Keep/keep.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Keep/keep.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,23 +99,67 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="view.Main" />
-      <module name="project-group-11-fixed" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <module name="ProjectAP" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LoginMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProjectAP" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LoginMenuTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginMenuTest.checkForgotPassword_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProjectAP" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LoginMenuTest" />
+      <option name="METHOD_NAME" value="checkForgotPassword_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfileMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProjectAP" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ProfileMenuTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SignupMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProjectAP" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SignupMenuTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.LoginMenuTest.checkForgotPassword_Success" />
+      <item itemvalue="JUnit.LoginMenuTest" />
+      <item itemvalue="JUnit.ProfileMenuTest" />
+      <item itemvalue="JUnit.SignupMenuTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.SignupMenuTest" />
+        <item itemvalue="JUnit.ProfileMenuTest" />
+        <item itemvalue="JUnit.LoginMenuTest" />
+        <item itemvalue="JUnit.LoginMenuTest.checkForgotPassword_Success" />
       </list>
     </recent_temporary>
   </component>
@@ -263,21 +261,8 @@
       <workItem from="1685700643291" duration="15000" />
       <workItem from="1685706508571" duration="31000" />
       <workItem from="1685867115847" duration="3378000" />
-      <workItem from="1685956789263" duration="16225000" />
-    </task>
-    <task id="LOCAL-00045" summary="Attack ended (check TODOs)">
-      <created>1683321368780</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1683321368780</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Ground attack added (duplication need to be removed)">
-      <created>1683322067598</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1683322067598</updated>
+      <workItem from="1685956789263" duration="17756000" />
+      <workItem from="1686027321489" duration="2928000" />
     </task>
     <task id="LOCAL-00047" summary="TODOs Updated (need to be discussed)">
       <created>1683322429973</created>
@@ -608,7 +593,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685980059109</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="move Map with Click!!">
+      <created>1685983647409</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1685983647409</updated>
+    </task>
+    <task id="LOCAL-00095" summary="small changes">
+      <created>1685991651383</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1685991651383</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -650,8 +649,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="errors resolved" />
-    <MESSAGE value="Dig pitch added in nextTurn" />
     <MESSAGE value="nothing special" />
     <MESSAGE value="Remove dead units debugged" />
     <MESSAGE value="map edited + cliff debugged" />
@@ -675,7 +672,9 @@
     <MESSAGE value="fixed bugs" />
     <MESSAGE value="improve mapLoading" />
     <MESSAGE value="add tree to showMap" />
-    <option name="LAST_COMMIT_MESSAGE" value="add tree to showMap" />
+    <MESSAGE value="move Map with Click!!" />
+    <MESSAGE value="small changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="small changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -697,41 +696,30 @@
         <PinnedItemInfo parentTag="model.map.Map" memberName="tiles" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="destinationX" />
-        <watch expression="destinationY" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidUsernameFormat.ic" NAME="SignupMenuTest.invalidUsernameFormat Coverage Results" MODIFIED="1682819253264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$ProfileMenuTest_and_2_more.ic" NAME="ProfileMenuTest and 2 more Coverage Results" MODIFIED="1683832111787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1682864228552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noLowerCaseTest.ic" NAME="SignupMenuTest.noLowerCaseTest Coverage Results" MODIFIED="1682819394120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1683831881489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$ProfileMenuTest.ic" NAME="ProfileMenuTest Coverage Results" MODIFIED="1684764664587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_usernameExistTest.ic" NAME="SignupMenuTest.usernameExistTest Coverage Results" MODIFIED="1682819379326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emptyFieldTest.ic" NAME="SignupMenuTest.emptyFieldTest Coverage Results" MODIFIED="1682819323758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noSpecialTest.ic" NAME="SignupMenuTest.noSpecialTest Coverage Results" MODIFIED="1682819401421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$LoginMenuTest.ic" NAME="LoginMenuTest Coverage Results" MODIFIED="1683831815198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_wrongAnswerConfirmationTest.ic" NAME="SignupMenuTest.wrongAnswerConfirmationTest Coverage Results" MODIFIED="1682819421975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$Main.ic" NAME="Main Coverage Results" MODIFIED="1683831943870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$Main.ic" NAME="Main Coverage Results" MODIFIED="1682711397956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noNumberTest.ic" NAME="SignupMenuTest.noNumberTest Coverage Results" MODIFIED="1682819397820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noUpperCaseTest.ic" NAME="SignupMenuTest.noUpperCaseTest Coverage Results" MODIFIED="1682819390138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidUsernameFormat.ic" NAME="SignupMenuTest.invalidUsernameFormat Coverage Results" MODIFIED="1682819253264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_shortPasswordTest.ic" NAME="SignupMenuTest.shortPasswordTest Coverage Results" MODIFIED="1682819384415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$LoginMenuTest.ic" NAME="LoginMenuTest Coverage Results" MODIFIED="1684764654501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$ProfileMenuTest.ic" NAME="ProfileMenuTest Coverage Results" MODIFIED="1683831863938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_wrongAnswerConfirmationTest.ic" NAME="SignupMenuTest.wrongAnswerConfirmationTest Coverage Results" MODIFIED="1682819421975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidEmailFormatTest.ic" NAME="SignupMenuTest.invalidEmailFormatTest Coverage Results" MODIFIED="1682819412108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emailExistTest.ic" NAME="SignupMenuTest.emailExistTest Coverage Results" MODIFIED="1682819409536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_WrongConfirmationTest.ic" NAME="SignupMenuTest.WrongConfirmationTest Coverage Results" MODIFIED="1682819405048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_shortPasswordTest.ic" NAME="SignupMenuTest.shortPasswordTest Coverage Results" MODIFIED="1682819384415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1684764673336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$Main.ic" NAME="Main Coverage Results" MODIFIED="1682711397956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_randomArgsTest.ic" NAME="SignupMenuTest.randomArgsTest Coverage Results" MODIFIED="1682819201893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noNumberTest.ic" NAME="SignupMenuTest.noNumberTest Coverage Results" MODIFIED="1682819397820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_validTagQuestionPickTest.ic" NAME="SignupMenuTest.validTagQuestionPickTest Coverage Results" MODIFIED="1682819415637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidEmailFormatTest.ic" NAME="SignupMenuTest.invalidEmailFormatTest Coverage Results" MODIFIED="1682819412108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidQuestionNumberTest.ic" NAME="SignupMenuTest.invalidQuestionNumberTest Coverage Results" MODIFIED="1682819418999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noUpperCaseTest.ic" NAME="SignupMenuTest.noUpperCaseTest Coverage Results" MODIFIED="1682819390138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emptyFieldTest.ic" NAME="SignupMenuTest.emptyFieldTest Coverage Results" MODIFIED="1682819323758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noSpecialTest.ic" NAME="SignupMenuTest.noSpecialTest Coverage Results" MODIFIED="1682819401421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_usernameExistTest.ic" NAME="SignupMenuTest.usernameExistTest Coverage Results" MODIFIED="1682819379326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
