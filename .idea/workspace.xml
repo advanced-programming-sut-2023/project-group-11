@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="Select tile: Left, Move map: Right_click drag">
+    <list default="true" id="1db72b18-c9d3-4b37-b703-4d8dcf037380" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,14 +265,7 @@
       <workItem from="1685867115847" duration="3378000" />
       <workItem from="1685956789263" duration="17756000" />
       <workItem from="1686027321489" duration="14107000" />
-      <workItem from="1686067312934" duration="8237000" />
-    </task>
-    <task id="LOCAL-00053" summary="setLocation for units">
-      <created>1683666563631</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1683666563632</updated>
+      <workItem from="1686067312934" duration="9672000" />
     </task>
     <task id="LOCAL-00054" summary="Start game debugged (map initialization + minor changes)">
       <created>1683669887248</created>
@@ -612,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686072965180</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="Select tile: Left, Select Multiple tiles: Drag with Midlle after selecting a tile">
+      <created>1686080386331</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1686080386331</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,7 +652,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Stop Digging" />
     <MESSAGE value="Minor Changes" />
     <MESSAGE value="Dig pitch debugged + resetAbilities debugged" />
     <MESSAGE value="Kill Governance &amp; next turn debugged" />
@@ -679,7 +676,8 @@
     <MESSAGE value="Move map added with dragging" />
     <MESSAGE value="show selected Tile" />
     <MESSAGE value="Select tile: Left, Move map: Right_click drag" />
-    <option name="LAST_COMMIT_MESSAGE" value="Select tile: Left, Move map: Right_click drag" />
+    <MESSAGE value="Select tile: Left, Select Multiple tiles: Drag with Midlle after selecting a tile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Select tile: Left, Select Multiple tiles: Drag with Midlle after selecting a tile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

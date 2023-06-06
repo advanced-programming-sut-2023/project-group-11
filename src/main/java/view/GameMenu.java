@@ -28,6 +28,8 @@ public class GameMenu extends Application {
     private int mapSize;
     private int firstTileX = 0;
     private int firstTileY = 0;
+    private int selectedTileX = 0;
+    private int selectedTileY = 0;
     private int pressedTileX = 0;
     private int pressedTileY = 0;
     private Tile selectedTile;
@@ -146,14 +148,20 @@ public class GameMenu extends Application {
     }
 
     public void press(MouseEvent mouseEvent) {
-        selectedBorderHeight = 1;
-        selectedBorderWidth = 1;
         pressedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
         pressedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            selectedTiles.clear();
+            selectedBorderHeight = 1;
+            selectedBorderWidth = 1;
             Tile tile = ShowMapMenuController.getSelectedTile(pressedTileX, pressedTileY, firstTileX, firstTileY);
             if (tile.equals(selectedTile)) selectedTile = null;
-            else selectedTile = tile;
+            else {
+                selectedTile = tile;
+                selectedTiles.add(selectedTile);
+                selectedTileX = pressedTileX;
+                selectedTileY = pressedTileY;
+            }
             showMap();
         }
     }
@@ -166,12 +174,15 @@ public class GameMenu extends Application {
         if (deltaX == 0 && deltaY == 0) return;
 
         if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) moveMapMove(deltaX, deltaY);
-        else if (mouseEvent.getButton().equals(MouseButton.MIDDLE)) selectMultipleTiles(deltaX, deltaY);
+        else if (selectedTile != null && mouseEvent.getButton().equals(MouseButton.MIDDLE))
+            selectMultipleTiles(deltaX, deltaY);
     }
 
     private void selectMultipleTiles(int deltaX, int deltaY) {
         if (deltaX < 0 || deltaY < 0) return;
-        Tile[][] tempArray = ShowMapMenuController.getTiles(pressedTileX, pressedTileY, deltaY, deltaX);
+        int selectedColumns = (pressedTileX - selectedTileX) + deltaX + 1;
+        int selectedRows = (pressedTileY - selectedTileY) + deltaY + 1;
+        Tile[][] tempArray = ShowMapMenuController.getTiles(selectedTileX, selectedTileY, selectedRows, selectedColumns);
 
         selectedTiles.clear();
         for (Tile[] tiles : tempArray)
