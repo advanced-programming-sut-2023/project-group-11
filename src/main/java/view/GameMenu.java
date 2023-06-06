@@ -179,22 +179,25 @@ public class GameMenu extends Application {
     }
 
     private void selectMultipleTiles(int deltaX, int deltaY) {
-        if (deltaX < 0 || deltaY < 0) return;
         int selectedColumns = (pressedTileX - selectedTileX) + deltaX + 1;
         int selectedRows = (pressedTileY - selectedTileY) + deltaY + 1;
+
+        if (selectedRows < 1 || selectedColumns < 1) return;
         Tile[][] tempArray = ShowMapMenuController.getTiles(selectedTileX, selectedTileY, selectedRows, selectedColumns);
 
         selectedTiles.clear();
         for (Tile[] tiles : tempArray)
             selectedTiles.addAll(Arrays.asList(tiles));
 
-        selectedBorderWidth += deltaX;
-        selectedBorderHeight += deltaY;
+        selectedBorderWidth = selectedColumns;
+        selectedBorderHeight = selectedRows;
 
         showMap();
 
         pressedTileX += deltaX;
         pressedTileY += deltaY;
+
+//        System.out.println(selectedTiles.size());
     }
 
     public void moveMapMove(int deltaX, int deltaY) {
