@@ -39,9 +39,10 @@ public class MarketMenu extends Application {
     private Label goldLabel;
     //TODO: update gold label & debug market in the game
     private AllResource item;
-
+    private static Stage stage;
     @Override
     public void start(Stage stage) throws Exception {
+        this.stage = stage;
         Pane pane = FXMLLoader.load(getClass().getResource("/FXML/MarketMenu.fxml"));
         stage.setScene(new Scene(pane));
         stage.show();
@@ -71,6 +72,7 @@ public class MarketMenu extends Application {
     private void setMouseEvent(HBox box) {
         for(Node imageView:box.getChildren()){
             imageView.setOnMouseClicked(mouseEvent -> {
+                buySellPane.setVisible(true);
                 updateBuySellLabels(amountTextField.getText());
                 String itemName = ((ImageView)mouseEvent.getSource()).getId();
                 item = MarketMenuController.getResourceByName(itemName);
@@ -81,20 +83,17 @@ public class MarketMenu extends Application {
     }
 
     public void showRawBox() {
-        buySellPane.setVisible(true);
         rawMaterialBox.setVisible(true);
         weaponBox.setVisible(false);
         foodBox.setVisible(false);
     }
 
     public void showWeaponBox() {
-        buySellPane.setVisible(true);
         weaponBox.setVisible(true);
         rawMaterialBox.setVisible(false);
         foodBox.setVisible(false);
     }
     public void showFoodBox() {
-        buySellPane.setVisible(true);
         foodBox.setVisible(true);
         rawMaterialBox.setVisible(false);
         weaponBox.setVisible(false);
@@ -117,5 +116,9 @@ public class MarketMenu extends Application {
             case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION,
                     "Buy Successful","Item bought successfully!");
         }
+    }
+
+    public void tradeMenu() throws Exception {
+        new TradeMenu().start(stage);
     }
 }

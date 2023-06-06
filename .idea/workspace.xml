@@ -4,37 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="debug">
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/MarketMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/3d94feb4-4a87-46d6-a5cc-12f21da1ba4a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/6fc9163e-918f-4b9c-9293-5e7953946445.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/ale.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/apple.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/bow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/bread.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/cheese.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/crossbow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/flour.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/gold.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/hop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/iron.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/leather.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/mace.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/meat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/metal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/pike.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/pitch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/spear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/stone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/sword.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/vector-cheese-icon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/wheat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/AllResource/wood.png" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="market menu added">
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/TradeMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/TradeMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MarketMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/AllResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/AllResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/MarketMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/MarketMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CSS/style1.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CSS/style1.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/MarketMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/MarketMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -289,14 +265,7 @@
       <workItem from="1685811626729" duration="6187000" />
       <workItem from="1685860500010" duration="6210000" />
       <workItem from="1685992410645" duration="429000" />
-      <workItem from="1686031630427" duration="13112000" />
-    </task>
-    <task id="LOCAL-00040" summary="Rewrite Machine Constructor">
-      <created>1683038870437</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1683038870437</updated>
+      <workItem from="1686031630427" duration="20291000" />
     </task>
     <task id="LOCAL-00041" summary="Move ended (need review)">
       <created>1683055338770</created>
@@ -634,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685822018479</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="market menu added">
+      <created>1686052448773</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1686052448773</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -676,7 +652,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="TODOs Updated (CHECK THEM!)" />
     <MESSAGE value="Governance dying + End Game added (Only khadagh left)" />
     <MESSAGE value="Add score added" />
     <MESSAGE value="Lord making resolved + drop unit debugged" />
@@ -701,7 +676,8 @@
     <MESSAGE value="Captcha added to Login" />
     <MESSAGE value="ddebug" />
     <MESSAGE value="debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug" />
+    <MESSAGE value="market menu added" />
+    <option name="LAST_COMMIT_MESSAGE" value="market menu added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
