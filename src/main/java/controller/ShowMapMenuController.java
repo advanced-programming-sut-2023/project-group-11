@@ -2,6 +2,7 @@ package controller;
 
 import model.map.Map;
 import model.map.Tile;
+import view.GameMenu;
 
 public class ShowMapMenuController {
     private static Map currentMap;

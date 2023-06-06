@@ -20,6 +20,8 @@ import model.map.Tile;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameMenu extends Application {
     @FXML
@@ -32,7 +34,12 @@ public class GameMenu extends Application {
     private int firstTileY = 0;
     private int selectedTileX = 0;
     private int selectedTileY = 0;
+    private int pressedTileX = 0;
+    private int pressedTileY = 0;
     private Tile selectedTile;
+    private ArrayList<Tile> selectedTiles = new ArrayList<>();
+    private int selectedBorderWidth = 1;
+    private int selectedBorderHeight = 1;
     private Tooltip tooltip;
 
     // -------------------------------- Start -----------------------------------------------------
@@ -52,7 +59,6 @@ public class GameMenu extends Application {
         showMap();
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
         initializeToolTip();
-//        hover();
     }
 
     // ---------------------------------- Getter/Setter -------------------------------------------
@@ -65,20 +71,20 @@ public class GameMenu extends Application {
         this.tileSize = tileSize;
     }
 
+    public void setSelectedTile(Tile tile) {
+        this.selectedTile = tile;
+    }
+
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
     private void showMap() {
-        double time = System.currentTimeMillis();
-
         mapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
         Tile[][] mapTiles = ShowMapMenuController.getTiles(firstTileX, firstTileY, rowsCount, columnCount);
 
         setTextureTreeImages(mapTiles);
-        setBuidingUnitImages(mapTiles);
-
-        System.out.println((System.currentTimeMillis() - time) / 1000);
+        setBuildingUnitImages(mapTiles);
     }
 
     private void setTextureTreeImages(Tile[][] mapTiles) {
@@ -95,7 +101,7 @@ public class GameMenu extends Application {
         }
     }
 
-    private void setBuidingUnitImages(Tile[][] mapTiles) {
+    private void setBuildingUnitImages(Tile[][] mapTiles) {
         int xCoordinate = 0, yCoordinate = 0;
 
         for (Tile[] tiles : mapTiles) {
@@ -115,7 +121,7 @@ public class GameMenu extends Application {
     }
 
     private void boldSelectedTile(int xCoordinate, int yCoordinate) {
-        Rectangle border = new Rectangle(xCoordinate, yCoordinate, tileSize, tileSize);
+        Rectangle border = new Rectangle(xCoordinate, yCoordinate, selectedBorderWidth * tileSize, selectedBorderHeight * tileSize);
         border.setStroke(Color.RED);
         border.setStrokeWidth(2);
         border.setFill(null);
@@ -147,44 +153,70 @@ public class GameMenu extends Application {
         new MainMenu().start(SignupMenu.getStage());
     }
 
-    public void moveMapMove(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-            int endTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
-            int endTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
-            int deltaX = endTileX - selectedTileX;
-            int deltaY = endTileY - selectedTileY;
-            if (deltaX == 0 && deltaY == 0) return;
-
-            if (firstTileX - deltaX >= 0 && firstTileX - deltaX < mapSize - (mapPaneWidth / tileSize))
-                firstTileX -= deltaX;
-            if (firstTileY - deltaY >= 0 && firstTileY - deltaY < mapSize - (mapPaneHeight / tileSize))
-                firstTileY -= deltaY;
-
-            showMap();
-
-            selectedTileX = endTileX;
-            selectedTileY = endTileY;
-        }
-    }
-
-    public void setSelectedTile(MouseEvent mouseEvent) {//TODO: for clicking
+    public void press(MouseEvent mouseEvent) {
+        pressedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+        pressedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
-            selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
-            Tile tile = ShowMapMenuController.getSelectedTile(selectedTileX, selectedTileY, firstTileX, firstTileY);
+            selectedTiles.clear();
+            selectedBorderHeight = 1;
+            selectedBorderWidth = 1;
+            Tile tile = ShowMapMenuController.getSelectedTile(pressedTileX, pressedTileY, firstTileX, firstTileY);
             if (tile.equals(selectedTile)) selectedTile = null;
-            else selectedTile = tile;
+            else {
+                selectedTile = tile;
+                selectedTiles.add(selectedTile);
+                selectedTileX = pressedTileX;
+                selectedTileY = pressedTileY;
+            }
             showMap();
         }
     }
 
-    public void setStartCoordinates(MouseEvent mouseEvent) { //TODO: for pressing
-        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-            selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
-            selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
-        }
+    public void drag(MouseEvent mouseEvent) {
+        int endTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+        int endTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        int deltaX = endTileX - pressedTileX;
+        int deltaY = endTileY - pressedTileY;
+        if (deltaX == 0 && deltaY == 0) return;
+
+        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) moveMapMove(deltaX, deltaY);
+        else if (selectedTile != null && mouseEvent.getButton().equals(MouseButton.MIDDLE))
+            selectMultipleTiles(deltaX, deltaY);
     }
 
+    private void selectMultipleTiles(int deltaX, int deltaY) {
+        int selectedColumns = (pressedTileX - selectedTileX) + deltaX + 1;
+        int selectedRows = (pressedTileY - selectedTileY) + deltaY + 1;
+
+        if (selectedRows < 1 || selectedColumns < 1) return;
+        Tile[][] tempArray = ShowMapMenuController.getTiles(selectedTileX, selectedTileY, selectedRows, selectedColumns);
+
+        selectedTiles.clear();
+        for (Tile[] tiles : tempArray)
+            selectedTiles.addAll(Arrays.asList(tiles));
+
+        selectedBorderWidth = selectedColumns;
+        selectedBorderHeight = selectedRows;
+
+        showMap();
+
+        pressedTileX += deltaX;
+        pressedTileY += deltaY;
+
+//        System.out.println(selectedTiles.size());
+    }
+
+    public void moveMapMove(int deltaX, int deltaY) {
+        if (firstTileX - deltaX >= 0 && firstTileX - deltaX < mapSize - (mapPaneWidth / tileSize))
+            firstTileX -= deltaX;
+        if (firstTileY - deltaY >= 0 && firstTileY - deltaY < mapSize - (mapPaneHeight / tileSize))
+            firstTileY -= deltaY;
+
+        showMap();
+
+        pressedTileX += deltaX;
+        pressedTileY += deltaY;
+    }
     @FXML
     private void hover(MouseEvent mouseEvent) {
         initializeToolTip();
