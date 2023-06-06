@@ -11,16 +11,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.User;
 import model.map.Map;
 
 import java.net.URL;
 
 public class NewGame extends Application {
     private static Stage stage;
-    public TableView users;
+    public TableView<User> users;
     public ChoiceBox<Map> mapName;
 
     @Override
@@ -57,11 +57,11 @@ public class NewGame extends Application {
         Utils.columnMaker(users, "Score", "score");
     }
 
-    public void startGame() {
-        ObservableList<Integer> selectedIndices= users.getSelectionModel().getSelectedIndices();
-        MainMenuController.startGame(selectedIndices, mapName.getValue().getName());
-//        for (int i = 0; i < selectedIndices.size(); i++) {
-//            MainMenuController.initializeAreas();
-//        }
+    public void startGame() throws Exception {
+        MainMenuController.startGame(users.getSelectionModel().getSelectedItems(), mapName.getValue().getName());
+    }
+
+    public void back() throws Exception {
+        new MainMenu().start(stage);
     }
 }

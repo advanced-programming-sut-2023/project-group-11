@@ -39,7 +39,7 @@ public class MainMenuController {
 //        return MainMenuMessages.SUCCESS;
 //    }
 
-    public static void startGame(ObservableList<Integer> selectedIndices, String mapName) {
+    public static void startGame(ObservableList<User> selectedIndices, String mapName) throws Exception {
         String[] usernames = makeListOfPlayers(new ArrayList<>(selectedIndices));
         Stronghold.setCurrentGame(new Game(makeGovernances(usernames), Stronghold.getMapByName(mapName)));
         ArrayList<Integer> areas = new ArrayList<>();
@@ -47,14 +47,11 @@ public class MainMenuController {
 
 
         //TODO: area initialization must be implemented
-        for (int i = 0; i < usernames.length; i++) {
-            initializeAreas(usernames[i], areas, i + 1);
-        }
-        try {
-            new GameMenu().start(SignupMenu.getStage());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        initializeAreas(null, areas, 1);
+        for (int i = 0; i < usernames.length; i++)
+            initializeAreas(usernames[i], areas, i + 2);
+
+        new GameMenu().start(SignupMenu.getStage());
     }
 
     public static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {
@@ -76,13 +73,11 @@ public class MainMenuController {
 //        return result.substring(0, result.length() - 1);
 //    }
 
-    public static String[] makeListOfPlayers(ArrayList<Integer> indices) {
+    public static String[] makeListOfPlayers(ArrayList<User> users) {
         ArrayList<String> usernames = new ArrayList<>();
-        ArrayList<User> users = Stronghold.getUsers();
 
-        usernames.add(Stronghold.getCurrentUser().getUsername());
-        for (Integer index : indices)
-            usernames.add(users.get(index).getUsername());
+        for (User user : users)
+            usernames.add(user.getUsername());
         return usernames.toArray(new String[0]);
     }
 

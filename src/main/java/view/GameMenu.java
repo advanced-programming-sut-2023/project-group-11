@@ -10,6 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Game;
+import model.Governance;
+import model.Stronghold;
 import model.map.Tile;
 
 import java.net.URL;
@@ -40,6 +43,9 @@ public class GameMenu extends Application {
     public void initialize() {
         showMap();
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
+        for (Governance governance : Stronghold.getCurrentGame().getGovernances()) {
+            System.out.println(governance.getOwner().getUsername());
+        }
     }
 
     // ---------------------------------- Getter/Setter -------------------------------------------

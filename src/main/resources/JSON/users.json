@@ -7,10 +7,10 @@
     "nickname": "sepehr",
     "email": "sepehr@go.com",
     "slogan": "You are clearly no match for my forces! Give in now, my friend!",
-    "avatarFileName": "8.png",
+    "avatarFileName": "1.png",
     "score": 3000,
     "rank": 1,
-    "stayLoggedIn": false
+    "stayLoggedIn": true
   },
   {
     "recoveryQuestion": "What is my best friend's name?",
@@ -20,7 +20,7 @@
     "nickname": "RSamirRS",
     "email": "amir@gma.co",
     "slogan": "I shall have my revenge, in this life or the next",
-    "avatarFileName": "8.png",
+    "avatarFileName": "1.png",
     "score": 2000,
     "rank": 2,
     "stayLoggedIn": false
@@ -33,7 +33,7 @@
     "nickname": "SadeghViper",
     "email": "sadegh.sg.sn@gmail.com",
     "slogan": "I shall dye for my country",
-    "avatarFileName": "8.png",
+    "avatarFileName": "1.png",
     "score": 0,
     "rank": 3,
     "stayLoggedIn": false
@@ -46,9 +46,9 @@
     "nickname": "DarkLork",
     "email": "Sadegh.sg.snn@gmail.com",
     "slogan": "A soldier's death... is a noble death.",
-    "avatarFileName": "7.png",
+    "avatarFileName": "1.png",
     "score": 0,
     "rank": 4,
-    "stayLoggedIn": true
+    "stayLoggedIn": false
   }
 ]
