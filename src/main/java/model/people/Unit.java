@@ -1,5 +1,6 @@
 package model.people;
 
+import javafx.scene.image.Image;
 import model.Governance;
 import model.Stronghold;
 import model.map.Tile;
@@ -18,6 +19,7 @@ public abstract class Unit {
     protected int[] patrolOrigin;
     protected int[] patrolDestination;
     protected boolean isPatrolling = false;
+    private Image image = null;
 
     public int getHp() {
         return hp;
@@ -116,5 +118,12 @@ public abstract class Unit {
 
     public String toString() {
         return "UnitType->" + name + " * HP->" + hp + " * State->" + unitState + " * Owner->" + ownerGovernance.getOwner().getNickname();
+    }
+
+    public Image getImage() {
+        if (image == null)
+            image = new Image(System.getProperty("user.dir") +
+                    "/src/main/resources/IMG/Units/" + name.replace(' ', '_') + ".png");
+        return image;
     }
 }

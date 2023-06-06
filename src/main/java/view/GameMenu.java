@@ -93,7 +93,7 @@ public class GameMenu extends Application {
                             tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
                 }
                 if (tile.getUnits().size() != 0) {
-                    //TODO: units Images (working on it)
+                    setTileImage(tile.getUnits().get(0).getImage(), xCoordinate, yCoordinate);
                 }
                 xCoordinate += tileSize;
             }
