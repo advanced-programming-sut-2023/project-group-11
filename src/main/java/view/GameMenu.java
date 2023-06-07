@@ -191,7 +191,7 @@ public class GameMenu extends Application {
         int selectedColumns = (pressedTileX - selectedTileX) + deltaX + 1;
         int selectedRows = (pressedTileY - selectedTileY) + deltaY + 1;
 
-        if (selectedRows < 1 || selectedColumns < 1) return;
+        if (selectedRows < 1 || selectedColumns < 1 || outOfPane(deltaX, deltaY)) return;
         Tile[][] tempArray = ShowMapMenuController.getTiles(selectedTileX, selectedTileY, selectedRows, selectedColumns);
 
         selectedTiles.clear();
@@ -219,6 +219,12 @@ public class GameMenu extends Application {
 
         pressedTileX += deltaX;
         pressedTileY += deltaY;
+    }
+
+    private boolean outOfPane(int deltaX, int deltaY) {
+        return (pressedTileX + deltaX) - firstTileX >= (mapPaneWidth / tileSize) ||
+                (pressedTileY + deltaY) - firstTileY >= (mapPaneHeight / tileSize);
+
     }
 
     public void checkShortcut(KeyEvent keyEvent) {
