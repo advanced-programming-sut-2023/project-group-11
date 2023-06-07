@@ -4,6 +4,7 @@ import controller.ShowMapMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameMenu extends Application {
+    @FXML
+    private AnchorPane sidePane;
     @FXML
     private AnchorPane mapPane;
     private final int mapPaneHeight = 720;
@@ -59,9 +62,17 @@ public class GameMenu extends Application {
 
     @FXML
     public void initialize() {
-        showMap();
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
+        setTraversable();
+        showMap();
         initializeToolTip();
+    }
+
+    private void setTraversable() {
+        for (Node child : sidePane.getChildren())
+            child.setFocusTraversable(false);
+        mapPane.setFocusTraversable(true);
+        mapPane.requestFocus();
     }
 
     // ---------------------------------- Getter/Setter -------------------------------------------
