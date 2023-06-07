@@ -183,6 +183,7 @@ public class Utils {
     public static void columnMaker(TableView tableView, String header, String userField) {
         TableColumn<User, String> tableColumn = new TableColumn<>(header);
         tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
+        tableColumn.setSortable(false);
         tableView.getColumns().add(tableColumn);
     }
 }
