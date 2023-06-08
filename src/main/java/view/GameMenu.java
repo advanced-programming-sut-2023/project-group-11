@@ -1,9 +1,6 @@
 package view;
 
-import controller.BuildingUtils;
-import controller.GameMenuController;
-import controller.ShowMapMenuController;
-import controller.Utils;
+import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -303,8 +300,17 @@ public class GameMenu extends Application {
         switch (keyCode) {
             case ADD -> zoom(true);
             case SUBTRACT -> zoom(false);
+            case E -> seeTiles();
             case M -> checkMoveUnit();
         }
+    }
+
+    private void seeTiles() {
+        System.out.println(selectedTiles.size());
+        for (Tile tile : selectedTiles) {
+            System.out.println(tile);
+        }
+        System.out.println("end");
     }
 
     private void checkMoveUnit() throws Exception {
