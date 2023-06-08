@@ -125,23 +125,18 @@ public class GameMenuController {
         return "Fear rate: " + currentGovernance.getFearFactor();
     }
 
-    public static GameMenuMessages checkDropBuilding(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate", "type"))
-            return GameMenuMessages.INVALID_COMMAND;
-
-        int x = Integer.parseInt(matcher.group("xCoordinate"));
-        int y = Integer.parseInt(matcher.group("yCoordinate"));
-        String type = Utils.removeDoubleQuotation(matcher.group("type"));
-        Building building = BuildingUtils.getBuildingByType(type);
-
-        if (!BuildingUtils.isValidBuildingType(type)) return GameMenuMessages.INVALID_BUILDING_TYPE;
+    public static GameMenuMessages checkDropBuilding(int x,int y,String buildingType) {
+        Building building = BuildingUtils.getBuildingByType(buildingType);
 
         int size = building.getSize();
-
-        if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size))
-            return GameMenuMessages.INVALID_COORDINATE;
+//        if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size))
+//            return GameMenuMessages.INVALID_COORDINATE;
         if (!BuildingUtils.isMapEmpty(x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
-        if (!BuildingUtils.isTextureSuitable(type, x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
+        if (!BuildingUtils.isTextureSuitable(buildingType, x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
+        if(true) {
+            //TODO: delete test mode + debug in current game, current governance, current map, ....
+            return GameMenuMessages.SUCCESS;
+        }
         if (building.getGoldCost() > currentGovernance.getGold()) return GameMenuMessages.NOT_ENOUGH_MONEY;
         if (!currentGovernance.hasEnoughItem(building.getResourceCostType(), building.getResourceCostNumber()))
             return GameMenuMessages.NOT_ENOUGH_RESOURCE;
