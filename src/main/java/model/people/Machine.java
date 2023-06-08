@@ -23,7 +23,7 @@ public class Machine extends Attacker {
         this.name = name;
         speed = Speed.valueOf((String) machine.get("speed"));
         leftMoves = speed.getMovesInEachTurn();
-        cost = ((Long) machine.get("cost")).intValue();
+        cost = ((Double) machine.get("cost")).intValue();
         hp = Hp.valueOf((String) machine.get("hp")).getHp();
         engineersNeededToActivate = ((Long) machine.get("engineersNeededToActivate")).intValue();
         damage = SiegeDamage.valueOf((String) machine.get("damage")).getDamage();

@@ -29,7 +29,7 @@ public class MovingAnimation {
 
     private void initializeTimeline(ArrayList<Unit> units) {
         timeline = new Timeline(new KeyFrame(
-                Duration.millis(1000.0 / units.get(0).getSpeed()), actionEvent -> this.start()));
+                Duration.millis(2000.0 / units.get(0).getSpeed()), actionEvent -> this.start()));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }

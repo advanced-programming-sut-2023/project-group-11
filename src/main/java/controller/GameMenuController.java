@@ -22,7 +22,7 @@ public class GameMenuController {
     private static Governance currentGovernance;
 
     public static String nextTurn() {
-        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
+        ArrayList<Governance> governances = currentGame.getGovernances();
         int turn = currentGame.getTurn();
         int totalGovernances = governances.size();
         currentGovernance = governances.get(turn % totalGovernances);
@@ -192,7 +192,7 @@ public class GameMenuController {
         if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate", "type", "count"))
             return GameMenuMessages.INVALID_COMMAND;
 
-        currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+        currentGovernance = currentGame.getCurrentGovernance();
         int x = Integer.parseInt(matcher.group("xCoordinate"));
         int y = Integer.parseInt(matcher.group("yCoordinate"));
         int count = Integer.parseInt(matcher.group("count"));
@@ -710,13 +710,13 @@ public class GameMenuController {
 
     public static String showMapDetails(int x, int y) {
         String output = "";
-        Map map = Stronghold.getCurrentGame().getMap();
+        Map map = currentGame.getMap();
         Tile tile = map.getTile(x, y);
         output += tile.toString();
         return output;
     }
 
     public static double getGold() {
-        return Stronghold.getCurrentGame().getCurrentGovernance().getGold();
+        return currentGame.getCurrentGovernance().getGold();
     }
 }

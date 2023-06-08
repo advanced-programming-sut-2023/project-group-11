@@ -49,7 +49,8 @@ public abstract class Unit {
         this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         this.ownerGovernance.addUnit(this);
         this.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(tile));
-        if (!(this instanceof Machine || this instanceof Lord || isDropping)) this.ownerGovernance.changeCurrentPopulation(-1);
+        if (!(this instanceof Machine || this instanceof Lord || isDropping))
+            this.ownerGovernance.changeCurrentPopulation(-1);
         tile.getUnits().add(this);
     }
 
@@ -117,13 +118,13 @@ public abstract class Unit {
     }
 
     public String toString() {
-        return "UnitType->" + name + " * HP->" + hp + " * State->" + unitState + " * Owner->" + ownerGovernance.getOwner().getNickname();
+        return "UnitType->" + name + " * HP->" + hp + " * State->" + unitState + " * Moves Left->" + leftMoves +
+                " * Speed->" + speed.getMovesInEachTurn() + " * Owner->" + ownerGovernance.getOwner().getNickname();
     }
 
     public Image getImage() {
         if (image == null)
-            image = new Image(System.getProperty("user.dir") +
-                    "/src/main/resources/IMG/Units/" + name.replace(' ', '_') + ".png");
+            image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Units/" + name + ".png");
         return image;
     }
 }

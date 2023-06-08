@@ -5,8 +5,6 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -106,22 +104,32 @@ public class GameMenu extends Application {
 //        }
 
 
+        GameMenuController.dropUnit(i++, i, 10, "battering ram");
+        GameMenuController.dropUnit(i++, i, 10, "trebuchets");
+        GameMenuController.dropUnit(i++, i, 10, "portable shield");
+        GameMenuController.dropUnit(i++, i, 10, "catapults");
+        GameMenuController.dropUnit(i++, i, 10, "siege tower");
+        GameMenuController.dropUnit(i++, i, 10, "fire ballista");
+        GameMenuController.dropUnit(i++, i, 10, "engineer");
         GameMenuController.dropUnit(i++, i, 10, "horse archer");
-        i++;
         GameMenuController.dropUnit(i++, i, 10, "tunneler");
-        i++;
         GameMenuController.dropUnit(i++, i, 10, "slaves");
-        i++;
+        GameMenuController.dropUnit(i++, i, 10, "slaves");
+        GameMenuController.dropUnit(i++, i, 10, "slinger");
+        GameMenuController.dropUnit(i++, i, 10, "ladderman");
+        GameMenuController.dropUnit(i++, i, 10, "fire thrower");
+        GameMenuController.dropUnit(i++, i, 10, "archer");
+        GameMenuController.dropUnit(i++, i, 10, "archer bow");
+        GameMenuController.dropUnit(i++, i, 10, "swordsman");
+        GameMenuController.dropUnit(i++, i, 10, "knight");
+        GameMenuController.dropUnit(i++, i, 10, "black monk");
+        GameMenuController.dropUnit(i++, i, 10, "pikeman");
         GameMenuController.dropUnit(i++, i, 10, "crossbowman");
-        i++;
+        GameMenuController.dropUnit(i++, i, 10, "crossbowman");
         GameMenuController.dropUnit(i++, i, 10, "assassin");
-        i++;
         GameMenuController.dropUnit(i++, i, 10, "maceman");
-        i++;
         GameMenuController.dropUnit(i++, i, 10, "spearman");
-        i++;
         GameMenuController.dropUnit(i++, i, 10, "arabian swordsman");
-//        i++;
     }
 
     private void setTraversable() {
@@ -347,32 +355,32 @@ public class GameMenu extends Application {
         Tooltip.install(mapPane, tooltip);
     }
 
-    private void initializeBuildingBoxes(){
-        initializeBuildingBox(governanceBox,"Church","Filler","DrawBridge","Trap");
-        initializeBuildingBox(warBox,"Keep","Tower","Storage","UnitMaker");
+    private void initializeBuildingBoxes() {
+        initializeBuildingBox(governanceBox, "Church", "Filler", "DrawBridge", "Trap");
+        initializeBuildingBox(warBox, "Keep", "Tower", "Storage", "UnitMaker");
         //TODO: gatehouse
         //TODO: blackBackground pics + optimizing pics(drawBridge ...)
-        initializeBuildingBox(productiveBox,"ProductiveBuilding");
+        initializeBuildingBox(productiveBox, "ProductiveBuilding");
     }
 
-    private void initializeBuildingBox(TilePane box,String... address) {
+    private void initializeBuildingBox(TilePane box, String... address) {
         ArrayList<File> buildingImages = new ArrayList<>();
         try {
-            for (String add:address)
-                fillBuildingImages(buildingImages,add);
+            for (String add : address)
+                fillBuildingImages(buildingImages, add);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        fillBuildingBox(buildingImages,box);
+        fillBuildingBox(buildingImages, box);
     }
 
-    private void fillBuildingBox(ArrayList<File> buildingImages,TilePane box) {
-        for (File buildingImage : buildingImages){
+    private void fillBuildingBox(ArrayList<File> buildingImages, TilePane box) {
+        for (File buildingImage : buildingImages) {
             ImageView buildingImageView = new ImageView(buildingImage.getPath());
             buildingImageView.setFitHeight(60);
             buildingImageView.setFitWidth(60);
             buildingImageView.setPreserveRatio(true);
-            buildingImageView.setId(buildingImage.getName().substring(0,buildingImage.getName().length()-4));
+            buildingImageView.setId(buildingImage.getName().substring(0, buildingImage.getName().length() - 4));
             buildingImageView.setOnMouseClicked(this::buildingMouseClick);
             buildingImageView.setOnDragDetected(this::buildingDrag);
             box.getChildren().add(buildingImageView);
@@ -380,29 +388,29 @@ public class GameMenu extends Application {
     }
 
     private void buildingDrag(MouseEvent mouseEvent) {
-        ImageView buildingImageView = (ImageView)mouseEvent.getSource();
+        ImageView buildingImageView = (ImageView) mouseEvent.getSource();
         int buildingSize = BuildingUtils.getBuildingByType(buildingImageView.getId()).getSize();
         buildingDragName = buildingImageView.getId();
         ImageView dragImage = new ImageView(buildingImageView.getImage());
-        dragImage.setFitWidth(tileSize*buildingSize*1.25);
-        dragImage.setFitHeight(tileSize*buildingSize*1.25);
+        dragImage.setFitWidth(tileSize * buildingSize * 1.25);
+        dragImage.setFitHeight(tileSize * buildingSize * 1.25);
         dragImage.setPreserveRatio(false);
         Dragboard dragboard = buildingImageView.startDragAndDrop(TransferMode.MOVE);
         ClipboardContent content = new ClipboardContent();
-        content.putImage(dragImage.snapshot(null,null));
+        content.putImage(dragImage.snapshot(null, null));
         dragboard.setContent(content);
-        dragboard.setDragView(dragImage.snapshot(null,null),15,15);
+        dragboard.setDragView(dragImage.snapshot(null, null), 15, 15);
         mouseEvent.consume();
     }
 
-    private static void fillBuildingImages(ArrayList<File> buildingImages,String address) throws URISyntaxException {
+    private static void fillBuildingImages(ArrayList<File> buildingImages, String address) throws URISyntaxException {
         File[] array;
         array = new File(GameMenu.class.getResource("/IMG/Building/" + address).toURI()).listFiles();
         buildingImages.addAll(List.of(array));
     }
 
     private void buildingMouseClick(MouseEvent mouseEvent) {
-        buildingNameLabel.setText(((ImageView)mouseEvent.getSource()).getId());
+        buildingNameLabel.setText(((ImageView) mouseEvent.getSource()).getId());
     }
 
     public void showProductiveBox() {
@@ -432,15 +440,17 @@ public class GameMenu extends Application {
     public void buildingDragDone(DragEvent dragEvent) {
         int x = Math.floorDiv((int) buildingDragX, tileSize) + firstTileX;
         int y = Math.floorDiv((int) buildingDragY, tileSize) + firstTileY;
-        switch (GameMenuController.checkDropBuilding(x,y,buildingDragName)){
-            case CANT_BUILD_HERE -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","Can't build here!");
-            case NOT_ENOUGH_MONEY -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","You don't have enough money!");
-            case NOT_ENOUGH_RESOURCE -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","You don't have enough resource!");
-            case NOT_ENOUGH_POPULATION -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","You don't have enough population!");
-            case SUCCESS -> {
-                setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName).getImage()
-                        ,(x-firstTileX)*tileSize,(y-firstTileY)*tileSize,BuildingUtils.getBuildingByType(buildingDragName).getSize(),y,x);
-            }
+        switch (GameMenuController.checkDropBuilding(x, y, buildingDragName)) {
+            case CANT_BUILD_HERE -> ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "Can't build here!");
+            case NOT_ENOUGH_MONEY ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough money!");
+            case NOT_ENOUGH_RESOURCE ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough resource!");
+            case NOT_ENOUGH_POPULATION ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough population!");
+            case SUCCESS -> setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName).getImage()
+                    , (x - firstTileX) * tileSize, (y - firstTileY) * tileSize,
+                    BuildingUtils.getBuildingByType(buildingDragName).getSize(), y, x);
         }
     }
 

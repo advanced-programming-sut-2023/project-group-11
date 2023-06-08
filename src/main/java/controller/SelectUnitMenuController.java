@@ -36,7 +36,7 @@ public class SelectUnitMenuController {
 
         if (!Utils.isValidCoordinates(map, destinationX, destinationY))
             return SelectUnitMenuMessages.INVALID_COORDINATE;
-        else if (notValidTextureForMoving(map.getTile(destinationX, destinationY)))
+        if (notValidTextureForMoving(map.getTile(destinationX, destinationY)))
             return SelectUnitMenuMessages.INVALID_DESTINATION_TEXTURE;
         else if (currentX == destinationX && currentY == destinationY)
             return SelectUnitMenuMessages.NO_MOVES_NEEDED;
@@ -887,15 +887,22 @@ public class SelectUnitMenuController {
         } catch (Exception e) {
             if (unitName.equals("engineer")) return new Engineer();
             else if (unitName.equals("lord")) return new Lord(null);
-            else return new Machine(unitName);
+            else if (Utils.isValidMachineType(unitName)) return new Machine(unitName);
+            else return null;
         }
     }
 
-    public static ArrayList<Tile> getUnEmptyTiles(ArrayList<Tile> selectedTiles) {
+    public static ArrayList<Tile> getUnEmptyTiles(ArrayList<Tile> selectedTiles, String unitType) {
         ArrayList<Tile> unEmptyTiles = new ArrayList<>();
         for (Tile selectedTile : selectedTiles)
-            if (selectedTile.getUnits().size() > 0)
+            if (selectedTile.getUnits().size() > 0 && tileHasUnitType(selectedTile, unitType))
                 unEmptyTiles.add(selectedTile);
         return unEmptyTiles;
+    }
+
+    private static boolean tileHasUnitType(Tile selectedTile, String unitType) {
+        for (Unit unit : selectedTile.getUnits())
+            if (unit.getName().equals(unitType)) return true;
+        return false;
     }
 }

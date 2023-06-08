@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="698.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MoveUnit">
-    <VBox alignment="CENTER" layoutX="6.0" layoutY="55.0" prefHeight="291.0" prefWidth="686.0" spacing="10.0">
+<AnchorPane prefHeight="400.0" prefWidth="832.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MoveUnit">
+    <VBox alignment="CENTER" layoutX="14.0" layoutY="55.0" prefHeight="291.0" prefWidth="804.0" spacing="10.0">
         <Label text="please select a soldier from the list below" />
         <HBox alignment="CENTER" prefHeight="32.0" prefWidth="344.0" spacing="10.0">
             <TextField promptText="xDestination" fx:id="xDestination" />
