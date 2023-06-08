@@ -28,6 +28,7 @@ public enum AllResource {
 
     private final String name;
     private final int price;
+    private Image image;
 
     AllResource(String name, int price) {
         this.name = name;
@@ -45,7 +46,9 @@ public enum AllResource {
     }
 
     public Image getImage(){
-            return new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/AllResource/" + name + ".png");
+        if(image == null)
+            image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/AllResource/" + name + ".png");
+        return image;
     }
 
     public int getPrice() {

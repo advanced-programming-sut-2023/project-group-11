@@ -7,6 +7,7 @@ import model.Trade;
 import view.enums.messages.TradeMenuMessages;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.regex.Matcher;
 
 public class TradeMenuController {
@@ -86,6 +87,12 @@ public class TradeMenuController {
         for (Governance governance:Stronghold.getCurrentGame().getGovernances())
             output += (index++) + "- " + governance.getOwner().getNickname() + "'s Governance\n";
         return output;
+    }
+
+    public static ArrayList<AllResource> getAllResources(){
+        ArrayList<AllResource> allResources = new ArrayList<>();
+        Collections.addAll(allResources, AllResource.values());
+        return allResources;
     }
 
 }
