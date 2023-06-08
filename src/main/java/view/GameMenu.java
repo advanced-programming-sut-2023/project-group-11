@@ -1,18 +1,22 @@
 package view;
 
+import controller.BuildingUtils;
+import controller.GameMenuController;
 import controller.ShowMapMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -21,18 +25,32 @@ import model.map.Tile;
 import view.enums.Zoom;
 
 import java.awt.*;
+import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class GameMenu extends Application {
     @FXML
     private AnchorPane mapPane;
+    @FXML
+    private TilePane productiveBox;
+    @FXML
+    private TilePane warBox;
+    @FXML
+    private TilePane governanceBox;
+    @FXML
+    private Label buildingNameLabel;
     private final int mapPaneHeight = 720;
     private final int mapPaneWidth = 990;
     private int tileSize = 30;
     private Zoom currentZoom = Zoom.NORMAL;
     private int mapSize;
+    private double buildingDragX;
+    private double buildingDragY;
+    private String buildingDragName;
     private int firstTileX = 0;
     private int firstTileY = 0;
     private int selectedTileX = 0;
@@ -53,15 +71,15 @@ public class GameMenu extends Application {
                 new URL(getClass().getResource("/FXML/GameMenu.fxml").toExternalForm()));
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
-
         stage.show();
     }
 
     @FXML
-    public void initialize() {
+    public void initialize(){
         showMap();
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
         initializeToolTip();
+        initializeBuildingBoxes();
     }
 
     // ---------------------------------- Getter/Setter -------------------------------------------
@@ -256,5 +274,102 @@ public class GameMenu extends Application {
         tooltip.setShowDuration(Duration.seconds(3));
         tooltip.setWrapText(true);
         Tooltip.install(mapPane, tooltip);
+    }
+
+    private void initializeBuildingBoxes(){
+        initializeBuildingBox(governanceBox,"Church","Filler","DrawBridge","Trap");
+        initializeBuildingBox(warBox,"Keep","Tower","Storage","UnitMaker");
+        //TODO: gatehouse
+        //TODO: blackBackground pics + optimizing pics(drawBridge ...)
+        initializeBuildingBox(productiveBox,"ProductiveBuilding");
+    }
+
+    private void initializeBuildingBox(TilePane box,String... address) {
+        ArrayList<File> buildingImages = new ArrayList<>();
+        try {
+            for (String add:address)
+                fillBuildingImages(buildingImages,add);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        fillBuildingBox(buildingImages,box);
+    }
+
+    private void fillBuildingBox(ArrayList<File> buildingImages,TilePane box) {
+        for (File buildingImage : buildingImages){
+            ImageView buildingImageView = new ImageView(buildingImage.getPath());
+            buildingImageView.setFitHeight(60);
+            buildingImageView.setFitWidth(60);
+            buildingImageView.setPreserveRatio(true);
+            buildingImageView.setId(buildingImage.getName().substring(0,buildingImage.getName().length()-4));
+            buildingImageView.setOnMouseClicked(this::buildingMouseClick);
+            buildingImageView.setOnDragDetected(this::buildingDrag);
+            box.getChildren().add(buildingImageView);
+        }
+    }
+
+    private void buildingDrag(MouseEvent mouseEvent) {
+        ImageView buildingImageView = (ImageView)mouseEvent.getSource();
+        int buildingSize = BuildingUtils.getBuildingByType(buildingImageView.getId()).getSize();
+        buildingDragName = buildingImageView.getId();
+        ImageView dragImage = new ImageView(buildingImageView.getImage());
+        dragImage.setFitWidth(tileSize*buildingSize*1.25);
+        dragImage.setFitHeight(tileSize*buildingSize*1.25);
+        dragImage.setPreserveRatio(false);
+        Dragboard dragboard = buildingImageView.startDragAndDrop(TransferMode.MOVE);
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(dragImage.snapshot(null,null));
+        dragboard.setContent(content);
+        dragboard.setDragView(dragImage.snapshot(null,null),15,15);
+        mouseEvent.consume();
+    }
+
+    private static void fillBuildingImages(ArrayList<File> buildingImages,String address) throws URISyntaxException {
+        File[] array;
+        array = new File(GameMenu.class.getResource("/IMG/Building/" + address).toURI()).listFiles();
+        buildingImages.addAll(List.of(array));
+    }
+
+    private void buildingMouseClick(MouseEvent mouseEvent) {
+        buildingNameLabel.setText(((ImageView)mouseEvent.getSource()).getId());
+    }
+
+    public void showProductiveBox() {
+        productiveBox.setVisible(true);
+        warBox.setVisible(false);
+        governanceBox.setVisible(false);
+    }
+
+    public void showWarBox() {
+        warBox.setVisible(true);
+        productiveBox.setVisible(false);
+        governanceBox.setVisible(false);
+    }
+
+    public void showGovernanceBox() {
+        governanceBox.setVisible(true);
+        warBox.setVisible(false);
+        productiveBox.setVisible(false);
+    }
+
+    public void buildingDragOver(DragEvent dragEvent) {
+        buildingDragX = dragEvent.getSceneX();
+        buildingDragY = dragEvent.getSceneY();
+//        System.out.println("asdasd");
+    }
+
+    public void buildingDragDone(DragEvent dragEvent) {
+        int x = Math.floorDiv((int) buildingDragX, tileSize) + firstTileX;
+        int y = Math.floorDiv((int) buildingDragY, tileSize) + firstTileY;
+        switch (GameMenuController.checkDropBuilding(x,y,buildingDragName)){
+            case CANT_BUILD_HERE -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","Can't build here!");
+            case NOT_ENOUGH_MONEY -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","You don't have enough money!");
+            case NOT_ENOUGH_RESOURCE -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","You don't have enough resource!");
+            case NOT_ENOUGH_POPULATION -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","You don't have enough population!");
+            case SUCCESS -> {
+                setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName).getImage()
+                        ,(x-firstTileX)*tileSize,(y-firstTileY)*tileSize,BuildingUtils.getBuildingByType(buildingDragName).getSize(),y,x);
+            }
+        }
     }
 }
