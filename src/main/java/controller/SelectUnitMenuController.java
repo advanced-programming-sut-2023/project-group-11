@@ -1,5 +1,8 @@
 package controller;
 
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import model.Game;
 import model.Governance;
 import model.Path;
@@ -11,21 +14,23 @@ import model.map.Tile;
 import model.people.*;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
+import view.MovingAnimation;
 import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class SelectUnitMenuController {
-    public static SelectUnitMenuMessages checkMoveUnit(Matcher matcher, int[] currentLocation, String unitType, boolean isPatrol) {
-        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
-            return SelectUnitMenuMessages.INVALID_COMMAND;
+    public static SelectUnitMenuMessages checkMoveUnit(int[] currentLocation, int destinationX, int destinationY, String unitType, boolean isPatrol) {
+//        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
+//            return SelectUnitMenuMessages.INVALID_COMMAND;
 
         Map map = Stronghold.getCurrentGame().getMap();
         Path shortestPath;
-        int destinationX = Integer.parseInt(matcher.group("xCoordinate"));
-        int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
+//        int destinationX = Integer.parseInt(matcher.group("xCoordinate"));
+//        int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
 
@@ -46,7 +51,7 @@ public class SelectUnitMenuController {
         else if ((shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY)) == null)
             return SelectUnitMenuMessages.INVALID_DISTANCE;
 
-        if (isPatrol) setPatrolUnit(matcher, currentLocation, unitType);
+        if (isPatrol) setPatrolUnit(destinationX, destinationY, currentLocation, unitType);
         moveUnits(map, unitType, shortestPath, currentLocation, destinationX, destinationY);
 
         return SelectUnitMenuMessages.SUCCESS;
@@ -88,10 +93,10 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static void setPatrolUnit(Matcher matcher, int[] currentLocation, String unitType) {
+    public static void setPatrolUnit(int destinationX, int destinationY, int[] currentLocation, String unitType) {
         Map map = Stronghold.getCurrentGame().getMap();
-        int destinationX = Integer.parseInt(matcher.group("xCoordinate"));
-        int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
+//        int destinationX = Integer.parseInt(matcher.group("xCoordinate"));
+//        int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
         ArrayList<Unit> selectedUnits = map.getTile(currentLocation).getUnitsByType(unitType);
@@ -256,7 +261,7 @@ public class SelectUnitMenuController {
 
     private static void digTunnel(Map map, Unit tunneler, int currentX, int currentY, String direction) {
         Tile currentTile = map.getTile(currentX, currentY);
-        tunneler.removeFromGame(currentTile, tunneler.getOwner());
+        tunneler.removeFromGame(currentTile);
 
         if ("up".equals(direction))
             for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX + i, currentY); i++)
@@ -341,7 +346,7 @@ public class SelectUnitMenuController {
         int currentPopulation = governance.getCurrentPopulation();
         int maxPopulation = governance.getMaxPopulation();
 
-        for (Unit unit : selectedUnits) unit.removeFromGame(tile, governance);
+        for (Unit unit : selectedUnits) unit.removeFromGame(tile);
 
         governance.changeCurrentPopulation(Math.min(selectedUnits.size(), maxPopulation - currentPopulation));
     }
@@ -350,13 +355,15 @@ public class SelectUnitMenuController {
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
         ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
-        map.getTile(currentX, currentY).clearUnitsByType(selectedUnits);
+        if (selectedUnits.size() == 0) return;
+//        map.getTile(currentX, currentY).clearUnitsByType(selectedUnits);
+////        System.out.println(selectedUnits);
+//        System.out.println(selectedUnits.get(0).getLocation()[1]);
 
         setLeftMoves(shortestPath, selectedUnits);
-        setLocation(selectedUnits, destinationX, destinationY);
-        applyPathEffects(map, shortestPath, selectedUnits);
+        setLocation(selectedUnits, shortestPath);
 
-        map.getTile(destinationX, destinationY).getUnits().addAll(selectedUnits);
+//        map.getTile(destinationX, destinationY).getUnits().addAll(selectedUnits);
         currentLocation[0] = destinationX;
         currentLocation[1] = destinationY;
     }
@@ -497,7 +504,9 @@ public class SelectUnitMenuController {
     }
 
     public static boolean isValidDestinationSameOwnerUnits(Tile currentTile, Tile destination) {
-        return destination.getUnits().size() == 0 || currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
+        return destination.getUnits().size() == 0 ||
+                currentTile.getUnits().size() == 0 ||
+                currentTile.getUnits().get(0).getOwner().equals(destination.getUnits().get(0).getOwner());
     }
 
     private static void setLeftMoves(Path shortestPath, ArrayList<Unit> selectedUnits) {
@@ -506,22 +515,22 @@ public class SelectUnitMenuController {
         }
     }
 
-    public static void setLocation(ArrayList<Unit> selectedUnits, int destinationX, int destinationY) {
-        for (Unit unit : selectedUnits)
-            unit.setLocation(new int[]{destinationX, destinationY});
+    public static void setLocation(ArrayList<Unit> selectedUnits, Path shortestPath) {
+        new MovingAnimation(selectedUnits, shortestPath);
     }
 
-    public static void applyPathEffects(Map map, Path shortestPath, ArrayList<Unit> selectedUnits) {
+    public static void applyPathEffects(int[] location, ArrayList<Unit> selectedUnits) {
         Building currentBuilding;
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        for (int[] location : shortestPath.getPath()) {
-            if ((currentBuilding = map.getTile(location[0], location[1]).getBuilding()) instanceof GateHouse gateHouse)
-                gateHouse.setGateController(Stronghold.getCurrentGame().getCurrentGovernance());
-            else if (currentBuilding instanceof Trap trap && !trap.getOwner().equals(currentGovernance))
-                applyTrapDamage(selectedUnits, trap);
+        Map map = Stronghold.getCurrentGame().getMap();
+//        for (int[] location : shortestPath.getPath()) {
+        if ((currentBuilding = map.getTile(location[0], location[1]).getBuilding()) instanceof GateHouse gateHouse)
+            gateHouse.setGateController(Stronghold.getCurrentGame().getCurrentGovernance());
+        else if (currentBuilding instanceof Trap trap && !trap.getOwner().equals(currentGovernance))
+            applyTrapDamage(selectedUnits, trap);
 
-            if (selectedUnits.size() == 0) return;
-        }
+//        if (selectedUnits.size() == 0) return;
+//        }
     }
 
     private static void applyTrapDamage(ArrayList<Unit> selectedUnits, Trap currentBuilding) {
@@ -531,7 +540,7 @@ public class SelectUnitMenuController {
             Tile tile = map.getTile(currentBuilding.getXCoordinate(), currentBuilding.getYCoordinate());
             unit.setHp(unit.getHp() - currentBuilding.getDamage());
             if (unit.getHp() <= 0) {
-                unit.removeFromGame(tile, unit.getOwner());
+                unit.removeFromGame(tile);
                 selectedUnits.remove(unit);
             }
         }
@@ -642,7 +651,7 @@ public class SelectUnitMenuController {
             } else if (unit.getName().equals("assassin")) ((Troop) unit).setRevealed(true);
         }
 
-        removings.forEach(unit -> unit.removeFromGame(targetTile, unit.getOwner()));
+        removings.forEach(unit -> unit.removeFromGame(targetTile));
     }
 
     private static void killGovernance(Governance owner) {
@@ -661,7 +670,7 @@ public class SelectUnitMenuController {
     private static void removeUnits(Governance owner, Map map) {
         int size = owner.getUnits().size();
         for (int i = 0; i < size; i++)
-            owner.getUnits().get(0).removeFromGame(map.getTile(owner.getUnits().get(0).getLocation()), owner);
+            owner.getUnits().get(0).removeFromGame(map.getTile(owner.getUnits().get(0).getLocation()));
     }
 
     private static void removeBuildings(Governance owner, Map map) {
@@ -843,5 +852,50 @@ public class SelectUnitMenuController {
 
         for (Unit unit : selectedUnits) ((Troop) unit).setDigging(false);
         return SelectUnitMenuMessages.SUCCESS;
+    }
+
+    public static boolean hasUnit(ArrayList<Tile> selectedTiles) {
+        for (Tile selectedTile : selectedTiles)
+            if (selectedTile.getUnits().size() > 0) return true;
+        return false;
+    }
+
+    public static ArrayList<HBox> getTilesUnits(ArrayList<Tile> selectedTiles) {
+//        for (Tile selectedTile : selectedTiles) {
+//            System.out.println(selectedTile);
+//        }
+//        System.out.println(selectedTiles.size());
+//        System.out.println("-----------------------------------------------------------------------");
+        ArrayList<HBox> hBoxes = new ArrayList<>();
+        HashMap<String, Integer> unitIntegerHashMap = new HashMap<>();
+
+        for (Tile selectedTile : selectedTiles)
+            for (Unit unit : selectedTile.getUnits())
+                unitIntegerHashMap.merge(unit.getName(), 1, Integer::sum);
+
+        for (String unitName : unitIntegerHashMap.keySet()) {
+            Unit unit = getUnitByType(unitName);
+            hBoxes.add(new HBox(new ImageView(unit.getImage()), new Label(unitIntegerHashMap.get(unitName).toString())));
+        }
+
+        return hBoxes;
+    }
+
+    private static Unit getUnitByType(String unitName) {
+        try {
+            return new Troop(unitName);
+        } catch (Exception e) {
+            if (unitName.equals("engineer")) return new Engineer();
+            else if (unitName.equals("lord")) return new Lord(null);
+            else return new Machine(unitName);
+        }
+    }
+
+    public static ArrayList<Tile> getUnEmptyTiles(ArrayList<Tile> selectedTiles) {
+        ArrayList<Tile> unEmptyTiles = new ArrayList<>();
+        for (Tile selectedTile : selectedTiles)
+            if (selectedTile.getUnits().size() > 0)
+                unEmptyTiles.add(selectedTile);
+        return unEmptyTiles;
     }
 }

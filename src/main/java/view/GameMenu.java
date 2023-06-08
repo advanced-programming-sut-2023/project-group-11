@@ -1,6 +1,9 @@
 package view;
 
+import controller.GameMenuController;
+import controller.SelectUnitMenuController;
 import controller.ShowMapMenuController;
+import controller.Utils;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +29,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameMenu extends Application {
+    public GameMenu() {
+        Utils.setGameMenu(this);
+    }
+
     @FXML
     private AnchorPane mapPane;
     private final int mapPaneHeight = 720;
@@ -59,9 +66,45 @@ public class GameMenu extends Application {
 
     @FXML
     public void initialize() {
+        initMap();
         showMap();
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
         initializeToolTip();
+    }
+
+    private void initMap() {
+//        ArrayList<Building> buildings = new ArrayList<>();
+//        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+//        for (ProductiveBuildingType productiveBuildingType : ProductiveBuildingType.values()) {
+//            buildings.add(BuildingUtils.getBuildingByType(productiveBuildingType.getName()));
+//        }
+//        for (UnitMakerType productiveBuildingType : UnitMakerType.values()) {
+//            buildings.add(BuildingUtils.getBuildingByType(productiveBuildingType.getName()));
+//        }
+//
+        int i = 10;
+//        for (Building building : buildings) {
+//            BuildingUtils.build(currentGovernance, building, i, i, building.getSize());
+//            i += 4;
+//        }
+
+
+        GameMenuController.dropUnit(i++, i, 10, "horse archer");
+        i++;
+        GameMenuController.dropUnit(i++, i, 10, "tunneler");
+        i++;
+        GameMenuController.dropUnit(i++, i, 10, "slaves");
+        i++;
+        GameMenuController.dropUnit(i++, i, 10, "crossbowman");
+        i++;
+        GameMenuController.dropUnit(i++, i, 10, "assassin");
+        i++;
+        GameMenuController.dropUnit(i++, i, 10, "maceman");
+        i++;
+        GameMenuController.dropUnit(i++, i, 10, "spearman");
+        i++;
+        GameMenuController.dropUnit(i++, i, 10, "arabian swordsman");
+//        i++;
     }
 
     // ---------------------------------- Getter/Setter -------------------------------------------
@@ -80,7 +123,7 @@ public class GameMenu extends Application {
 
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
-    private void showMap() {
+    public void showMap() {
         mapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
@@ -109,7 +152,6 @@ public class GameMenu extends Application {
 
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
-                //TODO: needs debug for buildings with size more than 1
                 if (tile.getBuilding() != null)
                     setTileBuildingImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
                             tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
@@ -221,13 +263,18 @@ public class GameMenu extends Application {
         pressedTileY += deltaY;
     }
 
-    public void checkShortcut(KeyEvent keyEvent) {
+    public void checkShortcut(KeyEvent keyEvent) throws Exception {
         KeyCode keyCode = keyEvent.getCode();
 
         switch (keyCode) {
             case ADD -> zoom(true);
             case SUBTRACT -> zoom(false);
+            case M -> checkMoveUnit();
         }
+    }
+
+    private void checkMoveUnit() throws Exception {
+        if (SelectUnitMenuController.hasUnit(selectedTiles)) new MoveUnit().start(new Stage());
     }
 
     private void zoom(boolean zoomIn) {
@@ -241,8 +288,10 @@ public class GameMenu extends Application {
 
         showMap();
     }
+
     @FXML
     private void hover(MouseEvent mouseEvent) {
+        tooltip.hide();
         initializeToolTip();
         selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
         selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
@@ -250,11 +299,16 @@ public class GameMenu extends Application {
         if (selectedTiles.size() > 1) tooltip.setText(ShowMapMenuController.getTilesData(selectedTiles));
         else tooltip.setText(tile.toString());
     }
+
     private void initializeToolTip() {
         tooltip = new Tooltip();
         tooltip.setShowDelay(Duration.seconds(1));
         tooltip.setShowDuration(Duration.seconds(3));
         tooltip.setWrapText(true);
         Tooltip.install(mapPane, tooltip);
+    }
+
+    public ArrayList<Tile> getSelectedTiles() {
+        return selectedTiles;
     }
 }

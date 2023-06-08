@@ -112,7 +112,7 @@ public abstract class Building {
 
     @Override
     public String toString() {
-        return "Building Type: " + name + " HP: " + hitPoint;
+        return "Building Type: " + name + " HP: " + hitPoint + " Owner: " + owner.getOwner().getNickname();
     }
 
     @Override

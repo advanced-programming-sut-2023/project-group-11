@@ -244,8 +244,8 @@ public class GameMenuController {
         return output[0];
     }
 
-    private static void dropUnit(int x, int y, int count, String type) {
-        Tile tile = currentGame.getMap().getTile(x, y);
+    public static void dropUnit(int x, int y, int count, String type) {
+        Tile tile = Stronghold.getCurrentGame().getMap().getTile(x, y);
 
         for (int i = 0; i < count; i++) {
             Unit unit;
@@ -640,8 +640,8 @@ public class GameMenuController {
         Path shortestPath = findRootToDestination(map, units.get(0).getName(), currentX, currentY, destinationX, destinationY);
         map.getTile(currentX, currentY).clearUnitsByType(units);
 
-        setLocation(units, destinationX, destinationY);
-        applyPathEffects(map, shortestPath, units);
+        setLocation(units, shortestPath);
+//        applyPathEffects( shortestPath, units);TODO apply this later
 
         map.getTile(destinationX, destinationY).getUnits().addAll(units);
     }

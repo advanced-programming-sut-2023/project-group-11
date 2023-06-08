@@ -17,6 +17,7 @@ import model.Stronghold;
 import model.User;
 import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
+import view.GameMenu;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -28,6 +29,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 
 public class Utils {
+    private static GameMenu gameMenu;
     public static boolean checkEmptyField(String username, String password, String email, String nickname, String slogan, boolean hasSlogan) {
         return (username.isEmpty() ||
                 password.isEmpty() ||
@@ -185,5 +187,13 @@ public class Utils {
         tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
         tableColumn.setSortable(false);
         tableView.getColumns().add(tableColumn);
+    }
+
+    public static GameMenu getGameMenu() {
+        return gameMenu;
+    }
+
+    public static void setGameMenu(GameMenu gameMenu) {
+        Utils.gameMenu = gameMenu;
     }
 }
