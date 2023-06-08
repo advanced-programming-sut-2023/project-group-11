@@ -2,6 +2,7 @@ package model.map;
 
 import controller.BuildingUtils;
 import model.Governance;
+import model.Stronghold;
 import model.buildings.Building;
 import model.people.Troop;
 import model.people.Unit;
@@ -100,6 +101,8 @@ public class Tile {
             if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
                 unitsName += (i++) + ". " + unit.toString() + '\n';
 
+        int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);
+        result += "Coordinates: x=" + location[1] + " y=" + location[0] + '\n';
         result += "Texture: " + texture.getName() + '\n';
         if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
         if (units.size() > 0) result += "Units:\n" + unitsName;

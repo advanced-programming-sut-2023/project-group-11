@@ -111,9 +111,9 @@ public abstract class Unit {
         return ownerGovernance.equals(Stronghold.getCurrentGame().getCurrentGovernance());
     }
 
-    public void removeFromGame(Tile tile, Governance owner) {
+    public void removeFromGame(Tile tile) {
         tile.getUnits().remove(this);
-        owner.removeUnit(this);
+        ownerGovernance.removeUnit(this);
     }
 
     public String toString() {
