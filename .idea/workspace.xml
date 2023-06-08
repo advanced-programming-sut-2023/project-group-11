@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="MultiTile Selection Hover added">
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/MoveUnit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/MovingAnimation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/MoveUnit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/enums/UnitMakerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/enums/UnitMakerType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Unit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Filler/ox tether.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Filler/ox tether.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/apple orchard.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/ProductiveBuilding/apple orchard.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Units/slave.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Units/slaves.png" afterDir="false" />
-    </list>
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="move unit added (check TODOs)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -242,13 +226,6 @@
       <workItem from="1685992410645" duration="429000" />
       <workItem from="1686031630427" duration="21746000" />
       <workItem from="1686111068614" duration="10965000" />
-    </task>
-    <task id="LOCAL-00042" summary="Attack upto applying damage">
-      <created>1683234033791</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1683234033791</updated>
     </task>
     <task id="LOCAL-00043" summary="Conflicts resolved">
       <created>1683234790483</created>
@@ -586,7 +563,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686072086397</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="move unit added (check TODOs)">
+      <created>1686249535332</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1686249535333</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -628,7 +612,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add score added" />
     <MESSAGE value="Lord making resolved + drop unit debugged" />
     <MESSAGE value="Start digging pitch added" />
     <MESSAGE value="errors resolved" />
@@ -653,7 +636,8 @@
     <MESSAGE value="debug" />
     <MESSAGE value="market menu added" />
     <MESSAGE value="Trade initialized" />
-    <option name="LAST_COMMIT_MESSAGE" value="Trade initialized" />
+    <MESSAGE value="move unit added (check TODOs)" />
+    <option name="LAST_COMMIT_MESSAGE" value="move unit added (check TODOs)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -672,11 +656,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/model/map/Tile.java</url>
           <line>48</line>
           <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/MoveUnit.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
