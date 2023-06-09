@@ -4,12 +4,59 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Trade incomplete (temporary)">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/desert1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/DrawBridge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/DrawBridge.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/UnitMaker/sc_gameinfo_buildings_mercenary.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/draw bridge.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img10.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img11.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img12.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img13.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img13.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img16.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img17.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img17.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img18.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img18.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img19.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img19.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img20.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img21.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img21.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img24.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img24.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img25.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img25.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img26.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img26.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img27.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img27.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img28.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img28.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img29.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img29.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img30.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img30.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img31.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img31.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img7.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img8.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img9.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img10.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img11.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img7.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img8.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img9.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/sc_gameinfo_buildings_22c.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/small gatehouse.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/sc_gameinfo_buildings_2a.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/large gatehouse.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/defence turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/defence turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/perimeter turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/perimeter turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/round tower.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/round tower.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/UnitMaker/engineer guild.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/UnitMaker/engineer guild.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,30 +117,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/CE/T2/AP/Projects/JavaFX001",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/JavaFX001&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="controller.MapEditMenuController" />
@@ -264,14 +311,7 @@
       <workItem from="1685860500010" duration="6210000" />
       <workItem from="1685992410645" duration="429000" />
       <workItem from="1686031630427" duration="21746000" />
-      <workItem from="1686111068614" duration="28906000" />
-    </task>
-    <task id="LOCAL-00043" summary="Conflicts resolved">
-      <created>1683234790483</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1683234790483</updated>
+      <workItem from="1686111068614" duration="34272000" />
     </task>
     <task id="LOCAL-00044" summary="Make JSON Directory In Resources">
       <created>1683320435897</created>
@@ -609,7 +649,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686153649848</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)">
+      <created>1686243204287</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1686243204287</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,7 +698,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Lord making resolved + drop unit debugged" />
     <MESSAGE value="Start digging pitch added" />
     <MESSAGE value="errors resolved" />
     <MESSAGE value="Dig pitch added in nextTurn" />
@@ -676,7 +722,8 @@
     <MESSAGE value="market menu added" />
     <MESSAGE value="Trade initialized" />
     <MESSAGE value="Trade incomplete (temporary)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Trade incomplete (temporary)" />
+    <MESSAGE value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
+    <option name="LAST_COMMIT_MESSAGE" value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -688,7 +735,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java</url>
-          <line>669</line>
+          <line>678</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>

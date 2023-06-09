@@ -6,6 +6,7 @@ public class DrawBridge extends Building {
 
     public DrawBridge(boolean isOpen) {
         this.isOpen = isOpen;
+        size = 1;
         name = "draw bridge";
     }
 
