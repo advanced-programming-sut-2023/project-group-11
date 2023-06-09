@@ -54,12 +54,12 @@ public class GameMenu extends Application {
     private double buildingDragX;
     private double buildingDragY;
     private String buildingDragName;
-    private int firstTileX = 0;
-    private int firstTileY = 0;
-    private int selectedTileX = 0;
-    private int selectedTileY = 0;
-    private int pressedTileX = 0;
-    private int pressedTileY = 0;
+    private int firstTileXInMap = 0;
+    private int firstTileYInMap = 0;
+    private int selectedTileXInScreen = 0;
+    private int selectedTileYInScreen = 0;
+    private int pressedTileXInScreen = 0;
+    private int pressedTileYInScreen = 0;
     private Tile selectedTile;
     private ArrayList<Tile> selectedTiles = new ArrayList<>();
     private int selectedBorderWidth = 1;
@@ -159,7 +159,7 @@ public class GameMenu extends Application {
         mapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
-        Tile[][] mapTiles = ShowMapMenuController.getTiles(firstTileX, firstTileY, rowsCount, columnCount);
+        Tile[][] mapTiles = ShowMapMenuController.getTiles(firstTileXInMap, firstTileYInMap, rowsCount, columnCount);
 
         setTextureTreeImages(mapTiles);
         setBuildingUnitImages(mapTiles);
@@ -207,7 +207,7 @@ public class GameMenu extends Application {
     }
 
     private void setTileBuildingImage(Image image, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
-        if (buildingY != firstTileX + (xCoordinate / tileSize) || buildingX != firstTileY + (yCoordinate / tileSize))
+        if (buildingY != firstTileXInMap + (xCoordinate / tileSize) || buildingX != firstTileYInMap + (yCoordinate / tileSize))
             return; //TODO: Be careful about inverse x & y
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(xCoordinate);
@@ -232,19 +232,19 @@ public class GameMenu extends Application {
     }
 
     public void press(MouseEvent mouseEvent) {
-        pressedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
-        pressedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        pressedTileXInScreen = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+        pressedTileYInScreen = Math.floorDiv((int) mouseEvent.getY(), tileSize);
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             selectedTiles.clear();
             selectedBorderHeight = 1;
             selectedBorderWidth = 1;
-            Tile tile = ShowMapMenuController.getSelectedTile(pressedTileX, pressedTileY, firstTileX, firstTileY);
+            Tile tile = ShowMapMenuController.getSelectedTile(pressedTileXInScreen, pressedTileYInScreen, firstTileXInMap, firstTileYInMap);
             if (tile.equals(selectedTile)) selectedTile = null;
             else {
                 selectedTile = tile;
                 selectedTiles.add(selectedTile);
-                selectedTileX = pressedTileX;
-                selectedTileY = pressedTileY;
+                selectedTileXInScreen = pressedTileXInScreen;
+                selectedTileYInScreen = pressedTileYInScreen;
             }
             showMap();
         }
@@ -253,8 +253,8 @@ public class GameMenu extends Application {
     public void drag(MouseEvent mouseEvent) {
         int endTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
         int endTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
-        int deltaX = endTileX - pressedTileX;
-        int deltaY = endTileY - pressedTileY;
+        int deltaX = endTileX - pressedTileXInScreen;
+        int deltaY = endTileY - pressedTileYInScreen;
         if (deltaX == 0 && deltaY == 0) return;
 
         if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) moveMapMove(deltaX, deltaY);
@@ -263,11 +263,12 @@ public class GameMenu extends Application {
     }
 
     private void selectMultipleTiles(int deltaX, int deltaY) {
-        int selectedColumns = (pressedTileX - selectedTileX) + deltaX + 1;
-        int selectedRows = (pressedTileY - selectedTileY) + deltaY + 1;
+        int selectedColumns = (pressedTileXInScreen - selectedTileXInScreen) + deltaX + 1;
+        int selectedRows = (pressedTileYInScreen - selectedTileYInScreen) + deltaY + 1;
 
         if (selectedRows < 1 || selectedColumns < 1 || outOfPane(deltaX, deltaY)) return;
-        Tile[][] tempArray = ShowMapMenuController.getTiles(selectedTileX, selectedTileY, selectedRows, selectedColumns);
+        Tile[][] tempArray = ShowMapMenuController.getTiles(selectedTileXInScreen + firstTileXInMap,
+                selectedTileYInScreen + firstTileYInMap, selectedRows, selectedColumns);
 
         selectedTiles.clear();
         for (Tile[] tiles : tempArray)
@@ -278,27 +279,27 @@ public class GameMenu extends Application {
 
         showMap();
 
-        pressedTileX += deltaX;
-        pressedTileY += deltaY;
+        pressedTileXInScreen += deltaX;
+        pressedTileYInScreen += deltaY;
 
 //        System.out.println(selectedTiles.size());
     }
 
     public void moveMapMove(int deltaX, int deltaY) {
-        if (firstTileX - deltaX >= 0 && firstTileX - deltaX < mapSize - (mapPaneWidth / tileSize))
-            firstTileX -= deltaX;
-        if (firstTileY - deltaY >= 0 && firstTileY - deltaY < mapSize - (mapPaneHeight / tileSize))
-            firstTileY -= deltaY;
+        if (firstTileXInMap - deltaX >= 0 && firstTileXInMap - deltaX < mapSize - (mapPaneWidth / tileSize))
+            firstTileXInMap -= deltaX;
+        if (firstTileYInMap - deltaY >= 0 && firstTileYInMap - deltaY < mapSize - (mapPaneHeight / tileSize))
+            firstTileYInMap -= deltaY;
 
         showMap();
 
-        pressedTileX += deltaX;
-        pressedTileY += deltaY;
+        pressedTileXInScreen += deltaX;
+        pressedTileYInScreen += deltaY;
     }
 
     private boolean outOfPane(int deltaX, int deltaY) {
-        return (pressedTileX + deltaX) - firstTileX >= (mapPaneWidth / tileSize) ||
-                (pressedTileY + deltaY) - firstTileY >= (mapPaneHeight / tileSize);
+        return (pressedTileXInScreen + deltaX) - firstTileXInMap >= (mapPaneWidth / tileSize) ||
+                (pressedTileYInScreen + deltaY) - firstTileYInMap >= (mapPaneHeight / tileSize);
 
     }
 
@@ -340,9 +341,9 @@ public class GameMenu extends Application {
     @FXML
     private void hover(MouseEvent mouseEvent) {
         initializeToolTip();
-        selectedTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
-        selectedTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
-        Tile tile = ShowMapMenuController.getSelectedTile(selectedTileX, selectedTileY, firstTileX, firstTileY);
+        selectedTileXInScreen = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+        selectedTileYInScreen = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        Tile tile = ShowMapMenuController.getSelectedTile(selectedTileXInScreen, selectedTileYInScreen, firstTileXInMap, firstTileYInMap);
         if (selectedTiles.size() > 1) tooltip.setText(ShowMapMenuController.getTilesData(selectedTiles));
         else tooltip.setText(tile.toString());
     }
@@ -438,8 +439,8 @@ public class GameMenu extends Application {
     }
 
     public void buildingDragDone(DragEvent dragEvent) {
-        int x = Math.floorDiv((int) buildingDragX, tileSize) + firstTileX;
-        int y = Math.floorDiv((int) buildingDragY, tileSize) + firstTileY;
+        int x = Math.floorDiv((int) buildingDragX, tileSize) + firstTileXInMap;
+        int y = Math.floorDiv((int) buildingDragY, tileSize) + firstTileYInMap;
         switch (GameMenuController.checkDropBuilding(x, y, buildingDragName)) {
             case CANT_BUILD_HERE -> ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "Can't build here!");
             case NOT_ENOUGH_MONEY ->
@@ -449,7 +450,7 @@ public class GameMenu extends Application {
             case NOT_ENOUGH_POPULATION ->
                     ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough population!");
             case SUCCESS -> setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName).getImage()
-                    , (x - firstTileX) * tileSize, (y - firstTileY) * tileSize,
+                    , (x - firstTileXInMap) * tileSize, (y - firstTileYInMap) * tileSize,
                     BuildingUtils.getBuildingByType(buildingDragName).getSize(), y, x);
         }
     }
