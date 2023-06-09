@@ -52,18 +52,19 @@ public class SelectUnitMenuController {
             return SelectUnitMenuMessages.INVALID_DISTANCE;
 
         if (isPatrol) setPatrolUnit(destinationX, destinationY, currentLocation, unitType);
+        else stopPatrol(map.getTile(currentX, currentY).getUnitsByType(unitType));
         moveUnits(map, unitType, shortestPath, currentLocation, destinationX, destinationY);
 
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static SelectUnitMenuMessages checkAttack(Matcher matcher, int[] currentLocation, String unitType, String attackType) {
-        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
-            return SelectUnitMenuMessages.INVALID_COMMAND;
+    public static SelectUnitMenuMessages checkAttack(int[] currentLocation, int targetX, int targetY, String unitType) {
+//        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
+//            return SelectUnitMenuMessages.INVALID_COMMAND;
 
         Map map = Stronghold.getCurrentGame().getMap();
-        int targetX = Integer.parseInt(matcher.group("xCoordinate"));
-        int targetY = Integer.parseInt(matcher.group("yCoordinate"));
+//        int targetX = Integer.parseInt(matcher.group("xCoordinate"));
+//        int targetY = Integer.parseInt(matcher.group("yCoordinate"));
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
         ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
@@ -72,8 +73,7 @@ public class SelectUnitMenuController {
 
         if (!Utils.isValidCoordinates(map, targetX, targetY))
             return SelectUnitMenuMessages.INVALID_COORDINATE;
-        else if ((attackType.equals("air attack") && !isValidUnitForAirAttack(unitType)) ||
-                (attackType.equals("ground attack") && !isValidUnitForGroundAttack(unitType)))
+        else if (!isValidUnitForAirAttack(unitType) && !isValidUnitForGroundAttack(unitType))
             return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_ATTACK;
         else if (((Attacker) selectedUnits.get(0)).getRange(currentTile) < Math.abs(currentX - targetX) ||
                 ((Attacker) selectedUnits.get(0)).getRange(currentTile) < Math.abs(currentY - targetY))
@@ -130,17 +130,17 @@ public class SelectUnitMenuController {
         }
     }
 
-    public static SelectUnitMenuMessages checkStopPatrol(int[] currentLocation, String unitType) {
-        Map map = Stronghold.getCurrentGame().getMap();
-        int currentX = currentLocation[0];
-        int currentY = currentLocation[1];
-        ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
-
-        if (!selectedUnits.get(0).isPatrolling()) return SelectUnitMenuMessages.NOT_PATROLLING;
-
-        stopPatrol(selectedUnits);
-        return SelectUnitMenuMessages.SUCCESS;
-    }
+//    public static SelectUnitMenuMessages checkStopPatrol(int[] currentLocation, String unitType) {
+//        Map map = Stronghold.getCurrentGame().getMap();
+//        int currentX = currentLocation[0];
+//        int currentY = currentLocation[1];
+//        ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+//
+//        if (!selectedUnits.get(0).isPatrolling()) return SelectUnitMenuMessages.NOT_PATROLLING;
+//
+//        stopPatrol(selectedUnits);
+//        return SelectUnitMenuMessages.SUCCESS;
+//    }
 
     private static void stopPatrol(ArrayList<Unit> units) {
         for (Unit unit : units) unit.stopPatrol();

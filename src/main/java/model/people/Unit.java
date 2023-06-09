@@ -16,8 +16,8 @@ public abstract class Unit {
     protected Governance ownerGovernance;
     protected UnitState unitState = UnitState.STANDING;
     protected int[] location;
-    protected int[] patrolOrigin;
-    protected int[] patrolDestination;
+    protected int[] patrolOrigin = new int[2];
+    protected int[] patrolDestination = new int[2];
     protected boolean isPatrolling = false;
     private Image image = null;
 

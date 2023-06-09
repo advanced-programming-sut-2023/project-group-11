@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -25,8 +27,12 @@ public class MoveUnit extends Application {
     public TextField xDestination;
     public TextField yDestination;
     public ImageView selectedSoldierImage;
+    public ToggleGroup checkAction;
     private ArrayList<Tile> selectedTiles = Utils.getGameMenu().getSelectedTiles();
+    private String unitType;
     public HBox soldiers;
+    private SelectUnitMenuMessages message;
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -42,8 +48,7 @@ public class MoveUnit extends Application {
         soldiers.getChildren().addAll(hBoxes);
         selectedSoldierImage.setImage(getHBoxImage(hBoxes.get(0)));
         for (HBox hBox : hBoxes)
-            hBox.setOnMouseClicked(mouseEvent ->
-                    selectedSoldierImage.setImage(getHBoxImage(hBox)));
+            hBox.setOnMouseClicked(mouseEvent -> selectedSoldierImage.setImage(getHBoxImage(hBox)));
     }
 
     private Image getHBoxImage(HBox hBox) {
@@ -51,32 +56,76 @@ public class MoveUnit extends Application {
     }
 
     @FXML
-    public void getDestinationCoordinates() {
+    public void getDestinationCoordinates() throws Exception {
         try {
             int destinationX = Integer.parseInt(xDestination.getText());
             int destinationY = Integer.parseInt(yDestination.getText());
-            moveUnit(destinationX, destinationY);
+            checkAction(destinationX, destinationY);
         } catch (NumberFormatException e) {
             ViewUtils.alert(Alert.AlertType.ERROR, "Move Error", "Please enter a number!");
         }
     }
 
-    public void getDestinationTile() {
-        stage.close();
-        Utils.getGameMenu().selectMoveTile(this);
+    public void checkAction(int destinationX, int destinationY) throws Exception {
+        method();
+        RadioButton selected = (RadioButton) checkAction.getSelectedToggle();
+        getClass().getDeclaredMethod("check" + selected.getText() + "Unit", int.class, int.class).
+                invoke(this, destinationX, destinationY);
     }
 
-    public void moveUnit(int destinationX, int destinationY) {
-        SelectUnitMenuMessages message;
-        String unitType = getUnitTypeByImage(selectedSoldierImage);
-        selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
+    private void checkMoveUnit(int destinationX, int destinationY) {
+        moveUnit(destinationX, destinationY, false);
+    }
 
+    public void checkPatrolUnit(int destinationX, int destinationY) {
+        moveUnit(destinationX, destinationY, true);
+    }
+
+    public void moveUnit(int destinationX, int destinationY, boolean isPatrol) {
         for (Tile selectedTile : selectedTiles) {
             int[] location = ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile);
             message = SelectUnitMenuController.checkMoveUnit(new int[]{location[0], location[1]},
-                    destinationY, destinationX, unitType, false);
+                    destinationY, destinationX, unitType, isPatrol);
 
             handleMoveError(message);
+        }
+    }
+
+    public void checkAttackUnit(int destinationX, int destinationY) {
+        for (Tile selectedTile : selectedTiles) {
+            message = SelectUnitMenuController.checkAttack(ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile),
+                    destinationY, destinationX, unitType);
+
+            handleAttackError(message);
+        }
+    }
+
+    public void getDestinationTile() {
+        stage.close();
+        Utils.getGameMenu().selectDestinationTile(this);
+    }
+
+
+    private void method() {
+        unitType = getUnitTypeByImage(selectedSoldierImage);
+        selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
+    }
+
+    private void handleAttackError(SelectUnitMenuMessages message) {
+        switch (message) {
+            case SUCCESS -> stage.close();
+            case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "Invalid Coordinate!");
+            case INVALID_UNIT_TYPE_TO_ATTACK -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "Cannot Attack With This Unit!");
+            case OUT_OF_RANGE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "Target is Out Of Range!");
+            case NO_ATTACK_LEFT -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "You Attacked Once This Round With This Unit!");
+            case EMPTY_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "There Is No One In Target-Tile!");
+            case FRIENDLY_ATTACK -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "You Can't Attack To Your Own Troops And Building!");
         }
     }
 
