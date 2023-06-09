@@ -129,12 +129,13 @@ public class GameMenuController {
         Building building = BuildingUtils.getBuildingByType(buildingType);
 
         int size = building.getSize();
-//        if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size))
-//            return GameMenuMessages.INVALID_COORDINATE;
+        if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size))
+            return GameMenuMessages.INVALID_COORDINATE;
         if (!BuildingUtils.isMapEmpty(x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
         if (!BuildingUtils.isTextureSuitable(buildingType, x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
         if(true) {
             //TODO: delete test mode + debug in current game, current governance, current map, ....
+            BuildingUtils.build(currentGovernance, building, x, y, size);
             return GameMenuMessages.SUCCESS;
         }
         if (building.getGoldCost() > currentGovernance.getGold()) return GameMenuMessages.NOT_ENOUGH_MONEY;
