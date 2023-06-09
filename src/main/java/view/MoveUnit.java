@@ -4,7 +4,6 @@ import controller.SelectUnitMenuController;
 import controller.ShowMapMenuController;
 import controller.Utils;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -50,31 +49,44 @@ public class MoveUnit extends Application {
         try {
             int destinationX = Integer.parseInt(xDestination.getText());
             int destinationY = Integer.parseInt(yDestination.getText());
-            String unitType = getUnitTypeByImage(selectedSoldierImage);
-            selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
-            for (Tile selectedTile : selectedTiles) {
-                int[] location = ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile);
-                moveUnit(location[0], location[1], destinationX, destinationY, unitType);
-            }
+            moveUnit(destinationX, destinationY);
         } catch (NumberFormatException e) {
             ViewUtils.alert(Alert.AlertType.ERROR, "Move Error", "Please enter a number!");
-        } catch (NullPointerException e) {
-            ViewUtils.alert(Alert.AlertType.ERROR, "Move Error", "Please select the unit image!");
         }
+    }
+
+    public void getDestinationTile() {
+        stage.close();
+        Utils.getGameMenu().selectMoveTile(this);
+    }
+
+    public void moveUnit(int destinationX, int destinationY) {
+        SelectUnitMenuMessages message;
+
+        if (selectedSoldierImage.getImage() != null) {
+            String unitType = getUnitTypeByImage(selectedSoldierImage);
+            selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
+
+            for (Tile selectedTile : selectedTiles) {
+                int[] location = ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile);
+                message = SelectUnitMenuController.checkMoveUnit(new int[]{location[0], location[1]},
+                        destinationY, destinationX, unitType, false);
+
+                handleMoveError(message);
+            }
+        } else ViewUtils.alert(Alert.AlertType.ERROR, "Move Error", "Please select the unit image!");
     }
 
     private String getUnitTypeByImage(ImageView selectedSoldierImage) {
         String[] splitted = selectedSoldierImage.getImage().getUrl().split("/");
-        return splitted[splitted.length - 1].substring(0, splitted[splitted.length - 1].lastIndexOf('.'));
+        String imageName = splitted[splitted.length - 1];
+        return imageName.substring(0, imageName.lastIndexOf('.'));
     }
 
-    public static void moveUnit(int pressedTileX, int pressedTileY, int destinationX, int destinationY, String unitType) {
-        SelectUnitMenuMessages message = SelectUnitMenuController.checkMoveUnit(new int[]{pressedTileX, pressedTileY},
-                destinationY, destinationX, unitType, false);
-
+    private void handleMoveError(SelectUnitMenuMessages message) {
         switch (message) {
             case SUCCESS -> stage.close();
-            case INVALID_COORDINATE ->  ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",
+            case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",
                     "Invalid Coordinates!");
             case INVALID_DESTINATION_TEXTURE -> ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",
                     "Invalid Destination: Invalid Texture!");
@@ -89,12 +101,5 @@ public class MoveUnit extends Application {
             case INVALID_DISTANCE -> ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",
                     "Invalid Destination: Too Far For Going There, Based On Unit's Speed!");
         }
-    }
-
-    public void getDestinationTile(ActionEvent actionEvent) {
-        stage.close();
-        String unitType = getUnitTypeByImage(selectedSoldierImage);
-        selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
-//        Utils.getGameMenu().selectMoveTile(unitType,selectedTiles);
     }
 }

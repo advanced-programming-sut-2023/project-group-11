@@ -463,15 +463,12 @@ public class GameMenu extends Application {
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Next Turn Successful", GameMenuController.nextTurn());
     }
 
-//    public void selectMoveTile(String unitType, ArrayList<Tile> selectedTiles) {
-//        mapPane.setOnMouseClicked(mouseEvent -> {
-//            pressedTileXInScreen = Math.floorDiv((int) mouseEvent.getX(), tileSize);
-//            pressedTileYInScreen = Math.floorDiv((int) mouseEvent.getY(), tileSize);
-//            for (Tile selectedTile : selectedTiles) {
-//                int[] location = ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile);
-//                MoveUnit.moveUnit(location[0], location[1], pressedTileXInScreen, pressedTileYInScreen, unitType);
-//            }
-//            mouseEvent.consume();
-//        });
-//    }
+    public void selectMoveTile(MoveUnit moveUnit) {
+        mapPane.setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getClickCount() == 2 && mouseEvent.getButton().equals(MouseButton.SECONDARY))
+                moveUnit.moveUnit(firstTileXInMap + pressedTileXInScreen,
+                        firstTileYInMap + selectedTileYInScreen);
+            mouseEvent.consume();
+        });
+    }
 }

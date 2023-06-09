@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<AnchorPane stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="view.MoveUnit">
-    <VBox alignment="CENTER" layoutX="7.0" layoutY="28.0" prefHeight="291.0" prefWidth="1000.0" spacing="10.0">
-        <Label text="please select a soldier from the list below"/>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="397.0" prefWidth="1007.0" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MoveUnit">
+    <VBox alignment="CENTER" layoutX="7.0" layoutY="28.0" prefHeight="366.0" prefWidth="1000.0" spacing="10.0">
+        <Label text="please select a soldier from the list below" />
         <HBox alignment="CENTER" prefHeight="32.0" prefWidth="344.0" spacing="10.0">
-            <TextField promptText="xDestination" fx:id="xDestination"/>
-            <TextField fx:id="yDestination" promptText="yDestination"/>
+            <TextField promptText="xDestination" fx:id="xDestination" />
+            <TextField fx:id="yDestination" promptText="yDestination" />
         </HBox>
-        <HBox fx:id="soldiers" alignment="CENTER" prefHeight="160.0" prefWidth="1000.0" spacing="10.0"/>
-        <ImageView fx:id="selectedSoldierImage" fitHeight="59.0" fitWidth="96.0" pickOnBounds="true"
-                   preserveRatio="true"/>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-            <Button mnemonicParsing="false" onAction="#getDestinationCoordinates" styleClass="menu-button"
-                    text="move with coordinates"/>
-            <Button mnemonicParsing="false" onAction="#getDestinationTile" styleClass="menu-button"
-                    text="move with selecting tile"/>
+        <HBox fx:id="soldiers" alignment="CENTER" prefHeight="160.0" prefWidth="1000.0" spacing="10.0" />
+        <ImageView fx:id="selectedSoldierImage" fitHeight="59.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true" />
+        <HBox alignment="CENTER" prefHeight="87.0" prefWidth="1000.0" spacing="10.0">
+            <Button mnemonicParsing="false" onAction="#getDestinationCoordinates" prefHeight="54.0" prefWidth="250.0" styleClass="menu-button" text="move with coordinates" />
+            <Button mnemonicParsing="false" onAction="#getDestinationTile" prefHeight="54.0" prefWidth="250.0" styleClass="menu-button" text="select tile(double right mouse click)" wrapText="true" />
         </HBox>
         <padding>
-            <Insets bottom="10.0"/>
+            <Insets bottom="10.0" />
         </padding>
     </VBox>
 </AnchorPane>
