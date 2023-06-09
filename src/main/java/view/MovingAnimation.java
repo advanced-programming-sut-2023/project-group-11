@@ -3,7 +3,6 @@ package view;
 import controller.SelectUnitMenuController;
 import controller.ShowMapMenuController;
 import controller.Utils;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
@@ -16,6 +15,7 @@ public class MovingAnimation {
     private final GameMenu gameMenu;
     private final ArrayList<Unit> units;
     private final Path shortestPath;
+    private final double MOVE_TIME;
     private Timeline timeline;
     private int move = 0;
 
@@ -24,19 +24,22 @@ public class MovingAnimation {
         this.gameMenu = Utils.getGameMenu();
         this.units = units;
         this.shortestPath = shortestPath;
-        initializeTimeline(units);
+        this.MOVE_TIME = 2.0 / units.get(0).getSpeed();
+        if (slowsDown(shortestPath.getPath().get(0))) initializeTimeline(MOVE_TIME * 2);
+        else initializeTimeline(MOVE_TIME);
     }
 
-    private void initializeTimeline(ArrayList<Unit> units) {
-        timeline = new Timeline(new KeyFrame(
-                Duration.millis(2000.0 / units.get(0).getSpeed()), actionEvent -> this.start()));
-        timeline.setCycleCount(Animation.INDEFINITE);
+    private void initializeTimeline(double moveTime) {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(moveTime), actionEvent -> this.start()));
         timeline.play();
     }
 
     private void start() {
         int[] currentLocation = shortestPath.getPath().get(move);
         int[] nextLocation = shortestPath.getPath().get(move + 1);
+
+        if (slowsDown(nextLocation)) initializeTimeline(MOVE_TIME * 2);
+        else initializeTimeline(MOVE_TIME);
 
         for (Unit unit : units) unit.setLocation(nextLocation);
 
@@ -48,5 +51,9 @@ public class MovingAnimation {
 
         move++;
         if (move >= shortestPath.getLength() - 1) timeline.stop();
+    }
+
+    private static boolean slowsDown(int[] nextLocation) {
+        return ShowMapMenuController.getCurrentMap().getTile(nextLocation).getTexture().slowsDown();
     }
 }

@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -39,9 +40,14 @@ public class MoveUnit extends Application {
     public void initialize() {
         ArrayList<HBox> hBoxes = SelectUnitMenuController.getTilesUnits(selectedTiles);
         soldiers.getChildren().addAll(hBoxes);
+        selectedSoldierImage.setImage(getHBoxImage(hBoxes.get(0)));
         for (HBox hBox : hBoxes)
             hBox.setOnMouseClicked(mouseEvent ->
-                    selectedSoldierImage.setImage(((ImageView) hBox.getChildren().get(0)).getImage()));
+                    selectedSoldierImage.setImage(getHBoxImage(hBox)));
+    }
+
+    private Image getHBoxImage(HBox hBox) {
+        return ((ImageView) hBox.getChildren().get(0)).getImage();
     }
 
     @FXML
@@ -62,19 +68,16 @@ public class MoveUnit extends Application {
 
     public void moveUnit(int destinationX, int destinationY) {
         SelectUnitMenuMessages message;
+        String unitType = getUnitTypeByImage(selectedSoldierImage);
+        selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
 
-        if (selectedSoldierImage.getImage() != null) {
-            String unitType = getUnitTypeByImage(selectedSoldierImage);
-            selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
+        for (Tile selectedTile : selectedTiles) {
+            int[] location = ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile);
+            message = SelectUnitMenuController.checkMoveUnit(new int[]{location[0], location[1]},
+                    destinationY, destinationX, unitType, false);
 
-            for (Tile selectedTile : selectedTiles) {
-                int[] location = ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile);
-                message = SelectUnitMenuController.checkMoveUnit(new int[]{location[0], location[1]},
-                        destinationY, destinationX, unitType, false);
-
-                handleMoveError(message);
-            }
-        } else ViewUtils.alert(Alert.AlertType.ERROR, "Move Error", "Please select the unit image!");
+            handleMoveError(message);
+        }
     }
 
     private String getUnitTypeByImage(ImageView selectedSoldierImage) {

@@ -3,24 +3,24 @@ package model.map;
 import javafx.scene.image.Image;
 
 public enum Texture {
-    SAND("sand", "desert"),
-    SAND_DUNE("sand dune", "desert"),
-    ROCK("rock", "rock"),           // UnBuildable
-    CLIFF("cliff", "cliff"),      // UnBuildable - Sakhreh
-    STONE("stone", "stone"),
-    IRON("iron", "iron"),
-    GRASS("grass", "grass"),
-    DENSE_GRASSLAND("dense grassland", "grass"),
-    GRASSLAND("grassland", "grassland"),  // UnBuildable
-    OIL("oil", "desert"),
-    MARSH("marsh", "marsh"),      // Jolge
-    SHALLOW_WATER("shallow water", "shallow_water"),
-    RIVER("river", "water"),
-    SMALL_LAKE("small lake", "water"),
-    BIG_LAKE("big lake", "water"),
-    SEA("sea", "water"),
-    BEACH("beach", "desert"),
-    PITCH("pitch", "pitch")             // unbuildable
+    SAND("sand", "desert"),                         //زمین
+    SAND_DUNE("sand dune", "desert"),               //زمین با سنگ ریزه
+    ROCK("rock", "rock"),                           // تخته سنگ - UnBuildable
+    CLIFF("cliff", "cliff"),                        // UnBuildable - صخره
+    STONE("stone", "stone"),                        // معدن سنگ
+    IRON("iron", "iron"),                           // معدن آهن
+    GRASS("grass", "grass"),                        // چمن
+    DENSE_GRASSLAND("dense grassland", "grass"),    //علفزار پرتراکم
+    GRASSLAND("grassland", "grassland"),            // UnBuildable
+    OIL("oil", "desert"),                           //نفت
+    MARSH("marsh", "marsh"),                        // جلگه
+    SHALLOW_WATER("shallow water", "shallow_water"),// آب کم عمق
+    RIVER("river", "water"),                        // رودخانه
+    SMALL_LAKE("small lake", "water"),              // برکه کوچک
+    BIG_LAKE("big lake", "water"),                  // برکه بزرگ
+    SEA("sea", "water"),                            // دریا
+    BEACH("beach", "desert"),                       // ساحل دریا
+    PITCH("pitch", "pitch")                         // UnBuildable خندق
     ;
 
     private final String name;
@@ -66,6 +66,10 @@ public enum Texture {
 
     public boolean isBuildable() {
         return !(isWater() || this.equals(CLIFF) || this.equals(ROCK) || this.equals(PITCH));
+    }
+
+    public boolean slowsDown() {
+        return this.equals(MARSH) || this.equals(BEACH) || this.equals(SAND_DUNE) || this.equals(SHALLOW_WATER);
     }
 
     public String getName() {

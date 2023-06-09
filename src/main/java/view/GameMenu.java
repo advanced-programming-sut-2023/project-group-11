@@ -131,6 +131,10 @@ public class GameMenu extends Application {
         GameMenuController.dropUnit(i++, i, 10, "maceman");
         GameMenuController.dropUnit(i++, i, 10, "spearman");
         GameMenuController.dropUnit(i++, i, 10, "arabian swordsman");
+        GameMenuController.dropUnit(39, 44, 10, "horse archer");
+        GameMenuController.dropUnit(41, 44, 10, "horse archer");
+        GameMenuController.dropUnit(42, 44, 10, "horse archer");
+        GameMenuController.dropUnit(43, 44, 10, "horse archer");
     }
 
     private void setTraversable() {
@@ -358,7 +362,7 @@ public class GameMenu extends Application {
 
     private void initializeBuildingBoxes() {
         initializeBuildingBox(governanceBox, "Church", "Filler", "DrawBridge", "Trap");
-        initializeBuildingBox(warBox, "Keep", "Tower", "Storage", "UnitMaker","GateHouse");
+        initializeBuildingBox(warBox, "Keep", "Tower", "Storage", "UnitMaker", "GateHouse");
         //TODO: gatehouse
         //TODO: blackBackground pics + optimizing pics(drawBridge ...)
         initializeBuildingBox(productiveBox, "ProductiveBuilding");
@@ -441,9 +445,9 @@ public class GameMenu extends Application {
     public void buildingDragDone(DragEvent dragEvent) {
         int x = Math.floorDiv((int) buildingDragX, tileSize) + firstTileXInMap;
         int y = Math.floorDiv((int) buildingDragY, tileSize) + firstTileYInMap;
-        if(buildingDragX > mapPaneWidth || buildingDragX < 0 || buildingDragY > mapPaneHeight || buildingDragY < 0)
+        if (buildingDragX > mapPaneWidth || buildingDragX < 0 || buildingDragY > mapPaneHeight || buildingDragY < 0)
             return;
-        switch (GameMenuController.checkDropBuilding(y,x, buildingDragName)) {
+        switch (GameMenuController.checkDropBuilding(y, x, buildingDragName)) {
             case CANT_BUILD_HERE -> ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "Can't build here!");
             case NOT_ENOUGH_MONEY ->
                     ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough money!");
