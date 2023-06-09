@@ -33,9 +33,9 @@ public class ShowMapMenuController {
     }
 
     public static String getTilesData(ArrayList<Tile> selectedTiles) {
+        double averageProduction = 0;
         int totalSoldiers = 0;
         int totalProduction = 0;
-        double averageProduction = 0;
         int maxProduction = 0;
         int minProduction = 0;
         int buildingProduction;

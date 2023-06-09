@@ -79,6 +79,7 @@ public class GameMenu extends Application {
 
     @FXML
     public void initialize() {
+        GameMenuController.setCurrentGame();
         initMap();
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
         setTraversable();
@@ -97,20 +98,20 @@ public class GameMenu extends Application {
 //            buildings.add(BuildingUtils.getBuildingByType(productiveBuildingType.getName()));
 //        }
 //
-        int i = 10;
+        int i = 20;
 //        for (Building building : buildings) {
 //            BuildingUtils.build(currentGovernance, building, i, i, building.getSize());
 //            i += 4;
 //        }
 
 
-        GameMenuController.dropUnit(i++, i, 10, "battering ram");
-        GameMenuController.dropUnit(i++, i, 10, "trebuchets");
-        GameMenuController.dropUnit(i++, i, 10, "portable shield");
-        GameMenuController.dropUnit(i++, i, 10, "catapults");
-        GameMenuController.dropUnit(i++, i, 10, "siege tower");
-        GameMenuController.dropUnit(i++, i, 10, "fire ballista");
-        GameMenuController.dropUnit(i++, i, 10, "engineer");
+//        GameMenuController.dropUnit(i++, i, 10, "battering ram");
+//        GameMenuController.dropUnit(i++, i, 10, "trebuchets");
+//        GameMenuController.dropUnit(i++, i, 10, "portable shield");
+//        GameMenuController.dropUnit(i++, i, 10, "catapults");
+//        GameMenuController.dropUnit(i++, i, 10, "siege tower");
+//        GameMenuController.dropUnit(i++, i, 10, "fire ballista");
+//        GameMenuController.dropUnit(i++, i, 10, "engineer");
         GameMenuController.dropUnit(i++, i, 10, "horse archer");
         GameMenuController.dropUnit(i++, i, 10, "tunneler");
         GameMenuController.dropUnit(i++, i, 10, "slaves");
@@ -135,7 +136,6 @@ public class GameMenu extends Application {
     private void setTraversable() {
         for (Node child : sidePane.getChildren())
             child.setFocusTraversable(false);
-        mapPane.setFocusTraversable(true);
         mapPane.requestFocus();
     }
 
@@ -189,7 +189,7 @@ public class GameMenu extends Application {
                     setTileBuildingImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
                             tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
                 if (tile.getUnits().size() != 0)
-                    setTileImage(tile.getUnits().get(0).getImage(), xCoordinate, yCoordinate);
+                    setTileImage(tile.getUnits().get(tile.getUnits().size() - 1).getImage(), xCoordinate, yCoordinate);
                 if (tile.equals(selectedTile)) boldSelectedTile(xCoordinate, yCoordinate);
                 xCoordinate += tileSize;
             }
@@ -458,4 +458,20 @@ public class GameMenu extends Application {
     public ArrayList<Tile> getSelectedTiles() {
         return selectedTiles;
     }
+
+    public void nextTurn() {
+        ViewUtils.alert(Alert.AlertType.INFORMATION, "Next Turn Successful", GameMenuController.nextTurn());
+    }
+
+//    public void selectMoveTile(String unitType, ArrayList<Tile> selectedTiles) {
+//        mapPane.setOnMouseClicked(mouseEvent -> {
+//            pressedTileXInScreen = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+//            pressedTileYInScreen = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+//            for (Tile selectedTile : selectedTiles) {
+//                int[] location = ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile);
+//                MoveUnit.moveUnit(location[0], location[1], pressedTileXInScreen, pressedTileYInScreen, unitType);
+//            }
+//            mouseEvent.consume();
+//        });
+//    }
 }

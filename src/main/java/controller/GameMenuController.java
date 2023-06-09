@@ -240,7 +240,7 @@ public class GameMenuController {
     }
 
     public static void dropUnit(int x, int y, int count, String type) {
-        Tile tile = Stronghold.getCurrentGame().getMap().getTile(x, y);
+        Tile tile = currentGame.getMap().getTile(x, y);
 
         for (int i = 0; i < count; i++) {
             Unit unit;
@@ -333,7 +333,7 @@ public class GameMenuController {
     }
 
     private static void cagedWardog(Building building) {
-        if (building.getName().equals("caged_wardogs")) {
+        if (building.getName().equals("caged wardogs")) {
             int x = building.getXCoordinate();
             int y = building.getYCoordinate();
             int range = 3, damage = 20;
@@ -672,13 +672,10 @@ public class GameMenuController {
         Set<java.util.Map.Entry<Governance, Integer>> entries = scores.entrySet();
         List<java.util.Map.Entry<Governance, Integer>> sortedEntries = new ArrayList<>(entries);
         ArrayList<Governance> result = new ArrayList<>();
-        Comparator<java.util.Map.Entry<Governance, Integer>> comparator = new Comparator<java.util.Map.Entry<Governance, Integer>>() {
-            @Override
-            public int compare(java.util.Map.Entry<Governance, Integer> o1, java.util.Map.Entry<Governance, Integer> o2) {
-                Integer v1 = o1.getValue();
-                Integer v2 = o2.getValue();
-                return v2.compareTo(v1);
-            }
+        Comparator<java.util.Map.Entry<Governance, Integer>> comparator = (o1, o2) -> {
+            Integer v1 = o1.getValue();
+            Integer v2 = o2.getValue();
+            return v2.compareTo(v1);
         };
 
         sortedEntries.sort(comparator);

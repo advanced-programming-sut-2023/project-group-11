@@ -855,23 +855,22 @@ public class SelectUnitMenuController {
     }
 
     public static boolean hasUnit(ArrayList<Tile> selectedTiles) {
-        for (Tile selectedTile : selectedTiles)
-            if (selectedTile.getUnits().size() > 0) return true;
+        for (Tile selectedTile : selectedTiles) {
+            ArrayList<Unit> units = selectedTile.getUnits();
+            if (units.size() > 0 && units.get(0).isForCurrentGovernance())
+                return true;
+        }
         return false;
     }
 
     public static ArrayList<HBox> getTilesUnits(ArrayList<Tile> selectedTiles) {
-//        for (Tile selectedTile : selectedTiles) {
-//            System.out.println(selectedTile);
-//        }
-//        System.out.println(selectedTiles.size());
-//        System.out.println("-----------------------------------------------------------------------");
         ArrayList<HBox> hBoxes = new ArrayList<>();
         HashMap<String, Integer> unitIntegerHashMap = new HashMap<>();
 
         for (Tile selectedTile : selectedTiles)
             for (Unit unit : selectedTile.getUnits())
-                unitIntegerHashMap.merge(unit.getName(), 1, Integer::sum);
+                if (unit.isForCurrentGovernance())
+                    unitIntegerHashMap.merge(unit.getName(), 1, Integer::sum);
 
         for (String unitName : unitIntegerHashMap.keySet()) {
             Unit unit = getUnitByType(unitName);
@@ -902,7 +901,7 @@ public class SelectUnitMenuController {
 
     private static boolean tileHasUnitType(Tile selectedTile, String unitType) {
         for (Unit unit : selectedTile.getUnits())
-            if (unit.getName().equals(unitType)) return true;
+            if (unit.getName().equals(unitType) && unit.isForCurrentGovernance()) return true;
         return false;
     }
 }
