@@ -124,7 +124,7 @@ public class BuildingUtils {
 
         for (int i = x; i < x + size; i++)
             for (int j = y; j < y + size; j++)
-                tiles[i][j].setBuilding(building);
+                tiles[j][i].setBuilding(building);
     }
 
     public static boolean isBuildingInTile(Building building) {

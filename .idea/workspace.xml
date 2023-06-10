@@ -4,59 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/desert1.png" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="dropBuilding improved">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/DrawBridge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/DrawBridge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/BuildingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/BuildingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/draw bridge.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img10.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img10.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img11.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img12.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img12.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img13.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img13.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img16.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img16.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img17.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img17.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img18.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img18.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img19.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img19.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img20.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img20.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img21.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img21.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img24.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img24.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img25.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img25.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img26.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img26.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img27.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img27.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img28.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img28.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img29.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img29.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img30.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img30.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img31.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img31.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img7.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img8.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/DrawBridge/0_0img9.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/drawbridges/0_0img9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img0.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img10.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img10.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img11.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img6.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img7.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img8.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/gate/0_0img9.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/gate/0_0img9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/sc_gameinfo_buildings_22c.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/small gatehouse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/sc_gameinfo_buildings_2a.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/GateHouse/large gatehouse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/defence turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/defence turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/perimeter turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/perimeter turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/round tower.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Tower/round tower.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/UnitMaker/engineer guild.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/UnitMaker/engineer guild.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -311,14 +264,8 @@
       <workItem from="1685860500010" duration="6210000" />
       <workItem from="1685992410645" duration="429000" />
       <workItem from="1686031630427" duration="21746000" />
-      <workItem from="1686111068614" duration="34272000" />
-    </task>
-    <task id="LOCAL-00044" summary="Make JSON Directory In Resources">
-      <created>1683320435897</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1683320435897</updated>
+      <workItem from="1686111068614" duration="38368000" />
+      <workItem from="1686388118247" duration="13849000" />
     </task>
     <task id="LOCAL-00045" summary="Attack ended (check TODOs)">
       <created>1683321368780</created>
@@ -656,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686243204287</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="dropBuilding improved">
+      <created>1686317093263</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1686317093263</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -698,7 +652,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Start digging pitch added" />
     <MESSAGE value="errors resolved" />
     <MESSAGE value="Dig pitch added in nextTurn" />
     <MESSAGE value="nothing special" />
@@ -723,7 +676,8 @@
     <MESSAGE value="Trade initialized" />
     <MESSAGE value="Trade incomplete (temporary)" />
     <MESSAGE value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
-    <option name="LAST_COMMIT_MESSAGE" value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
+    <MESSAGE value="dropBuilding improved" />
+    <option name="LAST_COMMIT_MESSAGE" value="dropBuilding improved" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

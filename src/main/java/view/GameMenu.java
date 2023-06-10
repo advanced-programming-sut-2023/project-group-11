@@ -13,11 +13,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Stronghold;
+import model.buildings.UnitMaker;
 import model.map.Tile;
 import view.enums.Zoom;
 
@@ -46,6 +49,20 @@ public class GameMenu extends Application {
     private TilePane governanceBox;
     @FXML
     private Label buildingNameLabel;
+    @FXML
+    private Pane buildingsPane;
+    @FXML
+    private Pane selectBuildingPane;
+    @FXML
+    private Label selectBuildingLabel;
+    @FXML
+    private ImageView selectBuildingImageView;
+    @FXML
+    private Pane buildingCommandPane;
+    @FXML
+    private TilePane unitPane;
+    @FXML
+    private Label unitLabel;
     private final int mapPaneHeight = 720;
     private final int mapPaneWidth = 990;
     private int tileSize = 30;
@@ -211,7 +228,7 @@ public class GameMenu extends Application {
     }
 
     private void setTileBuildingImage(Image image, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
-        if (buildingY != firstTileXInMap + (xCoordinate / tileSize) || buildingX != firstTileYInMap + (yCoordinate / tileSize))
+        if (buildingY != firstTileYInMap + (yCoordinate / tileSize) || buildingX != firstTileXInMap + (xCoordinate / tileSize))
             return; //TODO: Be careful about inverse x & y
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(xCoordinate);
@@ -249,9 +266,29 @@ public class GameMenu extends Application {
                 selectedTiles.add(selectedTile);
                 selectedTileXInScreen = pressedTileXInScreen;
                 selectedTileYInScreen = pressedTileYInScreen;
+                if(tile.hasBuilding()){
+                    if(tile.getBuilding().getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()))
+                        selectBuildingTiles(tile);
+                }else {
+                    buildingsPane.setVisible(true);
+                    selectBuildingPane.setVisible(false);
+                }
             }
             showMap();
         }
+    }
+
+    private void selectBuildingTiles(Tile tile) {
+        prepateSelectBuildingMenu(tile);
+        int buildingSize = tile.getBuilding().getSize();
+        int buildingX = tile.getBuilding().getXCoordinate();
+        int buildingY = tile.getBuilding().getYCoordinate();
+        selectedTileXInScreen = buildingX - firstTileXInMap;
+        selectedTileYInScreen = buildingY - firstTileYInMap;
+        selectedTile = ShowMapMenuController.getSelectedTile(selectedTileXInScreen,selectedTileYInScreen,firstTileXInMap,firstTileYInMap);
+        pressedTileXInScreen = buildingX - firstTileXInMap + buildingSize-1;
+        pressedTileYInScreen = buildingY - firstTileYInMap + buildingSize-1;
+        selectMultipleTiles(0, 0);
     }
 
     public void drag(MouseEvent mouseEvent) {
@@ -352,6 +389,45 @@ public class GameMenu extends Application {
         else tooltip.setText(tile.toString());
     }
 
+    private void prepateSelectBuildingMenu(Tile tile) {
+        selectBuildingImageView.setImage(tile.getBuilding().getImage());
+        selectBuildingLabel.setText(tile.getBuilding().getName());
+        buildingCommandPane.setVisible(SelectBuildingMenuController.hasCommand(tile.getBuilding()));
+        if(SelectBuildingMenuController.isUnitMaker(tile.getBuilding())){
+            fillUnitBox(tile);
+        }
+        selectBuildingPane.setVisible(true);
+        buildingsPane.setVisible(false);
+    }
+
+    private void fillUnitBox(Tile tile) {
+        unitPane.getChildren().clear();
+        ArrayList<File> UnitImages = new ArrayList<>();
+        try {
+            File[] array;
+            array = new File(GameMenu.class.getResource("/IMG/Units").toURI()).listFiles();
+            UnitImages.addAll(List.of(array));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        for (File UnitImage : UnitImages) {
+            ImageView UnitImageView = new ImageView(UnitImage.getPath());
+            String unitType = UnitImage.getName().substring(0, UnitImage.getName().length() - 4);
+            if(!SelectBuildingMenuController.isUnitMakerSuitable(unitType,tile.getBuilding()))
+                continue;
+            UnitImageView.setFitHeight(60);
+            UnitImageView.setFitWidth(60);
+            UnitImageView.setPreserveRatio(true);
+            UnitImageView.setId(unitType);
+            UnitImageView.setOnMouseClicked(this::UnitMouseClick);
+            unitPane.getChildren().add(UnitImageView);
+        }
+    }
+
+    private void UnitMouseClick(MouseEvent mouseEvent) {
+        unitLabel.setText(((ImageView)mouseEvent.getSource()).getId());
+    }
+
     private void initializeToolTip() {
         tooltip = new Tooltip();
         tooltip.setShowDelay(Duration.seconds(1));
@@ -393,6 +469,8 @@ public class GameMenu extends Application {
     }
 
     private void buildingDrag(MouseEvent mouseEvent) {
+        buildingNameLabel.setVisible(true);
+        buildingNameLabel.setText(((ImageView) mouseEvent.getSource()).getId());
         ImageView buildingImageView = (ImageView) mouseEvent.getSource();
         int buildingSize = BuildingUtils.getBuildingByType(buildingImageView.getId()).getSize();
         buildingDragName = buildingImageView.getId();
@@ -415,6 +493,7 @@ public class GameMenu extends Application {
     }
 
     private void buildingMouseClick(MouseEvent mouseEvent) {
+        buildingNameLabel.setVisible(true);
         buildingNameLabel.setText(((ImageView) mouseEvent.getSource()).getId());
     }
 
@@ -447,7 +526,7 @@ public class GameMenu extends Application {
         int y = Math.floorDiv((int) buildingDragY, tileSize) + firstTileYInMap;
         if (buildingDragX > mapPaneWidth || buildingDragX < 0 || buildingDragY > mapPaneHeight || buildingDragY < 0)
             return;
-        switch (GameMenuController.checkDropBuilding(y, x, buildingDragName)) {
+        switch (GameMenuController.checkDropBuilding(x,y, buildingDragName)) {
             case CANT_BUILD_HERE -> ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "Can't build here!");
             case NOT_ENOUGH_MONEY ->
                     ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough money!");
@@ -457,7 +536,7 @@ public class GameMenu extends Application {
                     ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough population!");
             case SUCCESS -> setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName).getImage()
                     , (x - firstTileXInMap) * tileSize, (y - firstTileYInMap) * tileSize,
-                    BuildingUtils.getBuildingByType(buildingDragName).getSize(), y, x);
+                    BuildingUtils.getBuildingByType(buildingDragName).getSize(),x,y);
         }
     }
 
@@ -481,5 +560,14 @@ public class GameMenu extends Application {
             }
             mouseEvent.consume();
         });
+    }
+
+    public void checkRepair(MouseEvent mouseEvent) {
+        switch (SelectBuildingMenuController.checkRepair(selectedTile.getBuilding())){
+            case NO_NEED_TO_REPAIR -> ViewUtils.alert(Alert.AlertType.ERROR,"Repair error","No need to repair!");
+            case ENEMY_AROUND -> ViewUtils.alert(Alert.AlertType.ERROR,"Repair error","There's enemy around!");
+            case NOT_ENOUGH_RESOURCE -> ViewUtils.alert(Alert.AlertType.ERROR,"Repair error","Not enough resource to repair");
+            case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION,"Repair successful","Successfully repaired!");
+        }
     }
 }

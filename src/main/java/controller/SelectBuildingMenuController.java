@@ -10,7 +10,9 @@ import model.buildings.UnitMaker;
 import model.map.Map;
 import model.map.Tile;
 import model.people.Engineer;
+import model.people.Machine;
 import model.people.Troop;
+import model.people.Unit;
 import view.enums.messages.SelectBuildingMenuMessages;
 
 import java.util.regex.Matcher;
@@ -66,11 +68,37 @@ public class SelectBuildingMenuController {
         return SelectBuildingMenuMessages.SUCCESS;
     }
 
+    public static Boolean isUnitMakerSuitable(String unitType,Building building){
+        if(unitType.equals("lord"))
+            return false;
+        if(building.getName().equals("cathedral"))
+            return unitType.equals("black monk");
+        UnitMaker unitMaker = (UnitMaker) building;
+        Troop unit;
+        if((unitType.equals("engineer")))
+            return unitMaker.isEngineerMaker();
+        if(Utils.isValidMachineType(unitType))
+            return unitMaker.getName().equals("barracks");
+        if(Utils.isValidUnitType(unitType)) {
+            unit = new Troop(unitType);
+            if (unit.isArab())
+                return unitMaker.isMercenaryMaker();
+            else
+                return unitMaker.getName().equals("barracks");
+        }
+        return true;
+    }
     public static boolean hasCommand(int x, int y) {
         Building building = BuildingUtils.getBuilding(x, y);
         return building instanceof UnitMaker
                 || building instanceof Tower
                 || building instanceof GateHouse;
+    }
+
+    public static boolean hasCommand(Building building) {
+        return building instanceof UnitMaker
+                || building instanceof Tower
+                || building instanceof GateHouse || building.getName().equals("cathedral");
     }
 
     public static boolean isUnitMaker(Building building) {
@@ -82,8 +110,7 @@ public class SelectBuildingMenuController {
                 || building instanceof GateHouse;
     }
 
-    public static SelectBuildingMenuMessages checkRepair(int x, int y) {
-        Building building = BuildingUtils.getBuilding(x, y);
+    public static SelectBuildingMenuMessages checkRepair(Building building) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
 
         if (!isRepairable(building)) return SelectBuildingMenuMessages.CANT_REPAIR;

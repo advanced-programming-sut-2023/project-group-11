@@ -2,30 +2,62 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenu">
-    <AnchorPane fx:id="sidePane" layoutX="991.0" prefHeight="720.0" prefWidth="301.0" styleClass="mapToolBar">
-        <HBox alignment="CENTER" layoutX="53.0" layoutY="19.0" spacing="8.0">
-            <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showProductiveBox" text="Productive" />
-            <Button focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#showWarBox" text="War" />
-            <Button focusTraversable="false" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#showGovernanceBox" text="Governance" />
-        </HBox>
+    <AnchorPane fx:id="sidePane" layoutX="989.0" prefHeight="720.0" prefWidth="301.0" styleClass="mapToolBar">
         <HBox alignment="CENTER" layoutX="56.0" layoutY="606.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
             <Button focusTraversable="false" mnemonicParsing="false" onKeyPressed="#checkShortcut" onMouseClicked="#back" prefHeight="27.0" prefWidth="52.0" styleClass="menu-button" text="Back" />
             <Button focusTraversable="false" mnemonicParsing="false" onAction="#nextTurn" prefWidth="80.0" styleClass="menu-button" text="Next Turn" />
         </HBox>
-        <TilePane fx:id="productiveBox" layoutX="15.0" layoutY="75.0" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" visible="false" />
-        <TilePane fx:id="warBox" layoutX="15.0" layoutY="75.0" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" visible="false" />
-        <TilePane fx:id="governanceBox" layoutX="15.0" layoutY="75.0" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" visible="false" />
-        <Label fx:id="buildingNameLabel" layoutX="138.0" layoutY="329.0" textAlignment="CENTER">
-            <font>
-                <Font size="13.0" />
-            </font>
-        </Label>
+      <AnchorPane fx:id="selectBuildingPane" layoutX="11.0" layoutY="14.0" prefHeight="549.0" prefWidth="280.0" visible="false">
+         <children>
+            <Label fx:id="selectBuildingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="14.0" text="Building name" textAlignment="CENTER">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="selectBuildingImageView" fitHeight="150.0" fitWidth="150.0" layoutX="65.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../IMG/Building/Church/cathedral.png" />
+               </image>
+            </ImageView>
+            <AnchorPane fx:id="buildingCommandPane" layoutX="12.0" layoutY="189.0" prefHeight="405.0" prefWidth="258.0" visible="false">
+               <children>
+                  <Button focusTraversable="false" layoutX="103.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#checkRepair" text="Repair" />
+                  <TilePane fx:id="unitPane" layoutX="-1.0" layoutY="68.0" prefHeight="288.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="258.0" />
+                  <Label fx:id="unitLabel" layoutX="111.0" layoutY="368.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="buildingsPane" layoutX="11.0" layoutY="14.0" prefHeight="415.0" prefWidth="280.0">
+         <children>
+              <HBox alignment="CENTER" layoutX="37.0" layoutY="42.0" spacing="8.0">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showProductiveBox" text="Productive" />
+                  <Button focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#showWarBox" text="War" />
+                  <Button focusTraversable="false" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#showGovernanceBox" text="Governance" />
+              </HBox>
+              <TilePane fx:id="productiveBox" layoutX="5.0" layoutY="81.0" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" visible="false" />
+              <TilePane fx:id="warBox" layoutX="5.0" layoutY="81.0" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" visible="false" />
+              <TilePane fx:id="governanceBox" layoutX="5.0" layoutY="81.0" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" visible="false" />
+              <Label fx:id="buildingNameLabel" layoutX="101.0" layoutY="364.0" visible="false">
+                  <font>
+                      <Font size="13.0" />
+                  </font>
+              </Label>
+            <Label layoutX="74.0" layoutY="14.0" text="Drag buildings to build">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
     </AnchorPane>
-    <AnchorPane fx:id="mapPane" focusTraversable="true" onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" onKeyPressed="#checkShortcut" onMouseDragged="#drag" onMouseMoved="#hover" onMousePressed="#press" prefHeight="720.0" prefWidth="990.0" />
+    <AnchorPane fx:id="mapPane" focusTraversable="true" layoutX="-1.0" onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" onKeyPressed="#checkShortcut" onMouseDragged="#drag" onMouseMoved="#hover" onMousePressed="#press" prefHeight="720.0" prefWidth="990.0" />
 </AnchorPane>
