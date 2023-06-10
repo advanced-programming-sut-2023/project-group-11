@@ -51,7 +51,7 @@ public class BuildingUtils {
 
         for (int i = x; i < x + size; i++) {
             for (int j = y; j < y + size; j++) {
-                if (!isSuitable(tiles[i][j], field))
+                if (!isSuitable(tiles[j][i], field))
                     return false;
             }
         }

@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="dropBuilding improved">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="SelectBuilding excluding create unit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/BuildingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/BuildingUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,14 +264,7 @@
       <workItem from="1685992410645" duration="429000" />
       <workItem from="1686031630427" duration="21746000" />
       <workItem from="1686111068614" duration="38368000" />
-      <workItem from="1686388118247" duration="13849000" />
-    </task>
-    <task id="LOCAL-00045" summary="Attack ended (check TODOs)">
-      <created>1683321368780</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1683321368780</updated>
+      <workItem from="1686388118247" duration="16466000" />
     </task>
     <task id="LOCAL-00046" summary="Ground attack added (duplication need to be removed)">
       <created>1683322067598</created>
@@ -610,7 +602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686317093263</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="SelectBuilding excluding create unit">
+      <created>1686405681880</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1686405681880</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,7 +651,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="errors resolved" />
     <MESSAGE value="Dig pitch added in nextTurn" />
     <MESSAGE value="nothing special" />
     <MESSAGE value="Remove dead units debugged" />
@@ -677,7 +675,8 @@
     <MESSAGE value="Trade incomplete (temporary)" />
     <MESSAGE value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
     <MESSAGE value="dropBuilding improved" />
-    <option name="LAST_COMMIT_MESSAGE" value="dropBuilding improved" />
+    <MESSAGE value="SelectBuilding excluding create unit" />
+    <option name="LAST_COMMIT_MESSAGE" value="SelectBuilding excluding create unit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

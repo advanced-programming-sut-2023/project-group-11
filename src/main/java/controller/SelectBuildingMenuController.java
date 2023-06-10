@@ -22,31 +22,18 @@ public class SelectBuildingMenuController {
     private static boolean unitCreationFlag = false;
     private static final int[] unitCreationCoordinates = new int[2];
 
-    public static SelectBuildingMenuMessages checkCreateUnit(Matcher matcher, int x, int y) {
+    public static SelectBuildingMenuMessages checkCreateUnit(Building building,String type) {
         unitCreationTile = null;
         unitCreationFlag = false;
 
-        if (!Utils.isValidCommandTags(matcher, "type", "count"))
-            return SelectBuildingMenuMessages.INVALID_COMMAND;
-
-        String type = Utils.removeDoubleQuotation(matcher.group("type"));
-        int count = Integer.parseInt(matcher.group("count"));
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        Building building = BuildingUtils.getBuilding(x, y);
-
-        if (!Utils.isValidUnitType(type) || type.equals("lord")) return SelectBuildingMenuMessages.INVALID_TYPE;
+        int x = building.getXCoordinate(), y = building.getYCoordinate();
+        int count = 1;
         if (!currentGovernance.hasEnoughPopulation(count)) return SelectBuildingMenuMessages.NOT_ENOUGH_POPULATION;
-        if (!isUnitMaker(building)) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-
-        if (type.equals("black monk") && !building.getName().equals("cathedral"))
-            return SelectBuildingMenuMessages.CANT_CREATE_HERE;
-
         UnitMaker unitMaker = (UnitMaker) building;
-
         if (type.equals("engineer")) {
             Engineer engineer = new Engineer();
             engineer.setLocation(new int[]{x, y});
-            if (!unitMaker.isEngineerMaker()) return SelectBuildingMenuMessages.CANT_CREATE_HERE;
             if (currentGovernance.getGold() < engineer.getCost() * count)
                 return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
             if (!createEngineer(unitMaker, engineer, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
@@ -55,8 +42,6 @@ public class SelectBuildingMenuController {
 
         Troop troop = new Troop(type);
 
-        if ((troop.isArab() && !unitMaker.isMercenaryMaker()) || (!troop.isArab() && !building.getName().equals("barracks")))
-            return SelectBuildingMenuMessages.CANT_CREATE_HERE;
         if (currentGovernance.getGold() < count * troop.getCost()) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
 
         AllResource armor = troop.getArmorType();
@@ -73,12 +58,14 @@ public class SelectBuildingMenuController {
             return false;
         if(building.getName().equals("cathedral"))
             return unitType.equals("black monk");
+        if(unitType.equals("black monk"))
+            building.getName().equals("cathedral");
         UnitMaker unitMaker = (UnitMaker) building;
         Troop unit;
         if((unitType.equals("engineer")))
             return unitMaker.isEngineerMaker();
         if(Utils.isValidMachineType(unitType))
-            return unitMaker.getName().equals("barracks");
+            return false;
         if(Utils.isValidUnitType(unitType)) {
             unit = new Troop(unitType);
             if (unit.isArab())

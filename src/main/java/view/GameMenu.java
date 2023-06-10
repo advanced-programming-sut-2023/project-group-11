@@ -269,6 +269,7 @@ public class GameMenu extends Application {
                 if(tile.hasBuilding()){
                     if(tile.getBuilding().getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()))
                         selectBuildingTiles(tile);
+                    //TODO: debug needed in if
                 }else {
                     buildingsPane.setVisible(true);
                     selectBuildingPane.setVisible(false);
@@ -425,7 +426,18 @@ public class GameMenu extends Application {
     }
 
     private void UnitMouseClick(MouseEvent mouseEvent) {
-        unitLabel.setText(((ImageView)mouseEvent.getSource()).getId());
+        //TODO: how to create machines?
+        String unitType = ((ImageView)mouseEvent.getSource()).getId();
+        unitLabel.setText(unitType + "\n(double click to create)");
+        if(mouseEvent.getClickCount() == 2){
+            switch (SelectBuildingMenuController.checkCreateUnit(selectedTile.getBuilding(), unitType)){
+                case NOT_ENOUGH_POPULATION -> ViewUtils.alert(Alert.AlertType.ERROR,"Create unit error","You don't have enough population!");
+                case NOT_ENOUGH_GOLD -> ViewUtils.alert(Alert.AlertType.ERROR,"Create unit error","You don't have enough gold!");
+                case NOT_ENOUGH_RESOURCE -> ViewUtils.alert(Alert.AlertType.ERROR,"Create unit error","You don't have enough resource!");
+                case BAD_UNIT_MAKER_PLACE -> ViewUtils.alert(Alert.AlertType.ERROR,"Create unit error","Bad unitMaker place!!!");
+                case SUCCESS -> showMap();
+            }
+        }
     }
 
     private void initializeToolTip() {
@@ -562,7 +574,7 @@ public class GameMenu extends Application {
         });
     }
 
-    public void checkRepair(MouseEvent mouseEvent) {
+    public void checkRepair() {
         switch (SelectBuildingMenuController.checkRepair(selectedTile.getBuilding())){
             case NO_NEED_TO_REPAIR -> ViewUtils.alert(Alert.AlertType.ERROR,"Repair error","No need to repair!");
             case ENEMY_AROUND -> ViewUtils.alert(Alert.AlertType.ERROR,"Repair error","There's enemy around!");
