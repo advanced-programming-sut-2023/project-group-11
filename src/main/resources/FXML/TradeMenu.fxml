@@ -21,17 +21,17 @@
                         <Insets bottom="30.0" />
                      </padding>
                   </Label>
-                  <Button mnemonicParsing="false" onMouseClicked="#newTrade" prefHeight="39.0" prefWidth="130.0" text="Create new trade">
+                  <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#newTrade" prefHeight="39.0" prefWidth="130.0" text="Create new trade">
                      <font>
                         <Font name="Trebuchet MS" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#previousTrades" prefHeight="39.0" prefWidth="130.0" text="Previous trades">
+                  <Button focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#previousTrades" prefHeight="39.0" prefWidth="130.0" text="Previous trades">
                      <font>
                         <Font name="Trebuchet MS" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="82.0" layoutY="151.0" mnemonicParsing="false" onMouseClicked="#returnMarket" prefHeight="39.0" prefWidth="130.0" text="Return market">
+                  <Button focusTraversable="false" layoutX="82.0" layoutY="151.0" mnemonicParsing="false" onMouseClicked="#returnMarket" prefHeight="39.0" prefWidth="130.0" text="Return market">
                      <font>
                         <Font name="Trebuchet MS" size="13.0" />
                      </font>

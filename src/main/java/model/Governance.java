@@ -32,7 +32,8 @@ public class Governance {
     private int aleFactor = 0;
     private double troopDamageRatio = 1;
     private double workersEfficiency = 1;
-    private final ArrayList<Trade> previousTrades = new ArrayList<>();
+    private final ArrayList<Trade> previousReceivedTrades = new ArrayList<>();
+    private final ArrayList<Trade> previousSentTrades = new ArrayList<>();
     private final ArrayList<Trade> tradeNotification = new ArrayList<>();
     private final HashMap<AllResource, Integer> allResources = new HashMap<>();
     private final ArrayList<Storage> storages = new ArrayList<>();
@@ -191,8 +192,20 @@ public class Governance {
         return workersEfficiency;
     }
 
-    public void addTrade(Trade trade) {
-        previousTrades.add(trade);
+    public void addToSentTrades(Trade trade) {
+        previousSentTrades.add(trade);
+    }
+
+    public void addToReceivedTrades(Trade trade) {
+        previousReceivedTrades.add(trade);
+    }
+
+    public ArrayList<Trade> getPreviousReceivedTrades() {
+        return previousReceivedTrades;
+    }
+
+    public ArrayList<Trade> getPreviousSentTrades() {
+        return previousSentTrades;
     }
 
     public ArrayList<Unit> getUnits() {
@@ -242,7 +255,7 @@ public class Governance {
     public String tradeHistory() {
         String output = "";
         int i = 1;
-        for (Trade previousTrade : previousTrades)
+        for (Trade previousTrade : previousReceivedTrades)
             output += (i++) + "-" + previousTrade;
         return output;
     }

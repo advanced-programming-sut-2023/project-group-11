@@ -8,6 +8,7 @@ public class Trade {
     private final String senderMessage;
     private String receiverMessage;
     private boolean isOpen = true;
+    private boolean isSeen = false;
     private String tradeType;
     private final Governance sender;
     private Governance receiver;
@@ -22,7 +23,8 @@ public class Trade {
         this.sender = sender;
         this.receiver = receiver;
         Stronghold.getCurrentGame().getTrades().add(this);
-        sender.addTrade(this);
+        sender.addToSentTrades(this);
+        receiver.addToReceivedTrades(this);
         tradeNotify(this);
     }
 
@@ -42,6 +44,13 @@ public class Trade {
         isOpen = open;
     }
 
+    public boolean isSeen() {
+        return isSeen;
+    }
+
+    public void setSeen(boolean seen) {
+        isSeen = seen;
+    }
 
     public void setReceiverMessage(String receiverMessage) {
         this.receiverMessage = receiverMessage;
@@ -63,16 +72,41 @@ public class Trade {
         return sender;
     }
 
-    public void accept(String message, Governance receiver) {
+    public String getSenderName() {
+        return sender.getOwner().getNickname();
+    }
+
+    public String getReceiverName() {
+        return receiver.getOwner().getNickname();
+    }
+
+    public String getResourceName() {
+        return resourceType.getName();
+    }
+
+    public String getSenderMessage() {
+        return senderMessage;
+    }
+
+    public String getTradeType() {
+        return tradeType;
+    }
+
+    public String getStatus(){
+        return isOpen ? "Open" : "Closed";
+    }
+
+    public String getSeenStatus(){
+        return isSeen ? "YES" : "NO";
+    }
+
+    public void accept(Governance buyer,Governance seller) {
         isOpen = false;
-        receiverMessage = message;
-        double transfer = price * resourceAmount;
-        sender.setGold(sender.getGold() + transfer);
-        sender.removeFromStorage(resourceType, resourceAmount);
-        receiver.setGold(receiver.getGold() - transfer);
-        receiver.addToStorage(resourceType, resourceAmount);
-        this.receiver = receiver;
-        receiver.addTrade(this);
+        int transfer = price * resourceAmount;
+        buyer.setGold(buyer.getGold() - transfer);
+        seller.setGold(seller.getGold() + transfer);
+        seller.removeFromStorage(resourceType, resourceAmount);
+        buyer.addToStorage(resourceType, resourceAmount);
     }
 
     @Override
@@ -89,4 +123,7 @@ public class Trade {
     }
 
 
+    public Governance getReceiver() {
+        return receiver;
+    }
 }

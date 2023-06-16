@@ -117,8 +117,8 @@ public class MainMenuController {
 
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size; j++) {
-                tiles[x + i][y + j].setBuilding(keep);
-                tiles[x + i][y + j].setTexture(Texture.SAND);
+                tiles[y + i][x + j].setBuilding(keep);
+                tiles[y + i][x + j].setTexture(Texture.SAND);
             }
 
         currentGovernance.addBuilding(keep);
@@ -127,7 +127,7 @@ public class MainMenuController {
     }
 
     private static void dropLord(Governance currentGovernance, Lord lord, int x, int y) {
-        Tile tile = Stronghold.getCurrentGame().getMap().getTile(x, y);
+        Tile tile = Stronghold.getCurrentGame().getMap().getTile(y, x);
         tile.getUnits().add(lord);
         lord.setLocation(new int[]{x, y});
         currentGovernance.addUnit(lord);

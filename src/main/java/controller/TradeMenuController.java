@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.AllResource;
 import model.Governance;
 import model.Stronghold;
@@ -8,7 +10,6 @@ import view.enums.messages.TradeMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.regex.Matcher;
 
 public class TradeMenuController {
 
@@ -29,27 +30,27 @@ public class TradeMenuController {
         return output;
     }
 
-    public static TradeMenuMessages checkAcceptTrade(Matcher matcher) {
-        currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        if (!Utils.isValidCommandTags(matcher, "idGroup", "messageGroup"))
-            return TradeMenuMessages.INVALID_COMMAND;
-        int id = Integer.parseInt(matcher.group("id"));
-        String message = Utils.removeDoubleQuotation(matcher.group("message"));
-        ArrayList<Trade> trades = Stronghold.getCurrentGame().getTrades();
-        if (trades.size() < id)
-            return TradeMenuMessages.INVALID_ID;
-        Trade trade = trades.get(id - 1);
-        if (!trade.isOpen())
-            return TradeMenuMessages.TRADE_CLOSED;
-        if (currentGovernance.equals(trade.getSender()))
-            return TradeMenuMessages.CANT_ACCEPT_YOUR_OWN_TRADE;
-        if (currentGovernance.getGold() < trade.getResourceAmount() * trade.getPrice())
+    public static TradeMenuMessages checkAcceptTrade(Trade trade) {
+        Governance sender = trade.getSender();
+        Governance receiver = trade.getReceiver();
+        Governance seller = null, buyer=null;
+        switch (trade.getTradeType()) {
+            case "buy" -> {
+                buyer = sender;
+                seller = receiver;
+            }
+            case "sell" -> {
+                buyer = receiver;
+                seller = sender;
+            }
+        }
+        if (buyer.getGold() < trade.getResourceAmount() * trade.getPrice())
             return TradeMenuMessages.NOT_ENOUGH_GOLD;
-        if (!trade.getSender().hasEnoughItem(trade.getResourceType(), trade.getResourceAmount()))
+        if (!seller.hasEnoughItem(trade.getResourceType(), trade.getResourceAmount()))
             return TradeMenuMessages.NOT_ENOUGH_AMOUNT;
-        if (!currentGovernance.hasStorageForItem(trade.getResourceType(), trade.getResourceAmount()))
+        if (!buyer.hasStorageForItem(trade.getResourceType(), trade.getResourceAmount()))
             return TradeMenuMessages.NOT_ENOUGH_STORAGE;
-        trade.accept(message, currentGovernance);
+        trade.accept(buyer,seller);
         return TradeMenuMessages.SUCCESS;
     }
 
@@ -85,4 +86,16 @@ public class TradeMenuController {
         return allResources;
     }
 
+    public static ObservableList<Trade> getSentTradesObservable() {
+        return FXCollections.observableArrayList(Stronghold.getCurrentGame().getCurrentGovernance().getPreviousSentTrades());
+    }
+
+    public static ObservableList<Trade> getReceivedTradesObservable() {
+        return FXCollections.observableArrayList(Stronghold.getCurrentGame().getCurrentGovernance().getPreviousReceivedTrades());
+    }
+
+    public static void seenNewTrades() {
+        for (Trade trade : Stronghold.getCurrentGame().getCurrentGovernance().getPreviousReceivedTrades())
+            trade.setSeen(true);
+    }
 }

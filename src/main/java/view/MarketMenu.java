@@ -53,7 +53,7 @@ public class MarketMenu extends Application {
         setMouseEvent(foodBox);
         setMouseEvent(rawMaterialBox);
         setMouseEvent(weaponBox);
-//        goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+        goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
         amountTextField.textProperty().addListener((observable, oldText, newText)->{
             updateBuySellLabels(newText);
         });
@@ -113,7 +113,7 @@ public class MarketMenu extends Application {
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Sell Successful", "Item Sold Successfully!");
-//                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
             }
         }
     }
@@ -126,7 +126,7 @@ public class MarketMenu extends Application {
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Buy Successful", "Item bought successfully!");
-//                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
             }
         }
     }

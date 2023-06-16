@@ -18,6 +18,7 @@ import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import model.AllResource;
 import model.Governance;
+import model.Stronghold;
 import model.User;
 
 import java.util.ArrayList;
@@ -118,6 +119,7 @@ public class CreateTradeMenu extends Application {
         selectedItem = AllResource.getAllResourceByName(((ImageView)mouseEvent.getSource()).getId());
         itemImageView.setImage(selectedItem.getImage());
         itemLabel.setText(selectedItem.getName());
+        amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(selectedItem));
         tradeBox.setVisible(true);
     }
 

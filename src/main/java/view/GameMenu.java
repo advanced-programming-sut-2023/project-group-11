@@ -206,7 +206,7 @@ public class GameMenu extends Application {
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
                 //TODO: needs debug for buildings with size more than 1
-                if (tile.getBuilding() != null)
+                if (BuildingUtils.isBuildingInTile(tile.getBuilding()))
                     setTileBuildingImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
                             tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
                 if (tile.getUnits().size() != 0)
@@ -566,6 +566,7 @@ public class GameMenu extends Application {
 
     public void nextTurn() {
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Next Turn Successful", GameMenuController.nextTurn());
+        showMap();
     }
 
     public void selectDestinationTile(MoveUnit moveUnit) {

@@ -27,7 +27,8 @@ public class TradeMenu extends Application {
         new CreateTradeMenu().start(stage);
     }
 
-    public void previousTrades() {
+    public void previousTrades() throws Exception {
+        new PreviousTradesMenu().start(stage);
     }
 
     public void returnMarket() throws Exception {
