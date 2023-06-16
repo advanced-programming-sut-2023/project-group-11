@@ -1,11 +1,9 @@
 package view;
 
-import controller.EntryMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -25,7 +23,8 @@ public class TradeMenu extends Application {
     public void initialize(){
     }
 
-    public void newTrade() {
+    public void newTrade() throws Exception {
+        new CreateTradeMenu().start(stage);
     }
 
     public void previousTrades() {

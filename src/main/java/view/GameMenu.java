@@ -267,8 +267,9 @@ public class GameMenu extends Application {
                 selectedTileXInScreen = pressedTileXInScreen;
                 selectedTileYInScreen = pressedTileYInScreen;
                 if(tile.hasBuilding()){
-                    if(tile.getBuilding().getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()))
-                        selectBuildingTiles(tile);
+                    if(tile.getBuilding().getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance())) {
+                            selectBuildingTiles(tile);
+                    }
                     //TODO: debug needed in if
                 }else {
                     buildingsPane.setVisible(true);
@@ -279,8 +280,15 @@ public class GameMenu extends Application {
         }
     }
 
-    private void selectBuildingTiles(Tile tile) {
+    private void selectBuildingTiles(Tile tile){
         prepateSelectBuildingMenu(tile);
+        if(SelectBuildingMenuController.isShop(tile.getBuilding())) {
+            try {
+                new MarketMenu().start(new Stage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
         int buildingSize = tile.getBuilding().getSize();
         int buildingX = tile.getBuilding().getXCoordinate();
         int buildingY = tile.getBuilding().getYCoordinate();

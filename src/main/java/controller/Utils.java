@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import model.AllResource;
+import model.Governance;
 import model.Stronghold;
 import model.User;
 import model.map.Map;
@@ -180,6 +181,11 @@ public class Utils {
     public static ObservableList<User> getUsersObservable() {
         ArrayList<User> users = Stronghold.getUsers();
         return FXCollections.observableArrayList(users);
+    }
+
+    public static ObservableList<Governance> getGovernancesObservable() {
+        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
+        return FXCollections.observableArrayList(governances);
     }
 
     public static void columnMaker(TableView tableView, String header, String userField) {

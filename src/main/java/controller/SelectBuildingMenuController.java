@@ -207,4 +207,8 @@ public class SelectBuildingMenuController {
                         unitCreationTile.getUnits().get(0).getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()));
 
     }
+
+    public static boolean isShop(Building building){
+        return building.getName().equals("shop");
+    }
 }

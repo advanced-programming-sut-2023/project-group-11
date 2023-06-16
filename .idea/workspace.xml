@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="SelectBuilding excluding create unit">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="create unit added but creation tile is [x,y] inversed and needs debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/BuildingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/BuildingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/CreateTradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/CreateTradeMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/TradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/TradeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/CreateTradeMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/CreateTradeMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +89,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/JavaFX001&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/project-group-11-2&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -264,14 +273,9 @@
       <workItem from="1685992410645" duration="429000" />
       <workItem from="1686031630427" duration="21746000" />
       <workItem from="1686111068614" duration="38368000" />
-      <workItem from="1686388118247" duration="16466000" />
-    </task>
-    <task id="LOCAL-00046" summary="Ground attack added (duplication need to be removed)">
-      <created>1683322067598</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1683322067598</updated>
+      <workItem from="1686388118247" duration="16560000" />
+      <workItem from="1686574384404" duration="240000" />
+      <workItem from="1686896420968" duration="6305000" />
     </task>
     <task id="LOCAL-00047" summary="TODOs Updated (need to be discussed)">
       <created>1683322429973</created>
@@ -609,7 +613,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686405681880</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="create unit added but creation tile is [x,y] inversed and needs debug">
+      <created>1686411758275</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1686411758275</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,7 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Dig pitch added in nextTurn" />
     <MESSAGE value="nothing special" />
     <MESSAGE value="Remove dead units debugged" />
     <MESSAGE value="map edited + cliff debugged" />
@@ -676,7 +686,8 @@
     <MESSAGE value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
     <MESSAGE value="dropBuilding improved" />
     <MESSAGE value="SelectBuilding excluding create unit" />
-    <option name="LAST_COMMIT_MESSAGE" value="SelectBuilding excluding create unit" />
+    <MESSAGE value="create unit added but creation tile is [x,y] inversed and needs debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="create unit added but creation tile is [x,y] inversed and needs debug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

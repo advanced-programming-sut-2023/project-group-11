@@ -133,22 +133,22 @@
             </HBox>
             <HBox layoutX="139.0" layoutY="78.0" spacing="10.0">
                <children>
-                  <Button fx:id="foodbutton" mnemonicParsing="false" onMouseClicked="#showFoodBox" prefHeight="35.0" prefWidth="85.0" text="Food">
+                  <Button fx:id="foodbutton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showFoodBox" prefHeight="35.0" prefWidth="85.0" text="Food">
                      <font>
                         <Font name="Trebuchet MS" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="weaponButton" mnemonicParsing="false" onMouseClicked="#showWeaponBox" prefHeight="35.0" prefWidth="85.0" text="Weapon">
+                  <Button fx:id="weaponButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showWeaponBox" prefHeight="35.0" prefWidth="85.0" text="Weapon">
                      <font>
                         <Font name="Trebuchet MS" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="rawButton" mnemonicParsing="false" onMouseClicked="#showRawBox" prefHeight="35.0" prefWidth="85.0" text="Raw material" textAlignment="CENTER">
+                  <Button fx:id="rawButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showRawBox" prefHeight="35.0" prefWidth="85.0" text="Raw material" textAlignment="CENTER">
                      <font>
                         <Font name="Trebuchet MS" size="11.0" />
                      </font>
                   </Button>
-                  <Button fx:id="tradeButton" layoutX="202.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#tradeMenu" prefHeight="35.0" prefWidth="85.0" text="Trade menu">
+                  <Button fx:id="tradeButton" focusTraversable="false" layoutX="202.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#tradeMenu" prefHeight="35.0" prefWidth="85.0" text="Trade menu">
                      <font>
                         <Font name="Trebuchet MS" size="11.0" />
                      </font>
@@ -204,7 +204,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <Button layoutX="22.0" layoutY="16.0" mnemonicParsing="false" text="Back" />
+            <Button focusTraversable="false" layoutX="22.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#back" text="Back" />
          </children>
       </AnchorPane>
    </children>

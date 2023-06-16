@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.AllResource;
+import model.Stronghold;
 
 public class MarketMenu extends Application {
     @FXML
@@ -52,20 +53,26 @@ public class MarketMenu extends Application {
         setMouseEvent(foodBox);
         setMouseEvent(rawMaterialBox);
         setMouseEvent(weaponBox);
-
+//        goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
         amountTextField.textProperty().addListener((observable, oldText, newText)->{
             updateBuySellLabels(newText);
         });
     }
 
     private void updateBuySellLabels(String newText) {
+        if(newText.length()>=4)
+            amountTextField.setText(newText.substring(0,newText.length()-1));
         if(newText.isEmpty()){
             buyLabel.setText("");
             sellLabel.setText("");
         }else {
+            try {
             int amount = Integer.parseInt(newText);
             buyLabel.setText(String.valueOf((amount * item.getPrice())));
             sellLabel.setText(String.valueOf((amount * item.getPrice() / 2)));
+            }catch (Exception e){
+                amountTextField.setText(newText.substring(0,newText.length()-1));
+            }
         }
     }
 
@@ -103,8 +110,11 @@ public class MarketMenu extends Application {
         switch (MarketMenuController.checkSellItem(item,amountTextField.getText())){
             case NOT_ENOUGH_STORAGE -> ViewUtils.alert(Alert.AlertType.ERROR,
                     "Sell Error","You don't have enough of this item!");
-            case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION,
-                    "Sell Successful","Item Sold Successfully!");
+            case SUCCESS -> {
+                ViewUtils.alert(Alert.AlertType.INFORMATION,
+                        "Sell Successful", "Item Sold Successfully!");
+//                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+            }
         }
     }
     public void buy() {
@@ -113,12 +123,19 @@ public class MarketMenu extends Application {
                     "Buy Error","You don't have enough storage!");
             case NOT_ENOUGH_GOLD -> ViewUtils.alert(Alert.AlertType.ERROR,
                     "Buy Error","You don't have enough gold to buy this item!");
-            case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION,
-                    "Buy Successful","Item bought successfully!");
+            case SUCCESS -> {
+                ViewUtils.alert(Alert.AlertType.INFORMATION,
+                        "Buy Successful", "Item bought successfully!");
+//                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+            }
         }
     }
 
     public void tradeMenu() throws Exception {
         new TradeMenu().start(stage);
+    }
+
+    public void back() {
+        stage.close();
     }
 }

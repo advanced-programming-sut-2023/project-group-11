@@ -8,10 +8,8 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -19,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import model.AllResource;
+import model.Governance;
 import model.User;
 
 import java.util.ArrayList;
@@ -27,10 +26,11 @@ public class CreateTradeMenu extends Application {
 
     private static Stage stage;
     private AllResource selectedItem;
+    private Governance selectedGovernance;
     @FXML
     private TilePane resourcePane;
     @FXML
-    private TableView users;
+    private TableView governances;
     @FXML
     private HBox tradeBox;
     @FXML
@@ -41,6 +41,12 @@ public class CreateTradeMenu extends Application {
     private Label tradeWithLabel;
     @FXML
     private Label amountLabel;
+    @FXML
+    private TextField amountTextField;
+    @FXML
+    private TextField priceTextField;
+    @FXML
+    private TextArea messageField;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -52,25 +58,49 @@ public class CreateTradeMenu extends Application {
 
     @FXML
     public void initialize(){
-        EntryMenuController.fillAllFieldsWithPreviousData();
         initializeResourcePane();
         initializeUsers();
+        amountTextField.textProperty().addListener((observable, oldText, newText)->{
+            checkTextFields(amountTextField,newText);
+        });
+        priceTextField.textProperty().addListener((observable, oldText, newText)->{
+            checkTextFields(priceTextField,newText);
+        });
+
+    }
+
+    private void checkTextFields(TextField field,String newText) {
+        if(newText.isEmpty())
+            return;
+        if(newText.length()>=4)
+            field.setText(newText.substring(0,newText.length()-1));
+        try {
+            int amount = Integer.parseInt(newText);
+        }catch (Exception e){
+            field.setText(newText.substring(0,newText.length()-1));
+        }
     }
 
     private void initializeUsers() {
-        users.setItems(MainMenuController.removeCurrentUserFromList(Utils.getUsersObservable()));
+        governances.setItems(MainMenuController.removeCurrentGovernanceFromList(Utils.getGovernancesObservable()));
         addColumns();
         //TODO: debug in game + gameCurrentGovernance
-        users.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        users.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
-            User selectedUser = (User)newSelection;
-            tradeWithLabel.setText("Trade with: \n" + (selectedUser).getUsername());
+        governances.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        governances.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedGovernance = (Governance) newSelection;
+            tradeWithLabel.setText("Trade with: \n" + (selectedGovernance).getOwner().getNickname());
             //TODO: amount label update for governance
         });
     }
     private void addColumns() {
-        Utils.columnMaker(users, "Avatar", "avatar");
-        Utils.columnMaker(users, "Username", "username");
+        TableColumn<Governance, String> tableColumn = new TableColumn<>("Avatar");
+        tableColumn.setCellValueFactory(new PropertyValueFactory<>("avatar"));
+        tableColumn.setSortable(false);
+        governances.getColumns().add(tableColumn);
+        tableColumn = new TableColumn<>("Name");
+        tableColumn.setCellValueFactory(new PropertyValueFactory<>("nickname"));
+        tableColumn.setSortable(false);
+        governances.getColumns().add(tableColumn);
     }
 
     private void initializeResourcePane() {
@@ -92,13 +122,34 @@ public class CreateTradeMenu extends Application {
     }
 
     public void amountChange(MouseEvent mouseEvent) {
+        int amount = Integer.parseInt(amountTextField.getText());
         switch (((Button)mouseEvent.getSource()).getText()){
             case "+"->{
-
+                if(amount<999)
+                    amountTextField.setText(String.valueOf(++amount));
             }
             case "-"->{
-
+                if(amount>0)
+                    amountTextField.setText(String.valueOf(--amount));
             }
         }
+    }
+
+    public void checkTrade(MouseEvent mouseEvent) {
+        try {
+            if(selectedGovernance == null)
+                throw new Exception();
+            int amount = Integer.parseInt(String.valueOf(amountTextField.getText()));
+            int price = Integer.parseInt(String.valueOf(priceTextField.getText()));
+            String tradeType = ((Button) mouseEvent.getSource()).getText();
+            TradeMenuController.checkTrade(selectedItem, amount, price, messageField.getText(), tradeType, selectedGovernance);
+            ViewUtils.alert(Alert.AlertType.INFORMATION,"Trade Successful","Trade created successfully!");
+        }catch (Exception e){
+            ViewUtils.alert(Alert.AlertType.ERROR,"Trade Error","Select governance & fill fields!");
+        }
+    }
+
+    public void back() throws Exception {
+        new TradeMenu().start(stage);
     }
 }

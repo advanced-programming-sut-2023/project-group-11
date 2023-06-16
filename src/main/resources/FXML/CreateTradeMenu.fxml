@@ -14,12 +14,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="500.0" prefWidth="750.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CreateTradeMenu">
    <children>
       <AnchorPane layoutX="46.0" layoutY="19.0" opacity="0.9" prefHeight="465.0" prefWidth="652.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
          <children>
-            <Label layoutX="80.0" layoutY="14.0" text="Select user">
+            <Label layoutX="80.0" layoutY="14.0" text="Select governance">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="376.0" layoutY="14.0" text="Select resource">
                <font>
                   <Font size="18.0" />
                </font>
@@ -28,7 +32,7 @@
                <children>
                   <HBox layoutX="18.0" layoutY="14.0" prefHeight="188.0" prefWidth="556.0" spacing="80.0">
                      <children>
-                        <TableView fx:id="users" prefHeight="189.0" prefWidth="154.0" />
+                        <TableView fx:id="governances" prefHeight="189.0" prefWidth="154.0" />
                         <TilePane fx:id="resourcePane" prefHeight="189.0" prefWidth="315.0">
                            <children>
                               <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
@@ -141,7 +145,7 @@
                         </TilePane>
                      </children>
                   </HBox>
-                  <HBox fx:id="tradeBox" alignment="CENTER" layoutX="16.0" layoutY="209.0" prefHeight="189.0" prefWidth="556.0" spacing="50.0" visible="false">
+                  <HBox fx:id="tradeBox" alignment="CENTER" layoutX="16.0" layoutY="209.0" prefHeight="189.0" prefWidth="556.0" spacing="50.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="7.0">
                            <children>
@@ -153,19 +157,19 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
-                              <TextField alignment="CENTER" promptText="amount" text="1" />
+                              <TextField fx:id="amountTextField" alignment="CENTER" promptText="amount" text="1" />
                               <HBox spacing="5.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onMouseClicked="#amountChange" prefWidth="50.0" text="+" />
-                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#amountChange" prefHeight="26.0" prefWidth="50.0" text="-" />
+                                    <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#amountChange" prefWidth="50.0" text="+" />
+                                    <Button focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#amountChange" prefHeight="26.0" prefWidth="50.0" text="-" />
                                  </children>
                               </HBox>
-                              <TextField alignment="CENTER" layoutX="10.0" layoutY="10.0" promptText="price" />
-                              <TextArea prefHeight="97.0" prefWidth="100.0" promptText="message" />
+                              <TextField fx:id="priceTextField" alignment="CENTER" layoutX="10.0" layoutY="10.0" promptText="price" />
+                              <TextArea fx:id="messageField" prefHeight="97.0" prefWidth="100.0" promptText="message" />
                               <HBox layoutX="10.0" layoutY="33.0" spacing="5.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefWidth="50.0" text="buy" />
-                                    <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="sell" />
+                                    <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#checkTrade" prefWidth="50.0" text="buy" />
+                                    <Button focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#checkTrade" prefHeight="26.0" prefWidth="50.0" text="sell" />
                                  </children>
                               </HBox>
                            </children>
@@ -174,11 +178,7 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <Label layoutX="376.0" layoutY="14.0" text="Select resource">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
+            <Button focusTraversable="false" layoutX="597.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#back" text="Back" />
          </children>
       </AnchorPane>
    </children>

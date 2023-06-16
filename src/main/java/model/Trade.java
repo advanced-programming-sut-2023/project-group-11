@@ -4,20 +4,23 @@ public class Trade {
 
     private final AllResource resourceType;
     private final int resourceAmount;
-    private final double price;
+    private final int price;
     private final String senderMessage;
     private String receiverMessage;
     private boolean isOpen = true;
+    private String tradeType;
     private final Governance sender;
     private Governance receiver;
 
 
-    public Trade(AllResource resourceType, int resourceAmount, double price, String senderMessage, Governance sender) {
+    public Trade(AllResource resourceType, int resourceAmount, int price, String senderMessage,String tradeType, Governance sender,Governance receiver) {
         this.resourceType = resourceType;
         this.resourceAmount = resourceAmount;
         this.price = price;
         this.senderMessage = senderMessage;
+        this.tradeType = tradeType;
         this.sender = sender;
+        this.receiver = receiver;
         Stronghold.getCurrentGame().getTrades().add(this);
         sender.addTrade(this);
         tradeNotify(this);
@@ -52,7 +55,7 @@ public class Trade {
         return resourceAmount;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 

@@ -178,6 +178,11 @@ public class MainMenuController {
         return userObservableList;
     }
 
+    public static ObservableList<Governance> removeCurrentGovernanceFromList(ObservableList<Governance> governanceObservableList) {
+        governanceObservableList.remove(Stronghold.getCurrentGame().getCurrentGovernance());
+        return governanceObservableList;
+    }
+
     public static void logout() {
         User currentUser = Stronghold.getCurrentUser();
         currentUser.setStayLoggedIn(false);

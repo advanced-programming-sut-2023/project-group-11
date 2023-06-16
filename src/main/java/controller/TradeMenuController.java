@@ -14,19 +14,9 @@ public class TradeMenuController {
 
     private static Governance currentGovernance;
 
-    public static TradeMenuMessages checkTrade(Matcher matcher) {
+    public static TradeMenuMessages checkTrade(AllResource resource, int amount, int price, String message, String tradeType, Governance reciever) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        if (!Utils.isValidCommandTags(matcher, "resourceType", "resourceAmount", "price", "message"))
-            return TradeMenuMessages.INVALID_COMMAND;
-        String resourceType = Utils.removeDoubleQuotation(matcher.group("resourceType"));
-        String message = Utils.removeDoubleQuotation(matcher.group("message"));
-        int resourceAmount = Integer.parseInt(matcher.group("resourceAmount"));
-        int price = Integer.parseInt(matcher.group("price"));
-        AllResource resource = AllResource.getAllResourceByName(resourceType);
-
-        if (resource == null)
-            return TradeMenuMessages.INVALID_RESOURCE_TYPE;
-        new Trade(resource, resourceAmount, price, message, currentGovernance);
+        new Trade(resource, amount, price, message, tradeType, currentGovernance, reciever);
         return TradeMenuMessages.SUCCESS;
     }
 
@@ -48,7 +38,7 @@ public class TradeMenuController {
         ArrayList<Trade> trades = Stronghold.getCurrentGame().getTrades();
         if (trades.size() < id)
             return TradeMenuMessages.INVALID_ID;
-        Trade trade = trades.get(id-1);
+        Trade trade = trades.get(id - 1);
         if (!trade.isOpen())
             return TradeMenuMessages.TRADE_CLOSED;
         if (currentGovernance.equals(trade.getSender()))
@@ -73,7 +63,7 @@ public class TradeMenuController {
         String output = "";
         int index = 1;
         for (Trade trade : currentGovernance.getTradeNotification()) {
-            if(index == 1)
+            if (index == 1)
                 output += "Notifications: \n";
             output += (index++) + "-" + trade + "\n";
         }
@@ -81,15 +71,15 @@ public class TradeMenuController {
         return output;
     }
 
-    public static String showAllGovernance(){
+    public static String showAllGovernance() {
         String output = "";
         int index = 1;
-        for (Governance governance:Stronghold.getCurrentGame().getGovernances())
+        for (Governance governance : Stronghold.getCurrentGame().getGovernances())
             output += (index++) + "- " + governance.getOwner().getNickname() + "'s Governance\n";
         return output;
     }
 
-    public static ArrayList<AllResource> getAllResources(){
+    public static ArrayList<AllResource> getAllResources() {
         ArrayList<AllResource> allResources = new ArrayList<>();
         Collections.addAll(allResources, AllResource.values());
         return allResources;
