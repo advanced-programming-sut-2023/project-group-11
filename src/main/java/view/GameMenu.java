@@ -20,7 +20,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Stronghold;
-import model.buildings.UnitMaker;
 import model.map.Tile;
 import view.enums.Zoom;
 
@@ -281,7 +280,7 @@ public class GameMenu extends Application {
     }
 
     private void selectBuildingTiles(Tile tile){
-        prepateSelectBuildingMenu(tile);
+        prepareSelectBuildingMenu(tile);
         if(SelectBuildingMenuController.isShop(tile.getBuilding())) {
             try {
                 new MarketMenu().start(new Stage());
@@ -398,12 +397,16 @@ public class GameMenu extends Application {
         else tooltip.setText(tile.toString());
     }
 
-    private void prepateSelectBuildingMenu(Tile tile) {
+    private void prepareSelectBuildingMenu(Tile tile) {
         selectBuildingImageView.setImage(tile.getBuilding().getImage());
         selectBuildingLabel.setText(tile.getBuilding().getName());
         buildingCommandPane.setVisible(SelectBuildingMenuController.hasCommand(tile.getBuilding()));
         if(SelectBuildingMenuController.isUnitMaker(tile.getBuilding())){
+            unitPane.setVisible(true);
             fillUnitBox(tile);
+        }else {
+            unitLabel.setText("");
+            unitPane.setVisible(false);
         }
         selectBuildingPane.setVisible(true);
         buildingsPane.setVisible(false);
@@ -458,7 +461,7 @@ public class GameMenu extends Application {
 
     private void initializeBuildingBoxes() {
         initializeBuildingBox(governanceBox, "Church", "Filler", "DrawBridge", "Trap");
-        initializeBuildingBox(warBox, "Keep", "Tower", "Storage", "UnitMaker", "GateHouse");
+        initializeBuildingBox(warBox, "Tower", "Storage", "UnitMaker", "GateHouse");
         //TODO: gatehouse
         //TODO: blackBackground pics + optimizing pics(drawBridge ...)
         initializeBuildingBox(productiveBox, "ProductiveBuilding");

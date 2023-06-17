@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="CreateTrade completed">
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/PreviousTradesMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/PreviousTradesMenu.fxml" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Trade &amp; Market Complete + minor debug, improvement">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Trade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/CreateTradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/CreateTradeMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/TradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/TradeMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/CreateTradeMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/CreateTradeMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/TradeMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/TradeMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,30 +67,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/CE/T2/AP/Projects/project-group-11-2",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/project-group-11-2&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="controller.MapEditMenuController" />
@@ -276,14 +266,8 @@
       <workItem from="1686574384404" duration="240000" />
       <workItem from="1686896420968" duration="7239000" />
       <workItem from="1686915739398" duration="6933000" />
-      <workItem from="1686937437314" duration="4030000" />
-    </task>
-    <task id="LOCAL-00048" summary="Attack updated(duplication removed) + important TODOs added">
-      <created>1683360959392</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1683360959392</updated>
+      <workItem from="1686937437314" duration="4374000" />
+      <workItem from="1686999064014" duration="378000" />
     </task>
     <task id="LOCAL-00049" summary="TODOs Updated">
       <created>1683404730759</created>
@@ -621,7 +605,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686903231801</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Trade &amp; Market Complete + minor debug, improvement">
+      <created>1686944680607</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1686944680607</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,7 +654,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Remove dead units debugged" />
     <MESSAGE value="map edited + cliff debugged" />
     <MESSAGE value="Start game double quote handled" />
     <MESSAGE value="Debug as possible as i could!" />
@@ -688,7 +678,8 @@
     <MESSAGE value="SelectBuilding excluding create unit" />
     <MESSAGE value="create unit added but creation tile is [x,y] inversed and needs debug" />
     <MESSAGE value="CreateTrade completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="CreateTrade completed" />
+    <MESSAGE value="Trade &amp; Market Complete + minor debug, improvement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Trade &amp; Market Complete + minor debug, improvement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
