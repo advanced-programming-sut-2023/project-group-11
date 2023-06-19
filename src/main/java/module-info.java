@@ -3,8 +3,8 @@ module ProjectAP {
     requires javafx.fxml;
     requires javafx.media;
     requires javafx.graphics;
-    requires javafx.swing;
     requires com.google.gson;
+    requires javafx.swing;
     requires JColor;
     requires json.simple;
     requires passay;
@@ -14,7 +14,10 @@ module ProjectAP {
     requires com.fasterxml.jackson.annotation;
 
     exports view;
-    exports model.map;
     opens view to javafx.fxml;
     opens model to com.google.gson, javafx.base;
+    opens model.map to com.google.gson;
+    opens model.buildings to com.google.gson;
+    opens model.people to com.google.gson;
+    exports model.people.enums to com.google.gson;
 }

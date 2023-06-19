@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 public class Tree {
     private final String name;
     private int leftWood = 200;
-    private Image image;
+    private transient Image image;
 
     public Tree(String name) {
         this.name = name;

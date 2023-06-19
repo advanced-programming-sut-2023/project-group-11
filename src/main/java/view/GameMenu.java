@@ -64,8 +64,8 @@ public class GameMenu extends Application {
     private Label unitLabel;
     private final int mapPaneHeight = 720;
     private final int mapPaneWidth = 990;
-    private int tileSize = 30;
     private Zoom currentZoom = Zoom.NORMAL;
+    private int tileSize = currentZoom.getSize();
     private int mapSize;
     private double buildingDragX;
     private double buildingDragY;
@@ -159,23 +159,10 @@ public class GameMenu extends Application {
         mapPane.requestFocus();
     }
 
-    // ---------------------------------- Getter/Setter -------------------------------------------
-
-    public int getTileSize() {
-        return tileSize;
-    }
-
-    public void setTileSize(int tileSize) {
-        this.tileSize = tileSize;
-    }
-
-    public void setSelectedTile(Tile tile) {
-        this.selectedTile = tile;
-    }
-
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
     public void showMap() {
+        // TODO: handle hidden items
         mapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;

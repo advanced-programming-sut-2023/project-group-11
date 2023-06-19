@@ -1,5 +1,6 @@
 package model.people;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.scene.image.Image;
 import model.Governance;
 import model.Stronghold;
@@ -19,7 +20,7 @@ public abstract class Unit {
     protected int[] patrolOrigin = new int[2];
     protected int[] patrolDestination = new int[2];
     protected boolean isPatrolling = false;
-    private Image image = null;
+    private transient Image image = null;
 
     public int getHp() {
         return hp;
@@ -124,7 +125,7 @@ public abstract class Unit {
 
     public Image getImage() {
         if (image == null)
-            image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Units/" + name + ".png");
+            return new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Units/" + name + ".png");
         return image;
     }
 }

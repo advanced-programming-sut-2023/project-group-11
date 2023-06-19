@@ -17,7 +17,7 @@ public abstract class Building {
     protected int workersNumber;
     protected boolean isActive;
     protected String name;
-    protected Image image;
+    protected transient Image image;
 
     public void setOwner(Governance owner) {
         this.owner = owner;

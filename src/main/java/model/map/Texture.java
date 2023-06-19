@@ -25,7 +25,7 @@ public enum Texture {
 
     private final String name;
     private final String textureImageName;
-    private Image image;
+    private transient Image image;
 
     Texture(String name, String textureImageName) {
         this.name = name;

@@ -3,15 +3,53 @@ package controller;
 import javafx.scene.control.ChoiceBox;
 import model.Stronghold;
 import model.map.Map;
-import view.MapEditMenu;
+import view.enums.messages.MapEditMenuMessages;
 
 public class MapEditMenuController {
+        private static Map currentMap;
 
     public static void setMapsOnChoiceBox(ChoiceBox<Map> mapsChoiceBox) {
         mapsChoiceBox.getItems().addAll(Stronghold.getMaps());
         mapsChoiceBox.setValue(Stronghold.getMapByName("original"));
         ShowMapMenuController.setCurrentMap(Stronghold.getMapByName("original"));
-        mapsChoiceBox.setOnAction(actionEvent -> ShowMapMenuController.setCurrentMap(mapsChoiceBox.getValue()));
+        mapsChoiceBox.setOnAction(actionEvent -> {
+            ShowMapMenuController.setCurrentMap(mapsChoiceBox.getValue());
+            MapEditMenuController.setCurrentMap(mapsChoiceBox.getValue());
+        });
+    }
+
+    public static void saveMap() {
+        Utils.updateDatabase("maps");
+    }
+
+    public static void setCurrentMap(String mapName) {
+        currentMap = Stronghold.getMapByName(mapName);
+    }
+
+    public static void setCurrentMap(Map map) {
+        currentMap = map;
+    }
+
+    public static Map getCurrentMap() {
+        return currentMap;
+    }
+
+    public static void setNewMapAsCurrentMap(String mapName, int size) {
+        currentMap = new Map(mapName, size);
+        Utils.updateDatabase("maps");
+    }
+
+    public static MapEditMenuMessages checkMakeNewMap(String mapName, String mapSize) {
+        if (mapName.isEmpty()) return MapEditMenuMessages.MAP_NAME_FIELD_EMPTY;
+        else if (mapSize.isEmpty()) return MapEditMenuMessages.MAP_SIZE_FIELD_EMPTY;
+        else if (!mapSize.matches("\\d+")) return MapEditMenuMessages.INVALID_MAP_SIZE_FORMAT;
+        else if (Stronghold.getMapByName(mapName) != null) return MapEditMenuMessages.MAP_EXIST;
+        else if (Integer.parseInt(mapSize) < 50 || Integer.parseInt(mapSize) > 200) return MapEditMenuMessages.INVALID_MAP_SIZE;
+
+        currentMap = new Map(mapName, Integer.parseInt(mapSize));
+        ShowMapMenuController.setCurrentMap(currentMap);
+        Utils.updateDatabase("maps");
+        return MapEditMenuMessages.SUCCESS;
     }
 }
 
