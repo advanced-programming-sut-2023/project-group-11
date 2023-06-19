@@ -53,7 +53,7 @@ public class MovingAnimation {
         if (move >= shortestPath.getLength() - 1) timeline.stop();
     }
 
-    private static boolean slowsDown(int[] nextLocation) {
-        return ShowMapMenuController.getCurrentMap().getTile(nextLocation).getTexture().slowsDown();
+    private static boolean slowsDown(int[] location) {
+        return ShowMapMenuController.getCurrentMap().getTile(location).getTexture().slowsDown();
     }
 }

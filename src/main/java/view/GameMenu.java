@@ -265,12 +265,12 @@ public class GameMenu extends Application {
                 selectedTiles.add(selectedTile);
                 selectedTileXInScreen = pressedTileXInScreen;
                 selectedTileYInScreen = pressedTileYInScreen;
-                if(tile.hasBuilding()){
-                    if(tile.getBuilding().getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance())) {
-                            selectBuildingTiles(tile);
+                if (tile.hasBuilding()) {
+                    if (tile.getBuilding().getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance())) {
+                        selectBuildingTiles(tile);
                     }
                     //TODO: debug needed in if
-                }else {
+                } else {
                     buildingsPane.setVisible(true);
                     selectBuildingPane.setVisible(false);
                 }
@@ -279,9 +279,9 @@ public class GameMenu extends Application {
         }
     }
 
-    private void selectBuildingTiles(Tile tile){
+    private void selectBuildingTiles(Tile tile) {
         prepareSelectBuildingMenu(tile);
-        if(SelectBuildingMenuController.isShop(tile.getBuilding())) {
+        if (SelectBuildingMenuController.isShop(tile.getBuilding())) {
             try {
                 new MarketMenu().start(new Stage());
             } catch (Exception e) {
@@ -293,9 +293,9 @@ public class GameMenu extends Application {
         int buildingY = tile.getBuilding().getYCoordinate();
         selectedTileXInScreen = buildingX - firstTileXInMap;
         selectedTileYInScreen = buildingY - firstTileYInMap;
-        selectedTile = ShowMapMenuController.getSelectedTile(selectedTileXInScreen,selectedTileYInScreen,firstTileXInMap,firstTileYInMap);
-        pressedTileXInScreen = buildingX - firstTileXInMap + buildingSize-1;
-        pressedTileYInScreen = buildingY - firstTileYInMap + buildingSize-1;
+        selectedTile = ShowMapMenuController.getSelectedTile(selectedTileXInScreen, selectedTileYInScreen, firstTileXInMap, firstTileYInMap);
+        pressedTileXInScreen = buildingX - firstTileXInMap + buildingSize - 1;
+        pressedTileYInScreen = buildingY - firstTileYInMap + buildingSize - 1;
         selectMultipleTiles(0, 0);
     }
 
@@ -390,21 +390,21 @@ public class GameMenu extends Application {
     @FXML
     private void hover(MouseEvent mouseEvent) {
         initializeToolTip();
-        selectedTileXInScreen = Math.floorDiv((int) mouseEvent.getX(), tileSize);
-        selectedTileYInScreen = Math.floorDiv((int) mouseEvent.getY(), tileSize);
-        Tile tile = ShowMapMenuController.getSelectedTile(selectedTileXInScreen, selectedTileYInScreen, firstTileXInMap, firstTileYInMap);
-        if (selectedTiles.size() > 1) tooltip.setText(ShowMapMenuController.getTilesData(selectedTiles));
-        else tooltip.setText(tile.toString());
+        int mouseX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+        int mouseY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        Tile hoveredTile = ShowMapMenuController.getSelectedTile(mouseX, mouseY, firstTileXInMap, firstTileYInMap);
+        if (selectedTiles.contains(hoveredTile)) tooltip.setText(ShowMapMenuController.getTilesData(selectedTiles));
+        else tooltip.setText(hoveredTile.toString());
     }
 
     private void prepareSelectBuildingMenu(Tile tile) {
         selectBuildingImageView.setImage(tile.getBuilding().getImage());
         selectBuildingLabel.setText(tile.getBuilding().getName());
         buildingCommandPane.setVisible(SelectBuildingMenuController.hasCommand(tile.getBuilding()));
-        if(SelectBuildingMenuController.isUnitMaker(tile.getBuilding())){
+        if (SelectBuildingMenuController.isUnitMaker(tile.getBuilding())) {
             unitPane.setVisible(true);
             fillUnitBox(tile);
-        }else {
+        } else {
             unitLabel.setText("");
             unitPane.setVisible(false);
         }
@@ -425,7 +425,7 @@ public class GameMenu extends Application {
         for (File UnitImage : UnitImages) {
             ImageView UnitImageView = new ImageView(UnitImage.getPath());
             String unitType = UnitImage.getName().substring(0, UnitImage.getName().length() - 4);
-            if(!SelectBuildingMenuController.isUnitMakerSuitable(unitType,tile.getBuilding()))
+            if (!SelectBuildingMenuController.isUnitMakerSuitable(unitType, tile.getBuilding()))
                 continue;
             UnitImageView.setFitHeight(60);
             UnitImageView.setFitWidth(60);
@@ -438,14 +438,18 @@ public class GameMenu extends Application {
 
     private void UnitMouseClick(MouseEvent mouseEvent) {
         //TODO: how to create machines?
-        String unitType = ((ImageView)mouseEvent.getSource()).getId();
+        String unitType = ((ImageView) mouseEvent.getSource()).getId();
         unitLabel.setText(unitType + "\n(double click to create)");
-        if(mouseEvent.getClickCount() == 2){
-            switch (SelectBuildingMenuController.checkCreateUnit(selectedTile.getBuilding(), unitType)){
-                case NOT_ENOUGH_POPULATION -> ViewUtils.alert(Alert.AlertType.ERROR,"Create unit error","You don't have enough population!");
-                case NOT_ENOUGH_GOLD -> ViewUtils.alert(Alert.AlertType.ERROR,"Create unit error","You don't have enough gold!");
-                case NOT_ENOUGH_RESOURCE -> ViewUtils.alert(Alert.AlertType.ERROR,"Create unit error","You don't have enough resource!");
-                case BAD_UNIT_MAKER_PLACE -> ViewUtils.alert(Alert.AlertType.ERROR,"Create unit error","Bad unitMaker place!!!");
+        if (mouseEvent.getClickCount() == 2) {
+            switch (SelectBuildingMenuController.checkCreateUnit(selectedTile.getBuilding(), unitType)) {
+                case NOT_ENOUGH_POPULATION ->
+                        ViewUtils.alert(Alert.AlertType.ERROR, "Create unit error", "You don't have enough population!");
+                case NOT_ENOUGH_GOLD ->
+                        ViewUtils.alert(Alert.AlertType.ERROR, "Create unit error", "You don't have enough gold!");
+                case NOT_ENOUGH_RESOURCE ->
+                        ViewUtils.alert(Alert.AlertType.ERROR, "Create unit error", "You don't have enough resource!");
+                case BAD_UNIT_MAKER_PLACE ->
+                        ViewUtils.alert(Alert.AlertType.ERROR, "Create unit error", "Bad unitMaker place!!!");
                 case SUCCESS -> showMap();
             }
         }
@@ -549,7 +553,7 @@ public class GameMenu extends Application {
         int y = Math.floorDiv((int) buildingDragY, tileSize) + firstTileYInMap;
         if (buildingDragX > mapPaneWidth || buildingDragX < 0 || buildingDragY > mapPaneHeight || buildingDragY < 0)
             return;
-        switch (GameMenuController.checkDropBuilding(x,y, buildingDragName)) {
+        switch (GameMenuController.checkDropBuilding(x, y, buildingDragName)) {
             case CANT_BUILD_HERE -> ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "Can't build here!");
             case NOT_ENOUGH_MONEY ->
                     ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough money!");
@@ -559,7 +563,7 @@ public class GameMenu extends Application {
                     ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough population!");
             case SUCCESS -> setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName).getImage()
                     , (x - firstTileXInMap) * tileSize, (y - firstTileYInMap) * tileSize,
-                    BuildingUtils.getBuildingByType(buildingDragName).getSize(),x,y);
+                    BuildingUtils.getBuildingByType(buildingDragName).getSize(), x, y);
         }
     }
 
@@ -587,11 +591,12 @@ public class GameMenu extends Application {
     }
 
     public void checkRepair() {
-        switch (SelectBuildingMenuController.checkRepair(selectedTile.getBuilding())){
-            case NO_NEED_TO_REPAIR -> ViewUtils.alert(Alert.AlertType.ERROR,"Repair error","No need to repair!");
-            case ENEMY_AROUND -> ViewUtils.alert(Alert.AlertType.ERROR,"Repair error","There's enemy around!");
-            case NOT_ENOUGH_RESOURCE -> ViewUtils.alert(Alert.AlertType.ERROR,"Repair error","Not enough resource to repair");
-            case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION,"Repair successful","Successfully repaired!");
+        switch (SelectBuildingMenuController.checkRepair(selectedTile.getBuilding())) {
+            case NO_NEED_TO_REPAIR -> ViewUtils.alert(Alert.AlertType.ERROR, "Repair error", "No need to repair!");
+            case ENEMY_AROUND -> ViewUtils.alert(Alert.AlertType.ERROR, "Repair error", "There's enemy around!");
+            case NOT_ENOUGH_RESOURCE ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Repair error", "Not enough resource to repair");
+            case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION, "Repair successful", "Successfully repaired!");
         }
     }
 }
