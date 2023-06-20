@@ -3,26 +3,19 @@ package controller;
 import model.AllResource;
 import model.Governance;
 import model.Stronghold;
-import model.buildings.Building;
-import model.buildings.GateHouse;
-import model.buildings.Tower;
-import model.buildings.UnitMaker;
+import model.buildings.*;
 import model.map.Map;
 import model.map.Tile;
 import model.people.Engineer;
-import model.people.Machine;
 import model.people.Troop;
-import model.people.Unit;
 import view.enums.messages.SelectBuildingMenuMessages;
-
-import java.util.regex.Matcher;
 
 public class SelectBuildingMenuController {
     private static Tile unitCreationTile = null;
     private static boolean unitCreationFlag = false;
     private static final int[] unitCreationCoordinates = new int[2];
 
-    public static SelectBuildingMenuMessages checkCreateUnit(Building building,String type) {
+    public static SelectBuildingMenuMessages checkCreateUnit(Building building, String type) {
         unitCreationTile = null;
         unitCreationFlag = false;
 
@@ -53,20 +46,20 @@ public class SelectBuildingMenuController {
         return SelectBuildingMenuMessages.SUCCESS;
     }
 
-    public static Boolean isUnitMakerSuitable(String unitType,Building building){
-        if(unitType.equals("lord"))
+    public static Boolean isUnitMakerSuitable(String unitType, Building building) {
+        if (unitType.equals("lord"))
             return false;
-        if(building.getName().equals("cathedral"))
+        if (building.getName().equals("cathedral"))
             return unitType.equals("black monk");
-        if(unitType.equals("black monk"))
+        if (unitType.equals("black monk"))
             building.getName().equals("cathedral");
         UnitMaker unitMaker = (UnitMaker) building;
         Troop unit;
-        if((unitType.equals("engineer")))
+        if ((unitType.equals("engineer")))
             return unitMaker.isEngineerMaker();
-        if(Utils.isValidMachineType(unitType))
+        if (Utils.isValidMachineType(unitType))
             return false;
-        if(Utils.isValidUnitType(unitType)) {
+        if (Utils.isValidUnitType(unitType)) {
             unit = new Troop(unitType);
             if (unit.isArab())
                 return unitMaker.isMercenaryMaker();
@@ -75,6 +68,7 @@ public class SelectBuildingMenuController {
         }
         return true;
     }
+
     public static boolean hasCommand(int x, int y) {
         Building building = BuildingUtils.getBuilding(x, y);
         return building instanceof UnitMaker
@@ -208,7 +202,11 @@ public class SelectBuildingMenuController {
 
     }
 
-    public static boolean isShop(Building building){
+    public static boolean isShop(Building building) {
         return building.getName().equals("shop");
+    }
+
+    public static boolean isKeep(Building building) {
+        return building instanceof Keep;
     }
 }

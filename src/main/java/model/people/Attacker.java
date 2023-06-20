@@ -27,4 +27,12 @@ public class Attacker extends Unit {
     public void setAttacked(boolean attacked) {
         this.attacked = attacked;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                " * damage->" + damage +
+                " * range->" + range +
+                " * attacked->" + attacked;
+    }
 }

@@ -58,31 +58,28 @@ public class GameMenuController {
         return GameMenuMessages.SUCCESS;
     }
 
-    public static String showPopularity(Matcher matcher) {
-        String output = "";
-
-        if (matcher.group("factors") == null) output += currentGovernance.getPopularity();
-        else {
-            output += "Food: " + currentGovernance.getFoodFactor() + '\n';
-            output += "Tax: " + currentGovernance.getTaxFactor() + '\n';
-            output += "Religious: " + currentGovernance.getReligiousFactor() + '\n';
-            output += "Fear: " + currentGovernance.getFearFactor() + '\n';
-        }
-
-        return output;
+    public static int showFactor(String factor) throws Exception {
+        return (int) Governance.class.getDeclaredMethod("get" + factor + "Factor").invoke(currentGovernance);
     }
 
-    public static String showFoodList() {
-        String output = "";
-
-        output += "Bread: " + currentGovernance.getAllResources().get(AllResource.BREAD) + '\n';
-        output += "Apple: " + currentGovernance.getAllResources().get(AllResource.APPLE) + '\n';
-        output += "Cheese: " + currentGovernance.getAllResources().get(AllResource.CHEESE) + '\n';
-        output += "Meat: " + currentGovernance.getAllResources().get(AllResource.MEAT) + '\n';
-
-        return output;
-    }
-
+    //    public static String showPopularity() {
+//        return "Food: " + currentGovernance.getFoodFactor() + '\n' +
+//                "Tax: " + currentGovernance.getTaxFactor() + '\n' +
+//                "Religious: " + currentGovernance.getReligiousFactor() + '\n' +
+//                "Fear: " + currentGovernance.getFearFactor() + '\n';
+//    }
+//
+//    public static String showFoodList() {
+//        String output = "";
+//
+//        output += "Bread: " + currentGovernance.getAllResources().get(AllResource.BREAD) + '\n';
+//        output += "Apple: " + currentGovernance.getAllResources().get(AllResource.APPLE) + '\n';
+//        output += "Cheese: " + currentGovernance.getAllResources().get(AllResource.CHEESE) + '\n';
+//        output += "Meat: " + currentGovernance.getAllResources().get(AllResource.MEAT) + '\n';
+//
+//        return output;
+//    }
+//
     public static GameMenuMessages checkChangeFoodRate(Matcher matcher) {
         int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
 
@@ -125,7 +122,7 @@ public class GameMenuController {
         return "Fear rate: " + currentGovernance.getFearFactor();
     }
 
-    public static GameMenuMessages checkDropBuilding(int x,int y,String buildingType) {
+    public static GameMenuMessages checkDropBuilding(int x, int y, String buildingType) {
         Building building = BuildingUtils.getBuildingByType(buildingType);
 
         int size = building.getSize();
@@ -133,7 +130,7 @@ public class GameMenuController {
             return GameMenuMessages.INVALID_COORDINATE;
         if (!BuildingUtils.isMapEmpty(x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
         if (!BuildingUtils.isTextureSuitable(buildingType, x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
-        if(true) {
+        if (true) {
             //TODO: delete test mode + debug in current game, current governance, current map, ....
             BuildingUtils.build(currentGovernance, building, x, y, size);
             return GameMenuMessages.SUCCESS;
@@ -424,6 +421,7 @@ public class GameMenuController {
 
     private static void updatePopularityRate() {
         if (currentGovernance.getTotalFood() == 0) currentGovernance.setFoodRate(-2);
+        else currentGovernance.setFoodRate(currentGovernance.getFoodRate());
         if (currentGovernance.getGold() < currentGovernance.getTaxGold()) currentGovernance.setTaxRate(0);
 
         int currentFoodFactor = currentGovernance.getFoodFactor();

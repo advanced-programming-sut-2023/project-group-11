@@ -14,7 +14,7 @@ import model.map.Tile;
 import model.people.*;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
-import view.MovingAnimation;
+import view.animation.MovingAnimation;
 import view.enums.messages.SelectUnitMenuMessages;
 
 import java.util.ArrayList;

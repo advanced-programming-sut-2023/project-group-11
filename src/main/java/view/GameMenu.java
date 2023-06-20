@@ -15,12 +15,13 @@ import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Governance;
 import model.Stronghold;
-import model.buildings.Building;
 import model.map.Tile;
 import view.enums.Zoom;
 
@@ -63,6 +64,14 @@ public class GameMenu extends Application {
     private TilePane unitPane;
     @FXML
     private Label unitLabel;
+    @FXML
+    private AnchorPane governanceInformationPane;
+    @FXML
+    private Label governancePopularity;
+    @FXML
+    private Label governanceGold;
+    @FXML
+    private Label governancePopulation;
     private final int mapPaneHeight = 720;
     private final int mapPaneWidth = 990;
     private Zoom currentZoom = Zoom.NORMAL;
@@ -278,6 +287,7 @@ public class GameMenu extends Application {
                 throw new RuntimeException(e);
             }
         }
+        if (SelectBuildingMenuController.isKeep(tile.getBuilding())) showGovernanceInformation();
         int buildingSize = tile.getBuilding().getSize();
         int buildingX = tile.getBuilding().getXCoordinate();
         int buildingY = tile.getBuilding().getYCoordinate();
@@ -287,6 +297,20 @@ public class GameMenu extends Application {
         pressedTileXInScreen = buildingX - firstTileXInMap + buildingSize - 1;
         pressedTileYInScreen = buildingY - firstTileYInMap + buildingSize - 1;
         selectMultipleTiles(0, 0);
+    }
+
+    private void showGovernanceInformation() {
+        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
+        showGovernanceInformationPane();
+        setGovernanceInformationLabels(governance);
+    }
+
+    private void setGovernanceInformationLabels(Governance governance) {
+        governanceGold.setText("gold=" + governance.getGold());
+        governancePopularity.setText("popularity=" + governance.getPopularity());
+        governancePopulation.setText(governance.getUnemployedPopulation() + "\\" + governance.getMaxPopulation());
+        if (governance.getPopularity() >= 50) governancePopularity.setTextFill(Color.GREEN);
+        else governancePopularity.setTextFill(Color.RED);
     }
 
     public void drag(MouseEvent mouseEvent) {
@@ -352,24 +376,21 @@ public class GameMenu extends Application {
             case M -> checkMoveUnit();
             case C -> copyBuilding();
             case V -> pasteBuilding();
+            case S -> checkSetUnitState();
+            case ESCAPE -> stopGame();
         }
     }
 
-    private void pasteBuilding() {
-        if(copiedBuildingName != null && !copiedBuildingName.equals("keep")){
-            buildingDragName = copiedBuildingName;
-            buildingDragX = pressedTileXInScreen*tileSize;
-            buildingDragY = pressedTileYInScreen*tileSize;
-            buildingDragDone();
-        }
-    }
+    private void zoom(boolean zoomIn) {
+        if (currentZoom.getLevel() < 4 && zoomIn) {
+            currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() + 1);
+            tileSize = currentZoom.getSize();
+        } else if (currentZoom.getLevel() > 0 && !zoomIn && (mapPaneWidth / Zoom.getZoomByLevel(currentZoom.getLevel() - 1).getSize()) < mapSize) {
+            currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() - 1);
+            tileSize = currentZoom.getSize();
+        } else Toolkit.getDefaultToolkit().beep();
 
-    private void copyBuilding() {
-            try {
-                copiedBuildingName = selectedTile.getBuilding().getName();
-            }catch (Exception e) {
-                copiedBuildingName = null;
-            }
+        showMap();
     }
 
     private void seeTiles() {
@@ -384,16 +405,29 @@ public class GameMenu extends Application {
         if (SelectUnitMenuController.hasUnit(selectedTiles)) new MoveUnit().start(new Stage());
     }
 
-    private void zoom(boolean zoomIn) {
-        if (currentZoom.getLevel() < 4 && zoomIn) {
-            currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() + 1);
-            tileSize = currentZoom.getSize();
-        } else if (currentZoom.getLevel() > 0 && !zoomIn && (mapPaneWidth / Zoom.getZoomByLevel(currentZoom.getLevel() - 1).getSize()) < mapSize) {
-            currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() - 1);
-            tileSize = currentZoom.getSize();
-        } else Toolkit.getDefaultToolkit().beep();
+    private void pasteBuilding() {
+        if (copiedBuildingName != null && !copiedBuildingName.equals("keep")) {
+            buildingDragName = copiedBuildingName;
+            buildingDragX = pressedTileXInScreen * tileSize;
+            buildingDragY = pressedTileYInScreen * tileSize;
+            buildingDragDone();
+        }
+    }
 
-        showMap();
+    private void copyBuilding() {
+        try {
+            copiedBuildingName = selectedTile.getBuilding().getName();
+        } catch (Exception e) {
+            copiedBuildingName = null;
+        }
+    }
+
+    private void checkSetUnitState() throws Exception {
+        if (SelectUnitMenuController.hasUnit(selectedTiles)) new SetUnitState().start(new Stage());
+    }
+
+    private void stopGame() {
+        //TODO: implement
     }
 
     @FXML
@@ -533,23 +567,27 @@ public class GameMenu extends Application {
         buildingNameLabel.setText(((ImageView) mouseEvent.getSource()).getId());
     }
 
+    private void changePaneVisibility(Pane pane, Pane... panes) {
+        pane.setVisible(true);
+        for (Pane pane1 : panes) pane1.setVisible(false);
+    }
+
     public void showProductiveBox() {
-        productiveBox.setVisible(true);
-        warBox.setVisible(false);
-        governanceBox.setVisible(false);
+        changePaneVisibility(productiveBox, warBox, governanceBox, governanceInformationPane);
     }
 
     public void showWarBox() {
-        warBox.setVisible(true);
-        productiveBox.setVisible(false);
-        governanceBox.setVisible(false);
+        changePaneVisibility(warBox, productiveBox, governanceBox, governanceInformationPane);
     }
 
     public void showGovernanceBox() {
-        governanceBox.setVisible(true);
-        warBox.setVisible(false);
-        productiveBox.setVisible(false);
+        changePaneVisibility(governanceBox, warBox, productiveBox, governanceInformationPane);
     }
+
+    public void showGovernanceInformationPane() {
+        changePaneVisibility(governanceInformationPane, governanceBox, warBox, productiveBox);
+    }
+
 
     public void buildingDragOver(DragEvent dragEvent) {
         buildingDragX = dragEvent.getSceneX();
@@ -611,5 +649,33 @@ public class GameMenu extends Application {
                     ViewUtils.alert(Alert.AlertType.ERROR, "Repair error", "Not enough resource to repair");
             case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION, "Repair successful", "Successfully repaired!");
         }
+    }
+
+    public void showPopularityFactors() throws Exception {
+        if (governanceInformationPane.isVisible()) {
+            VBox vBox = new VBox();
+
+            initializePopularityFactors(vBox);
+            AnchorPane anchorPane = new AnchorPane(vBox);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(anchorPane));
+            stage.show();
+        }
+    }
+
+    private void initializePopularityFactors(VBox vBox) throws Exception {
+        String[] factors = {"Food", "Tax", "Fear", "Religious", "Ale"};
+        for (String factor : factors) vBox.getChildren().add(createLabel(factor));
+    }
+
+    private Label createLabel(String factor) throws Exception {
+        int currentValue = GameMenuController.showFactor(factor);
+        Label label = new Label(factor + ": " + currentValue);
+
+        if (currentValue > 0) label.setTextFill(Color.GREEN);
+        else if (currentValue < 0) label.setTextFill(Color.RED);
+        else label.setTextFill(Color.YELLOW);
+
+        return label;
     }
 }

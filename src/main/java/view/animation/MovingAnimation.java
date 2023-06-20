@@ -1,4 +1,4 @@
-package view;
+package view.animation;
 
 import controller.SelectUnitMenuController;
 import controller.ShowMapMenuController;
@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.util.Duration;
 import model.Path;
 import model.people.Unit;
+import view.GameMenu;
 
 import java.util.ArrayList;
 

@@ -146,12 +146,11 @@ public class Governance {
     }
 
     public int getFoodFactor() {
-        return foodFactor;
+        return foodRate * 4 + foodTypesCount();
     }
 
     public void setFoodRate(int foodRate) {
         this.foodRate = foodRate;
-        foodFactor = foodRate * 4 + foodTypesCount();
     }
 
     public int getFearFactor() {
@@ -228,11 +227,11 @@ public class Governance {
         allResources.put(allResource, allResources.get(allResource) + count);
     }
 
-    public ImageView getAvatar(){
+    public ImageView getAvatar() {
         return owner.getAvatar();
     }
 
-    public String getNickname(){
+    public String getNickname() {
         return owner.getNickname();
     }
 
@@ -326,7 +325,7 @@ public class Governance {
         if (allResources.get(AllResource.MEAT) > 0) output++;
         if (allResources.get(AllResource.CHEESE) > 0) output++;
 
-        return output-1;
+        return Math.max(0, output - 1);
     }
 
     public void resetUnitAbilities() {

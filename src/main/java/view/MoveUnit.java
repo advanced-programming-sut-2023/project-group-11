@@ -105,6 +105,7 @@ public class MoveUnit extends Application {
         switch (message) {
             case SUCCESS -> {
                 stage.close();
+                //TODO: add attack animation and attack banner
                 Utils.getGameMenu().showMap();
             }
             case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
