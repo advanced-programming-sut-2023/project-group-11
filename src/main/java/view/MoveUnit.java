@@ -33,11 +33,10 @@ public class MoveUnit extends Application {
     public HBox soldiers;
     private SelectUnitMenuMessages message;
 
-
     @Override
     public void start(Stage stage) throws Exception {
         MoveUnit.stage = stage;
-        AnchorPane anchorPane = FXMLLoader.load(new URL(getClass().getResource("/FXML/MoveUnit.fxml").toExternalForm()));
+        AnchorPane anchorPane = FXMLLoader.load(new URL(getClass().getResource("/FXML/SelectUnit.fxml").toExternalForm()));
 
         stage.setScene(new Scene(anchorPane));
         stage.show();
@@ -67,7 +66,7 @@ public class MoveUnit extends Application {
     }
 
     public void checkAction(int destinationX, int destinationY) throws Exception {
-        method();
+        initializeAction();
         RadioButton selected = (RadioButton) checkAction.getSelectedToggle();
         getClass().getDeclaredMethod("check" + selected.getText() + "Unit", int.class, int.class).
                 invoke(this, destinationX, destinationY);
@@ -105,15 +104,12 @@ public class MoveUnit extends Application {
         Utils.getGameMenu().selectDestinationTile(this);
     }
 
-
-    private void method() {
-        unitType = getUnitTypeByImage(selectedSoldierImage);
-        selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
-    }
-
     private void handleAttackError(SelectUnitMenuMessages message) {
         switch (message) {
-            case SUCCESS -> stage.close();
+            case SUCCESS -> {
+                stage.close();
+                Utils.getGameMenu().showMap();
+            }
             case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
                     "Invalid Coordinate!");
             case INVALID_UNIT_TYPE_TO_ATTACK -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
@@ -133,6 +129,11 @@ public class MoveUnit extends Application {
         String[] splitted = selectedSoldierImage.getImage().getUrl().split("/");
         String imageName = splitted[splitted.length - 1];
         return imageName.substring(0, imageName.lastIndexOf('.'));
+    }
+
+    private void initializeAction() {
+        unitType = getUnitTypeByImage(selectedSoldierImage);
+        selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
     }
 
     private void handleMoveError(SelectUnitMenuMessages message) {
