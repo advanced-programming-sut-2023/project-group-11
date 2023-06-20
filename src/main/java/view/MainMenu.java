@@ -25,8 +25,8 @@ public class MainMenu extends Application {
     }
 
     public void newGame() throws Exception {
-        new NewGame().start(stage);
-//        new NewGame().start(new Stage());
+//        new NewGame().start(stage);
+        new NewGame().start(new Stage());
     }
 
     public void profileMenu() throws Exception {

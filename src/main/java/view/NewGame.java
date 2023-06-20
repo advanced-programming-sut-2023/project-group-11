@@ -61,6 +61,7 @@ public class NewGame extends Application {
     }
 
     public void back() throws Exception {
-        new MainMenu().start(stage);
+        stage.close();
+        new MainMenu().start(SignupMenu.getStage());
     }
 }
