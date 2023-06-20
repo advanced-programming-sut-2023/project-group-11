@@ -170,6 +170,7 @@ public class GameMenu extends Application {
 
         setTextureTreeImages(mapTiles);
         setBuildingUnitImages(mapTiles);
+        sidePane.toFront();
     }
 
     private void setTextureTreeImages(Tile[][] mapTiles) {
@@ -334,8 +335,8 @@ public class GameMenu extends Application {
     }
 
     private boolean outOfPane(int deltaX, int deltaY) {
-        return (pressedTileXInScreen + deltaX) - firstTileXInMap >= (mapPaneWidth / tileSize) ||
-                (pressedTileYInScreen + deltaY) - firstTileYInMap >= (mapPaneHeight / tileSize);
+        return (pressedTileXInScreen + deltaX) >= (mapPaneWidth / tileSize) ||
+                (pressedTileYInScreen + deltaY) >= (mapPaneHeight / tileSize);
 
     }
 
@@ -366,7 +367,7 @@ public class GameMenu extends Application {
         if (currentZoom.getLevel() < 4 && zoomIn) {
             currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() + 1);
             tileSize = currentZoom.getSize();
-        } else if (currentZoom.getLevel() > 0 && !zoomIn) {
+        } else if (currentZoom.getLevel() > 0 && !zoomIn && (mapPaneWidth / Zoom.getZoomByLevel(currentZoom.getLevel() - 1).getSize()) < mapSize) {
             currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() - 1);
             tileSize = currentZoom.getSize();
         } else Toolkit.getDefaultToolkit().beep();
