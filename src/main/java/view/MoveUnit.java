@@ -7,10 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -138,10 +135,7 @@ public class MoveUnit extends Application {
 
     private void handleMoveError(SelectUnitMenuMessages message) {
         switch (message) {
-            case SUCCESS -> {
-                stage.close();
-                System.out.println("success");
-            }
+            case SUCCESS -> stage.close();
             case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",
                     "Invalid Coordinates!");
             case INVALID_DESTINATION_TEXTURE -> ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",

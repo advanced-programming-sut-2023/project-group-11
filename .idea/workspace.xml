@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Copy,Paste buildings + debugs">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectBuildingMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Inverse x&amp;y debugged (Trap killing need debugging)">
       <change beforePath="$PROJECT_DIR$/src/main/java/view/MoveUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MoveUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,14 +267,7 @@
       <workItem from="1686915739398" duration="6933000" />
       <workItem from="1686937437314" duration="4374000" />
       <workItem from="1686999064014" duration="740000" />
-      <workItem from="1687241534062" duration="10378000" />
-    </task>
-    <task id="LOCAL-00051" summary="Attack priority set&#10;(armor effect &amp; throwing path ignored)">
-      <created>1683636926402</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1683636926402</updated>
+      <workItem from="1687241534062" duration="10727000" />
     </task>
     <task id="LOCAL-00052" summary="Dead machine -&gt; remove engineer">
       <created>1683637401496</created>
@@ -621,7 +605,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687248009172</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="Inverse x&amp;y debugged (Trap killing need debugging)">
+      <created>1687260064182</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1687260064182</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,7 +654,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Debug as possible as i could!" />
     <MESSAGE value="remove TODOs" />
     <MESSAGE value="Stop Digging" />
     <MESSAGE value="Minor Changes" />
@@ -688,7 +678,8 @@
     <MESSAGE value="Trade &amp; Market Complete + minor debug, improvement" />
     <MESSAGE value="minor debugs" />
     <MESSAGE value="Copy,Paste buildings + debugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Copy,Paste buildings + debugs" />
+    <MESSAGE value="Inverse x&amp;y debugged (Trap killing need debugging)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inverse x&amp;y debugged (Trap killing need debugging)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
