@@ -20,6 +20,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Stronghold;
+import model.buildings.Building;
 import model.map.Tile;
 import view.enums.Zoom;
 
@@ -70,6 +71,7 @@ public class GameMenu extends Application {
     private double buildingDragX;
     private double buildingDragY;
     private String buildingDragName;
+    private String copiedBuildingName;
     private int firstTileXInMap = 0;
     private int firstTileYInMap = 0;
     private int selectedTileXInScreen = 0;
@@ -348,7 +350,26 @@ public class GameMenu extends Application {
             case SUBTRACT -> zoom(false);
             case E -> seeTiles();
             case M -> checkMoveUnit();
+            case C -> copyBuilding();
+            case V -> pasteBuilding();
         }
+    }
+
+    private void pasteBuilding() {
+        if(copiedBuildingName != null && !copiedBuildingName.equals("keep")){
+            buildingDragName = copiedBuildingName;
+            buildingDragX = pressedTileXInScreen*tileSize;
+            buildingDragY = pressedTileYInScreen*tileSize;
+            buildingDragDone();
+        }
+    }
+
+    private void copyBuilding() {
+            try {
+                copiedBuildingName = selectedTile.getBuilding().getName();
+            }catch (Exception e) {
+                copiedBuildingName = null;
+            }
     }
 
     private void seeTiles() {
@@ -536,7 +557,7 @@ public class GameMenu extends Application {
 //        System.out.println("asdasd");
     }
 
-    public void buildingDragDone(DragEvent dragEvent) {
+    public void buildingDragDone() {
         int x = Math.floorDiv((int) buildingDragX, tileSize) + firstTileXInMap;
         int y = Math.floorDiv((int) buildingDragY, tileSize) + firstTileYInMap;
         if (buildingDragX > mapPaneWidth || buildingDragX < 0 || buildingDragY > mapPaneHeight || buildingDragY < 0)
@@ -549,9 +570,13 @@ public class GameMenu extends Application {
                     ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough resource!");
             case NOT_ENOUGH_POPULATION ->
                     ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough population!");
-            case SUCCESS -> setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName).getImage()
-                    , (x - firstTileXInMap) * tileSize, (y - firstTileYInMap) * tileSize,
-                    BuildingUtils.getBuildingByType(buildingDragName).getSize(), x, y);
+            case SUCCESS -> {
+                selectedTile = ShowMapMenuController.getSelectedTile(x, y, 0, 0);
+                setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName).getImage()
+                        , (x - firstTileXInMap) * tileSize, (y - firstTileYInMap) * tileSize,
+                        BuildingUtils.getBuildingByType(buildingDragName).getSize(), x, y);
+                selectBuildingTiles(selectedTile);
+            }
         }
     }
 

@@ -32,7 +32,7 @@ public class BuildingUtils {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         for (int i = x; i < x + size; i++) {
             for (int j = y; j < y + size; j++) {
-                if (tiles[i][j].isFull())
+                if (tiles[j][i].isFull())
                     return false;
             }
         }
