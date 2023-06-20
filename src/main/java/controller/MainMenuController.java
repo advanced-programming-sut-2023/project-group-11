@@ -127,7 +127,7 @@ public class MainMenuController {
     }
 
     private static void dropLord(Governance currentGovernance, Lord lord, int x, int y) {
-        Tile tile = Stronghold.getCurrentGame().getMap().getTile(y, x);
+        Tile tile = Stronghold.getCurrentGame().getMap().getTile(x, y);
         tile.getUnits().add(lord);
         lord.setLocation(new int[]{x, y});
         currentGovernance.addUnit(lord);

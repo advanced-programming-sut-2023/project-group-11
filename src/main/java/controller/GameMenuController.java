@@ -507,8 +507,7 @@ public class GameMenuController {
                     continue;
                 if (i != 0 && j != 0)
                     continue;
-                Tile tile = currentGame.getMap().getTile(x + i, x + j);
-//                Tile tile = currentGame.getMap().getTile(x+i,y+j);
+                Tile tile = currentGame.getMap().getTile(x + i, x + j); //TODO: change directions based on new getTile
                 if (tile.hasEnemy(currentGovernance)) {
                     if (j > 0)
                         enemyNumberRight += tile.getUnits().size();

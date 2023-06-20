@@ -6,10 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,14 +276,8 @@
       <workItem from="1687078319756" duration="503000" />
       <workItem from="1687163421802" duration="14998000" />
       <workItem from="1687219639785" duration="27000" />
-      <workItem from="1687244725187" duration="1384000" />
-    </task>
-    <task id="LOCAL-00050" summary="Add (Areas + Lord + Keep)">
-      <created>1683588625187</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1683588625188</updated>
+      <workItem from="1687244725187" duration="3110000" />
+      <workItem from="1687252642360" duration="797000" />
     </task>
     <task id="LOCAL-00051" summary="Attack priority set&#10;(armor effect &amp; throwing path ignored)">
       <created>1683636926402</created>
@@ -619,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687194271633</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="minor debug">
+      <created>1687246188507</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1687246188508</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -661,7 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Start game double quote handled" />
     <MESSAGE value="Debug as possible as i could!" />
     <MESSAGE value="remove TODOs" />
     <MESSAGE value="Stop Digging" />
@@ -686,7 +688,8 @@
     <MESSAGE value="CreateTrade completed" />
     <MESSAGE value="Trade &amp; Market Complete + minor debug, improvement" />
     <MESSAGE value="save maps in map edit menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="save maps in map edit menu" />
+    <MESSAGE value="minor debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor debug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

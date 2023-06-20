@@ -15,7 +15,7 @@ public class ShowMapMenuController {
         for (int i = 0; i < rowsCount; i++) {
             tiles[i] = new Tile[columnCount];
             for (int j = 0; j < columnCount; j++)
-                tiles[i][j] = currentMap.getTile(y + i, x + j); //TODO: Be careful about inverse x & y
+                tiles[i][j] = currentMap.getTile(x + j, y + i);
         }
         return tiles;
     }
@@ -29,7 +29,7 @@ public class ShowMapMenuController {
     }
 
     public static Tile getSelectedTile(int selectedTileX, int selectedTileY, int firstTileX, int firstTileY) {
-        return currentMap.getTile(selectedTileY + firstTileY, selectedTileX + firstTileX);
+        return currentMap.getTile(selectedTileX + firstTileX, selectedTileY + firstTileY);
     }
 
     public static String getTilesData(ArrayList<Tile> selectedTiles) {

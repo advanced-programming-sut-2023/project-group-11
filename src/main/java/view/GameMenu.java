@@ -220,7 +220,7 @@ public class GameMenu extends Application {
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(xCoordinate);
         imageView.setLayoutY(yCoordinate);
-        imageView.setFitWidth(tileSize * buildingSize); //TODO: do not get out of the pane
+        imageView.setFitWidth(tileSize * buildingSize);
         imageView.setFitHeight(tileSize * buildingSize);
         imageView.setPreserveRatio(false);
         mapPane.getChildren().add(imageView);

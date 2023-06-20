@@ -49,11 +49,11 @@ public class Map {
     }
 
     public Tile getTile(int x, int y) {
-        return tiles[x][y];
+        return tiles[y][x];
     }
 
     public Tile getTile(int[] location) {
-        return tiles[location[0]][location[1]];
+        return tiles[location[1]][location[0]];
     }
 
     @Override

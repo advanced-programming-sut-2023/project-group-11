@@ -426,10 +426,10 @@ public class SelectUnitMenuController {
         Tile previousTile = map.getTile(previousX, previousY);
         Building previousBuilding = previousTile.getBuilding();
 
-        if (notValidUnitTypeForClimbing(unitType))
+        if (currentBuilding instanceof Trap) return true;
+        else if (notValidUnitTypeForClimbing(unitType))
             return false;
-
-        if (currentBuilding instanceof Trap || currentBuilding instanceof Keep)
+        else if (currentBuilding instanceof Keep)
             return true;
         else if (currentBuilding instanceof GateHouse gateHouse) {
             if (currentGovernance.equals(gateHouse.getGateController()))
@@ -734,19 +734,19 @@ public class SelectUnitMenuController {
     private static ArrayList<Tile> getSelectedTiles(Map map, int x, int y, int length, String direction) {
         ArrayList<Tile> selectedTiles = new ArrayList<>();
         switch (direction) {
-            case "left" -> {
+            case "up" -> {
                 for (int i = 0; i < length; i++)
                     selectedTiles.add(map.getTile(x, y - i));
             }
-            case "right" -> {
+            case "down" -> {
                 for (int i = 0; i < length; i++)
                     selectedTiles.add(map.getTile(x, y + i));
             }
-            case "up" -> {
+            case "left" -> {
                 for (int i = 0; i < length; i++)
                     selectedTiles.add(map.getTile(x - i, y));
             }
-            case "down" -> {
+            case "right" -> {
                 for (int i = 0; i < length; i++)
                     selectedTiles.add(map.getTile(x + i, y));
             }
