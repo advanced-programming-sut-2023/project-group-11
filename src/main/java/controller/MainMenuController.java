@@ -169,7 +169,7 @@ public class MainMenuController {
                 coordinate[1] = 5 * mapSize / 6;
             }
         }
-        return coordinate;
+        return new int[]{coordinate[1],coordinate[0]};
     }
 
 

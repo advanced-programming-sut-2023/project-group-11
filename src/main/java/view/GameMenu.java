@@ -594,7 +594,7 @@ public class GameMenu extends Application {
             if (mouseEvent.getClickCount() == 2 && mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
                 try {
                     moveUnit.checkAction(firstTileXInMap + pressedTileXInScreen,
-                            firstTileYInMap + selectedTileYInScreen);
+                            firstTileYInMap + pressedTileYInScreen);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

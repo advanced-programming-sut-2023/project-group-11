@@ -202,7 +202,7 @@ public class SelectBuildingMenuController {
 
     private static boolean canCreateUnit() {
         return unitCreationTile.getTexture().isSuitableForUnit() &&
-                !SelectUnitMenuController.notValidTextureForMoving(unitCreationTile) &&
+                !unitCreationTile.hasBuilding() &&
                 (unitCreationTile.getUnits().size() == 0 ||
                         unitCreationTile.getUnits().get(0).getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()));
 

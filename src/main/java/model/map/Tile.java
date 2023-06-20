@@ -102,7 +102,7 @@ public class Tile {
                 unitsName += (i++) + ". " + unit.toString() + '\n';
 
         int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);
-        result += "Coordinates: x=" + location[1] + " y=" + location[0] + '\n';
+        result += "Coordinates: x=" + location[0] + " y=" + location[1] + '\n';
         result += "Texture: " + texture.getName() + '\n';
         if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
         if (units.size() > 0) result += "Units:\n" + unitsName;

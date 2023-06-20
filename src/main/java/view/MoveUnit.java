@@ -84,7 +84,7 @@ public class MoveUnit extends Application {
         for (Tile selectedTile : selectedTiles) {
             int[] location = ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile);
             message = SelectUnitMenuController.checkMoveUnit(new int[]{location[0], location[1]},
-                    destinationY, destinationX, unitType, isPatrol);
+                    destinationX, destinationY, unitType, isPatrol);
 
             handleMoveError(message);
         }
@@ -93,7 +93,7 @@ public class MoveUnit extends Application {
     public void checkAttackUnit(int destinationX, int destinationY) {
         for (Tile selectedTile : selectedTiles) {
             message = SelectUnitMenuController.checkAttack(ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile),
-                    destinationY, destinationX, unitType);
+                    destinationX, destinationY, unitType);
 
             handleAttackError(message);
         }
@@ -138,7 +138,10 @@ public class MoveUnit extends Application {
 
     private void handleMoveError(SelectUnitMenuMessages message) {
         switch (message) {
-            case SUCCESS -> stage.close();
+            case SUCCESS -> {
+                stage.close();
+                System.out.println("success");
+            }
             case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",
                     "Invalid Coordinates!");
             case INVALID_DESTINATION_TEXTURE -> ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",

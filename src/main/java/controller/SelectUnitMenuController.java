@@ -458,18 +458,13 @@ public class SelectUnitMenuController {
         Tile previousTile = map.getTile(previousLocation[0], previousLocation[1]);
         Tile currentTile = map.getTile(currentLocation[0], currentLocation[1]);
 
-        if (previousTile.getBuilding().getName().equals("stairs"))
-            return true;
-        else if (previousTile.getBuilding() instanceof GateHouse)
-            return true;
-        else if (previousTile.getBuilding() instanceof Keep)
-            return true;
-        else if (currentTile.getUnitsByType("ladderman").size() != 0)
-            return true;
-        else if (currentTile.getUnitsByType("siege tower").size() != 0)
-            return true;
-        else
-            return unitType.equals("assassin");
+        if (previousTile.getBuilding() instanceof Trap) return true;
+        else if (previousTile.getBuilding().getName().equals("stairs")) return true;
+        else if (previousTile.getBuilding() instanceof GateHouse) return true;
+        else if (previousTile.getBuilding() instanceof Keep) return true;
+        else if (currentTile.getUnitsByType("ladderman").size() != 0) return true;
+        else if (currentTile.getUnitsByType("siege tower").size() != 0) return true;
+        else return unitType.equals("assassin");
     }
 
     private static int minimumSpeed(ArrayList<Unit> units) {
