@@ -117,6 +117,7 @@ public class MarketMenu extends Application {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Sell Successful", "Item Sold Successfully!");
                 goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
             }
         }
     }
@@ -130,6 +131,7 @@ public class MarketMenu extends Application {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Buy Successful", "Item bought successfully!");
                 goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
             }
         }
     }

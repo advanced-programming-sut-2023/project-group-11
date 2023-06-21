@@ -164,7 +164,7 @@
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#buy" text="Buy">
+                        <Button alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#buy" text="Buy">
                            <graphic>
                               <Label fx:id="buyLabel" alignment="CENTER_RIGHT" />
                            </graphic>
@@ -172,7 +172,7 @@
                               <Font size="18.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#sell" text="Sell">
+                        <Button alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#sell" text="Sell">
                            <graphic>
                               <Label fx:id="sellLabel" />
                            </graphic>
