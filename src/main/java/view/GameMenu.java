@@ -173,7 +173,6 @@ public class GameMenu extends Application {
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
     public void showMap() {
-        // TODO: handle hidden items
         mapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
@@ -203,7 +202,6 @@ public class GameMenu extends Application {
 
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
-                //TODO: needs debug for buildings with size more than 1
                 if (BuildingUtils.isBuildingInTile(tile.getBuilding()))
                     setTileBuildingImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
                             tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
@@ -227,7 +225,7 @@ public class GameMenu extends Application {
 
     private void setTileBuildingImage(Image image, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
         if (buildingY != firstTileYInMap + (yCoordinate / tileSize) || buildingX != firstTileXInMap + (xCoordinate / tileSize))
-            return; //TODO: Be careful about inverse x & y
+            return;
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(xCoordinate);
         imageView.setLayoutY(yCoordinate);
