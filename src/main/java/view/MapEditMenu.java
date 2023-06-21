@@ -26,6 +26,7 @@ import model.map.Texture;
 import model.map.Tile;
 import model.map.Tree;
 import view.enums.Zoom;
+import view.enums.messages.MapEditMenuMessages;
 
 import java.awt.*;
 import java.net.URL;
@@ -166,11 +167,37 @@ public class MapEditMenu extends Application {
     }
 
     public void setTexture(MouseEvent mouseEvent) {
+        String textureName = ((ImageView) mouseEvent.getSource()).getId();
+        textureNameLabel.setVisible(true);
+        textureNameLabel.setText(textureName);
 
+        MapEditMenuMessages message = MapEditMenuController.setTexture(selectedTiles, textureName,
+                selectedTileXInScreen + firstTileXInMap, selectedTileYInScreen + firstTileYInMap);
+
+        switch (message) {
+            case SELECT_ONLY_ONE_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
+                    "Select only on tile for this texture!");
+            case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
+                    "Invalid place to deploy this texture!");
+        }
+
+        showMap();
     }
 
     public void dropTree(MouseEvent mouseEvent) {
+        String treeName = ((ImageView) mouseEvent.getSource()).getId();
 
+        textureNameLabel.setVisible(true);
+        textureNameLabel.setText(treeName);
+
+        MapEditMenuMessages message = MapEditMenuController.dropTree(selectedTiles, treeName);
+
+        switch (message) {
+            case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, "Drop Tree Failed",
+                    "Invalid place to deploy tree!");
+        }
+
+        showMap();
     }
 
     // ---------------------------------- Show map ------------------------------------------------

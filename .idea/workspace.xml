@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Show textures in MapEditMenu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/MapEditMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/MapEditMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,14 +271,7 @@
       <workItem from="1687241534062" duration="10727000" />
       <workItem from="1687279353376" duration="3637000" />
       <workItem from="1687295014520" duration="1740000" />
-      <workItem from="1687338144477" duration="4686000" />
-    </task>
-    <task id="LOCAL-00054" summary="Start game debugged (map initialization + minor changes)">
-      <created>1683669887248</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1683669887248</updated>
+      <workItem from="1687338144477" duration="6287000" />
     </task>
     <task id="LOCAL-00055" summary="error resolved">
       <created>1683669953803</created>
@@ -618,7 +609,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687296649512</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="Show textures in MapEditMenu">
+      <created>1687343528952</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1687343528953</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +658,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Minor Changes" />
     <MESSAGE value="Dig pitch debugged + resetAbilities debugged" />
     <MESSAGE value="Kill Governance &amp; next turn debugged" />
     <MESSAGE value="signup initialized" />
@@ -685,7 +682,8 @@
     <MESSAGE value="Inverse x&amp;y debugged (Trap killing need debugging)" />
     <MESSAGE value="Popup newGame" />
     <MESSAGE value="MapEdit controller added" />
-    <option name="LAST_COMMIT_MESSAGE" value="MapEdit controller added" />
+    <MESSAGE value="Show textures in MapEditMenu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Show textures in MapEditMenu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
