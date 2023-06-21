@@ -4,21 +4,21 @@ import javafx.scene.image.Image;
 
 public enum Texture {
     SAND("sand", "desert"),                         //زمین
-    SAND_DUNE("sand dune", "desert"),               //زمین با سنگ ریزه
+    SAND_DUNE("sand dune", "desert_dune"),               //زمین با سنگ ریزه
     ROCK("rock", "rock"),                           // تخته سنگ - UnBuildable
     CLIFF("cliff", "cliff"),                        // UnBuildable - صخره
     STONE("stone", "stone"),                        // معدن سنگ
     IRON("iron", "iron"),                           // معدن آهن
     GRASS("grass", "grass"),                        // چمن
-    DENSE_GRASSLAND("dense grassland", "grass"),    //علفزار پرتراکم
+    DENSE_GRASSLAND("dense grassland", "dense_grassland"),    //علفزار پرتراکم
     GRASSLAND("grassland", "grassland"),            // UnBuildable
     OIL("oil", "desert"),                           //نفت
     MARSH("marsh", "marsh"),                        // جلگه
     SHALLOW_WATER("shallow water", "shallow_water"),// آب کم عمق
-    RIVER("river", "water"),                        // رودخانه
-    SMALL_LAKE("small lake", "water"),              // برکه کوچک
-    BIG_LAKE("big lake", "water"),                  // برکه بزرگ
-    SEA("sea", "water"),                            // دریا
+    RIVER("river", "river"),                        // رودخانه
+    SMALL_LAKE("small lake", "lake"),              // برکه کوچک
+    BIG_LAKE("big lake", "lake"),                  // برکه بزرگ
+    SEA("sea", "sea"),                            // دریا
     BEACH("beach", "desert"),                       // ساحل دریا
     PITCH("pitch", "pitch")                         // UnBuildable خندق
     ;
