@@ -39,7 +39,10 @@ public class PreviousTradesMenu extends Application {
         receivedTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         receivedTrades.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             selectedTrade = (Trade) newSelection;
-            acceptButton.setVisible(selectedTrade.isOpen());
+            try {
+                acceptButton.setVisible(selectedTrade.isOpen());
+            }catch (Exception e){
+            }
         });
 //        receivedTrades.setRowFactory(tv -> new TableRow() {
 //            protected void updateItem(Trade trade, boolean b) {
@@ -49,6 +52,17 @@ public class PreviousTradesMenu extends Application {
 //                }
 //            }
 //        });
+    }
+
+    public void reinitializeReceivedTrades(){
+        receivedTrades.getItems().clear();
+        receivedTrades.setItems((TradeMenuController.getReceivedTradesObservable()));
+        addColumns(receivedTrades);
+        receivedTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        receivedTrades.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedTrade = (Trade) newSelection;
+            acceptButton.setVisible(selectedTrade.isOpen());
+        });
     }
 
     private void addColumns(TableView tableView) {
@@ -95,7 +109,10 @@ public class PreviousTradesMenu extends Application {
             case NOT_ENOUGH_GOLD -> ViewUtils.alert(Alert.AlertType.ERROR,"Trade Error","Buyer doesn't have enough gold!");
             case NOT_ENOUGH_AMOUNT -> ViewUtils.alert(Alert.AlertType.ERROR,"Trade Error","Sender doesn't have enough resource!");
             case NOT_ENOUGH_STORAGE -> ViewUtils.alert(Alert.AlertType.ERROR,"Trade Error","Buyer doesn't have enough storage!");
-            case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION,"Trade Successful","Trade Successfully done!");
+            case SUCCESS -> {
+                ViewUtils.alert(Alert.AlertType.INFORMATION,"Trade Successful","Trade Successfully done!");
+                reinitializeReceivedTrades();
+            }
         }
     }
 }

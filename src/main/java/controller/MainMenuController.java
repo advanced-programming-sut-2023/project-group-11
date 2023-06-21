@@ -101,8 +101,8 @@ public class MainMenuController {
         y = getXYBySelectedArea(selectedArea, mapSize)[1];
 
         buildKeep(currentGovernance, keep, x, y);
-        BuildingUtils.build(currentGovernance, new Storage(StorageType.STOCKPILE), x - 1, y, 1);
-        BuildingUtils.build(currentGovernance, new Storage(StorageType.GRANARY), x, y - 1, 1);
+        BuildingUtils.build(currentGovernance, new Storage(StorageType.STOCKPILE), x - 2, y);
+        BuildingUtils.build(currentGovernance, new Storage(StorageType.GRANARY), x, y - 2);
         currentGovernance.initializeStorages();
         dropLord(currentGovernance, lord, x, y);
         currentGovernance.setTerritory(Territory.getTerritoryByArea(selectedArea));
