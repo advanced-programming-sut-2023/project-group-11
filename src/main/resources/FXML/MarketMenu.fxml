@@ -200,6 +200,11 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
+                        <Label fx:id="amountLabel" alignment="CENTER" layoutX="60.0" layoutY="150.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                </children>
