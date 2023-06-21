@@ -320,7 +320,7 @@ public class GameMenu extends Application {
         int deltaY = endTileY - pressedTileYInScreen;
         if (deltaX == 0 && deltaY == 0) return;
 
-        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) moveMapMove(deltaX, deltaY);
+        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) moveMap(deltaX, deltaY);
         else if (selectedTile != null && mouseEvent.getButton().equals(MouseButton.MIDDLE))
             selectMultipleTiles(deltaX, deltaY);
     }
@@ -348,7 +348,7 @@ public class GameMenu extends Application {
 //        System.out.println(selectedTiles.size());
     }
 
-    public void moveMapMove(int deltaX, int deltaY) {
+    public void moveMap(int deltaX, int deltaY) {
         if (firstTileXInMap - deltaX >= 0 && firstTileXInMap - deltaX < mapSize - (mapPaneWidth / tileSize))
             firstTileXInMap -= deltaX;
         if (firstTileYInMap - deltaY >= 0 && firstTileYInMap - deltaY < mapSize - (mapPaneHeight / tileSize))
@@ -372,7 +372,6 @@ public class GameMenu extends Application {
         switch (keyCode) {
             case ADD -> zoom(true);
             case SUBTRACT -> zoom(false);
-            case E -> seeTiles();
             case M -> checkMoveUnit();
             case C -> copyBuilding();
             case V -> pasteBuilding();
@@ -391,14 +390,6 @@ public class GameMenu extends Application {
         } else Toolkit.getDefaultToolkit().beep();
 
         showMap();
-    }
-
-    private void seeTiles() {
-        System.out.println(selectedTiles.size());
-        for (Tile tile : selectedTiles) {
-            System.out.println(tile);
-        }
-        System.out.println("end");
     }
 
     private void checkMoveUnit() throws Exception {
@@ -592,7 +583,6 @@ public class GameMenu extends Application {
     public void buildingDragOver(DragEvent dragEvent) {
         buildingDragX = dragEvent.getSceneX();
         buildingDragY = dragEvent.getSceneY();
-//        System.out.println("asdasd");
     }
 
     public void buildingDragDone() {

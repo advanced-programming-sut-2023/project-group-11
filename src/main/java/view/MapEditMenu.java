@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -16,18 +17,33 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import model.map.Texture;
 import model.map.Tile;
+import model.map.Tree;
 import view.enums.Zoom;
 
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class MapEditMenu extends Application {
+    @FXML
+    private AnchorPane texturesPane;
+    @FXML
+    private TilePane sandBox;
+    @FXML
+    private TilePane waterBox;
+    @FXML
+    private TilePane treeBox;
+    @FXML
+    private Label textureNameLabel;
     @FXML
     private AnchorPane sidePane;
     @FXML
@@ -65,6 +81,46 @@ public class MapEditMenu extends Application {
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
         showMap();
         setTraversable();
+        initializeTextureBoxes();
+    }
+
+    private void initializeTextureBoxes() {
+        initializeTextureBox(sandBox, Texture.SAND, Texture.IRON, Texture.STONE, Texture.CLIFF, Texture.DENSE_GRASSLAND,
+                Texture.GRASS, Texture.GRASSLAND, Texture.ROCK, Texture.SAND_DUNE);
+        initializeTextureBox(waterBox, Texture.BEACH, Texture.SEA, Texture.RIVER, Texture.SHALLOW_WATER, Texture.BIG_LAKE,
+                Texture.SMALL_LAKE, Texture.MARSH, Texture.OIL);
+        initializeTreeBox("cherry", "coconut", "date", "olive", "small");
+    }
+
+    private void initializeTextureBox(TilePane box, Texture... textures) {
+        HashMap<String, Image> texturesImages = new HashMap<>();
+        for (Texture texture : textures)
+            texturesImages.put(texture.getName(), texture.getImage());
+        fillBox(box, texturesImages, true);
+    }
+
+    private void initializeTreeBox(String... treeNames) {
+        HashMap<String, Image> treesImages = new HashMap<>();
+        for (String treeName : treeNames) {
+            Tree tree = new Tree(treeName);
+            treesImages.put(treeName, tree.getImage());
+        }
+        fillBox(treeBox, treesImages, false);
+    }
+
+    private void fillBox(TilePane box, HashMap<String, Image> images, boolean isTexture) {
+        for (String imageName : images.keySet()) {
+            ImageView imageView = new ImageView(images.get(imageName));
+            imageView.setFitHeight(60);
+            imageView.setFitWidth(60);
+            imageView.setPreserveRatio(true);
+            imageView.setId(imageName);
+            if (isTexture)
+                imageView.setOnMouseClicked(this::setTexture);
+            else
+                imageView.setOnMouseClicked(this::dropTree);
+            box.getChildren().add(imageView);
+        }
     }
 
     private void setTraversable() {
@@ -90,6 +146,31 @@ public class MapEditMenu extends Application {
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Saving map", "Map saved successfully!");
             new MainMenu().start(SignupMenu.getStage());
         }
+    }
+
+    private void changePaneVisibility(Pane pane, Pane... panes) {
+        pane.setVisible(true);
+        for (Pane pane1 : panes) pane1.setVisible(false);
+    }
+
+    public void showSandBox() {
+        changePaneVisibility(sandBox, waterBox, treeBox);
+    }
+
+    public void showWaterBox() {
+        changePaneVisibility(waterBox, sandBox, treeBox);
+    }
+
+    public void showTreeBox() {
+        changePaneVisibility(treeBox, sandBox, waterBox);
+    }
+
+    public void setTexture(MouseEvent mouseEvent) {
+
+    }
+
+    public void dropTree(MouseEvent mouseEvent) {
+
     }
 
     // ---------------------------------- Show map ------------------------------------------------
@@ -174,12 +255,12 @@ public class MapEditMenu extends Application {
         int deltaY = endTileY - pressedTileYInScreen;
         if (deltaX == 0 && deltaY == 0) return;
 
-        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) moveMapMove(deltaX, deltaY);
+        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) moveMap(deltaX, deltaY);
         else if (selectedTile != null && mouseEvent.getButton().equals(MouseButton.MIDDLE))
             selectMultipleTiles(deltaX, deltaY);
     }
 
-    public void moveMapMove(int deltaX, int deltaY) {
+    public void moveMap(int deltaX, int deltaY) {
         if (firstTileXInMap - deltaX >= 0 && firstTileXInMap - deltaX < mapSize - (mapPaneWidth / tileSize))
             firstTileXInMap -= deltaX;
         if (firstTileYInMap - deltaY >= 0 && firstTileYInMap - deltaY < mapSize - (mapPaneHeight / tileSize))
