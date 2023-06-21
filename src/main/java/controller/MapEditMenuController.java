@@ -19,6 +19,7 @@ public class MapEditMenuController {
         mapsChoiceBox.getItems().addAll(Stronghold.getMaps());
         mapsChoiceBox.setValue(Stronghold.getMapByName("original"));
         ShowMapMenuController.setCurrentMap(Stronghold.getMapByName("original"));
+        currentMap = Stronghold.getMapByName("original");
         mapsChoiceBox.setOnAction(actionEvent -> {
             ShowMapMenuController.setCurrentMap(mapsChoiceBox.getValue());
             MapEditMenuController.setCurrentMap(mapsChoiceBox.getValue());

@@ -7,6 +7,7 @@ import model.buildings.Building;
 import model.people.Troop;
 import model.people.Unit;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Tile {
@@ -114,5 +115,13 @@ public class Tile {
 
     public void clearUnitsByType(ArrayList<Unit> selectedUnits) {
         this.units.removeAll(selectedUnits);
+    }
+
+    public Unit getLastUnitInTile() {
+        Unit result = null;
+        for (Unit unit : units)
+            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
+                result = unit;
+        return result;
     }
 }

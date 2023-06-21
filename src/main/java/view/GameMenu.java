@@ -205,8 +205,8 @@ public class GameMenu extends Application {
                 if (BuildingUtils.isBuildingInTile(tile.getBuilding()))
                     setTileBuildingImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
                             tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
-                if (tile.getUnits().size() != 0)
-                    setTileImage(tile.getUnits().get(tile.getUnits().size() - 1).getImage(), xCoordinate, yCoordinate);
+                if (tile.getLastUnitInTile() != null)
+                    setTileImage(tile.getLastUnitInTile().getImage(), xCoordinate, yCoordinate);
                 if (tile.equals(selectedTile)) boldSelectedTile(xCoordinate, yCoordinate);
                 xCoordinate += tileSize;
             }
