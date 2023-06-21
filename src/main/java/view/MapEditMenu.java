@@ -149,6 +149,11 @@ public class MapEditMenu extends Application {
         }
     }
 
+    public void clear() {
+        MapEditMenuController.clear(selectedTiles);
+        showMap();
+    }
+
     private void changePaneVisibility(Pane pane, Pane... panes) {
         pane.setVisible(true);
         for (Pane pane1 : panes) pane1.setVisible(false);
