@@ -26,7 +26,6 @@ public class SelectUnitMenuController {
     public static SelectUnitMenuMessages checkMoveUnit(int[] currentLocation, int destinationX, int destinationY, String unitType, boolean isPatrol) {
 //        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
 //            return SelectUnitMenuMessages.INVALID_COMMAND;
-
         Map map = Stronghold.getCurrentGame().getMap();
         Path shortestPath;
 //        int destinationX = Integer.parseInt(matcher.group("xCoordinate"));
@@ -601,10 +600,12 @@ public class SelectUnitMenuController {
             targetBuilding.setHitPoint(targetHp - 3 * attackerDamage);
         else
             targetBuilding.setHitPoint(targetHp - attackerDamage);
-        setAttackedTrue(selectedUnits);
-        if (targetBuilding.getHitPoint() <= 0) {
+
+        if (targetBuilding.getHitPoint() <= 0)
             destroyBuilding(map, targetBuilding);
-        }
+        else if (((Attacker) selectedUnits.get(0)).hasFiringWeapon() && !targetBuilding.isFiring())
+            targetBuilding.setFiring(true);
+        setAttackedTrue(selectedUnits);
     }
 
     private static void destroyBuilding(Map map, Building building) {

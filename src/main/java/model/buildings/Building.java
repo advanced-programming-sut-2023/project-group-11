@@ -16,6 +16,8 @@ public abstract class Building {
     protected int resourceCostNumber;
     protected int workersNumber;
     protected boolean isActive;
+    protected boolean isFiring = false;
+    protected int firingLeft = 0;
     protected String name;
     protected transient Image image;
 
@@ -91,6 +93,22 @@ public abstract class Building {
         this.yCoordinate = yCoordinate;
     }
 
+    public boolean isFiring() {
+        return isFiring;
+    }
+
+    public void setFiring(boolean firing) {
+        isFiring = firing;
+    }
+
+    public int getFiringLeft() {
+        return firingLeft;
+    }
+
+    public void setFiringLeft(int firingLeft) {
+        this.firingLeft = firingLeft;
+    }
+
     public Image getImage() {
         if (image == null)
             image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Building/" +
@@ -112,7 +130,9 @@ public abstract class Building {
 
     @Override
     public String toString() {
-        return "Building Type: " + name + " HP: " + hitPoint + " Owner: " + owner.getOwner().getNickname();
+        String result = "Building Type: " + name + " HP: " + hitPoint + " Owner: " + owner.getOwner().getNickname();
+        if (this.isFiring) result += " Firing left: " + firingLeft;
+        return result;
     }
 
     @Override

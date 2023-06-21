@@ -5,26 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/big_lake.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/dense_grassland.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/desert_dune.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/marsh-pre.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/pitch-pre.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/river.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/sea-pre.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/see.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/small_lake.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/fire.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Texture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Textures/desert.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/desert.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Textures/desert1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Textures/grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/grass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Textures/grassland.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/grassland.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Textures/marsh.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/marsh.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Textures/pitch.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/pitch.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Textures/shallow_water.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Textures/shallow_water.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Textures/water.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Attacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Attacker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/Machines.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/Machines.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -289,13 +278,6 @@
       <workItem from="1686999064014" duration="740000" />
       <workItem from="1687241534062" duration="11376000" />
       <workItem from="1687343254461" duration="3303000" />
-    </task>
-    <task id="LOCAL-00056" summary="debugging started (start game + show map + select unit + move)">
-      <created>1683670809465</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1683670809465</updated>
     </task>
     <task id="LOCAL-00057" summary="Next turn added">
       <created>1683672415568</created>
@@ -633,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687352727170</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="Textures images edited">
+      <created>1687367915831</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1687367915831</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,7 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Kill Governance &amp; next turn debugged" />
     <MESSAGE value="signup initialized" />
     <MESSAGE value="signup incomplete + adaptation with javafx" />
     <MESSAGE value="signup complete except for question &amp; captcha" />
@@ -700,7 +688,8 @@
     <MESSAGE value="TODOs done + debug and improvements" />
     <MESSAGE value="nothing" />
     <MESSAGE value="Revealed unit showing in map" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revealed unit showing in map" />
+    <MESSAGE value="Textures images edited" />
+    <option name="LAST_COMMIT_MESSAGE" value="Textures images edited" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -712,7 +701,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java</url>
-          <line>673</line>
+          <line>674</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>

@@ -10,7 +10,8 @@
       "hp": "SIEGE_HP",
       "speed": "VERY_LOW",
       "cost": 150.0,
-      "unitState": "STANDING"
+      "unitState": "STANDING",
+      "hasFiringWeapon": false
     },
     "trebuchets": {
       "engineersNeededToActivate": 3,
@@ -22,7 +23,8 @@
       "hp": "SIEGE_HP",
       "speed": "CONSTANT",
       "cost": 150.0,
-      "unitState": "STANDING"
+      "unitState": "STANDING",
+      "hasFiringWeapon": false
     },
     "portable shield": {
       "engineersNeededToActivate": 1,
@@ -34,7 +36,8 @@
       "hp": "SHIELD_HP",
       "speed": "VERY_HIGH",
       "cost": 50.0,
-      "unitState": "STANDING"
+      "unitState": "STANDING",
+      "hasFiringWeapon": false
     },
     "catapults": {
       "engineersNeededToActivate": 2,
@@ -46,7 +49,8 @@
       "hp": "SIEGE_HP",
       "speed": "MEDIUM",
       "cost": 150.0,
-      "unitState": "STANDING"
+      "unitState": "STANDING",
+      "hasFiringWeapon": false
     },
     "siege tower": {
       "engineersNeededToActivate": 4,
@@ -58,7 +62,8 @@
       "hp": "SIEGE_HP",
       "speed": "MEDIUM",
       "cost": 150.0,
-      "unitState": "STANDING"
+      "unitState": "STANDING",
+      "hasFiringWeapon": false
     },
     "fire ballista": {
       "engineersNeededToActivate": 2,
@@ -70,7 +75,8 @@
       "hp": "SIEGE_HP",
       "speed": "LOW",
       "cost": 150.0,
-      "unitState": "STANDING"
+      "unitState": "STANDING",
+      "hasFiringWeapon": true
     }
   }
 ]

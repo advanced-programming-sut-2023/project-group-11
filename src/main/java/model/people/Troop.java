@@ -18,7 +18,6 @@ public class Troop extends Attacker {
     private final AllResource armorType;
     private final boolean hasHorse;
     private final boolean isArab;
-    private final boolean hasFiringWeapon;
     private final boolean canDigPitch;
     private boolean revealed;
     private boolean isDigging = false;
@@ -72,10 +71,6 @@ public class Troop extends Attacker {
 
     public boolean isArab() {
         return isArab;
-    }
-
-    public boolean hasFiringWeapon() {
-        return hasFiringWeapon;
     }
 
     public boolean canDigPitch() {

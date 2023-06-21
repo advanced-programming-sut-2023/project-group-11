@@ -8,6 +8,7 @@ public class Attacker extends Unit {
     protected int damage;
     protected int range;
     protected boolean attacked = false;
+    protected boolean hasFiringWeapon = false;
 
     public int getDamage() {
         return damage;
@@ -26,6 +27,10 @@ public class Attacker extends Unit {
 
     public void setAttacked(boolean attacked) {
         this.attacked = attacked;
+    }
+
+    public boolean hasFiringWeapon() {
+        return hasFiringWeapon;
     }
 
     @Override

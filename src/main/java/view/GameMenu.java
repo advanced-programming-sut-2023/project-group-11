@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Governance;
 import model.Stronghold;
+import model.buildings.Building;
 import model.map.Tile;
 import view.enums.Zoom;
 
@@ -137,31 +138,31 @@ public class GameMenu extends Application {
 //        GameMenuController.dropUnit(i++, i, 10, "portable shield");
 //        GameMenuController.dropUnit(i++, i, 10, "catapults");
 //        GameMenuController.dropUnit(i++, i, 10, "siege tower");
-//        GameMenuController.dropUnit(i++, i, 10, "fire ballista");
+        GameMenuController.dropUnit(i++, i, 1, "fire ballista");
 //        GameMenuController.dropUnit(i++, i, 10, "engineer");
-        GameMenuController.dropUnit(i++, i, 10, "horse archer");
-        GameMenuController.dropUnit(i++, i, 10, "tunneler");
-        GameMenuController.dropUnit(i++, i, 10, "slaves");
-        GameMenuController.dropUnit(i++, i, 10, "slaves");
-        GameMenuController.dropUnit(i++, i, 10, "slinger");
-        GameMenuController.dropUnit(i++, i, 10, "ladderman");
-        GameMenuController.dropUnit(i++, i, 10, "fire thrower");
-        GameMenuController.dropUnit(i++, i, 10, "archer");
-        GameMenuController.dropUnit(i++, i, 10, "archer bow");
-        GameMenuController.dropUnit(i++, i, 10, "swordsman");
-        GameMenuController.dropUnit(i++, i, 10, "knight");
-        GameMenuController.dropUnit(i++, i, 10, "black monk");
-        GameMenuController.dropUnit(i++, i, 10, "pikeman");
-        GameMenuController.dropUnit(i++, i, 10, "crossbowman");
-        GameMenuController.dropUnit(i++, i, 10, "crossbowman");
-        GameMenuController.dropUnit(i++, i, 10, "assassin");
-        GameMenuController.dropUnit(i++, i, 10, "maceman");
-        GameMenuController.dropUnit(i++, i, 10, "spearman");
-        GameMenuController.dropUnit(i++, i, 10, "arabian swordsman");
-        GameMenuController.dropUnit(39, 44, 10, "horse archer");
-        GameMenuController.dropUnit(41, 44, 10, "horse archer");
-        GameMenuController.dropUnit(42, 44, 10, "horse archer");
-        GameMenuController.dropUnit(43, 44, 10, "horse archer");
+        GameMenuController.dropUnit(i++, i, 2, "horse archer");
+        GameMenuController.dropUnit(i++, i, 2, "tunneler");
+        GameMenuController.dropUnit(i++, i, 2, "slaves");
+        GameMenuController.dropUnit(i++, i, 2, "slaves");
+        GameMenuController.dropUnit(i++, i, 2, "slinger");
+        GameMenuController.dropUnit(i++, i, 2, "ladderman");
+        GameMenuController.dropUnit(i++, i, 2, "fire thrower");
+        GameMenuController.dropUnit(i++, i, 2, "archer");
+        GameMenuController.dropUnit(i++, i, 2, "archer bow");
+        GameMenuController.dropUnit(i++, i, 2, "swordsman");
+        GameMenuController.dropUnit(i++, i, 2, "knight");
+        GameMenuController.dropUnit(i++, i, 2, "black monk");
+        GameMenuController.dropUnit(i++, i, 2, "pikeman");
+        GameMenuController.dropUnit(i++, i, 2, "crossbowman");
+        GameMenuController.dropUnit(i++, i, 2, "crossbowman");
+        GameMenuController.dropUnit(i++, i, 2, "assassin");
+        GameMenuController.dropUnit(i++, i, 2, "maceman");
+        GameMenuController.dropUnit(i++, i, 2, "spearman");
+        GameMenuController.dropUnit(i++, i, 2, "arabian swordsman");
+        GameMenuController.dropUnit(39, 44, 2, "horse archer");
+        GameMenuController.dropUnit(41, 44, 2, "horse archer");
+        GameMenuController.dropUnit(42, 44, 2, "horse archer");
+        GameMenuController.dropUnit(43, 44, 2, "horse archer");
     }
 
     private void setTraversable() {
@@ -203,7 +204,7 @@ public class GameMenu extends Application {
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
                 if (BuildingUtils.isBuildingInTile(tile.getBuilding()))
-                    setTileBuildingImage(tile.getBuilding().getImage(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
+                    setTileBuildingImage(tile.getBuilding(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
                             tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
                 if (tile.getLastUnitInTile() != null)
                     setTileImage(tile.getLastUnitInTile().getImage(), xCoordinate, yCoordinate);
@@ -223,16 +224,26 @@ public class GameMenu extends Application {
         mapPane.getChildren().add(border);
     }
 
-    private void setTileBuildingImage(Image image, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
-        if (buildingY != firstTileYInMap + (yCoordinate / tileSize) || buildingX != firstTileXInMap + (xCoordinate / tileSize))
-            return;
-        ImageView imageView = new ImageView(image);
-        imageView.setLayoutX(xCoordinate);
-        imageView.setLayoutY(yCoordinate);
-        imageView.setFitWidth(tileSize * buildingSize);
-        imageView.setFitHeight(tileSize * buildingSize);
-        imageView.setPreserveRatio(false);
-        mapPane.getChildren().add(imageView);
+    private void setTileBuildingImage(Building building, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
+        if (!(buildingY != firstTileYInMap + (yCoordinate / tileSize) || buildingX != firstTileXInMap + (xCoordinate / tileSize))) {
+            Image image = building.getImage();
+            ImageView imageView = new ImageView(image);
+            imageView.setLayoutX(xCoordinate);
+            imageView.setLayoutY(yCoordinate);
+            imageView.setFitWidth(tileSize * buildingSize);
+            imageView.setFitHeight(tileSize * buildingSize);
+            imageView.setPreserveRatio(false);
+            mapPane.getChildren().add(imageView);
+        }
+        if (building.isFiring()) {
+            Image image = new Image(this.getClass().getResource("/IMG/fire.jpg").toExternalForm());
+            ImageView imageView = new ImageView(image);
+            imageView.setLayoutX(xCoordinate);
+            imageView.setLayoutY(yCoordinate);
+            imageView.setFitWidth(tileSize);
+            imageView.setFitHeight(tileSize);
+            mapPane.getChildren().add(imageView);
+        }
     }
 
     private void setTileImage(Image image, int xCoordinate, int yCoordinate) {
@@ -598,7 +609,7 @@ public class GameMenu extends Application {
                     ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough population!");
             case SUCCESS -> {
                 selectedTile = ShowMapMenuController.getSelectedTile(x, y, 0, 0);
-                setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName).getImage()
+                setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName)
                         , (x - firstTileXInMap) * tileSize, (y - firstTileYInMap) * tileSize,
                         BuildingUtils.getBuildingByType(buildingDragName).getSize(), x, y);
                 selectBuildingTiles(selectedTile);
