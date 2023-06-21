@@ -322,6 +322,16 @@ public class GameMenuController {
     private static void updateBuildingStuff() {
         for (Building building : currentGovernance.getBuildings()) {
             cagedWardog(building);
+            fireBuilding(building);
+        }
+    }
+
+    private static void fireBuilding(Building building) {
+        if (building.isFiring()) {
+            if (building.getFiringLeft() == 0) building.setFiring(false);
+            building.setHitPoint(building.getHitPoint() - 50);
+            building.setFiringLeft(building.getFiringLeft() - 1);
+            if (building.getHitPoint() <= 0) building.removeFromGame(currentGame.getMap());
         }
     }
 
@@ -338,7 +348,7 @@ public class GameMenuController {
                     if (tile.hasEnemy(currentGovernance)) {
                         for (Unit unit : tile.getUnits())
                             unit.setHp(unit.getHp() - damage);
-                        building.removeFromGame(currentGame.getMap(), currentGovernance);
+                        building.removeFromGame(currentGame.getMap());
                     }
                     removeDeadUnits(tile);
                 }

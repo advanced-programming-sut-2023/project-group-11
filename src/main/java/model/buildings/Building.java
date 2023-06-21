@@ -116,7 +116,7 @@ public abstract class Building {
         return image;
     }
 
-    public void removeFromGame(Map map, Governance owner) {
+    public void removeFromGame(Map map) {
         if (this.name.equals("hovel")) owner.changeMaxPopulation(-8);
         if (this instanceof Church) owner.changeReligiousFactor(-2);
 

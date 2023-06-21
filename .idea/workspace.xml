@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/fire.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Attacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Attacker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Machine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/Machines.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/Machines.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,13 +273,7 @@
       <workItem from="1686999064014" duration="740000" />
       <workItem from="1687241534062" duration="11376000" />
       <workItem from="1687343254461" duration="3303000" />
-    </task>
-    <task id="LOCAL-00057" summary="Next turn added">
-      <created>1683672415568</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1683672415568</updated>
+      <workItem from="1687384932697" duration="360000" />
     </task>
     <task id="LOCAL-00058" summary="Make the &quot;original&quot; map">
       <created>1683719571877</created>
@@ -622,7 +611,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687367915831</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="Fire">
+      <created>1687371317624</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1687371317624</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +660,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="signup initialized" />
     <MESSAGE value="signup incomplete + adaptation with javafx" />
     <MESSAGE value="signup complete except for question &amp; captcha" />
     <MESSAGE value="Signup without Captcha" />
@@ -689,7 +684,8 @@
     <MESSAGE value="nothing" />
     <MESSAGE value="Revealed unit showing in map" />
     <MESSAGE value="Textures images edited" />
-    <option name="LAST_COMMIT_MESSAGE" value="Textures images edited" />
+    <MESSAGE value="Fire" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fire" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -701,7 +697,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java</url>
-          <line>674</line>
+          <line>676</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
