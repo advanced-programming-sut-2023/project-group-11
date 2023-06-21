@@ -107,10 +107,11 @@ public class BuildingUtils {
         return building;
     }
 
-    public static void build(Governance governance, Building building, int x, int y, int size) {
+    public static void build(Governance governance, Building building, int x, int y) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         building.setOwner(governance);
         governance.addBuilding(building);
+        int size = building.getSize();
 
         if (building.getName().equals("hovel")) governance.changeMaxPopulation(+8);
         if (building instanceof Church) governance.changeReligiousFactor(+2);

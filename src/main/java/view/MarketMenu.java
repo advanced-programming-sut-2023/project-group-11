@@ -33,6 +33,8 @@ public class MarketMenu extends Application {
     @FXML
     private Label itemLabel;
     @FXML
+    private Label amountLabel;
+    @FXML
     private Label buyLabel;
     @FXML
     private Label sellLabel;
@@ -80,10 +82,11 @@ public class MarketMenu extends Application {
         for(Node imageView:box.getChildren()){
             imageView.setOnMouseClicked(mouseEvent -> {
                 buySellPane.setVisible(true);
-                updateBuySellLabels(amountTextField.getText());
                 String itemName = ((ImageView)mouseEvent.getSource()).getId();
                 item = MarketMenuController.getResourceByName(itemName);
+                updateBuySellLabels(amountTextField.getText());
                 itemLabel.setText(itemName);
+                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
                 itemImageView.setImage(item.getImage());
             });
         }
@@ -114,6 +117,7 @@ public class MarketMenu extends Application {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Sell Successful", "Item Sold Successfully!");
                 goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
             }
         }
     }
@@ -127,6 +131,7 @@ public class MarketMenu extends Application {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Buy Successful", "Item bought successfully!");
                 goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
             }
         }
     }

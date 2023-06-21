@@ -5,11 +5,11 @@ import model.AllResource;
 
 public enum StorageType {
 
-    STOCKPILE("stockpile", 1, 150, 0, AllResource.NONE, 0,
+    STOCKPILE("stockpile", 2, 150, 0, AllResource.NONE, 0,
             0, true, 100),
-    ARMOURY("armoury", 1, 250, 0, AllResource.WOOD, 5,
+    ARMOURY("armoury", 2, 250, 0, AllResource.WOOD, 5,
             0, true, 50),
-    GRANARY("granary", 1, 150, 0, AllResource.WOOD, 5,
+    GRANARY("granary", 2, 150, 0, AllResource.WOOD, 5,
             0, true, 250);
     private final String name;
 //    private final String imageName;

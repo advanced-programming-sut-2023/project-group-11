@@ -130,18 +130,13 @@ public class GameMenuController {
             return GameMenuMessages.INVALID_COORDINATE;
         if (!BuildingUtils.isMapEmpty(x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
         if (!BuildingUtils.isTextureSuitable(buildingType, x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
-        if (true) {
-            //TODO: delete test mode + debug in current game, current governance, current map, ....
-            BuildingUtils.build(currentGovernance, building, x, y, size);
-            return GameMenuMessages.SUCCESS;
-        }
         if (building.getGoldCost() > currentGovernance.getGold()) return GameMenuMessages.NOT_ENOUGH_MONEY;
         if (!currentGovernance.hasEnoughItem(building.getResourceCostType(), building.getResourceCostNumber()))
             return GameMenuMessages.NOT_ENOUGH_RESOURCE;
         if (!currentGovernance.hasEnoughPopulation(building.getWorkersNumber()))
             return GameMenuMessages.NOT_ENOUGH_POPULATION;
 
-        BuildingUtils.build(currentGovernance, building, x, y, size);
+        BuildingUtils.build(currentGovernance, building, x, y);
         return GameMenuMessages.SUCCESS;
     }
 
@@ -408,7 +403,7 @@ public class GameMenuController {
                     continue;
                 Tile tile = currentGame.getMap().getTile(x + i, y + j);
                 Tree tree = tile.getTree();
-                if (tree != null && tree.getLeftWood() >= cutRate) {
+                if (tree != null && tree.getLeftWood() >= cutRate && currentGovernance.hasStorageForItem(AllResource.WOOD,20)) {
                     tree.setLeftWood(tree.getLeftWood() - cutRate);
                     if (tree.getLeftWood() <= 0)
                         tile.setTree(null);

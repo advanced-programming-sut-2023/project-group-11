@@ -59,6 +59,7 @@ public class NewGame extends Application {
     public void startGame() throws Exception {
         stage.close();
         MainMenuController.startGame(users.getSelectionModel().getSelectedItems(), mapName.getValue().getName());
+        stage.close();
     }
 
     public void back() throws Exception {
