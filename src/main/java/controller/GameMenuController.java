@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.scene.control.Alert;
 import model.*;
 import model.buildings.Building;
 import model.buildings.Climbable;
@@ -10,6 +11,7 @@ import model.map.Tree;
 import model.people.*;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
+import view.ViewUtils;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.*;
@@ -38,7 +40,7 @@ public class GameMenuController {
             updatePopulation();
             updatePopularityRate();
             updateBuildingStuff();
-            if (getCurrentTurn() % 4 == 0) getSick();
+            if (getCurrentTurn() % (new Random().nextInt(3) + 2) == 0) getSick();
         }
 
         return "Current Turn = " + getCurrentTurn() +
@@ -315,6 +317,9 @@ public class GameMenuController {
             if (!randomBuilding.isSick()) break;
         }
         randomBuilding.setSick(true);
+        ViewUtils.alert(Alert.AlertType.INFORMATION, "Sick Building",
+                currentGovernance.getNickname() + " have got sick in x:" + randomBuilding.getXCoordinate() +
+                        " y:" + randomBuilding.getYCoordinate());
     }
 
     private static boolean allBuildingAreSick(ArrayList<Building> buildings) {
