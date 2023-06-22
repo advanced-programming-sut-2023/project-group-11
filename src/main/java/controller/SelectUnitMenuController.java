@@ -538,7 +538,7 @@ public class SelectUnitMenuController {
                 selectedUnits.remove(unit);
             }
         }
-        currentBuilding.removeFromGame(map, currentBuilding.getOwner());
+        currentBuilding.removeFromGame(map);
     }
 
     public static boolean isValidUnitForAirAttack(String type) {
@@ -576,7 +576,7 @@ public class SelectUnitMenuController {
                 else onlyBuilding = true;
             } else if (!unitType.equals("battle ram")) onlyUnits = true;
         } else {
-            if (unitType.equals("trebuchets") || unitType.equals("catapults")) {
+            if (unitType.equals("trebuchets") || unitType.equals("catapults") || unitType.equals("fire ballista")) {
                 if (targetTile.getBuilding() != null) onlyBuilding = true;
                 else onlyUnits = true;
             } else {
@@ -603,13 +603,15 @@ public class SelectUnitMenuController {
 
         if (targetBuilding.getHitPoint() <= 0)
             destroyBuilding(map, targetBuilding);
-        else if (((Attacker) selectedUnits.get(0)).hasFiringWeapon() && !targetBuilding.isFiring())
+        else if (((Attacker) selectedUnits.get(0)).hasFiringWeapon() && !targetBuilding.isFiring()) {
             targetBuilding.setFiring(true);
+            targetBuilding.setFiringLeft(2);
+        }
         setAttackedTrue(selectedUnits);
     }
 
     private static void destroyBuilding(Map map, Building building) {
-        building.removeFromGame(map, building.getOwner());
+        building.removeFromGame(map);
     }
 
     private static void attackUnits(ArrayList<Unit> selectedUnits, Tile targetTile) {
@@ -672,7 +674,7 @@ public class SelectUnitMenuController {
     private static void removeBuildings(Governance owner, Map map) {
         int size = owner.getBuildings().size();
         for (int i = 0; i < size; i++)
-            owner.getBuildings().get(0).removeFromGame(map, owner);
+            owner.getBuildings().get(0).removeFromGame(map);
     }
 
     private static void setAttackedTrue(ArrayList<Unit> selectedUnits) {

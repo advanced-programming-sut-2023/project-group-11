@@ -38,24 +38,13 @@ public class GameMenuController {
             updatePopulation();
             updatePopularityRate();
             updateBuildingStuff();
+            if (getCurrentTurn() % 4 == 0) getSick();
         }
 
         return "Current Turn = " + getCurrentTurn() +
                 "\nCurrent Governance = " + currentGovernance.getOwner().getNickname() +
                 "\nScore = " + currentGovernance.getScore() +
                 "\nArea = " + currentGovernance.getTerritory();
-    }
-
-    public static GameMenuMessages checkShowMap(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
-            return GameMenuMessages.INVALID_COMMAND;
-
-        int x = Integer.parseInt(matcher.group("xCoordinate"));
-        int y = Integer.parseInt(matcher.group("yCoordinate"));
-
-        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
-            return GameMenuMessages.INVALID_COORDINATE;
-        return GameMenuMessages.SUCCESS;
     }
 
     public static int showFactor(String factor) throws Exception {
@@ -308,6 +297,51 @@ public class GameMenuController {
     private static void updateBuildingStuff() {
         for (Building building : currentGovernance.getBuildings()) {
             cagedWardog(building);
+            fireBuilding(building);
+            if (building.isSick()) {
+                if (cureSickness(building)) building.setSick(false);
+                else currentGovernance.setPopularity(currentGovernance.getPopularity() - 4);
+            }
+        }
+    }
+
+    private static void getSick() {
+        ArrayList<Building> buildings = currentGovernance.getBuildings();
+        if (allBuildingAreSick(buildings)) return;
+
+        Building randomBuilding;
+        while (true) {
+            randomBuilding = buildings.get(new Random().nextInt(buildings.size()));
+            if (!randomBuilding.isSick()) break;
+        }
+        randomBuilding.setSick(true);
+    }
+
+    private static boolean allBuildingAreSick(ArrayList<Building> buildings) {
+        for (Building building : buildings)
+            if (!building.isSick()) return false;
+        return true;
+    }
+
+    private static boolean cureSickness(Building building) {
+        Tile[][] buildingTiles = ShowMapMenuController.getTiles(
+                building.getXCoordinate(), building.getYCoordinate(), building.getSize(), building.getSize());
+        for (Tile[] tiles : buildingTiles) {
+            for (Tile tile : tiles) {
+                for (Unit unit : tile.getUnits()) {
+                    if (unit instanceof Engineer) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static void fireBuilding(Building building) {
+        if (building.isFiring()) {
+            if (building.getFiringLeft() == 0) building.setFiring(false);
+            building.setHitPoint(building.getHitPoint() - 50);
+            building.setFiringLeft(building.getFiringLeft() - 1);
+            if (building.getHitPoint() <= 0) building.removeFromGame(currentGame.getMap());
         }
     }
 
@@ -324,7 +358,7 @@ public class GameMenuController {
                     if (tile.hasEnemy(currentGovernance)) {
                         for (Unit unit : tile.getUnits())
                             unit.setHp(unit.getHp() - damage);
-                        building.removeFromGame(currentGame.getMap(), currentGovernance);
+                        building.removeFromGame(currentGame.getMap());
                     }
                     removeDeadUnits(tile);
                 }
@@ -456,11 +490,12 @@ public class GameMenuController {
     private static void unitUpdate(Unit unit, int range) {
         ArrayList<Unit> units = getAllSameUnitsOfTile(unit);
         Map map = currentGame.getMap();
-        setUnitUpdateState(units);
         int currentX = unit.getLocation()[0];
         int currentY = unit.getLocation()[1];
         int finalRange = isValidUnitForAirAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
-        attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
+//        setUnitUpdateState(units,attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units));
+        setUnitUpdateState(units,attackNearestEnemy2(currentX, currentY, finalRange, currentGame.getMap(), units));
+//        attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
         if (unit.getUnitState() == UnitState.OFFENSIVE)
             for (Unit unit1 : units)
                 unit1.setUnitState(UnitState.DEFENSIVE);
@@ -486,16 +521,16 @@ public class GameMenuController {
                     continue;
                 if (i != 0 && j != 0)
                     continue;
-                Tile tile = currentGame.getMap().getTile(x + i, x + j); //TODO: change directions based on new getTile
+                Tile tile = currentGame.getMap().getTile(x + i, x + j);
                 if (tile.hasEnemy(currentGovernance)) {
                     if (j > 0)
-                        enemyNumberRight += tile.getUnits().size();
-                    if (j < 0)
-                        enemyNumberLeft += tile.getUnits().size();
-                    if (i > 0)
                         enemyNumberDown += tile.getUnits().size();
-                    if (i < 0)
+                    if (j < 0)
                         enemyNumberUp += tile.getUnits().size();
+                    if (i > 0)
+                        enemyNumberRight += tile.getUnits().size();
+                    if (i < 0)
+                        enemyNumberLeft += tile.getUnits().size();
                 }
             }
         }
@@ -554,9 +589,70 @@ public class GameMenuController {
                 Arrays.equals(firstUnit.getPatrolDestination(), unit.getPatrolDestination());
     }
 
-    private static void setUnitUpdateState(ArrayList<Unit> units) {
+    private static void setUnitUpdateState(ArrayList<Unit> units, Boolean attacked) {
         for (Unit unit : units)
-            ((Attacker) unit).setAttacked(true);
+            ((Attacker) unit).setAttacked(attacked);
+    }
+
+    private static boolean attackNearestEnemy2(int currentX, int currentY,
+                                               int range, Map map, ArrayList<Unit> units){
+        String unitName = units.get(0).getName();
+        int minDistance = 100;
+        boolean airAttack = isValidUnitForAirAttack(unitName);
+        Tile attackTargetTile = null,moveTargetTile = map.getTile(currentX,currentY);
+        for (int i =-range;i<range;i++){
+            for (int j=-range;j<range;j++){
+                if(!Utils.isValidCoordinates(map,currentX,currentY))
+                    continue;
+                if(i+j > range)
+                    continue;
+                if(i+j>minDistance)
+                    continue;
+                int destinationX = currentX + i;
+                int destinationY = currentY + j;
+                if(airAttack){
+                    if(map.getTile(destinationX, destinationY).hasEnemy(currentGovernance)){
+                        attackTargetTile = map.getTile(destinationX, destinationY);
+                        minDistance = i + j;
+                    }
+                }else{
+                    if(canUnitMove(destinationX, destinationY,currentX,currentY,unitName)){
+                        if(Utils.isValidCoordinates(map,destinationX+1,destinationY) && map.getTile(destinationX+1,destinationY).hasEnemy(currentGovernance)){
+                            moveTargetTile = map.getTile(destinationX, destinationY);
+                            attackTargetTile = map.getTile(destinationX+1, destinationY);
+                            minDistance = i+j;
+                            continue;
+                        }
+                        if(Utils.isValidCoordinates(map,destinationX-1,destinationY) && map.getTile(destinationX-1,destinationY).hasEnemy(currentGovernance)){
+                            moveTargetTile = map.getTile(destinationX, destinationY);
+                            attackTargetTile = map.getTile(destinationX-1, destinationY);
+                            minDistance = i+j;
+                            continue;
+                        }
+                        if(Utils.isValidCoordinates(map,destinationX,destinationY+1) && map.getTile(destinationX,destinationY+1).hasEnemy(currentGovernance)){
+                            moveTargetTile = map.getTile(destinationX, destinationY+1);
+                            attackTargetTile = map.getTile(destinationX, destinationY+1);
+                            minDistance = i+j;
+                            continue;
+                        }
+                        if(Utils.isValidCoordinates(map,destinationX,destinationY-1) && map.getTile(destinationX,destinationY-1).hasEnemy(currentGovernance)){
+                            moveTargetTile = map.getTile(destinationX, destinationY-1);
+                            attackTargetTile = map.getTile(destinationX, destinationY-1);
+                            minDistance = i+j;
+                        }
+                    }
+                }
+            }
+        }
+        if(attackTargetTile == null)
+            return false;
+        if(!airAttack){
+            moveUnits(map, units, currentX, currentY, map.getTileLocation(moveTargetTile)[0],map.getTileLocation(moveTargetTile)[1]);
+        }
+        if(units.size() > 0)
+            attack(units, unitName, attackTargetTile, moveTargetTile);
+        return true;
+
     }
 
     private static boolean attackNearestEnemy(int destinationX, int destinationY, int currentX, int currentY,

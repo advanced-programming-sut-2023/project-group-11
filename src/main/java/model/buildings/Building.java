@@ -18,6 +18,7 @@ public abstract class Building {
     protected boolean isActive;
     protected boolean isFiring = false;
     protected int firingLeft = 0;
+    protected boolean isSick = false;
     protected String name;
     protected transient Image image;
 
@@ -109,6 +110,14 @@ public abstract class Building {
         this.firingLeft = firingLeft;
     }
 
+    public boolean isSick() {
+        return isSick;
+    }
+
+    public void setSick(boolean sick) {
+        isSick = sick;
+    }
+
     public Image getImage() {
         if (image == null)
             image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Building/" +
@@ -116,7 +125,7 @@ public abstract class Building {
         return image;
     }
 
-    public void removeFromGame(Map map, Governance owner) {
+    public void removeFromGame(Map map) {
         if (this.name.equals("hovel")) owner.changeMaxPopulation(-8);
         if (this instanceof Church) owner.changeReligiousFactor(-2);
 

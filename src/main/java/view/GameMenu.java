@@ -72,6 +72,11 @@ public class GameMenu extends Application {
     private Label governanceGold;
     @FXML
     private Label governancePopulation;
+    @FXML
+    private Pane clipBoardPane;
+    @FXML
+    private TilePane clipBoardTilePane;
+    private final ArrayList<String> clipBoard = new ArrayList<>();
     private final int mapPaneHeight = 720;
     private final int mapPaneWidth = 990;
     private Zoom currentZoom = Zoom.NORMAL;
@@ -88,7 +93,7 @@ public class GameMenu extends Application {
     private int pressedTileXInScreen = 0;
     private int pressedTileYInScreen = 0;
     private Tile selectedTile;
-    private ArrayList<Tile> selectedTiles = new ArrayList<>();
+    private final ArrayList<Tile> selectedTiles = new ArrayList<>();
     private int selectedBorderWidth = 1;
     private int selectedBorderHeight = 1;
     private Tooltip tooltip;
@@ -233,6 +238,16 @@ public class GameMenu extends Application {
             imageView.setFitHeight(tileSize * buildingSize);
             imageView.setPreserveRatio(false);
             mapPane.getChildren().add(imageView);
+            if (building.isSick()) {
+                Image image1 = new Image(this.getClass().getResource("/IMG/sickness.png").toExternalForm());
+                ImageView imageView1 = new ImageView(image1);
+                imageView1.setLayoutX(xCoordinate);
+                imageView1.setLayoutY(yCoordinate);
+                imageView1.setFitWidth(tileSize * buildingSize);
+                imageView1.setFitHeight(tileSize * buildingSize);
+                imageView1.setOpacity(0.4);
+                mapPane.getChildren().add(imageView1);
+            }
         }
         if (building.isFiring()) {
             Image image = new Image(this.getClass().getResource("/IMG/fire.jpg").toExternalForm());
@@ -385,7 +400,12 @@ public class GameMenu extends Application {
             case V -> pasteBuilding();
             case S -> checkSetUnitState();
             case ESCAPE -> stopGame();
+            case B -> clipBoard();
         }
+    }
+
+    private void clipBoard() {
+        clipBoardPane.setVisible(!clipBoardPane.isVisible());
     }
 
     private void zoom(boolean zoomIn) {
@@ -416,9 +436,32 @@ public class GameMenu extends Application {
     private void copyBuilding() {
         try {
             copiedBuildingName = selectedTile.getBuilding().getName();
+            fillClipBoard();
         } catch (Exception e) {
             copiedBuildingName = null;
         }
+    }
+
+    private void fillClipBoard() {
+        if (!clipBoard.contains(copiedBuildingName) || copiedBuildingName.equals("keep")) {
+            clipBoard.add(copiedBuildingName);
+            ImageView buildingImage = new ImageView(BuildingUtils.getBuildingByType(copiedBuildingName).getImage());
+            buildingImage.setFitHeight(60);
+            buildingImage.setFitWidth(60);
+            buildingImage.setPreserveRatio(true);
+            buildingImage.setId(copiedBuildingName);
+            buildingImage.setOnMouseClicked(this::clipBoardMouseClick);
+            clipBoardTilePane.getChildren().add(buildingImage);
+        }
+        if (clipBoard.size() > 9) {
+            clipBoard.remove(0);
+            clipBoardTilePane.getChildren().remove(0);
+        }
+    }
+
+    private void clipBoardMouseClick(MouseEvent mouseEvent) {
+        copiedBuildingName = ((ImageView) mouseEvent.getSource()).getId();
+        clipBoardPane.setVisible(false);
     }
 
     private void checkSetUnitState() throws Exception {
