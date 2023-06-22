@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="market improved 2">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="clipBoard + debug in state updating">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/MarketMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/MarketMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Map.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,14 +272,7 @@
       <workItem from="1686999064014" duration="740000" />
       <workItem from="1687241534062" duration="11376000" />
       <workItem from="1687343254461" duration="6722000" />
-      <workItem from="1687416463103" duration="1895000" />
-    </task>
-    <task id="LOCAL-00056" summary="debugging started (start game + show map + select unit + move)">
-      <created>1683670809465</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1683670809465</updated>
+      <workItem from="1687416463103" duration="11763000" />
     </task>
     <task id="LOCAL-00057" summary="Next turn added">
       <created>1683672415568</created>
@@ -620,7 +610,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687347054535</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="clipBoard + debug in state updating">
+      <created>1687418499003</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1687418499004</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -662,7 +659,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Kill Governance &amp; next turn debugged" />
     <MESSAGE value="signup initialized" />
     <MESSAGE value="signup incomplete + adaptation with javafx" />
     <MESSAGE value="signup complete except for question &amp; captcha" />
@@ -687,7 +683,8 @@
     <MESSAGE value="TODOs done + debug and improvements" />
     <MESSAGE value="market improved" />
     <MESSAGE value="market improved 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="market improved 2" />
+    <MESSAGE value="clipBoard + debug in state updating" />
+    <option name="LAST_COMMIT_MESSAGE" value="clipBoard + debug in state updating" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
