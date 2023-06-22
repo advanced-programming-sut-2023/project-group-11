@@ -18,6 +18,7 @@ public abstract class Building {
     protected boolean isActive;
     protected boolean isFiring = false;
     protected int firingLeft = 0;
+    protected boolean isSick = false;
     protected String name;
     protected transient Image image;
 
@@ -107,6 +108,14 @@ public abstract class Building {
 
     public void setFiringLeft(int firingLeft) {
         this.firingLeft = firingLeft;
+    }
+
+    public boolean isSick() {
+        return isSick;
+    }
+
+    public void setSick(boolean sick) {
+        isSick = sick;
     }
 
     public Image getImage() {

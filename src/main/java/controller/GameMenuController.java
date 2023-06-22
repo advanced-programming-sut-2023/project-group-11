@@ -38,24 +38,13 @@ public class GameMenuController {
             updatePopulation();
             updatePopularityRate();
             updateBuildingStuff();
+            if (getCurrentTurn() % 4 == 0) getSick();
         }
 
         return "Current Turn = " + getCurrentTurn() +
                 "\nCurrent Governance = " + currentGovernance.getOwner().getNickname() +
                 "\nScore = " + currentGovernance.getScore() +
                 "\nArea = " + currentGovernance.getTerritory();
-    }
-
-    public static GameMenuMessages checkShowMap(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
-            return GameMenuMessages.INVALID_COMMAND;
-
-        int x = Integer.parseInt(matcher.group("xCoordinate"));
-        int y = Integer.parseInt(matcher.group("yCoordinate"));
-
-        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
-            return GameMenuMessages.INVALID_COORDINATE;
-        return GameMenuMessages.SUCCESS;
     }
 
     public static int showFactor(String factor) throws Exception {
@@ -323,7 +312,42 @@ public class GameMenuController {
         for (Building building : currentGovernance.getBuildings()) {
             cagedWardog(building);
             fireBuilding(building);
+            if (building.isSick()) {
+                if (cureSickness(building)) building.setSick(false);
+                else currentGovernance.setPopularity(currentGovernance.getPopularity() - 4);
+            }
         }
+    }
+
+    private static void getSick() {
+        ArrayList<Building> buildings = currentGovernance.getBuildings();
+        if (allBuildingAreSick(buildings)) return;
+
+        Building randomBuilding;
+        while (true) {
+            randomBuilding = buildings.get(new Random().nextInt(buildings.size()));
+            if (!randomBuilding.isSick()) break;
+        }
+        randomBuilding.setSick(true);
+    }
+
+    private static boolean allBuildingAreSick(ArrayList<Building> buildings) {
+        for (Building building : buildings)
+            if (!building.isSick()) return false;
+        return true;
+    }
+
+    private static boolean cureSickness(Building building) {
+        Tile[][] buildingTiles = ShowMapMenuController.getTiles(
+                building.getXCoordinate(), building.getYCoordinate(), building.getSize(), building.getSize());
+        for (Tile[] tiles : buildingTiles) {
+            for (Tile tile : tiles) {
+                for (Unit unit : tile.getUnits()) {
+                    if (unit instanceof Engineer) return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static void fireBuilding(Building building) {
@@ -413,7 +437,7 @@ public class GameMenuController {
                     continue;
                 Tile tile = currentGame.getMap().getTile(x + i, y + j);
                 Tree tree = tile.getTree();
-                if (tree != null && tree.getLeftWood() >= cutRate && currentGovernance.hasStorageForItem(AllResource.WOOD,20)) {
+                if (tree != null && tree.getLeftWood() >= cutRate && currentGovernance.hasStorageForItem(AllResource.WOOD, 20)) {
                     tree.setLeftWood(tree.getLeftWood() - cutRate);
                     if (tree.getLeftWood() <= 0)
                         tile.setTree(null);
@@ -483,7 +507,7 @@ public class GameMenuController {
         int currentX = unit.getLocation()[0];
         int currentY = unit.getLocation()[1];
         int finalRange = isValidUnitForAirAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
-        setUnitUpdateState(units,attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units));
+        setUnitUpdateState(units, attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units));
 //        attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
         if (unit.getUnitState() == UnitState.OFFENSIVE)
             for (Unit unit1 : units)
@@ -578,7 +602,7 @@ public class GameMenuController {
                 Arrays.equals(firstUnit.getPatrolDestination(), unit.getPatrolDestination());
     }
 
-    private static void setUnitUpdateState(ArrayList<Unit> units,Boolean attacked) {
+    private static void setUnitUpdateState(ArrayList<Unit> units, Boolean attacked) {
         for (Unit unit : units)
             ((Attacker) unit).setAttacked(attacked);
     }

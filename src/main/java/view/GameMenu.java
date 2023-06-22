@@ -239,6 +239,16 @@ public class GameMenu extends Application {
             imageView.setFitHeight(tileSize * buildingSize);
             imageView.setPreserveRatio(false);
             mapPane.getChildren().add(imageView);
+            if (building.isSick()) {
+                Image image1 = new Image(this.getClass().getResource("/IMG/sickness.png").toExternalForm());
+                ImageView imageView1 = new ImageView(image1);
+                imageView1.setLayoutX(xCoordinate);
+                imageView1.setLayoutY(yCoordinate);
+                imageView1.setFitWidth(tileSize * buildingSize);
+                imageView1.setFitHeight(tileSize * buildingSize);
+                imageView1.setOpacity(0.4);
+                mapPane.getChildren().add(imageView1);
+            }
         }
         if (building.isFiring()) {
             Image image = new Image(this.getClass().getResource("/IMG/fire.jpg").toExternalForm());
@@ -428,14 +438,13 @@ public class GameMenu extends Application {
         try {
             copiedBuildingName = selectedTile.getBuilding().getName();
             fillClipBoard();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             copiedBuildingName = null;
         }
     }
 
     private void fillClipBoard() {
-        if(!clipBoard.contains(copiedBuildingName) || copiedBuildingName.equals("keep")) {
+        if (!clipBoard.contains(copiedBuildingName) || copiedBuildingName.equals("keep")) {
             clipBoard.add(copiedBuildingName);
             ImageView buildingImage = new ImageView(BuildingUtils.getBuildingByType(copiedBuildingName).getImage());
             buildingImage.setFitHeight(60);
@@ -445,14 +454,14 @@ public class GameMenu extends Application {
             buildingImage.setOnMouseClicked(this::clipBoardMouseClick);
             clipBoardTilePane.getChildren().add(buildingImage);
         }
-        if(clipBoard.size()>9) {
+        if (clipBoard.size() > 9) {
             clipBoard.remove(0);
             clipBoardTilePane.getChildren().remove(0);
         }
     }
 
     private void clipBoardMouseClick(MouseEvent mouseEvent) {
-        copiedBuildingName = ((ImageView)mouseEvent.getSource()).getId();
+        copiedBuildingName = ((ImageView) mouseEvent.getSource()).getId();
         clipBoardPane.setVisible(false);
     }
 

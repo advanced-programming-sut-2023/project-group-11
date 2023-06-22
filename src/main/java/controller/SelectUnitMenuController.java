@@ -576,7 +576,7 @@ public class SelectUnitMenuController {
                 else onlyBuilding = true;
             } else if (!unitType.equals("battle ram")) onlyUnits = true;
         } else {
-            if (unitType.equals("trebuchets") || unitType.equals("catapults")) {
+            if (unitType.equals("trebuchets") || unitType.equals("catapults") || unitType.equals("fire ballista")) {
                 if (targetTile.getBuilding() != null) onlyBuilding = true;
                 else onlyUnits = true;
             } else {
