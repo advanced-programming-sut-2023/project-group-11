@@ -39,6 +39,8 @@ public class GameMenu extends Application {
     }
 
     @FXML
+    private AnchorPane miniMapPane;
+    @FXML
     private AnchorPane sidePane;
     @FXML
     private AnchorPane mapPane;
@@ -82,6 +84,7 @@ public class GameMenu extends Application {
     private Zoom currentZoom = Zoom.NORMAL;
     private int tileSize = currentZoom.getSize();
     private int mapSize;
+    private int miniMapTileSize;
     private double buildingDragX;
     private double buildingDragY;
     private String buildingDragName;
@@ -97,6 +100,7 @@ public class GameMenu extends Application {
     private int selectedBorderWidth = 1;
     private int selectedBorderHeight = 1;
     private Tooltip tooltip;
+    private Rectangle miniMapBorder;
 
     // -------------------------------- Start -----------------------------------------------------
 
@@ -114,7 +118,9 @@ public class GameMenu extends Application {
         GameMenuController.setCurrentGame();
         initMap();
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
+        miniMapTileSize = 200 / mapSize;
         setTraversable();
+        showMiniMap();
         showMap();
         initializeToolTip();
         initializeBuildingBoxes();
@@ -178,14 +184,18 @@ public class GameMenu extends Application {
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
     public void showMap() {
+        double time = System.currentTimeMillis();
         mapPane.getChildren().clear();
+        miniMapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
         Tile[][] mapTiles = ShowMapMenuController.getTiles(firstTileXInMap, firstTileYInMap, rowsCount, columnCount);
 
         setTextureTreeImages(mapTiles);
         setBuildingUnitImages(mapTiles);
+        showMiniMap();
         sidePane.toFront();
+        System.out.println((System.currentTimeMillis() - time)/1000);
     }
 
     private void setTextureTreeImages(Tile[][] mapTiles) {
@@ -193,8 +203,8 @@ public class GameMenu extends Application {
 
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
-                setTileImage(tile.getTexture().getImage(), xCoordinate, yCoordinate);
-                if (tile.getTree() != null) setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate);
+                setTileImage(tile.getTexture().getImage(), xCoordinate, yCoordinate, tileSize, mapPane);
+                if (tile.getTree() != null) setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate, tileSize, mapPane);
                 xCoordinate += tileSize;
             }
             yCoordinate += tileSize;
@@ -209,15 +219,67 @@ public class GameMenu extends Application {
             for (Tile tile : tiles) {
                 if (BuildingUtils.isBuildingInTile(tile.getBuilding()))
                     setTileBuildingImage(tile.getBuilding(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
-                            tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate());
+                            tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate(), tileSize,
+                            firstTileXInMap, firstTileYInMap, mapPane);
                 if (tile.getLastUnitInTile() != null)
-                    setTileImage(tile.getLastUnitInTile().getImage(), xCoordinate, yCoordinate);
+                    setTileImage(tile.getLastUnitInTile().getImage(), xCoordinate, yCoordinate, tileSize, mapPane);
                 if (tile.equals(selectedTile)) boldSelectedTile(xCoordinate, yCoordinate);
                 xCoordinate += tileSize;
             }
             yCoordinate += tileSize;
             xCoordinate = 0;
         }
+    }
+
+    private void showMiniMap() {
+        Tile[][] mapTiles = ShowMapMenuController.getTiles(0, 0, mapSize, mapSize);
+
+        setTextureTreeMiniMap(mapTiles);
+        setBuildingUnitMiniMap(mapTiles);
+        setMiniMapBorder();
+    }
+
+    private void setTextureTreeMiniMap(Tile[][] mapTiles) {
+        int xCoordinate = 0, yCoordinate = 0;
+
+        for (Tile[] tiles : mapTiles) {
+            for (Tile tile : tiles) {
+                setTileImage(tile.getTexture().getImage(), xCoordinate, yCoordinate, miniMapTileSize, miniMapPane);
+                if (tile.getTree() != null) setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate, miniMapTileSize, miniMapPane);
+
+                xCoordinate += miniMapTileSize;
+            }
+            yCoordinate += miniMapTileSize;
+            xCoordinate = 0;
+        }
+    }
+
+    private void setBuildingUnitMiniMap(Tile[][] mapTiles) {
+        int xCoordinate = 0, yCoordinate = 0;
+
+        for (Tile[] tiles : mapTiles) {
+            for (Tile tile : tiles) {
+                if (BuildingUtils.isBuildingInTile(tile.getBuilding()))
+                    setTileBuildingImage(tile.getBuilding(), xCoordinate, yCoordinate, tile.getBuilding().getSize(),
+                            tile.getBuilding().getXCoordinate(), tile.getBuilding().getYCoordinate(), miniMapTileSize,
+                            0, 0, miniMapPane);
+                if (tile.getLastUnitInTile() != null)
+                    setTileImage(tile.getLastUnitInTile().getImage(), xCoordinate, yCoordinate, miniMapTileSize, miniMapPane);
+
+                xCoordinate += miniMapTileSize;
+            }
+            yCoordinate += miniMapTileSize;
+            xCoordinate = 0;
+        }
+    }
+
+    private void setMiniMapBorder() {
+        miniMapBorder = new Rectangle(firstTileXInMap * miniMapTileSize, firstTileYInMap * miniMapTileSize,
+                (mapPaneWidth / tileSize) * miniMapTileSize, (mapPaneHeight / tileSize) * miniMapTileSize);
+        miniMapBorder.setStroke(Color.WHITE);
+        miniMapBorder.setStrokeWidth(1);
+        miniMapBorder.setFill(null);
+        miniMapPane.getChildren().add(miniMapBorder);
     }
 
     private void boldSelectedTile(int xCoordinate, int yCoordinate) {
@@ -228,8 +290,10 @@ public class GameMenu extends Application {
         mapPane.getChildren().add(border);
     }
 
-    private void setTileBuildingImage(Building building, int xCoordinate, int yCoordinate, int buildingSize, int buildingX, int buildingY) {
-        if (!(buildingY != firstTileYInMap + (yCoordinate / tileSize) || buildingX != firstTileXInMap + (xCoordinate / tileSize))) {
+    private void setTileBuildingImage(Building building, int xCoordinate, int yCoordinate, int buildingSize,
+                                      int buildingX, int buildingY, int tileSize, int firstTileXInMap, int firstTileYInMap,
+                                      AnchorPane mapPane) {
+        if (buildingY == firstTileYInMap + (yCoordinate / tileSize) && buildingX == firstTileXInMap + (xCoordinate / tileSize)) {
             Image image = building.getImage();
             ImageView imageView = new ImageView(image);
             imageView.setLayoutX(xCoordinate);
@@ -260,17 +324,13 @@ public class GameMenu extends Application {
         }
     }
 
-    private void setTileImage(Image image, int xCoordinate, int yCoordinate) {
+    private void setTileImage(Image image, int xCoordinate, int yCoordinate, int tileSize, AnchorPane mapPane) {
         ImageView imageView = new ImageView(image);
         imageView.setLayoutX(xCoordinate);
         imageView.setLayoutY(yCoordinate);
         imageView.setFitWidth(tileSize);
         imageView.setFitHeight(tileSize);
         mapPane.getChildren().add(imageView);
-    }
-
-    public void back() throws Exception {
-        new MainMenu().start(SignupMenu.getStage());
     }
 
     public void press(MouseEvent mouseEvent) {
@@ -402,6 +462,7 @@ public class GameMenu extends Application {
             case S -> checkSetUnitState();
             case ESCAPE -> stopGame();
             case B -> clipBoard();
+            case N -> nextTurn();
         }
     }
 
@@ -654,7 +715,8 @@ public class GameMenu extends Application {
                 selectedTile = ShowMapMenuController.getSelectedTile(x, y, 0, 0);
                 setTileBuildingImage(BuildingUtils.getBuildingByType(buildingDragName)
                         , (x - firstTileXInMap) * tileSize, (y - firstTileYInMap) * tileSize,
-                        BuildingUtils.getBuildingByType(buildingDragName).getSize(), x, y);
+                        BuildingUtils.getBuildingByType(buildingDragName).getSize(), x, y, tileSize, firstTileXInMap,
+                        firstTileYInMap, mapPane);
                 selectBuildingTiles(selectedTile);
             }
         }

@@ -12,10 +12,6 @@
 
 <AnchorPane onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenu">
     <AnchorPane fx:id="sidePane" layoutX="989.0" prefHeight="720.0" prefWidth="301.0" styleClass="mapToolBar">
-        <HBox alignment="CENTER" layoutX="56.0" layoutY="606.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-            <Button focusTraversable="false" mnemonicParsing="false" onKeyPressed="#checkShortcut" onMouseClicked="#back" prefHeight="27.0" prefWidth="52.0" styleClass="menu-button" text="Back" />
-            <Button focusTraversable="false" mnemonicParsing="false" onAction="#nextTurn" prefWidth="80.0" styleClass="menu-button" text="Next Turn" />
-        </HBox>
         <AnchorPane fx:id="selectBuildingPane" layoutX="11.0" layoutY="14.0" prefHeight="549.0" prefWidth="280.0" visible="false">
             <Label fx:id="selectBuildingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="14.0" text="Building name" textAlignment="CENTER">
                 <font>
@@ -58,6 +54,7 @@
                 <Label fx:id="governancePopulation" />
             </VBox>
         </AnchorPane>
+      <AnchorPane fx:id="miniMapPane" layoutX="51.0" layoutY="507.0" prefHeight="200.0" prefWidth="200.0" />
     </AnchorPane>
     <AnchorPane fx:id="mapPane" focusTraversable="true" layoutX="-1.0" onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" onKeyPressed="#checkShortcut" onMouseDragged="#drag" onMouseMoved="#hover" onMousePressed="#press" prefHeight="720.0" prefWidth="990.0" />
    <AnchorPane fx:id="clipBoardPane" layoutX="407.0" layoutY="228.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20px;" visible="false">
