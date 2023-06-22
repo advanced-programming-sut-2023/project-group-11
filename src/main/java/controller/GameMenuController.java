@@ -62,6 +62,10 @@ public class GameMenuController {
         return (int) Governance.class.getDeclaredMethod("get" + factor + "Factor").invoke(currentGovernance);
     }
 
+    public static void changeRate(String factor, int rateNumber) throws Exception {
+        Governance.class.getDeclaredMethod("set" + factor + "Rate", int.class).invoke(currentGovernance, rateNumber);
+    }
+
     //    public static String showPopularity() {
 //        return "Food: " + currentGovernance.getFoodFactor() + '\n' +
 //                "Tax: " + currentGovernance.getTaxFactor() + '\n' +
@@ -80,25 +84,25 @@ public class GameMenuController {
 //        return output;
 //    }
 //
-    public static void changeFoodRate(int rateNumber) {
-        currentGovernance.setFoodRate(rateNumber);
-    }
+//    public static void changeFoodRate(int rateNumber) {
+//        currentGovernance.setFoodRate(rateNumber);
+//    }
 
     public static int showFoodRate() {
         return currentGovernance.getFoodRate();
     }
 
-    public static void changeTaxRate(int rateNumber) {
-        currentGovernance.setTaxRate(rateNumber);
-    }
+//    public static void changeTaxRate(int rateNumber) {
+//        currentGovernance.setTaxRate(rateNumber);
+//    }
 
     public static int showTaxRate() {
         return currentGovernance.getTaxRate();
     }
 
-    public static void changeFearRate(int rateNumber) {
-        currentGovernance.setFearFactor(rateNumber);
-    }
+//    public static void changeFearRate(int rateNumber) {
+//        currentGovernance.setFearRate(rateNumber);
+//    }
 
     public static int showFearRate() {
         return currentGovernance.getFearFactor();

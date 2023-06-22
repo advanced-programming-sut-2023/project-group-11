@@ -156,7 +156,7 @@ public class Governance {
         return fearFactor;
     }
 
-    public void setFearFactor(int fearFactor) {
+    public void setFearRate(int fearFactor) {
         this.fearFactor = fearFactor;
         troopDamageRatio = 1 + 5 * (fearFactor) / 100.0;
         workersEfficiency = 1 + 5 * (fearFactor) / 100.0;
@@ -167,7 +167,7 @@ public class Governance {
     }
 
     public void changeReligiousFactor(int religiousFactor) {
-        this.religiousFactor += religiousFactor;
+        this.religiousFactor = Math.max(this.religiousFactor + religiousFactor, 4);
     }
 
     public int getAleFactor() {

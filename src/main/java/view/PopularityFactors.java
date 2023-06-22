@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -22,6 +24,11 @@ public class PopularityFactors extends Application {
     public Slider foodRateSlider;
     public Slider taxRateSlider;
     public Slider fearRateSlider;
+    public ImageView foodFace;
+    public ImageView taxFace;
+    public ImageView fearFace;
+    public ImageView religiousFace;
+    public ImageView aleFace;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -35,30 +42,44 @@ public class PopularityFactors extends Application {
     }
 
     public void initialize() throws Exception {
-        setSliderValue();
+        initializeSliders();
         String[] factors = {"Food", "Tax", "Fear", "Religious", "Ale"};
-        for (String factor : factors) setLabelValue(factor);
+        for (String factor : factors) setLabelValue(factor, GameMenuController.showFactor(factor));
     }
 
-    private void setLabelValue(String factor) throws Exception {
-        int currentValue = GameMenuController.showFactor(factor);
+    private void setLabelValue(String factor, int currentValue) throws Exception {
         Label label = (Label) getClass().getField(factor.toLowerCase()).get(this);
+        ImageView imageView = (ImageView) getClass().getField(factor.toLowerCase() + "Face").get(this);
 
-        label.setText(factor + ": " + currentValue);
-        if (currentValue > 0) label.setTextFill(Color.GREEN);
-        else if (currentValue < 0) label.setTextFill(Color.RED);
-        else label.setTextFill(Color.YELLOW);
+        label.setText(String.valueOf(currentValue));
+        if (currentValue > 0) setColor(imageView, label, Color.GREEN, "Green");
+        else if (currentValue < 0) setColor(imageView, label, Color.RED, "Red");
+        else setColor(imageView, label, Color.YELLOW, "Yellow");
     }
 
-    private void setSliderValue() {
+    private void setColor(ImageView imageView, Label label, Color color, String colorName) {
+        label.setTextFill(color);
+        imageView.setImage(new Image(System.getProperty("user.dir") +
+                "/src/main/resources/IMG/PopularityFactorsMenu/" + colorName + "Face.PNG"));
+    }
+
+    private void initializeSliders() {
+        addListener(foodRateSlider, "Food");
+        addListener(taxRateSlider, "Tax");
+        addListener(fearRateSlider, "Fear");
         foodRateSlider.setValue(GameMenuController.showFoodRate());
         taxRateSlider.setValue(GameMenuController.showTaxRate());
         fearRateSlider.setValue(GameMenuController.showFearRate());
     }
 
-    public void save() {
-        GameMenuController.changeFoodRate((int) foodRateSlider.getValue());
-        GameMenuController.changeFearRate((int) fearRateSlider.getValue());
-        GameMenuController.changeTaxRate((int) taxRateSlider.getValue());
+    private void addListener(Slider slider, String factor) {
+        slider.valueProperty().addListener((observable, old, newValue) -> {
+            try {
+                GameMenuController.changeRate(factor, newValue.intValue());
+                setLabelValue(factor, GameMenuController.showFactor(factor));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
