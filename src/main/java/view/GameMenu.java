@@ -186,14 +186,13 @@ public class GameMenu extends Application {
     public void showMap() {
         double time = System.currentTimeMillis();
         mapPane.getChildren().clear();
-        miniMapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
         Tile[][] mapTiles = ShowMapMenuController.getTiles(firstTileXInMap, firstTileYInMap, rowsCount, columnCount);
 
         setTextureTreeImages(mapTiles);
         setBuildingUnitImages(mapTiles);
-        showMiniMap();
+        setMiniMapBorder();
         sidePane.toFront();
         System.out.println((System.currentTimeMillis() - time)/1000);
     }
@@ -235,8 +234,8 @@ public class GameMenu extends Application {
         Tile[][] mapTiles = ShowMapMenuController.getTiles(0, 0, mapSize, mapSize);
 
         setTextureTreeMiniMap(mapTiles);
-        setBuildingUnitMiniMap(mapTiles);
-        setMiniMapBorder();
+//        setBuildingUnitMiniMap(mapTiles);
+//        setMiniMapBorder();
     }
 
     private void setTextureTreeMiniMap(Tile[][] mapTiles) {
@@ -274,6 +273,7 @@ public class GameMenu extends Application {
     }
 
     private void setMiniMapBorder() {
+        miniMapPane.getChildren().remove(miniMapBorder);
         miniMapBorder = new Rectangle(firstTileXInMap * miniMapTileSize, firstTileYInMap * miniMapTileSize,
                 (mapPaneWidth / tileSize) * miniMapTileSize, (mapPaneHeight / tileSize) * miniMapTileSize);
         miniMapBorder.setStroke(Color.WHITE);
