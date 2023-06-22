@@ -49,7 +49,11 @@ public class Map {
     }
 
     public Tile getTile(int x, int y) {
-        return tiles[y][x];
+        try {
+            return tiles[y][x];
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public Tile getTile(int[] location) {
