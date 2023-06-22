@@ -29,6 +29,7 @@ public class Governance {
     private int fearFactor = 0;
     private int religiousFactor = 0;
     private int aleFactor = 0;
+    private int sickFactor = 0;
     private double troopDamageRatio = 1;
     private double workersEfficiency = 1;
     private final ArrayList<Trade> previousReceivedTrades = new ArrayList<>();
@@ -352,5 +353,13 @@ public class Governance {
 
     public double getTotalGold() {
         return totalGold;
+    }
+
+    public int getSickFactor() {
+        return sickFactor;
+    }
+
+    public void setSickFactor(int sickFactor) {
+        this.sickFactor = sickFactor;
     }
 }

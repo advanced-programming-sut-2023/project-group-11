@@ -40,7 +40,7 @@ public class GameMenuController {
             updatePopulation();
             updatePopularityRate();
             updateBuildingStuff();
-            if (getCurrentTurn() % (new Random().nextInt(3) + 2) == 0) getSick();
+            if (getCurrentTurn() % 4 == 0) getSick();
         }
 
         return "Current Turn = " + getCurrentTurn() +
@@ -302,7 +302,7 @@ public class GameMenuController {
             fireBuilding(building);
             if (building.isSick()) {
                 if (cureSickness(building)) building.setSick(false);
-                else currentGovernance.setPopularity(currentGovernance.getPopularity() - 4);
+                else currentGovernance.setSickFactor(currentGovernance.getSickFactor() - 2);
             }
         }
     }
