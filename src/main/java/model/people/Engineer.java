@@ -13,6 +13,7 @@ public class Engineer extends Unit {
         this.hp = Hp.VERY_LOW.getHp();
         this.cost = 30;
         this.speed = Speed.VERY_HIGH;
+        this.leftMoves = speed.getMovesInEachTurn();
     }
 
     public boolean isInWork() {
