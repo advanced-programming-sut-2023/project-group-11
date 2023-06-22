@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="MiniMap added (needs improvements)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -275,14 +274,7 @@
       <workItem from="1687431239691" duration="3205000" />
       <workItem from="1687438041352" duration="1380000" />
       <workItem from="1687439458292" duration="72000" />
-      <workItem from="1687467812563" duration="6591000" />
-    </task>
-    <task id="LOCAL-00065" summary="Governance dying + End Game added (Only khadagh left)">
-      <created>1683851746161</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1683851746161</updated>
+      <workItem from="1687467812563" duration="7056000" />
     </task>
     <task id="LOCAL-00066" summary="Add score added">
       <created>1683885475602</created>
@@ -620,7 +612,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687474804930</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="Mini map with no change (need to choose)">
+      <created>1687475275213</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1687475275213</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +663,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="market menu added" />
     <MESSAGE value="Trade initialized" />
     <MESSAGE value="Trade incomplete (temporary)" />
     <MESSAGE value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
@@ -689,7 +687,8 @@
     <MESSAGE value="SickFactor added (need applying in popularity &amp; showing in popularity factors)" />
     <MESSAGE value="Curing sickness added" />
     <MESSAGE value="MiniMap added (needs improvements)" />
-    <option name="LAST_COMMIT_MESSAGE" value="MiniMap added (needs improvements)" />
+    <MESSAGE value="Mini map with no change (need to choose)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mini map with no change (need to choose)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
