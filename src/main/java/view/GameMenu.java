@@ -15,7 +15,6 @@ import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -651,30 +650,6 @@ public class GameMenu extends Application {
     }
 
     public void showPopularityFactors() throws Exception {
-        if (governanceInformationPane.isVisible()) {
-            VBox vBox = new VBox();
-
-            initializePopularityFactors(vBox);
-            AnchorPane anchorPane = new AnchorPane(vBox);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(anchorPane));
-            stage.show();
-        }
-    }
-
-    private void initializePopularityFactors(VBox vBox) throws Exception {
-        String[] factors = {"Food", "Tax", "Fear", "Religious", "Ale"};
-        for (String factor : factors) vBox.getChildren().add(createLabel(factor));
-    }
-
-    private Label createLabel(String factor) throws Exception {
-        int currentValue = GameMenuController.showFactor(factor);
-        Label label = new Label(factor + ": " + currentValue);
-
-        if (currentValue > 0) label.setTextFill(Color.GREEN);
-        else if (currentValue < 0) label.setTextFill(Color.RED);
-        else label.setTextFill(Color.YELLOW);
-
-        return label;
+        if (governanceInformationPane.isVisible()) new PopularityFactors().start(new Stage());
     }
 }

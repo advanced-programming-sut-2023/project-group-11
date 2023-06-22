@@ -80,46 +80,28 @@ public class GameMenuController {
 //        return output;
 //    }
 //
-    public static GameMenuMessages checkChangeFoodRate(Matcher matcher) {
-        int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
-
-        if (rateNumber < -2 || rateNumber > 2) return GameMenuMessages.INVALID_RATE;
-
+    public static void changeFoodRate(int rateNumber) {
         currentGovernance.setFoodRate(rateNumber);
-
-        return GameMenuMessages.SUCCESS;
     }
 
-    public static String showFoodRate() {
-        return "Food rate: " + currentGovernance.getFoodRate();
+    public static int showFoodRate() {
+        return currentGovernance.getFoodRate();
     }
 
-    public static GameMenuMessages checkChangeTaxRate(Matcher matcher) {
-        int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
-
-        if (rateNumber < -3 || rateNumber > 8) return GameMenuMessages.INVALID_RATE;
-
+    public static void changeTaxRate(int rateNumber) {
         currentGovernance.setTaxRate(rateNumber);
-
-        return GameMenuMessages.SUCCESS;
     }
 
-    public static String showTaxRate() {
-        return "Tax rate: " + currentGovernance.getTaxRate();
+    public static int showTaxRate() {
+        return currentGovernance.getTaxRate();
     }
 
-    public static GameMenuMessages checkChangeFearRate(Matcher matcher) {
-        int rateNumber = Integer.parseInt(matcher.group("rateNumber"));
-
-        if (rateNumber < -5 || rateNumber > 5) return GameMenuMessages.INVALID_RATE;
-
+    public static void changeFearRate(int rateNumber) {
         currentGovernance.setFearFactor(rateNumber);
-
-        return GameMenuMessages.SUCCESS;
     }
 
-    public static String showFearRate() {
-        return "Fear rate: " + currentGovernance.getFearFactor();
+    public static int showFearRate() {
+        return currentGovernance.getFearFactor();
     }
 
     public static GameMenuMessages checkDropBuilding(int x, int y, String buildingType) {
@@ -399,11 +381,11 @@ public class GameMenuController {
         int range = 10, cutRate = 20;
         for (int i = -range; i <= range; i++) {
             for (int j = -range; j <= range; j++) {
-                if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
+                if (!Utils.isValidCoordinates(currentGame.getMap(), i, j))
                     continue;
                 Tile tile = currentGame.getMap().getTile(x + i, y + j);
                 Tree tree = tile.getTree();
-                if (tree != null && tree.getLeftWood() >= cutRate && currentGovernance.hasStorageForItem(AllResource.WOOD,20)) {
+                if (tree != null && tree.getLeftWood() >= cutRate && currentGovernance.hasStorageForItem(AllResource.WOOD, 20)) {
                     tree.setLeftWood(tree.getLeftWood() - cutRate);
                     if (tree.getLeftWood() <= 0)
                         tile.setTree(null);
