@@ -480,11 +480,11 @@ public class GameMenuController {
     private static void unitUpdate(Unit unit, int range) {
         ArrayList<Unit> units = getAllSameUnitsOfTile(unit);
         Map map = currentGame.getMap();
-        setUnitUpdateState(units);
         int currentX = unit.getLocation()[0];
         int currentY = unit.getLocation()[1];
         int finalRange = isValidUnitForAirAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
-        attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
+        setUnitUpdateState(units,attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units));
+//        attackNearestEnemy(currentX, currentY, currentX, currentY, 0, finalRange, currentGame.getMap(), units);
         if (unit.getUnitState() == UnitState.OFFENSIVE)
             for (Unit unit1 : units)
                 unit1.setUnitState(UnitState.DEFENSIVE);
@@ -578,9 +578,9 @@ public class GameMenuController {
                 Arrays.equals(firstUnit.getPatrolDestination(), unit.getPatrolDestination());
     }
 
-    private static void setUnitUpdateState(ArrayList<Unit> units) {
+    private static void setUnitUpdateState(ArrayList<Unit> units,Boolean attacked) {
         for (Unit unit : units)
-            ((Attacker) unit).setAttacked(true);
+            ((Attacker) unit).setAttacked(attacked);
     }
 
     private static boolean attackNearestEnemy(int destinationX, int destinationY, int currentX, int currentY,

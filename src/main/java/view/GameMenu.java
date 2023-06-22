@@ -73,6 +73,11 @@ public class GameMenu extends Application {
     private Label governanceGold;
     @FXML
     private Label governancePopulation;
+    @FXML
+    private Pane clipBoardPane;
+    @FXML
+    private TilePane clipBoardTilePane;
+    private final ArrayList<String> clipBoard = new ArrayList<>();
     private final int mapPaneHeight = 720;
     private final int mapPaneWidth = 990;
     private Zoom currentZoom = Zoom.NORMAL;
@@ -89,7 +94,7 @@ public class GameMenu extends Application {
     private int pressedTileXInScreen = 0;
     private int pressedTileYInScreen = 0;
     private Tile selectedTile;
-    private ArrayList<Tile> selectedTiles = new ArrayList<>();
+    private final ArrayList<Tile> selectedTiles = new ArrayList<>();
     private int selectedBorderWidth = 1;
     private int selectedBorderHeight = 1;
     private Tooltip tooltip;
@@ -386,7 +391,12 @@ public class GameMenu extends Application {
             case V -> pasteBuilding();
             case S -> checkSetUnitState();
             case ESCAPE -> stopGame();
+            case B -> clipBoard();
         }
+    }
+
+    private void clipBoard() {
+        clipBoardPane.setVisible(!clipBoardPane.isVisible());
     }
 
     private void zoom(boolean zoomIn) {
@@ -417,9 +427,33 @@ public class GameMenu extends Application {
     private void copyBuilding() {
         try {
             copiedBuildingName = selectedTile.getBuilding().getName();
-        } catch (Exception e) {
+            fillClipBoard();
+        }
+        catch (Exception e) {
             copiedBuildingName = null;
         }
+    }
+
+    private void fillClipBoard() {
+        if(!clipBoard.contains(copiedBuildingName) || copiedBuildingName.equals("keep")) {
+            clipBoard.add(copiedBuildingName);
+            ImageView buildingImage = new ImageView(BuildingUtils.getBuildingByType(copiedBuildingName).getImage());
+            buildingImage.setFitHeight(60);
+            buildingImage.setFitWidth(60);
+            buildingImage.setPreserveRatio(true);
+            buildingImage.setId(copiedBuildingName);
+            buildingImage.setOnMouseClicked(this::clipBoardMouseClick);
+            clipBoardTilePane.getChildren().add(buildingImage);
+        }
+        if(clipBoard.size()>9) {
+            clipBoard.remove(0);
+            clipBoardTilePane.getChildren().remove(0);
+        }
+    }
+
+    private void clipBoardMouseClick(MouseEvent mouseEvent) {
+        copiedBuildingName = ((ImageView)mouseEvent.getSource()).getId();
+        clipBoardPane.setVisible(false);
     }
 
     private void checkSetUnitState() throws Exception {
