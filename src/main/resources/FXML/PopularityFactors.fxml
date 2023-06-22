@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.PopularityFactors">
+    <ImageView fitHeight="207.0" fitWidth="435.0" layoutX="83.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../IMG/PopularityFactorsMenu/PopularityFactorsMenu.png"/>
+    </ImageView>
+    <VBox alignment="CENTER" layoutX="83.0" layoutY="168.0" prefHeight="210.0" prefWidth="434.0" spacing="20.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="25.0">
+                <Label text="Food Rate"/>
+                <Label text="Tax Rate  "/>
+                <Label text="Fear Rate"/>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="129.0" prefWidth="293.0" spacing="10.0">
+                <Slider fx:id="foodRateSlider" blockIncrement="4.0" majorTickUnit="1.0" max="2.0" min="-2.0"
+                        minorTickCount="0" showTickLabels="true" snapToTicks="true"/>
+                <Slider fx:id="taxRateSlider" blockIncrement="1.0" majorTickUnit="1.0" max="8.0" min="-3.0"
+                        minorTickCount="0" showTickLabels="true" snapToTicks="true" value="1.0"/>
+                <Slider fx:id="fearRateSlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="-5.0"
+                        minorTickCount="0" showTickLabels="true" snapToTicks="true"/>
+            </VBox>
+        </HBox>
+    </VBox>
+    <HBox layoutX="203.0" layoutY="29.0" prefHeight="93.0" prefWidth="50.0">
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+            <Label text="0" fx:id="food"/>
+            <Label text="0" fx:id="tax"/>
+            <Label text="0" textFill="yellow"/>
+            <Label text="0" fx:id="fear"/>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="32.0">
+            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="foodFace">
+                <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="taxFace">
+                <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="fearFace">
+                <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
+            </ImageView>
+        </VBox>
+    </HBox>
+    <HBox layoutX="357.0" layoutY="29.0" prefHeight="43.0" prefWidth="50.0">
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+            <Label text="0" fx:id="religious"/>
+            <Label text="0" fx:id="ale"/>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="32.0">
+            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="religiousFace">
+                <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="aleFace">
+                <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
+            </ImageView>
+        </VBox>
+    </HBox>
+</AnchorPane>

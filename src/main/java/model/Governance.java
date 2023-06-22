@@ -5,7 +5,6 @@ import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
 import model.people.Attacker;
-import model.people.Engineer;
 import model.people.Unit;
 
 import java.util.ArrayList;
@@ -157,7 +156,7 @@ public class Governance {
         return fearFactor;
     }
 
-    public void setFearFactor(int fearFactor) {
+    public void setFearRate(int fearFactor) {
         this.fearFactor = fearFactor;
         troopDamageRatio = 1 + 5 * (fearFactor) / 100.0;
         workersEfficiency = 1 + 5 * (fearFactor) / 100.0;
@@ -168,7 +167,7 @@ public class Governance {
     }
 
     public void changeReligiousFactor(int religiousFactor) {
-        this.religiousFactor += religiousFactor;
+        this.religiousFactor = Math.max(this.religiousFactor + religiousFactor, 4);
     }
 
     public int getAleFactor() {
@@ -331,7 +330,7 @@ public class Governance {
     public void resetUnitAbilities() {
         for (Unit unit : units) {
             unit.setLeftMoves(unit.getSpeed());
-            if (!(unit instanceof Engineer)) ((Attacker) unit).setAttacked(false);
+            if (unit instanceof Attacker attacker) attacker.setAttacked(false);
         }
     }
 
