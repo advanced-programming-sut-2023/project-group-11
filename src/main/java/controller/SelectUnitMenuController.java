@@ -145,16 +145,13 @@ public class SelectUnitMenuController {
         for (Unit unit : units) unit.stopPatrol();
     }
 
-    public static SelectUnitMenuMessages checkSetUnitState(Matcher matcher, int[] currentLocation, String unitType) {
+    public static void checkSetUnitState(String state, int[] currentLocation, String unitType) {
         Map map = Stronghold.getCurrentGame().getMap();
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
         ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
-        String state = matcher.group("state");
 
-        if (!state.matches("standing|defensive|offensive")) return SelectUnitMenuMessages.INVALID_STATE;
         for (Unit unit : selectedUnits) unit.setUnitState(UnitState.valueOf(state.toUpperCase()));
-        return SelectUnitMenuMessages.SUCCESS;
     }
 
     public static SelectUnitMenuMessages checkPourOil(Matcher matcher, int[] currentLocation, String unitType) {
@@ -342,12 +339,12 @@ public class SelectUnitMenuController {
         Tile tile = map.getTile(currentX, currentY);
         ArrayList<Unit> selectedUnits = tile.getUnitsByType(unitType);
         Governance governance = selectedUnits.get(0).getOwner();
+        int unEmployedPopulation = governance.getUnemployedPopulation();
         int currentPopulation = governance.getCurrentPopulation();
-        int maxPopulation = governance.getMaxPopulation();
 
         for (Unit unit : selectedUnits) unit.removeFromGame(tile);
 
-        governance.changeCurrentPopulation(Math.min(selectedUnits.size(), maxPopulation - currentPopulation));
+        governance.changeCurrentPopulation(Math.min(selectedUnits.size(), currentPopulation - unEmployedPopulation));
     }
 
     private static void moveUnits(Map map, String unitType, Path shortestPath, int[] currentLocation, int destinationX, int destinationY) {
@@ -355,14 +352,10 @@ public class SelectUnitMenuController {
         int currentY = currentLocation[1];
         ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
         if (selectedUnits.size() == 0) return;
-//        map.getTile(currentX, currentY).clearUnitsByType(selectedUnits);
-////        System.out.println(selectedUnits);
-//        System.out.println(selectedUnits.get(0).getLocation()[1]);
 
         setLeftMoves(shortestPath, selectedUnits);
         setLocation(selectedUnits, shortestPath);
 
-//        map.getTile(destinationX, destinationY).getUnits().addAll(selectedUnits);
         currentLocation[0] = destinationX;
         currentLocation[1] = destinationY;
     }

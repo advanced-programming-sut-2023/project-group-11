@@ -21,6 +21,7 @@ public class PopularityFactors extends Application {
     public Label fear;
     public Label religious;
     public Label ale;
+    public Label total;
     public Slider foodRateSlider;
     public Slider taxRateSlider;
     public Slider fearRateSlider;
@@ -29,6 +30,7 @@ public class PopularityFactors extends Application {
     public ImageView fearFace;
     public ImageView religiousFace;
     public ImageView aleFace;
+    public ImageView totalFace;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -43,7 +45,7 @@ public class PopularityFactors extends Application {
 
     public void initialize() throws Exception {
         initializeSliders();
-        String[] factors = {"Food", "Tax", "Fear", "Religious", "Ale"};
+        String[] factors = {"Food", "Tax", "Fear", "Religious", "Ale", "Total"};
         for (String factor : factors) setLabelValue(factor, GameMenuController.showFactor(factor));
     }
 
@@ -77,6 +79,7 @@ public class PopularityFactors extends Application {
             try {
                 GameMenuController.changeRate(factor, newValue.intValue());
                 setLabelValue(factor, GameMenuController.showFactor(factor));
+                setLabelValue("Total", GameMenuController.showFactor("Total"));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

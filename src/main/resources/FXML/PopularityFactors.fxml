@@ -27,36 +27,46 @@
     </VBox>
     <HBox layoutX="203.0" layoutY="29.0" prefHeight="93.0" prefWidth="50.0">
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-            <Label text="0" fx:id="food"/>
-            <Label text="0" fx:id="tax"/>
+            <Label fx:id="food" text="0"/>
+            <Label fx:id="tax" text="0"/>
             <Label text="0" textFill="yellow"/>
-            <Label text="0" fx:id="fear"/>
+            <Label fx:id="fear" text="0"/>
         </VBox>
         <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="32.0">
-            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="foodFace">
+            <ImageView fx:id="foodFace" fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
             </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="taxFace">
+            <ImageView fx:id="taxFace" fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
             </ImageView>
             <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
             </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="fearFace">
+            <ImageView fx:id="fearFace" fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
             </ImageView>
         </VBox>
     </HBox>
     <HBox layoutX="357.0" layoutY="29.0" prefHeight="43.0" prefWidth="50.0">
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-            <Label text="0" fx:id="religious"/>
-            <Label text="0" fx:id="ale"/>
+            <Label fx:id="religious" text="0"/>
+            <Label fx:id="ale" text="0"/>
         </VBox>
         <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="32.0">
-            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="religiousFace">
+            <ImageView fx:id="religiousFace" fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
             </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true" fx:id="aleFace">
+            <ImageView fx:id="aleFace" fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
+            </ImageView>
+        </VBox>
+    </HBox>
+    <HBox layoutX="438.0" layoutY="132.0" prefHeight="20.0" prefWidth="50.0">
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+            <Label fx:id="total" text="0"/>
+        </VBox>
+        <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="32.0">
+            <ImageView fx:id="totalFace" fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
             </ImageView>
         </VBox>
