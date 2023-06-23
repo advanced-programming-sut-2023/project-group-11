@@ -356,7 +356,8 @@ public class GameMenuController {
         if (Utils.isValidCoordinates(currentMap, x, y - 1)) {
             y -= 1;
             rows += 1;
-        }if (Utils.isValidCoordinates(currentMap, x - 1, y)) {
+        }
+        if (Utils.isValidCoordinates(currentMap, x - 1, y)) {
             x -= 1;
             columns += 1;
         }
@@ -570,7 +571,7 @@ public class GameMenuController {
     private static Boolean canUnitMove(int destinationX, int destinationY, int currentX, int currentY, String unitType) {
         Map map = currentGame.getMap();
 
-        if(currentX == destinationX && currentY == destinationY)
+        if (currentX == destinationX && currentY == destinationY)
             return true;
         if (!Utils.isValidCoordinates(map, destinationX, destinationY))
             return false;
@@ -642,10 +643,10 @@ public class GameMenuController {
                 } else {
                     if (canUnitMove(destinationX, destinationY, currentX, currentY, unitName)) {
                         if (Utils.isValidCoordinates(map, destinationX + 1, destinationY) && map.getTile(destinationX + 1, destinationY).hasEnemy(currentGovernance)) {
-                                moveTargetTile = map.getTile(destinationX, destinationY);
-                                attackTargetTile = map.getTile(destinationX + 1, destinationY);
-                                minDistance = distance;
-                                continue;
+                            moveTargetTile = map.getTile(destinationX, destinationY);
+                            attackTargetTile = map.getTile(destinationX + 1, destinationY);
+                            minDistance = distance;
+                            continue;
                         }
                         if (Utils.isValidCoordinates(map, destinationX - 1, destinationY) && map.getTile(destinationX - 1, destinationY).hasEnemy(currentGovernance)) {
                             moveTargetTile = map.getTile(destinationX, destinationY);
@@ -676,7 +677,7 @@ public class GameMenuController {
             int destinationY = map.getTileLocation(moveTargetTile)[1];
             System.out.println(destinationX + " " + destinationY);
             System.out.println(currentX + " " + currentY);
-            if(!(currentX== destinationX) || !(currentY== destinationY))
+            if (!(currentX == destinationX) || !(currentY == destinationY))
                 moveUnits(map, units, currentX, currentY, destinationX, destinationY);
         }
         if (units.size() > 0)
@@ -781,5 +782,10 @@ public class GameMenuController {
 
     public static double getArrowAngle(double[] currentLocation, double[] destinationLocation) {
         return Math.toDegrees(Math.atan((destinationLocation[1] - currentLocation[1]) / (destinationLocation[0] - currentLocation[0])));
+    }
+
+    public static boolean hasReachedDestination(double[] currentLocation, double[] destinationLocation) {
+        return Math.abs(currentLocation[0] - destinationLocation[0]) < 0.05 ||
+                Math.abs(currentLocation[1] - destinationLocation[1]) < 0.05;
     }
 }

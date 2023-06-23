@@ -596,8 +596,11 @@ public class SelectUnitMenuController {
 
         if (targetBuilding instanceof GateHouse && selectedUnits.get(0).getName().equals("battle ram"))
             targetBuilding.setHitPoint(targetHp - 3 * attackerDamage);
-        else
+        else {
             targetBuilding.setHitPoint(targetHp - attackerDamage);
+            if (isValidUnitForAirAttack(selectedUnits.get(0).getName()))
+                extracted(selectedUnits, targetTile);
+        }
 
         if (targetBuilding.getHitPoint() <= 0)
             destroyBuilding(map, targetBuilding);
@@ -629,7 +632,12 @@ public class SelectUnitMenuController {
 
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
-        new AttackAnimation(Utils.getGameMenu(), selectedUnits, new double[]{selectedUnits.get(0).getLocation()[0],
+        if (isValidUnitForAirAttack(selectedUnits.get(0).getName()))
+            extracted(selectedUnits, targetTile);
+    }
+
+    private static void extracted(ArrayList<Unit> selectedUnits, Tile targetTile) {
+        new AttackAnimation(Utils.getGameMenu(), new double[]{selectedUnits.get(0).getLocation()[0],
                 selectedUnits.get(0).getLocation()[1]},
                 new double[]{Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[0],
                         Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[1]});
