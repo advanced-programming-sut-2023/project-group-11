@@ -59,7 +59,7 @@ public class SetUnitState extends Application {
             switch (selected.getText()) {
                 case "Disband" -> {
                     SelectUnitMenuController.disbandUnit(location, unitType);
-                    Utils.getGameMenu().showMap();
+                    Utils.getGameMenu().showMap(false);
                 }
                 case "Standing", "Offensive", "Defensive" ->
                         SelectUnitMenuController.checkSetUnitState(selected.getText(), location, unitType);

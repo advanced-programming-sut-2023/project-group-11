@@ -23,6 +23,7 @@ import model.Governance;
 import model.Stronghold;
 import model.buildings.Building;
 import model.map.Tile;
+import model.people.Troop;
 import view.enums.Zoom;
 
 import java.awt.*;
@@ -556,7 +557,10 @@ public class GameMenu extends Application {
     private void UnitMouseClick(MouseEvent mouseEvent) {
         //TODO: how to create machines?
         String unitType = ((ImageView) mouseEvent.getSource()).getId();
-        unitLabel.setText(unitType + "\n(double click to create)");
+        if(unitType.equals("engineer"))
+            unitLabel.setText("engineer\n30 gold\n");
+        else
+            unitLabel.setText(new Troop(unitType).getPublicDetails());
         if (mouseEvent.getClickCount() == 2) {
             switch (SelectBuildingMenuController.checkCreateUnit(selectedTile.getBuilding(), unitType)) {
                 case NOT_ENOUGH_POPULATION ->
