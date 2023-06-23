@@ -116,4 +116,16 @@ public class Troop extends Attacker {
     public void setDiggingDestination(int[] diggingDestination) {
         this.diggingDestination = diggingDestination;
     }
+
+    public String getPublicDetails(){
+        String output;
+        output = name + "\n";
+        if(weaponType != null && !weaponType.equals(AllResource.NONE))
+            output += "weapon: " + weaponType.getName() + "\n";
+        if(armorType != null && !armorType.equals(AllResource.NONE))
+            output += "armor: " + armorType.getName() + "\n";
+//        if((int)cost > 0)
+        output += (int)cost + " gold\n";
+        return output;
+    }
 }

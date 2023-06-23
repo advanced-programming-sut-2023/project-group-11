@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="improvements in various fields">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/greenFace.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/greenFace.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/redFace.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/redFace.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/yellowFace.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/yellowFace.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Units/lord.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Units/lord.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,31 +70,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/project-group-11-2&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/User/Downloads/graphics_project-master",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="controller.MapEditMenuController" />
@@ -269,12 +273,51 @@
       <workItem from="1686937437314" duration="4374000" />
       <workItem from="1686999064014" duration="740000" />
       <workItem from="1687241534062" duration="11376000" />
-      <workItem from="1687343254461" duration="3303000" />
-      <workItem from="1687384932697" duration="719000" />
-      <workItem from="1687431239691" duration="3205000" />
-      <workItem from="1687438041352" duration="1380000" />
-      <workItem from="1687439458292" duration="72000" />
-      <workItem from="1687467812563" duration="7056000" />
+      <workItem from="1687343254461" duration="6722000" />
+      <workItem from="1687416463103" duration="15226000" />
+      <workItem from="1687506503301" duration="9255000" />
+    </task>
+    <task id="LOCAL-00060" summary="Attack debugged">
+      <created>1683742507356</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1683742507356</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Attack &amp; Start game debugged (need correction)">
+      <created>1683819331530</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1683819331530</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Remove Climbablity + Building range Increment applied">
+      <created>1683824437446</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1683824437446</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Assassin's get revealed in fights + Fear effect in damage applied">
+      <created>1683846002394</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1683846002394</updated>
+    </task>
+    <task id="LOCAL-00064" summary="TODOs Updated (CHECK THEM!)">
+      <created>1683846437160</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1683846437160</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Governance dying + End Game added (Only khadagh left)">
+      <created>1683851746161</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1683851746161</updated>
     </task>
     <task id="LOCAL-00066" summary="Add score added">
       <created>1683885475602</created>
@@ -535,91 +578,49 @@
       <option name="project" value="LOCAL" />
       <updated>1687346405622</updated>
     </task>
-    <task id="LOCAL-00103" summary="nothing">
-      <created>1687351009998</created>
+    <task id="LOCAL-00103" summary="market improved">
+      <created>1687346889627</created>
       <option name="number" value="00103" />
       <option name="presentableId" value="LOCAL-00103" />
       <option name="project" value="LOCAL" />
-      <updated>1687351009998</updated>
+      <updated>1687346889627</updated>
     </task>
-    <task id="LOCAL-00104" summary="Revealed unit showing in map">
-      <created>1687352727170</created>
+    <task id="LOCAL-00104" summary="market improved 2">
+      <created>1687347054535</created>
       <option name="number" value="00104" />
       <option name="presentableId" value="LOCAL-00104" />
       <option name="project" value="LOCAL" />
-      <updated>1687352727170</updated>
+      <updated>1687347054535</updated>
     </task>
-    <task id="LOCAL-00105" summary="Textures images edited">
-      <created>1687367915831</created>
+    <task id="LOCAL-00105" summary="clipBoard + debug in state updating">
+      <created>1687418499003</created>
       <option name="number" value="00105" />
       <option name="presentableId" value="LOCAL-00105" />
       <option name="project" value="LOCAL" />
-      <updated>1687367915831</updated>
+      <updated>1687418499004</updated>
     </task>
-    <task id="LOCAL-00106" summary="Fire">
-      <created>1687371317624</created>
+    <task id="LOCAL-00106" summary="nextTurn optimized">
+      <created>1687434392318</created>
       <option name="number" value="00106" />
       <option name="presentableId" value="LOCAL-00106" />
       <option name="project" value="LOCAL" />
-      <updated>1687371317624</updated>
+      <updated>1687434392318</updated>
     </task>
-    <task id="LOCAL-00107" summary="Fire completed">
-      <created>1687385533555</created>
+    <task id="LOCAL-00107" summary="improvements">
+      <created>1687437178872</created>
       <option name="number" value="00107" />
       <option name="presentableId" value="LOCAL-00107" />
       <option name="project" value="LOCAL" />
-      <updated>1687385533556</updated>
+      <updated>1687437178872</updated>
     </task>
-    <task id="LOCAL-00108" summary="sickness added (curing needs implements)">
-      <created>1687435224454</created>
+    <task id="LOCAL-00108" summary="improvements in various fields">
+      <created>1687520805763</created>
       <option name="number" value="00108" />
       <option name="presentableId" value="LOCAL-00108" />
       <option name="project" value="LOCAL" />
-      <updated>1687435224454</updated>
+      <updated>1687520805764</updated>
     </task>
-    <task id="LOCAL-00109" summary="add sickness.png">
-      <created>1687436659910</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1687436659910</updated>
-    </task>
-    <task id="LOCAL-00110" summary="Sickness notif &amp; random turn getting sick added">
-      <created>1687436980894</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1687436980894</updated>
-    </task>
-    <task id="LOCAL-00111" summary="SickFactor added (need applying in popularity &amp; showing in popularity factors)">
-      <created>1687438454323</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1687438454324</updated>
-    </task>
-    <task id="LOCAL-00112" summary="Curing sickness added">
-      <created>1687439409595</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1687439409595</updated>
-    </task>
-    <task id="LOCAL-00113" summary="MiniMap added (needs improvements)">
-      <created>1687474804929</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1687474804930</updated>
-    </task>
-    <task id="LOCAL-00114" summary="Mini map with no change (need to choose)">
-      <created>1687475275213</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1687475275213</updated>
-    </task>
-    <option name="localTasksCounter" value="115" />
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,9 +661,13 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Signup without Captcha" />
+    <MESSAGE value="Captcha added to Signup" />
+    <MESSAGE value="Captcha added to Login" />
+    <MESSAGE value="ddebug" />
+    <MESSAGE value="debug" />
+    <MESSAGE value="market menu added" />
     <MESSAGE value="Trade initialized" />
     <MESSAGE value="Trade incomplete (temporary)" />
     <MESSAGE value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
@@ -676,19 +681,13 @@
     <MESSAGE value="Inverse x&amp;y debugged (Trap killing need debugging)" />
     <MESSAGE value="Nothing special" />
     <MESSAGE value="TODOs done + debug and improvements" />
-    <MESSAGE value="nothing" />
-    <MESSAGE value="Revealed unit showing in map" />
-    <MESSAGE value="Textures images edited" />
-    <MESSAGE value="Fire" />
-    <MESSAGE value="Fire completed" />
-    <MESSAGE value="sickness added (curing needs implements)" />
-    <MESSAGE value="add sickness.png" />
-    <MESSAGE value="Sickness notif &amp; random turn getting sick added" />
-    <MESSAGE value="SickFactor added (need applying in popularity &amp; showing in popularity factors)" />
-    <MESSAGE value="Curing sickness added" />
-    <MESSAGE value="MiniMap added (needs improvements)" />
-    <MESSAGE value="Mini map with no change (need to choose)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mini map with no change (need to choose)" />
+    <MESSAGE value="market improved" />
+    <MESSAGE value="market improved 2" />
+    <MESSAGE value="clipBoard + debug in state updating" />
+    <MESSAGE value="nextTurn optimized" />
+    <MESSAGE value="improvements" />
+    <MESSAGE value="improvements in various fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="improvements in various fields" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -700,7 +699,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java</url>
-          <line>676</line>
+          <line>669</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
@@ -708,8 +707,6 @@
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="model.map.Map" memberName="tiles" />
-        <PinnedItemInfo parentTag="view.GameMenu" memberName="pressedTileX" />
-        <PinnedItemInfo parentTag="view.GameMenu" memberName="selectedTileY" />
       </pinned-members>
     </pin-to-top-manager>
   </component>
@@ -718,24 +715,24 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noLowerCaseTest.ic" NAME="SignupMenuTest.noLowerCaseTest Coverage Results" MODIFIED="1682819394120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$ProfileMenuTest.ic" NAME="ProfileMenuTest Coverage Results" MODIFIED="1684764664587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidUsernameFormat.ic" NAME="SignupMenuTest.invalidUsernameFormat Coverage Results" MODIFIED="1682819253264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_shortPasswordTest.ic" NAME="SignupMenuTest.shortPasswordTest Coverage Results" MODIFIED="1682819384415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$LoginMenuTest.ic" NAME="LoginMenuTest Coverage Results" MODIFIED="1684764654501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_wrongAnswerConfirmationTest.ic" NAME="SignupMenuTest.wrongAnswerConfirmationTest Coverage Results" MODIFIED="1682819421975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidEmailFormatTest.ic" NAME="SignupMenuTest.invalidEmailFormatTest Coverage Results" MODIFIED="1682819412108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emailExistTest.ic" NAME="SignupMenuTest.emailExistTest Coverage Results" MODIFIED="1682819409536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_usernameExistTest.ic" NAME="SignupMenuTest.usernameExistTest Coverage Results" MODIFIED="1682819379326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$LoginMenuTest.ic" NAME="LoginMenuTest Coverage Results" MODIFIED="1683887739009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_WrongConfirmationTest.ic" NAME="SignupMenuTest.WrongConfirmationTest Coverage Results" MODIFIED="1682819405048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1684764673336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$Main.ic" NAME="Main Coverage Results" MODIFIED="1682711397956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_randomArgsTest.ic" NAME="SignupMenuTest.randomArgsTest Coverage Results" MODIFIED="1682819201893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noNumberTest.ic" NAME="SignupMenuTest.noNumberTest Coverage Results" MODIFIED="1682819397820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noLowerCaseTest.ic" NAME="SignupMenuTest.noLowerCaseTest Coverage Results" MODIFIED="1682819394120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$ProfileMenuTest.ic" NAME="ProfileMenuTest Coverage Results" MODIFIED="1683887713042" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_validTagQuestionPickTest.ic" NAME="SignupMenuTest.validTagQuestionPickTest Coverage Results" MODIFIED="1682819415637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidQuestionNumberTest.ic" NAME="SignupMenuTest.invalidQuestionNumberTest Coverage Results" MODIFIED="1682819418999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noUpperCaseTest.ic" NAME="SignupMenuTest.noUpperCaseTest Coverage Results" MODIFIED="1682819390138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidQuestionNumberTest.ic" NAME="SignupMenuTest.invalidQuestionNumberTest Coverage Results" MODIFIED="1682819418999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_randomArgsTest.ic" NAME="SignupMenuTest.randomArgsTest Coverage Results" MODIFIED="1682819201893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidUsernameFormat.ic" NAME="SignupMenuTest.invalidUsernameFormat Coverage Results" MODIFIED="1682819253264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1683887758295" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emptyFieldTest.ic" NAME="SignupMenuTest.emptyFieldTest Coverage Results" MODIFIED="1682819323758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noSpecialTest.ic" NAME="SignupMenuTest.noSpecialTest Coverage Results" MODIFIED="1682819401421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_usernameExistTest.ic" NAME="SignupMenuTest.usernameExistTest Coverage Results" MODIFIED="1682819379326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_shortPasswordTest.ic" NAME="SignupMenuTest.shortPasswordTest Coverage Results" MODIFIED="1682819384415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noNumberTest.ic" NAME="SignupMenuTest.noNumberTest Coverage Results" MODIFIED="1682819397820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_wrongAnswerConfirmationTest.ic" NAME="SignupMenuTest.wrongAnswerConfirmationTest Coverage Results" MODIFIED="1682819421975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$Main.ic" NAME="Main Coverage Results" MODIFIED="1682711397956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

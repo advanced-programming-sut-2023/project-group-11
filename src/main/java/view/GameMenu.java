@@ -23,8 +23,10 @@ import model.Governance;
 import model.Stronghold;
 import model.buildings.Building;
 import model.map.Tile;
+import model.people.Troop;
 import view.enums.Zoom;
 
+import javax.swing.text.View;
 import java.awt.*;
 import java.io.File;
 import java.net.URISyntaxException;
@@ -216,7 +218,17 @@ public class GameMenu extends Application {
             showMiniMap();
         }
         sidePane.toFront();
-        System.out.println((System.currentTimeMillis() - time) / 1000);
+        System.out.println((System.currentTimeMillis() - time)/1000);
+        if(GameMenuController.gameHasEnded()) {
+            ViewUtils.alert(Alert.AlertType.INFORMATION, "Game Ended",
+                    "Winner: " + GameMenuController.getWinnerName() + "\n" + GameMenuController.scores());
+            GameMenuController.endGame();
+            try {
+                new MainMenu().start(SignupMenu.getStage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private void showMiniMap() {
@@ -574,7 +586,10 @@ public class GameMenu extends Application {
     private void UnitMouseClick(MouseEvent mouseEvent) {
         //TODO: how to create machines?
         String unitType = ((ImageView) mouseEvent.getSource()).getId();
-        unitLabel.setText(unitType + "\n(double click to create)");
+        if(unitType.equals("engineer"))
+            unitLabel.setText("engineer\n30 gold\n");
+        else
+            unitLabel.setText(new Troop(unitType).getPublicDetails());
         if (mouseEvent.getClickCount() == 2) {
             switch (SelectBuildingMenuController.checkCreateUnit(selectedTile.getBuilding(), unitType)) {
                 case NOT_ENOUGH_POPULATION ->
