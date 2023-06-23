@@ -236,7 +236,7 @@ public class GameMenuController {
         currentGovernance.changeCurrentPopulation(Math.min(popularity / 10 - 5, maxPopulation - currentPopulation));
 
         for (Building building : buildings) {
-            if (building.isActive() && currentGovernance.getUnemployedPopulation() < 0) {
+            if (building.isActive() && building.getWorkersNumber() > 0 && currentGovernance.getUnemployedPopulation() < 0) {
                 building.setActive(false);
                 currentGovernance.changeCurrentPopulation(building.getWorkersNumber());
             }
