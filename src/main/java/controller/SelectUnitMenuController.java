@@ -574,7 +574,7 @@ public class SelectUnitMenuController {
                 else onlyBuilding = true;
             } else if (!unitType.equals("battle ram")) onlyUnits = true;
         } else {
-            if (unitType.equals("trebuchets") || unitType.equals("catapults") || unitType.equals("fire ballista")) {
+            if (unitType.equals("trebuchets") || unitType.equals("catapults") || unitType.equals("fire ballista") || unitType.equals("fire thrower")) {
                 if (targetTile.getBuilding() != null) onlyBuilding = true;
                 else onlyUnits = true;
             } else {
@@ -584,7 +584,6 @@ public class SelectUnitMenuController {
 
         if (onlyBuilding) attackBuilding(selectedUnits, targetTile);
         else if (onlyUnits) attackUnits(selectedUnits, targetTile);
-        else setAttackedTrue(selectedUnits);
     }
 
     private static void attackBuilding(ArrayList<Unit> selectedUnits, Tile targetTile) {
