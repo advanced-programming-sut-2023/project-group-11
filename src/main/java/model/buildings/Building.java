@@ -144,11 +144,11 @@ public abstract class Building {
         return result;
     }
 
-    public String getPublicDetails(){
+    public String getPublicDetails() {
         String output = name + "\n";
-        if((int)goldCost > 0)
-            output += (int)goldCost + " gold\n";
-        if(resourceCostType != null && !resourceCostType.equals(AllResource.NONE)){
+        if ((int) goldCost > 0)
+            output += (int) goldCost + " gold\n";
+        if (resourceCostType != null && !resourceCostType.equals(AllResource.NONE)) {
             output += resourceCostNumber + " " + resourceCostType.getName() + "\n";
         }
         return output;

@@ -120,7 +120,7 @@ public class GameMenu extends Application {
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
         miniMapTileSize = 200 / mapSize;
         setTraversable();
-        showMap();
+        showMap(false);
         initializeToolTip();
         initializeBuildingBoxes();
     }
@@ -182,17 +182,22 @@ public class GameMenu extends Application {
 
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
-    public void showMap() {
+    public void showMap(boolean isMoving) {
         double time = System.currentTimeMillis();
         mapPane.getChildren().clear();
-        miniMapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
         Tile[][] mapTiles = ShowMapMenuController.getTiles(firstTileXInMap, firstTileYInMap, rowsCount, columnCount);
 
-        setTextureTreeImages(mapTiles, tileSize, mapPane);
+        setTextureTreeImages(mapTiles, tileSize, mapPane, false);
         setBuildingUnitImages(mapTiles, tileSize ,firstTileXInMap, firstTileYInMap, mapPane, 2);
-        showMiniMap();
+        if (isMoving){
+            miniMapPane.getChildren().remove(miniMapBorder);
+            setMiniMapBorder();
+        } else {
+            miniMapPane.getChildren().clear();
+            showMiniMap();
+        }
         sidePane.toFront();
         System.out.println((System.currentTimeMillis() - time)/1000);
     }
@@ -200,17 +205,17 @@ public class GameMenu extends Application {
     private void showMiniMap() {
         Tile[][] mapTiles = ShowMapMenuController.getTiles(0, 0, mapSize, mapSize);
 
-        setTextureTreeImages(mapTiles, miniMapTileSize, miniMapPane);
+        setTextureTreeImages(mapTiles, miniMapTileSize, miniMapPane, true);
         setBuildingUnitImages(mapTiles, miniMapTileSize, 0, 0, miniMapPane, 1);
         setMiniMapBorder();
     }
 
-    private void setTextureTreeImages(Tile[][] mapTiles, int tileSize, AnchorPane mapPane) {
+    private void setTextureTreeImages(Tile[][] mapTiles, int tileSize, AnchorPane mapPane, boolean isMiniMap) {
         int xCoordinate = 0, yCoordinate = 0;
 
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
-                setTileImage(tile.getTexture().getImage(), xCoordinate, yCoordinate, tileSize, mapPane);
+                setTileImage(tile.getTexture().getImage(isMiniMap), xCoordinate, yCoordinate, tileSize, mapPane);
                 if (tile.getTree() != null) setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate, tileSize, mapPane);
                 xCoordinate += tileSize;
             }
@@ -323,7 +328,7 @@ public class GameMenu extends Application {
                     selectBuildingPane.setVisible(false);
                 }
             }
-            showMap();
+            showMap(false);
         }
     }
 
@@ -389,7 +394,7 @@ public class GameMenu extends Application {
         selectedBorderWidth = selectedColumns;
         selectedBorderHeight = selectedRows;
 
-        showMap();
+        showMap(false);
 
         pressedTileXInScreen += deltaX;
         pressedTileYInScreen += deltaY;
@@ -403,7 +408,7 @@ public class GameMenu extends Application {
         if (firstTileYInMap - deltaY >= 0 && firstTileYInMap - deltaY < mapSize - (mapPaneHeight / tileSize))
             firstTileYInMap -= deltaY;
 
-        showMap();
+        showMap(true);
 
         pressedTileXInScreen += deltaX;
         pressedTileYInScreen += deltaY;
@@ -444,7 +449,7 @@ public class GameMenu extends Application {
             tileSize = currentZoom.getSize();
         } else Toolkit.getDefaultToolkit().beep();
 
-        showMap();
+        showMap(true);
     }
 
     private void checkMoveUnit() throws Exception {
@@ -562,7 +567,7 @@ public class GameMenu extends Application {
                         ViewUtils.alert(Alert.AlertType.ERROR, "Create unit error", "You don't have enough resource!");
                 case BAD_UNIT_MAKER_PLACE ->
                         ViewUtils.alert(Alert.AlertType.ERROR, "Create unit error", "Bad unitMaker place!!!");
-                case SUCCESS -> showMap();
+                case SUCCESS -> showMap(false);
             }
         }
     }
@@ -693,7 +698,7 @@ public class GameMenu extends Application {
 
     public void nextTurn() {
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Next Turn Successful", GameMenuController.nextTurn());
-        showMap();
+        showMap(false);
     }
 
     public void selectDestinationTile(MoveUnit moveUnit) {

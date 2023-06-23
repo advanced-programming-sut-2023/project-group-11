@@ -26,6 +26,7 @@ public enum Texture {
     private final String name;
     private final String textureImageName;
     private transient Image image;
+    private transient Image miniMapImage;
 
     Texture(String name, String textureImageName) {
         this.name = name;
@@ -76,9 +77,15 @@ public enum Texture {
         return name;
     }
 
-    public Image getImage() {
-        if (image == null)
-            image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Textures/" + textureImageName + ".png");
-        return image;
+    public Image getImage(boolean isMiniMap) {
+        if (isMiniMap) {
+            if (miniMapImage == null)
+                miniMapImage = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/MiniMap/Textures/" + textureImageName + ".png");
+            return miniMapImage;
+        } else {
+            if (image == null)
+                image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Textures/" + textureImageName + ".png");
+            return image;
+        }
     }
 }

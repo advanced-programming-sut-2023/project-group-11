@@ -48,7 +48,7 @@ public class MovingAnimation {
         ShowMapMenuController.getCurrentMap().getTile(nextLocation).getUnits().addAll(units);
         SelectUnitMenuController.applyPathEffects(nextLocation, units);
 
-        gameMenu.showMap();
+        gameMenu.showMap(false);
 
         move++;
         if (move >= shortestPath.getLength() - 1) timeline.stop();

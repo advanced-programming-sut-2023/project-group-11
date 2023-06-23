@@ -96,7 +96,7 @@ public class MapEditMenu extends Application {
     private void initializeTextureBox(TilePane box, Texture... textures) {
         HashMap<String, Image> texturesImages = new HashMap<>();
         for (Texture texture : textures)
-            texturesImages.put(texture.getName(), texture.getImage());
+            texturesImages.put(texture.getName(), texture.getImage(false));
         fillBox(box, texturesImages, true);
     }
 
@@ -223,7 +223,7 @@ public class MapEditMenu extends Application {
 
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
-                setTileImage(tile.getTexture().getImage(), xCoordinate, yCoordinate);
+                setTileImage(tile.getTexture().getImage(false), xCoordinate, yCoordinate);
                 if (tile.getTree() != null) setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate);
                 xCoordinate += tileSize;
             }

@@ -1,6 +1,5 @@
 package model.people;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.scene.image.Image;
 import model.Governance;
 import model.Stronghold;
@@ -125,7 +124,7 @@ public abstract class Unit {
 
     public Image getImage() {
         if (image == null)
-            return new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Units/" + name + ".png");
+            image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Units/" + name + ".png");
         return image;
     }
 }
