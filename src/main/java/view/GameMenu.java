@@ -202,7 +202,6 @@ public class GameMenu extends Application {
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
     public void showMap(boolean isMoving) {
-        double time = System.currentTimeMillis();
         mapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
@@ -218,7 +217,6 @@ public class GameMenu extends Application {
             showMiniMap();
         }
         sidePane.toFront();
-        System.out.println((System.currentTimeMillis() - time)/1000);
         if(GameMenuController.gameHasEnded()) {
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Game Ended",
                     "Winner: " + GameMenuController.getWinnerName() + "\n" + GameMenuController.scores());
@@ -310,6 +308,15 @@ public class GameMenu extends Application {
                 imageView1.setFitWidth(tileSize * buildingSize);
                 imageView1.setFitHeight(tileSize * buildingSize);
                 imageView1.setOpacity(0.4);
+                mapPane.getChildren().add(imageView1);
+            }
+            if (!building.isActive()) {
+                Image image1 = new Image(this.getClass().getResource("/IMG/unavailable.png").toExternalForm());
+                ImageView imageView1 = new ImageView(image1);
+                imageView1.setLayoutX(xCoordinate);
+                imageView1.setLayoutY(yCoordinate);
+                imageView1.setFitWidth(tileSize * buildingSize);
+                imageView1.setFitHeight(tileSize * buildingSize);
                 mapPane.getChildren().add(imageView1);
             }
         }
