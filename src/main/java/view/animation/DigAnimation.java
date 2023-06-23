@@ -1,14 +1,12 @@
 package view.animation;
 
 import controller.ShowMapMenuController;
-import controller.Utils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import model.Path;
 import model.map.Texture;
 import model.people.Unit;
-import view.GameMenu;
 
 import java.util.ArrayList;
 

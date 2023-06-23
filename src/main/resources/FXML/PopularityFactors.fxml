@@ -29,7 +29,7 @@
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
             <Label fx:id="food" text="0"/>
             <Label fx:id="tax" text="0"/>
-            <Label text="0" textFill="yellow"/>
+            <Label fx:id="sickness" text="0"/>
             <Label fx:id="fear" text="0"/>
         </VBox>
         <VBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="32.0">
@@ -39,7 +39,7 @@
             <ImageView fx:id="taxFace" fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
             </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="sicknessFace" fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../IMG/PopularityFactorsMenu/YellowFace.PNG"/>
             </ImageView>
             <ImageView fx:id="fearFace" fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">

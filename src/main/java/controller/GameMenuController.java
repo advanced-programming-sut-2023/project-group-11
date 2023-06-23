@@ -307,7 +307,7 @@ public class GameMenuController {
                     ViewUtils.alert(Alert.AlertType.INFORMATION, "Cure sickness",
                             "Sickness has been solved in x:" + building.getXCoordinate() +
                                     " y:" + building.getYCoordinate());
-                } else currentGovernance.setSickFactor(currentGovernance.getSickFactor() - 2);
+                } else currentGovernance.setSicknessFactor(currentGovernance.getSicknessFactor() - 2);
             }
         }
     }
@@ -787,5 +787,9 @@ public class GameMenuController {
     public static boolean hasReachedDestination(double[] currentLocation, double[] destinationLocation) {
         return Math.abs(currentLocation[0] - destinationLocation[0]) < 0.05 ||
                 Math.abs(currentLocation[1] - destinationLocation[1]) < 0.05;
+    }
+
+    public static boolean hasFood() {
+        return currentGovernance.getTotalFood() > 0;
     }
 }

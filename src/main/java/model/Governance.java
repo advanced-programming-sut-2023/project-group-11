@@ -29,7 +29,7 @@ public class Governance {
     private int fearFactor = 0;
     private int religiousFactor = 0;
     private int aleFactor = 0;
-    private int sickFactor = 0;
+    private int sicknessFactor = 0;
     private double troopDamageRatio = 1;
     private double workersEfficiency = 1;
     private final ArrayList<Trade> previousReceivedTrades = new ArrayList<>();
@@ -138,6 +138,7 @@ public class Governance {
     }
 
     public int getTotalFood() {
+        updateFood();
         return totalFood;
     }
 
@@ -176,15 +177,23 @@ public class Governance {
     }
 
     public void increaseAleFactor() {
-        aleFactor += Math.ceilDiv(10, currentPopulation);
+        aleFactor = Math.min(8, aleFactor + Math.ceilDiv(20, currentPopulation));
     }
 
     public void resetAleFactor() {
         aleFactor = 0;
     }
 
+    public int getSicknessFactor() {
+        return sicknessFactor;
+    }
+
+    public void setSicknessFactor(int sicknessFactor) {
+        this.sicknessFactor = Math.max(-8, sicknessFactor);
+    }
+
     public int getTotalFactor() {
-        return foodFactor + taxFactor + aleFactor + religiousFactor + sickFactor + fearFactor;
+        return getFoodFactor() + taxFactor + aleFactor + religiousFactor + sicknessFactor + fearFactor;
     }
 
     public double getTroopDamageRatio() {
@@ -264,6 +273,7 @@ public class Governance {
     }
 
     public boolean hasStorageForItem(AllResource item, int amount) {
+        if (item.equals(AllResource.NONE)) return true;
         int capacity = 0;
         for (Storage storage : storages) {
             if (storage.getStorage().containsKey(item)) {
@@ -357,13 +367,5 @@ public class Governance {
 
     public double getTotalGold() {
         return totalGold;
-    }
-
-    public int getSickFactor() {
-        return sickFactor;
-    }
-
-    public void setSickFactor(int sickFactor) {
-        this.sickFactor = sickFactor;
     }
 }

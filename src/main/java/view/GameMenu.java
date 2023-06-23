@@ -26,7 +26,6 @@ import model.map.Tile;
 import model.people.Troop;
 import view.enums.Zoom;
 
-import javax.swing.text.View;
 import java.awt.*;
 import java.io.File;
 import java.net.URISyntaxException;
@@ -218,8 +217,8 @@ public class GameMenu extends Application {
             showMiniMap();
         }
         sidePane.toFront();
-        System.out.println((System.currentTimeMillis() - time)/1000);
-        if(GameMenuController.gameHasEnded()) {
+        System.out.println((System.currentTimeMillis() - time) / 1000);
+        if (GameMenuController.gameHasEnded()) {
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Game Ended",
                     "Winner: " + GameMenuController.getWinnerName() + "\n" + GameMenuController.scores());
             GameMenuController.endGame();
@@ -336,6 +335,7 @@ public class GameMenu extends Application {
     public void press(MouseEvent mouseEvent) {
         pressedTileXInScreen = Math.floorDiv((int) mouseEvent.getX(), tileSize);
         pressedTileYInScreen = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+        changePaneVisibility(sidePane, warBox, productiveBox, governanceBox, governanceInformationPane);
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             selectedTiles.clear();
             selectedBorderHeight = 1;
@@ -586,7 +586,7 @@ public class GameMenu extends Application {
     private void UnitMouseClick(MouseEvent mouseEvent) {
         //TODO: how to create machines?
         String unitType = ((ImageView) mouseEvent.getSource()).getId();
-        if(unitType.equals("engineer"))
+        if (unitType.equals("engineer"))
             unitLabel.setText("engineer\n30 gold\n");
         else
             unitLabel.setText(new Troop(unitType).getPublicDetails());
