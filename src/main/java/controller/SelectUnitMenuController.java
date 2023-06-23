@@ -314,21 +314,15 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
-        if (!unitType.equals("engineer"))
-            return SelectUnitMenuMessages.INVALID_COMMAND;
+    public static SelectUnitMenuMessages checkBuildMachine(Tile tile, String machineType) {
 
-        String machineType = Utils.removeDoubleQuotation(matcher.group("machineType"));
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
 
-        if (!Utils.isValidMachineType(machineType)) return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
-
         Machine machine = new Machine(machineType);
-        machine.setLocation(currentLocation);
+        machine.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(tile));
 
         if (governance.getGold() < machine.getCost()) return SelectUnitMenuMessages.NOT_ENOUGH_GOLD;
 
-        Tile tile = Stronghold.getCurrentGame().getMap().getTile(currentLocation[0], currentLocation[1]);
 
         if (tile.getUnitsByType("engineer").size() < machine.getEngineersNeededToActivate())
             return SelectUnitMenuMessages.NOT_ENOUGH_ENGINEERS;

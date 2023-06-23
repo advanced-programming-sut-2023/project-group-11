@@ -463,6 +463,20 @@ public class GameMenu extends Application {
             case ESCAPE -> stopGame();
             case B -> clipBoard();
             case N -> nextTurn();
+            case U -> checkBuildMachine();
+        }
+    }
+
+    private void checkBuildMachine() {
+        if(selectedTile == null)
+            return;
+        BuildMachine buildMachineMenu = new BuildMachine();
+        buildMachineMenu.setTile(selectedTile);
+        try {
+            buildMachineMenu.start(new Stage());
+            showMap(false);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
