@@ -26,6 +26,7 @@ import model.map.Tile;
 import model.people.Troop;
 import view.enums.Zoom;
 
+import javax.swing.text.View;
 import java.awt.*;
 import java.io.File;
 import java.net.URISyntaxException;
@@ -201,6 +202,16 @@ public class GameMenu extends Application {
         }
         sidePane.toFront();
         System.out.println((System.currentTimeMillis() - time)/1000);
+        if(GameMenuController.gameHasEnded()) {
+            ViewUtils.alert(Alert.AlertType.INFORMATION, "Game Ended",
+                    "Winner: " + GameMenuController.getWinnerName() + "\n" + GameMenuController.scores());
+            GameMenuController.endGame();
+            try {
+                new MainMenu().start(SignupMenu.getStage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private void showMiniMap() {
