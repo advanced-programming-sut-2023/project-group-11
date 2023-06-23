@@ -2,6 +2,9 @@
     -fx-background-image: url("../IMG/bg1.jpg");
     -fx-background-size: 100% 100%;
 }
+.body2{
+    -fx-background-image: url("../IMG/PopularityFactorsMenu/bottom.jpg");
+}
 .label{
     -fx-font-family: "Trebuchet MS";
 }
@@ -16,6 +19,12 @@
 .menu-button{
     -fx-font-family: andalus;
     -fx-font-size: 17px;
+}
+
+.custom-button{
+    -fx-background-image: url("../IMG/PopularityFactorsMenu/bottom.jpg");
+    -fx-text-fill: white;
+    -fx-border-color: #8c5f06;
 }
 
 .mapToolBar{
