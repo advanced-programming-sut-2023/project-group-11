@@ -314,21 +314,15 @@ public class SelectUnitMenuController {
         return SelectUnitMenuMessages.SUCCESS;
     }
 
-    public static SelectUnitMenuMessages checkBuildMachine(Matcher matcher, int[] currentLocation, String unitType) {
-        if (!unitType.equals("engineer"))
-            return SelectUnitMenuMessages.INVALID_COMMAND;
+    public static SelectUnitMenuMessages checkBuildMachine(Tile tile, String machineType) {
 
-        String machineType = Utils.removeDoubleQuotation(matcher.group("machineType"));
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
 
-        if (!Utils.isValidMachineType(machineType)) return SelectUnitMenuMessages.INVALID_MACHINE_TYPE;
-
         Machine machine = new Machine(machineType);
-        machine.setLocation(currentLocation);
+        machine.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(tile));
 
         if (governance.getGold() < machine.getCost()) return SelectUnitMenuMessages.NOT_ENOUGH_GOLD;
 
-        Tile tile = Stronghold.getCurrentGame().getMap().getTile(currentLocation[0], currentLocation[1]);
 
         if (tile.getUnitsByType("engineer").size() < machine.getEngineersNeededToActivate())
             return SelectUnitMenuMessages.NOT_ENOUGH_ENGINEERS;
@@ -570,7 +564,7 @@ public class SelectUnitMenuController {
                 else onlyBuilding = true;
             } else if (!unitType.equals("battle ram")) onlyUnits = true;
         } else {
-            if (unitType.equals("trebuchets") || unitType.equals("catapults") || unitType.equals("fire ballista")) {
+            if (unitType.equals("trebuchets") || unitType.equals("catapults") || unitType.equals("fire ballista") || unitType.equals("fire thrower")) {
                 if (targetTile.getBuilding() != null) onlyBuilding = true;
                 else onlyUnits = true;
             } else {
@@ -580,7 +574,6 @@ public class SelectUnitMenuController {
 
         if (onlyBuilding) attackBuilding(selectedUnits, targetTile);
         else if (onlyUnits) attackUnits(selectedUnits, targetTile);
-        else setAttackedTrue(selectedUnits);
     }
 
     private static void attackBuilding(ArrayList<Unit> selectedUnits, Tile targetTile) {

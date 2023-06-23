@@ -63,6 +63,10 @@ public class Machine extends Attacker {
         return machine;
     }
 
+    public String getPublicDetails(){
+        return name + "\n" + engineersNeededToActivate + " engineers\n" + (int)cost + " gold";
+    }
+
     public ArrayList<Engineer> getEngineers() {
         return engineers;
     }

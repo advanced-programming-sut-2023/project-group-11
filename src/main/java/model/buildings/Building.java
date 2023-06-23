@@ -139,7 +139,8 @@ public abstract class Building {
 
     @Override
     public String toString() {
-        String result = "Building Type: " + name + " HP: " + hitPoint + " Owner: " + owner.getOwner().getNickname();
+        String result = "Building Type: " + name + " HP: " + hitPoint + " Owner: " + owner.getOwner().getNickname() +
+                " WorkersNum: " + workersNumber + " IsActive: " + isActive;
         if (this.isFiring) result += " Firing left: " + firingLeft;
         return result;
     }
