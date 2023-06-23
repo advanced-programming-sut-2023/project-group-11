@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="improvements">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="improvements in various fields">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Troop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SetUnitState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SetUnitState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/animation/MovingAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/animation/MovingAnimation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/GameMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/greenFace.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/greenFace.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/redFace.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/redFace.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/yellowFace.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/PopularityFactorsMenu/yellowFace.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Units/lord.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/IMG/Units/lord.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,31 +70,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/JavaFX001&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/User/Downloads/graphics_project-master",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="controller.MapEditMenuController" />
@@ -277,14 +275,7 @@
       <workItem from="1687241534062" duration="11376000" />
       <workItem from="1687343254461" duration="6722000" />
       <workItem from="1687416463103" duration="15226000" />
-      <workItem from="1687506503301" duration="6652000" />
-    </task>
-    <task id="LOCAL-00059" summary="Debugging move almost Done">
-      <created>1683725943636</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1683725943636</updated>
+      <workItem from="1687506503301" duration="9255000" />
     </task>
     <task id="LOCAL-00060" summary="Attack debugged">
       <created>1683742507356</created>
@@ -622,7 +613,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687437178872</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="improvements in various fields">
+      <created>1687520805763</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1687520805764</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -664,7 +662,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="signup complete except for question &amp; captcha" />
     <MESSAGE value="Signup without Captcha" />
     <MESSAGE value="Captcha added to Signup" />
     <MESSAGE value="Captcha added to Login" />
@@ -689,7 +686,8 @@
     <MESSAGE value="clipBoard + debug in state updating" />
     <MESSAGE value="nextTurn optimized" />
     <MESSAGE value="improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="improvements" />
+    <MESSAGE value="improvements in various fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="improvements in various fields" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
