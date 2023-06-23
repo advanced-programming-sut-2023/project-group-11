@@ -269,7 +269,8 @@ public class GameMenuController {
     private static void updateGold() {
         double currentGold = currentGovernance.getGold();
         double taxGold = currentGovernance.getTaxGold();
-        currentGovernance.setGold(Math.max(0, currentGold - taxGold));
+        int currentPopulation = currentGovernance.getCurrentPopulation();
+        currentGovernance.setGold(Math.max(0, currentGold + taxGold * currentPopulation));
     }
 
     private static void updateStorages() {
@@ -470,14 +471,7 @@ public class GameMenuController {
         else currentGovernance.setFoodRate(currentGovernance.getFoodRate());
         if (currentGovernance.getGold() < currentGovernance.getTaxGold()) currentGovernance.setTaxRate(0);
 
-        int currentFoodFactor = currentGovernance.getFoodFactor();
-        int currentFearFactor = currentGovernance.getFearFactor();
-        int currentTaxFactor = currentGovernance.getTaxFactor();
-        int currentReligiousFactor = currentGovernance.getReligiousFactor();
-        int currentAleFactor = currentGovernance.getAleFactor();
-        int totalFactor = currentFoodFactor + currentFearFactor
-                + currentTaxFactor + currentReligiousFactor + currentAleFactor;
-
+        int totalFactor = currentGovernance.getTotalFactor();
         totalFactor = Math.min(totalFactor + currentGovernance.getPopularity(), 100);
         totalFactor = Math.max(totalFactor, 0);
 

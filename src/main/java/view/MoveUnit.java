@@ -7,7 +7,10 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -21,10 +24,14 @@ import java.util.ArrayList;
 
 public class MoveUnit extends Application {
     private static Stage stage;
-    public TextField xDestination;
-    public TextField yDestination;
-    public ImageView selectedSoldierImage;
-    public ToggleGroup checkAction;
+    @FXML
+    private TextField xDestination;
+    @FXML
+    private TextField yDestination;
+    @FXML
+    private ImageView selectedSoldierImage;
+    @FXML
+    private ToggleGroup checkAction;
     private ArrayList<Tile> selectedTiles = Utils.getGameMenu().getSelectedTiles();
     private String unitType;
     public HBox soldiers;

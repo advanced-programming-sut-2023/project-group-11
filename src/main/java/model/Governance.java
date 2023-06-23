@@ -183,6 +183,10 @@ public class Governance {
         aleFactor = 0;
     }
 
+    public int getTotalFactor() {
+        return foodFactor + taxFactor + aleFactor + religiousFactor + sickFactor + fearFactor;
+    }
+
     public double getTroopDamageRatio() {
         return troopDamageRatio;
     }
