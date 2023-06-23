@@ -115,7 +115,6 @@ public class MoveUnit extends Application {
     private void handleDigPitchError(SelectUnitMenuMessages message) {
         switch (message) {
             case SUCCESS -> System.out.println("Digging Pitch Started!");
-            case INVALID_COMMAND -> ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Command!");
             case INVALID_DIRECTION -> ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Direction!");
             case INVALID_LENGTH ->
                     ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Final Destination Based On Digging Length!");
@@ -135,8 +134,8 @@ public class MoveUnit extends Application {
         switch (message) {
             case SUCCESS -> {
                 stage.close();
-                //TODO: add attack animation and attack banner
-//                Utils.getGameMenu().showMap(false);
+//                TODO: add attack banner
+                Utils.getGameMenu().showMap(false);
             }
             case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
                     "Invalid Coordinate!");

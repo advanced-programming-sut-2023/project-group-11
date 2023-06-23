@@ -291,10 +291,10 @@ public class SelectUnitMenuController {
         int length = Math.abs(destinationX - currentX) + Math.abs(destinationY - currentY);
         String direction = "";
         if (destinationX == currentX) {
-            if (currentY > destinationY) direction = "down";
-            if (currentY < destinationY) direction = "up";
+            if (currentY > destinationY) direction = "left";
+            if (currentY < destinationY) direction = "right";
         } else if (destinationY == currentY) {
-            if (currentX > destinationX) direction = "right";
+            if (currentX > destinationX) direction = "up";
             if (currentX < destinationX) direction = "down";
         } else return SelectUnitMenuMessages.INVALID_DIRECTION;
 
@@ -508,21 +508,17 @@ public class SelectUnitMenuController {
     }
 
     public static void setLocation(ArrayList<Unit> selectedUnits, Path shortestPath) {
-        new MovingAnimation(selectedUnits, shortestPath);
+        new MovingAnimation(selectedUnits, shortestPath, 2.0 / selectedUnits.get(0).getSpeed());
     }
 
     public static void applyPathEffects(int[] location, ArrayList<Unit> selectedUnits) {
         Building currentBuilding;
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         Map map = Stronghold.getCurrentGame().getMap();
-//        for (int[] location : shortestPath.getPath()) {
         if ((currentBuilding = map.getTile(location[0], location[1]).getBuilding()) instanceof GateHouse gateHouse)
             gateHouse.setGateController(Stronghold.getCurrentGame().getCurrentGovernance());
         else if (currentBuilding instanceof Trap trap && !trap.getOwner().equals(currentGovernance))
             applyTrapDamage(selectedUnits, trap);
-
-//        if (selectedUnits.size() == 0) return;
-//        }
     }
 
     private static void applyTrapDamage(ArrayList<Unit> selectedUnits, Trap currentBuilding) {
@@ -741,19 +737,19 @@ public class SelectUnitMenuController {
     private static ArrayList<Tile> getSelectedTiles(Map map, int x, int y, int length, String direction) {
         ArrayList<Tile> selectedTiles = new ArrayList<>();
         switch (direction) {
-            case "up" -> {
+            case "left" -> {
                 for (int i = 0; i < length; i++)
                     selectedTiles.add(map.getTile(x, y - i));
             }
-            case "down" -> {
+            case "right" -> {
                 for (int i = 0; i < length; i++)
                     selectedTiles.add(map.getTile(x, y + i));
             }
-            case "left" -> {
+            case "up" -> {
                 for (int i = 0; i < length; i++)
                     selectedTiles.add(map.getTile(x - i, y));
             }
-            case "right" -> {
+            case "down" -> {
                 for (int i = 0; i < length; i++)
                     selectedTiles.add(map.getTile(x + i, y));
             }
@@ -778,10 +774,12 @@ public class SelectUnitMenuController {
         int destinationX = getDestinationForDigging(direction, currentX, currentY, Math.min(leftMoves, length))[0];
         int destinationY = getDestinationForDigging(direction, currentX, currentY, Math.min(leftMoves, length))[1];
         ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        Path shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY);
 
-        new DigAnimation(selectedUnits, findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY));
-//        moveUnits(map, unitType, findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY),
-//                currentLocation, destinationX, destinationY);
+        if (shortestPath != null) {
+            setLeftMoves(shortestPath, selectedUnits);
+            new DigAnimation(selectedUnits, shortestPath);
+        }
     }
 
     private static void digPitch(ArrayList<Tile> selectedTiles) {

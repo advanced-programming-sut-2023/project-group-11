@@ -21,11 +21,11 @@ public class MovingAnimation {
     private int move = 0;
 
 
-    public MovingAnimation(ArrayList<Unit> units, Path shortestPath) {
+    public MovingAnimation(ArrayList<Unit> units, Path shortestPath, double MOVE_TIME) {
         this.gameMenu = Utils.getGameMenu();
         this.units = units;
         this.shortestPath = shortestPath;
-        this.MOVE_TIME = 2.0 / units.get(0).getSpeed();
+        this.MOVE_TIME = MOVE_TIME;
         if (slowsDown(shortestPath.getPath().get(0))) initializeTimeline(MOVE_TIME * 2);
         else initializeTimeline(MOVE_TIME);
     }
