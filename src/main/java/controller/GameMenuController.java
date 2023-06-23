@@ -11,6 +11,7 @@ import model.map.Tree;
 import model.people.*;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
+import view.GameMenu;
 import view.ViewUtils;
 import view.enums.messages.GameMenuMessages;
 
@@ -356,7 +357,8 @@ public class GameMenuController {
         if (Utils.isValidCoordinates(currentMap, x, y - 1)) {
             y -= 1;
             rows += 1;
-        }if (Utils.isValidCoordinates(currentMap, x - 1, y)) {
+        }
+        if (Utils.isValidCoordinates(currentMap, x - 1, y)) {
             x -= 1;
             columns += 1;
         }
@@ -815,5 +817,17 @@ public class GameMenuController {
 
     public static double getGold() {
         return currentGame.getCurrentGovernance().getGold();
+    }
+
+    public static double[] getCoordinateWithTile(double[] mapLocation) {
+        GameMenu gameMenu = Utils.getGameMenu();
+        int tileSize = gameMenu.getTileSize();
+        double mapX = mapLocation[0] - gameMenu.getFirstTileXInMap();
+        double mapY = mapLocation[1] - gameMenu.getFirstTileYInMap();
+        return new double[]{mapX * tileSize, mapY * tileSize};
+    }
+
+    public static double getArrowAngle(double[] currentLocation, double[] destinationLocation) {
+        return Math.toDegrees(Math.atan((destinationLocation[1] - currentLocation[1]) / (destinationLocation[0] - currentLocation[0])))-45;
     }
 }

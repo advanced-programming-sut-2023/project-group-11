@@ -180,6 +180,23 @@ public class GameMenu extends Application {
         mapPane.requestFocus();
     }
 
+    // -------------------------------- Getter/Setter -----------------------------------------------------
+
+    public AnchorPane getMapPane() {
+        return mapPane;
+    }
+
+    public int getFirstTileXInMap() {
+        return firstTileXInMap;
+    }
+
+    public int getFirstTileYInMap() {
+        return firstTileYInMap;
+    }
+
+    public int getTileSize() {
+        return tileSize;
+    }
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
     public void showMap(boolean isMoving) {
@@ -190,8 +207,8 @@ public class GameMenu extends Application {
         Tile[][] mapTiles = ShowMapMenuController.getTiles(firstTileXInMap, firstTileYInMap, rowsCount, columnCount);
 
         setTextureTreeImages(mapTiles, tileSize, mapPane, false);
-        setBuildingUnitImages(mapTiles, tileSize ,firstTileXInMap, firstTileYInMap, mapPane, 2);
-        if (isMoving){
+        setBuildingUnitImages(mapTiles, tileSize, firstTileXInMap, firstTileYInMap, mapPane, 2);
+        if (isMoving) {
             miniMapPane.getChildren().remove(miniMapBorder);
             setMiniMapBorder();
         } else {
@@ -199,7 +216,7 @@ public class GameMenu extends Application {
             showMiniMap();
         }
         sidePane.toFront();
-        System.out.println((System.currentTimeMillis() - time)/1000);
+        System.out.println((System.currentTimeMillis() - time) / 1000);
     }
 
     private void showMiniMap() {
@@ -216,7 +233,8 @@ public class GameMenu extends Application {
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
                 setTileImage(tile.getTexture().getImage(isMiniMap), xCoordinate, yCoordinate, tileSize, mapPane);
-                if (tile.getTree() != null) setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate, tileSize, mapPane);
+                if (tile.getTree() != null)
+                    setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate, tileSize, mapPane);
                 xCoordinate += tileSize;
             }
             yCoordinate += tileSize;
@@ -614,7 +632,7 @@ public class GameMenu extends Application {
 
     private void buildingDrag(MouseEvent mouseEvent) {
         buildingNameLabel.setVisible(true);
-        buildingNameLabel.setText(BuildingUtils.getBuildingByType(((ImageView)mouseEvent.getSource()).getId()).getPublicDetails());
+        buildingNameLabel.setText(BuildingUtils.getBuildingByType(((ImageView) mouseEvent.getSource()).getId()).getPublicDetails());
         ImageView buildingImageView = (ImageView) mouseEvent.getSource();
         int buildingSize = BuildingUtils.getBuildingByType(buildingImageView.getId()).getSize();
         buildingDragName = buildingImageView.getId();
@@ -638,7 +656,7 @@ public class GameMenu extends Application {
 
     private void buildingMouseClick(MouseEvent mouseEvent) {
         buildingNameLabel.setVisible(true);
-        buildingNameLabel.setText(BuildingUtils.getBuildingByType(((ImageView)mouseEvent.getSource()).getId()).getPublicDetails());
+        buildingNameLabel.setText(BuildingUtils.getBuildingByType(((ImageView) mouseEvent.getSource()).getId()).getPublicDetails());
     }
 
     private void changePaneVisibility(Pane pane, Pane... panes) {

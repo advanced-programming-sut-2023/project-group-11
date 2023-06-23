@@ -103,6 +103,29 @@ public class MoveUnit extends Application {
         }
     }
 
+    public void checkDigPitchUnit(int destinationX, int destinationY) {
+        for (Tile selectedTile : selectedTiles) {
+            message = SelectUnitMenuController.checkDigPitch(
+                    ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile), destinationX, destinationY, unitType);
+
+            handleDigPitchError(message);
+        }
+    }
+
+    private void handleDigPitchError(SelectUnitMenuMessages message) {
+        switch (message) {
+            case SUCCESS -> System.out.println("Digging Pitch Started!");
+            case INVALID_COMMAND -> ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Command!");
+            case INVALID_DIRECTION -> ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Direction!");
+            case INVALID_LENGTH ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Final Destination Based On Digging Length!");
+            case INVALID_UNIT_TYPE_TO_DIG_PITCH ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "This Units Cannot Dig Pitch!");
+            case INVALID_AREA_FOR_DIGGING_PITCH ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Area For Digging Pitch!");
+        }
+    }
+
     public void getDestinationTile() {
         stage.close();
         Utils.getGameMenu().selectDestinationTile(this);
@@ -113,7 +136,7 @@ public class MoveUnit extends Application {
             case SUCCESS -> {
                 stage.close();
                 //TODO: add attack animation and attack banner
-                Utils.getGameMenu().showMap(false);
+//                Utils.getGameMenu().showMap(false);
             }
             case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
                     "Invalid Coordinate!");

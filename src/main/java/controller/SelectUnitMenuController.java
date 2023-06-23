@@ -14,6 +14,8 @@ import model.map.Tile;
 import model.people.*;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
+import view.animation.AttackAnimation;
+import view.animation.DigAnimation;
 import view.animation.MovingAnimation;
 import view.enums.messages.SelectUnitMenuMessages;
 
@@ -280,31 +282,34 @@ public class SelectUnitMenuController {
         if (building != null && !building.getOwner().equals(tunneler.getOwner())) destroyBuilding(map, building);
     }
 
-    public static SelectUnitMenuMessages checkDigPitch(Matcher matcher, int[] currentLocation, String unitType) {
-        if (!Utils.isValidCommandTags(matcher, "direction", "length"))
-            return SelectUnitMenuMessages.INVALID_COMMAND;
-
+    public static SelectUnitMenuMessages checkDigPitch(int[] currentLocation, int destinationX, int destinationY, String unitType) {
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        int length = Integer.parseInt(matcher.group("length"));
-        String direction = matcher.group("direction");
         Map map = Stronghold.getCurrentGame().getMap();
         ArrayList<Unit> selectedUnits = map.getTile(currentLocation).getUnitsByType(unitType);
 
-        if (!isValidDirection(direction))
-            return SelectUnitMenuMessages.INVALID_DIRECTION;
-        else if (!(selectedUnits.get(0) instanceof Troop troop && troop.canDigPitch()))
+        int length = Math.abs(destinationX - currentX) + Math.abs(destinationY - currentY);
+        String direction = "";
+        if (destinationX == currentX) {
+            if (currentY > destinationY) direction = "down";
+            if (currentY < destinationY) direction = "up";
+        } else if (destinationY == currentY) {
+            if (currentX > destinationX) direction = "right";
+            if (currentX < destinationX) direction = "down";
+        } else return SelectUnitMenuMessages.INVALID_DIRECTION;
+
+        if (!(selectedUnits.get(0) instanceof Troop troop && troop.canDigPitch()))
             return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_DIG_PITCH;
         else if (!isValidDestinationForDiggingPitch(map, currentX, currentY, direction, length))
             return SelectUnitMenuMessages.INVALID_LENGTH;
         else if (notValidAreaForDiggingPitch(map, currentX, currentY, length, direction))
             return SelectUnitMenuMessages.INVALID_AREA_FOR_DIGGING_PITCH;
 
-        ArrayList<Tile> selectedTiles = getSelectedTiles(map, currentX, currentY, minimumSpeed(selectedUnits), direction);
+        ArrayList<Tile> selectedTiles = getSelectedTiles(map, currentX, currentY, Math.min(minimumSpeed(selectedUnits), length), direction);
 
         setDiggingPitchConceptsForUnits(selectedUnits, currentX, currentY, length, direction, minimumSpeed(selectedUnits));
-        moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits));
-        digPitch(selectedTiles);
+        moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits), length);
+//        digPitch(selectedTiles);
 
         return SelectUnitMenuMessages.SUCCESS;
     }
@@ -624,6 +629,10 @@ public class SelectUnitMenuController {
 
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
+        new AttackAnimation(Utils.getGameMenu(), selectedUnits, new double[]{selectedUnits.get(0).getLocation()[0],
+                selectedUnits.get(0).getLocation()[1]},
+                new double[]{Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[0],
+                        Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[1]});
     }
 
     public static void removeDeadUnits(Tile targetTile) {
@@ -708,8 +717,7 @@ public class SelectUnitMenuController {
         return Utils.isValidCoordinates(map, destinationX, destinationY) &&
                 !notValidTextureForMoving(map.getTile(destinationX, destinationY)) &&
                 !(map.getTile(destinationX, destinationY).getUnits().size() != 0 && !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY))) &&
-                map.getTile(destinationX, destinationY).getBuilding() == null
-                ;
+                map.getTile(destinationX, destinationY).getBuilding() == null;
     }
 
     private static boolean notValidAreaForDiggingPitch(Map map, int x, int y, int length, String direction) {
@@ -756,14 +764,16 @@ public class SelectUnitMenuController {
         }
     }
 
-    private static void moveUnitsForDiggingPitch(Map map, int[] currentLocation, String unitType, String direction, int leftMoves) {
+    private static void moveUnitsForDiggingPitch(Map map, int[] currentLocation, String unitType, String direction, int leftMoves, int length) {
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        int destinationX = getDestinationForDigging(direction, currentX, currentY, leftMoves)[0];
-        int destinationY = getDestinationForDigging(direction, currentX, currentY, leftMoves)[1];
+        int destinationX = getDestinationForDigging(direction, currentX, currentY, Math.min(leftMoves, length))[0];
+        int destinationY = getDestinationForDigging(direction, currentX, currentY, Math.min(leftMoves, length))[1];
+        ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
 
-        moveUnits(map, unitType, findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY),
-                currentLocation, destinationX, destinationY);
+        new DigAnimation(selectedUnits, findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY));
+//        moveUnits(map, unitType, findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY),
+//                currentLocation, destinationX, destinationY);
     }
 
     private static void digPitch(ArrayList<Tile> selectedTiles) {
@@ -801,15 +811,15 @@ public class SelectUnitMenuController {
             currentLocation = selected.getLocation();
             currentX = currentLocation[0];
             currentY = currentLocation[1];
-            destinationX = getDestinationForDigging(direction, currentX, currentY, minimumSpeed(selectedUnits))[0];
-            destinationY = getDestinationForDigging(direction, currentX, currentY, minimumSpeed(selectedUnits))[1];
+            destinationX = getDestinationForDigging(direction, currentX, currentY, Math.min(diggingLengthLeft, minimumSpeed(selectedUnits)))[0];
+            destinationY = getDestinationForDigging(direction, currentX, currentY, Math.min(minimumSpeed(selectedUnits), diggingLengthLeft))[1];
             shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY);
             selectedTiles = getSelectedTiles(map, currentX, currentY, minimumSpeed(selectedUnits), direction);
 
             if (shortestPath != null) {
                 setDiggingPitchConceptsForUnits(selectedUnits, currentX, currentY, diggingLengthLeft, direction, minimumSpeed(selectedUnits));
-                moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits));
-                digPitch(selectedTiles);
+                moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits), diggingLengthLeft);
+//                digPitch(selectedTiles);
             } else {
                 for (Unit unit : selectedUnits) ((Troop) unit).setDigging(false);
             }
