@@ -10,6 +10,7 @@ import model.map.Tile;
 import model.map.Tree;
 import model.people.*;
 import model.people.enums.Speed;
+import view.GameMenu;
 import view.ViewUtils;
 import view.enums.messages.GameMenuMessages;
 
@@ -765,5 +766,18 @@ public class GameMenuController {
 
     public static double getGold() {
         return currentGame.getCurrentGovernance().getGold();
+    }
+
+
+    public static double[] getCoordinateWithTile(double[] mapLocation) {
+        GameMenu gameMenu = Utils.getGameMenu();
+        int tileSize = gameMenu.getTileSize();
+        double mapX = mapLocation[0] - gameMenu.getFirstTileXInMap();
+        double mapY = mapLocation[1] - gameMenu.getFirstTileYInMap();
+        return new double[]{mapX * tileSize, mapY * tileSize};
+    }
+
+    public static double getArrowAngle(double[] currentLocation, double[] destinationLocation) {
+        return Math.toDegrees(Math.atan((destinationLocation[1] - currentLocation[1]) / (destinationLocation[0] - currentLocation[0])))-45;
     }
 }

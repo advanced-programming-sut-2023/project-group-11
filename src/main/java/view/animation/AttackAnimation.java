@@ -28,8 +28,8 @@ public class AttackAnimation extends Transition {
         this.currentLocation = GameMenuController.getCoordinateWithTile(currentLocation);
         this.destinationLocation = GameMenuController.getCoordinateWithTile(destinationLocation);
         this.mapPane = gameMenu.getMapPane();
-        System.out.println(GameMenuController.getArrowAngle(currentLocation,destinationLocation));
-        this.arrow.setRotate(-GameMenuController.getArrowAngle(currentLocation,destinationLocation));
+        System.out.println(GameMenuController.getArrowAngle(currentLocation, destinationLocation));
+        this.arrow.setRotate(-GameMenuController.getArrowAngle(currentLocation, destinationLocation));
         int tileSize = gameMenu.getTileSize();
         xIncrement = destinationLocation[0] - currentLocation[0];
         yIncrement = destinationLocation[1] - currentLocation[1];
