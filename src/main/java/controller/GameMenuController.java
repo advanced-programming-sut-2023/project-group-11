@@ -780,6 +780,6 @@ public class GameMenuController {
     }
 
     public static double getArrowAngle(double[] currentLocation, double[] destinationLocation) {
-        return Math.toDegrees(Math.atan((destinationLocation[1] - currentLocation[1]) / (destinationLocation[0] - currentLocation[0])))-45;
+        return Math.toDegrees(Math.atan((destinationLocation[1] - currentLocation[1]) / (destinationLocation[0] - currentLocation[0])));
     }
 }
