@@ -1,5 +1,18 @@
 [
   {
+    "recoveryQuestion": "What is my father's name?",
+    "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
+    "username": "Sadegh2",
+    "password": "3fe3a52eab4a7ab2e0c9bf3e07648aae93e36d01af4bf99a1bac83901476fb28",
+    "nickname": "DarkLork",
+    "email": "Sadegh.sg.snn@gmail.com",
+    "slogan": "You are clearly no match for my forces! Give in now, my friend!",
+    "avatarFileName": "6.png",
+    "score": 8000,
+    "rank": 1,
+    "stayLoggedIn": true
+  },
+  {
     "recoveryQuestion": "What is my best friend's name?",
     "recoveryAnswer": "2d73c1f6c77da314c2e3c9060ce798370cdd3bb9f5c7061b834b11784c61bd4d",
     "username": "sepehr",
@@ -8,8 +21,8 @@
     "email": "sepehr@go.com",
     "slogan": "You are clearly no match for my forces! Give in now, my friend!",
     "avatarFileName": "8.png",
-    "score": 3000,
-    "rank": 1,
+    "score": 5000,
+    "rank": 2,
     "stayLoggedIn": false
   },
   {
@@ -22,7 +35,7 @@
     "slogan": "I shall have my revenge, in this life or the next",
     "avatarFileName": "8.png",
     "score": 2000,
-    "rank": 2,
+    "rank": 3,
     "stayLoggedIn": false
   },
   {
@@ -35,20 +48,7 @@
     "slogan": "I shall dye for my country",
     "avatarFileName": "8.png",
     "score": 0,
-    "rank": 3,
-    "stayLoggedIn": false
-  },
-  {
-    "recoveryQuestion": "What is my father's name?",
-    "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
-    "username": "Sadegh2",
-    "password": "3fe3a52eab4a7ab2e0c9bf3e07648aae93e36d01af4bf99a1bac83901476fb28",
-    "nickname": "DarkLork",
-    "email": "Sadegh.sg.snn@gmail.com",
-    "slogan": "You are clearly no match for my forces! Give in now, my friend!",
-    "avatarFileName": "6.png",
-    "score": 0,
     "rank": 4,
-    "stayLoggedIn": true
+    "stayLoggedIn": false
   }
 ]
