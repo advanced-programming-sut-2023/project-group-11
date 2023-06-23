@@ -1,6 +1,7 @@
 package view.animation;
 
 import controller.GameMenuController;
+import controller.Utils;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,7 +11,8 @@ import view.GameMenu;
 
 public class AttackAnimation extends Transition {
     private final AnchorPane mapPane;
-    private final ImageView arrow = new ImageView(new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/arrow.png"));
+    private final ImageView arrow = new ImageView(new Image(getClass().getResource("/IMG/arrow.png").toExternalForm()));
+    private final ImageView attackBanner = new ImageView(new Image(getClass().getResource("/IMG/attack banner.png").toExternalForm()));
     private final double[] currentLocation;
     private final double[] destinationLocation;
     private final double xIncrement;
@@ -24,12 +26,19 @@ public class AttackAnimation extends Transition {
         int tileSize = gameMenu.getTileSize();
         xIncrement = destinationLocation[0] - currentLocation[0];
         yIncrement = destinationLocation[1] - currentLocation[1];
-        arrow.setFitWidth(tileSize);
-        arrow.setFitHeight(tileSize);
-        mapPane.getChildren().add(arrow);
+        addImage(arrow, tileSize, tileSize);
+        addImage(attackBanner, 131, 71);
+        attackBanner.setLayoutX(360 + 131 / 2.0);
+        attackBanner.setLayoutY(0);
         setCycleDuration(Duration.seconds(1));
         setCycleCount(INDEFINITE);
         play();
+    }
+
+    private void addImage(ImageView imageView, int width, int height) {
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        mapPane.getChildren().add(imageView);
     }
 
     @Override
@@ -40,10 +49,13 @@ public class AttackAnimation extends Transition {
         double destinationY = currentY + 0.5 * yIncrement;
         arrow.setLayoutX(destinationX);
         arrow.setLayoutY(destinationY);
+        arrow.toFront();
+        attackBanner.toFront();
         currentLocation[0] = destinationX;
         currentLocation[1] = destinationY;
         if (GameMenuController.hasReachedDestination(currentLocation, destinationLocation)) {
-            mapPane.getChildren().remove(arrow);
+            mapPane.getChildren().removeAll(arrow, attackBanner);
+            Utils.getGameMenu().showMap(false);
             stop();
         }
     }

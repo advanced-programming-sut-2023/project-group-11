@@ -678,7 +678,7 @@ public class GameMenuController {
             System.out.println(destinationX + " " + destinationY);
             System.out.println(currentX + " " + currentY);
             if (!(currentX == destinationX) || !(currentY == destinationY))
-                moveUnits(map, units, currentX, currentY, destinationX, destinationY, 2.0 / units.get(0).getSpeed());
+                moveUnits(map, units, currentX, currentY, destinationX, destinationY);
         }
         if (units.size() > 0)
             attack(units, unitName, attackTargetTile, moveTargetTile);
@@ -686,7 +686,7 @@ public class GameMenuController {
 
     }
 
-    private static void moveUnits(Map map, ArrayList<Unit> units, int currentX, int currentY, int destinationX, int destinationY, double MOVE_TIME) {
+    private static void moveUnits(Map map, ArrayList<Unit> units, int currentX, int currentY, int destinationX, int destinationY) {
         Path shortestPath = findRootToDestination(map, units.get(0).getName(), currentX, currentY, destinationX, destinationY);
         map.getTile(currentX, currentY).clearUnitsByType(units);
 
@@ -785,7 +785,7 @@ public class GameMenuController {
     }
 
     public static boolean hasReachedDestination(double[] currentLocation, double[] destinationLocation) {
-        return Math.abs(currentLocation[0] - destinationLocation[0]) < 0.05 ||
+        return Math.abs(currentLocation[0] - destinationLocation[0]) < 0.05 &&
                 Math.abs(currentLocation[1] - destinationLocation[1]) < 0.05;
     }
 

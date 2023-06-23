@@ -605,7 +605,6 @@ public class GameMenu extends Application {
     }
 
     private void UnitMouseClick(MouseEvent mouseEvent) {
-        //TODO: how to create machines?
         String unitType = ((ImageView) mouseEvent.getSource()).getId();
         if (unitType.equals("engineer"))
             unitLabel.setText("engineer\n30 gold\n");

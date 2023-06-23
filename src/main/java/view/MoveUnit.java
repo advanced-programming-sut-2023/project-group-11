@@ -112,44 +112,9 @@ public class MoveUnit extends Application {
         }
     }
 
-    private void handleDigPitchError(SelectUnitMenuMessages message) {
-        switch (message) {
-            case SUCCESS -> System.out.println("Digging Pitch Started!");
-            case INVALID_DIRECTION -> ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Direction!");
-            case INVALID_LENGTH ->
-                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Final Destination Based On Digging Length!");
-            case INVALID_UNIT_TYPE_TO_DIG_PITCH ->
-                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "This Units Cannot Dig Pitch!");
-            case INVALID_AREA_FOR_DIGGING_PITCH ->
-                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Area For Digging Pitch!");
-        }
-    }
-
     public void getDestinationTile() {
         stage.close();
         Utils.getGameMenu().selectDestinationTile(this);
-    }
-
-    private void handleAttackError(SelectUnitMenuMessages message) {
-        switch (message) {
-            case SUCCESS -> {
-                stage.close();
-//                TODO: add attack banner
-                Utils.getGameMenu().showMap(false);
-            }
-            case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
-                    "Invalid Coordinate!");
-            case INVALID_UNIT_TYPE_TO_ATTACK -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
-                    "Cannot Attack With This Unit!");
-            case OUT_OF_RANGE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
-                    "Target is Out Of Range!");
-            case NO_ATTACK_LEFT -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
-                    "You Attacked Once This Round With This Unit!");
-            case EMPTY_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
-                    "There Is No One In Target-Tile!");
-            case FRIENDLY_ATTACK -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
-                    "You Can't Attack To Your Own Troops And Building!");
-        }
     }
 
     private String getUnitTypeByImage(ImageView selectedSoldierImage) {
@@ -180,6 +145,37 @@ public class MoveUnit extends Application {
                     "Invalid Destination: Invalid Unit type in destination!");
             case INVALID_DISTANCE -> ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",
                     "Invalid Destination: Too Far For Going There, Based On Unit's Speed!");
+        }
+    }
+
+    private void handleAttackError(SelectUnitMenuMessages message) {
+        switch (message) {
+            case SUCCESS -> stage.close();
+            case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "Invalid Coordinate!");
+            case INVALID_UNIT_TYPE_TO_ATTACK -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "Cannot Attack With This Unit!");
+            case OUT_OF_RANGE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "Target is Out Of Range!");
+            case NO_ATTACK_LEFT -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "You Attacked Once This Round With This Unit!");
+            case EMPTY_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "There Is No One In Target-Tile!");
+            case FRIENDLY_ATTACK -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
+                    "You Can't Attack To Your Own Troops And Building!");
+        }
+    }
+
+    private void handleDigPitchError(SelectUnitMenuMessages message) {
+        switch (message) {
+            case SUCCESS -> System.out.println("Digging Pitch Started!");
+            case INVALID_DIRECTION -> ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Direction!");
+            case INVALID_LENGTH ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Final Destination Based On Digging Length!");
+            case INVALID_UNIT_TYPE_TO_DIG_PITCH ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "This Units Cannot Dig Pitch!");
+            case INVALID_AREA_FOR_DIGGING_PITCH ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Area For Digging Pitch!");
         }
     }
 }

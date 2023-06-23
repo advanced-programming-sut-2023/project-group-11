@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
@@ -57,9 +58,11 @@ public class NewGame extends Application {
     }
 
     public void startGame() throws Exception {
-        stage.close();
-        MainMenuController.startGame(users.getSelectionModel().getSelectedItems(), mapName.getValue().getName());
-        stage.close();
+        if (users.getSelectionModel().getSelectedItems().size() >= 1) {
+            MainMenuController.startGame(users.getSelectionModel().getSelectedItems(), mapName.getValue().getName());
+            stage.close();
+        }
+        else ViewUtils.alert(Alert.AlertType.ERROR,"Start Game","Please choose a player!");
     }
 
     public void back() throws Exception {

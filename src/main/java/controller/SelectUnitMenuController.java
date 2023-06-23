@@ -588,7 +588,7 @@ public class SelectUnitMenuController {
         else {
             targetBuilding.setHitPoint(targetHp - attackerDamage);
             if (isValidUnitForAirAttack(selectedUnits.get(0).getName()))
-                extracted(selectedUnits, targetTile);
+                attackAnimation(selectedUnits, targetTile);
         }
 
         if (targetBuilding.getHitPoint() <= 0)
@@ -622,10 +622,10 @@ public class SelectUnitMenuController {
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
         if (isValidUnitForAirAttack(selectedUnits.get(0).getName()))
-            extracted(selectedUnits, targetTile);
+            attackAnimation(selectedUnits, targetTile);
     }
 
-    private static void extracted(ArrayList<Unit> selectedUnits, Tile targetTile) {
+    private static void attackAnimation(ArrayList<Unit> selectedUnits, Tile targetTile) {
         new AttackAnimation(Utils.getGameMenu(), new double[]{selectedUnits.get(0).getLocation()[0],
                 selectedUnits.get(0).getLocation()[1]},
                 new double[]{Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[0],

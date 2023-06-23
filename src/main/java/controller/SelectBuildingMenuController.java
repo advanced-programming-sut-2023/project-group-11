@@ -8,6 +8,7 @@ import model.map.Map;
 import model.map.Tile;
 import model.people.Engineer;
 import model.people.Troop;
+import model.people.Unit;
 import view.enums.messages.SelectBuildingMenuMessages;
 
 public class SelectBuildingMenuController {
@@ -23,13 +24,12 @@ public class SelectBuildingMenuController {
         int x = building.getXCoordinate(), y = building.getYCoordinate();
         int count = 1;
         if (!currentGovernance.hasEnoughPopulation(count)) return SelectBuildingMenuMessages.NOT_ENOUGH_POPULATION;
-        UnitMaker unitMaker = (UnitMaker) building;
+
         if (type.equals("engineer")) {
             Engineer engineer = new Engineer();
-            engineer.setLocation(new int[]{x, y});
             if (currentGovernance.getGold() < engineer.getCost() * count)
                 return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
-            if (!createEngineer(unitMaker, engineer, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
+            if (!createUnit(building, engineer,null, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
             return SelectBuildingMenuMessages.SUCCESS;
         }
 
@@ -42,7 +42,7 @@ public class SelectBuildingMenuController {
 
         if (!currentGovernance.hasEnoughItem(armor, count) || !currentGovernance.hasEnoughItem(weapon, count))
             return SelectBuildingMenuMessages.NOT_ENOUGH_RESOURCE;
-        if (!createUnit(unitMaker, troop, type, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
+        if (!createUnit(building, troop, type, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
         return SelectBuildingMenuMessages.SUCCESS;
     }
 
@@ -123,35 +123,31 @@ public class SelectBuildingMenuController {
         return false;
     }
 
-    private static boolean createUnit(UnitMaker unitMaker, Troop troop, String unitType, int count) {
+    private static boolean createUnit(Building unitMaker, Unit unit, String unitType, int count) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
         setUnitCoordinates(unitMaker);
 
         if (unitCreationTile == null) return false;
 
-        governance.setGold(governance.getGold() - troop.getCost() * count);
+        governance.setGold(governance.getGold() - unit.getCost() * count);
+        if (unit instanceof Troop troop) createTroop(troop, unitType, count, governance);
+        else createEngineer(count);
+
+        return true;
+    }
+
+    private static void createTroop(Troop troop, String unitType, int count, Governance governance) {
         governance.removeFromStorage(troop.getWeaponType(), count);
         governance.removeFromStorage(troop.getArmorType(), count);
 
         for (int i = 0; i < count; i++) new Troop(unitType).initializeUnit(unitCreationTile, false);
-
-        return true;
     }
 
-    private static boolean createEngineer(UnitMaker unitMaker, Engineer engineer, int count) {
-        Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
-        setUnitCoordinates(unitMaker);
-
-        if (unitCreationTile == null) return false;
-
-        governance.setGold(governance.getGold() - engineer.getCost() * count);
-
+    private static void createEngineer(int count) {
         for (int i = 0; i < count; i++) new Engineer().initializeUnit(unitCreationTile, false);
-
-        return true;
     }
 
-    private static void setUnitCoordinates(UnitMaker unitMaker) {
+    private static void setUnitCoordinates(Building unitMaker) {
         Map map = Stronghold.getCurrentGame().getMap();
         int unitMakerXCoordinate = unitMaker.getXCoordinate();
         int unitMakerYCoordinate = unitMaker.getYCoordinate();
