@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="750.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TradeMenu">
    <children>
-      <AnchorPane layoutX="46.0" layoutY="19.0" opacity="0.9" prefHeight="465.0" prefWidth="652.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+      <AnchorPane layoutX="46.0" layoutY="19.0" opacity="0.85" prefHeight="465.0" prefWidth="652.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
          <children>
             <VBox alignment="CENTER" layoutX="189.0" layoutY="20.0" prefHeight="399.0" prefWidth="274.0" spacing="10.0">
                <children>

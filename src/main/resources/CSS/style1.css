@@ -5,6 +5,10 @@
 .body2{
     -fx-background-image: url("../IMG/PopularityFactorsMenu/bottom.jpg");
 }
+.sidePane{
+    -fx-background-image: url("../IMG/SideBC.png");
+    -fx-background-size: 100% 100%;
+}
 .label{
     -fx-font-family: "Trebuchet MS";
 }

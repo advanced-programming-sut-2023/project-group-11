@@ -10,7 +10,7 @@
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane layoutX="255.0" layoutY="113.0" opacity="0.92" prefHeight="494.0" prefWidth="770.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+                <AnchorPane layoutX="255.0" layoutY="113.0" opacity="0.85" prefHeight="494.0" prefWidth="770.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
                     <children>
                         <VBox alignment="CENTER" layoutX="308.0" layoutY="90.0" prefHeight="314.0" prefWidth="154.0" spacing="25.0">
                             <children>

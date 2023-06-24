@@ -15,7 +15,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="120.0" layoutY="45.0" opacity="0.92" prefHeight="630.0" prefWidth="1040.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+            <AnchorPane layoutX="120.0" layoutY="45.0" opacity="0.85" prefHeight="630.0" prefWidth="1040.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
                <children>
                   <CheckBox fx:id="passwordShow" layoutX="593.0" layoutY="229.0" mnemonicParsing="false" onAction="#changeVisibility" text="show password">
                      <font>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenu">
-    <AnchorPane fx:id="sidePane" layoutX="989.0" prefHeight="720.0" prefWidth="301.0" styleClass="mapToolBar">
+    <AnchorPane fx:id="sidePane" layoutX="989.0" prefHeight="720.0" prefWidth="301.0">
         <AnchorPane fx:id="selectBuildingPane" layoutX="11.0" layoutY="14.0" prefHeight="549.0" prefWidth="280.0" visible="false">
             <Label fx:id="selectBuildingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="14.0" text="Building name" textAlignment="CENTER">
                 <font>
@@ -41,7 +42,7 @@
                     <Font size="16.0" />
                 </font>
             </Label>
-            <Label layoutX="74.0" layoutY="14.0" text="Drag buildings to build">
+            <Label layoutX="74.0" layoutY="14.0" text="Drag buildings to build" textFill="WHITE">
                 <font>
                     <Font size="13.0" />
                 </font>
@@ -55,6 +56,10 @@
             </VBox>
         </AnchorPane>
       <AnchorPane fx:id="miniMapPane" layoutX="51.0" layoutY="507.0" prefHeight="200.0" prefWidth="200.0" />
+      <styleClass>
+         <String fx:value="mapToolBar" />
+         <String fx:value="sidePane" />
+      </styleClass>
     </AnchorPane>
     <AnchorPane fx:id="mapPane" focusTraversable="true" layoutX="-1.0" onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" onKeyPressed="#checkShortcut" onMouseDragged="#drag" onMouseMoved="#hover" onMousePressed="#press" prefHeight="720.0" prefWidth="990.0" />
    <AnchorPane fx:id="clipBoardPane" layoutX="407.0" layoutY="228.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20px;" visible="false">

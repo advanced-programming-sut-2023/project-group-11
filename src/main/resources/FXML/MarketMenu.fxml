@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="750.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MarketMenu">
    <children>
-      <AnchorPane layoutX="46.0" layoutY="19.0" opacity="0.9" prefHeight="465.0" prefWidth="652.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+      <AnchorPane layoutX="46.0" layoutY="19.0" opacity="0.85" prefHeight="465.0" prefWidth="652.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
          <children>
             <Label layoutX="257.0" layoutY="14.0" text="Market Menu">
                <font>
