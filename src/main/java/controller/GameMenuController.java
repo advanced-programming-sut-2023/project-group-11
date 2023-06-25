@@ -298,7 +298,10 @@ public class GameMenuController {
     }
 
     private static void updateBuildingStuff() {
-        for (Building building : currentGovernance.getBuildings()) {
+        ArrayList<Building> buildings = currentGovernance.getBuildings();
+        Building building;
+        for (int i = buildings.size() - 1; i >= 0; i--) {
+            building = buildings.get(i);
             cagedWardog(building);
             fireBuilding(building);
             if (building.isSick()) {
@@ -785,8 +788,11 @@ public class GameMenuController {
     }
 
     public static boolean hasReachedDestination(double[] currentLocation, double[] destinationLocation) {
-        return Math.abs(currentLocation[0] - destinationLocation[0]) < 0.05 &&
-                Math.abs(currentLocation[1] - destinationLocation[1]) < 0.05;
+        return Math.abs(currentLocation[0] - destinationLocation[0]) < 5 &&
+                Math.abs(currentLocation[1] - destinationLocation[1]) < 5;
+    }
+    public static double calculateDestination(double xIncrement, double yIncrement){
+        return Math.sqrt(Math.pow(xIncrement, 2) + Math.pow(yIncrement, 2));
     }
 
     public static boolean hasFood() {

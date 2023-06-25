@@ -27,7 +27,7 @@ public class AttackAnimation extends Transition {
         xIncrement = destinationLocation[0] - currentLocation[0];
         yIncrement = destinationLocation[1] - currentLocation[1];
         addImage(arrow, tileSize, tileSize);
-        addImage(attackBanner, 131, 71);
+        addImage(attackBanner, 262, 142);
         attackBanner.setLayoutX(360 + 131 / 2.0);
         attackBanner.setLayoutY(0);
         setCycleDuration(Duration.seconds(1));
@@ -45,8 +45,10 @@ public class AttackAnimation extends Transition {
     protected void interpolate(double v) {
         double currentX = currentLocation[0];
         double currentY = currentLocation[1];
-        double destinationX = currentX + 0.5 * xIncrement;
-        double destinationY = currentY + 0.5 * yIncrement;
+        double distance = GameMenuController.calculateDestination(xIncrement, yIncrement);
+        double changingRate = 3 / distance;
+        double destinationX = currentX + changingRate * xIncrement;
+        double destinationY = currentY + changingRate * yIncrement;
         arrow.setLayoutX(destinationX);
         arrow.setLayoutY(destinationY);
         arrow.toFront();

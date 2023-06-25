@@ -8,8 +8,21 @@
     "email": "Sadegh.sg.snn@gmail.com",
     "slogan": "You are clearly no match for my forces! Give in now, my friend!",
     "avatarFileName": "6.png",
-    "score": 14000,
+    "score": 32000,
     "rank": 1,
+    "stayLoggedIn": false
+  },
+  {
+    "recoveryQuestion": "What is my father's name?",
+    "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
+    "username": "Sadegh",
+    "password": "3fe3a52eab4a7ab2e0c9bf3e07648aae93e36d01af4bf99a1bac83901476fb28",
+    "nickname": "SadeghViper",
+    "email": "sadegh.sg.sn@gmail.com",
+    "slogan": "I shall have my revenge, in this life or the next",
+    "avatarFileName": "desktop-wallpaper-diablo-3-crusader-armor-iphone-8-7-6s-crusaders-thumbnail.jpg",
+    "score": 22000,
+    "rank": 2,
     "stayLoggedIn": true
   },
   {
@@ -22,7 +35,7 @@
     "slogan": "You are clearly no match for my forces! Give in now, my friend!",
     "avatarFileName": "8.png",
     "score": 7000,
-    "rank": 2,
+    "rank": 3,
     "stayLoggedIn": false
   },
   {
@@ -35,19 +48,6 @@
     "slogan": "I shall have my revenge, in this life or the next",
     "avatarFileName": "8.png",
     "score": 2000,
-    "rank": 3,
-    "stayLoggedIn": false
-  },
-  {
-    "recoveryQuestion": "What is my father's name?",
-    "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
-    "username": "Sadegh",
-    "password": "2e3a73b434678a4a6f4b2a2f6a1420a6cd2bb7933fe50229dc90d5093e7eaf9e",
-    "nickname": "SadeghViper",
-    "email": "sadegh.sg.sn@gmail.com",
-    "slogan": "I shall dye for my country",
-    "avatarFileName": "8.png",
-    "score": 0,
     "rank": 4,
     "stayLoggedIn": false
   }

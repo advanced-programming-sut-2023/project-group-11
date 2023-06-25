@@ -14,7 +14,7 @@
 <AnchorPane onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenu">
     <AnchorPane fx:id="sidePane" layoutX="989.0" prefHeight="720.0" prefWidth="301.0">
         <AnchorPane fx:id="selectBuildingPane" layoutX="11.0" layoutY="14.0" prefHeight="549.0" prefWidth="280.0" visible="false">
-            <Label fx:id="selectBuildingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="14.0" text="Building name" textAlignment="CENTER">
+            <Label fx:id="selectBuildingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="14.0" text="Building name" textAlignment="CENTER" textFill="WHITE">
                 <font>
                     <Font size="13.0" />
                 </font>
@@ -22,13 +22,13 @@
             <ImageView fx:id="selectBuildingImageView" fitHeight="150.0" fitWidth="150.0" layoutX="65.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../IMG/Building/Church/cathedral.png" />
             </ImageView>
-            <AnchorPane fx:id="buildingCommandPane" layoutX="12.0" layoutY="189.0" prefHeight="405.0" prefWidth="258.0" visible="false">
-                <Button focusTraversable="false" layoutX="103.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#checkRepair" text="Repair" />
-                <TilePane fx:id="unitPane" layoutX="-1.0" layoutY="68.0" prefHeight="288.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="258.0" />
-                <Label fx:id="unitLabel" layoutX="138.0" layoutY="213.0" />
+            <AnchorPane fx:id="buildingCommandPane" layoutX="12.0" layoutY="175.0" prefHeight="405.0" prefWidth="258.0" visible="false">
+                <Button focusTraversable="false" layoutX="103.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#checkRepair" text="Repair" />
+                <TilePane fx:id="unitPane" layoutX="-1.0" layoutY="60.0" prefHeight="288.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="258.0" />
+                <Label fx:id="unitLabel" layoutX="138.0" layoutY="185.0" textFill="WHITE" />
             </AnchorPane>
         </AnchorPane>
-        <AnchorPane fx:id="buildingsPane" layoutX="11.0" layoutY="14.0" prefHeight="415.0" prefWidth="280.0">
+        <AnchorPane fx:id="buildingsPane" layoutX="11.0" layoutY="15.0" prefHeight="415.0" prefWidth="280.0">
             <HBox alignment="CENTER" layoutX="37.0" layoutY="42.0" spacing="8.0">
                 <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showProductiveBox" text="Productive" />
                 <Button focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#showWarBox" text="War" />
@@ -55,7 +55,7 @@
                 <Label fx:id="governancePopulation" />
             </VBox>
         </AnchorPane>
-      <AnchorPane fx:id="miniMapPane" layoutX="51.0" layoutY="507.0" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane fx:id="miniMapPane" layoutX="51.0" layoutY="487.0" prefHeight="200.0" prefWidth="200.0" />
       <styleClass>
          <String fx:value="mapToolBar" />
          <String fx:value="sidePane" />
