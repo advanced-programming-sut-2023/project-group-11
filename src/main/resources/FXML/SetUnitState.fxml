@@ -20,7 +20,7 @@
             <RadioButton mnemonicParsing="false" text="Defensive" toggleGroup="$checkAction"/>
             <RadioButton mnemonicParsing="false" text="Offensive" toggleGroup="$checkAction"/>
             <RadioButton mnemonicParsing="false" text="Standing" toggleGroup="$checkAction"/>
-
+            <RadioButton mnemonicParsing="false" text="Stop" toggleGroup="$checkAction"/>
         </HBox>
         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="1000.0" spacing="10.0">
             <Button mnemonicParsing="false" onAction="#apply" prefHeight="40.0" prefWidth="250.0"

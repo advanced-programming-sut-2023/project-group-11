@@ -14,7 +14,7 @@ import model.map.Tile;
 import model.people.*;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
-import view.animation.AttackAnimation;
+import view.animation.AirAttackAnimation;
 import view.animation.DigAnimation;
 import view.animation.MovingAnimation;
 import view.enums.messages.SelectUnitMenuMessages;
@@ -54,18 +54,14 @@ public class SelectUnitMenuController {
 
         if (isPatrol) setPatrolUnit(destinationX, destinationY, currentLocation, unitType);
         else stopPatrol(map.getTile(currentX, currentY).getUnitsByType(unitType));
+        stopDigging(currentLocation, unitType);
         moveUnits(map, unitType, shortestPath, currentLocation, destinationX, destinationY);
 
         return SelectUnitMenuMessages.SUCCESS;
     }
 
     public static SelectUnitMenuMessages checkAttack(int[] currentLocation, int targetX, int targetY, String unitType) {
-//        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
-//            return SelectUnitMenuMessages.INVALID_COMMAND;
-
         Map map = Stronghold.getCurrentGame().getMap();
-//        int targetX = Integer.parseInt(matcher.group("xCoordinate"));
-//        int targetY = Integer.parseInt(matcher.group("yCoordinate"));
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
         ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
@@ -74,7 +70,7 @@ public class SelectUnitMenuController {
 
         if (!Utils.isValidCoordinates(map, targetX, targetY))
             return SelectUnitMenuMessages.INVALID_COORDINATE;
-        else if (!isValidUnitForAirAttack(unitType) && !isValidUnitForGroundAttack(unitType))
+        else if (!selectedUnits.get(0).isValidUnitForAirAttack() && !selectedUnits.get(0).isValidUnitForGroundAttack())
             return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_ATTACK;
         else if (((Attacker) selectedUnits.get(0)).getRange(currentTile) < Math.abs(currentX - targetX) ||
                 ((Attacker) selectedUnits.get(0)).getRange(currentTile) < Math.abs(currentY - targetY))
@@ -243,43 +239,19 @@ public class SelectUnitMenuController {
         return true;
     }
 
-    public static SelectUnitMenuMessages checkDigTunnel(Matcher matcher, int[] currentLocation, String unitType) {
+    public static SelectUnitMenuMessages checkDigTunnel(int[] currentLocation, int destinationX, int destinationY, String unitType) {
         Map map = Stronghold.getCurrentGame().getMap();
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        Unit unit = map.getTile(currentX, currentY).getUnitsByType(unitType).get(0);
+        ArrayList<Unit> units = map.getTile(currentX, currentY).getUnitsByType(unitType);
 
-        String direction = matcher.group("direction");
-        if (!unit.getName().equals("tunneler")) return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_DIG_TUNNEL;
-        if (!isValidDirection(direction)) return SelectUnitMenuMessages.INVALID_DIRECTION;
+        int length = Math.min(10, getLength(currentX, currentY, destinationX, destinationY));
+        String direction = getDirection(currentX, currentY, destinationX, destinationY);
+        if (direction == null) return SelectUnitMenuMessages.INVALID_DIRECTION;
 
-        digTunnel(map, unit, currentX, currentY, direction);
+        for (Unit unit : units) unit.removeFromGame(map.getTile(currentX, currentY));
+        moveUnitsForDigging(map, currentLocation, units.get(0).getName(), direction, length, Texture.SAND);
         return SelectUnitMenuMessages.SUCCESS;
-    }
-
-    private static void digTunnel(Map map, Unit tunneler, int currentX, int currentY, String direction) {
-        Tile currentTile = map.getTile(currentX, currentY);
-        tunneler.removeFromGame(currentTile);
-
-        if ("up".equals(direction))
-            for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX + i, currentY); i++)
-                digTunnel(map, tunneler, currentX + i, currentY);
-        else if ("down".equals(direction))
-            for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX - i, currentY); i++)
-                digTunnel(map, tunneler, currentX - i, currentY);
-        else if ("right".equals(direction))
-            for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX, currentY + i); i++)
-                digTunnel(map, tunneler, currentX, currentY + i);
-        else if ("left".equals(direction))
-            for (int i = 1; i <= 10 && Utils.isValidCoordinates(map, currentX, currentY - i); i++)
-                digTunnel(map, tunneler, currentX, currentY - i);
-    }
-
-    private static void digTunnel(Map map, Unit tunneler, int currentX, int currentY) {
-        Tile currentTile = map.getTile(currentX, currentY);
-        Building building = currentTile.getBuilding();
-
-        if (building != null && !building.getOwner().equals(tunneler.getOwner())) destroyBuilding(map, building);
     }
 
     public static SelectUnitMenuMessages checkDigPitch(int[] currentLocation, int destinationX, int destinationY, String unitType) {
@@ -288,30 +260,38 @@ public class SelectUnitMenuController {
         Map map = Stronghold.getCurrentGame().getMap();
         ArrayList<Unit> selectedUnits = map.getTile(currentLocation).getUnitsByType(unitType);
 
-        int length = Math.abs(destinationX - currentX) + Math.abs(destinationY - currentY);
-        String direction = "";
-        if (destinationX == currentX) {
-            if (currentY > destinationY) direction = "left";
-            if (currentY < destinationY) direction = "right";
-        } else if (destinationY == currentY) {
-            if (currentX > destinationX) direction = "up";
-            if (currentX < destinationX) direction = "down";
-        } else return SelectUnitMenuMessages.INVALID_DIRECTION;
+        int length = getLength(currentX, currentY, destinationX, destinationY);
+        String direction = getDirection(currentX, currentY, destinationX, destinationY);
+        if (direction == null) return SelectUnitMenuMessages.INVALID_DIRECTION;
 
-        if (!(selectedUnits.get(0) instanceof Troop troop && troop.canDigPitch()))
-            return SelectUnitMenuMessages.INVALID_UNIT_TYPE_TO_DIG_PITCH;
-        else if (!isValidDestinationForDiggingPitch(map, currentX, currentY, direction, length))
+        if (!isValidDestinationForDiggingPitch(map, currentX, currentY, direction, length))
             return SelectUnitMenuMessages.INVALID_LENGTH;
         else if (notValidAreaForDiggingPitch(map, currentX, currentY, length, direction))
             return SelectUnitMenuMessages.INVALID_AREA_FOR_DIGGING_PITCH;
 
-        ArrayList<Tile> selectedTiles = getSelectedTiles(map, currentX, currentY, Math.min(minimumSpeed(selectedUnits), length), direction);
+//        ArrayList<Tile> selectedTiles = getSelectedTiles(map, currentX, currentY, Math.min(minimumSpeed(selectedUnits), length), direction);
 
         setDiggingPitchConceptsForUnits(selectedUnits, currentX, currentY, length, direction, minimumSpeed(selectedUnits));
-        moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits), length);
+        moveUnitsForDigging(map, currentLocation, unitType, direction, Math.min(minimumSpeed(selectedUnits), length), Texture.PITCH);
 //        digPitch(selectedTiles);
 
         return SelectUnitMenuMessages.SUCCESS;
+    }
+
+    private static int getLength(int currentX, int currentY, int destinationX, int destinationY) {
+        return Math.abs(destinationX - currentX) + Math.abs(destinationY - currentY);
+    }
+
+    private static String getDirection(int currentX, int currentY, int destinationX, int destinationY) {
+        if (destinationX == currentX) {
+            if (currentY > destinationY) return "left";
+            else if (currentY < destinationY) return "right";
+            else return null;
+        } else if (destinationY == currentY) {
+            if (currentX > destinationX) return "up";
+            else if (currentX < destinationX) return "down";
+            else return null;
+        } else return null;
     }
 
     public static SelectUnitMenuMessages checkBuildMachine(Tile tile, String machineType) {
@@ -344,6 +324,14 @@ public class SelectUnitMenuController {
         for (Unit unit : selectedUnits) unit.removeFromGame(tile);
 
         governance.changeCurrentPopulation(Math.min(selectedUnits.size(), currentPopulation - unEmployedPopulation));
+    }
+
+    public static void stopUnit(int[] currentLocation, String unitType) {
+        Map map = Stronghold.getCurrentGame().getMap();
+        int currentX = currentLocation[0];
+        int currentY = currentLocation[1];
+        ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
+        for (Unit selectedUnit : selectedUnits) selectedUnit.stop();
     }
 
     private static void moveUnits(Map map, String unitType, Path shortestPath, int[] currentLocation, int destinationX, int destinationY) {
@@ -526,20 +514,7 @@ public class SelectUnitMenuController {
                 selectedUnits.remove(unit);
             }
         }
-        currentBuilding.removeFromGame(map);
-    }
-
-    public static boolean isValidUnitForAirAttack(String type) {
-        return type.equals("archer") || type.equals("archer bow") ||
-                type.equals("slinger") || type.equals("horse archer") || type.equals("fire thrower") ||
-                type.equals("trebuchets") || type.equals("fire ballista") || type.equals("catapults");
-    }
-
-    public static boolean isValidUnitForGroundAttack(String type) {
-        return type.equals("spearman") || type.equals("pikeman") || type.equals("maceman") ||
-                type.equals("swordsman") || type.equals("knight") || type.equals("black monk") ||
-                type.equals("slaves") || type.equals("assassin") || type.equals("arabian swordsman") ||
-                type.equals("battering ram") || type.equals("lord");
+        currentBuilding.removeFromGame();
     }
 
     private static boolean noAttackLeft(ArrayList<Unit> selectedUnits) {
@@ -557,7 +532,7 @@ public class SelectUnitMenuController {
         boolean onlyBuilding = false;
         boolean onlyUnits = false;
 
-        if (isValidUnitForGroundAttack(unitType)) {
+        if (selectedUnits.get(0).isValidUnitForGroundAttack()) {
             if (targetTile.getBuilding() != null) {
                 if (currentTile.getBuilding() != null && targetTile.getUnits().size() != 0)
                     onlyUnits = true;
@@ -587,12 +562,12 @@ public class SelectUnitMenuController {
             targetBuilding.setHitPoint(targetHp - 3 * attackerDamage);
         else {
             targetBuilding.setHitPoint(targetHp - attackerDamage);
-            if (isValidUnitForAirAttack(selectedUnits.get(0).getName()))
+            if (selectedUnits.get(0).isValidUnitForAirAttack())
                 attackAnimation(selectedUnits, targetTile);
         }
 
         if (targetBuilding.getHitPoint() <= 0)
-            destroyBuilding(map, targetBuilding);
+            destroyBuilding(targetBuilding);
         else if (((Attacker) selectedUnits.get(0)).hasFiringWeapon() && !targetBuilding.isFiring()) {
             targetBuilding.setFiring(true);
             targetBuilding.setFiringLeft(2);
@@ -600,8 +575,8 @@ public class SelectUnitMenuController {
         setAttackedTrue(selectedUnits);
     }
 
-    private static void destroyBuilding(Map map, Building building) {
-        building.removeFromGame(map);
+    private static void destroyBuilding(Building building) {
+        building.removeFromGame();
     }
 
     private static void attackUnits(ArrayList<Unit> selectedUnits, Tile targetTile) {
@@ -621,12 +596,12 @@ public class SelectUnitMenuController {
 
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
-        if (isValidUnitForAirAttack(selectedUnits.get(0).getName()))
+        if (selectedUnits.get(0).isValidUnitForAirAttack())
             attackAnimation(selectedUnits, targetTile);
     }
 
     private static void attackAnimation(ArrayList<Unit> selectedUnits, Tile targetTile) {
-        new AttackAnimation(Utils.getGameMenu(), new double[]{selectedUnits.get(0).getLocation()[0],
+        new AirAttackAnimation(Utils.getGameMenu(), new double[]{selectedUnits.get(0).getLocation()[0],
                 selectedUnits.get(0).getLocation()[1]},
                 new double[]{Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[0],
                         Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[1]});
@@ -657,7 +632,7 @@ public class SelectUnitMenuController {
         currentGame.plusTurnCounter(-1);
 
 
-        removeBuildings(owner, map);
+        removeBuildings(owner);
         removeUnits(owner, map);
         currentGame.addLoserScore(owner, owner.getScore());
         currentGame.getGovernances().remove(owner);
@@ -670,10 +645,10 @@ public class SelectUnitMenuController {
             owner.getUnits().get(0).removeFromGame(map.getTile(owner.getUnits().get(0).getLocation()));
     }
 
-    private static void removeBuildings(Governance owner, Map map) {
+    private static void removeBuildings(Governance owner) {
         int size = owner.getBuildings().size();
         for (int i = 0; i < size; i++)
-            owner.getBuildings().get(0).removeFromGame(map);
+            owner.getBuildings().get(0).removeFromGame();
     }
 
     private static void setAttackedTrue(ArrayList<Unit> selectedUnits) {
@@ -700,13 +675,6 @@ public class SelectUnitMenuController {
                 isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY)));
     }
 
-    private static boolean isValidDirection(String direction) {
-        return direction.equals("right") ||
-                direction.equals("up") ||
-                direction.equals("left") ||
-                direction.equals("down");
-    }
-
     private static boolean isValidDestinationForDiggingPitch(Map map, int currentX, int currentY, String direction, int length) {
         int destinationX = getDestinationForDigging(direction, currentX, currentY, length)[0];
         int destinationY = getDestinationForDigging(direction, currentX, currentY, length)[1];
@@ -718,10 +686,10 @@ public class SelectUnitMenuController {
     }
 
     private static boolean notValidAreaForDiggingPitch(Map map, int x, int y, int length, String direction) {
-        ArrayList<Tile> tilesToBeDigged = getSelectedTiles(map, x, y, length, direction);
-        for (int i = 1; i < tilesToBeDigged.size(); i++) {
-            if (tilesToBeDigged.get(i).getBuilding() != null || tilesToBeDigged.get(i).getUnits().size() != 0 ||
-                    !tilesToBeDigged.get(i).getTexture().isSuitableForPitch())
+        ArrayList<Tile> tilesToBeDug = getSelectedTiles(map, x, y, length, direction);
+        for (int i = 1; i < tilesToBeDug.size(); i++) {
+            if (tilesToBeDug.get(i).getBuilding() != null || tilesToBeDug.get(i).getUnits().size() != 0 ||
+                    !tilesToBeDug.get(i).getTexture().isSuitableForPitch())
                 return true;
         }
         return false;
@@ -731,19 +699,19 @@ public class SelectUnitMenuController {
         ArrayList<Tile> selectedTiles = new ArrayList<>();
         switch (direction) {
             case "left" -> {
-                for (int i = 0; i < length; i++)
+                for (int i = 0; i <= length; i++)
                     selectedTiles.add(map.getTile(x, y - i));
             }
             case "right" -> {
-                for (int i = 0; i < length; i++)
+                for (int i = 0; i <= length; i++)
                     selectedTiles.add(map.getTile(x, y + i));
             }
             case "up" -> {
-                for (int i = 0; i < length; i++)
+                for (int i = 0; i <= length; i++)
                     selectedTiles.add(map.getTile(x - i, y));
             }
             case "down" -> {
-                for (int i = 0; i < length; i++)
+                for (int i = 0; i <= length; i++)
                     selectedTiles.add(map.getTile(x + i, y));
             }
         }
@@ -761,23 +729,26 @@ public class SelectUnitMenuController {
         }
     }
 
-    private static void moveUnitsForDiggingPitch(Map map, int[] currentLocation, String unitType, String direction, int leftMoves, int length) {
+    private static void moveUnitsForDigging(Map map, int[] currentLocation, String unitType, String direction, int length, Texture texture) {
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        int destinationX = getDestinationForDigging(direction, currentX, currentY, Math.min(leftMoves, length))[0];
-        int destinationY = getDestinationForDigging(direction, currentX, currentY, Math.min(leftMoves, length))[1];
+        int destinationX = getDestinationForDigging(direction, currentX, currentY, length)[0];
+        int destinationY = getDestinationForDigging(direction, currentX, currentY, length)[1];
+        boolean isDigPitch = texture.equals(Texture.PITCH);
         ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
-        Path shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY);
+        Path shortestPath = new Path();
+
+        if (isDigPitch)
+            shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY);
+        else for (Tile selectedTile : getSelectedTiles(map, currentX, currentY, length, direction)) {
+            System.out.println(length);
+            System.out.println(Arrays.toString(map.getTileLocation(selectedTile)));
+            shortestPath.addToPath(map.getTileLocation(selectedTile));
+        }
 
         if (shortestPath != null) {
             setLeftMoves(shortestPath, selectedUnits);
-            new DigAnimation(selectedUnits, shortestPath);
-        }
-    }
-
-    private static void digPitch(ArrayList<Tile> selectedTiles) {
-        for (Tile tile : selectedTiles) {
-            tile.setTexture(Texture.PITCH);
+            new DigAnimation(selectedUnits, shortestPath, texture);
         }
     }
 
@@ -817,7 +788,7 @@ public class SelectUnitMenuController {
 
             if (shortestPath != null) {
                 setDiggingPitchConceptsForUnits(selectedUnits, currentX, currentY, diggingLengthLeft, direction, minimumSpeed(selectedUnits));
-                moveUnitsForDiggingPitch(map, currentLocation, unitType, direction, minimumSpeed(selectedUnits), diggingLengthLeft);
+                moveUnitsForDigging(map, currentLocation, unitType, direction, Math.min(minimumSpeed(selectedUnits), diggingLengthLeft), Texture.PITCH);
 //                digPitch(selectedTiles);
             } else {
                 for (Unit unit : selectedUnits) ((Troop) unit).setDigging(false);
@@ -843,15 +814,11 @@ public class SelectUnitMenuController {
         return new int[]{destinationX, destinationY};
     }
 
-    public static SelectUnitMenuMessages checkStopDigging(int[] currentLocation, String unitType) {
+    public static void stopDigging(int[] currentLocation, String unitType) {
         Map map = Stronghold.getCurrentGame().getMap();
         ArrayList<Unit> selectedUnits = map.getTile(currentLocation).getUnitsByType(unitType);
 
-        if (!(selectedUnits.get(0) instanceof Troop troop && troop.isDigging()))
-            return SelectUnitMenuMessages.NOT_DIGGING;
-
         for (Unit unit : selectedUnits) ((Troop) unit).setDigging(false);
-        return SelectUnitMenuMessages.SUCCESS;
     }
 
     public static boolean hasUnit(ArrayList<Tile> selectedTiles) {
@@ -880,7 +847,7 @@ public class SelectUnitMenuController {
         return hBoxes;
     }
 
-    private static Unit getUnitByType(String unitName) {
+    public static Unit getUnitByType(String unitName) {
         try {
             return new Troop(unitName);
         } catch (Exception e) {

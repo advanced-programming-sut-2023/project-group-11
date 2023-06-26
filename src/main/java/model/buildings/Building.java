@@ -3,6 +3,7 @@ package model.buildings;
 import javafx.scene.image.Image;
 import model.AllResource;
 import model.Governance;
+import model.Stronghold;
 import model.map.Map;
 
 public abstract class Building {
@@ -125,7 +126,7 @@ public abstract class Building {
         return image;
     }
 
-    public void removeFromGame(Map map) {
+    public void removeFromGame() {
         if (this.name.equals("hovel")) owner.changeMaxPopulation(-8);
         if (this instanceof Church) owner.changeReligiousFactor(-2);
 
@@ -134,7 +135,7 @@ public abstract class Building {
 
         for (int i = 0; i < size; i++)
             for (int j = 0; j < size; j++)
-                map.getTile(xCoordinate + i, yCoordinate + j).setBuilding(null);
+                Stronghold.getCurrentGame().getMap().getTile(xCoordinate + i, yCoordinate + j).setBuilding(null);
     }
 
     @Override

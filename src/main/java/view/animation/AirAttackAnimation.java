@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import view.GameMenu;
 
-public class AttackAnimation extends Transition {
+public class AirAttackAnimation extends Transition {
     private final AnchorPane mapPane;
     private final ImageView arrow = new ImageView(new Image(getClass().getResource("/IMG/arrow.png").toExternalForm()));
     private final ImageView attackBanner = new ImageView(new Image(getClass().getResource("/IMG/attack banner.png").toExternalForm()));
@@ -18,7 +18,7 @@ public class AttackAnimation extends Transition {
     private final double xIncrement;
     private final double yIncrement;
 
-    public AttackAnimation(GameMenu gameMenu, double[] currentLocation, double[] destinationLocation) {
+    public AirAttackAnimation(GameMenu gameMenu, double[] currentLocation, double[] destinationLocation) {
         this.currentLocation = GameMenuController.getCoordinateWithTile(currentLocation);
         this.destinationLocation = GameMenuController.getCoordinateWithTile(destinationLocation);
         this.mapPane = gameMenu.getMapPane();

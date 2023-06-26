@@ -17,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.map.Tile;
+import model.people.Troop;
+import model.people.Unit;
 import view.enums.messages.SelectUnitMenuMessages;
 
 import java.net.URL;
@@ -32,6 +34,12 @@ public class MoveUnit extends Application {
     private ImageView selectedSoldierImage;
     @FXML
     private ToggleGroup checkAction;
+    @FXML
+    private RadioButton attackButton;
+    @FXML
+    private RadioButton digPitchButton;
+    @FXML
+    private RadioButton digTunnelButton;
     private ArrayList<Tile> selectedTiles = Utils.getGameMenu().getSelectedTiles();
     private String unitType;
     public HBox soldiers;
@@ -50,8 +58,19 @@ public class MoveUnit extends Application {
         ArrayList<HBox> hBoxes = SelectUnitMenuController.getTilesUnits(selectedTiles);
         soldiers.getChildren().addAll(hBoxes);
         selectedSoldierImage.setImage(getHBoxImage(hBoxes.get(0)));
+        limitButtons();
         for (HBox hBox : hBoxes)
-            hBox.setOnMouseClicked(mouseEvent -> selectedSoldierImage.setImage(getHBoxImage(hBox)));
+            hBox.setOnMouseClicked(mouseEvent -> {
+                selectedSoldierImage.setImage(getHBoxImage(hBox));
+                limitButtons();
+            });
+    }
+
+    private void limitButtons() {
+        Unit unit = SelectUnitMenuController.getUnitByType(getUnitTypeByImage(selectedSoldierImage));
+        attackButton.setDisable(!unit.canAttack());
+        digPitchButton.setDisable(!(unit instanceof Troop troop && troop.canDigPitch()));
+        digTunnelButton.setDisable(!unit.canDigTunnel());
     }
 
     private Image getHBoxImage(HBox hBox) {
@@ -112,6 +131,15 @@ public class MoveUnit extends Application {
         }
     }
 
+    public void checkDigTunnelUnit(int destinationX, int destinationY) {
+        for (Tile selectedTile : selectedTiles) {
+            message = SelectUnitMenuController.checkDigTunnel(
+                    ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile), destinationX, destinationY, unitType);
+
+            handleDigTunnelError(message);
+        }
+    }
+
     public void getDestinationTile() {
         stage.close();
         Utils.getGameMenu().selectDestinationTile(this);
@@ -153,8 +181,6 @@ public class MoveUnit extends Application {
             case SUCCESS -> stage.close();
             case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
                     "Invalid Coordinate!");
-            case INVALID_UNIT_TYPE_TO_ATTACK -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
-                    "Cannot Attack With This Unit!");
             case OUT_OF_RANGE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
                     "Target is Out Of Range!");
             case NO_ATTACK_LEFT -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
@@ -172,10 +198,14 @@ public class MoveUnit extends Application {
             case INVALID_DIRECTION -> ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Direction!");
             case INVALID_LENGTH ->
                     ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Final Destination Based On Digging Length!");
-            case INVALID_UNIT_TYPE_TO_DIG_PITCH ->
-                    ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "This Units Cannot Dig Pitch!");
             case INVALID_AREA_FOR_DIGGING_PITCH ->
                     ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Area For Digging Pitch!");
+        }
+    }
+
+    private void handleDigTunnelError(SelectUnitMenuMessages message) {
+        switch (message) {
+            case INVALID_DIRECTION -> ViewUtils.alert(Alert.AlertType.ERROR,"Dig Tunnel","Direction must be up or left or down or right!");
         }
     }
 }

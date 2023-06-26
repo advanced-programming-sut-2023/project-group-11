@@ -377,7 +377,7 @@ public class GameMenuController {
             if (building.getFiringLeft() == 0) building.setFiring(false);
             building.setHitPoint(building.getHitPoint() - 50);
             building.setFiringLeft(building.getFiringLeft() - 1);
-            if (building.getHitPoint() <= 0) building.removeFromGame(currentGame.getMap());
+            if (building.getHitPoint() <= 0) building.removeFromGame();
         }
     }
 
@@ -394,7 +394,7 @@ public class GameMenuController {
                     if (tile.hasEnemy(currentGovernance)) {
                         for (Unit unit : tile.getUnits())
                             unit.setHp(unit.getHp() - damage);
-                        building.removeFromGame(currentGame.getMap());
+                        building.removeFromGame();
                     }
                     removeDeadUnits(tile);
                 }
@@ -497,7 +497,7 @@ public class GameMenuController {
                 case STANDING -> {
                     if (unit instanceof Engineer)
                         continue;
-                    if (isValidUnitForAirAttack(unit.getName()) && !((Attacker) unit).hasAttacked())
+                    if (unit.isValidUnitForAirAttack() && !((Attacker) unit).hasAttacked())
                         unitUpdate(unit, 0);
                 }
                 case DEFENSIVE -> {
@@ -521,7 +521,7 @@ public class GameMenuController {
         Map map = currentGame.getMap();
         int currentX = unit.getLocation()[0];
         int currentY = unit.getLocation()[1];
-        int finalRange = isValidUnitForAirAttack(unit.getName()) ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
+        int finalRange = unit.isValidUnitForAirAttack() ? ((Attacker) unit).getRange(map.getTile(unit.getLocation())) : range;
         setUnitUpdateState(units, attackNearestEnemy(currentX, currentY, finalRange, currentGame.getMap(), units));
 //        if (unit.getUnitState() == UnitState.OFFENSIVE)
 //            for (Unit unit1 : units)
@@ -627,7 +627,7 @@ public class GameMenuController {
                                               int range, Map map, ArrayList<Unit> units) {
         String unitName = units.get(0).getName();
         int minDistance = 100;
-        boolean airAttack = isValidUnitForAirAttack(unitName);
+        boolean airAttack = units.get(0).isValidUnitForAirAttack();
         Tile attackTargetTile = null, moveTargetTile = map.getTile(currentX, currentY);
         for (int i = -range; i < range; i++) {
             for (int j = -range; j < range; j++) {

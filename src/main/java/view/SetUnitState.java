@@ -4,7 +4,6 @@ import controller.SelectUnitMenuController;
 import controller.ShowMapMenuController;
 import controller.Utils;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -61,6 +60,8 @@ public class SetUnitState extends Application {
                     SelectUnitMenuController.disbandUnit(location, unitType);
                     Utils.getGameMenu().showMap(false);
                 }
+                case "Stop" -> SelectUnitMenuController.stopUnit(
+                        ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile), unitType);
                 case "Standing", "Offensive", "Defensive" ->
                         SelectUnitMenuController.checkSetUnitState(selected.getText(), location, unitType);
             }

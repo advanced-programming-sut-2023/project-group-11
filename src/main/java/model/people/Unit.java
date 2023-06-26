@@ -117,6 +117,27 @@ public abstract class Unit {
         ownerGovernance.removeUnit(this);
     }
 
+    public boolean isValidUnitForAirAttack() {
+        return name.equals("archer") || name.equals("archer bow") ||
+                name.equals("slinger") || name.equals("horse archer") || name.equals("fire thrower") ||
+                name.equals("trebuchets") || name.equals("fire ballista") || name.equals("catapults");
+    }
+
+    public boolean isValidUnitForGroundAttack() {
+        return name.equals("spearman") || name.equals("pikeman") || name.equals("maceman") ||
+                name.equals("swordsman") || name.equals("knight") || name.equals("black monk") ||
+                name.equals("slaves") || name.equals("assassin") || name.equals("arabian swordsman") ||
+                name.equals("battering ram") || name.equals("lord");
+    }
+
+    public boolean canAttack() {
+        return isValidUnitForGroundAttack() || isValidUnitForAirAttack();
+    }
+
+    public boolean canDigTunnel() {
+        return name.equals("tunneler");
+    }
+
     public String toString() {
         return "UnitType->" + name + " * HP->" + hp + " * State->" + unitState + " * Moves Left->" + leftMoves +
                 " * Speed->" + speed.getMovesInEachTurn() + " * Owner->" + ownerGovernance.getOwner().getNickname();
@@ -126,5 +147,10 @@ public abstract class Unit {
         if (image == null)
             image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/Units/" + name + ".png");
         return image;
+    }
+
+    public void stop() {
+        stopPatrol();
+        if (this instanceof Troop troop) troop.setDigging(false);
     }
 }
