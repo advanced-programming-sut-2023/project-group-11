@@ -90,6 +90,7 @@ public class GameMenu extends Application {
     private double buildingDragY;
     private String buildingDragName;
     private String copiedBuildingName;
+    private Boolean isBuildingSelected;
     private int firstTileXInMap = 0;
     private int firstTileYInMap = 0;
     private int selectedTileXInScreen = 0;
@@ -360,9 +361,8 @@ public class GameMenu extends Application {
                     }
                     //TODO: debug needed in if
                 } else {
-                    buildingsPane.setVisible(true);
-                    buildingNameLabel.setVisible(false);
-                    selectBuildingPane.setVisible(false);
+                    isBuildingSelected = false;
+                    resetSidePane();
                 }
             }
             showMap(false);
@@ -370,6 +370,7 @@ public class GameMenu extends Application {
     }
 
     private void selectBuildingTiles(Tile tile) {
+        isBuildingSelected = true;
         prepareSelectBuildingMenu(tile);
         if (SelectBuildingMenuController.isShop(tile.getBuilding())) {
             try {
@@ -471,7 +472,20 @@ public class GameMenu extends Application {
             case B -> clipBoard();
             case N -> nextTurn();
             case U -> checkBuildMachine();
+            case D -> deleteBuilding();
         }
+    }
+
+    private void deleteBuilding() {
+        if(!isBuildingSelected)
+            return;
+        if(selectedTile.getBuilding().getName().equals("keep")) {
+            ViewUtils.alert(Alert.AlertType.ERROR, "Delete Error", "You can't delete your keep!");
+            return;
+        }
+        selectedTile.getBuilding().removeFromGame();
+        showMap(false);
+        resetSidePane();
     }
 
     private void checkBuildMachine() {
@@ -518,8 +532,10 @@ public class GameMenu extends Application {
 
     private void copyBuilding() {
         try {
-            copiedBuildingName = selectedTile.getBuilding().getName();
-            fillClipBoard();
+            if(isBuildingSelected) {
+                copiedBuildingName = selectedTile.getBuilding().getName();
+                fillClipBoard();
+            }
         } catch (Exception e) {
             copiedBuildingName = null;
         }
@@ -750,8 +766,16 @@ public class GameMenu extends Application {
     }
 
     public void nextTurn() {
+        selectedTile = null;
+        resetSidePane();
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Next Turn Successful", GameMenuController.nextTurn());
-        showMap(false);
+        showMap(true);
+    }
+
+    private void resetSidePane() {
+        buildingsPane.setVisible(true);
+        buildingNameLabel.setVisible(false);
+        selectBuildingPane.setVisible(false);
     }
 
     public void selectDestinationTile(MoveUnit moveUnit) {

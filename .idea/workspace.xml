@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="build Machine Done">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Wall/short wall.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Wall/stairs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/Wall/tall wall.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/Building/pitch ditch.png" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="wall and stairs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/IMG/Building/Trap/pitch ditch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,14 +277,7 @@
       <workItem from="1687594785085" duration="283000" />
       <workItem from="1687610932531" duration="64000" />
       <workItem from="1687617721008" duration="1222000" />
-      <workItem from="1687792384596" duration="2545000" />
-    </task>
-    <task id="LOCAL-00064" summary="TODOs Updated (CHECK THEM!)">
-      <created>1683846437160</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1683846437160</updated>
+      <workItem from="1687792384596" duration="5690000" />
     </task>
     <task id="LOCAL-00065" summary="Governance dying + End Game added (Only khadagh left)">
       <created>1683851746161</created>
@@ -628,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687545414759</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="wall and stairs">
+      <created>1687794964053</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1687794964054</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +664,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="debug" />
     <MESSAGE value="market menu added" />
     <MESSAGE value="Trade initialized" />
     <MESSAGE value="Trade incomplete (temporary)" />
@@ -695,7 +688,8 @@
     <MESSAGE value="debug in state update" />
     <MESSAGE value="improvement :)" />
     <MESSAGE value="build Machine Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="build Machine Done" />
+    <MESSAGE value="wall and stairs" />
+    <option name="LAST_COMMIT_MESSAGE" value="wall and stairs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -707,7 +701,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java</url>
-          <line>650</line>
+          <line>644</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
