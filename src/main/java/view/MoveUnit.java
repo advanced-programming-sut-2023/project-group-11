@@ -205,7 +205,10 @@ public class MoveUnit extends Application {
 
     private void handleDigTunnelError(SelectUnitMenuMessages message) {
         switch (message) {
-            case INVALID_DIRECTION -> ViewUtils.alert(Alert.AlertType.ERROR,"Dig Tunnel","Direction must be up or left or down or right!");
+            case INVALID_DIRECTION ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Dig Tunnel", "Direction must be up or left or down or right!");
+            case INVALID_AREA_FOR_DIGGING_TUNNEL ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Dig Tunnel", "Invalid Area For Digging Pitch!");
         }
     }
 }

@@ -27,12 +27,8 @@ import java.util.regex.Matcher;
 
 public class SelectUnitMenuController {
     public static SelectUnitMenuMessages checkMoveUnit(int[] currentLocation, int destinationX, int destinationY, String unitType, boolean isPatrol) {
-//        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate"))
-//            return SelectUnitMenuMessages.INVALID_COMMAND;
         Map map = Stronghold.getCurrentGame().getMap();
         Path shortestPath;
-//        int destinationX = Integer.parseInt(matcher.group("xCoordinate"));
-//        int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
 
@@ -93,8 +89,6 @@ public class SelectUnitMenuController {
 
     public static void setPatrolUnit(int destinationX, int destinationY, int[] currentLocation, String unitType) {
         Map map = Stronghold.getCurrentGame().getMap();
-//        int destinationX = Integer.parseInt(matcher.group("xCoordinate"));
-//        int destinationY = Integer.parseInt(matcher.group("yCoordinate"));
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
         ArrayList<Unit> selectedUnits = map.getTile(currentLocation).getUnitsByType(unitType);
@@ -127,18 +121,6 @@ public class SelectUnitMenuController {
             unit.setPatrolDestination(new int[]{currentX, currentY});
         }
     }
-
-//    public static SelectUnitMenuMessages checkStopPatrol(int[] currentLocation, String unitType) {
-//        Map map = Stronghold.getCurrentGame().getMap();
-//        int currentX = currentLocation[0];
-//        int currentY = currentLocation[1];
-//        ArrayList<Unit> selectedUnits = map.getTile(currentX, currentY).getUnitsByType(unitType);
-//
-//        if (!selectedUnits.get(0).isPatrolling()) return SelectUnitMenuMessages.NOT_PATROLLING;
-//
-//        stopPatrol(selectedUnits);
-//        return SelectUnitMenuMessages.SUCCESS;
-//    }
 
     private static void stopPatrol(ArrayList<Unit> units) {
         for (Unit unit : units) unit.stopPatrol();
@@ -244,11 +226,13 @@ public class SelectUnitMenuController {
         Map map = Stronghold.getCurrentGame().getMap();
         int currentX = currentLocation[0];
         int currentY = currentLocation[1];
-        ArrayList<Unit> units = map.getTile(currentX, currentY).getUnitsByType(unitType);
-
         int length = Math.min(10, getLength(currentX, currentY, destinationX, destinationY));
+        ArrayList<Unit> units = map.getTile(currentX, currentY).getUnitsByType(unitType);
         String direction = getDirection(currentX, currentY, destinationX, destinationY);
+
         if (direction == null) return SelectUnitMenuMessages.INVALID_DIRECTION;
+        if (!isValidDestinationForDiggingTunnel(map, currentX, currentY, direction, length))
+            return SelectUnitMenuMessages.INVALID_AREA_FOR_DIGGING_TUNNEL;
 
         for (Unit unit : units) unit.removeFromGame(map.getTile(currentX, currentY));
         moveUnitsForDigging(map, currentLocation, units.get(0).getName(), direction, length, Texture.SAND);
@@ -617,7 +601,6 @@ public class SelectUnitMenuController {
                         Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[1]});
     }
 
-
     public static void removeDeadUnits(Tile targetTile) {
         ArrayList<Unit> removings = new ArrayList<>();
 
@@ -694,6 +677,14 @@ public class SelectUnitMenuController {
                 !notValidTextureForMoving(map.getTile(destinationX, destinationY)) &&
                 !(map.getTile(destinationX, destinationY).getUnits().size() != 0 && !isValidDestinationSameOwnerUnits(map.getTile(currentX, currentY), map.getTile(destinationX, destinationY))) &&
                 map.getTile(destinationX, destinationY).getBuilding() == null;
+    }
+
+    private static boolean isValidDestinationForDiggingTunnel(Map map, int currentX, int currentY, String direction, int length) {
+        int destinationX = getDestinationForDigging(direction, currentX, currentY, length)[0];
+        int destinationY = getDestinationForDigging(direction, currentX, currentY, length)[1];
+
+        return Utils.isValidCoordinates(map, destinationX, destinationY) &&
+                !notValidTextureForMoving(map.getTile(destinationX, destinationY));
     }
 
     private static boolean notValidAreaForDiggingPitch(Map map, int x, int y, int length, String direction) {

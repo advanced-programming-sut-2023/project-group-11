@@ -10,7 +10,6 @@ import model.map.Texture;
 import model.people.Unit;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DigAnimation {
     private final Path shortestPath;
