@@ -634,8 +634,8 @@ public class GameMenu extends Application {
     }
 
     private void initializeBuildingBoxes() {
-        initializeBuildingBox(governanceBox, "Church", "Filler", "DrawBridge", "Trap");
-        initializeBuildingBox(warBox, "Tower", "Storage", "UnitMaker", "GateHouse");
+        initializeBuildingBox(governanceBox, "Church", "Filler", "DrawBridge");
+        initializeBuildingBox(warBox, "Tower", "Storage", "UnitMaker", "GateHouse","Wall","Trap");
         //TODO: gatehouse
         //TODO: blackBackground pics + optimizing pics(drawBridge ...)
         initializeBuildingBox(productiveBox, "ProductiveBuilding");
