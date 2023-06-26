@@ -791,11 +791,17 @@ public class GameMenuController {
         return Math.abs(currentLocation[0] - destinationLocation[0]) < 5 &&
                 Math.abs(currentLocation[1] - destinationLocation[1]) < 5;
     }
-    public static double calculateDestination(double xIncrement, double yIncrement){
+
+    public static double calculateDestination(double xIncrement, double yIncrement) {
         return Math.sqrt(Math.pow(xIncrement, 2) + Math.pow(yIncrement, 2));
     }
 
     public static boolean hasFood() {
         return currentGovernance.getTotalFood() > 0;
+    }
+
+    public static void deleteBuilding(ArrayList<Tile> selectedTiles) {
+        for (Tile selectedTile : selectedTiles)
+            if (selectedTile.getBuilding() != null) selectedTile.getBuilding().removeFromGame();
     }
 }

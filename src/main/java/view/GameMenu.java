@@ -25,7 +25,7 @@ import model.buildings.Building;
 import model.map.Tile;
 import model.people.Troop;
 import view.enums.Zoom;
-import javax.swing.text.View;
+
 import java.awt.*;
 import java.io.File;
 import java.net.URISyntaxException;
@@ -216,7 +216,7 @@ public class GameMenu extends Application {
             showMiniMap();
         }
         sidePane.toFront();
-        if(GameMenuController.gameHasEnded()) {
+        if (GameMenuController.gameHasEnded()) {
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Game Ended",
                     "Winner: " + GameMenuController.getWinnerName() + "\n" + GameMenuController.scores());
             GameMenuController.endGame();
@@ -397,8 +397,8 @@ public class GameMenu extends Application {
     }
 
     private void setGovernanceInformationLabels(Governance governance) {
-        governanceGold.setText("gold=" + governance.getGold());
-        governancePopularity.setText("popularity=" + governance.getPopularity());
+        governanceGold.setText(String.valueOf((int) governance.getGold()));
+        governancePopularity.setText(String.valueOf(governance.getPopularity()));
         governancePopulation.setText(governance.getUnemployedPopulation() + "\\" + governance.getMaxPopulation());
         if (governance.getPopularity() >= 50) governancePopularity.setTextFill(Color.GREEN);
         else governancePopularity.setTextFill(Color.RED);
@@ -471,11 +471,20 @@ public class GameMenu extends Application {
             case B -> clipBoard();
             case N -> nextTurn();
             case U -> checkBuildMachine();
+            case D -> delete();
         }
     }
 
+    private void delete() {
+        GameMenuController.deleteBuilding(selectedTiles);
+        showMap(false);
+    }
+    private void restartGame(){
+
+    }
+
     private void checkBuildMachine() {
-        if(selectedTile == null)
+        if (selectedTile == null)
             return;
         BuildMachine buildMachineMenu = new BuildMachine();
         buildMachineMenu.setTile(selectedTile);
@@ -635,7 +644,7 @@ public class GameMenu extends Application {
 
     private void initializeBuildingBoxes() {
         initializeBuildingBox(governanceBox, "Church", "Filler", "DrawBridge");
-        initializeBuildingBox(warBox, "Tower", "Storage", "UnitMaker", "GateHouse","Wall","Trap");
+        initializeBuildingBox(warBox, "Tower", "Storage", "UnitMaker", "GateHouse", "Wall", "Trap");
         //TODO: gatehouse
         //TODO: blackBackground pics + optimizing pics(drawBridge ...)
         initializeBuildingBox(productiveBox, "ProductiveBuilding");
@@ -714,7 +723,6 @@ public class GameMenu extends Application {
     public void showGovernanceInformationPane() {
         changePaneVisibility(governanceInformationPane, governanceBox, warBox, productiveBox);
     }
-
 
     public void buildingDragOver(DragEvent dragEvent) {
         buildingDragX = dragEvent.getSceneX();
