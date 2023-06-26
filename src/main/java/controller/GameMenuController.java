@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import model.*;
 import model.buildings.Building;
 import model.buildings.Climbable;
+import model.buildings.Keep;
 import model.buildings.ProductiveBuilding;
 import model.map.Map;
 import model.map.Tile;
@@ -741,8 +742,8 @@ public class GameMenuController {
         return result;
     }
 
-    public static void endGame() {
-        addScoresForPlayers();
+    public static void endGame(boolean hasEnded) {
+        if (hasEnded) addScoresForPlayers();
         EntryMenuController.parseMaps();
         nullTheCurrentGames();
     }
@@ -791,11 +792,32 @@ public class GameMenuController {
         return Math.abs(currentLocation[0] - destinationLocation[0]) < 5 &&
                 Math.abs(currentLocation[1] - destinationLocation[1]) < 5;
     }
-    public static double calculateDestination(double xIncrement, double yIncrement){
+
+    public static double calculateDestination(double xIncrement, double yIncrement) {
         return Math.sqrt(Math.pow(xIncrement, 2) + Math.pow(yIncrement, 2));
     }
 
     public static boolean hasFood() {
         return currentGovernance.getTotalFood() > 0;
+    }
+
+    public static void deleteBuilding(ArrayList<Tile> selectedTiles) {
+        for (Tile selectedTile : selectedTiles) {
+            Building building = selectedTile.getBuilding();
+            if (building != null && !(building instanceof Keep)) building.removeFromGame();
+        }
+    }
+
+    public static ArrayList<User> getUsernames() {
+        ArrayList<User> users = new ArrayList<>();
+        ArrayList<Governance> governances = currentGame.getGovernances();
+        for (int i = 1; i < governances.size(); i++)
+            users.add(governances.get(i).getOwner());
+
+        return users;
+    }
+
+    public static String getMapName() {
+        return currentGame.getMap().getName();
     }
 }

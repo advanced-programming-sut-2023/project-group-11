@@ -17,6 +17,7 @@ import view.GameMenu;
 import view.SignupMenu;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainMenuController {
 //    public static MainMenuMessages checkStartGame(Matcher matcher) {
@@ -39,8 +40,8 @@ public class MainMenuController {
 //        return MainMenuMessages.SUCCESS;
 //    }
 
-    public static void startGame(ObservableList<User> selectedIndices, String mapName) throws Exception {
-        String[] usernames = makeListOfPlayers(new ArrayList<>(selectedIndices));
+    public static void startGame(ArrayList<User> users, String mapName) throws Exception {
+        String[] usernames = makeListOfPlayers(users);
         Stronghold.setCurrentGame(new Game(makeGovernances(usernames), Stronghold.getMapByName(mapName)));
         ArrayList<Integer> areas = new ArrayList<>();
         for (int i = 1; i <= 8; i++) areas.add(i);
@@ -169,7 +170,7 @@ public class MainMenuController {
                 coordinate[1] = 5 * mapSize / 6;
             }
         }
-        return new int[]{coordinate[1],coordinate[0]};
+        return new int[]{coordinate[1], coordinate[0]};
     }
 
 

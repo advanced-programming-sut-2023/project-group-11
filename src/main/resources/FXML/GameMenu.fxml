@@ -1,75 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenu">
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<AnchorPane onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" prefHeight="720.0" prefWidth="1280.0"
+            stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.GameMenu">
     <AnchorPane fx:id="sidePane" layoutX="989.0" prefHeight="720.0" prefWidth="301.0">
-        <AnchorPane fx:id="selectBuildingPane" layoutX="11.0" layoutY="14.0" prefHeight="549.0" prefWidth="280.0" visible="false">
-            <Label fx:id="selectBuildingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="14.0" text="Building name" textAlignment="CENTER" textFill="WHITE">
+        <AnchorPane fx:id="selectBuildingPane" layoutX="11.0" layoutY="14.0" prefHeight="549.0" prefWidth="280.0"
+                    visible="false">
+            <Label fx:id="selectBuildingLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="14.0"
+                   text="Building name" textAlignment="CENTER" textFill="WHITE">
                 <font>
-                    <Font size="13.0" />
+                    <Font size="13.0"/>
                 </font>
             </Label>
-            <ImageView fx:id="selectBuildingImageView" fitHeight="150.0" fitWidth="150.0" layoutX="65.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../IMG/Building/Church/cathedral.png" />
+            <ImageView fx:id="selectBuildingImageView" fitHeight="150.0" fitWidth="150.0" layoutX="65.0" layoutY="45.0"
+                       pickOnBounds="true" preserveRatio="true">
+                <Image url="@../IMG/Building/Church/cathedral.png"/>
             </ImageView>
-            <AnchorPane fx:id="buildingCommandPane" layoutX="12.0" layoutY="175.0" prefHeight="405.0" prefWidth="258.0" visible="false">
-                <Button focusTraversable="false" layoutX="103.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#checkRepair" text="Repair" />
-                <TilePane fx:id="unitPane" layoutX="-1.0" layoutY="60.0" prefHeight="288.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="258.0" />
-                <Label fx:id="unitLabel" layoutX="138.0" layoutY="185.0" textFill="WHITE" />
+            <AnchorPane fx:id="buildingCommandPane" layoutX="12.0" layoutY="175.0" prefHeight="405.0" prefWidth="258.0"
+                        visible="false">
+                <Button focusTraversable="false" layoutX="103.0" layoutY="32.0" mnemonicParsing="false"
+                        onMouseClicked="#checkRepair" text="Repair"/>
+                <TilePane fx:id="unitPane" layoutX="-1.0" layoutY="60.0" prefHeight="288.0" prefTileHeight="60.0"
+                          prefTileWidth="60.0" prefWidth="258.0"/>
+                <Label fx:id="unitLabel" layoutX="138.0" layoutY="185.0" textFill="WHITE"/>
             </AnchorPane>
         </AnchorPane>
         <AnchorPane fx:id="buildingsPane" layoutX="11.0" layoutY="15.0" prefHeight="415.0" prefWidth="280.0">
             <HBox alignment="CENTER" layoutX="37.0" layoutY="42.0" spacing="8.0">
-                <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showProductiveBox" text="Productive" />
-                <Button focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#showWarBox" text="War" />
-                <Button focusTraversable="false" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#showGovernanceBox" text="Governance" />
+                <Button focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showProductiveBox"
+                        text="Productive"/>
+                <Button focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
+                        onMouseClicked="#showWarBox" text="War"/>
+                <Button focusTraversable="false" layoutX="62.0" layoutY="10.0" mnemonicParsing="false"
+                        onMouseClicked="#showGovernanceBox" text="Governance"/>
             </HBox>
-            <TilePane fx:id="productiveBox" layoutX="5.0" layoutY="81.0" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" visible="false" />
-            <TilePane fx:id="warBox" layoutX="5.0" layoutY="81.0" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" visible="false" />
-            <TilePane fx:id="governanceBox" layoutX="5.0" layoutY="81.0" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" visible="false" />
+            <TilePane fx:id="productiveBox" layoutX="5.0" layoutY="81.0" prefHeight="240.0" prefTileHeight="60.0"
+                      prefTileWidth="60.0" prefWidth="270.0" visible="false"/>
+            <TilePane fx:id="warBox" layoutX="5.0" layoutY="81.0" prefHeight="240.0" prefTileHeight="60.0"
+                      prefTileWidth="60.0" prefWidth="270.0" visible="false"/>
+            <TilePane fx:id="governanceBox" layoutX="5.0" layoutY="81.0" prefHeight="240.0" prefTileHeight="60.0"
+                      prefTileWidth="60.0" prefWidth="270.0" visible="false"/>
             <Label fx:id="buildingNameLabel" layoutX="101.0" layoutY="364.0" visible="false">
                 <font>
-                    <Font size="16.0" />
+                    <Font size="16.0"/>
                 </font>
             </Label>
             <Label layoutX="74.0" layoutY="14.0" text="Drag buildings to build" textFill="WHITE">
                 <font>
-                    <Font size="13.0" />
+                    <Font size="13.0"/>
                 </font>
             </Label>
         </AnchorPane>
-        <AnchorPane fx:id="governanceInformationPane" layoutX="11.0" layoutY="222.0" prefHeight="415.0" prefWidth="280.0" visible="false">
-            <VBox alignment="CENTER" layoutX="90.0" layoutY="14.0" onMouseClicked="#showPopularityFactors" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-                <Label fx:id="governancePopularity" />
-                <Label fx:id="governanceGold" />
-                <Label fx:id="governancePopulation" />
+        <AnchorPane fx:id="governanceInformationPane" layoutX="2.0" layoutY="224.0" prefHeight="185.0" prefWidth="301.0"
+                    visible="false">
+            <ImageView fitHeight="185.0" fitWidth="227.0" layoutX="44.0" onMouseClicked="#showPopularityFactors"
+                       pickOnBounds="true" preserveRatio="true">
+                <Image url="@../IMG/Face.png"/>
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </ImageView>
+            <VBox alignment="TOP_CENTER" layoutX="63.0" layoutY="100.0" onMouseClicked="#showPopularityFactors"
+                  prefHeight="66.0" prefWidth="35.0" rotate="12.0" spacing="5.0">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+                <Label fx:id="governancePopularity">
+                    <font>
+                        <Font name="Arial Narrow" size="14.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="governanceGold" textFill="green">
+                    <font>
+                        <Font name="Arial Narrow" size="10.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="governancePopulation" textFill="green">
+                    <font>
+                        <Font name="Arial Narrow" size="9.0"/>
+                    </font>
+                </Label>
             </VBox>
         </AnchorPane>
-      <AnchorPane fx:id="miniMapPane" layoutX="51.0" layoutY="487.0" prefHeight="200.0" prefWidth="200.0" />
-      <styleClass>
-         <String fx:value="mapToolBar" />
-         <String fx:value="sidePane" />
-      </styleClass>
+        <AnchorPane fx:id="miniMapPane" layoutX="51.0" layoutY="487.0" prefHeight="200.0" prefWidth="200.0"/>
+        <styleClass>
+            <String fx:value="mapToolBar"/>
+            <String fx:value="sidePane"/>
+        </styleClass>
     </AnchorPane>
-    <AnchorPane fx:id="mapPane" focusTraversable="true" layoutX="-1.0" onDragDone="#buildingDragDone" onDragOver="#buildingDragOver" onKeyPressed="#checkShortcut" onMouseDragged="#drag" onMouseMoved="#hover" onMousePressed="#press" prefHeight="720.0" prefWidth="990.0" />
-   <AnchorPane fx:id="clipBoardPane" layoutX="407.0" layoutY="228.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20px;" visible="false">
-      <children>
-         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="203.0">
-            <children>
-               <Label text="Clipboard" />
-               <TilePane fx:id="clipBoardTilePane" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0" prefWidth="270.0" />
-            </children>
-         </VBox>
-      </children>
-   </AnchorPane>
+    <AnchorPane fx:id="mapPane" focusTraversable="true" layoutX="-1.0" onDragDone="#buildingDragDone"
+                onDragOver="#buildingDragOver" onKeyPressed="#checkShortcut" onMouseDragged="#drag"
+                onMouseMoved="#hover" onMousePressed="#press" prefHeight="720.0" prefWidth="990.0"/>
+    <AnchorPane fx:id="clipBoardPane" layoutX="407.0" layoutY="228.0" prefHeight="200.0" prefWidth="200.0"
+                style="-fx-background-color: white; -fx-background-radius: 20px;" visible="false">
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="203.0">
+            <Label text="Clipboard"/>
+            <TilePane fx:id="clipBoardTilePane" prefHeight="240.0" prefTileHeight="60.0" prefTileWidth="60.0"
+                      prefWidth="270.0"/>
+        </VBox>
+    </AnchorPane>
 </AnchorPane>
