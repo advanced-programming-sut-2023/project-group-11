@@ -169,7 +169,7 @@ public class Governance {
     }
 
     public void changeReligiousFactor(int religiousFactor) {
-        this.religiousFactor = Math.max(this.religiousFactor + religiousFactor, 4);
+        this.religiousFactor = Math.max(0, Math.min(this.religiousFactor + religiousFactor, 4));
     }
 
     public int getAleFactor() {

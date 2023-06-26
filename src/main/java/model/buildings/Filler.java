@@ -15,4 +15,10 @@ public class Filler extends Building {
         workersNumber = fillerType.getWorkersNumber();
         isActive = fillerType.isActive();
     }
+
+    @Override
+    public void removeFromGame() {
+        super.removeFromGame();
+        if (name.equals("hovel"))owner.changeMaxPopulation(-8);
+    }
 }

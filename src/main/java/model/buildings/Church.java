@@ -18,6 +18,12 @@ public class Church extends Building {
         isGeneral = churchType.isGeneral();
     }
 
+    @Override
+    public void removeFromGame() {
+        super.removeFromGame();
+        owner.changeReligiousFactor(-2);
+    }
+
     public boolean isGeneral() {
         return isGeneral;
     }

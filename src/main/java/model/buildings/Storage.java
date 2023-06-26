@@ -77,6 +77,12 @@ public class Storage extends Building {
     }
 
     @Override
+    public void removeFromGame() {
+        super.removeFromGame();
+        storage.forEach(((resource, integer) -> owner.removeFromStorage(resource, integer)));
+    }
+
+    @Override
     public String toString() {
         String output = "";
         for (Map.Entry<AllResource, Integer> entry : storage.entrySet()) {

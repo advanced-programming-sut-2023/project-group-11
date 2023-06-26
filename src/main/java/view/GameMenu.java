@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Governance;
 import model.Stronghold;
+import model.User;
 import model.buildings.Building;
 import model.map.Tile;
 import model.people.Troop;
@@ -477,6 +478,13 @@ public class GameMenu extends Application {
         }
     }
 
+    private void restartGame() throws Exception {
+        ArrayList<User> users = GameMenuController.getUsernames();
+        String mapName = GameMenuController.getMapName();
+
+        GameMenuController.endGame(false);
+        MainMenuController.startGame(users, mapName);
+    }
     private void deleteBuilding() {
         if(!isBuildingSelected)
             return;
