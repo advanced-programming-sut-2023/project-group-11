@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.map.Tile;
 import model.people.Troop;
@@ -51,7 +52,8 @@ public class MoveUnit extends Application {
         AnchorPane anchorPane = FXMLLoader.load(new URL(getClass().getResource("/FXML/SelectUnit.fxml").toExternalForm()));
 
         stage.setScene(new Scene(anchorPane));
-        stage.show();
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.showAndWait();
     }
 
     public void initialize() {

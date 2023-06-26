@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.AllResource;
 import model.Stronghold;
@@ -44,9 +45,10 @@ public class MarketMenu extends Application {
     private static Stage stage;
     @Override
     public void start(Stage stage) throws Exception {
-        this.stage = stage;
+        MarketMenu.stage = stage;
         Pane pane = FXMLLoader.load(getClass().getResource("/FXML/MarketMenu.fxml"));
         stage.setScene(new Scene(pane));
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
     @FXML
@@ -55,9 +57,7 @@ public class MarketMenu extends Application {
         setMouseEvent(rawMaterialBox);
         setMouseEvent(weaponBox);
         goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
-        amountTextField.textProperty().addListener((observable, oldText, newText)->{
-            updateBuySellLabels(newText);
-        });
+        amountTextField.textProperty().addListener((observable, oldText, newText)-> updateBuySellLabels(newText));
     }
 
     private void updateBuySellLabels(String newText) {

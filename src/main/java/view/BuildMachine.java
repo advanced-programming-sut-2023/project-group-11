@@ -57,7 +57,7 @@ public class BuildMachine extends Application {
         BuildMachine.stage = stage;
         Pane pane = FXMLLoader.load(getClass().getResource("/FXML/BuildMachine.fxml"));
         stage.setScene(new Scene(pane));
-        stage.show();
+        stage.showAndWait();
     }
 
 }

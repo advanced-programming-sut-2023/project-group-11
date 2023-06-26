@@ -1,16 +1,14 @@
 package view;
 
 import controller.SignupMenuController;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.Optional;
 import java.util.Random;
 
 public class ViewUtils {
@@ -40,12 +38,12 @@ public class ViewUtils {
         } else return error.getText().isEmpty() || error.getText().equals("Strong!");
     }
 
-    public static void alert(Alert.AlertType TYPE, String header, String content) {
+    public static Optional<ButtonType> alert(Alert.AlertType TYPE, String header, String content) {
         Alert alert = new Alert(TYPE);
         alert.setTitle(TYPE.name());
         alert.setHeaderText(header);
         alert.setContentText(content);
-        alert.showAndWait();
+        return alert.showAndWait();
     }
 
     public static String reloadCaptcha(ImageView captchaImageView) throws URISyntaxException {

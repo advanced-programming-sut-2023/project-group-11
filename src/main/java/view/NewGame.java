@@ -12,6 +12,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.User;
 import model.map.Map;
@@ -33,7 +34,7 @@ public class NewGame extends Application {
                 new URL(SignupMenu.class.getResource("/FXML/NewGame.fxml").toExternalForm()));
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
-
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 

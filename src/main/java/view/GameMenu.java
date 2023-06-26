@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Governance;
 import model.Stronghold;
-import model.User;
 import model.buildings.Building;
 import model.map.Tile;
 import model.people.Troop;
@@ -36,6 +35,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GameMenu extends Application {
+    private static Stage stage;
+
     public GameMenu() {
         Utils.setGameMenu(this);
     }
@@ -62,6 +63,8 @@ public class GameMenu extends Application {
     private Label selectBuildingLabel;
     @FXML
     private ImageView selectBuildingImageView;
+    @FXML
+    private ImageView scribesImage;
     @FXML
     private Pane buildingCommandPane;
     @FXML
@@ -111,6 +114,7 @@ public class GameMenu extends Application {
     public void start(Stage stage) throws Exception {
         AnchorPane anchorPane = FXMLLoader.load(
                 new URL(getClass().getResource("/FXML/GameMenu.fxml").toExternalForm()));
+        GameMenu.stage = stage;
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
         stage.show();
@@ -406,6 +410,8 @@ public class GameMenu extends Application {
         governanceGold.setText(String.valueOf((int) governance.getGold()));
         governancePopularity.setText(String.valueOf(governance.getPopularity()));
         governancePopulation.setText(governance.getUnemployedPopulation() + "\\" + governance.getMaxPopulation());
+        scribesImage.setImage(new Image(getClass().getResource(
+                "/IMG/Scribe/" + 10 * Math.ceilDiv(governance.getPopularity(), 10) + ".png").toExternalForm()));
         if (governance.getPopularity() >= 50) governancePopularity.setTextFill(Color.GREEN);
         else governancePopularity.setTextFill(Color.RED);
     }
@@ -478,16 +484,7 @@ public class GameMenu extends Application {
             case N -> nextTurn();
             case U -> checkBuildMachine();
             case D -> deleteBuilding();
-            case R -> restartGame();
         }
-    }
-
-    private void restartGame() throws Exception {
-        ArrayList<User> users = GameMenuController.getUsernames();
-        String mapName = GameMenuController.getMapName();
-
-        GameMenuController.endGame(false);
-        MainMenuController.startGame(users, mapName);
     }
 
     private void deleteBuilding() {
@@ -575,8 +572,8 @@ public class GameMenu extends Application {
         if (SelectUnitMenuController.hasUnit(selectedTiles)) new SetUnitState().start(new Stage());
     }
 
-    private void stopGame() {
-        //TODO: implement
+    private void stopGame() throws Exception {
+        new Options().start(new Stage());
     }
 
     @FXML

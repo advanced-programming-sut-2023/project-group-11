@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.map.Tile;
 
@@ -35,6 +36,7 @@ public class SetUnitState extends Application {
         AnchorPane anchorPane = FXMLLoader.load(new URL(getClass().getResource("/FXML/SetUnitState.fxml").toExternalForm()));
 
         stage.setScene(new Scene(anchorPane));
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 

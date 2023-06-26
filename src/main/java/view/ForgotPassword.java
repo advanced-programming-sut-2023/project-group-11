@@ -35,7 +35,7 @@ public class ForgotPassword extends Application {
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
 
-        stage.show();
+        stage.showAndWait();
     }
 
     @FXML

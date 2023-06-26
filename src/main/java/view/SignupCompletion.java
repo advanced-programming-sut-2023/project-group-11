@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URISyntaxException;
@@ -57,6 +58,7 @@ public class SignupCompletion extends Application {
         stage.setTitle("Signup completion");
         Pane pane = FXMLLoader.load(SignupCompletion.class.getResource("/FXML/SignupCompletion.fxml"));
         stage.setScene(new Scene(pane));
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 

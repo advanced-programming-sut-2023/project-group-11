@@ -87,6 +87,6 @@ public class ChangePassword extends Application {
 
         ChangePassword.stage = stage;
         stage.setScene(new Scene(anchorPane));
-        stage.show();
+        stage.showAndWait();
     }
 }
