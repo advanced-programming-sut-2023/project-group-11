@@ -17,11 +17,14 @@ import model.User;
 import model.map.Map;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 public class NewGame extends Application {
     private static Stage stage;
-    public TableView<User> users;
-    public ChoiceBox<Map> mapName;
+    @FXML
+    private TableView<User> users;
+    @FXML
+    private ChoiceBox<Map> mapName;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -59,10 +62,10 @@ public class NewGame extends Application {
 
     public void startGame() throws Exception {
         if (users.getSelectionModel().getSelectedItems().size() >= 1) {
-            MainMenuController.startGame(users.getSelectionModel().getSelectedItems(), mapName.getValue().getName());
+            MainMenuController.startGame(
+                    new ArrayList<>(users.getSelectionModel().getSelectedItems()), mapName.getValue().getName());
             stage.close();
-        }
-        else ViewUtils.alert(Alert.AlertType.ERROR,"Start Game","Please choose a player!");
+        } else ViewUtils.alert(Alert.AlertType.ERROR, "Start Game", "Please choose a player!");
     }
 
     public void back() throws Exception {

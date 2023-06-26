@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Governance;
 import model.Stronghold;
+import model.User;
 import model.buildings.Building;
 import model.map.Tile;
 import model.people.Troop;
@@ -219,7 +220,7 @@ public class GameMenu extends Application {
         if (GameMenuController.gameHasEnded()) {
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Game Ended",
                     "Winner: " + GameMenuController.getWinnerName() + "\n" + GameMenuController.scores());
-            GameMenuController.endGame();
+            GameMenuController.endGame(true);
             try {
                 new MainMenu().start(SignupMenu.getStage());
             } catch (Exception e) {
@@ -472,6 +473,7 @@ public class GameMenu extends Application {
             case N -> nextTurn();
             case U -> checkBuildMachine();
             case D -> delete();
+            case R -> restartGame();
         }
     }
 
@@ -479,8 +481,13 @@ public class GameMenu extends Application {
         GameMenuController.deleteBuilding(selectedTiles);
         showMap(false);
     }
-    private void restartGame(){
 
+    private void restartGame() throws Exception {
+        ArrayList<User> users = GameMenuController.getUsernames();
+        String mapName = GameMenuController.getMapName();
+
+        GameMenuController.endGame(false);
+        MainMenuController.startGame(users, mapName);
     }
 
     private void checkBuildMachine() {
