@@ -16,6 +16,7 @@ import model.people.enums.Speed;
 import model.people.enums.UnitState;
 import view.animation.AirAttackAnimation;
 import view.animation.DigAnimation;
+import view.animation.GroundAttackAnimation;
 import view.animation.MovingAnimation;
 import view.enums.messages.SelectUnitMenuMessages;
 
@@ -563,7 +564,8 @@ public class SelectUnitMenuController {
         else {
             targetBuilding.setHitPoint(targetHp - attackerDamage);
             if (selectedUnits.get(0).isValidUnitForAirAttack())
-                attackAnimation(selectedUnits, targetTile);
+                airAttackAnimation(selectedUnits, targetTile);
+            else groundAttackAnimation(selectedUnits, targetTile);
         }
 
         if (targetBuilding.getHitPoint() <= 0)
@@ -597,15 +599,24 @@ public class SelectUnitMenuController {
         setAttackedTrue(selectedUnits);
         removeDeadUnits(targetTile);
         if (selectedUnits.get(0).isValidUnitForAirAttack())
-            attackAnimation(selectedUnits, targetTile);
+            airAttackAnimation(selectedUnits, targetTile);
+        else groundAttackAnimation(selectedUnits, targetTile);
     }
 
-    private static void attackAnimation(ArrayList<Unit> selectedUnits, Tile targetTile) {
+    private static void airAttackAnimation(ArrayList<Unit> selectedUnits, Tile targetTile) {
         new AirAttackAnimation(Utils.getGameMenu(), new double[]{selectedUnits.get(0).getLocation()[0],
                 selectedUnits.get(0).getLocation()[1]},
                 new double[]{Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[0],
                         Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[1]});
     }
+
+    private static void groundAttackAnimation(ArrayList<Unit> selectedUnits, Tile targetTile) {
+        new GroundAttackAnimation(Utils.getGameMenu(), new double[]{selectedUnits.get(0).getLocation()[0],
+                selectedUnits.get(0).getLocation()[1]},
+                new double[]{Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[0],
+                        Stronghold.getCurrentGame().getMap().getTileLocation(targetTile)[1]});
+    }
+
 
     public static void removeDeadUnits(Tile targetTile) {
         ArrayList<Unit> removings = new ArrayList<>();
@@ -740,11 +751,8 @@ public class SelectUnitMenuController {
 
         if (isDigPitch)
             shortestPath = findRootToDestination(map, unitType, currentX, currentY, destinationX, destinationY);
-        else for (Tile selectedTile : getSelectedTiles(map, currentX, currentY, length, direction)) {
-            System.out.println(length);
-            System.out.println(Arrays.toString(map.getTileLocation(selectedTile)));
+        else for (Tile selectedTile : getSelectedTiles(map, currentX, currentY, length, direction))
             shortestPath.addToPath(map.getTileLocation(selectedTile));
-        }
 
         if (shortestPath != null) {
             setLeftMoves(shortestPath, selectedUnits);

@@ -42,7 +42,6 @@ public class DigAnimation {
         int[] currentLocation;
         if (isDigPitch) currentLocation = shortestPath.getPath().get(move++);
         else currentLocation = shortestPath.getPath().get(++move);
-        System.out.println(Arrays.toString(currentLocation));
         ShowMapMenuController.getCurrentMap().getTile(currentLocation).setTexture(texture);
         if (!isDigPitch)
             if (ShowMapMenuController.getCurrentMap().getTile(currentLocation).getBuilding() != null) {
