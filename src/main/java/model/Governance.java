@@ -236,7 +236,7 @@ public class Governance {
         storages.add(storage);
     }
 
-    private void changeResourceAmount(AllResource allResource, int count) {
+    public void changeResourceAmount(AllResource allResource, int count) {
         allResources.put(allResource, allResources.get(allResource) + count);
     }
 

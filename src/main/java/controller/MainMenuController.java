@@ -42,7 +42,8 @@ public class MainMenuController {
 
     public static void startGame(ArrayList<User> users, String mapName) throws Exception {
         String[] usernames = makeListOfPlayers(users);
-        Stronghold.setCurrentGame(new Game(makeGovernances(usernames), Stronghold.getMapByName(mapName)));
+        Map map = Stronghold.getMapByName(mapName);
+        Stronghold.setCurrentGame(new Game(makeGovernances(usernames), map));
         ArrayList<Integer> areas = new ArrayList<>();
         for (int i = 1; i <= 8; i++) areas.add(i);
 
@@ -52,6 +53,7 @@ public class MainMenuController {
         for (int i = 0; i < usernames.length; i++)
             initializeAreas(usernames[i], areas, i + 2);
 
+        ShowMapMenuController.setCurrentMap(map);
         new GameMenu().start(SignupMenu.getStage());
     }
 

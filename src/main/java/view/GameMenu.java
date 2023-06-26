@@ -200,6 +200,10 @@ public class GameMenu extends Application {
     public int getTileSize() {
         return tileSize;
     }
+
+    public ArrayList<Tile> getSelectedTiles() {
+        return selectedTiles;
+    }
     // ---------------------------------- Controller-kind Methods ---------------------------------
 
     public void showMap(boolean isMoving) {
@@ -485,14 +489,9 @@ public class GameMenu extends Application {
         GameMenuController.endGame(false);
         MainMenuController.startGame(users, mapName);
     }
+
     private void deleteBuilding() {
-        if(!isBuildingSelected)
-            return;
-        if(selectedTile.getBuilding().getName().equals("keep")) {
-            ViewUtils.alert(Alert.AlertType.ERROR, "Delete Error", "You can't delete your keep!");
-            return;
-        }
-        selectedTile.getBuilding().removeFromGame();
+        GameMenuController.deleteBuilding(selectedTiles);
         showMap(false);
         resetSidePane();
     }
@@ -541,7 +540,7 @@ public class GameMenu extends Application {
 
     private void copyBuilding() {
         try {
-            if(isBuildingSelected) {
+            if (isBuildingSelected) {
                 copiedBuildingName = selectedTile.getBuilding().getName();
                 fillClipBoard();
             }
@@ -769,10 +768,6 @@ public class GameMenu extends Application {
         }
     }
 
-    public ArrayList<Tile> getSelectedTiles() {
-        return selectedTiles;
-    }
-
     public void nextTurn() {
         selectedTile = null;
         resetSidePane();
@@ -811,6 +806,6 @@ public class GameMenu extends Application {
     }
 
     public void showPopularityFactors() throws Exception {
-        if (governanceInformationPane.isVisible()) new PopularityFactors().start(new Stage());
+        new PopularityFactors().start(new Stage());
     }
 }
