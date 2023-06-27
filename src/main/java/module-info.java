@@ -22,4 +22,5 @@ module ProjectAP {
     exports model.people.enums to com.google.gson;
     exports view.animation;
     opens view.animation to javafx.fxml;
+    opens net.packets to com.google.gson;
 }

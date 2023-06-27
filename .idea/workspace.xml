@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="delete building implemented">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="debug in building deletion">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/packets/Packet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/packets/Packet00Signup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/EntryMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/EntryMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupCompletion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupCompletion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +41,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,8 +51,17 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/controller/Utils.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/model/Governance.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/model/buildings/Building.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/model/buildings/Church.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/view/GameMenu.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/view/Options.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/view/animation/DigAnimation.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/view/animation/MovingAnimation.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/resources/JSON/users.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -68,31 +85,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/BaleCamp&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/User/Downloads/network/network/broker",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="controller.MapEditMenuController" />
@@ -109,7 +126,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="19" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="view.Main" />
@@ -279,14 +296,7 @@
       <workItem from="1687610932531" duration="64000" />
       <workItem from="1687617721008" duration="1222000" />
       <workItem from="1687792384596" duration="7713000" />
-      <workItem from="1687861390062" duration="435000" />
-    </task>
-    <task id="LOCAL-00066" summary="Add score added">
-      <created>1683885475602</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1683885475602</updated>
+      <workItem from="1687861390062" duration="17747000" />
     </task>
     <task id="LOCAL-00067" summary="Lord making resolved + drop unit debugged">
       <created>1683886614237</created>
@@ -624,7 +634,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687803447616</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="debug in building deletion">
+      <created>1687861949684</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1687861949684</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +683,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Trade initialized" />
     <MESSAGE value="Trade incomplete (temporary)" />
     <MESSAGE value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
     <MESSAGE value="dropBuilding improved" />
@@ -691,7 +707,8 @@
     <MESSAGE value="build Machine Done" />
     <MESSAGE value="wall and stairs" />
     <MESSAGE value="delete building implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete building implemented" />
+    <MESSAGE value="debug in building deletion" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug in building deletion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

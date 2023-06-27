@@ -1,6 +1,7 @@
 package model;
 
 import model.map.Map;
+import net.Client;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class Stronghold {
     private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
     private static User currentUser;
+    private static Client currentClient;
     private static Game currentGame;
 
     static {
@@ -40,6 +42,14 @@ public class Stronghold {
 
     public static User getCurrentUser() {
         return currentUser;
+    }
+
+    public static Client getCurrentClient() {
+        return currentClient;
+    }
+
+    public static void setCurrentClient(Client currentClient) {
+        Stronghold.currentClient = currentClient;
     }
 
     public static void setCurrentUser(User currentUser) {
