@@ -804,7 +804,7 @@ public class GameMenuController {
     public static void deleteBuilding(ArrayList<Tile> selectedTiles) {
         for (Tile selectedTile : selectedTiles) {
             Building building = selectedTile.getBuilding();
-            if (building != null && !(building instanceof Keep)) building.removeFromGame();
+            if (building != null && !(building instanceof Keep) && building.getOwner().equals(currentGovernance)) building.removeFromGame();
         }
     }
 

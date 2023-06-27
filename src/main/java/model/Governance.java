@@ -236,6 +236,10 @@ public class Governance {
         storages.add(storage);
     }
 
+    public void removeStorage(Storage storage) {
+        storages.remove(storage);
+    }
+
     public void changeResourceAmount(AllResource allResource, int count) {
         allResources.put(allResource, allResources.get(allResource) + count);
     }
