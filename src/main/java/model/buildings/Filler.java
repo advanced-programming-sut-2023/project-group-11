@@ -19,6 +19,6 @@ public class Filler extends Building {
     @Override
     public void removeFromGame() {
         super.removeFromGame();
-        if (name.equals("hovel"))owner.changeMaxPopulation(-8);
+        if (name.equals("hovel")) owner.changeMaxPopulation(-8);
     }
 }

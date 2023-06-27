@@ -52,8 +52,8 @@ public class MoveUnit extends Application {
         AnchorPane anchorPane = FXMLLoader.load(new URL(getClass().getResource("/FXML/SelectUnit.fxml").toExternalForm()));
 
         stage.setScene(new Scene(anchorPane));
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.showAndWait();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     public void initialize() {

@@ -11,6 +11,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.enums.messages.MapEditMenuMessages;
 
@@ -36,7 +37,7 @@ public class MapSelection extends Application {
                 new URL(MainMenu.class.getResource("/FXML/MapSelection.fxml").toExternalForm()));
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
-
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 

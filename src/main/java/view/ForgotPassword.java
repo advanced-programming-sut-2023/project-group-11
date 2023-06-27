@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.enums.messages.LoginMenuMessages;
 
@@ -35,7 +36,8 @@ public class ForgotPassword extends Application {
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
 
-        stage.showAndWait();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     @FXML

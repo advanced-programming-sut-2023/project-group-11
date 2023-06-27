@@ -5,14 +5,11 @@ import controller.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -65,6 +62,7 @@ public class Options extends Application {
     private void backToMainMenu() throws Exception {
         Optional<ButtonType> result =
                 ViewUtils.alert(Alert.AlertType.CONFIRMATION, "End Game", "Are you sure to go back to main menu?");
+
         if (result.isPresent() && result.get() == ButtonType.OK) {
             stage.close();
             GameMenuController.endGame(false);
@@ -76,6 +74,7 @@ public class Options extends Application {
     private void restart() throws Exception {
         Optional<ButtonType> result =
                 ViewUtils.alert(Alert.AlertType.CONFIRMATION, "End Game", "Are you sure to restart game?");
+
         if (result.isPresent() && result.get() == ButtonType.OK) {
             stage.close();
             ArrayList<User> users = GameMenuController.getUsernames();

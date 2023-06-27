@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.map.Tile;
 import model.people.Machine;
@@ -57,7 +58,8 @@ public class BuildMachine extends Application {
         BuildMachine.stage = stage;
         Pane pane = FXMLLoader.load(getClass().getResource("/FXML/BuildMachine.fxml"));
         stage.setScene(new Scene(pane));
-        stage.showAndWait();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
 }

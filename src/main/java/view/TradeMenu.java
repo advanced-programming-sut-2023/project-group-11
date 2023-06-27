@@ -18,7 +18,6 @@ public class TradeMenu extends Application {
         Pane pane = FXMLLoader.load(getClass().getResource("/FXML/TradeMenu.fxml"));
         stage.setScene(new Scene(pane));
 
-        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 

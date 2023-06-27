@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import view.enums.messages.ProfileMenuMessages;
 
@@ -87,6 +88,7 @@ public class ChangePassword extends Application {
 
         ChangePassword.stage = stage;
         stage.setScene(new Scene(anchorPane));
-        stage.showAndWait();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 }
