@@ -23,7 +23,7 @@ public class Server extends Thread {
         }
     }
 
-    public static Server getServer(){
+    public static Server getServer() {
         return server;
     }
 
@@ -37,15 +37,22 @@ public class Server extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            parsePacket(packet.getData());
+            System.out.println("Client > " + new String(data).trim());
+            parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
         }
     }
 
-    private void parsePacket(byte[] data) {
+    private void parsePacket(byte[] data, InetAddress address, int port) {
+        if (new String(data).trim().equals("Connection request")) {
+            Client client = new Client(address, port);
+            System.out.println("    ip: " + address + " port: " + port);
+            return;
+        }
         Packet initialPacket = Packet.newPacket(data);
-        switch (initialPacket.getType()){
+        switch (initialPacket.getType()) {
             case SIGNUP -> {
                 Packet00Signup packet = Packet00Signup.newPacket(data);
+                sendDataToAllClients(data,address,port);
             }
             case LOGIN -> {
                 Packet packet;
@@ -67,7 +74,13 @@ public class Server extends Thread {
     }
 
     public void sendDataToAllClients(byte[] data) {
-        for (Client client:clients)
-            sendData(data,client.getIpAddress(),port);
+        for (Client client : clients)
+            sendData(data, client.getIpAddress(), client.getPort());
+    }
+
+    public void sendDataToAllClients(byte[] data,InetAddress address,int port) {
+        for (Client client : clients)
+            if(!(client.getIpAddress().equals(address) && client.getPort() == port))
+                sendData(data, client.getIpAddress(), client.getPort());
     }
 }

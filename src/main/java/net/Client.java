@@ -1,20 +1,35 @@
 package net;
 
+import controller.SignupMenuController;
 import model.Stronghold;
+import net.packets.Packet;
+import net.packets.Packet00Signup;
 
 import java.io.IOException;
 import java.net.*;
 
 public class Client extends Thread {
     private InetAddress ipAddress;
+    private int port;
     private DatagramSocket socket;
 
     public Client(String ipAddress) {
         try {
             this.socket = new DatagramSocket();
-            System.out.println(socket.getPort());
             this.ipAddress = InetAddress.getByName(ipAddress);
         } catch (SocketException | UnknownHostException e) {
+            e.printStackTrace();
+        }
+        Stronghold.setCurrentClient(this);
+        Server.getClients().add(this);
+    }
+
+    public Client(InetAddress ipAddress,int port) {
+        try {
+            this.socket = new DatagramSocket();
+            this.port = port;
+            this.ipAddress = ipAddress;
+        } catch (SocketException e) {
             e.printStackTrace();
         }
         Stronghold.setCurrentClient(this);
@@ -30,6 +45,20 @@ public class Client extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("Server > " + new String(data).trim());
+            parsePacket(packet.getData());
+        }
+    }
+
+    private void parsePacket(byte[] data) {
+        Packet initialPacket = Packet.newPacket(data);
+        switch (initialPacket.getType()){
+            case SIGNUP -> {
+                Packet00Signup packet = Packet00Signup.newPacket(data);
+                SignupMenuController.createUser(packet.getUsername(),packet.getPassword(),
+                        packet.getEmail(),packet.getNickname(),packet.getSlogan(),
+                        packet.getRecoveryQuestion(),packet.getRecoveryAnswer());
+            }
         }
     }
 
@@ -44,5 +73,9 @@ public class Client extends Thread {
 
     public InetAddress getIpAddress() {
         return ipAddress;
+    }
+
+    public int getPort() {
+        return port;
     }
 }

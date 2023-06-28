@@ -50,5 +50,18 @@
     "score": 2000,
     "rank": 4,
     "stayLoggedIn": false
+  },
+  {
+    "recoveryQuestion": "What was my first pet's name?",
+    "recoveryAnswer": "6726dc9c570ba69916e848388ebe13d422d76bbb07c77e72d652936837207f3a",
+    "username": "sfsdf",
+    "password": "441c50cae478d9396a3c67832be5931ecd80f9a88109f5fb5038a1c1aa94644c",
+    "nickname": "sadfdsf",
+    "email": "sadf@sdaf.sdf",
+    "slogan": "",
+    "avatarFileName": "1.png",
+    "score": 0,
+    "rank": 0,
+    "stayLoggedIn": false
   }
 ]

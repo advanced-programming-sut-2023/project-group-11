@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="debug in building deletion">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/Server.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/packets/Packet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/packets/Packet00Signup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/EntryMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/EntryMenu.fxml" afterDir="false" />
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="researches about net phase&#10;more research is needed (possibility of migration to socketServer)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/packets/PacketType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupCompletion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupCompletion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/packets/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/packets/Packet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/packets/Packet00Signup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/packets/Packet00Signup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/EntryMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/EntryMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,11 +26,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="Enum" />
         <option value="CSS File" />
         <option value="module-info" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -96,7 +92,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/User/Downloads/network/network/broker",
+    "last_opened_file_path": "C:/Users/User/Downloads/2D-Game-Engine-master",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -296,14 +292,8 @@
       <workItem from="1687610932531" duration="64000" />
       <workItem from="1687617721008" duration="1222000" />
       <workItem from="1687792384596" duration="7713000" />
-      <workItem from="1687861390062" duration="17747000" />
-    </task>
-    <task id="LOCAL-00067" summary="Lord making resolved + drop unit debugged">
-      <created>1683886614237</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1683886614237</updated>
+      <workItem from="1687861390062" duration="18706000" />
+      <workItem from="1687934458354" duration="4868000" />
     </task>
     <task id="LOCAL-00068" summary="Start digging pitch added">
       <created>1683904251428</created>
@@ -641,7 +631,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687861949684</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="researches about net phase&#10;more research is needed (possibility of migration to socketServer)">
+      <created>1687897040951</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1687897040951</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -680,10 +677,29 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/net-sep-developing" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Trade incomplete (temporary)" />
     <MESSAGE value="dropBuilding initially added (needs debug in currentGame &amp; currentGovernance &amp; building size &amp; ..)" />
     <MESSAGE value="dropBuilding improved" />
     <MESSAGE value="SelectBuilding excluding create unit" />
@@ -708,7 +724,8 @@
     <MESSAGE value="wall and stairs" />
     <MESSAGE value="delete building implemented" />
     <MESSAGE value="debug in building deletion" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug in building deletion" />
+    <MESSAGE value="researches about net phase&#10;more research is needed (possibility of migration to socketServer)" />
+    <option name="LAST_COMMIT_MESSAGE" value="researches about net phase&#10;more research is needed (possibility of migration to socketServer)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

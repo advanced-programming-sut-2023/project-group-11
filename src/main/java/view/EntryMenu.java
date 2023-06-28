@@ -40,6 +40,7 @@ public class EntryMenu extends Application {
     public void createClient() throws Exception {
         Client client = new Client("localhost");
         client.start();
+        client.sendData("Connection request".getBytes());
         System.out.println(client.getIpAddress());
         new SignupMenu().start(stage);
     }

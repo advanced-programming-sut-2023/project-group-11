@@ -23,7 +23,6 @@ public class Packet00Signup extends Packet{
         this.recoveryAnswer = recoveryAnswer;
     }
     public static Packet00Signup newPacket(byte[] data) {
-        System.out.println(new String(data).trim());
         return new Gson().fromJson(new String(data).trim(), Packet00Signup.class);
     }
 
