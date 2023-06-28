@@ -6,6 +6,7 @@ module server {
     requires java.desktop;
     requires org.apache.commons.lang3;
     requires com.fasterxml.jackson.annotation;
+    requires org.json;
 
     opens model to com.google.gson, javafx.base;
     opens model.map to com.google.gson;
