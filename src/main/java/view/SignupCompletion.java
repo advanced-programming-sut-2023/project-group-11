@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Stronghold;
+import net.Client;
 import net.packets.Packet00Signup;
 
 import java.net.URISyntaxException;
@@ -84,7 +85,7 @@ public class SignupCompletion extends Application {
                 return;
             }
             SignupMenuController.createUser(username, password, email, nickname, slogan, chosenQuestion, answerField.getText());
-            new Packet00Signup(username,password,email,nickname,slogan,chosenQuestion,answerField.getText()).writeData(Stronghold.getCurrentClient());
+            new Packet00Signup(username,password,email,nickname,slogan,chosenQuestion,answerField.getText()).writeData(Client.getClient());
             stage.close();
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Congratulation!", "User created successfully!");
         } else {

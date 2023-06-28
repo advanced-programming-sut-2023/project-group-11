@@ -1,7 +1,9 @@
 package net;
 
+import model.Stronghold;
 import net.packets.Packet;
 import net.packets.Packet00Signup;
+import net.packets.Packet01Login;
 
 import java.io.IOException;
 import java.net.*;
@@ -12,7 +14,7 @@ public class Server extends Thread {
     private static Server server;
     private DatagramSocket socket;
     private int port = 1331;
-    private static ArrayList<Client> clients = new ArrayList<>();
+    private static ArrayList<ClientClone> clients = new ArrayList<>();
 
     public Server() {
         server = this;
@@ -43,11 +45,13 @@ public class Server extends Thread {
     }
 
     private void parsePacket(byte[] data, InetAddress address, int port) {
+        ClientClone client;
         if (new String(data).trim().equals("Connection request")) {
-            Client client = new Client(address, port);
+            client = new ClientClone(address, port);
             System.out.println("    ip: " + address + " port: " + port);
             return;
         }
+        client = getClient(address, port);
         Packet initialPacket = Packet.newPacket(data);
         switch (initialPacket.getType()) {
             case SIGNUP -> {
@@ -55,7 +59,8 @@ public class Server extends Thread {
                 sendDataToAllClients(data,address,port);
             }
             case LOGIN -> {
-                Packet packet;
+                Packet01Login packet = Packet01Login.newPacket(data);
+                client.setCurrentUser(Stronghold.getUserByUsername(packet.getUsername()));
             }
         }
     }
@@ -69,7 +74,7 @@ public class Server extends Thread {
         }
     }
 
-    public static ArrayList<Client> getClients() {
+    public static ArrayList<ClientClone> getClients() {
         return clients;
     }
 
@@ -82,5 +87,12 @@ public class Server extends Thread {
         for (Client client : clients)
             if(!(client.getIpAddress().equals(address) && client.getPort() == port))
                 sendData(data, client.getIpAddress(), client.getPort());
+    }
+
+    private ClientClone getClient(InetAddress address,int port){
+        for (ClientClone client:clients)
+            if(client.getIpAddress().equals(address) && client.getPort() == port)
+                return client;
+        return null;
     }
 }

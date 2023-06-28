@@ -16,6 +16,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Stronghold;
+import net.Client;
+import net.packets.Packet01Login;
 import view.enums.messages.LoginMenuMessages;
 import view.enums.messages.SignupMenuMessages;
 
@@ -197,6 +200,7 @@ public class SignupMenu extends Application {
                     reloadCaptcha();
                 }else {
                     LoginMenuController.loginUser(loginUsernameField.getText());
+                    new Packet01Login(loginUsernameField.getText()).writeData(Client.getClient());
                     new MainMenu().start(SignupMenu.stage);
                 }
             }

@@ -38,7 +38,7 @@ public class EntryMenu extends Application {
     }
 
     public void createClient() throws Exception {
-        Client client = new Client("localhost");
+        Client client = Client.getClient("localhost");
         client.start();
         client.sendData("Connection request".getBytes());
         System.out.println(client.getIpAddress());

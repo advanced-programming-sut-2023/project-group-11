@@ -2,6 +2,7 @@ package net;
 
 import controller.SignupMenuController;
 import model.Stronghold;
+import model.User;
 import net.packets.Packet;
 import net.packets.Packet00Signup;
 
@@ -9,31 +10,31 @@ import java.io.IOException;
 import java.net.*;
 
 public class Client extends Thread {
-    private InetAddress ipAddress;
-    private int port;
-    private DatagramSocket socket;
 
-    public Client(String ipAddress) {
+    private static Client client;
+    protected InetAddress ipAddress;
+    protected int port;
+    protected DatagramSocket socket;
+
+    private Client(String ipAddress) {
         try {
             this.socket = new DatagramSocket();
             this.ipAddress = InetAddress.getByName(ipAddress);
         } catch (SocketException | UnknownHostException e) {
             e.printStackTrace();
         }
-        Stronghold.setCurrentClient(this);
-        Server.getClients().add(this);
     }
 
-    public Client(InetAddress ipAddress,int port) {
-        try {
-            this.socket = new DatagramSocket();
-            this.port = port;
-            this.ipAddress = ipAddress;
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
-        Stronghold.setCurrentClient(this);
-        Server.getClients().add(this);
+    public Client() {
+    }
+
+    public static Client getClient(String ipAddress){
+        if(client == null)
+            client = new Client(ipAddress);
+        return client;
+    }
+    public static Client getClient(){
+        return client;
     }
 
     public void run() {
