@@ -16,7 +16,6 @@ import view.ViewUtils;
 import view.enums.messages.GameMenuMessages;
 
 import java.util.*;
-import java.util.regex.Matcher;
 
 import static controller.SelectUnitMenuController.*;
 
@@ -58,43 +57,13 @@ public class GameMenuController {
         Governance.class.getDeclaredMethod("set" + factor + "Rate", int.class).invoke(currentGovernance, rateNumber);
     }
 
-    //    public static String showPopularity() {
-//        return "Food: " + currentGovernance.getFoodFactor() + '\n' +
-//                "Tax: " + currentGovernance.getTaxFactor() + '\n' +
-//                "Religious: " + currentGovernance.getReligiousFactor() + '\n' +
-//                "Fear: " + currentGovernance.getFearFactor() + '\n';
-//    }
-//
-//    public static String showFoodList() {
-//        String output = "";
-//
-//        output += "Bread: " + currentGovernance.getAllResources().get(AllResource.BREAD) + '\n';
-//        output += "Apple: " + currentGovernance.getAllResources().get(AllResource.APPLE) + '\n';
-//        output += "Cheese: " + currentGovernance.getAllResources().get(AllResource.CHEESE) + '\n';
-//        output += "Meat: " + currentGovernance.getAllResources().get(AllResource.MEAT) + '\n';
-//
-//        return output;
-//    }
-//
-//    public static void changeFoodRate(int rateNumber) {
-//        currentGovernance.setFoodRate(rateNumber);
-//    }
-
     public static int showFoodRate() {
         return currentGovernance.getFoodRate();
     }
 
-//    public static void changeTaxRate(int rateNumber) {
-//        currentGovernance.setTaxRate(rateNumber);
-//    }
-
     public static int showTaxRate() {
         return currentGovernance.getTaxRate();
     }
-
-//    public static void changeFearRate(int rateNumber) {
-//        currentGovernance.setFearRate(rateNumber);
-//    }
 
     public static int showFearRate() {
         return currentGovernance.getFearFactor();
@@ -118,98 +87,6 @@ public class GameMenuController {
         return GameMenuMessages.SUCCESS;
     }
 
-    public static GameMenuMessages checkSelectBuilding(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate")) return GameMenuMessages.INVALID_COMMAND;
-
-        int xCoordinate = Integer.parseInt(matcher.group("xCoordinate"));
-        int yCoordinate = Integer.parseInt(matcher.group("yCoordinate"));
-
-        if (!Utils.isValidCoordinates(currentGame.getMap(), xCoordinate, yCoordinate))
-            return GameMenuMessages.INVALID_COORDINATE;
-
-        Building building = currentGame.getMap().getTile(xCoordinate, yCoordinate).getBuilding();
-
-        if (!BuildingUtils.isBuildingInTile(building)) return GameMenuMessages.NO_BUILDING_HERE;
-        if (!building.getOwner().equals(currentGovernance)) return GameMenuMessages.NOT_YOUR_BUILDING;
-        return GameMenuMessages.SUCCESS;
-    }
-
-    public static GameMenuMessages checkSelectUnit(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate", "type"))
-            return GameMenuMessages.INVALID_COMMAND;
-
-        int x = Integer.parseInt(matcher.group("xCoordinate"));
-        int y = Integer.parseInt(matcher.group("yCoordinate"));
-        String type = Utils.removeDoubleQuotation(matcher.group("type"));
-        Map map = currentGame.getMap();
-
-        if (!Utils.isValidCoordinates(map, x, y)) return GameMenuMessages.INVALID_COORDINATE;
-
-        Tile tile = map.getTile(x, y);
-
-        if (!(Utils.isValidUnitType(type) || Utils.isValidMachineType(type)))
-            return GameMenuMessages.INVALID_UNIT_TYPE;
-        else if (tile.getUnits().size() == 0)
-            return GameMenuMessages.NO_UNIT_HERE;
-        else if (!tile.getUnits().get(0).getOwner().equals(currentGame.getCurrentGovernance()))
-            return GameMenuMessages.NOT_YOUR_UNIT;
-        else if (tile.getUnitsByType(type).size() == 0)
-            return GameMenuMessages.NO_UNIT_HERE_WITH_THIS_TYPE;
-
-        return GameMenuMessages.SUCCESS;
-    }
-
-    public static GameMenuMessages checkDropUnit(Matcher matcher) {
-        if (!Utils.isValidCommandTags(matcher, "xCoordinate", "yCoordinate", "type", "count"))
-            return GameMenuMessages.INVALID_COMMAND;
-
-        currentGovernance = currentGame.getCurrentGovernance();
-        int x = Integer.parseInt(matcher.group("xCoordinate"));
-        int y = Integer.parseInt(matcher.group("yCoordinate"));
-        int count = Integer.parseInt(matcher.group("count"));
-        String type = Utils.removeDoubleQuotation(matcher.group("type"));
-
-        if (!Utils.isValidCoordinates(currentGame.getMap(), x, y))
-            return GameMenuMessages.INVALID_COORDINATE;
-
-        Tile tile = currentGame.getMap().getTile(x, y);
-
-        if (tile.getUnits().size() + count > 12)
-            return GameMenuMessages.NOT_ENOUGH_SPACE;
-        if ((!Utils.isValidUnitType(type) && !Utils.isValidMachineType(type)) || type.equals("lord"))
-            return GameMenuMessages.INVALID_UNIT_TYPE;
-        if (!tile.getTexture().isSuitableForUnit())
-            return GameMenuMessages.INVALID_TEXTURE;
-        if (tile.hasBuilding() && !(tile.getBuilding() instanceof Climbable))
-            return GameMenuMessages.CANT_DROP_IN_BUILDING;
-        if (tile.getUnits().size() > 0 && !currentGovernance.equals(tile.getUnits().get(0).getOwner()))
-            return GameMenuMessages.INVALID_LOCATION_DIFFERENT_OWNER_UNIT;
-
-        dropUnit(x, y, count, type);
-        return GameMenuMessages.SUCCESS;
-    }
-
-    public static GameMenuMessages checkShowResource(Matcher matcher) {
-        String resourceName = Utils.removeDoubleQuotation(matcher.group("resource"));
-
-        if (!resourceName.equals("all") && (!resourceName.equals("gold")) && !isValidResourceName(resourceName))
-            return GameMenuMessages.INVALID_RESOURCE_TYPE;
-        return GameMenuMessages.SUCCESS;
-    }
-
-    public static String showResource(String resourceName) {
-        final String[] output = {""};
-        if (resourceName.equals("all")) {
-            currentGovernance.getAllResources().forEach((allResource, integer) ->
-                    output[0] += allResource.getName() + '=' + integer + '\n');
-            output[0] += "gold=" + currentGovernance.getGold() + "\n";
-        } else if (resourceName.equals("gold")) output[0] += "gold=" + currentGovernance.getGold() + "\n";
-        else output[0] += resourceName + '=' +
-                    currentGovernance.getAllResources().get(AllResource.valueOf(resourceName.toUpperCase())) + '\n';
-
-        return output[0];
-    }
-
     public static void dropUnit(int x, int y, int count, String type) {
         Tile tile = currentGame.getMap().getTile(x, y);
 
@@ -225,7 +102,7 @@ public class GameMenuController {
             } else if (type.equals("engineer")) unit = new Engineer();
             else unit = new Troop(type);
 
-            unit.initializeUnit(tile, true);
+            unit.initializeUnit(tile);
         }
     }
 
@@ -288,7 +165,7 @@ public class GameMenuController {
         int totalFoodRemoved = 0;
 
         for (AllResource resource : AllResource.values())
-            if (Utils.isFood(resource))
+            if (resource.isFood())
                 while (totalFoodRemoved < foodConsumption) {
                     if (!currentGovernance.hasEnoughItem(resource, 1)) break;
                     currentGovernance.removeFromStorage(resource, 1);
@@ -699,12 +576,6 @@ public class GameMenuController {
 
     }
 
-    private static boolean isValidResourceName(String resourceName) {
-        for (AllResource resource : AllResource.values())
-            if (resourceName.equals(resource.getName())) return true;
-        return false;
-    }
-
     public static boolean gameHasEnded() {
         return currentGame.getGovernances().size() == 1;
     }
@@ -763,18 +634,9 @@ public class GameMenuController {
         Stronghold.setCurrentGame(null);
     }
 
-    public static String showMapDetails(int x, int y) {
-        String output = "";
-        Map map = currentGame.getMap();
-        Tile tile = map.getTile(x, y);
-        output += tile.toString();
-        return output;
-    }
-
     public static double getGold() {
         return currentGame.getCurrentGovernance().getGold();
     }
-
 
     public static double[] getCoordinateWithTile(double[] mapLocation) {
         GameMenu gameMenu = Utils.getGameMenu();
@@ -804,7 +666,8 @@ public class GameMenuController {
     public static void deleteBuilding(ArrayList<Tile> selectedTiles) {
         for (Tile selectedTile : selectedTiles) {
             Building building = selectedTile.getBuilding();
-            if (building != null && !(building instanceof Keep) && building.getOwner().equals(currentGovernance)) building.removeFromGame();
+            if (building != null && !(building instanceof Keep) && building.getOwner().equals(currentGovernance))
+                building.removeFromGame();
         }
     }
 

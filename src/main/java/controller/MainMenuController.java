@@ -17,29 +17,8 @@ import view.GameMenu;
 import view.SignupMenu;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainMenuController {
-//    public static MainMenuMessages checkStartGame(Matcher matcher) {
-//        if (!Utils.isValidCommandTags(matcher, "mapName", "guests"))
-//            return MainMenuMessages.INVALID_COMMAND;
-//
-//        String mapName = Utils.removeDoubleQuotation(matcher.group("mapName"));
-//        String[] listOfPlayers = makeListOfPlayers(matcher.group("guests")).split("-");
-//
-//        if (!Stronghold.isMapName(mapName))
-//            return MainMenuMessages.MAP_NOT_EXIST;
-//        for (String name : listOfPlayers)
-//            if (!Stronghold.usernameExist(name)) return MainMenuMessages.USER_NOT_EXIST;
-//        for (String name : listOfPlayers)
-//            if (Stronghold.getCurrentUser().equals(Stronghold.getUserByUsername(name)))
-//                return MainMenuMessages.OWNER_IN_GUESTS;
-//
-//
-//        Stronghold.setCurrentGame(new Game(makeGovernances(listOfPlayers), Stronghold.getMapByName(mapName)));
-//        return MainMenuMessages.SUCCESS;
-//    }
-
     public static void startGame(ArrayList<User> users, String mapName) throws Exception {
         String[] usernames = makeListOfPlayers(users);
         Map map = Stronghold.getMapByName(mapName);
@@ -48,7 +27,6 @@ public class MainMenuController {
         for (int i = 1; i <= 8; i++) areas.add(i);
 
 
-        //TODO: area initialization must be implemented
         initializeAreas(null, areas, 1);
         for (int i = 0; i < usernames.length; i++)
             initializeAreas(usernames[i], areas, i + 2);
@@ -66,15 +44,6 @@ public class MainMenuController {
 
         return governances;
     }
-
-//    public static String makeListOfPlayers(String guests) {
-//        String result = "";
-//        String[] list = guests.split(" (?=[^\"]*(?:(?:\"[^\"]*){2})*$)");
-//        for (String name : list) {
-//            result += Utils.removeDoubleQuotation(name) + "-";
-//        }
-//        return result.substring(0, result.length() - 1);
-//    }
 
     public static String[] makeListOfPlayers(ArrayList<User> users) {
         ArrayList<String> usernames = new ArrayList<>();

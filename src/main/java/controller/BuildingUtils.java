@@ -14,20 +14,6 @@ public class BuildingUtils {
         return x >= 0 && x + size < mapSize && y >= 0 && y + size < mapSize;
     }
 
-    public static boolean isValidBuildingType(String type) {
-        return ChurchType.getChurchTypeByName(type) != null
-                || FillerType.getFillerTypeByName(type) != null
-                || GateHouseType.getGateHouseTypeByName(type) != null
-                || ProductiveBuildingType.getProductiveBuildingTypeByName(type) != null
-                || StorageType.getStorageTypeByName(type) != null
-                || TowerType.getTowerTypeByName(type) != null
-                || TrapType.getTrapTypeByName(type) != null
-                || UnitMakerType.getUnitMakerTypeByName(type) != null
-                || WallType.getWallTypeByName(type) != null
-                || type.equals("draw bridge")
-                ;
-    }
-
     public static boolean isMapEmpty(int x, int y, int size) {
         Tile[][] tiles = Stronghold.getCurrentGame().getMap().getTiles();
         for (int i = x; i < x + size; i++) {

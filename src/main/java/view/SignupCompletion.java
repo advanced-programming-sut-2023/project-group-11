@@ -31,6 +31,8 @@ public class SignupCompletion extends Application {
     @FXML
     private Label captchaError;
     @FXML
+    private Label recoveryQuestionError;
+    @FXML
     private ImageView captchaImageView;
     public static Stage stage;
 
@@ -75,26 +77,19 @@ public class SignupCompletion extends Application {
     }
 
     public void finishSignup() throws URISyntaxException {
-        if (!answerField.getText().isEmpty()) {
-            if (!captchaField.getText().equals(captchaNumber)) {
-                captchaError.setText("wrong captcha");
-                reloadCaptcha();
-                return;
-            }
+        if (answerField.getText().isEmpty()) answerError.setText("must be filled!");
+        else if (!captchaField.getText().equals(captchaNumber)) {
+            captchaError.setText("wrong captcha");
+            reloadCaptcha();
+        } else if (chosenQuestion == null) recoveryQuestionError.setText("must be chosen!");
+        else {
             SignupMenuController.createUser(username, password, email, nickname, slogan, chosenQuestion, answerField.getText());
             stage.close();
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Congratulation!", "User created successfully!");
-        } else {
-            answerError.setText("must be filled!");
         }
-
     }
 
     public void reloadCaptcha() throws URISyntaxException {
         captchaNumber = ViewUtils.reloadCaptcha(captchaImageView);
-//        File[] files = new File(SignupCompletion.class.getResource("/IMG/captcha").toURI()).listFiles();
-//        File captcha = files[new Random().nextInt(files.length)];
-//        captchaNumber = captcha.getName().substring(0, 4);
-//        captchaImageView.setImage(new Image(captcha.getPath()));
     }
 }

@@ -661,7 +661,7 @@ public class SelectUnitMenuController {
             machine.addEngineer(engineer);
             tile.getUnits().remove(engineer);
         }
-        machine.initializeUnit(tile, false);
+        machine.initializeUnit(tile);
     }
 
     private static boolean isValidForMoving(Map map, int currentX, int currentY, int destinationX, int destinationY) {

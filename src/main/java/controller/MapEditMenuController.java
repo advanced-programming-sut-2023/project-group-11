@@ -9,11 +9,10 @@ import model.map.Tree;
 import view.enums.messages.MapEditMenuMessages;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class MapEditMenuController {
-        private static Map currentMap;
+    private static Map currentMap;
 
     public static void setMapsOnChoiceBox(ChoiceBox<Map> mapsChoiceBox) {
         mapsChoiceBox.getItems().addAll(Stronghold.getMaps());
@@ -43,18 +42,20 @@ public class MapEditMenuController {
         else if (mapSize.isEmpty()) return MapEditMenuMessages.MAP_SIZE_FIELD_EMPTY;
         else if (!mapSize.matches("\\d+")) return MapEditMenuMessages.INVALID_MAP_SIZE_FORMAT;
         else if (Stronghold.getMapByName(mapName) != null) return MapEditMenuMessages.MAP_EXIST;
-        else if (Integer.parseInt(mapSize) < 50 || Integer.parseInt(mapSize) > 200) return MapEditMenuMessages.INVALID_MAP_SIZE;
+        else if (Integer.parseInt(mapSize) < 50 || Integer.parseInt(mapSize) > 200)
+            return MapEditMenuMessages.INVALID_MAP_SIZE;
 
         currentMap = new Map(mapName, Integer.parseInt(mapSize));
         ShowMapMenuController.setCurrentMap(currentMap);
         Utils.updateDatabase("maps");
         return MapEditMenuMessages.SUCCESS;
     }
+
     public static void clear(ArrayList<Tile> tiles) {
         for (Tile tile : tiles) tile.clear();
     }
 
-    public static MapEditMenuMessages setTexture(ArrayList<Tile> tiles,  String textureName, int selectedTileX, int selectedTileY) {
+    public static MapEditMenuMessages setTexture(ArrayList<Tile> tiles, String textureName, int selectedTileX, int selectedTileY) {
         Texture texture = Texture.getTextureByName(textureName);
 
         if (tiles.size() == 0) return MapEditMenuMessages.EMPTY_SELECTED_TILES;
@@ -95,8 +96,7 @@ public class MapEditMenuController {
                     }
                 }
             }
-        }
-        else {
+        } else {
             for (Tile tile : tiles)
                 tile.setTexture(texture);
         }
@@ -133,6 +133,7 @@ public class MapEditMenuController {
             }
         return true;
     }
+
     private static boolean isSuitableLandForTree(ArrayList<Tile> tiles) {
         for (Tile tile : tiles)
             if (tile.isFull() || tile.getTexture().isWater() || tile.getTexture().isStone() || tile.getTexture().isIron())
@@ -142,10 +143,10 @@ public class MapEditMenuController {
 
     private static ArrayList<int[][]> buildCoordinates() {
         ArrayList<int[][]> directions = new ArrayList<>();
-        directions.add(new int[][]{{4,1},{4,3}});
-        directions.add(new int[][]{{1,0},{3,0}});
-        directions.add(new int[][]{{0,1},{0,3}});
-        directions.add(new int[][]{{1,4},{3,4}});
+        directions.add(new int[][]{{4, 1}, {4, 3}});
+        directions.add(new int[][]{{1, 0}, {3, 0}});
+        directions.add(new int[][]{{0, 1}, {0, 3}});
+        directions.add(new int[][]{{1, 4}, {3, 4}});
         return directions;
     }
 }

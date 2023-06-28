@@ -154,9 +154,4 @@ public abstract class Building {
         }
         return output;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        return name == ((Building) obj).getName();
-    }
 }

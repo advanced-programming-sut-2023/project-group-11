@@ -29,7 +29,7 @@ public class SelectBuildingMenuController {
             Engineer engineer = new Engineer();
             if (currentGovernance.getGold() < engineer.getCost() * count)
                 return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
-            if (!createUnit(building, engineer,null, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
+            if (!createUnit(building, engineer, null, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
             return SelectBuildingMenuMessages.SUCCESS;
         }
 
@@ -52,7 +52,7 @@ public class SelectBuildingMenuController {
         if (building.getName().equals("cathedral"))
             return unitType.equals("black monk");
         if (unitType.equals("black monk"))
-            building.getName().equals("cathedral");
+            return building.getName().equals("cathedral");
         UnitMaker unitMaker = (UnitMaker) building;
         Troop unit;
         if ((unitType.equals("engineer")))
@@ -140,11 +140,11 @@ public class SelectBuildingMenuController {
         governance.removeFromStorage(troop.getWeaponType(), count);
         governance.removeFromStorage(troop.getArmorType(), count);
 
-        for (int i = 0; i < count; i++) new Troop(unitType).initializeUnit(unitCreationTile, false);
+        for (int i = 0; i < count; i++) new Troop(unitType).initializeUnit(unitCreationTile);
     }
 
     private static void createEngineer(int count) {
-        for (int i = 0; i < count; i++) new Engineer().initializeUnit(unitCreationTile, false);
+        for (int i = 0; i < count; i++) new Engineer().initializeUnit(unitCreationTile);
     }
 
     private static void setUnitCoordinates(Building unitMaker) {
@@ -186,16 +186,11 @@ public class SelectBuildingMenuController {
             }
     }
 
-    public static int[] getUnitCreationCoordinates() {
-        return unitCreationCoordinates;
-    }
-
     private static boolean canCreateUnit() {
         return unitCreationTile.getTexture().isSuitableForUnit() &&
                 !unitCreationTile.hasBuilding() &&
                 (unitCreationTile.getUnits().size() == 0 ||
                         unitCreationTile.getUnits().get(0).getOwner().equals(Stronghold.getCurrentGame().getCurrentGovernance()));
-
     }
 
     public static boolean isShop(Building building) {

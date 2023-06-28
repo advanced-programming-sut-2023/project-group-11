@@ -45,8 +45,15 @@ public enum AllResource {
         return null;
     }
 
-    public Image getImage(){
-        if(image == null)
+    public boolean isFood() {
+        return this.equals(AllResource.BREAD) ||
+                this.equals(AllResource.MEAT) ||
+                this.equals(AllResource.CHEESE) ||
+                this.equals(AllResource.APPLE);
+    }
+
+    public Image getImage() {
+        if (image == null)
             image = new Image(System.getProperty("user.dir") + "/src/main/resources/IMG/AllResource/" + name + ".png");
         return image;
     }
@@ -55,4 +62,12 @@ public enum AllResource {
         return price;
     }
 
+    @Override
+    public String toString() {
+        return "AllResource{" +
+                "name='" + name + '\'' +
+                ", buy price=" + price +
+                ", sell price=" + price / 2 +
+                '}';
+    }
 }

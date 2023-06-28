@@ -3,11 +3,11 @@ package model.buildings.enums;
 import model.AllResource;
 
 public enum WallType {
-    SHORT_WALL("short wall", 1, 300, 0, AllResource.NONE, 0,
+    SHORT_WALL("short wall", 1, 300, 0, AllResource.STONE, 1,
             0, true, 3),
-    TALL_WALL("tall wall", 1, 500, 0, AllResource.NONE, 0,
+    TALL_WALL("tall wall", 1, 500, 0, AllResource.STONE, 2,
             0, true, 5),
-    STAIRS("stairs", 1, 300, 0, AllResource.NONE, 0,
+    STAIRS("stairs", 1, 300, 0, AllResource.STONE, 1,
             0, true, 2);
 
     private final String name;

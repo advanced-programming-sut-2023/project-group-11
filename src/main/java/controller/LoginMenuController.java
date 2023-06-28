@@ -5,8 +5,6 @@ import model.Stronghold;
 import model.User;
 import view.enums.messages.LoginMenuMessages;
 
-import java.util.regex.Matcher;
-
 public class LoginMenuController {
     public static LoginMenuMessages checkLogin(String username, String password, boolean stayLoggedIn) {
         if (username.isEmpty()) return LoginMenuMessages.EMPTY_USERNAME_FIELD;

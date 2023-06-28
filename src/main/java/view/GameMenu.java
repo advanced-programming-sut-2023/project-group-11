@@ -4,6 +4,7 @@ import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -123,62 +124,13 @@ public class GameMenu extends Application {
     @FXML
     public void initialize() {
         GameMenuController.setCurrentGame();
-        initMap();
+        mapPane.setCursor(new ImageCursor(new Image(getClass().getResource("/IMG/cursor.png").toExternalForm())));
         mapSize = ShowMapMenuController.getCurrentMap().getSize();
         miniMapTileSize = 200 / mapSize;
         setTraversable();
         showMap(false);
         initializeToolTip();
         initializeBuildingBoxes();
-    }
-
-    private void initMap() {
-//        ArrayList<Building> buildings = new ArrayList<>();
-//        Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-//        for (ProductiveBuildingType productiveBuildingType : ProductiveBuildingType.values()) {
-//            buildings.add(BuildingUtils.getBuildingByType(productiveBuildingType.getName()));
-//        }
-//        for (UnitMakerType productiveBuildingType : UnitMakerType.values()) {
-//            buildings.add(BuildingUtils.getBuildingByType(productiveBuildingType.getName()));
-//        }
-//
-        int i = 20;
-//        for (Building building : buildings) {
-//            BuildingUtils.build(currentGovernance, building, i, i, building.getSize());
-//            i += 4;
-//        }
-
-
-//        GameMenuController.dropUnit(i++, i, 10, "battering ram");
-//        GameMenuController.dropUnit(i++, i, 10, "trebuchets");
-//        GameMenuController.dropUnit(i++, i, 10, "portable shield");
-//        GameMenuController.dropUnit(i++, i, 10, "catapults");
-//        GameMenuController.dropUnit(i++, i, 10, "siege tower");
-        GameMenuController.dropUnit(i++, i, 1, "fire ballista");
-//        GameMenuController.dropUnit(i++, i, 10, "engineer");
-        GameMenuController.dropUnit(i++, i, 2, "horse archer");
-        GameMenuController.dropUnit(i++, i, 2, "tunneler");
-        GameMenuController.dropUnit(i++, i, 2, "slaves");
-        GameMenuController.dropUnit(i++, i, 2, "slaves");
-        GameMenuController.dropUnit(i++, i, 2, "slinger");
-        GameMenuController.dropUnit(i++, i, 2, "ladderman");
-        GameMenuController.dropUnit(i++, i, 2, "fire thrower");
-        GameMenuController.dropUnit(i++, i, 2, "archer");
-        GameMenuController.dropUnit(i++, i, 2, "archer bow");
-        GameMenuController.dropUnit(i++, i, 2, "swordsman");
-        GameMenuController.dropUnit(i++, i, 2, "knight");
-        GameMenuController.dropUnit(i++, i, 2, "black monk");
-        GameMenuController.dropUnit(i++, i, 2, "pikeman");
-        GameMenuController.dropUnit(i++, i, 2, "crossbowman");
-        GameMenuController.dropUnit(i++, i, 2, "crossbowman");
-        GameMenuController.dropUnit(i++, i, 2, "assassin");
-        GameMenuController.dropUnit(i++, i, 2, "maceman");
-        GameMenuController.dropUnit(i++, i, 2, "spearman");
-        GameMenuController.dropUnit(i++, i, 2, "arabian swordsman");
-        GameMenuController.dropUnit(39, 44, 2, "horse archer");
-        GameMenuController.dropUnit(41, 44, 2, "horse archer");
-        GameMenuController.dropUnit(42, 44, 2, "horse archer");
-        GameMenuController.dropUnit(43, 44, 2, "horse archer");
     }
 
     private void setTraversable() {
@@ -776,6 +728,7 @@ public class GameMenu extends Application {
         buildingsPane.setVisible(true);
         buildingNameLabel.setVisible(false);
         selectBuildingPane.setVisible(false);
+        governanceInformationPane.setVisible(false);
     }
 
     public void selectDestinationTile(MoveUnit moveUnit) {

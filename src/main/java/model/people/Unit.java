@@ -45,11 +45,11 @@ public abstract class Unit {
         return unitState;
     }
 
-    public void initializeUnit(Tile tile, boolean isDropping) {
+    public void initializeUnit(Tile tile) {
         this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         this.ownerGovernance.addUnit(this);
         this.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(tile));
-        if (!(this instanceof Machine || this instanceof Lord || isDropping))
+        if (!(this instanceof Machine || this instanceof Lord))
             this.ownerGovernance.changeCurrentPopulation(-1);
         tile.getUnits().add(this);
     }
