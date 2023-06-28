@@ -12,6 +12,7 @@ module client {
     requires java.desktop;
     requires org.apache.commons.lang3;
     requires com.fasterxml.jackson.annotation;
+    requires org.json;
 
     exports view;
     opens view to javafx.fxml;
