@@ -47,6 +47,11 @@ public class User implements Comparable<User> {
         this.password = password;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+
     public String getEmail() {
         return email;
     }
@@ -116,5 +121,9 @@ public class User implements Comparable<User> {
         if (this.score < o.score) return 1;
         else if (this.score > o.score) return -1;
         else return this.username.compareTo(o.username);
+    }
+
+    public String getAvatarFileName() {
+        return avatarFileName;
     }
 }

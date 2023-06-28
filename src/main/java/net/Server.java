@@ -4,6 +4,7 @@ import model.Stronghold;
 import net.packets.Packet;
 import net.packets.Packet00Signup;
 import net.packets.Packet01Login;
+import net.packets.Packet02UpdateProfile;
 
 import java.io.IOException;
 import java.net.*;
@@ -61,6 +62,10 @@ public class Server extends Thread {
             case LOGIN -> {
                 Packet01Login packet = Packet01Login.newPacket(data);
                 client.setCurrentUser(Stronghold.getUserByUsername(packet.getUsername()));
+            }
+            case UPDATE_PROFILE -> {
+                Packet02UpdateProfile packet = Packet02UpdateProfile.newPacket(data);
+                sendDataToAllClients(data, address, port);
             }
         }
     }

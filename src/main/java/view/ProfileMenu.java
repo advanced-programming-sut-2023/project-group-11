@@ -18,6 +18,9 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Stronghold;
+import net.Client;
+import net.packets.Packet02UpdateProfile;
 import view.enums.messages.ProfileMenuMessages;
 
 import java.io.File;
@@ -107,6 +110,7 @@ public class ProfileMenu extends Application {
                 ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Username Successful",
                         "You have successfully changed your username!");
                 ProfileMenuController.changeUsername(newUsername.getText());
+                new Packet02UpdateProfile(username.getText(), Stronghold.getCurrentUser()).writeData(Client.getClient());
                 username.setText(newUsername.getText());
             }
         }
@@ -122,6 +126,7 @@ public class ProfileMenu extends Application {
             ProfileMenuController.changeAvatar(selectedFile);
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Avatar Successful",
                     "You have successfully changed your avatar!");
+            new Packet02UpdateProfile(username.getText(), Stronghold.getCurrentUser()).writeData(Client.getClient());
             updateAvatar();
         }
     }
@@ -148,6 +153,7 @@ public class ProfileMenu extends Application {
             File avatarFile = dragboard.getFiles().get(0);
             if (isImage(avatarFile.getPath())) {
                 ProfileMenuController.changeAvatar(avatarFile);
+                new Packet02UpdateProfile(username.getText(), Stronghold.getCurrentUser()).writeData(Client.getClient());
                 updateAvatar();
             }
         }
@@ -177,6 +183,7 @@ public class ProfileMenu extends Application {
 
     public void removeSlogan() {
         ProfileMenuController.removeSlogan();
+        new Packet02UpdateProfile(username.getText(), Stronghold.getCurrentUser()).writeData(Client.getClient());
         currentSlogan = null;
         slogan.setText("empty!");
     }
@@ -185,6 +192,7 @@ public class ProfileMenu extends Application {
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Slogan",
                 "You have successfully changed your slogan!");
         ProfileMenuController.changeSlogan(newSlogan.getText());
+        new Packet02UpdateProfile(username.getText(), Stronghold.getCurrentUser()).writeData(Client.getClient());
         currentSlogan = newSlogan.getText();
         slogan.setText(newSlogan.getText());
     }
@@ -215,6 +223,7 @@ public class ProfileMenu extends Application {
                         "You have successfully changed your email!");
                 email.setText(newEmail.getText());
                 ProfileMenuController.changeEmail(newEmail.getText());
+                new Packet02UpdateProfile(username.getText(), Stronghold.getCurrentUser()).writeData(Client.getClient());
             }
         }
     }
@@ -224,6 +233,7 @@ public class ProfileMenu extends Application {
                 "You have successfully changed your nickname!");
         nickname.setText(newNickname.getText());
         ProfileMenuController.changeNickname(newNickname.getText());
+        new Packet02UpdateProfile(username.getText(), Stronghold.getCurrentUser()).writeData(Client.getClient());
     }
 
     public void showScoreboard() throws Exception {

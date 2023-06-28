@@ -1,6 +1,9 @@
 package net.packets;
 
 import com.google.gson.Gson;
+import net.Client;
+
+import static controller.Utils.updateDatabase;
 
 public class Packet00Signup extends Packet{
 
@@ -24,6 +27,12 @@ public class Packet00Signup extends Packet{
     }
     public static Packet00Signup newPacket(byte[] data) {
         return new Gson().fromJson(new String(data).trim(), Packet00Signup.class);
+    }
+
+    @Override
+    public void writeData(Client client) {
+        super.writeData(client);
+        updateDatabase("users");
     }
 
     public String getUsername() {

@@ -13,6 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Stronghold;
+import net.Client;
+import net.packets.Packet02UpdateProfile;
 import view.enums.messages.ProfileMenuMessages;
 
 import java.net.URISyntaxException;
@@ -54,6 +57,7 @@ public class ChangePassword extends Application {
                 case SUCCESS -> {
                     ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Password Successful",
                             "You have successfully changed your password");
+                    new Packet02UpdateProfile(Stronghold.getCurrentUser().getUsername(), Stronghold.getCurrentUser()).writeData(Client.getClient());
                     stage.close();
                 }
             }

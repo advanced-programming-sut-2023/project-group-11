@@ -197,4 +197,14 @@ public class Utils {
     public static void setGameMenu(GameMenu gameMenu) {
         Utils.gameMenu = gameMenu;
     }
+
+    public static void updateUserProfile(String originalUsername,User updatedUser){
+        User originalUser = Stronghold.getUserByUsername(originalUsername);
+        originalUser.setUsername(updatedUser.getUsername());
+        originalUser.setPassword(updatedUser.getPassword());
+        originalUser.setEmail(updatedUser.getEmail());
+        originalUser.setSlogan(updatedUser.getSlogan());
+        originalUser.setNickname(updatedUser.getNickname());
+        originalUser.setAvatarFileName(updatedUser.getAvatarFileName());
+    }
 }

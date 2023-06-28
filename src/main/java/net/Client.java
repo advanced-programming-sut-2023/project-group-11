@@ -1,13 +1,17 @@
 package net;
 
 import controller.SignupMenuController;
+import controller.Utils;
 import model.Stronghold;
 import model.User;
 import net.packets.Packet;
 import net.packets.Packet00Signup;
+import net.packets.Packet02UpdateProfile;
 
 import java.io.IOException;
 import java.net.*;
+
+import static controller.Utils.updateDatabase;
 
 public class Client extends Thread {
 
@@ -59,6 +63,10 @@ public class Client extends Thread {
                 SignupMenuController.createUser(packet.getUsername(),packet.getPassword(),
                         packet.getEmail(),packet.getNickname(),packet.getSlogan(),
                         packet.getRecoveryQuestion(),packet.getRecoveryAnswer());
+            }
+            case UPDATE_PROFILE -> {
+                Packet02UpdateProfile packet = Packet02UpdateProfile.newPacket(data);
+                Utils.updateUserProfile(packet.getOriginalUsername(),packet.getUpdatedUser());
             }
         }
     }
