@@ -4,11 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="delete building implemented">
+    <list default="true" id="b273acd4-1392-4b83-99fa-09d84be231ad" name="Changes" comment="Side pane edited">
+      <change afterPath="$PROJECT_DIR$/client/client/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/client/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/client/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/client/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/client/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/client/src/main/java/org/example/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/server/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/server/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/server/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/server/src/main/java/org/example/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/IMG/avatars/desktop-wallpaper-diablo-3-crusader-armor-iphone-8-7-6s-crusaders-thumbnail.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Sadegh.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/externalDependencies.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mavenExecutorSetting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Governance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Governance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,19 +48,40 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/controller/Utils.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/model/buildings/Church.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/resources/JSON/users.json" root0="FORCE_HIGHLIGHTING" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="TCP_Network" />
+                    <option name="lastUsedInstant" value="1687979445" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1687979358" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="net-sep-developing" />
+                    <option name="lastUsedInstant" value="1687969477" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -79,7 +115,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/BaleCamp&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/client&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -94,32 +130,99 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Sadegh\Documents\Codes\Java\Intellij\ProjectAP\client" />
+    </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="controller.MapEditMenuController" />
       <recent name="controller.GameMenuController" />
       <recent name="controller.SelectUnitMenuController" />
       <recent name="controller.Utils" />
+      <recent name="model.Stronghold" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Sadegh\Documents\Codes\Java\Intellij\ProjectAP\server" />
       <recent name="C:\Users\Sadegh\Documents\Codes\Java\Intellij\ProjectAP\src\main\resources\JSON" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="19" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="view.Main" />
-      <module name="project-group-11-fixed" />
+      <module name="ProjectAP" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MapEditMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.MapEditMenu" />
+      <module name="ProjectAP" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProjectAP" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="LoginMenuTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfileMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProjectAP" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ProfileMenuTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SignupMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProjectAP" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SignupMenuTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MapEditMenu" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.LoginMenuTest" />
+      <item itemvalue="JUnit.ProfileMenuTest" />
+      <item itemvalue="JUnit.SignupMenuTest" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SignupMenuTest" />
+        <item itemvalue="JUnit.ProfileMenuTest" />
+        <item itemvalue="JUnit.LoginMenuTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.MapEditMenu" />
       </list>
     </recent_temporary>
   </component>
@@ -218,36 +321,32 @@
       <workItem from="1686915739398" duration="6933000" />
       <workItem from="1686937437314" duration="4374000" />
       <workItem from="1686999064014" duration="740000" />
-      <workItem from="1687241534062" duration="10727000" />
-      <workItem from="1687279353376" duration="3637000" />
-      <workItem from="1687295014520" duration="1617000" />
-      <workItem from="1687355793708" duration="16425000" />
-      <workItem from="1687506612432" duration="38880000" />
-      <workItem from="1687606080477" duration="656000" />
-      <workItem from="1687783092977" duration="38640000" />
-      <workItem from="1687858360639" duration="6968000" />
-      <workItem from="1687883688113" duration="1516000" />
-    </task>
-    <task id="LOCAL-00071" summary="nothing special">
-      <created>1683913774062</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1683913774062</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Remove dead units debugged">
-      <created>1683914547511</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1683914547511</updated>
-    </task>
-    <task id="LOCAL-00073" summary="map edited + cliff debugged">
-      <created>1683917552836</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1683917552836</updated>
+      <workItem from="1687241534062" duration="11376000" />
+      <workItem from="1687343254461" duration="3303000" />
+      <workItem from="1687384932697" duration="719000" />
+      <workItem from="1687431239691" duration="3205000" />
+      <workItem from="1687438041352" duration="1380000" />
+      <workItem from="1687439458292" duration="72000" />
+      <workItem from="1687467812563" duration="8559000" />
+      <workItem from="1687509686089" duration="13836000" />
+      <workItem from="1687540218273" duration="10000" />
+      <workItem from="1687600093399" duration="137000" />
+      <workItem from="1687600350072" duration="765000" />
+      <workItem from="1687604760015" duration="652000" />
+      <workItem from="1687605688944" duration="117000" />
+      <workItem from="1687629393665" duration="19000" />
+      <workItem from="1687629909892" duration="229000" />
+      <workItem from="1687631384650" duration="66000" />
+      <workItem from="1687682242071" duration="2815000" />
+      <workItem from="1687686043123" duration="2720000" />
+      <workItem from="1687730685464" duration="105000" />
+      <workItem from="1687809989889" duration="2861000" />
+      <workItem from="1687819499666" duration="48000" />
+      <workItem from="1687869201093" duration="748000" />
+      <workItem from="1687879443285" duration="2263000" />
+      <workItem from="1687962219700" duration="3882000" />
+      <workItem from="1687979613733" duration="1092000" />
+      <workItem from="1687982720104" duration="716000" />
     </task>
     <task id="LOCAL-00074" summary="Start game double quote handled">
       <created>1683921137345</created>
@@ -438,140 +537,161 @@
       <option name="project" value="LOCAL" />
       <updated>1687260064182</updated>
     </task>
-    <task id="LOCAL-00101" summary="Popup newGame">
-      <created>1687263417149</created>
+    <task id="LOCAL-00101" summary="Nothing special">
+      <created>1687260265290</created>
       <option name="number" value="00101" />
       <option name="presentableId" value="LOCAL-00101" />
       <option name="project" value="LOCAL" />
-      <updated>1687263417149</updated>
+      <updated>1687260265290</updated>
     </task>
-    <task id="LOCAL-00102" summary="PopularityFactors changed">
-      <created>1687429419888</created>
+    <task id="LOCAL-00102" summary="TODOs done + debug and improvements">
+      <created>1687346405622</created>
       <option name="number" value="00102" />
       <option name="presentableId" value="LOCAL-00102" />
       <option name="project" value="LOCAL" />
-      <updated>1687429419891</updated>
+      <updated>1687346405622</updated>
     </task>
-    <task id="LOCAL-00103" summary="PopularityFactors completed">
-      <created>1687435496377</created>
+    <task id="LOCAL-00103" summary="nothing">
+      <created>1687351009998</created>
       <option name="number" value="00103" />
       <option name="presentableId" value="LOCAL-00103" />
       <option name="project" value="LOCAL" />
-      <updated>1687435496379</updated>
+      <updated>1687351009998</updated>
     </task>
-    <task id="LOCAL-00104" summary="set state added">
-      <created>1687509351760</created>
+    <task id="LOCAL-00104" summary="Revealed unit showing in map">
+      <created>1687352727170</created>
       <option name="number" value="00104" />
       <option name="presentableId" value="LOCAL-00104" />
       <option name="project" value="LOCAL" />
-      <updated>1687509351760</updated>
+      <updated>1687352727170</updated>
     </task>
-    <task id="LOCAL-00105" summary="attack initialized">
-      <created>1687534322313</created>
+    <task id="LOCAL-00105" summary="Textures images edited">
+      <created>1687367915831</created>
       <option name="number" value="00105" />
       <option name="presentableId" value="LOCAL-00105" />
       <option name="project" value="LOCAL" />
-      <updated>1687534322314</updated>
+      <updated>1687367915831</updated>
     </task>
-    <task id="LOCAL-00106" summary="conflict">
-      <created>1687535037037</created>
+    <task id="LOCAL-00106" summary="Fire">
+      <created>1687371317624</created>
       <option name="number" value="00106" />
       <option name="presentableId" value="LOCAL-00106" />
       <option name="project" value="LOCAL" />
-      <updated>1687535037037</updated>
+      <updated>1687371317624</updated>
     </task>
-    <task id="LOCAL-00107" summary="AttackAnimation ended">
-      <created>1687536935552</created>
+    <task id="LOCAL-00107" summary="Fire completed">
+      <created>1687385533555</created>
       <option name="number" value="00107" />
       <option name="presentableId" value="LOCAL-00107" />
       <option name="project" value="LOCAL" />
-      <updated>1687536935552</updated>
+      <updated>1687385533556</updated>
     </task>
-    <task id="LOCAL-00108" summary="dig ditch ended">
-      <created>1687548768071</created>
+    <task id="LOCAL-00108" summary="sickness added (curing needs implements)">
+      <created>1687435224454</created>
       <option name="number" value="00108" />
       <option name="presentableId" value="LOCAL-00108" />
       <option name="project" value="LOCAL" />
-      <updated>1687548768071</updated>
+      <updated>1687435224454</updated>
     </task>
-    <task id="LOCAL-00109" summary="PopularityFactors debug">
-      <created>1687553585006</created>
+    <task id="LOCAL-00109" summary="add sickness.png">
+      <created>1687436659910</created>
       <option name="number" value="00109" />
       <option name="presentableId" value="LOCAL-00109" />
       <option name="project" value="LOCAL" />
-      <updated>1687553585006</updated>
+      <updated>1687436659910</updated>
     </task>
-    <task id="LOCAL-00110" summary="start game debug &amp;&#10;AttackAnimation debug + add attack banner &amp;&#10;create unit debug &amp;&#10;minor changes">
-      <created>1687559139149</created>
+    <task id="LOCAL-00110" summary="Sickness notif &amp; random turn getting sick added">
+      <created>1687436980894</created>
       <option name="number" value="00110" />
       <option name="presentableId" value="LOCAL-00110" />
       <option name="project" value="LOCAL" />
-      <updated>1687559139149</updated>
+      <updated>1687436980894</updated>
     </task>
-    <task id="LOCAL-00111" summary="dig tunnel and stop unit added">
-      <created>1687793441521</created>
+    <task id="LOCAL-00111" summary="SickFactor added (need applying in popularity &amp; showing in popularity factors)">
+      <created>1687438454323</created>
       <option name="number" value="00111" />
       <option name="presentableId" value="LOCAL-00111" />
       <option name="project" value="LOCAL" />
-      <updated>1687793441524</updated>
+      <updated>1687438454324</updated>
     </task>
-    <task id="LOCAL-00112" summary="GroundAttackAnimation added (please choose a better image for boom.png)">
-      <created>1687795538904</created>
+    <task id="LOCAL-00112" summary="Curing sickness added">
+      <created>1687439409595</created>
       <option name="number" value="00112" />
       <option name="presentableId" value="LOCAL-00112" />
       <option name="project" value="LOCAL" />
-      <updated>1687795538908</updated>
+      <updated>1687439409595</updated>
     </task>
-    <task id="LOCAL-00113" summary="dig tunnel debug&#10;add better image for ground attack">
-      <created>1687799111935</created>
+    <task id="LOCAL-00113" summary="MiniMap added (needs improvements)">
+      <created>1687474804929</created>
       <option name="number" value="00113" />
       <option name="presentableId" value="LOCAL-00113" />
       <option name="project" value="LOCAL" />
-      <updated>1687799111942</updated>
+      <updated>1687474804930</updated>
     </task>
-    <task id="LOCAL-00114" summary="delete and popularity face added">
-      <created>1687807841444</created>
+    <task id="LOCAL-00114" summary="Mini map with no change (need to choose)">
+      <created>1687475275213</created>
       <option name="number" value="00114" />
       <option name="presentableId" value="LOCAL-00114" />
       <option name="project" value="LOCAL" />
-      <updated>1687807841444</updated>
+      <updated>1687475275213</updated>
     </task>
-    <task id="LOCAL-00115" summary="restart needs debug">
-      <created>1687809875716</created>
+    <task id="LOCAL-00115" summary="remove duplication (slow map version)">
+      <created>1687475906070</created>
       <option name="number" value="00115" />
       <option name="presentableId" value="LOCAL-00115" />
       <option name="project" value="LOCAL" />
-      <updated>1687809875717</updated>
+      <updated>1687475906070</updated>
     </task>
-    <task id="LOCAL-00116" summary="Building.removeFromGame debug&#10;error resolved">
-      <created>1687811244784</created>
+    <task id="LOCAL-00116" summary="miniMap problem solved">
+      <created>1687512848287</created>
       <option name="number" value="00116" />
       <option name="presentableId" value="LOCAL-00116" />
       <option name="project" value="LOCAL" />
-      <updated>1687811244785</updated>
+      <updated>1687512848287</updated>
     </task>
-    <task id="LOCAL-00117" summary="delete building changed">
-      <created>1687814631286</created>
+    <task id="LOCAL-00117" summary="endGame added">
+      <created>1687533618172</created>
       <option name="number" value="00117" />
       <option name="presentableId" value="LOCAL-00117" />
       <option name="project" value="LOCAL" />
-      <updated>1687814631304</updated>
+      <updated>1687533618172</updated>
     </task>
-    <task id="LOCAL-00118" summary="Options added">
-      <created>1687823633408</created>
+    <task id="LOCAL-00118" summary="Unavailable Buildings added &amp; Lord image fixed">
+      <created>1687539246685</created>
       <option name="number" value="00118" />
       <option name="presentableId" value="LOCAL-00118" />
       <option name="project" value="LOCAL" />
-      <updated>1687823633413</updated>
+      <updated>1687539246685</updated>
     </task>
-    <task id="LOCAL-00119" summary="debug">
-      <created>1687867567541</created>
+    <task id="LOCAL-00119" summary="Minor changes in unit attacking">
+      <created>1687540102829</created>
       <option name="number" value="00119" />
       <option name="presentableId" value="LOCAL-00119" />
       <option name="project" value="LOCAL" />
-      <updated>1687867567542</updated>
+      <updated>1687540102829</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="Beauty changes">
+      <created>1687601100064</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1687601100064</updated>
+    </task>
+    <task id="LOCAL-00121" summary="Side pane edited + Debug AttackAnimation">
+      <created>1687688679204</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1687688679205</updated>
+    </task>
+    <task id="LOCAL-00122" summary="Deletion">
+      <created>1687810777891</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1687810777891</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,7 +719,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="TCP_Network" />
                       </list>
                     </value>
                   </entry>
@@ -610,35 +730,52 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="TCP_Network" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="CreateTrade completed" />
-    <MESSAGE value="Trade &amp; Market Complete + minor debug, improvement" />
     <MESSAGE value="minor debugs" />
     <MESSAGE value="Copy,Paste buildings + debugs" />
     <MESSAGE value="Inverse x&amp;y debugged (Trap killing need debugging)" />
-    <MESSAGE value="Popup newGame" />
-    <MESSAGE value="PopularityFactors changed" />
-    <MESSAGE value="PopularityFactors completed" />
-    <MESSAGE value="set state added" />
-    <MESSAGE value="attack initialized" />
-    <MESSAGE value="conflict" />
-    <MESSAGE value="AttackAnimation ended" />
-    <MESSAGE value="dig ditch ended" />
-    <MESSAGE value="PopularityFactors debug" />
-    <MESSAGE value="start game debug &amp;&#10;AttackAnimation debug + add attack banner &amp;&#10;create unit debug &amp;&#10;minor changes" />
-    <MESSAGE value="dig tunnel and stop unit added" />
-    <MESSAGE value="GroundAttackAnimation added (please choose a better image for boom.png)" />
-    <MESSAGE value="dig tunnel debug&#10;add better image for ground attack" />
-    <MESSAGE value="delete and popularity face added" />
-    <MESSAGE value="restart needs debug" />
-    <MESSAGE value="Building.removeFromGame debug" />
-    <MESSAGE value="Building.removeFromGame debug&#10;error resolved" />
-    <MESSAGE value="delete building changed" />
-    <MESSAGE value="Options added" />
-    <MESSAGE value="debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug" />
+    <MESSAGE value="Nothing special" />
+    <MESSAGE value="TODOs done + debug and improvements" />
+    <MESSAGE value="nothing" />
+    <MESSAGE value="Revealed unit showing in map" />
+    <MESSAGE value="Textures images edited" />
+    <MESSAGE value="Fire" />
+    <MESSAGE value="Fire completed" />
+    <MESSAGE value="sickness added (curing needs implements)" />
+    <MESSAGE value="add sickness.png" />
+    <MESSAGE value="Sickness notif &amp; random turn getting sick added" />
+    <MESSAGE value="SickFactor added (need applying in popularity &amp; showing in popularity factors)" />
+    <MESSAGE value="Curing sickness added" />
+    <MESSAGE value="MiniMap added (needs improvements)" />
+    <MESSAGE value="Mini map with no change (need to choose)" />
+    <MESSAGE value="remove duplication (slow map version)" />
+    <MESSAGE value="miniMap problem solved" />
+    <MESSAGE value="endGame added" />
+    <MESSAGE value="Unavailable Buildings added &amp; Lord image fixed" />
+    <MESSAGE value="Minor changes in unit attacking" />
+    <MESSAGE value="Beauty changes" />
+    <MESSAGE value="Side pane edited + Debug AttackAnimation" />
+    <MESSAGE value="Deletion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deletion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -649,9 +786,14 @@
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controller/GameMenuController.java</url>
-          <line>719</line>
-          <option name="timeStamp" value="23" />
+          <url>file://$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java</url>
+          <line>644</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/model/map/Tile.java</url>
+          <line>104</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -668,29 +810,24 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidUsernameFormat.ic" NAME="SignupMenuTest.invalidUsernameFormat Coverage Results" MODIFIED="1682819253264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$ProfileMenuTest_and_2_more.ic" NAME="ProfileMenuTest and 2 more Coverage Results" MODIFIED="1683832111787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1682864228552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noLowerCaseTest.ic" NAME="SignupMenuTest.noLowerCaseTest Coverage Results" MODIFIED="1682819394120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1683831881489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$ProfileMenuTest.ic" NAME="ProfileMenuTest Coverage Results" MODIFIED="1684764664587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_usernameExistTest.ic" NAME="SignupMenuTest.usernameExistTest Coverage Results" MODIFIED="1682819379326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emptyFieldTest.ic" NAME="SignupMenuTest.emptyFieldTest Coverage Results" MODIFIED="1682819323758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noSpecialTest.ic" NAME="SignupMenuTest.noSpecialTest Coverage Results" MODIFIED="1682819401421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$LoginMenuTest.ic" NAME="LoginMenuTest Coverage Results" MODIFIED="1683831815198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_wrongAnswerConfirmationTest.ic" NAME="SignupMenuTest.wrongAnswerConfirmationTest Coverage Results" MODIFIED="1682819421975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$Main.ic" NAME="Main Coverage Results" MODIFIED="1683831943870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$Main.ic" NAME="Main Coverage Results" MODIFIED="1682711397956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noNumberTest.ic" NAME="SignupMenuTest.noNumberTest Coverage Results" MODIFIED="1682819397820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noUpperCaseTest.ic" NAME="SignupMenuTest.noUpperCaseTest Coverage Results" MODIFIED="1682819390138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidUsernameFormat.ic" NAME="SignupMenuTest.invalidUsernameFormat Coverage Results" MODIFIED="1682819253264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_shortPasswordTest.ic" NAME="SignupMenuTest.shortPasswordTest Coverage Results" MODIFIED="1682819384415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$LoginMenuTest.ic" NAME="LoginMenuTest Coverage Results" MODIFIED="1684764654501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_group_11_fixed$ProfileMenuTest.ic" NAME="ProfileMenuTest Coverage Results" MODIFIED="1683831863938" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_wrongAnswerConfirmationTest.ic" NAME="SignupMenuTest.wrongAnswerConfirmationTest Coverage Results" MODIFIED="1682819421975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidEmailFormatTest.ic" NAME="SignupMenuTest.invalidEmailFormatTest Coverage Results" MODIFIED="1682819412108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emailExistTest.ic" NAME="SignupMenuTest.emailExistTest Coverage Results" MODIFIED="1682819409536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_WrongConfirmationTest.ic" NAME="SignupMenuTest.WrongConfirmationTest Coverage Results" MODIFIED="1682819405048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_shortPasswordTest.ic" NAME="SignupMenuTest.shortPasswordTest Coverage Results" MODIFIED="1682819384415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest.ic" NAME="SignupMenuTest Coverage Results" MODIFIED="1684764673336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$Main.ic" NAME="Main Coverage Results" MODIFIED="1682711397956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_randomArgsTest.ic" NAME="SignupMenuTest.randomArgsTest Coverage Results" MODIFIED="1682819201893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noNumberTest.ic" NAME="SignupMenuTest.noNumberTest Coverage Results" MODIFIED="1682819397820" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_validTagQuestionPickTest.ic" NAME="SignupMenuTest.validTagQuestionPickTest Coverage Results" MODIFIED="1682819415637" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidEmailFormatTest.ic" NAME="SignupMenuTest.invalidEmailFormatTest Coverage Results" MODIFIED="1682819412108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_invalidQuestionNumberTest.ic" NAME="SignupMenuTest.invalidQuestionNumberTest Coverage Results" MODIFIED="1682819418999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noUpperCaseTest.ic" NAME="SignupMenuTest.noUpperCaseTest Coverage Results" MODIFIED="1682819390138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_emptyFieldTest.ic" NAME="SignupMenuTest.emptyFieldTest Coverage Results" MODIFIED="1682819323758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_noSpecialTest.ic" NAME="SignupMenuTest.noSpecialTest Coverage Results" MODIFIED="1682819401421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProjectAP$SignupMenuTest_usernameExistTest.ic" NAME="SignupMenuTest.usernameExistTest Coverage Results" MODIFIED="1682819379326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

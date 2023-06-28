@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="750.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MarketMenu">
+   <children>
+      <AnchorPane layoutX="46.0" layoutY="19.0" opacity="0.85" prefHeight="465.0" prefWidth="652.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+         <children>
+            <Label layoutX="257.0" layoutY="14.0" text="Market Menu">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <HBox fx:id="rawMaterialBox" layoutX="190.0" layoutY="158.0" spacing="10.0" visible="false">
+               <children>
+                   <ImageView fx:id="wood" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/wood.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="iron" fitHeight="60.0" fitWidth="60.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/iron.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="pitch" fitHeight="60.0" fitWidth="60.0" layoutX="56.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/pitch.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="stone" fitHeight="60.0" fitWidth="60.0" layoutX="101.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/stone.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox fx:id="foodBox" layoutX="61.0" layoutY="158.0" spacing="7.0" visible="false">
+               <children>
+                  <ImageView fx:id="meat" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/meat.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cheese" fitHeight="60.0" fitWidth="60.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/cheese.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="bread" fitHeight="60.0" fitWidth="60.0" layoutX="56.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/bread.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="apple" fitHeight="60.0" fitWidth="60.0" layoutX="101.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/apple.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="hop" fitHeight="60.0" fitWidth="60.0" layoutX="147.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/hop.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="ale" fitHeight="60.0" fitWidth="60.0" layoutX="192.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/ale.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wheat" fitHeight="60.0" fitWidth="60.0" layoutX="238.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/wheat.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="flour" fitHeight="60.0" fitWidth="60.0" layoutX="284.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/flour.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox fx:id="weaponBox" layoutX="61.0" layoutY="158.0" spacing="7.0" visible="false">
+               <children>
+                  <ImageView fx:id="sword" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/sword.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="bow" fitHeight="60.0" fitWidth="60.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/bow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="crossbow" fitHeight="60.0" fitWidth="60.0" layoutX="56.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/crossbow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="mace" fitHeight="60.0" fitWidth="60.0" layoutX="101.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/mace.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="pike" fitHeight="60.0" fitWidth="60.0" layoutX="147.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/pike.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="spear" fitHeight="60.0" fitWidth="60.0" layoutX="192.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/spear.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="metal" fitHeight="60.0" fitWidth="60.0" layoutX="238.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/metal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="leather" fitHeight="60.0" fitWidth="60.0" layoutX="284.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/leather.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox layoutX="139.0" layoutY="78.0" spacing="10.0">
+               <children>
+                  <Button fx:id="foodbutton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showFoodBox" prefHeight="35.0" prefWidth="85.0" text="Food">
+                     <font>
+                        <Font name="Trebuchet MS" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="weaponButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showWeaponBox" prefHeight="35.0" prefWidth="85.0" text="Weapon">
+                     <font>
+                        <Font name="Trebuchet MS" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="rawButton" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#showRawBox" prefHeight="35.0" prefWidth="85.0" text="Raw material" textAlignment="CENTER">
+                     <font>
+                        <Font name="Trebuchet MS" size="11.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="tradeButton" focusTraversable="false" layoutX="202.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#tradeMenu" prefHeight="35.0" prefWidth="85.0" text="Trade menu">
+                     <font>
+                        <Font name="Trebuchet MS" size="11.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <AnchorPane fx:id="buySellPane" layoutX="65.0" layoutY="233.0" prefHeight="204.0" prefWidth="522.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" layoutX="228.0" layoutY="2.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <TextField fx:id="amountTextField" alignment="CENTER" maxHeight="33.0" maxWidth="86.0" minHeight="23.0" minWidth="37.0" prefHeight="33.0" prefWidth="86.0" promptText="amount">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <Button alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#buy" text="Buy">
+                           <graphic>
+                              <Label fx:id="buyLabel" alignment="CENTER_RIGHT" />
+                           </graphic>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="RIGHT" focusTraversable="false" mnemonicParsing="false" onMouseClicked="#sell" text="Sell">
+                           <graphic>
+                              <Label fx:id="sellLabel" />
+                           </graphic>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="417.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/AllResource/gold.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="goldLabel" layoutX="433.0" layoutY="80.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="CENTER" layoutX="60.0" layoutY="2.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="itemImageView" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="itemLabel" alignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="amountLabel" alignment="CENTER" layoutX="60.0" layoutY="150.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <Button focusTraversable="false" layoutX="22.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#back" text="Back" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

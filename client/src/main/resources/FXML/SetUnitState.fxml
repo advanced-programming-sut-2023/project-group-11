@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="397.0" prefWidth="1007.0" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SetUnitState">
+    <VBox alignment="CENTER" layoutX="7.0" layoutY="28.0" prefHeight="366.0" prefWidth="1000.0" spacing="10.0">
+        <Label text="please select a soldier from the list below"/>
+        <HBox fx:id="soldiers" alignment="CENTER" prefHeight="160.0" prefWidth="1000.0" spacing="10.0"/>
+        <ImageView fx:id="selectedSoldierImage" fitHeight="59.0" fitWidth="96.0" pickOnBounds="true"
+                   preserveRatio="true"/>
+        <HBox alignment="CENTER" prefHeight="26.0" prefWidth="1000.0" spacing="10.0">
+            <RadioButton mnemonicParsing="false" selected="true" text="Disband">
+                <toggleGroup>
+                    <ToggleGroup fx:id="checkAction"/>
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Defensive" toggleGroup="$checkAction"/>
+            <RadioButton mnemonicParsing="false" text="Offensive" toggleGroup="$checkAction"/>
+            <RadioButton mnemonicParsing="false" text="Standing" toggleGroup="$checkAction"/>
+            <RadioButton mnemonicParsing="false" text="Stop" toggleGroup="$checkAction"/>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="1000.0" spacing="10.0">
+            <Button mnemonicParsing="false" onAction="#apply" prefHeight="40.0" prefWidth="250.0"
+                    styleClass="menu-button" text="apply"/>
+        </HBox>
+        <padding>
+            <Insets bottom="10.0"/>
+        </padding>
+    </VBox>
+</AnchorPane>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="710.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewGame">
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane layoutX="55.0" layoutY="25.0" opacity="0.85" prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+            <Button layoutX="30.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefWidth="40.0" styleClass="menu-button" text="back" />
+                <TableView fx:id="users" layoutX="30.0" layoutY="115.0" prefHeight="200.0" prefWidth="230.0" />
+                <Button layoutX="263.0" layoutY="315.0" mnemonicParsing="false" onAction="#startGame" prefWidth="75.0" styleClass="menu-button" text="start game" />
+                <ChoiceBox fx:id="mapName" layoutX="337.0" layoutY="115.0" prefWidth="150.0" />
+            <Label layoutX="335.0" layoutY="79.0" text="choose map name from here" />
+            <Label layoutX="8.0" layoutY="79.0" text="choose players from here(ctrl for multiple selection)" />
+            </AnchorPane>
+        </AnchorPane>
+    </center>
+</BorderPane>
