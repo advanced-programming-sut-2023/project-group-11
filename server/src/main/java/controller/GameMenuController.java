@@ -11,7 +11,6 @@ import model.map.Tile;
 import model.map.Tree;
 import model.people.*;
 import model.people.enums.Speed;
-import view.GameMenu;
 import view.ViewUtils;
 
 import java.util.*;
@@ -637,11 +636,13 @@ public class GameMenuController {
         return currentGame.getCurrentGovernance().getGold();
     }
 
-    public static double[] getCoordinateWithTile(double[] mapLocation) {
-        GameMenu gameMenu = Utils.getGameMenu();
-        int tileSize = gameMenu.getTileSize();
-        double mapX = mapLocation[0] - gameMenu.getFirstTileXInMap();
-        double mapY = mapLocation[1] - gameMenu.getFirstTileYInMap();
+    public static double[] getCoordinateWithTile(ArrayList<Object> parameters) {
+        double[] mapLocation = (double[]) parameters.get(0);
+        int tileSize = (int) parameters.get(1);
+        int firstTileXInMap = (int) parameters.get(2);
+        int firstTileYInMap = (int) parameters.get(3);
+        double mapX = mapLocation[0] - firstTileXInMap;
+        double mapY = mapLocation[1] - firstTileYInMap;
         return new double[]{mapX * tileSize, mapY * tileSize};
     }
 

@@ -145,7 +145,8 @@ public class MainMenuController {
     }
 
 
-    public static ObservableList<User> removeCurrentUserFromList(ObservableList<User> userObservableList) {
+    public static ObservableList<User> removeCurrentUserFromList(ArrayList<Object> parameters) {
+        ObservableList<User> userObservableList = (ObservableList<User>) parameters.get(0);
         userObservableList.remove(Stronghold.getCurrentUser());//TODO: ArrayList<Object> parameters
         return userObservableList;
     }

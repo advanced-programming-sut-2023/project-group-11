@@ -23,8 +23,10 @@ public class AirAttackAnimation extends Transition {
     private String gameMenuController = "GameMenuController";
 
     public AirAttackAnimation(GameMenu gameMenu, double[] currentLocation, double[] destinationLocation) throws IOException {
-        this.currentLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile", currentLocation);
-        this.destinationLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile", destinationLocation);
+        this.currentLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile",
+                currentLocation, gameMenu.getTileSize(), gameMenu.getFirstTileXInMap(), gameMenu.getFirstTileYInMap());
+        this.destinationLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile",
+                destinationLocation, gameMenu.getTileSize(), gameMenu.getFirstTileXInMap(), gameMenu.getFirstTileYInMap());
         this.mapPane = gameMenu.getMapPane();
         this.arrow.setRotate((Double) connection.getData(gameMenuController, "getArrowAngle", currentLocation, destinationLocation));
         int tileSize = gameMenu.getTileSize();

@@ -27,8 +27,8 @@ public class GroundAttackAnimation {
     public GroundAttackAnimation(GameMenu gameMenu, double[] currentLocation, double[] destinationLocation) throws IOException {
         this.gameMenu = gameMenu;
         this.mapPane = gameMenu.getMapPane();
-        this.currentLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile", currentLocation);//TODO: may produce error
-        this.destinationLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile", destinationLocation);
+        this.currentLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile", currentLocation, gameMenu.getTileSize(), gameMenu.getFirstTileXInMap(), gameMenu.getFirstTileYInMap());//TODO: may produce error
+        this.destinationLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile", destinationLocation, gameMenu.getTileSize(), gameMenu.getFirstTileXInMap(), gameMenu.getFirstTileYInMap());
         int tileSize = gameMenu.getTileSize();
 
         addImage(attackBanner, 262, 142, 360 + 131 / 2.0, 0);

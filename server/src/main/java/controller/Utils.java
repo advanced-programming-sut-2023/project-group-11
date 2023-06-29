@@ -113,7 +113,11 @@ public class Utils {
         return FXCollections.observableArrayList(governances);
     }
 
-    public static void columnMaker(TableView tableView, String header, String userField) {
+    public static void columnMaker(ArrayList<Object> parameters) {
+        TableView tableView = (TableView) parameters.get(0);
+        String header = (String) parameters.get(1);
+        String userField = (String) parameters.get(2);
+
         TableColumn<User, String> tableColumn = new TableColumn<>(header);
         tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
         tableColumn.setSortable(false);
