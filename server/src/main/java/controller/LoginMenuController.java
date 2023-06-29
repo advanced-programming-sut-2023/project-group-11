@@ -3,16 +3,21 @@ package controller;
 import model.Delay;
 import model.Stronghold;
 import model.User;
-import view.enums.messages.LoginMenuMessages;
+
+import java.util.ArrayList;
 
 public class LoginMenuController {
-    public static LoginMenuMessages checkLogin(String username, String password, boolean stayLoggedIn) {
-        if (username.isEmpty()) return LoginMenuMessages.EMPTY_USERNAME_FIELD;
-        else if (password.isEmpty()) return LoginMenuMessages.EMPTY_PASSWORD_FIELD;
+    public static Message checkLogin(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
+        String password = (String) parameters.get(1);
+        boolean stayLoggedIn = (boolean) parameters.get(2);
+
+        if (username.isEmpty()) return Message.EMPTY_USERNAME_FIELD;
+        else if (password.isEmpty()) return Message.EMPTY_PASSWORD_FIELD;
 
         User user = Stronghold.getUserByUsername(username);
 
-        if (user == null) return LoginMenuMessages.USERNAME_NOT_EXIST;
+        if (user == null) return Message.USERNAME_NOT_EXIST;
         else if (!user.isPasswordCorrect(Utils.encryptField(password))) {
             long currentTime = System.currentTimeMillis();
             if (!Delay.hasUser(user))
@@ -20,55 +25,65 @@ public class LoginMenuController {
             Delay delay = Delay.getDelayByUser(user);
             delay.setDelayTime(delay.getDelayTime() == 0 ? 5000 : 2 * delay.getDelayTime());
             delay.setLastLoginCommandTime(currentTime);
-            return LoginMenuMessages.INCORRECT_PASSWORD;
+            return Message.INCORRECT_PASSWORD;
         } else if (Delay.getDelayByUser(user) != null) {
             long currentTime = System.currentTimeMillis();
             Delay delay = Delay.getDelayByUser(user);
             if (delay.getDelayTime() > currentTime - delay.getLastLoginCommandTime())
-                return LoginMenuMessages.LOCKED_ACCOUNT;
+                return Message.LOCKED_ACCOUNT;
         }
 
         if (stayLoggedIn) user.setStayLoggedIn(true);
 
-        return LoginMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
-    public static void loginUser(String username) {
+    public static void loginUser(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
         User user = Stronghold.getUserByUsername(username);
         Stronghold.setCurrentUser(user);
     }
 
-    public static LoginMenuMessages checkForgotPassword(String username) {
+    public static Message checkForgotPassword(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
         User user = Stronghold.getUserByUsername(username);
-        if (user == null) return LoginMenuMessages.USERNAME_NOT_EXIST;
-        return LoginMenuMessages.SUCCESS;
+        if (user == null) return Message.USERNAME_NOT_EXIST;
+        return Message.SUCCESS;
     }
 
-    public static LoginMenuMessages checkRecoveryAnswer(String username, String recoveryAnswer) {
-        if (recoveryAnswer.isEmpty()) return LoginMenuMessages.EMPTY_RECOVERY_ANSWER_FIELD;
+    public static Message checkRecoveryAnswer(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
+        String recoveryAnswer = (String) parameters.get(1);
+
+        if (recoveryAnswer.isEmpty()) return Message.EMPTY_RECOVERY_ANSWER_FIELD;
         User user = Stronghold.getUserByUsername(username);
         if (!user.isRecoveryAnswerCorrect(Utils.encryptField(recoveryAnswer)))
-            return LoginMenuMessages.WRONG_RECOVERY_ANSWER;
-        return LoginMenuMessages.SUCCESS;
+            return Message.WRONG_RECOVERY_ANSWER;
+        return Message.SUCCESS;
     }
 
-    public static String showRecoveryQuestion(String username) {
+    public static String showRecoveryQuestion(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
         User user = Stronghold.getUserByUsername(username);
         return user.getRecoveryQuestion();
     }
 
-    public static long getLeftLockedTime(String username) {
+    public static long getLeftLockedTime(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
         User user = Stronghold.getUserByUsername(username);
         Delay delay = Delay.getDelayByUser(user);
         return (delay.getDelayTime() - System.currentTimeMillis() + delay.getLastLoginCommandTime());
     }
 
-    public static LoginMenuMessages checkNewPassword(String username, String password) {
-        if (password.isEmpty()) return LoginMenuMessages.EMPTY_PASSWORD_FIELD;
-        else if (!Utils.isStrongPassword(password)) return LoginMenuMessages.WEAK_PASSWORD;
+    public static Message checkNewPassword(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
+        String password = (String) parameters.get(1);
+
+        if (password.isEmpty()) return Message.EMPTY_PASSWORD_FIELD;
+        else if (!Utils.isStrongPassword(password)) return Message.WEAK_PASSWORD;
 
         setNewPassword(username, password);
-        return LoginMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     private static void setNewPassword(String username, String password) {

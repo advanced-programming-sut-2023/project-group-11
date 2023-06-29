@@ -15,7 +15,6 @@ import model.Stronghold;
 import model.User;
 import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
-import view.GameMenu;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,8 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Utils {
-    private static GameMenu gameMenu;
-
     public static boolean isValidUsernameFormat(String username) {
         return username.matches("\"[\\w ]+\"|\\w+");
     }
@@ -107,6 +104,7 @@ public class Utils {
 
     public static ObservableList<User> getUsersObservable() {
         ArrayList<User> users = Stronghold.getUsers();
+        sortUsers();
         return FXCollections.observableArrayList(users);
     }
 
@@ -115,18 +113,14 @@ public class Utils {
         return FXCollections.observableArrayList(governances);
     }
 
-    public static void columnMaker(TableView tableView, String header, String userField) {
+    public static void columnMaker(ArrayList<Object> parameters) {
+        TableView tableView = (TableView) parameters.get(0);
+        String header = (String) parameters.get(1);
+        String userField = (String) parameters.get(2);
+
         TableColumn<User, String> tableColumn = new TableColumn<>(header);
         tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
         tableColumn.setSortable(false);
         tableView.getColumns().add(tableColumn);
-    }
-
-    public static GameMenu getGameMenu() {
-        return gameMenu;
-    }
-
-    public static void setGameMenu(GameMenu gameMenu) {
-        Utils.gameMenu = gameMenu;
     }
 }

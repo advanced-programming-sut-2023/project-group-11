@@ -39,7 +39,7 @@ public class GameMenu extends Application {
     private static Stage stage;
 
     public GameMenu() {
-        Utils.setGameMenu(this);
+        ViewUtils.setGameMenu(this);
     }
 
     @FXML

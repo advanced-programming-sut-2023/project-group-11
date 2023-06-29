@@ -8,6 +8,7 @@ import javafx.util.Duration;
 import model.Path;
 import model.map.Texture;
 import model.people.Unit;
+import view.ViewUtils;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class DigAnimation {
     private final boolean isDigPitch;
 
     public DigAnimation(ArrayList<Unit> units, Path shortestPath, Texture texture) {
-        Utils.getGameMenu().showMap(false);
+        ViewUtils.getGameMenu().showMap(false);
         this.shortestPath = shortestPath;
         this.texture = texture;
         isDigPitch = texture.equals(Texture.PITCH);
@@ -45,7 +46,7 @@ public class DigAnimation {
         if (!isDigPitch)
             if (ShowMapMenuController.getCurrentMap().getTile(currentLocation).getBuilding() != null) {
                 ShowMapMenuController.getCurrentMap().getTile(currentLocation).getBuilding().removeFromGame();
-                Utils.getGameMenu().showMap(false);
+                ViewUtils.getGameMenu().showMap(false);
             }
         if (move >= shortestPath.getLength() - 1) timeline.stop();
     }

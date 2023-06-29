@@ -26,7 +26,7 @@ public class SetUnitState extends Application {
     private ImageView selectedSoldierImage;
     @FXML
     private ToggleGroup checkAction;
-    private ArrayList<Tile> selectedTiles = Utils.getGameMenu().getSelectedTiles();
+    private ArrayList<Tile> selectedTiles = ViewUtils.getGameMenu().getSelectedTiles();
     private String unitType;
     public HBox soldiers;
 
@@ -60,7 +60,7 @@ public class SetUnitState extends Application {
             switch (selected.getText()) {
                 case "Disband" -> {
                     SelectUnitMenuController.disbandUnit(location, unitType);
-                    Utils.getGameMenu().showMap(false);
+                    ViewUtils.getGameMenu().showMap(false);
                 }
                 case "Stop" -> SelectUnitMenuController.stopUnit(
                         ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile), unitType);

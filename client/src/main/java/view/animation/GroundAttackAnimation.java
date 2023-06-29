@@ -1,7 +1,5 @@
 package view.animation;
 
-import controller.GameMenuController;
-import controller.Utils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.image.Image;
@@ -9,6 +7,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import view.GameMenu;
+import view.ViewUtils;
+import webConnection.Client;
+import webConnection.Connection;
+
+import java.io.IOException;
 
 public class GroundAttackAnimation {
     private final AnchorPane mapPane;
@@ -18,12 +21,14 @@ public class GroundAttackAnimation {
     private final double[] destinationLocation;
 
     private final GameMenu gameMenu;
+    private Connection connection = Client.getConnection();
+    private String gameMenuController = "GameMenuController";
 
-    public GroundAttackAnimation(GameMenu gameMenu, double[] currentLocation, double[] destinationLocation) {
+    public GroundAttackAnimation(GameMenu gameMenu, double[] currentLocation, double[] destinationLocation) throws IOException {
         this.gameMenu = gameMenu;
         this.mapPane = gameMenu.getMapPane();
-        this.currentLocation = GameMenuController.getCoordinateWithTile(currentLocation);
-        this.destinationLocation = GameMenuController.getCoordinateWithTile(destinationLocation);
+        this.currentLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile", currentLocation, gameMenu.getTileSize(), gameMenu.getFirstTileXInMap(), gameMenu.getFirstTileYInMap());//TODO: may produce error
+        this.destinationLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile", destinationLocation, gameMenu.getTileSize(), gameMenu.getFirstTileXInMap(), gameMenu.getFirstTileYInMap());
         int tileSize = gameMenu.getTileSize();
 
         addImage(attackBanner, 262, 142, 360 + 131 / 2.0, 0);
@@ -48,7 +53,7 @@ public class GroundAttackAnimation {
         int tileSize = gameMenu.getTileSize();
         attackBanner.toFront();
         boom.toFront();
-        Utils.getGameMenu().showMap(false);
+        ViewUtils.getGameMenu().showMap(false);
         mapPane.getChildren().removeAll(attackBanner);
     }
 }

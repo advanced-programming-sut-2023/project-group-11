@@ -1,13 +1,12 @@
 package view;
 
-import controller.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import webConnection.Client;
 
-import java.lang.reflect.Method;
 import java.net.URL;
 
 public class MainMenu extends Application {
@@ -38,7 +37,7 @@ public class MainMenu extends Application {
     }
 
     public void logout() throws Exception {
-        MainMenuController.logout();
+        Client.getConnection().doInServer("MainMenuController", "logout");
         new SignupMenu().start(SignupMenu.getStage());
     }
 }

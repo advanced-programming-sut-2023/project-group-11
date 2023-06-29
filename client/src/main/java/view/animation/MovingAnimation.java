@@ -1,15 +1,17 @@
 package view.animation;
 
-import controller.SelectUnitMenuController;
 import controller.ShowMapMenuController;
-import controller.Utils;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import model.Path;
 import model.people.Unit;
 import view.GameMenu;
+import view.ViewUtils;
+import webConnection.Client;
+import webConnection.Connection;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MovingAnimation {
@@ -19,10 +21,11 @@ public class MovingAnimation {
     private final double MOVE_TIME;
     private Timeline timeline;
     private int move = 0;
+    private Connection connection = Client.getConnection();
 
 
     public MovingAnimation(ArrayList<Unit> units, Path shortestPath, double MOVE_TIME) {
-        this.gameMenu = Utils.getGameMenu();
+        this.gameMenu = ViewUtils.getGameMenu();
         this.units = units;
         this.shortestPath = shortestPath;
         this.MOVE_TIME = MOVE_TIME;
@@ -31,11 +34,17 @@ public class MovingAnimation {
     }
 
     private void initializeTimeline(double moveTime) {
-        timeline = new Timeline(new KeyFrame(Duration.seconds(moveTime), actionEvent -> this.start()));
+        timeline = new Timeline(new KeyFrame(Duration.seconds(moveTime), actionEvent -> {
+            try {
+                this.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }));
         timeline.play();
     }
 
-    private void start() {
+    private void start() throws IOException {
         int[] currentLocation = shortestPath.getPath().get(move);
         int[] nextLocation = shortestPath.getPath().get(move + 1);
 
@@ -46,7 +55,7 @@ public class MovingAnimation {
 
         ShowMapMenuController.getCurrentMap().getTile(currentLocation).clearUnitsByType(units);
         ShowMapMenuController.getCurrentMap().getTile(nextLocation).getUnits().addAll(units);
-        SelectUnitMenuController.applyPathEffects(nextLocation, units);
+        connection.doInServer("SelectUnitMenuController", "applyPathEffects", nextLocation, units);
 
         gameMenu.showMap(move < shortestPath.getLength() - 2);
 

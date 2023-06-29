@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class ViewUtils {
+    private static GameMenu gameMenu;
 
     public static void fieldError(Label label, String error) {
         label.setText(error);
@@ -76,5 +77,13 @@ public class ViewUtils {
                 newPasswordError.setText("Very weak!");
             }
         });
+    }
+
+    public static GameMenu getGameMenu() {
+        return gameMenu;
+    }
+
+    public static void setGameMenu(GameMenu gameMenu) {
+        ViewUtils.gameMenu = gameMenu;
     }
 }

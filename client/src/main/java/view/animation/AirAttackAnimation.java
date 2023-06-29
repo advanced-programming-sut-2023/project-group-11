@@ -1,13 +1,15 @@
 package view.animation;
 
-import controller.GameMenuController;
-import controller.Utils;
 import javafx.animation.Transition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import view.GameMenu;
+import view.ViewUtils;
+import webConnection.Connection;
+
+import java.io.IOException;
 
 public class AirAttackAnimation extends Transition {
     private final AnchorPane mapPane;
@@ -17,12 +19,16 @@ public class AirAttackAnimation extends Transition {
     private final double[] destinationLocation;
     private final double xIncrement;
     private final double yIncrement;
+    private Connection connection;
+    private String gameMenuController = "GameMenuController";
 
-    public AirAttackAnimation(GameMenu gameMenu, double[] currentLocation, double[] destinationLocation) {
-        this.currentLocation = GameMenuController.getCoordinateWithTile(currentLocation);
-        this.destinationLocation = GameMenuController.getCoordinateWithTile(destinationLocation);
+    public AirAttackAnimation(GameMenu gameMenu, double[] currentLocation, double[] destinationLocation) throws IOException {
+        this.currentLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile",
+                currentLocation, gameMenu.getTileSize(), gameMenu.getFirstTileXInMap(), gameMenu.getFirstTileYInMap());
+        this.destinationLocation = (double[]) connection.getData(gameMenuController, "getCoordinateWithTile",
+                destinationLocation, gameMenu.getTileSize(), gameMenu.getFirstTileXInMap(), gameMenu.getFirstTileYInMap());
         this.mapPane = gameMenu.getMapPane();
-        this.arrow.setRotate(GameMenuController.getArrowAngle(currentLocation, destinationLocation));
+        this.arrow.setRotate((Double) connection.getData(gameMenuController, "getArrowAngle", currentLocation, destinationLocation));
         int tileSize = gameMenu.getTileSize();
         xIncrement = destinationLocation[0] - currentLocation[0];
         yIncrement = destinationLocation[1] - currentLocation[1];
@@ -45,7 +51,12 @@ public class AirAttackAnimation extends Transition {
     protected void interpolate(double v) {
         double currentX = currentLocation[0];
         double currentY = currentLocation[1];
-        double distance = GameMenuController.calculateDestination(xIncrement, yIncrement);
+        double distance;
+        try {
+            distance = (double) connection.getData(gameMenuController, "calculateDestination", xIncrement, yIncrement);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         double changingRate = 3 / distance;
         double destinationX = currentX + changingRate * xIncrement;
         double destinationY = currentY + changingRate * yIncrement;
@@ -55,10 +66,14 @@ public class AirAttackAnimation extends Transition {
         attackBanner.toFront();
         currentLocation[0] = destinationX;
         currentLocation[1] = destinationY;
-        if (GameMenuController.hasReachedDestination(currentLocation, destinationLocation)) {
-            mapPane.getChildren().removeAll(arrow, attackBanner);
-            Utils.getGameMenu().showMap(false);
-            stop();
+        try {
+            if ((Boolean) connection.getData(gameMenuController, "hasReachedDestination", currentLocation, destinationLocation)) {
+                mapPane.getChildren().removeAll(arrow, attackBanner);
+                ViewUtils.getGameMenu().showMap(false);
+                stop();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
