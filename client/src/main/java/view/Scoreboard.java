@@ -1,7 +1,7 @@
 package view;
 
-import controller.Utils;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +9,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import webConnection.Client;
+import webConnection.Connection;
 
+import java.io.IOException;
 import java.net.URL;
 
 public class Scoreboard extends Application {
@@ -17,6 +20,8 @@ public class Scoreboard extends Application {
     private static Stage stage;
     @FXML
     private TableView scoreboard;
+    private Connection connection = Client.getConnection();
+    private String utils = "Utils";
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -31,17 +36,17 @@ public class Scoreboard extends Application {
     }
 
     @FXML
-    public void initialize() {
-        Utils.sortUsers();
-        scoreboard.setItems(Utils.getUsersObservable());
+    public void initialize() throws IOException {
+        connection.doInServer(utils, "sortUsers");
+        scoreboard.setItems((ObservableList) connection.getArrayData(utils, "getUsersObservable"));//TODO: may produce exception
         addColumns();
     }
 
-    private void addColumns() {
-        Utils.columnMaker(scoreboard, "Avatar", "avatar");
-        Utils.columnMaker(scoreboard, "Rank", "rank");
-        Utils.columnMaker(scoreboard, "Username", "username");
-        Utils.columnMaker(scoreboard, "Score", "score");
+    private void addColumns() throws IOException {
+        connection.doInServer(utils, "columnMaker", scoreboard, "Avatar", "avatar");
+        connection.doInServer(utils, "columnMaker", scoreboard, "Rank", "rank");
+        connection.doInServer(utils, "columnMaker", scoreboard, "Username", "username");
+        connection.doInServer(utils, "columnMaker", scoreboard, "Score", "score");
     }
 
     public void back() throws Exception {

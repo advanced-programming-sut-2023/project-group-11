@@ -8,6 +8,7 @@ module server {
     requires com.fasterxml.jackson.annotation;
     requires org.json;
     requires javafx.base;
+    requires javafx.controls;
 
     opens model to com.google.gson, javafx.base;
     opens model.map to com.google.gson;

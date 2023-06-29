@@ -15,7 +15,6 @@ import model.Stronghold;
 import model.User;
 import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
-import view.GameMenu;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,8 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Utils {
-    private static GameMenu gameMenu;
-
     public static boolean isValidUsernameFormat(String username) {
         return username.matches("\"[\\w ]+\"|\\w+");
     }
@@ -120,13 +117,5 @@ public class Utils {
         tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
         tableColumn.setSortable(false);
         tableView.getColumns().add(tableColumn);
-    }
-
-    public static GameMenu getGameMenu() {
-        return gameMenu;
-    }
-
-    public static void setGameMenu(GameMenu gameMenu) {
-        Utils.gameMenu = gameMenu;
     }
 }

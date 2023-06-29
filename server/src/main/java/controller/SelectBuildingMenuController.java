@@ -9,41 +9,40 @@ import model.map.Tile;
 import model.people.Engineer;
 import model.people.Troop;
 import model.people.Unit;
-import view.enums.messages.SelectBuildingMenuMessages;
 
 public class SelectBuildingMenuController {
     private static Tile unitCreationTile = null;
     private static boolean unitCreationFlag = false;
     private static final int[] unitCreationCoordinates = new int[2];
 
-    public static SelectBuildingMenuMessages checkCreateUnit(Building building, String type) {
+    public static Message checkCreateUnit(Building building, String type) {
         unitCreationTile = null;
         unitCreationFlag = false;
 
         Governance currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         int x = building.getXCoordinate(), y = building.getYCoordinate();
         int count = 1;
-        if (!currentGovernance.hasEnoughPopulation(count)) return SelectBuildingMenuMessages.NOT_ENOUGH_POPULATION;
+        if (!currentGovernance.hasEnoughPopulation(count)) return Message.NOT_ENOUGH_POPULATION;
 
         if (type.equals("engineer")) {
             Engineer engineer = new Engineer();
             if (currentGovernance.getGold() < engineer.getCost() * count)
-                return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
-            if (!createUnit(building, engineer, null, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
-            return SelectBuildingMenuMessages.SUCCESS;
+                return Message.NOT_ENOUGH_GOLD;
+            if (!createUnit(building, engineer, null, count)) return Message.BAD_UNIT_MAKER_PLACE;
+            return Message.SUCCESS;
         }
 
         Troop troop = new Troop(type);
 
-        if (currentGovernance.getGold() < count * troop.getCost()) return SelectBuildingMenuMessages.NOT_ENOUGH_GOLD;
+        if (currentGovernance.getGold() < count * troop.getCost()) return Message.NOT_ENOUGH_GOLD;
 
         AllResource armor = troop.getArmorType();
         AllResource weapon = troop.getWeaponType();
 
         if (!currentGovernance.hasEnoughItem(armor, count) || !currentGovernance.hasEnoughItem(weapon, count))
-            return SelectBuildingMenuMessages.NOT_ENOUGH_RESOURCE;
-        if (!createUnit(building, troop, type, count)) return SelectBuildingMenuMessages.BAD_UNIT_MAKER_PLACE;
-        return SelectBuildingMenuMessages.SUCCESS;
+            return Message.NOT_ENOUGH_RESOURCE;
+        if (!createUnit(building, troop, type, count)) return Message.BAD_UNIT_MAKER_PLACE;
+        return Message.SUCCESS;
     }
 
     public static Boolean isUnitMakerSuitable(String unitType, Building building) {
@@ -91,23 +90,23 @@ public class SelectBuildingMenuController {
                 || building instanceof GateHouse;
     }
 
-    public static SelectBuildingMenuMessages checkRepair(Building building) {
+    public static Message checkRepair(Building building) {
         Governance governance = Stronghold.getCurrentGame().getCurrentGovernance();
 
-        if (!isRepairable(building)) return SelectBuildingMenuMessages.CANT_REPAIR;
-        if (building.getHitPoint() == building.getMaxHitPoint()) return SelectBuildingMenuMessages.NO_NEED_TO_REPAIR;
+        if (!isRepairable(building)) return Message.CANT_REPAIR;
+        if (building.getHitPoint() == building.getMaxHitPoint()) return Message.NO_NEED_TO_REPAIR;
         if (isEnemyAround(governance, building.getXCoordinate(), building.getYCoordinate(), building.getSize()))
-            return SelectBuildingMenuMessages.ENEMY_AROUND;
+            return Message.ENEMY_AROUND;
 
         int stoneNeededForRepair = (building.getMaxHitPoint() - building.getHitPoint()) / 10;
 
         if (!governance.hasEnoughItem(AllResource.STONE, stoneNeededForRepair))
-            return SelectBuildingMenuMessages.NOT_ENOUGH_RESOURCE;
+            return Message.NOT_ENOUGH_RESOURCE;
 
         governance.removeFromStorage(AllResource.STONE, stoneNeededForRepair);
         building.repair();
 
-        return SelectBuildingMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     private static boolean isEnemyAround(Governance governance, int X, int Y, int size) {

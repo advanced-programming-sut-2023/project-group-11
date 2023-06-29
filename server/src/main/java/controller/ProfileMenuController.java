@@ -1,21 +1,20 @@
 package controller;
 
 import model.Stronghold;
-import view.enums.messages.ProfileMenuMessages;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
 public class ProfileMenuController {
-    public static ProfileMenuMessages checkChangeUsername(String username) {
+    public static Message checkChangeUsername(String username) {
         if (!Utils.isValidUsernameFormat(username))
-            return ProfileMenuMessages.INVALID_USERNAME;
+            return Message.INVALID_USERNAME;
         else if (Stronghold.usernameExist(username))
-            return ProfileMenuMessages.USERNAME_EXIST;
+            return Message.USERNAME_EXIST;
 
 //        changeUsername(Stronghold.getCurrentUser(), username);
-        return ProfileMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     public static void changeUsername(String username) {
@@ -36,13 +35,13 @@ public class ProfileMenuController {
         Stronghold.getCurrentUser().setNickname(nickname);
     }
 
-    public static ProfileMenuMessages checkChangeEmail(String email) {
+    public static Message checkChangeEmail(String email) {
         if (!Utils.isValidEmailFormat(email))
-            return ProfileMenuMessages.INVALID_EMAIL;
+            return Message.INVALID_EMAIL;
         else if (Stronghold.emailExist(email))
-            return ProfileMenuMessages.EMAIL_EXIST;
+            return Message.EMAIL_EXIST;
 
-        return ProfileMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     public static void changeEmail(String email) {
@@ -53,14 +52,14 @@ public class ProfileMenuController {
         Stronghold.getCurrentUser().setSlogan(slogan);
     }
 
-    public static ProfileMenuMessages checkChangePassword(String oldPassword, String newPassword) {
+    public static Message checkChangePassword(String oldPassword, String newPassword) {
         if (!Stronghold.getCurrentUser().isPasswordCorrect(Utils.encryptField(oldPassword)))
-            return ProfileMenuMessages.INCORRECT_PASSWORD;
+            return Message.INCORRECT_PASSWORD;
         else if (oldPassword.equals(newPassword))
-            return ProfileMenuMessages.SAME_PASSWORD;
+            return Message.SAME_PASSWORD;
 
         changePassword(newPassword);
-        return ProfileMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     private static void changePassword(String newPassword) {

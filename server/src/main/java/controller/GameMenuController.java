@@ -13,7 +13,6 @@ import model.people.*;
 import model.people.enums.Speed;
 import view.GameMenu;
 import view.ViewUtils;
-import view.enums.messages.GameMenuMessages;
 
 import java.util.*;
 
@@ -69,22 +68,22 @@ public class GameMenuController {
         return currentGovernance.getFearFactor();
     }
 
-    public static GameMenuMessages checkDropBuilding(int x, int y, String buildingType) {
+    public static Message checkDropBuilding(int x, int y, String buildingType) {
         Building building = BuildingUtils.getBuildingByType(buildingType);
 
         int size = building.getSize();
         if (!BuildingUtils.isValidCoordinates(currentGame.getMap(), x, y, size))
-            return GameMenuMessages.INVALID_COORDINATE;
-        if (!BuildingUtils.isMapEmpty(x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
-        if (!BuildingUtils.isTextureSuitable(buildingType, x, y, size)) return GameMenuMessages.CANT_BUILD_HERE;
-        if (building.getGoldCost() > currentGovernance.getGold()) return GameMenuMessages.NOT_ENOUGH_MONEY;
+            return Message.INVALID_COORDINATE;
+        if (!BuildingUtils.isMapEmpty(x, y, size)) return Message.CANT_BUILD_HERE;
+        if (!BuildingUtils.isTextureSuitable(buildingType, x, y, size)) return Message.CANT_BUILD_HERE;
+        if (building.getGoldCost() > currentGovernance.getGold()) return Message.NOT_ENOUGH_MONEY;
         if (!currentGovernance.hasEnoughItem(building.getResourceCostType(), building.getResourceCostNumber()))
-            return GameMenuMessages.NOT_ENOUGH_RESOURCE;
+            return Message.NOT_ENOUGH_RESOURCE;
         if (!currentGovernance.hasEnoughPopulation(building.getWorkersNumber()))
-            return GameMenuMessages.NOT_ENOUGH_POPULATION;
+            return Message.NOT_ENOUGH_POPULATION;
 
         BuildingUtils.build(currentGovernance, building, x, y);
-        return GameMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     public static void dropUnit(int x, int y, int count, String type) {

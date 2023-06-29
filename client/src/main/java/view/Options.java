@@ -1,7 +1,5 @@
 package view;
 
-import controller.GameMenuController;
-import controller.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +14,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.User;
+import webConnection.Client;
+import webConnection.Connection;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -25,6 +26,8 @@ public class Options extends Application {
     private static Stage stage;
     @FXML
     private VBox labels;
+    private final String gameMenuController = "GameMenuController";
+    private final Connection connection = Client.getConnection();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -47,12 +50,12 @@ public class Options extends Application {
     }
 
     @FXML
-    private void exit() {
+    private void exit() throws IOException {
         Optional<ButtonType> result =
                 ViewUtils.alert(Alert.AlertType.CONFIRMATION, "End Game", "Are you sure to exit game?");
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            GameMenuController.endGame(false);
+            connection.doInServer(gameMenuController, "endGame", false);
             stage.close();
             SignupMenu.getStage().close();
         }
@@ -65,7 +68,7 @@ public class Options extends Application {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             stage.close();
-            GameMenuController.endGame(false);
+            connection.doInServer(gameMenuController, "endGame", false);
             new MainMenu().start(SignupMenu.getStage());
         }
     }
@@ -77,10 +80,10 @@ public class Options extends Application {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             stage.close();
-            ArrayList<User> users = GameMenuController.getUsernames();
-            String mapName = GameMenuController.getMapName();
-            GameMenuController.endGame(false);
-            MainMenuController.startGame(users, mapName);
+            ArrayList<User> users = (ArrayList<User>) connection.getArrayData(gameMenuController, "getUsernames");//TODO
+            String mapName = (String) connection.getData(gameMenuController, "getMapName");
+            connection.doInServer(gameMenuController, "endGame", false);
+            connection.doInServer("MainMenuController", "startGame", users, mapName);
         }
     }
 

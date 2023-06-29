@@ -41,7 +41,7 @@ public class MoveUnit extends Application {
     private RadioButton digPitchButton;
     @FXML
     private RadioButton digTunnelButton;
-    private ArrayList<Tile> selectedTiles = Utils.getGameMenu().getSelectedTiles();
+    private ArrayList<Tile> selectedTiles = ViewUtils.getGameMenu().getSelectedTiles();
     private String unitType;
     public HBox soldiers;
     private Message message;
@@ -152,7 +152,7 @@ public class MoveUnit extends Application {
 
     public void getDestinationTile() {
         stage.close();
-        Utils.getGameMenu().selectDestinationTile(this);
+        ViewUtils.getGameMenu().selectDestinationTile(this);
     }
 
     private String getUnitTypeByImage(ImageView selectedSoldierImage) {
