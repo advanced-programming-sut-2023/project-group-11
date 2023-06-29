@@ -1,10 +1,7 @@
 package view;
 
-import controller.EntryMenuController;
-import controller.MainMenuController;
-import controller.TradeMenuController;
-import controller.Utils;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -85,7 +82,12 @@ public class CreateTradeMenu extends Application {
     }
 
     private void initializeUsers() {
-        governances.setItems(MainMenuController.removeCurrentGovernanceFromList(Utils.getGovernancesObservable()));
+        try {
+            governances.setItems((ObservableList<User>) Client.getConnection().getData("MainMenuController",
+                    "removeCurrentUserFromList", (Client.getConnection().getData("Utils", "getUsersObservable"))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         //TODO: needs implementation in server
         addColumns();
         governances.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

@@ -119,7 +119,7 @@ public class MarketMenu extends Application {
 
     public void sell() throws IOException {
         //TODO: needs to reconsider in server-side
-        switch ((Message) Client.getConnection().getData("MarketMenuController","checkSellItem",item,amountTextField.getText())){
+        switch (Client.getConnection().checkAction("MarketMenuController","checkSellItem",item,amountTextField.getText())){
             case NOT_ENOUGH_STORAGE -> ViewUtils.alert(Alert.AlertType.ERROR,
                     "Sell Error","You don't have enough of this item!");
             case SUCCESS -> {
@@ -132,7 +132,7 @@ public class MarketMenu extends Application {
     }
     public void buy() throws IOException {
         //TODO: need to reconsider
-        switch ((Message) Client.getConnection().getData("MarketMenuController","checkBuyItem",item,amountTextField.getText())){
+        switch (Client.getConnection().checkAction("MarketMenuController","checkBuyItem",item,amountTextField.getText())){
             case NOT_ENOUGH_STORAGE -> ViewUtils.alert(Alert.AlertType.ERROR,
                     "Buy Error","You don't have enough storage!");
             case NOT_ENOUGH_GOLD -> ViewUtils.alert(Alert.AlertType.ERROR,
