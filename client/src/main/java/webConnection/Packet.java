@@ -29,4 +29,8 @@ public class Packet {
     public ArrayList<Object> getParameters() {
         return parameters;
     }
+
+    public OperationType getOperationType() {
+        return operationType;
+    }
 }

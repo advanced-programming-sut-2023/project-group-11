@@ -44,7 +44,7 @@ public class ForgotPassword extends Application {
     @FXML
     public void initialize() throws IOException {
         String recoveryQuestion = (String) Client.getConnection().getData("LoginMenuController",
-                "showRecoveryQuestion", SignupMenu.getUsername()).get("value");
+                "showRecoveryQuestion", SignupMenu.getUsername());
         recoveryQuestionLabel.setText(recoveryQuestionLabel.getText() + recoveryQuestion);
     }
 

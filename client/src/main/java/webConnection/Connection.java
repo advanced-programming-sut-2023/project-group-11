@@ -37,13 +37,17 @@ public class Connection extends Thread {
         return getRespond();
     }
 
-    public JSONObject getData(String className, String methodName, Object... parameters) throws IOException {
+    public Object getData(String className, String methodName, Object... parameters) throws IOException {
+        return getJSONData(className, methodName, parameters).get("value");
+    }
+
+    public JSONObject getJSONData(String className, String methodName, Object... parameters) throws IOException {
         Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
         sendData(packet);
         return receiveData();
     }
 
-    public JSONArray getArrayData(String className, String methodName, Object... parameters) throws IOException {
+    public JSONArray getJSONArrayData(String className, String methodName, Object... parameters) throws IOException {
         Packet packet = new Packet(OperationType.GET_ARRAY_DATA, className, methodName, parameters);
         sendData(packet);
         return receiveArrayData();
