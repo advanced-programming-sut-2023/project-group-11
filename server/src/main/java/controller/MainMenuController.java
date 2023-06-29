@@ -13,13 +13,13 @@ import model.map.Territory;
 import model.map.Texture;
 import model.map.Tile;
 import model.people.Lord;
-import view.GameMenu;
-import view.SignupMenu;
 
 import java.util.ArrayList;
 
 public class MainMenuController {
-    public static void startGame(ArrayList<User> users, String mapName) throws Exception {
+    public static void startGame(ArrayList<Object> parameters) throws Exception {
+        ArrayList<User> users = (ArrayList<User>) parameters.get(0);
+        String mapName = (String) parameters.get(1);
         String[] usernames = makeListOfPlayers(users);
         Map map = Stronghold.getMapByName(mapName);
         Stronghold.setCurrentGame(new Game(makeGovernances(usernames), map));
@@ -32,7 +32,7 @@ public class MainMenuController {
             initializeAreas(usernames[i], areas, i + 2);
 
         ShowMapMenuController.setCurrentMap(map);
-        new GameMenu().start(SignupMenu.getStage());
+
     }
 
     public static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {
@@ -146,7 +146,7 @@ public class MainMenuController {
 
 
     public static ObservableList<User> removeCurrentUserFromList(ObservableList<User> userObservableList) {
-        userObservableList.remove(Stronghold.getCurrentUser());
+        userObservableList.remove(Stronghold.getCurrentUser());//TODO: ArrayList<Object> parameters
         return userObservableList;
     }
 

@@ -104,6 +104,7 @@ public class Utils {
 
     public static ObservableList<User> getUsersObservable() {
         ArrayList<User> users = Stronghold.getUsers();
+        sortUsers();
         return FXCollections.observableArrayList(users);
     }
 

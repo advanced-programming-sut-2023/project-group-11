@@ -1,9 +1,7 @@
 package view;
 
-import controller.MainMenuController;
-import controller.MapEditMenuController;
-import controller.Utils;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +14,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.User;
 import model.map.Map;
+import webConnection.Client;
+import webConnection.Connection;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -26,6 +27,8 @@ public class NewGame extends Application {
     private TableView<User> users;
     @FXML
     private ChoiceBox<Map> mapName;
+    private final Connection connection = Client.getConnection();
+    private final String utils = "Utils";
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -39,32 +42,35 @@ public class NewGame extends Application {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         initializeMapNames();
         initializeUsers();
     }
 
-    private void initializeUsers() {
-        users.setItems(MainMenuController.removeCurrentUserFromList(Utils.getUsersObservable()));
+    private void initializeUsers() throws IOException {
+        users.setItems((ObservableList<User>) connection.getData("MainMenuController",
+                "removeCurrentUserFromList", (connection.getData(utils, "getUsersObservable"))));//TODO: check this later
+//        users.setItems(MainMenuController.removeCurrentUserFromList(Utils.getUsersObservable()));
         addColumns();
         users.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    private void initializeMapNames() {
-        MapEditMenuController.setMapsOnChoiceBox(mapName);
+    private void initializeMapNames() throws IOException {
+        connection.doInServer("MapEditMenuController", "setMapsOnChoiceBox", mapName);
     }
 
-    private void addColumns() {
-        Utils.columnMaker(users, "Avatar", "avatar");
-        Utils.columnMaker(users, "Rank", "rank");
-        Utils.columnMaker(users, "Username", "username");
-        Utils.columnMaker(users, "Score", "score");
+    private void addColumns() throws IOException {
+        connection.doInServer(utils, "columnMaker", users, "Avatar", "avatar");
+        connection.doInServer(utils, "columnMaker", users, "Rank", "rank");
+        connection.doInServer(utils, "columnMaker", users, "Username", "username");
+        connection.doInServer(utils, "columnMaker", users, "Score", "score");
     }
 
     public void startGame() throws Exception {
         if (users.getSelectionModel().getSelectedItems().size() >= 1) {
-            MainMenuController.startGame(
+            connection.doInServer("MainMenuController", "startGame",
                     new ArrayList<>(users.getSelectionModel().getSelectedItems()), mapName.getValue().getName());
+            new GameMenu().start(SignupMenu.getStage());
             stage.close();
         } else ViewUtils.alert(Alert.AlertType.ERROR, "Start Game", "Please choose a player!");
     }
