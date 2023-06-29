@@ -3,17 +3,19 @@ package webConnetion;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class Packet {
+public class ReceivingPacket {
+    private OperationType operationType;
     private String className;
     private String methodName;
-    private final ArrayList<Objects> parameters = new ArrayList<>();
+    private ArrayList<Object> parameters;
 
-    public Packet(String input) {
+    public ReceivingPacket(String input) {
         JSONObject packet = new JSONObject(input);
+        operationType = OperationType.valueOf((String) packet.get("operationType"));
         className = (String) packet.get("className");
         methodName = (String) packet.get("methodName");
+        parameters = (ArrayList) packet.get("parameters");
     }
 
     public String getClassName() {
@@ -24,7 +26,11 @@ public class Packet {
         return methodName;
     }
 
-    public ArrayList<Objects> getParameters() {
+    public ArrayList<Object> getParameters() {
         return parameters;
+    }
+
+    public OperationType getOperationType() {
+        return operationType;
     }
 }
