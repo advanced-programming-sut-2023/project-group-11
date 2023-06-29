@@ -1,12 +1,13 @@
 package view;
 
-import controller.SignupMenuController;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import webConnection.Client;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Optional;
 import java.util.Random;
@@ -56,7 +57,12 @@ public class ViewUtils {
 
     static void livePasswordError(PasswordField newPassword, Label newPasswordError) {
         newPassword.textProperty().addListener((observable, oldText, newText) -> {
-            int weakness = SignupMenuController.findHowWeakPasswordIs(newText);
+            int weakness = 0;
+            try {
+                weakness = (int) Client.getConnection().getData("SignupMenuController","findHowWeakPasswordIs",newText);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             if (newText.isEmpty()) {
                 newPasswordError.setText("");
             } else if (weakness == 0) {

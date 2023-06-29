@@ -8,7 +8,10 @@
       <change afterPath="$PROJECT_DIR$/src/main/java/controller/Message.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/webConnetion/OperationType.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/webConnetion/SendingPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/ViewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/ViewUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnetion/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/webConnetion/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnetion/ReceivingPacket.java" afterDir="false" />
     </list>

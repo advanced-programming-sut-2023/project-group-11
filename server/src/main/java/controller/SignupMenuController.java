@@ -6,23 +6,24 @@ import org.passay.CharacterData;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
-import view.enums.messages.SignupMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class SignupMenuController {
-    public static SignupMenuMessages checkUsername(String username) {
-        if (username.isEmpty()) return SignupMenuMessages.EMPTY_FIELD;
-        if (!Utils.isValidUsernameFormat(username)) return SignupMenuMessages.INVALID_USERNAME_FORMAT;
-        if (Stronghold.usernameExist(username)) return SignupMenuMessages.USERNAME_EXIST;
-        return SignupMenuMessages.SUCCESS;
+    public static Message checkUsername(ArrayList parameters) {
+        String username = (String) parameters.get(0);
+        if (username.isEmpty()) return Message.EMPTY_FIELD;
+        if (!Utils.isValidUsernameFormat(username)) return Message.INVALID_USERNAME_FORMAT;
+        if (Stronghold.usernameExist(username)) return Message.USERNAME_EXIST;
+        return Message.SUCCESS;
     }
 
-    public static SignupMenuMessages checkEmail(String email) {
-        if (Stronghold.emailExist(email)) return SignupMenuMessages.EMAIL_EXIST;
-        if (!Utils.isValidEmailFormat(email)) return SignupMenuMessages.INVALID_EMAIL_FORMAT;
-        return SignupMenuMessages.SUCCESS;
+    public static Message checkEmail(ArrayList parameters) {
+        String email = (String) parameters.get(0);
+        if (Stronghold.emailExist(email)) return Message.EMAIL_EXIST;
+        if (!Utils.isValidEmailFormat(email)) return Message.INVALID_EMAIL_FORMAT;
+        return Message.SUCCESS;
     }
 
     public static ArrayList<String> getRecoveryQuestions() {
@@ -69,7 +70,8 @@ public class SignupMenuController {
         return username;
     }
 
-    public static int findHowWeakPasswordIs(String password) {
+    public static int findHowWeakPasswordIs(ArrayList parameters) {
+        String password = (String) parameters.get(0);
         int weakness = 0;
         if (password.length() < 6) weakness++;
         if (!password.matches("(?=.*[A-Z]).*")) weakness++;
@@ -79,7 +81,14 @@ public class SignupMenuController {
         return weakness;
     }
 
-    public static void createUser(String username, String password, String email, String nickname, String slogan, String recoveryQuestion, String recoveryAnswer) {
+    public static void createUser(ArrayList parameters) {
+        String username = (String) parameters.get(0);
+        String password = (String) parameters.get(1);
+        String email = (String) parameters.get(2);
+        String nickname = (String) parameters.get(3);
+        String slogan = (String) parameters.get(4);
+        String recoveryQuestion = (String) parameters.get(5);
+        String recoveryAnswer = (String) parameters.get(6);
         recoveryAnswer = Utils.encryptField(recoveryAnswer);
         password = Utils.encryptField(password);
         new User(username, password, email, nickname, recoveryQuestion, recoveryAnswer, slogan);
