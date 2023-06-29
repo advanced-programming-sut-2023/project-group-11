@@ -82,7 +82,7 @@ public class Utils {
                 type.equals("fire ballista") || type.equals("catapults");
     }
 
-    public static String[] getCurrentUserFields() {
+    public static String[] getCurrentUserFields(ArrayList parameters) {
         User user = Stronghold.getCurrentUser();
         return new String[]{user.getUsername(), user.getEmail(), user.getRecoveryQuestion(),
                 user.getNickname(), user.getSlogan()};
