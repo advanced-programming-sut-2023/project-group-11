@@ -20,7 +20,8 @@ module client {
     opens model.map to com.google.gson;
     opens model.buildings to com.google.gson;
     opens model.people to com.google.gson;
+    opens webConnection to com.google.gson;
     exports model.people.enums to com.google.gson;
-    exports view.animation;
-    opens view.animation to javafx.fxml;
+//    exports view.animation;
+//    opens view.animation to javafx.fxml;
 }

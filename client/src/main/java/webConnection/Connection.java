@@ -49,7 +49,7 @@ public class Connection extends Thread {
     public ArrayList getArrayData(String className, String methodName, Object... parameters) throws IOException {
         Packet packet = new Packet(OperationType.GET_ARRAY_DATA, className, methodName, parameters);
         sendData(packet);
-        return new Gson().fromJson(receiveArrayData().toString(),new TypeToken<ArrayList<>>(){}.getType());
+        return new Gson().fromJson(receiveArrayData().toString(),new TypeToken<ArrayList>(){}.getType());
     }
 
     public JSONObject getJSONData(String className, String methodName, Object... parameters) throws IOException {
@@ -70,7 +70,8 @@ public class Connection extends Thread {
     }
 
     private void sendData (Packet packet) throws IOException {
-        out.writeUTF(new JSONObject(packet).toString());
+        String data = new Gson().toJson(packet);
+        out.writeUTF(data);
     }
 
     private Message getRespond() throws IOException {
@@ -78,7 +79,9 @@ public class Connection extends Thread {
     }
 
     private JSONObject receiveData() throws IOException {
-        return new JSONObject(in.readUTF());
+        String d = in.readUTF();
+//        return new JSONObject(new Gson().toJson(d));
+        return new JSONObject(d);
     }
 
     private JSONArray receiveArrayData() throws IOException {

@@ -1,5 +1,7 @@
 package webConnetion;
 
+import controller.EntryMenuController;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -7,6 +9,7 @@ import java.net.Socket;
 public class Server {
     public Server(int port) {
         System.out.println("Starting server...");
+        EntryMenuController.fillAllFieldsWithPreviousData();
         try {
             ServerSocket serverSocket = new ServerSocket(port);
             while (true) {

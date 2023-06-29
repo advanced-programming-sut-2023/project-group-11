@@ -1,6 +1,7 @@
 package webConnetion;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class ReceivingPacket {
         operationType = OperationType.valueOf((String) packet.get("operationType"));
         className = (String) packet.get("className");
         methodName = (String) packet.get("methodName");
-        parameters = (ArrayList) packet.get("parameters");
+        parameters = new ArrayList<>(((JSONArray) packet.get("parameters")).toList());
     }
 
     public String getClassName() {

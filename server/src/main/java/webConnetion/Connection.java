@@ -1,7 +1,6 @@
 package webConnetion;
 
-import controller.Message;
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -28,7 +27,7 @@ public class Connection extends Thread {
         while (true) {
             try {
                 ReceivingPacket receivingPacket = new ReceivingPacket(in.readUTF());
-                Class<?> controllerClass = Class.forName(receivingPacket.getClassName());
+                Class<?> controllerClass = Class.forName("controller." + receivingPacket.getClassName());
                 Method controllerMethod = controllerClass.getDeclaredMethod(receivingPacket.getMethodName(), ArrayList.class);
                 SendingPacket sendingPacket;
 
@@ -37,7 +36,7 @@ public class Connection extends Thread {
                 else {
                     Object result = controllerMethod.invoke(null, receivingPacket.getParameters());
                     sendingPacket = new SendingPacket(result);
-                    out.writeUTF(new JSONObject(sendingPacket).toString());
+                    out.writeUTF(new Gson().toJson(sendingPacket));
                 }
             } catch (IOException e) {
                 System.out.println("Connection \"ip=" + socket.getInetAddress().getHostAddress() + " port=" + socket.getPort() + "\" lost!");
