@@ -48,8 +48,8 @@ public class NewGame extends Application {
     }
 
     private void initializeUsers() throws IOException {
-        users.setItems((ObservableList<User>) connection.getData("MainMenuController",
-                "removeCurrentUserFromList", (connection.getData(utils, "getUsersObservable"))));//TODO: check this later
+//        users.setItems((ObservableList<User>) connection.getData("MainMenuController",
+//                "removeCurrentUserFromList", (connection.getData(utils, "getUsersObservable"))));//TODO: check this later
 //        users.setItems(MainMenuController.removeCurrentUserFromList(Utils.getUsersObservable()));
         addColumns();
         users.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

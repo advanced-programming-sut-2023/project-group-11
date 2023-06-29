@@ -79,9 +79,7 @@ public class Connection extends Thread {
     }
 
     private JSONObject receiveData() throws IOException {
-        String d = in.readUTF();
-//        return new JSONObject(new Gson().toJson(d));
-        return new JSONObject(d);
+        return new JSONObject(in.readUTF());
     }
 
     private JSONArray receiveArrayData() throws IOException {

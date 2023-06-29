@@ -1,6 +1,5 @@
 package view;
 
-import controller.GameMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +11,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import webConnection.Client;
+import webConnection.Connection;
 
+import java.io.IOException;
 import java.net.URL;
 
 public class PopularityFactors extends Application {
@@ -34,6 +36,8 @@ public class PopularityFactors extends Application {
     public ImageView aleFace;
     public ImageView totalFace;
     public ImageView sicknessFace;
+    private Connection connection = Client.getConnection();
+    private String gameMenuController = "GameMenuController";
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -50,7 +54,8 @@ public class PopularityFactors extends Application {
     public void initialize() throws Exception {
         initializeSliders();
         String[] factors = {"Food", "Tax", "Fear", "Religious", "Ale", "Sickness", "Total"};
-        for (String factor : factors) setLabelValue(factor, GameMenuController.showFactor(factor));
+        for (String factor : factors)
+            setLabelValue(factor, (int) connection.getData(gameMenuController, "showFactor", factor));
     }
 
     private void setLabelValue(String factor, int currentValue) throws Exception {
@@ -69,22 +74,22 @@ public class PopularityFactors extends Application {
                 "/src/main/resources/IMG/PopularityFactorsMenu/" + colorName + "Face.PNG"));
     }
 
-    private void initializeSliders() {
-        foodRateSlider.setDisable(!GameMenuController.hasFood());
+    private void initializeSliders() throws IOException {
+        foodRateSlider.setDisable(!((Boolean) connection.getData(gameMenuController, "hasFood")));
         addListener(foodRateSlider, "Food");
         addListener(taxRateSlider, "Tax");
         addListener(fearRateSlider, "Fear");
-        foodRateSlider.setValue(GameMenuController.showFoodRate());
-        taxRateSlider.setValue(GameMenuController.showTaxRate());
-        fearRateSlider.setValue(GameMenuController.showFearRate());
+        foodRateSlider.setValue((Double) connection.getData(gameMenuController, "showFoodRate"));
+        taxRateSlider.setValue((Double) connection.getData(gameMenuController, "showTaxRate"));
+        fearRateSlider.setValue((Double) connection.getData(gameMenuController, "showFearRate"));
     }
 
     private void addListener(Slider slider, String factor) {
         slider.valueProperty().addListener((observable, old, newValue) -> {
             try {
-                GameMenuController.changeRate(factor, newValue.intValue());
-                setLabelValue(factor, GameMenuController.showFactor(factor));
-                setLabelValue("Total", GameMenuController.showFactor("Total"));
+                connection.doInServer(gameMenuController, "changeRate", factor, newValue.intValue());
+                setLabelValue(factor, (Integer) connection.getData(gameMenuController, "showFactor", factor));
+                setLabelValue("Total", (Integer) connection.getData(gameMenuController, "showFactor", "Total"));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

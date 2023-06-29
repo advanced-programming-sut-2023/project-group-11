@@ -26,17 +26,17 @@ public class SignupMenuController {
         return Message.SUCCESS;
     }
 
-    public static ArrayList<String> getRecoveryQuestions() {
+    public static ArrayList<String> getRecoveryQuestions(ArrayList<Object> parameters) {
         return Stronghold.getRecoveryQuestions();
     }
 
-    public static String generateRandomSlogan() {
+    public static String generateRandomSlogan(ArrayList<Object> parameters) {
         ArrayList<String> randomSlogans = Stronghold.getRandomSlogans();
         int n = new Random().nextInt(0, randomSlogans.size());
         return randomSlogans.get(n);
     }
 
-    public static String generateRandomPassword() {
+    public static String generateRandomPassword(ArrayList<Object> parameters) {
         CharacterRule lowerCaseRule = new CharacterRule(EnglishCharacterData.LowerCase);
         lowerCaseRule.setNumberOfCharacters(1);
 

@@ -26,7 +26,7 @@ public class TradeMenuController {
         return Message.SUCCESS;
     }
 
-    public static String tradeList() {
+    public static String tradeList(ArrayList parameters) {
         String output = "";
         int index = 1;
         for (Trade trade : Stronghold.getCurrentGame().getTrades()) {
@@ -60,12 +60,12 @@ public class TradeMenuController {
         return Message.SUCCESS;
     }
 
-    public static String tradeHistory() {
+    public static String tradeHistory(ArrayList parameters) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         return currentGovernance.tradeHistory();
     }
 
-    public static String showNotifications() {
+    public static String showNotifications(ArrayList parameters) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         String output = "";
         int index = 1;
@@ -78,7 +78,7 @@ public class TradeMenuController {
         return output;
     }
 
-    public static String showAllGovernance() {
+    public static String showAllGovernance(ArrayList parameters) {
         String output = "";
         int index = 1;
         for (Governance governance : Stronghold.getCurrentGame().getGovernances())
@@ -86,21 +86,21 @@ public class TradeMenuController {
         return output;
     }
 
-    public static ArrayList<AllResource> getAllResources() {
+    public static ArrayList<AllResource> getAllResources(ArrayList parameters) {
         ArrayList<AllResource> allResources = new ArrayList<>();
         Collections.addAll(allResources, AllResource.values());
         return allResources;
     }
 
-    public static ObservableList<Trade> getSentTradesObservable() {
+    public static ObservableList<Trade> getSentTradesObservable(ArrayList parameters) {
         return FXCollections.observableArrayList(Stronghold.getCurrentGame().getCurrentGovernance().getPreviousSentTrades());
     }
 
-    public static ObservableList<Trade> getReceivedTradesObservable() {
+    public static ObservableList<Trade> getReceivedTradesObservable(ArrayList parameters) {
         return FXCollections.observableArrayList(Stronghold.getCurrentGame().getCurrentGovernance().getPreviousReceivedTrades());
     }
 
-    public static void seenNewTrades() {
+    public static void seenNewTrades(ArrayList parameters) {
         for (Trade trade : Stronghold.getCurrentGame().getCurrentGovernance().getPreviousReceivedTrades())
             trade.setSeen(true);
     }

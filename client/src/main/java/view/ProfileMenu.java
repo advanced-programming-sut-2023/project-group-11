@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -14,6 +15,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.json.JSONArray;
 import view.enums.Message;
 import webConnection.Client;
 import webConnection.Connection;
@@ -22,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ProfileMenu extends Application {
     //TODO: copy other users' avatars for current user
@@ -61,11 +64,18 @@ public class ProfileMenu extends Application {
 
     @FXML
     public void initialize() throws IOException {
-        setUserFields((String[]) connection.getData(utils, "getCurrentUserFields"));
+        setUserFields(convertToArray((JSONArray) connection.getData(utils, "getCurrentUserFields")));
         slogan.setWrapText(true);
         updateDefaultLabels();
         updateNewUsernameLabel();
         updateEmailLabel();
+    }
+
+    private String[] convertToArray(JSONArray jsonArray) {
+        ArrayList<Object> list = new ArrayList<>(jsonArray.toList());
+        String[] fields = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) fields[i] = (String) list.get(i);
+        return fields;
     }
 
     private void setUserFields(String[] userFields) {
@@ -175,7 +185,9 @@ public class ProfileMenu extends Application {
     }
 
     private void updateAvatar() throws IOException {
-        avatar.setImage(((ImageView) connection.getData(utils, "getCurrentUserAvatar")).getImage());
+        Image image = new Image(((String) connection.getData(utils, "getCurrentUserAvatarFileName")));
+        avatar.setImage(image);
+//        avatar.setImage(((String) connection.getData(utils, "getCurrentUserAvatarFileName")).getImage());
     }
 
     public void generateRandomSlogan() throws IOException {
