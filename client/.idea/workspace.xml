@@ -5,22 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="edit getData methods">
-      <change afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/OperationType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/SendingPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_10_38__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_10_38__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_11_07__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_11_07__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/CreateTradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/CreateTradeMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/GameMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/LoginMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/MainMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/MapEditMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/MarketMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/ProfileMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectBuildingMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/SelectUnitMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/ShowMapMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/SignupMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/TradeMenuMessages.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MarketMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MarketMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/SignupMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/SignupMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/TradeMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/ReceivingPacket.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,20 +53,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/client&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/client",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="webConnection" />
@@ -87,7 +88,7 @@
       <workItem from="1687984326282" duration="3585000" />
       <workItem from="1688013129333" duration="33000" />
       <workItem from="1688013172394" duration="349000" />
-      <workItem from="1688013733596" duration="10006000" />
+      <workItem from="1688013733596" duration="11365000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>

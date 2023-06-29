@@ -82,6 +82,6 @@ public class Connection extends Thread {
     }
 
     private JSONArray receiveArrayData() throws IOException {
-        return (JSONArray) receiveData().get("array");
+        return (JSONArray) receiveData().get("value");
     }
 }
