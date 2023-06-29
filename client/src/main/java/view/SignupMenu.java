@@ -160,7 +160,7 @@ public class SignupMenu extends Application {
     private void updateSignupLabel() {
         signupUsername.textProperty().addListener((observable, oldText, newText)->{
             try {
-                message = Client.getConnection().checkAction("SignupMenuController","SignupMenuController",newText);
+                message = Client.getConnection().checkAction("SignupMenuController","checkUsername",newText);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
