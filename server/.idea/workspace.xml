@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="">
+    <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="start server Connection">
+      <change afterPath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_10_38__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_11_07__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/SignupCompletion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/SignupCompletion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/OperationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/OperationType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +48,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/client&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/project-group-11-4/server&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -69,7 +72,8 @@
       <workItem from="1687984108416" duration="33000" />
       <workItem from="1687984392274" duration="4327000" />
       <workItem from="1688013075603" duration="355000" />
-      <workItem from="1688013733866" duration="4198000" />
+      <workItem from="1688013733866" duration="3260000" />
+      <workItem from="1688022099356" duration="1244000" />
     </task>
     <task id="LOCAL-00001" summary="add server project">
       <created>1687985072897</created>
@@ -96,7 +100,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/TCP_Network" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/TCP_Network" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>

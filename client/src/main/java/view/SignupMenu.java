@@ -13,12 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.enums.Message;
-import view.enums.messages.LoginMenuMessages;
-import view.enums.messages.SignupMenuMessages;
 import webConnection.Client;
-import webConnection.Connection;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Random;
@@ -110,12 +108,17 @@ public class SignupMenu extends Application {
         nicknameTextField.textProperty().addListener((observable, oldText, newText)-> nicknameError.setText(""));
     }
 
-    private void updateEmailLabel() {
+    private void updateEmailLabel(){
         emailTextField.textProperty().addListener((observable, oldText, newText)->{
             if(newText.isEmpty()){
                 emailError.setText("");
             }else {
-                switch (SignupMenuController.checkEmail(newText)) {
+                try {
+                    message = Client.getConnection().checkAction("SignupMenuController","checkEmail",newText);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                switch (message) {
                     case EMAIL_EXIST -> emailError.setText("emailTextField exists!");
                     case INVALID_EMAIL_FORMAT -> emailError.setText("invalid format!");
                     default -> emailError.setText("");
@@ -156,7 +159,12 @@ public class SignupMenu extends Application {
 
     private void updateSignupLabel() {
         signupUsername.textProperty().addListener((observable, oldText, newText)->{
-            switch (SignupMenuController.checkUsername(newText)) {
+            try {
+                message = Client.getConnection().checkAction("SignupMenuController","SignupMenuController",newText);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            switch (message) {
                 case USERNAME_EXIST -> signupUsernameError.setText("username exists");
                 case INVALID_USERNAME_FORMAT -> signupUsernameError.setText("invalid format");
                 default -> signupUsernameError.setText("");
@@ -215,9 +223,10 @@ public class SignupMenu extends Application {
         }
     }
 
-    public void generateRandomPassword() {
+    public void generateRandomPassword() throws IOException {
         signupConfirmation.setText("");
-        signupPassword.setText(SignupMenuController.generateRandomPassword());
+        String randomPassword = (String) Client.getConnection().getData("SignupMenuController","generateRandomPassword");
+        signupPassword.setText(randomPassword);
         passwordShown.setText(signupPassword.getText());
         passwordShow.setSelected(true);
         changeVisibility();
@@ -235,9 +244,10 @@ public class SignupMenu extends Application {
         }
     }
 
-    public void randomSlogan() {
+    public void randomSlogan() throws IOException {
         if(randomSloganBox.isSelected()){
-            sloganTextField.setText(SignupMenuController.generateRandomSlogan());
+            String randomSlogan = (String) Client.getConnection().getData("SignupMenuController","generateRandomSlogan");
+            sloganTextField.setText(randomSlogan);
         }else{
             sloganTextField.setText("");
         }

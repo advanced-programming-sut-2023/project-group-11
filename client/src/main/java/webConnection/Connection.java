@@ -1,11 +1,14 @@
 package webConnection;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import view.enums.Message;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Connection extends Thread {
@@ -41,6 +44,12 @@ public class Connection extends Thread {
         Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
         sendData(packet);
         return receiveData().get("value");
+    }
+
+    public ArrayList getArrayData(String className, String methodName, Object... parameters) throws IOException {
+        Packet packet = new Packet(OperationType.GET_ARRAY_DATA, className, methodName, parameters);
+        sendData(packet);
+        return new Gson().fromJson(receiveArrayData().toString(),new TypeToken<ArrayList<>>(){}.getType());
     }
 
     public JSONObject getJSONData(String className, String methodName, Object... parameters) throws IOException {
