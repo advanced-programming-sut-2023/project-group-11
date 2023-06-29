@@ -6,7 +6,6 @@ import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
 import model.map.Tree;
-import view.enums.messages.MapEditMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,57 +13,46 @@ import java.util.Random;
 public class MapEditMenuController {
     private static Map currentMap;
 
-    public static void setMapsOnChoiceBox(ChoiceBox<Map> mapsChoiceBox) {
-        mapsChoiceBox.getItems().addAll(Stronghold.getMaps());
-        mapsChoiceBox.setValue(Stronghold.getMapByName("original"));
-        ShowMapMenuController.setCurrentMap(Stronghold.getMapByName("original"));
-        currentMap = Stronghold.getMapByName("original");
-        mapsChoiceBox.setOnAction(actionEvent -> {
-            ShowMapMenuController.setCurrentMap(mapsChoiceBox.getValue());
-            MapEditMenuController.setCurrentMap(mapsChoiceBox.getValue());
-        });
-    }
-
     public static void saveMap() {
         Utils.updateDatabase("maps");
     }
 
-    public static void setCurrentMap(Map map) {
-        currentMap = map;
+    public static void setCurrentMap(String mapName) {
+        currentMap = Stronghold.getMapByName(mapName);
     }
 
     public static Map getCurrentMap() {
         return currentMap;
     }
 
-    public static MapEditMenuMessages checkMakeNewMap(String mapName, String mapSize) {
-        if (mapName.isEmpty()) return MapEditMenuMessages.MAP_NAME_FIELD_EMPTY;
-        else if (mapSize.isEmpty()) return MapEditMenuMessages.MAP_SIZE_FIELD_EMPTY;
-        else if (!mapSize.matches("\\d+")) return MapEditMenuMessages.INVALID_MAP_SIZE_FORMAT;
-        else if (Stronghold.getMapByName(mapName) != null) return MapEditMenuMessages.MAP_EXIST;
+    public static Message checkMakeNewMap(String mapName, String mapSize) {
+        if (mapName.isEmpty()) return Message.MAP_NAME_FIELD_EMPTY;
+        else if (mapSize.isEmpty()) return Message.MAP_SIZE_FIELD_EMPTY;
+        else if (!mapSize.matches("\\d+")) return Message.INVALID_MAP_SIZE_FORMAT;
+        else if (Stronghold.getMapByName(mapName) != null) return Message.MAP_EXIST;
         else if (Integer.parseInt(mapSize) < 50 || Integer.parseInt(mapSize) > 200)
-            return MapEditMenuMessages.INVALID_MAP_SIZE;
+            return Message.INVALID_MAP_SIZE;
 
         currentMap = new Map(mapName, Integer.parseInt(mapSize));
-        ShowMapMenuController.setCurrentMap(currentMap);
+        ShowMapMenuController.setCurrentMap(currentMap.getName());
         Utils.updateDatabase("maps");
-        return MapEditMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     public static void clear(ArrayList<Tile> tiles) {
         for (Tile tile : tiles) tile.clear();
     }
 
-    public static MapEditMenuMessages setTexture(ArrayList<Tile> tiles, String textureName, int selectedTileX, int selectedTileY) {
+    public static Message setTexture(ArrayList<Tile> tiles, String textureName, int selectedTileX, int selectedTileY) {
         Texture texture = Texture.getTextureByName(textureName);
 
-        if (tiles.size() == 0) return MapEditMenuMessages.EMPTY_SELECTED_TILES;
+        if (tiles.size() == 0) return Message.EMPTY_SELECTED_TILES;
         else if (texture.equals(Texture.BIG_LAKE) || texture.equals(Texture.SMALL_LAKE) || texture.equals(Texture.CLIFF)) {
-            if (tiles.size() > 1) return MapEditMenuMessages.SELECT_ONLY_ONE_TILE;
+            if (tiles.size() > 1) return Message.SELECT_ONLY_ONE_TILE;
             switch (texture) {
                 case SMALL_LAKE -> {
                     if (!isSuitableLandForLake(selectedTileX, selectedTileY, 3))
-                        return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+                        return Message.INVALID_PLACE_TO_DEPLOY;
                     else {
                         for (int i = 0; i < 3; i++)
                             for (int j = 0; j < 3; j++)
@@ -73,7 +61,7 @@ public class MapEditMenuController {
                 }
                 case BIG_LAKE -> {
                     if (!isSuitableLandForLake(selectedTileX, selectedTileY, 5))
-                        return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+                        return Message.INVALID_PLACE_TO_DEPLOY;
                     else {
                         for (int i = 0; i < 5; i++)
                             for (int j = 0; j < 5; j++)
@@ -82,7 +70,7 @@ public class MapEditMenuController {
                 }
                 case CLIFF -> {
                     if (!isSuitableLandForCliff(selectedTileX, selectedTileY))
-                        return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+                        return Message.INVALID_PLACE_TO_DEPLOY;
                     else {
                         ArrayList<int[][]> directions = buildCoordinates();
                         int[][] direction = directions.get(new Random().nextInt(directions.size()));
@@ -100,15 +88,15 @@ public class MapEditMenuController {
             for (Tile tile : tiles)
                 tile.setTexture(texture);
         }
-        return MapEditMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
-    public static MapEditMenuMessages dropTree(ArrayList<Tile> tiles, String treeName) {
-        if (!isSuitableLandForTree(tiles)) return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+    public static Message dropTree(ArrayList<Tile> tiles, String treeName) {
+        if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;
 
         for (Tile tile : tiles)
             tile.setTree(new Tree(treeName));
-        return MapEditMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     private static boolean isSuitableLandForLake(int tileX, int tileY, int lakeSize) {

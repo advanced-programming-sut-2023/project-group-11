@@ -1,5 +1,6 @@
 package controller;
 
+import model.Stronghold;
 import model.buildings.Building;
 import model.buildings.ProductiveBuilding;
 import model.map.Map;
@@ -24,8 +25,8 @@ public class ShowMapMenuController {
         return currentMap;
     }
 
-    public static void setCurrentMap(Map currentMap) {
-        ShowMapMenuController.currentMap = currentMap;
+    public static void setCurrentMap(String mapName) {
+        currentMap = Stronghold.getMapByName(mapName);
     }
 
     public static Tile getSelectedTile(int selectedTileX, int selectedTileY, int firstTileX, int firstTileY) {

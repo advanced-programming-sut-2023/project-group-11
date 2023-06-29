@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_3_35_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_11_28_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/main/java/model/Parsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_12_02__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_12_02__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/model/Stronghold.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/model/map/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/MapSelection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +68,26 @@
       <recent name="webConnetion" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="webConnetion.Server" />
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="webConnetion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -70,7 +99,7 @@
       <workItem from="1687984108416" duration="33000" />
       <workItem from="1687984392274" duration="4327000" />
       <workItem from="1688013075603" duration="355000" />
-      <workItem from="1688013733866" duration="12900000" />
+      <workItem from="1688013733866" duration="19391000" />
     </task>
     <task id="LOCAL-00001" summary="add server project">
       <created>1687985072897</created>
@@ -107,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688029577587</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="LoginMenu ended in both sides">
+      <created>1688039564723</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688039564723</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +169,7 @@
     <MESSAGE value="getData minor changes" />
     <MESSAGE value="add server pocket receiving and sending" />
     <MESSAGE value="Messages merged" />
-    <option name="LAST_COMMIT_MESSAGE" value="Messages merged" />
+    <MESSAGE value="LoginMenu ended in both sides" />
+    <option name="LAST_COMMIT_MESSAGE" value="LoginMenu ended in both sides" />
   </component>
 </project>

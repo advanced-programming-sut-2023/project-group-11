@@ -31,7 +31,7 @@ public class MainMenuController {
         for (int i = 0; i < usernames.length; i++)
             initializeAreas(usernames[i], areas, i + 2);
 
-        ShowMapMenuController.setCurrentMap(map);
+        ShowMapMenuController.setCurrentMap(map.getName());
 
     }
 

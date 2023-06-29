@@ -1,7 +1,5 @@
 package view;
 
-import controller.MapEditMenuController;
-import controller.ShowMapMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,13 +20,15 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import model.Parsers;
 import model.map.Texture;
 import model.map.Tile;
 import model.map.Tree;
 import view.enums.Zoom;
-import view.enums.messages.MapEditMenuMessages;
+import webConnection.Client;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,8 +78,9 @@ public class MapEditMenu extends Application {
     }
 
     @FXML
-    public void initialize() {
-        mapSize = ShowMapMenuController.getCurrentMap().getSize();
+    public void initialize() throws IOException {
+        mapSize = Parsers.parseMapObject(Client.getConnection().getJSONData("ShowMapMenuController",
+                "getCurrentMap")).getSize();
         showMap();
         setTraversable();
         initializeTextureBoxes();
@@ -143,7 +144,7 @@ public class MapEditMenu extends Application {
         ButtonType result = alert.showAndWait().orElse(cancelButton);
 
         if (result.equals(saveButton)) {
-            MapEditMenuController.saveMap();
+            Client.getConnection().doInServer("MapEditMenuController", "saveMap");
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Saving map", "Map saved successfully!");
             new MainMenu().start(SignupMenu.getStage());
         }

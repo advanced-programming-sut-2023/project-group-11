@@ -1,6 +1,5 @@
 package view;
 
-import controller.MapEditMenuController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,9 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import view.enums.messages.MapEditMenuMessages;
+import model.Parsers;
+import model.map.Map;
+import view.enums.Message;
+import webConnection.Client;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MapSelection extends Application {
     @FXML
@@ -27,7 +31,7 @@ public class MapSelection extends Application {
     @FXML
     private TextField newMapSize;
     @FXML
-    private ChoiceBox mapsChoiceBox;
+    private ChoiceBox<Map> mapsChoiceBox;
     private static Stage stage;
 
     @Override
@@ -42,8 +46,26 @@ public class MapSelection extends Application {
     }
 
     @FXML
-    public void initialize() {
-        MapEditMenuController.setMapsOnChoiceBox(mapsChoiceBox);
+    public void initialize() throws IOException {
+        setMapsOnChoiceBox();
+    }
+
+    private void setMapsOnChoiceBox() throws IOException {
+        ArrayList<Map> maps = Parsers.parseMapArrayList(Client.getConnection().getJSONArrayData("Stronghold", "getMaps"));
+        mapsChoiceBox.getItems().addAll(maps);
+        mapsChoiceBox.setValue(maps.get(0));
+        Client.getConnection().doInServer("ShowMapMenuController", "setCurrentMap", "original");
+        Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap", "original");
+        mapsChoiceBox.setOnAction(actionEvent -> {
+            try {
+                Client.getConnection().doInServer("ShowMapMenuController", "setCurrentMap",
+                        mapsChoiceBox.getValue().getName());
+                Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap",
+                        mapsChoiceBox.getValue().getName());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public void selectMap() throws Exception {
@@ -52,7 +74,8 @@ public class MapSelection extends Application {
     }
 
     public void makeNewMap() throws Exception {
-        MapEditMenuMessages message = MapEditMenuController.checkMakeNewMap(newMapName.getText(), newMapSize.getText());
+        Message message = Client.getConnection().checkAction("MapEditMenuController", "checkMakeNewMap",
+                newMapName.getText(), newMapSize.getText());
         ViewUtils.clearLabels(mapNameError, mapSizeError);
 
         switch (message) {
