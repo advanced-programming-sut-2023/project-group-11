@@ -30,13 +30,13 @@ public class SignupMenuController {
         return Stronghold.getRecoveryQuestions();
     }
 
-    public static String generateRandomSlogan() {
+    public static String generateRandomSlogan(ArrayList parameters) {
         ArrayList<String> randomSlogans = Stronghold.getRandomSlogans();
         int n = new Random().nextInt(0, randomSlogans.size());
         return randomSlogans.get(n);
     }
 
-    public static String generateRandomPassword() {
+    public static String generateRandomPassword(ArrayList parameters) {
         CharacterRule lowerCaseRule = new CharacterRule(EnglishCharacterData.LowerCase);
         lowerCaseRule.setNumberOfCharacters(1);
 

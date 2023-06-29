@@ -5,10 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_3_35_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/model/map/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/BuildMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/BuildMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/MapSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/MoveUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/MoveUnit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/NewGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/NewGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/PopularityFactors.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/PopularityFactors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/SetUnitState.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/SetUnitState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/ViewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/ViewUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/animation/AirAttackAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/animation/AirAttackAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/animation/DigAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/animation/DigAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/animation/GroundAttackAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/animation/GroundAttackAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/animation/MovingAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/animation/MovingAnimation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/SignupMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/TradeMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +78,26 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="webConnetion" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="webConnetion.Server" />
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="webConnetion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Server" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -118,7 +158,39 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/TCP_Network" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/TCP_Network" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="TCP_Network" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
