@@ -34,8 +34,6 @@ public enum Message {
     INVALID_AMOUNT,
 
 
-
-    WEAK_PASSWORD,
     //GAME
     INVALID_COORDINATE,
     INVALID_BUILDING_TYPE,
@@ -71,11 +69,8 @@ public enum Message {
     EMPTY_SELECTED_TILES,
     SELECT_ONLY_ONE_TILE,
     //MARKET
-    NOT_ENOUGH_GOLD,
-    NOT_ENOUGH_STORAGE,
     INVALID_ITEM,
     CANCEL,
-    INVALID_AMOUNT,
     //PROFILE
     INVALID_USERNAME,
     INVALID_EMAIL,
@@ -121,6 +116,5 @@ public enum Message {
     TRADE_CLOSED,
     UNSUCCESSFUL,
     CANT_ACCEPT_YOUR_OWN_TRADE,
-    NOT_ENOUGH_AMOUNT,
     ;
 }

@@ -1,8 +1,5 @@
 package view;
 
-import controller.SelectUnitMenuController;
-import controller.ShowMapMenuController;
-import controller.Utils;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +17,11 @@ import javafx.stage.Stage;
 import model.map.Tile;
 import model.people.Troop;
 import model.people.Unit;
-import view.enums.messages.SelectUnitMenuMessages;
+import view.enums.Message;
+import webConnection.Client;
+import webConnection.Connection;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -44,7 +44,9 @@ public class MoveUnit extends Application {
     private ArrayList<Tile> selectedTiles = Utils.getGameMenu().getSelectedTiles();
     private String unitType;
     public HBox soldiers;
-    private SelectUnitMenuMessages message;
+    private Message message;
+    private final String selectUnitMenuController = "SelectUnitMenuController";
+    private final Connection connection = Client.getConnection();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -56,20 +58,26 @@ public class MoveUnit extends Application {
         stage.show();
     }
 
-    public void initialize() {
-        ArrayList<HBox> hBoxes = SelectUnitMenuController.getTilesUnits(selectedTiles);
+    public void initialize() throws IOException {
+        ArrayList<HBox> hBoxes = (ArrayList<HBox>) connection.getArrayData(selectUnitMenuController,
+                "getTilesUnits", selectedTiles);//TODO: fix this
         soldiers.getChildren().addAll(hBoxes);
         selectedSoldierImage.setImage(getHBoxImage(hBoxes.get(0)));
         limitButtons();
         for (HBox hBox : hBoxes)
             hBox.setOnMouseClicked(mouseEvent -> {
                 selectedSoldierImage.setImage(getHBoxImage(hBox));
-                limitButtons();
+                try {
+                    limitButtons();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
     }
 
-    private void limitButtons() {
-        Unit unit = SelectUnitMenuController.getUnitByType(getUnitTypeByImage(selectedSoldierImage));
+    private void limitButtons() throws IOException {
+        Unit unit = (Unit) connection.getData(selectUnitMenuController, "getUnitByType",
+                (getUnitTypeByImage(selectedSoldierImage)));
         attackButton.setDisable(!unit.canAttack());
         digPitchButton.setDisable(!(unit instanceof Troop troop && troop.canDigPitch()));
         digTunnelButton.setDisable(!unit.canDigTunnel());
@@ -97,19 +105,19 @@ public class MoveUnit extends Application {
                 invoke(this, destinationX, destinationY);
     }
 
-    private void checkMoveUnit(int destinationX, int destinationY) {
+    private void checkMoveUnit(int destinationX, int destinationY) throws IOException {
         moveUnit(destinationX, destinationY, false);
     }
 
-    public void checkPatrolUnit(int destinationX, int destinationY) {
+    public void checkPatrolUnit(int destinationX, int destinationY) throws IOException {
         moveUnit(destinationX, destinationY, true);
     }
 
-    public void moveUnit(int destinationX, int destinationY, boolean isPatrol) {
+    public void moveUnit(int destinationX, int destinationY, boolean isPatrol) throws IOException {
         for (Tile selectedTile : selectedTiles) {
             int[] location = ShowMapMenuController.getCurrentMap().getTileLocation(selectedTile);
-            message = SelectUnitMenuController.checkMoveUnit(new int[]{location[0], location[1]},
-                    destinationX, destinationY, unitType, isPatrol);
+            message = connection.checkAction(selectUnitMenuController, "checkMoveUnit",
+                    new int[]{location[0], location[1]}, destinationX, destinationY, unitType, isPatrol);
 
             handleMoveError(message);
         }
@@ -153,12 +161,12 @@ public class MoveUnit extends Application {
         return imageName.substring(0, imageName.lastIndexOf('.'));
     }
 
-    private void initializeAction() {
+    private void initializeAction() throws IOException {
         unitType = getUnitTypeByImage(selectedSoldierImage);
-        selectedTiles = new ArrayList<>(SelectUnitMenuController.getUnEmptyTiles(selectedTiles, unitType));
+        selectedTiles = new ArrayList<>(connection.getArrayData(selectUnitMenuController, "getUnEmptyTiles", selectedTiles, unitType));//TODO: fix this
     }
 
-    private void handleMoveError(SelectUnitMenuMessages message) {
+    private void handleMoveError(Message message) {
         switch (message) {
             case SUCCESS -> stage.close();
             case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Move Error!",
@@ -178,7 +186,7 @@ public class MoveUnit extends Application {
         }
     }
 
-    private void handleAttackError(SelectUnitMenuMessages message) {
+    private void handleAttackError(Message message) {
         switch (message) {
             case SUCCESS -> stage.close();
             case INVALID_COORDINATE -> ViewUtils.alert(Alert.AlertType.ERROR, "Attack Unit",
@@ -194,7 +202,7 @@ public class MoveUnit extends Application {
         }
     }
 
-    private void handleDigPitchError(SelectUnitMenuMessages message) {
+    private void handleDigPitchError(Message message) {
         switch (message) {
             case SUCCESS -> System.out.println("Digging Pitch Started!");
             case INVALID_DIRECTION -> ViewUtils.alert(Alert.AlertType.ERROR, "Digging Error", "Invalid Direction!");
@@ -205,7 +213,7 @@ public class MoveUnit extends Application {
         }
     }
 
-    private void handleDigTunnelError(SelectUnitMenuMessages message) {
+    private void handleDigTunnelError(Message message) {
         switch (message) {
             case INVALID_DIRECTION ->
                     ViewUtils.alert(Alert.AlertType.ERROR, "Dig Tunnel", "Direction must be up or left or down or right!");

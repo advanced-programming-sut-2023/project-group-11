@@ -1,6 +1,5 @@
 package view;
 
-import controller.SelectUnitMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +15,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.map.Tile;
 import model.people.Machine;
+import view.enums.Message;
+import webConnection.Client;
+
+import java.io.IOException;
 
 public class BuildMachine extends Application {
 
@@ -26,31 +29,42 @@ public class BuildMachine extends Application {
     @FXML
     private TilePane machinePane;
     private static Tile tile;
+    private Message message;
     public static Stage stage;
 
     @FXML
-    public void initialize(){
-        for (Node node:machinePane.getChildren()){
+    public void initialize() {
+        for (Node node : machinePane.getChildren()) {
             ImageView imageView = (ImageView) node;
-            imageView.setId(imageView.getId().replace("_"," "));
-            imageView.setOnMouseClicked(this::onMouseClicked);
+            imageView.setId(imageView.getId().replace("_", " "));
+            imageView.setOnMouseClicked(mouseEvent -> {
+                try {
+                    onMouseClicked(mouseEvent);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
     }
 
-    private void onMouseClicked(MouseEvent mouseEvent) {
-        String machineType = ((ImageView)mouseEvent.getSource()).getId();
+    private void onMouseClicked(MouseEvent mouseEvent) throws IOException {
+        String machineType = ((ImageView) mouseEvent.getSource()).getId();
         detailLabel.setText(new Machine(machineType).getPublicDetails());
-        if(mouseEvent.getClickCount() == 2) {
-            switch (SelectUnitMenuController.checkBuildMachine(tile,machineType)){
-                case NOT_ENOUGH_GOLD -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","You don't have enough gold");
-                case NOT_ENOUGH_ENGINEERS -> ViewUtils.alert(Alert.AlertType.ERROR,"Build Error","You don't have enough engineers");
+        message = Client.getConnection().checkAction("SelectUnitMenuController",
+                "checkBuildMachine", tile, machineType);
+        if (mouseEvent.getClickCount() == 2) {
+            switch (message) {
+                case NOT_ENOUGH_GOLD ->
+                        ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough gold");
+                case NOT_ENOUGH_ENGINEERS ->
+                        ViewUtils.alert(Alert.AlertType.ERROR, "Build Error", "You don't have enough engineers");
                 case SUCCESS -> stage.close();
             }
         }
     }
 
     public void setTile(Tile tile) {
-        this.tile = tile;
+        BuildMachine.tile = tile;
     }
 
     @Override
