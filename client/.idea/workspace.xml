@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/enums/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/webConnection/OperationType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/ForgotPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ForgotPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/LoginMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/LoginMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/messages/SignupMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/messages/SignupMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Packet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/ForgotPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/ForgotPassword.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/OperationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/OperationType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +77,7 @@
       <workItem from="1687984326282" duration="3585000" />
       <workItem from="1688013129333" duration="33000" />
       <workItem from="1688013172394" duration="349000" />
-      <workItem from="1688013733596" duration="5159000" />
+      <workItem from="1688013733596" duration="6894000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>
@@ -102,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687989433207</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Client side changing (sending packets) started">
+      <created>1688020469513</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688020469513</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +114,7 @@
     </ignored-roots>
     <MESSAGE value="add client project" />
     <MESSAGE value="very primitive implement of client" />
-    <option name="LAST_COMMIT_MESSAGE" value="very primitive implement of client" />
+    <MESSAGE value="Client side changing (sending packets) started" />
+    <option name="LAST_COMMIT_MESSAGE" value="Client side changing (sending packets) started" />
   </component>
 </project>

@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/main/java/view/enums/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/OperationType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/ForgotPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/ForgotPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/enums/messages/LoginMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/enums/messages/LoginMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/enums/messages/SignupMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/enums/messages/SignupMenuMessages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Packet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/OperationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/OperationType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +69,7 @@
       <workItem from="1687984108416" duration="33000" />
       <workItem from="1687984392274" duration="4327000" />
       <workItem from="1688013075603" duration="355000" />
-      <workItem from="1688013733866" duration="3260000" />
+      <workItem from="1688013733866" duration="4198000" />
     </task>
     <task id="LOCAL-00001" summary="add server project">
       <created>1687985072897</created>

@@ -1,10 +1,12 @@
 package webConnection;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 import view.enums.Message;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.List;
 
 public class Connection extends Thread {
     private Socket socket;
@@ -35,10 +37,16 @@ public class Connection extends Thread {
         return getRespond();
     }
 
-    public Object getData(String className, String methodName, Object... parameters) throws IOException {
+    public JSONObject getData(String className, String methodName, Object... parameters) throws IOException {
         Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
         sendData(packet);
         return receiveData();
+    }
+
+    public JSONArray getArrayData(String className, String methodName, Object... parameters) throws IOException {
+        Packet packet = new Packet(OperationType.GET_ARRAY_DATA, className, methodName, parameters);
+        sendData(packet);
+        return receiveArrayData();
     }
 
     public void doInServer (String className, String methodName, Object... parameters) throws IOException {
@@ -51,10 +59,14 @@ public class Connection extends Thread {
     }
 
     private Message getRespond() throws IOException {
-        return Message.valueOf((String) receiveData());
+        return Message.valueOf((String) receiveData().get("value"));
     }
 
-    private Object receiveData() throws IOException {
-        return new JSONObject(in.readUTF()).get("value");
+    private JSONObject receiveData() throws IOException {
+        return new JSONObject(in.readUTF());
+    }
+
+    private JSONArray receiveArrayData() throws IOException {
+        return (JSONArray) receiveData().get("value");
     }
 }
