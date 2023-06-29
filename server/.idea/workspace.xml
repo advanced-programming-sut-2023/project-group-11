@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Packet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/main/java/view/enums/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/OperationType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/ForgotPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/ForgotPassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/enums/messages/LoginMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/enums/messages/LoginMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/enums/messages/SignupMenuMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/enums/messages/SignupMenuMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Packet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +35,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -37,20 +49,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/client&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="webConnetion" />
@@ -65,7 +77,9 @@
       <option name="presentableId" value="Default" />
       <updated>1687984107030</updated>
       <workItem from="1687984108416" duration="33000" />
-      <workItem from="1687984392274" duration="4325000" />
+      <workItem from="1687984392274" duration="4327000" />
+      <workItem from="1688013075603" duration="355000" />
+      <workItem from="1688013733866" duration="3260000" />
     </task>
     <task id="LOCAL-00001" summary="add server project">
       <created>1687985072897</created>

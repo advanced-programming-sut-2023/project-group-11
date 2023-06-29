@@ -1,6 +1,6 @@
 package webConnection;
 
-import view.Main;
+import view.SignupMenu;
 
 import java.net.Socket;
 
@@ -10,7 +10,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             connection = new Connection(new Socket("localhost", 15551));
-            Main.main(args);
+            SignupMenu.main(args);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

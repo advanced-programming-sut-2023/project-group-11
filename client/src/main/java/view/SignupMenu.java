@@ -16,8 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import view.enums.Message;
 import view.enums.messages.LoginMenuMessages;
 import view.enums.messages.SignupMenuMessages;
+import webConnection.Client;
+import webConnection.Connection;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -75,8 +78,7 @@ public class SignupMenu extends Application {
     private TextField nicknameTextField;
     @FXML
     private Label nicknameError;
-    private LoginMenuMessages message;
-    private SignupMenuMessages signupMessage;
+    private Message message;
     private static String username;
     public static Stage stage;
     private static String captchaNumber;
@@ -91,9 +93,7 @@ public class SignupMenu extends Application {
 
         stage.show();
 
-//        EntryMenuController.fillAllFieldsWithPreviousData();
-        stage.setOnCloseRequest(windowEvent -> Utils.endStronghold());
-        if (EntryMenuController.getStayLoggedIn() != null) new MainMenu().start(stage);
+//        if (EntryMenuController.getStayLoggedIn() != null) new MainMenu().start(stage); //TODO: stayLoggedIn!
     }
 
     public static void main(String[] args) throws Exception {
@@ -179,24 +179,25 @@ public class SignupMenu extends Application {
     public void login() throws Exception {
         boolean stayLoggedIn = stayLoggedInCheck.isSelected();
         ViewUtils.clearLabels(usernameError, passwordError);
-        message = LoginMenuController.checkLogin(loginUsernameField.getText(), loginPasswordField.getText(), stayLoggedIn);
+        message = Client.getConnection().checkAction("LoginMenuController", "checkLogin",
+                loginUsernameField.getText(), loginPasswordField.getText(), stayLoggedIn);
 
         switch (message) {
             case EMPTY_USERNAME_FIELD -> ViewUtils.fieldError(usernameError, "Required fields must be filled in!");
             case EMPTY_PASSWORD_FIELD -> ViewUtils.fieldError(passwordError, "Required fields must be filled in!");
             case USERNAME_NOT_EXIST -> ViewUtils.fieldError(usernameError, "Username doesn't exist!");
             case INCORRECT_PASSWORD -> ViewUtils.fieldError(passwordError, "Password is incorrect!");
-            case LOCKED_ACCOUNT ->
-                    ViewUtils.fieldError(usernameError,
-                            "Your account is locked for " +
-                                    LoginMenuController.getLeftLockedTime(loginUsernameField.getText()) / 1000.0 +
-                                    " seconds more!");
+            case LOCKED_ACCOUNT -> {
+                long leftTime = (Long) Client.getConnection().getData("LoginMenuController", "getLeftLockedTime",
+                        loginUsernameField.getText());
+                ViewUtils.fieldError(usernameError, "Your account is locked for " + leftTime / 1000.0 + " seconds more!");
+            }
             case SUCCESS -> {
                 if(!captchaField.getText().equals(captchaNumber)){
                     ViewUtils.fieldError(captchaError,"Wrong captcha!");
                     reloadCaptcha();
-                }else {
-                    LoginMenuController.loginUser(loginUsernameField.getText());
+                } else {
+                    Client.getConnection().doInServer("LoginMenuController", "loginUser", loginUsernameField.getText());
                     new MainMenu().start(SignupMenu.stage);
                 }
             }
@@ -206,7 +207,8 @@ public class SignupMenu extends Application {
     public void forgotPassword() throws Exception {
         ViewUtils.clearLabels(usernameError, passwordError);
         username = loginUsernameField.getText();
-        message = LoginMenuController.checkForgotPassword(username);
+        message = Client.getConnection().checkAction("LoginMenuController", "checkForgotPassword",
+                username);
 
         switch (message) {
             case USERNAME_NOT_EXIST -> ViewUtils.fieldError(usernameError, "Username doesn't exist!");
