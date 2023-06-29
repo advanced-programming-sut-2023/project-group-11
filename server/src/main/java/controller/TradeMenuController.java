@@ -35,7 +35,8 @@ public class TradeMenuController {
         return output;
     }
 
-    public static Message checkAcceptTrade(Trade trade) {
+    public static Message checkAcceptTrade(ArrayList parameters) {
+        Trade trade = (Trade) parameters.get(0);
         Governance sender = trade.getSender();
         Governance receiver = trade.getReceiver();
         Governance seller = null, buyer=null;
