@@ -20,7 +20,9 @@ import model.AllResource;
 import model.Governance;
 import model.Stronghold;
 import model.User;
+import webConnection.Client;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateTradeMenu extends Application {
@@ -84,13 +86,12 @@ public class CreateTradeMenu extends Application {
 
     private void initializeUsers() {
         governances.setItems(MainMenuController.removeCurrentGovernanceFromList(Utils.getGovernancesObservable()));
+        //TODO: needs implementation in server
         addColumns();
-        //TODO: debug in game + gameCurrentGovernance
         governances.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         governances.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             selectedGovernance = (Governance) newSelection;
             tradeWithLabel.setText("Trade with: \n" + (selectedGovernance).getOwner().getNickname());
-            //TODO: amount label update for governance
         });
     }
     private void addColumns() {
@@ -104,10 +105,15 @@ public class CreateTradeMenu extends Application {
         governances.getColumns().add(tableColumn);
     }
 
-    private void initializeResourcePane() {
-        ArrayList<AllResource> allResources = TradeMenuController.getAllResources();
+    private void initializeResourcePane(){
+        ArrayList allResources = null;
+        try {
+            allResources = Client.getConnection().getArrayData("TradeMenuController","getAllResources");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         for (int i =0;i< allResources.size()-1;i++){
-            AllResource resource = allResources.get(i);
+            AllResource resource = (AllResource) allResources.get(i);
             ImageView item = ((ImageView)resourcePane.getChildren().get(i));
             item.setImage(resource.getImage());
             item.setId(resource.getName());
@@ -144,7 +150,9 @@ public class CreateTradeMenu extends Application {
             int amount = Integer.parseInt(String.valueOf(amountTextField.getText()));
             int price = Integer.parseInt(String.valueOf(priceTextField.getText()));
             String tradeType = ((Button) mouseEvent.getSource()).getText();
-            TradeMenuController.checkTrade(selectedItem, amount, price, messageField.getText(), tradeType, selectedGovernance);
+            Client.getConnection().doInServer("TradeMenuController","checkTrade",selectedItem, amount, price, messageField.getText(), tradeType, selectedGovernance);
+            //TODO: need implementation in server-side
+//            TradeMenuController.checkTrade(selectedItem, amount, price, messageField.getText(), tradeType, selectedGovernance);
             ViewUtils.alert(Alert.AlertType.INFORMATION,"Trade Successful","Trade created successfully!");
         }catch (Exception e){
             ViewUtils.alert(Alert.AlertType.ERROR,"Trade Error","Select governance & fill fields!");

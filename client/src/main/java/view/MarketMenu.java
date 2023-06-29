@@ -1,6 +1,5 @@
 package view;
 
-import controller.MarketMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +15,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.AllResource;
 import model.Stronghold;
+import view.enums.Message;
+import webConnection.Client;
+
+import java.io.IOException;
+
+import static view.enums.Message.NOT_ENOUGH_STORAGE;
 
 public class MarketMenu extends Application {
     @FXML
@@ -82,7 +87,11 @@ public class MarketMenu extends Application {
             imageView.setOnMouseClicked(mouseEvent -> {
                 buySellPane.setVisible(true);
                 String itemName = ((ImageView)mouseEvent.getSource()).getId();
-                item = MarketMenuController.getResourceByName(itemName);
+                try {
+                    item = (AllResource) Client.getConnection().getData("MarketMenuController","getResourceByName",itemName);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 updateBuySellLabels(amountTextField.getText());
                 itemLabel.setText(itemName);
                 amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
@@ -108,8 +117,9 @@ public class MarketMenu extends Application {
         weaponBox.setVisible(false);
     }
 
-    public void sell() {
-        switch (MarketMenuController.checkSellItem(item,amountTextField.getText())){
+    public void sell() throws IOException {
+        //TODO: needs to reconsider in server-side
+        switch ((Message) Client.getConnection().getData("MarketMenuController","checkSellItem",item,amountTextField.getText())){
             case NOT_ENOUGH_STORAGE -> ViewUtils.alert(Alert.AlertType.ERROR,
                     "Sell Error","You don't have enough of this item!");
             case SUCCESS -> {
@@ -120,8 +130,9 @@ public class MarketMenu extends Application {
             }
         }
     }
-    public void buy() {
-        switch (MarketMenuController.checkBuyItem(item,amountTextField.getText())){
+    public void buy() throws IOException {
+        //TODO: need to reconsider
+        switch ((Message) Client.getConnection().getData("MarketMenuController","checkBuyItem",item,amountTextField.getText())){
             case NOT_ENOUGH_STORAGE -> ViewUtils.alert(Alert.AlertType.ERROR,
                     "Buy Error","You don't have enough storage!");
             case NOT_ENOUGH_GOLD -> ViewUtils.alert(Alert.AlertType.ERROR,

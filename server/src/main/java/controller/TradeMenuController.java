@@ -6,7 +6,6 @@ import model.AllResource;
 import model.Governance;
 import model.Stronghold;
 import model.Trade;
-import view.enums.messages.TradeMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,10 +14,16 @@ public class TradeMenuController {
 
     private static Governance currentGovernance;
 
-    public static TradeMenuMessages checkTrade(AllResource resource, int amount, int price, String message, String tradeType, Governance reciever) {
+    public static Message checkTrade(ArrayList parameters) {
+        AllResource resource = (AllResource) parameters.get(0);
+        int amount = (int) parameters.get(1);
+        int price = (int) parameters.get(2);
+        String message = (String) parameters.get(3);
+        String tradeType = (String) parameters.get(4);
+        Governance receiver = (Governance) parameters.get(5);
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        new Trade(resource, amount, price, message, tradeType, currentGovernance, reciever);
-        return TradeMenuMessages.SUCCESS;
+        new Trade(resource, amount, price, message, tradeType, currentGovernance, receiver);
+        return Message.SUCCESS;
     }
 
     public static String tradeList() {
@@ -30,7 +35,7 @@ public class TradeMenuController {
         return output;
     }
 
-    public static TradeMenuMessages checkAcceptTrade(Trade trade) {
+    public static Message checkAcceptTrade(Trade trade) {
         Governance sender = trade.getSender();
         Governance receiver = trade.getReceiver();
         Governance seller = null, buyer=null;
@@ -45,13 +50,13 @@ public class TradeMenuController {
             }
         }
         if (buyer.getGold() < trade.getResourceAmount() * trade.getPrice())
-            return TradeMenuMessages.NOT_ENOUGH_GOLD;
+            return Message.NOT_ENOUGH_GOLD;
         if (!seller.hasEnoughItem(trade.getResourceType(), trade.getResourceAmount()))
-            return TradeMenuMessages.NOT_ENOUGH_AMOUNT;
+            return Message.NOT_ENOUGH_AMOUNT;
         if (!buyer.hasStorageForItem(trade.getResourceType(), trade.getResourceAmount()))
-            return TradeMenuMessages.NOT_ENOUGH_STORAGE;
+            return Message.NOT_ENOUGH_STORAGE;
         trade.accept(buyer,seller);
-        return TradeMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     public static String tradeHistory() {
