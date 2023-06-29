@@ -38,7 +38,9 @@ public class Connection extends Thread {
     }
 
     public Object getData(String className, String methodName, Object... parameters) throws IOException {
-        return getJSONData(className, methodName, parameters).get("value");
+        Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
+        sendData(packet);
+        return receiveData().get("value");
     }
 
     public JSONObject getJSONData(String className, String methodName, Object... parameters) throws IOException {
@@ -71,6 +73,6 @@ public class Connection extends Thread {
     }
 
     private JSONArray receiveArrayData() throws IOException {
-        return (JSONArray) receiveData().get("value");
+        return (JSONArray) receiveData().get("array");
     }
 }
