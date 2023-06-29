@@ -270,3 +270,4 @@ public class SignupMenu extends Application {
         captchaImageView.setImage(new Image(captcha.getPath()));
     }
 }
+//AAAAAAAAAAA
