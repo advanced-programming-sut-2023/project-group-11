@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/OperationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/OperationType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/webConnetion/OperationType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/webConnetion/SendingPacket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnetion/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/webConnetion/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnetion/ReceivingPacket.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +20,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -69,7 +72,7 @@
       <workItem from="1687984108416" duration="33000" />
       <workItem from="1687984392274" duration="4327000" />
       <workItem from="1688013075603" duration="355000" />
-      <workItem from="1688013733866" duration="4198000" />
+      <workItem from="1688013733866" duration="9586000" />
     </task>
     <task id="LOCAL-00001" summary="add server project">
       <created>1687985072897</created>
@@ -85,7 +88,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687987567134</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="getData minor changes">
+      <created>1688027479380</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688027479380</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +118,7 @@
     </ignored-roots>
     <MESSAGE value="add server project" />
     <MESSAGE value="start server Connection" />
-    <option name="LAST_COMMIT_MESSAGE" value="start server Connection" />
+    <MESSAGE value="getData minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="getData minor changes" />
   </component>
 </project>

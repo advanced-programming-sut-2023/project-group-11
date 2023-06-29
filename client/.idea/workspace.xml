@@ -8,8 +8,6 @@
       <change afterPath="$PROJECT_DIR$/../server/src/main/java/controller/Message.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/OperationType.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/SendingPacket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/ReceivingPacket.java" afterDir="false" />
@@ -79,7 +77,7 @@
       <workItem from="1687984326282" duration="3585000" />
       <workItem from="1688013129333" duration="33000" />
       <workItem from="1688013172394" duration="349000" />
-      <workItem from="1688013733596" duration="9988000" />
+      <workItem from="1688013733596" duration="10006000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>
