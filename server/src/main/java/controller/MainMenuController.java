@@ -157,7 +157,7 @@ public class MainMenuController {
         return governanceObservableList;
     }
 
-    public static void logout() {
+    public static void logout(ArrayList<Object> parameters) {
         User currentUser = Stronghold.getCurrentUser();
         currentUser.setStayLoggedIn(false);
         Stronghold.setCurrentUser(null);

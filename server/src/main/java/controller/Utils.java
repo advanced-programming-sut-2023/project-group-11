@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import model.Governance;
 import model.Stronghold;
 import model.User;
@@ -88,8 +87,8 @@ public class Utils {
                 user.getNickname(), user.getSlogan()};
     }
 
-    public static ImageView getCurrentUserAvatar() {
-        return Stronghold.getCurrentUser().getAvatar();
+    public static String getCurrentUserAvatarFileName(ArrayList<Object> parameters) {
+        return Stronghold.getCurrentUser().getAvatarFileName();
     }
 
     public static void sortUsers() {
@@ -102,25 +101,25 @@ public class Utils {
         for (int i = 0; i < users.size(); i++) users.get(i).setRank(i + 1);
     }
 
-    public static ObservableList<User> getUsersObservable() {
-        ArrayList<User> users = Stronghold.getUsers();
-        sortUsers();
-        return FXCollections.observableArrayList(users);
-    }
-
-    public static ObservableList<Governance> getGovernancesObservable() {
-        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
-        return FXCollections.observableArrayList(governances);
-    }
-
-    public static void columnMaker(ArrayList<Object> parameters) {
-        TableView tableView = (TableView) parameters.get(0);
-        String header = (String) parameters.get(1);
-        String userField = (String) parameters.get(2);
-
-        TableColumn<User, String> tableColumn = new TableColumn<>(header);
-        tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
-        tableColumn.setSortable(false);
-        tableView.getColumns().add(tableColumn);
-    }
+//    public static ArrayList<User> getUsersObservable(ArrayList<Object> parameters) {
+//        ArrayList<User> users = Stronghold.getUsers();
+//        sortUsers();
+//        return users;
+//    }
+//
+//    public static ObservableList<Governance> getGovernancesObservable(ArrayList<Object> parameters) {
+//        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
+//        return FXCollections.observableArrayList(governances);
+//    }
+//
+//    public static void columnMaker(ArrayList<Object> parameters) {
+//        TableView tableView = (TableView) parameters.get(0);
+//        String header = (String) parameters.get(1);
+//        String userField = (String) parameters.get(2);
+//
+//        TableColumn<User, String> tableColumn = new TableColumn<>(header);
+//        tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
+//        tableColumn.setSortable(false);
+//        tableView.getColumns().add(tableColumn);
+//    }
 }

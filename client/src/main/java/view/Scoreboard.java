@@ -1,6 +1,7 @@
 package view;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import webConnection.Connection;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Scoreboard extends Application {
     //TODO: add lazy loading to scoreboard
@@ -35,19 +37,18 @@ public class Scoreboard extends Application {
         stage.show();
     }
 
-    @FXML
-    public void initialize() throws IOException {
-        connection.doInServer(utils, "sortUsers");
-        scoreboard.setItems((ObservableList) connection.getArrayData(utils, "getUsersObservable"));//TODO: may produce exception
-        addColumns();
-    }
-
-    private void addColumns() throws IOException {
-        connection.doInServer(utils, "columnMaker", scoreboard, "Avatar", "avatar");
-        connection.doInServer(utils, "columnMaker", scoreboard, "Rank", "rank");
-        connection.doInServer(utils, "columnMaker", scoreboard, "Username", "username");
-        connection.doInServer(utils, "columnMaker", scoreboard, "Score", "score");
-    }
+//    @FXML
+//    public void initialize() throws IOException {
+//        scoreboard.setItems(ViewUtils.getUsersObservable());//TODO: may produce exception
+//        addColumns();
+//    }
+//
+//    private void addColumns() throws IOException {
+//        ViewUtils.columnMaker(scoreboard, "Avatar", "avatar");
+//        ViewUtils.columnMaker(scoreboard, "Rank", "rank");
+//        ViewUtils.columnMaker(scoreboard, "Username", "username");
+//        ViewUtils.columnMaker(scoreboard, "Score", "score");
+//    }
 
     public void back() throws Exception {
         stage.close();
