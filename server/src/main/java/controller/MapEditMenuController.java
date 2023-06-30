@@ -1,6 +1,7 @@
 package controller;
 
 import model.Stronghold;
+import model.User;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
@@ -17,12 +18,20 @@ public class MapEditMenuController {
         Utils.updateDatabase("maps");
     }
 
-    public static ArrayList<String> getMapNames(ArrayList parameters){
+    public static ArrayList<String> getMapNames(ArrayList parameters) {
         ArrayList<String> mapNames = new ArrayList<>();
-        for (Map map:Stronghold.getMaps()){
-            mapNames.add(map.getName());
+        for (Map map : Stronghold.getMaps()) {
+            if (map.getOwners().contains(Stronghold.getCurrentUser().getUsername()))
+                mapNames.add(map.getName());
         }
         return mapNames;
+    }
+
+    public static ArrayList<String> getUserNames(ArrayList parameters) {
+        ArrayList<String> usernames = new ArrayList<>();
+        for (User user : Stronghold.getUsers())
+            usernames.add(user.getUsername());
+        return usernames;
     }
 
     public static void setCurrentMap(ArrayList<Object> parameters) {
@@ -46,6 +55,17 @@ public class MapEditMenuController {
 
         currentMap = new Map(mapName, Integer.parseInt(mapSize));
         ShowMapMenuController.setCurrentMap(new ArrayList<>(Arrays.asList(currentMap.getName())));
+        Utils.updateDatabase("maps");
+        return Message.SUCCESS;
+    }
+    public static Message checkShareMap(ArrayList<Object> parameters) {
+        String mapName = (String) parameters.get(0);
+        String username = (String) parameters.get(1);
+        Map sendingMap = Stronghold.getMapByName(mapName);
+
+        if (sendingMap.getOwners().contains(username)) return Message.USER_HAS_MAP;
+
+        sendingMap.addOwner(username);
         Utils.updateDatabase("maps");
         return Message.SUCCESS;
     }
@@ -107,10 +127,10 @@ public class MapEditMenuController {
 
     public static Message dropTree(ArrayList<Object> parameters) {
         int selectedTileX = (Integer) parameters.get(0);
-        int selectedTileY = (Integer) parameters.get(0);
-        int width = (Integer) parameters.get(0);
-        int height = (Integer) parameters.get(0);
-        String treeName = (String) parameters.get(0);
+        int selectedTileY = (Integer) parameters.get(1);
+        int width = (Integer) parameters.get(2);
+        int height = (Integer) parameters.get(3);
+        String treeName = (String) parameters.get(4);
         ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(new ArrayList<>(Arrays.asList(selectedTileX, selectedTileY, height, width)));
         if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;
 

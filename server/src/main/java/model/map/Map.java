@@ -1,9 +1,14 @@
 package model.map;
 
 import model.Stronghold;
+import model.User;
+
+import java.util.ArrayList;
 
 public class Map {
     private final String name;
+    private transient User mainOwner;
+    private ArrayList<String> owners = new ArrayList<>();
     private final Tile[][] tiles;
     private final int size;
 
@@ -18,13 +23,17 @@ public class Map {
                 tiles[i][j] = new Tile(j, i);
             }
         }
+        mainOwner = Stronghold.getCurrentUser();
+        owners.add(mainOwner.getUsername());
         Stronghold.addMap(this);
     }
 
-    public Map(String name, Tile[][] tiles, int size) {
+    public Map(String name, Tile[][] tiles, int size, ArrayList<String> owners) {
         this.name = name;
         this.tiles = tiles;
         this.size = size;
+        this.owners = owners;
+        this.mainOwner = Stronghold.getUserByUsername(owners.get(0));
         Stronghold.addMap(this);
     }
 
@@ -58,6 +67,18 @@ public class Map {
 
     public Tile getTile(int[] location) {
         return tiles[location[1]][location[0]];
+    }
+
+    public User getMainOwner() {
+        return mainOwner;
+    }
+
+    public ArrayList<String> getOwners() {
+        return owners;
+    }
+
+    public void addOwner(String username) {
+        owners.add(username);
     }
 
     @Override
