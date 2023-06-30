@@ -56,26 +56,26 @@ public class EntryMenuController {
     private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int size) {
         Tile[][] result = new Tile[size][];
         for (int i = 0; i < size; i++) {
-            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), size);
+            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), size, i);
         }
         return result;
     }
 
-    private static Tile[] convertToTileArray(JSONArray tiles, int size) {
+    private static Tile[] convertToTileArray(JSONArray tiles, int size, int row) {
         Tile[] result = new Tile[size];
         for (int i = 0; i < size; i++) {
-            result[i] = parseTileObject((JSONObject) tiles.get(i));
+            result[i] = parseTileObject((JSONObject) tiles.get(i), i, row);
         }
         return result;
     }
 
-    private static Tile parseTileObject(JSONObject tile) {
+    private static Tile parseTileObject(JSONObject tile, int column, int row) {
         Texture texture = Texture.valueOf(((String) tile.get("texture")));
         Tree tree = null;
         if (tile.get("tree") != null)
             tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
 
-        return new Tile(texture, tree);
+        return new Tile(texture, tree, column, row);
     }
 
     public static User getStayLoggedIn() {

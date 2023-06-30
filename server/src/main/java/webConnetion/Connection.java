@@ -1,11 +1,13 @@
 package webConnetion;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.Stronghold;
 import model.User;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -48,7 +50,8 @@ public class Connection extends Thread {
                 }
             } catch (IOException e) {
                 System.out.println("Connection \"ip=" + socket.getInetAddress().getHostAddress() + " port=" + socket.getPort() + "\" lost!");
-                throw new RuntimeException(e);
+//                throw new RuntimeException(e);
+                break;
             } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
                      IllegalAccessException e) {
                 System.out.println("Reflection Problem!");

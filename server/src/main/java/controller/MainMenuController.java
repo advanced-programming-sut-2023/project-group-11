@@ -16,6 +16,8 @@ import model.map.Tile;
 import model.people.Lord;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class MainMenuController {
     public static void startGame(ArrayList<Object> parameters) throws Exception {
@@ -32,8 +34,7 @@ public class MainMenuController {
         for (int i = 0; i < usernames.length; i++)
             initializeAreas(usernames[i], areas, i + 2);
 
-        ShowMapMenuController.setCurrentMap(map.getName());
-
+        ShowMapMenuController.setCurrentMap(new ArrayList<>(Arrays.asList(map.getName())));
     }
 
     public static void createGame(ArrayList<Object> parameters){

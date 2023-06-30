@@ -1,0 +1,658 @@
+Index: src/main/java/view/MapEditMenu.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Alert;\r\nimport javafx.scene.control.ButtonType;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.scene.input.KeyCode;\r\nimport javafx.scene.input.KeyEvent;\r\nimport javafx.scene.input.MouseButton;\r\nimport javafx.scene.input.MouseEvent;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport javafx.scene.layout.Pane;\r\nimport javafx.scene.layout.TilePane;\r\nimport javafx.scene.paint.Color;\r\nimport javafx.scene.shape.Rectangle;\r\nimport javafx.stage.Stage;\r\nimport model.Parsers;\r\nimport model.map.Texture;\r\nimport model.map.Tile;\r\nimport model.map.Tree;\r\nimport view.enums.Message;\r\nimport view.enums.Zoom;\r\nimport webConnection.Client;\r\n\r\nimport java.awt.*;\r\nimport java.io.IOException;\r\nimport java.net.URL;\r\nimport java.util.ArrayList;\r\nimport java.util.Arrays;\r\nimport java.util.HashMap;\r\n\r\npublic class MapEditMenu extends Application {\r\n    @FXML\r\n    private AnchorPane texturesPane;\r\n    @FXML\r\n    private TilePane sandBox;\r\n    @FXML\r\n    private TilePane waterBox;\r\n    @FXML\r\n    private TilePane treeBox;\r\n    @FXML\r\n    private Label textureNameLabel;\r\n    @FXML\r\n    private AnchorPane sidePane;\r\n    @FXML\r\n    private AnchorPane mapPane;\r\n    private Zoom currentZoom = Zoom.NORMAL;\r\n    private int tileSize = currentZoom.getSize();\r\n    private int mapSize;\r\n    private int firstTileXInMap = 0;\r\n    private int firstTileYInMap = 0;\r\n    private int selectedTileXInScreen = 0;\r\n    private int selectedTileYInScreen = 0;\r\n    private int pressedTileXInScreen = 0;\r\n    private int pressedTileYInScreen = 0;\r\n    private Tile selectedTile;\r\n    private ArrayList<Tile> selectedTiles = new ArrayList<>();\r\n    private int selectedBorderWidth = 1;\r\n    private int selectedBorderHeight = 1;\r\n    private final int mapPaneHeight = 720;\r\n    private final int mapPaneWidth = 990;\r\n\r\n    // -------------------------------- Start -----------------------------------------------------\r\n\r\n    @Override\r\n    public void start(Stage stage) throws Exception {\r\n        AnchorPane anchorPane = FXMLLoader.load(\r\n                new URL(MainMenu.class.getResource(\"/FXML/MapEditMenu.fxml\").toExternalForm()));\r\n        Scene scene = new Scene(anchorPane);\r\n        stage.setScene(scene);\r\n\r\n        stage.show();\r\n    }\r\n\r\n    @FXML\r\n    public void initialize() throws IOException {\r\n        mapSize = Parsers.parseMapObject(Client.getConnection().getJSONData(\"ShowMapMenuController\",\r\n                \"getCurrentMap\")).getSize();\r\n        showMap();\r\n        setTraversable();\r\n        initializeTextureBoxes();\r\n    }\r\n\r\n    private void initializeTextureBoxes() {\r\n        initializeTextureBox(sandBox, Texture.SAND, Texture.IRON, Texture.STONE, Texture.CLIFF, Texture.DENSE_GRASSLAND,\r\n                Texture.GRASS, Texture.GRASSLAND, Texture.ROCK, Texture.SAND_DUNE);\r\n        initializeTextureBox(waterBox, Texture.BEACH, Texture.SEA, Texture.RIVER, Texture.SHALLOW_WATER, Texture.BIG_LAKE,\r\n                Texture.SMALL_LAKE, Texture.MARSH, Texture.OIL);\r\n        initializeTreeBox(\"cherry\", \"coconut\", \"date\", \"olive\", \"small\");\r\n    }\r\n\r\n    private void initializeTextureBox(TilePane box, Texture... textures) {\r\n        HashMap<String, Image> texturesImages = new HashMap<>();\r\n        for (Texture texture : textures)\r\n            texturesImages.put(texture.getName(), texture.getImage(false));\r\n        fillBox(box, texturesImages, true);\r\n    }\r\n\r\n    private void initializeTreeBox(String... treeNames) {\r\n        HashMap<String, Image> treesImages = new HashMap<>();\r\n        for (String treeName : treeNames) {\r\n            Tree tree = new Tree(treeName);\r\n            treesImages.put(treeName, tree.getImage());\r\n        }\r\n        fillBox(treeBox, treesImages, false);\r\n    }\r\n\r\n    private void fillBox(TilePane box, HashMap<String, Image> images, boolean isTexture) {\r\n        for (String imageName : images.keySet()) {\r\n            ImageView imageView = new ImageView(images.get(imageName));\r\n            imageView.setFitHeight(60);\r\n            imageView.setFitWidth(60);\r\n            imageView.setPreserveRatio(true);\r\n            imageView.setId(imageName);\r\n            if (isTexture)\r\n                imageView.setOnMouseClicked(this::setTexture);\r\n            else\r\n                imageView.setOnMouseClicked(this::dropTree);\r\n            box.getChildren().add(imageView);\r\n        }\r\n    }\r\n\r\n    private void setTraversable() {\r\n        for (Node child : sidePane.getChildren())\r\n            child.setFocusTraversable(false);\r\n        mapPane.requestFocus();\r\n    }\r\n\r\n    // ---------------------------------- Controller-kind Methods ---------------------------------\r\n\r\n    public void back() throws Exception {\r\n        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);\r\n        alert.setTitle(\"Confirmation\");\r\n        alert.setHeaderText(\"Saving map\");\r\n        alert.setContentText(\"Are you sure about saving map?\");\r\n        ButtonType saveButton = new ButtonType(\"Save\");\r\n        ButtonType cancelButton = new ButtonType(\"Cancel\");\r\n        alert.getButtonTypes().setAll(saveButton, cancelButton);\r\n        ButtonType result = alert.showAndWait().orElse(cancelButton);\r\n\r\n        if (result.equals(saveButton)) {\r\n            Client.getConnection().doInServer(\"MapEditMenuController\", \"saveMap\");\r\n            ViewUtils.alert(Alert.AlertType.INFORMATION, \"Saving map\", \"Map saved successfully!\");\r\n            new MainMenu().start(SignupMenu.getStage());\r\n        }\r\n    }\r\n\r\n    public void clear() {\r\n        selectedTiles.forEach(Tile::clear);\r\n        showMap();\r\n    }\r\n\r\n    private void changePaneVisibility(Pane pane, Pane... panes) {\r\n        pane.setVisible(true);\r\n        for (Pane pane1 : panes) pane1.setVisible(false);\r\n    }\r\n\r\n    public void showSandBox() {\r\n        changePaneVisibility(sandBox, waterBox, treeBox);\r\n    }\r\n\r\n    public void showWaterBox() {\r\n        changePaneVisibility(waterBox, sandBox, treeBox);\r\n    }\r\n\r\n    public void showTreeBox() {\r\n        changePaneVisibility(treeBox, sandBox, waterBox);\r\n    }\r\n\r\n    public void setTexture(MouseEvent mouseEvent) throws IOException {\r\n        String textureName = ((ImageView) mouseEvent.getSource()).getId();\r\n        textureNameLabel.setVisible(true);\r\n        textureNameLabel.setText(textureName);\r\n\r\n        Message message = Client.getConnection().checkAction(\"MapEditMenuController\", \"setTexture\",\r\n                selectedTiles.size(), textureName, selectedTileXInScreen + firstTileXInMap,\r\n                selectedTileYInScreen + firstTileYInMap, selectedBorderHeight, selectedBorderWidth);\r\n\r\n        switch (message) {\r\n            case SELECT_ONLY_ONE_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, \"Set Texture Failed\",\r\n                    \"Select only on tile for this texture!\");\r\n            case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, \"Set Texture Failed\",\r\n                    \"Invalid place to deploy this texture!\");\r\n        }\r\n\r\n        showMap();\r\n    }\r\n\r\n    public void dropTree(MouseEvent mouseEvent) throws IOException {\r\n        String treeName = ((ImageView) mouseEvent.getSource()).getId();\r\n\r\n        textureNameLabel.setVisible(true);\r\n        textureNameLabel.setText(treeName);\r\n\r\n        Message message = Client.getConnection().checkAction(\"MapEditMenuController\", \"dropTree\",\r\n                selectedTileXInScreen + firstTileXInMap, selectedTileYInScreen + firstTileYInMap,\r\n                selectedBorderWidth, selectedBorderHeight, treeName);\r\n\r\n        switch (message) {\r\n            case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, \"Drop Tree Failed\",\r\n                    \"Invalid place to deploy tree!\");\r\n        }\r\n\r\n        showMap();\r\n    }\r\n\r\n    // ---------------------------------- Show map ------------------------------------------------\r\n\r\n    private void showMap() {\r\n        int rowsCount = mapPaneHeight / tileSize;\r\n        int columnCount = mapPaneWidth / tileSize;\r\n        try {\r\n            Tile[][] mapTiles = Parsers.parseTiles2DArray(Client.getConnection().getJSONArrayData(\"ShowMapMenuController\",\r\n                    \"getTiles\", firstTileXInMap, firstTileYInMap, rowsCount, columnCount), selectedBorderWidth, selectedBorderHeight);\r\n\r\n            mapPane.getChildren().clear();\r\n            setTextureTreeImages(mapTiles);\r\n            boldSelectedTile(mapTiles);\r\n            sidePane.toFront();\r\n        } catch (IOException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n    }\r\n\r\n    private void setTextureTreeImages(Tile[][] mapTiles) {\r\n        int xCoordinate = 0, yCoordinate = 0;\r\n\r\n        for (Tile[] tiles : mapTiles) {\r\n            for (Tile tile : tiles) {\r\n                setTileImage(tile.getTexture().getImage(false), xCoordinate, yCoordinate);\r\n                if (tile.getTree() != null) setTileImage(tile.getTree().getImage(), xCoordinate, yCoordinate);\r\n                xCoordinate += tileSize;\r\n            }\r\n            yCoordinate += tileSize;\r\n            xCoordinate = 0;\r\n        }\r\n    }\r\n\r\n    private void boldSelectedTile(Tile[][] mapTiles) {\r\n        int xCoordinate = 0, yCoordinate = 0;\r\n\r\n        for (Tile[] tiles : mapTiles) {\r\n            for (Tile tile : tiles) {\r\n                if (tile.equals(selectedTile)) {\r\n                    Rectangle border = new Rectangle(xCoordinate, yCoordinate, selectedBorderWidth * tileSize, selectedBorderHeight * tileSize);\r\n                    border.setStroke(Color.RED);\r\n                    border.setStrokeWidth(2);\r\n                    border.setFill(null);\r\n                    mapPane.getChildren().add(border);\r\n                    return;\r\n                }\r\n                xCoordinate += tileSize;\r\n            }\r\n            yCoordinate += tileSize;\r\n            xCoordinate = 0;\r\n        }\r\n    }\r\n\r\n    private void setTileImage(Image image, int xCoordinate, int yCoordinate) {\r\n        ImageView imageView = new ImageView(image);\r\n        imageView.setLayoutX(xCoordinate);\r\n        imageView.setLayoutY(yCoordinate);\r\n        imageView.setFitWidth(tileSize);\r\n        imageView.setFitHeight(tileSize);\r\n        mapPane.getChildren().add(imageView);\r\n    }\r\n\r\n    public void press(MouseEvent mouseEvent) {\r\n        pressedTileXInScreen = Math.floorDiv((int) mouseEvent.getX(), tileSize);\r\n        pressedTileYInScreen = Math.floorDiv((int) mouseEvent.getY(), tileSize);\r\n        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {\r\n            selectedTiles.clear();\r\n            selectedBorderHeight = 1;\r\n            selectedBorderWidth = 1;\r\n            Tile tile = ShowMapMenuController.getSelectedTile(pressedTileXInScreen, pressedTileYInScreen, firstTileXInMap, firstTileYInMap);\r\n            if (tile.equals(selectedTile)) selectedTile = null;\r\n            else {\r\n                selectedTile = tile;\r\n                selectedTiles.add(selectedTile);\r\n                selectedTileXInScreen = pressedTileXInScreen;\r\n                selectedTileYInScreen = pressedTileYInScreen;\r\n            }\r\n            showMap();\r\n        }\r\n    }\r\n\r\n    public void drag(MouseEvent mouseEvent) {\r\n        int endTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);\r\n        int endTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);\r\n        int deltaX = endTileX - pressedTileXInScreen;\r\n        int deltaY = endTileY - pressedTileYInScreen;\r\n        if (deltaX == 0 && deltaY == 0) return;\r\n\r\n        if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) moveMap(deltaX, deltaY);\r\n        else if (selectedTile != null && mouseEvent.getButton().equals(MouseButton.MIDDLE))\r\n            selectMultipleTiles(deltaX, deltaY);\r\n    }\r\n\r\n    public void moveMap(int deltaX, int deltaY) {\r\n        if (firstTileXInMap - deltaX >= 0 && firstTileXInMap - deltaX < mapSize - (mapPaneWidth / tileSize))\r\n            firstTileXInMap -= deltaX;\r\n        if (firstTileYInMap - deltaY >= 0 && firstTileYInMap - deltaY < mapSize - (mapPaneHeight / tileSize))\r\n            firstTileYInMap -= deltaY;\r\n\r\n        showMap();\r\n\r\n        pressedTileXInScreen += deltaX;\r\n        pressedTileYInScreen += deltaY;\r\n    }\r\n\r\n    private boolean outOfPane(int deltaX, int deltaY) {\r\n        return (pressedTileXInScreen + deltaX) >= (mapPaneWidth / tileSize) ||\r\n                (pressedTileYInScreen + deltaY) >= (mapPaneHeight / tileSize);\r\n\r\n    }\r\n\r\n    private void selectMultipleTiles(int deltaX, int deltaY) {\r\n        int selectedColumns = (pressedTileXInScreen - selectedTileXInScreen) + deltaX + 1;\r\n        int selectedRows = (pressedTileYInScreen - selectedTileYInScreen) + deltaY + 1;\r\n\r\n        if (selectedRows < 1 || selectedColumns < 1 || outOfPane(deltaX, deltaY)) return;\r\n        Tile[][] tempArray = ShowMapMenuController.getTiles(selectedTileXInScreen + firstTileXInMap,\r\n                selectedTileYInScreen + firstTileYInMap, selectedRows, selectedColumns);\r\n\r\n        selectedTiles.clear();\r\n        for (Tile[] tiles : tempArray)\r\n            selectedTiles.addAll(Arrays.asList(tiles));\r\n\r\n        selectedBorderWidth = selectedColumns;\r\n        selectedBorderHeight = selectedRows;\r\n\r\n        showMap();\r\n\r\n        pressedTileXInScreen += deltaX;\r\n        pressedTileYInScreen += deltaY;\r\n    }\r\n\r\n\r\n    public void checkShortcut(KeyEvent keyEvent){\r\n        KeyCode keyCode = keyEvent.getCode();\r\n\r\n        switch (keyCode) {\r\n            case ADD -> zoom(true);\r\n            case SUBTRACT -> zoom(false);\r\n        }\r\n    }\r\n\r\n    private void zoom(boolean zoomIn) {\r\n        if (currentZoom.getLevel() < 4 && zoomIn) {\r\n            currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() + 1);\r\n            tileSize = currentZoom.getSize();\r\n        } else if (currentZoom.getLevel() > 0 && !zoomIn &&\r\n                (mapPaneWidth / Zoom.getZoomByLevel(currentZoom.getLevel() - 1).getSize()) < mapSize) {\r\n            currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() - 1);\r\n            tileSize = currentZoom.getSize();\r\n        } else Toolkit.getDefaultToolkit().beep();\r\n\r\n        showMap();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/view/MapEditMenu.java b/src/main/java/view/MapEditMenu.java
+--- a/src/main/java/view/MapEditMenu.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/src/main/java/view/MapEditMenu.java	(date 1688116234367)
+@@ -173,41 +173,48 @@
+         changePaneVisibility(treeBox, sandBox, waterBox);
+     }
+ 
+-    public void setTexture(MouseEvent mouseEvent) throws IOException {
++    public void setTexture(MouseEvent mouseEvent){
+         String textureName = ((ImageView) mouseEvent.getSource()).getId();
+         textureNameLabel.setVisible(true);
+         textureNameLabel.setText(textureName);
+-
+-        Message message = Client.getConnection().checkAction("MapEditMenuController", "setTexture",
+-                selectedTiles.size(), textureName, selectedTileXInScreen + firstTileXInMap,
+-                selectedTileYInScreen + firstTileYInMap, selectedBorderHeight, selectedBorderWidth);
++        try {
++            Message message = Client.getConnection().checkAction("MapEditMenuController", "setTexture",
++                    selectedTiles.size(), textureName, selectedTileXInScreen + firstTileXInMap,
++                    selectedTileYInScreen + firstTileYInMap, selectedBorderHeight, selectedBorderWidth);
+ 
+-        switch (message) {
+-            case SELECT_ONLY_ONE_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
+-                    "Select only on tile for this texture!");
+-            case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
+-                    "Invalid place to deploy this texture!");
+-        }
++            switch (message) {
++                case SELECT_ONLY_ONE_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
++                        "Select only on tile for this texture!");
++                case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
++                        "Invalid place to deploy this texture!");
++            }
+ 
+-        showMap();
++            showMap();
++        } catch (IOException e) {
++            throw new RuntimeException(e);
++        }
+     }
+ 
+-    public void dropTree(MouseEvent mouseEvent) throws IOException {
++    public void dropTree(MouseEvent mouseEvent){
+         String treeName = ((ImageView) mouseEvent.getSource()).getId();
+ 
+         textureNameLabel.setVisible(true);
+         textureNameLabel.setText(treeName);
+ 
+-        Message message = Client.getConnection().checkAction("MapEditMenuController", "dropTree",
+-                selectedTileXInScreen + firstTileXInMap, selectedTileYInScreen + firstTileYInMap,
+-                selectedBorderWidth, selectedBorderHeight, treeName);
++        try {
++            Message message = Client.getConnection().checkAction("MapEditMenuController", "dropTree",
++                    selectedTileXInScreen + firstTileXInMap, selectedTileYInScreen + firstTileYInMap,
++                    selectedBorderWidth, selectedBorderHeight, treeName);
+ 
+-        switch (message) {
+-            case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, "Drop Tree Failed",
+-                    "Invalid place to deploy tree!");
+-        }
++            if (message == Message.INVALID_PLACE_TO_DEPLOY) {
++                ViewUtils.alert(Alert.AlertType.ERROR, "Drop Tree Failed",
++                        "Invalid place to deploy tree!");
++            }
+ 
+-        showMap();
++            showMap();
++        } catch (IOException e) {
++            throw new RuntimeException(e);
++        }
+     }
+ 
+     // ---------------------------------- Show map ------------------------------------------------
+@@ -216,8 +223,8 @@
+         int rowsCount = mapPaneHeight / tileSize;
+         int columnCount = mapPaneWidth / tileSize;
+         try {
+-            Tile[][] mapTiles = Parsers.parseTiles2DArray(Client.getConnection().getJSONArrayData("ShowMapMenuController",
+-                    "getTiles", firstTileXInMap, firstTileYInMap, rowsCount, columnCount), selectedBorderWidth, selectedBorderHeight);
++            Tile[][] mapTiles = Parsers.convertTo2DTileArray(Client.getConnection().getJSONArrayData("ShowMapMenuController",
++                    "getTiles", firstTileXInMap, firstTileYInMap, rowsCount, columnCount), selectedBorderHeight, selectedBorderWidth);
+ 
+             mapPane.getChildren().clear();
+             setTextureTreeImages(mapTiles);
+@@ -271,14 +278,16 @@
+         mapPane.getChildren().add(imageView);
+     }
+ 
+-    public void press(MouseEvent mouseEvent) {
++    public void press(MouseEvent mouseEvent) throws IOException {
+         pressedTileXInScreen = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+         pressedTileYInScreen = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+             selectedTiles.clear();
+             selectedBorderHeight = 1;
+             selectedBorderWidth = 1;
+-            Tile tile = ShowMapMenuController.getSelectedTile(pressedTileXInScreen, pressedTileYInScreen, firstTileXInMap, firstTileYInMap);
++            Tile tile = Parsers.parseTileObject(Client.getConnection().getJSONData("ShowMapMenuController",
++                    "getSelectedTile", pressedTileXInScreen, pressedTileYInScreen, firstTileXInMap, firstTileYInMap),
++                    pressedTileYInScreen + firstTileYInMap, pressedTileXInScreen + firstTileXInMap);
+             if (tile.equals(selectedTile)) selectedTile = null;
+             else {
+                 selectedTile = tile;
+@@ -290,7 +299,7 @@
+         }
+     }
+ 
+-    public void drag(MouseEvent mouseEvent) {
++    public void drag(MouseEvent mouseEvent) throws IOException {
+         int endTileX = Math.floorDiv((int) mouseEvent.getX(), tileSize);
+         int endTileY = Math.floorDiv((int) mouseEvent.getY(), tileSize);
+         int deltaX = endTileX - pressedTileXInScreen;
+@@ -320,13 +329,14 @@
+ 
+     }
+ 
+-    private void selectMultipleTiles(int deltaX, int deltaY) {
++    private void selectMultipleTiles(int deltaX, int deltaY) throws IOException {
+         int selectedColumns = (pressedTileXInScreen - selectedTileXInScreen) + deltaX + 1;
+         int selectedRows = (pressedTileYInScreen - selectedTileYInScreen) + deltaY + 1;
+ 
+         if (selectedRows < 1 || selectedColumns < 1 || outOfPane(deltaX, deltaY)) return;
+-        Tile[][] tempArray = ShowMapMenuController.getTiles(selectedTileXInScreen + firstTileXInMap,
+-                selectedTileYInScreen + firstTileYInMap, selectedRows, selectedColumns);
++        Tile[][] tempArray = Parsers.convertTo2DTileArray(Client.getConnection().getJSONArrayData(
++                "ShowMapMenuController", "getTiles", selectedTileXInScreen + firstTileXInMap,
++                selectedTileYInScreen + firstTileYInMap, selectedRows, selectedColumns), selectedRows,selectedColumns);
+ 
+         selectedTiles.clear();
+         for (Tile[] tiles : tempArray)
+Index: ../server/src/main/java/module-info.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module server {\r\n    requires com.google.gson;\r\n    requires json.simple;\r\n    requires passay;\r\n    requires org.apache.commons.codec;\r\n    requires java.desktop;\r\n    requires org.apache.commons.lang3;\r\n    requires com.fasterxml.jackson.annotation;\r\n    requires org.json;\r\n    requires javafx.base;\r\n    requires javafx.controls;\r\n\r\n    exports model.map;\r\n    opens model to com.google.gson, javafx.base;\r\n    opens model.map to com.google.gson;\r\n    opens model.buildings to com.google.gson;\r\n    opens model.people to com.google.gson;\r\n    opens webConnetion to com.google.gson;\r\n    exports model.people.enums to com.google.gson;\r\n    exports controller to com.google.gson;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../server/src/main/java/module-info.java b/../server/src/main/java/module-info.java
+--- a/../server/src/main/java/module-info.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/../server/src/main/java/module-info.java	(date 1688116828544)
+@@ -11,6 +11,7 @@
+     requires javafx.controls;
+ 
+     exports model.map;
++    exports model;
+     opens model to com.google.gson, javafx.base;
+     opens model.map to com.google.gson;
+     opens model.buildings to com.google.gson;
+Index: ../server/src/main/java/model/map/Tile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.map;\r\n\r\nimport controller.BuildingUtils;\r\nimport model.Governance;\r\nimport model.Stronghold;\r\nimport model.buildings.Building;\r\nimport model.people.Troop;\r\nimport model.people.Unit;\r\n\r\nimport java.awt.*;\r\nimport java.util.ArrayList;\r\n\r\npublic class Tile {\r\n    private Texture texture;\r\n    private Building building = null;\r\n    private ArrayList<Unit> units = new ArrayList<>();\r\n    private Tree tree;\r\n\r\n    public Tile() {\r\n        texture = Texture.SAND;\r\n        tree = null;\r\n    }\r\n\r\n    public Tile(Texture texture, Tree tree) {\r\n        this.texture = texture;\r\n        this.tree = tree;\r\n    }\r\n\r\n    public Texture getTexture() {\r\n        return texture;\r\n    }\r\n\r\n    public void setTexture(Texture texture) {\r\n        this.texture = texture;\r\n    }\r\n\r\n    public Building getBuilding() {\r\n        return building;\r\n    }\r\n\r\n    public void setBuilding(Building building) {\r\n        this.building = building;\r\n    }\r\n\r\n    public ArrayList<Unit> getUnits() {\r\n        return units;\r\n    }\r\n\r\n    public ArrayList<Unit> getUnitsByType(String unitType) {\r\n        ArrayList<Unit> selectedUnits = new ArrayList<>();\r\n        for (Unit unit : units) {\r\n            if (unit.getName().equals(unitType))\r\n                selectedUnits.add(unit);\r\n        }\r\n        return selectedUnits;\r\n    }\r\n\r\n    public String getResourceAmount() {\r\n        String result = null;\r\n        if (this.tree != null) result = \"Wood: \" + tree.getLeftWood();\r\n        else if (this.texture.equals(Texture.IRON) || this.texture.equals(Texture.STONE))\r\n            result = this.texture.getName() + \": Infinite\";\r\n        return result;\r\n    }\r\n\r\n    public Tree getTree() {\r\n        return tree;\r\n    }\r\n\r\n    public void setTree(Tree tree) {\r\n        this.tree = tree;\r\n    }\r\n\r\n    public void clear() {\r\n        this.building = null;\r\n        this.tree = null;\r\n        this.units = new ArrayList<>();\r\n    }\r\n\r\n    public boolean hasEnemy(Governance governance) {\r\n        for (Unit unit : units)\r\n            if (!unit.getOwner().equals(governance))\r\n                return true;\r\n        return false;\r\n    }\r\n\r\n    public boolean isFull() {\r\n        return building != null || units.size() != 0 || tree != null;\r\n    }\r\n\r\n    public boolean hasBuilding() {\r\n        return building != null;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        String unitsName = \"\";\r\n        String result = \"\";\r\n        int i = 1;\r\n\r\n        for (Unit unit : units)\r\n            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())\r\n                unitsName += (i++) + \". \" + unit.toString() + '\\n';\r\n\r\n        int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);\r\n        result += \"Coordinates: x=\" + location[0] + \" y=\" + location[1] + '\\n';\r\n        result += \"Texture: \" + texture.getName() + '\\n';\r\n        if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\\n';\r\n        if (units.size() > 0) result += \"Units:\\n\" + unitsName;\r\n        if (tree != null) result += \"Tree: \" + tree.getName() + '\\n';\r\n        if (getResourceAmount() != null) result += getResourceAmount() + '\\n';\r\n\r\n        return result;\r\n    }\r\n\r\n    public void clearUnitsByType(ArrayList<Unit> selectedUnits) {\r\n        this.units.removeAll(selectedUnits);\r\n    }\r\n\r\n    public Unit getLastUnitInTile() {\r\n        Unit result = null;\r\n        for (Unit unit : units)\r\n            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())\r\n                result = unit;\r\n        return result;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../server/src/main/java/model/map/Tile.java b/../server/src/main/java/model/map/Tile.java
+--- a/../server/src/main/java/model/map/Tile.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/../server/src/main/java/model/map/Tile.java	(date 1688116828535)
+@@ -9,21 +9,25 @@
+ 
+ import java.awt.*;
+ import java.util.ArrayList;
++import java.util.Arrays;
+ 
+ public class Tile {
+     private Texture texture;
+     private Building building = null;
+     private ArrayList<Unit> units = new ArrayList<>();
+     private Tree tree;
++    private final int[] location;
+ 
+-    public Tile() {
++    public Tile(int x, int y) {
+         texture = Texture.SAND;
+         tree = null;
++        location = new int[] {x, y};
+     }
+ 
+-    public Tile(Texture texture, Tree tree) {
++    public Tile(Texture texture, Tree tree, int x, int y) {
+         this.texture = texture;
+         this.tree = tree;
++        location = new int[] {x, y};
+     }
+ 
+     public Texture getTexture() {
+@@ -71,6 +75,10 @@
+         this.tree = tree;
+     }
+ 
++    public int[] getLocation() {
++        return location;
++    }
++
+     public void clear() {
+         this.building = null;
+         this.tree = null;
+@@ -102,7 +110,6 @@
+             if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
+                 unitsName += (i++) + ". " + unit.toString() + '\n';
+ 
+-        int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);
+         result += "Coordinates: x=" + location[0] + " y=" + location[1] + '\n';
+         result += "Texture: " + texture.getName() + '\n';
+         if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
+@@ -124,4 +131,11 @@
+                 result = unit;
+         return result;
+     }
++
++    @Override
++    public boolean equals(Object obj) {
++        if (obj instanceof Tile tile)
++            return Arrays.equals(this.location, tile.location);
++        return false;
++    }
+ }
+Index: ../server/src/main/java/controller/MainMenuController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport javafx.collections.ObservableList;\r\nimport model.Game;\r\nimport model.Governance;\r\nimport model.Stronghold;\r\nimport model.User;\r\nimport model.buildings.Keep;\r\nimport model.buildings.Storage;\r\nimport model.buildings.enums.StorageType;\r\nimport model.map.Map;\r\nimport model.map.Territory;\r\nimport model.map.Texture;\r\nimport model.map.Tile;\r\nimport model.people.Lord;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class MainMenuController {\r\n    public static void startGame(ArrayList<Object> parameters) throws Exception {\r\n        ArrayList<User> users = (ArrayList<User>) parameters.get(0);\r\n        String mapName = (String) parameters.get(1);\r\n        String[] usernames = makeListOfPlayers(users);\r\n        Map map = Stronghold.getMapByName(mapName);\r\n        Stronghold.setCurrentGame(new Game(makeGovernances(usernames), map));\r\n        ArrayList<Integer> areas = new ArrayList<>();\r\n        for (int i = 1; i <= 8; i++) areas.add(i);\r\n\r\n\r\n        initializeAreas(null, areas, 1);\r\n        for (int i = 0; i < usernames.length; i++)\r\n            initializeAreas(usernames[i], areas, i + 2);\r\n\r\n        ShowMapMenuController.setCurrentMap(map.getName());\r\n\r\n    }\r\n\r\n    public static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {\r\n        ArrayList<Governance> governances = new ArrayList<>();\r\n        governances.add(new Governance(Stronghold.getCurrentUser()));\r\n\r\n        for (String name : listOfPlayers)\r\n            governances.add(new Governance(Stronghold.getUserByUsername(name)));\r\n\r\n        return governances;\r\n    }\r\n\r\n    public static String[] makeListOfPlayers(ArrayList<User> users) {\r\n        ArrayList<String> usernames = new ArrayList<>();\r\n\r\n        for (User user : users)\r\n            usernames.add(user.getUsername());\r\n        return usernames.toArray(new String[0]);\r\n    }\r\n\r\n    public static void initializeAreas(String playerName, ArrayList<Integer> areas, int selectedArea) {\r\n        int x, y;\r\n        int mapSize = Stronghold.getCurrentGame().getMap().getSize();\r\n        Governance currentGovernance = Stronghold.getCurrentGame().getGovernances().get(0);\r\n\r\n        if (playerName != null) {\r\n            for (Governance governance : Stronghold.getCurrentGame().getGovernances()) {\r\n                if (governance.getOwner().getUsername().equals(playerName)) {\r\n                    currentGovernance = governance;\r\n                    break;\r\n                }\r\n            }\r\n        }\r\n\r\n        Lord lord = new Lord(currentGovernance);\r\n        Keep keep = new Keep(currentGovernance);\r\n        x = getXYBySelectedArea(selectedArea, mapSize)[0];\r\n        y = getXYBySelectedArea(selectedArea, mapSize)[1];\r\n\r\n        buildKeep(currentGovernance, keep, x, y);\r\n        BuildingUtils.build(currentGovernance, new Storage(StorageType.STOCKPILE), x - 2, y);\r\n        BuildingUtils.build(currentGovernance, new Storage(StorageType.GRANARY), x, y - 2);\r\n        currentGovernance.initializeStorages();\r\n        dropLord(currentGovernance, lord, x, y);\r\n        currentGovernance.setTerritory(Territory.getTerritoryByArea(selectedArea));\r\n\r\n        areas.remove(Integer.valueOf(selectedArea));\r\n    }\r\n\r\n    private static void buildKeep(Governance currentGovernance, Keep keep, int x, int y) {\r\n        int size = keep.getSize();\r\n        Map map = Stronghold.getCurrentGame().getMap();\r\n        Tile[][] tiles = map.getTiles();\r\n\r\n        for (int i = 0; i < size; i++)\r\n            for (int j = 0; j < size; j++) {\r\n                tiles[y + i][x + j].setBuilding(keep);\r\n                tiles[y + i][x + j].setTexture(Texture.SAND);\r\n            }\r\n\r\n        currentGovernance.addBuilding(keep);\r\n        keep.setXCoordinate(x);\r\n        keep.setYCoordinate(y);\r\n    }\r\n\r\n    private static void dropLord(Governance currentGovernance, Lord lord, int x, int y) {\r\n        Tile tile = Stronghold.getCurrentGame().getMap().getTile(x, y);\r\n        tile.getUnits().add(lord);\r\n        lord.setLocation(new int[]{x, y});\r\n        currentGovernance.addUnit(lord);\r\n    }\r\n\r\n    private static int[] getXYBySelectedArea(int selectedArea, int mapSize) {\r\n        int[] coordinate = new int[2];\r\n        switch (selectedArea) {\r\n            case 1 -> {\r\n                coordinate[0] = mapSize / 6;\r\n                coordinate[1] = mapSize / 6;\r\n            }\r\n            case 2 -> {\r\n                coordinate[0] = mapSize / 6;\r\n                coordinate[1] = mapSize / 2;\r\n            }\r\n            case 3 -> {\r\n                coordinate[0] = mapSize / 6;\r\n                coordinate[1] = 5 * mapSize / 6;\r\n            }\r\n            case 4 -> {\r\n                coordinate[0] = mapSize / 2;\r\n                coordinate[1] = mapSize / 6;\r\n            }\r\n            case 5 -> {\r\n                coordinate[0] = mapSize / 2;\r\n                coordinate[1] = 5 * mapSize / 6;\r\n            }\r\n            case 6 -> {\r\n                coordinate[0] = 5 * mapSize / 6;\r\n                coordinate[1] = mapSize / 6;\r\n            }\r\n            case 7 -> {\r\n                coordinate[0] = 5 * mapSize / 6;\r\n                coordinate[1] = mapSize / 2;\r\n            }\r\n            case 8 -> {\r\n                coordinate[0] = 5 * mapSize / 6;\r\n                coordinate[1] = 5 * mapSize / 6;\r\n            }\r\n        }\r\n        return new int[]{coordinate[1], coordinate[0]};\r\n    }\r\n\r\n\r\n    public static ObservableList<User> removeCurrentUserFromList(ArrayList<Object> parameters) {\r\n        ObservableList<User> userObservableList = (ObservableList<User>) parameters.get(0);\r\n        userObservableList.remove(Stronghold.getCurrentUser());//TODO: ArrayList<Object> parameters\r\n        return userObservableList;\r\n    }\r\n\r\n    public static ObservableList<Governance> removeCurrentGovernanceFromList(ArrayList<Object> parameters) {\r\n        ObservableList<Governance> governanceObservableList = (ObservableList<Governance>) parameters.get(0);\r\n        governanceObservableList.remove(Stronghold.getCurrentGame().getCurrentGovernance());\r\n        return governanceObservableList;\r\n    }\r\n\r\n    public static void logout(ArrayList<Object> parameters) {\r\n        User currentUser = Stronghold.getCurrentUser();\r\n        currentUser.setStayLoggedIn(false);\r\n        Stronghold.setCurrentUser(null);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../server/src/main/java/controller/MainMenuController.java b/../server/src/main/java/controller/MainMenuController.java
+--- a/../server/src/main/java/controller/MainMenuController.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/../server/src/main/java/controller/MainMenuController.java	(date 1688120520031)
+@@ -15,6 +15,8 @@
+ import model.people.Lord;
+ 
+ import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Collections;
+ 
+ public class MainMenuController {
+     public static void startGame(ArrayList<Object> parameters) throws Exception {
+@@ -31,8 +33,7 @@
+         for (int i = 0; i < usernames.length; i++)
+             initializeAreas(usernames[i], areas, i + 2);
+ 
+-        ShowMapMenuController.setCurrentMap(map.getName());
+-
++        ShowMapMenuController.setCurrentMap(new ArrayList<>(Arrays.asList(map.getName())));
+     }
+ 
+     public static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {
+Index: ../server/src/main/java/controller/MapEditMenuController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport model.Stronghold;\r\nimport model.map.Map;\r\nimport model.map.Texture;\r\nimport model.map.Tile;\r\nimport model.map.Tree;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Random;\r\n\r\npublic class MapEditMenuController {\r\n    private static Map currentMap;\r\n\r\n    public static void saveMap(ArrayList<Object> parameters) {\r\n        Utils.updateDatabase(\"maps\");\r\n    }\r\n\r\n    public static void setCurrentMap(ArrayList<Object> parameters) {\r\n        String mapName = (String) parameters.get(0);\r\n        currentMap = Stronghold.getMapByName(mapName);\r\n    }\r\n\r\n    public static Map getCurrentMap(ArrayList<Object> parameters) {\r\n        return currentMap;\r\n    }\r\n\r\n    public static Message checkMakeNewMap(ArrayList<Object> parameters) {\r\n        String mapName = (String) parameters.get(0);\r\n        String mapSize = (String) parameters.get(1);\r\n        if (mapName.isEmpty()) return Message.MAP_NAME_FIELD_EMPTY;\r\n        else if (mapSize.isEmpty()) return Message.MAP_SIZE_FIELD_EMPTY;\r\n        else if (!mapSize.matches(\"\\\\d+\")) return Message.INVALID_MAP_SIZE_FORMAT;\r\n        else if (Stronghold.getMapByName(mapName) != null) return Message.MAP_EXIST;\r\n        else if (Integer.parseInt(mapSize) < 50 || Integer.parseInt(mapSize) > 200)\r\n            return Message.INVALID_MAP_SIZE;\r\n\r\n        currentMap = new Map(mapName, Integer.parseInt(mapSize));\r\n        ShowMapMenuController.setCurrentMap(currentMap.getName());\r\n        Utils.updateDatabase(\"maps\");\r\n        return Message.SUCCESS;\r\n    }\r\n\r\n    public static Message setTexture(ArrayList<Object> parameters) {\r\n        int selectedTilesSize = (Integer) parameters.get(0);\r\n        String textureName = (String) parameters.get(1);\r\n        int selectedTileX = (Integer) parameters.get(2);\r\n        int selectedTileY = (Integer) parameters.get(3);\r\n        int height = (Integer) parameters.get(4);\r\n        int width = (Integer) parameters.get(5);\r\n        Texture texture = Texture.getTextureByName(textureName);\r\n\r\n        if (selectedTilesSize == 0) return Message.EMPTY_SELECTED_TILES;\r\n        else if (texture.equals(Texture.BIG_LAKE) || texture.equals(Texture.SMALL_LAKE) || texture.equals(Texture.CLIFF)) {\r\n            if (selectedTilesSize > 1) return Message.SELECT_ONLY_ONE_TILE;\r\n            switch (texture) {\r\n                case SMALL_LAKE -> {\r\n                    if (!isSuitableLandForLake(selectedTileX, selectedTileY, 3))\r\n                        return Message.INVALID_PLACE_TO_DEPLOY;\r\n                    else {\r\n                        for (int i = 0; i < 3; i++)\r\n                            for (int j = 0; j < 3; j++)\r\n                                currentMap.getTile(selectedTileX + i, selectedTileY + j).setTexture(Texture.SMALL_LAKE);\r\n                    }\r\n                }\r\n                case BIG_LAKE -> {\r\n                    if (!isSuitableLandForLake(selectedTileX, selectedTileY, 5))\r\n                        return Message.INVALID_PLACE_TO_DEPLOY;\r\n                    else {\r\n                        for (int i = 0; i < 5; i++)\r\n                            for (int j = 0; j < 5; j++)\r\n                                currentMap.getTile(selectedTileX + i, selectedTileY + j).setTexture(Texture.BIG_LAKE);\r\n                    }\r\n                }\r\n                case CLIFF -> {\r\n                    if (!isSuitableLandForCliff(selectedTileX, selectedTileY))\r\n                        return Message.INVALID_PLACE_TO_DEPLOY;\r\n                    else {\r\n                        ArrayList<int[][]> directions = buildCoordinates();\r\n                        int[][] direction = directions.get(new Random().nextInt(directions.size()));\r\n                        for (int i = 0; i < 5; i++) {\r\n                            for (int j = 0; j < 5; j++) {\r\n                                if ((i == direction[0][0] && j == direction[0][1]) || (i == direction[1][0] && j == direction[1][1]))\r\n                                    continue;\r\n                                currentMap.getTile(selectedTileX + i, selectedTileY + j).setTexture(Texture.CLIFF);\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        } else {\r\n            for (int i = 0; i < width; i++)\r\n                for (int j = 0; j < height; j++)\r\n                    currentMap.getTile(selectedTileX + i, selectedTileY + j).setTexture(texture);\r\n        }\r\n        return Message.SUCCESS;\r\n    }\r\n\r\n    public static Message dropTree(ArrayList<Object> parameters) {\r\n        int selectedTileX = (Integer) parameters.get(0);\r\n        int selectedTileY = (Integer) parameters.get(0);\r\n        int width = (Integer) parameters.get(0);\r\n        int height = (Integer) parameters.get(0);\r\n        String treeName = (String) parameters.get(0);\r\n        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(selectedTileX, selectedTileY, height, width);\r\n        if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;\r\n\r\n        for (Tile tile : tiles)\r\n            tile.setTree(new Tree(treeName));\r\n        return Message.SUCCESS;\r\n    }\r\n\r\n    private static boolean isSuitableLandForLake(int tileX, int tileY, int lakeSize) {\r\n        if (currentMap.getSize() <= tileX + lakeSize || currentMap.getSize() <= tileY + lakeSize) return false;\r\n        for (int i = 0; i < lakeSize; i++)\r\n            for (int j = 0; j < lakeSize; j++) {\r\n                if (currentMap.getTile(tileX + i, tileY + j).getTexture().equals(Texture.CLIFF) ||\r\n                        currentMap.getTile(tileX + i, tileY + j).isFull())\r\n                    return false;\r\n            }\r\n        return true;\r\n    }\r\n\r\n    private static boolean isSuitableLandForCliff(int tileX, int tileY) {\r\n        if (currentMap.getSize() <= tileX + 5 || currentMap.getSize() <= tileY + 5) return false;\r\n        for (int i = 0; i < 5; i++)\r\n            for (int j = 0; j < 5; j++) {\r\n                if (currentMap.getTile(tileX + i, tileY + j).getTexture().isWater() ||\r\n                        currentMap.getTile(tileX + i, tileY + j).getTexture().equals(Texture.CLIFF) ||\r\n                        currentMap.getTile(tileX + i, tileY + j).isFull())\r\n                    return false;\r\n            }\r\n        return true;\r\n    }\r\n\r\n    private static boolean isSuitableLandForTree(ArrayList<Tile> tiles) {\r\n        for (Tile tile : tiles)\r\n            if (tile.isFull() || tile.getTexture().isWater() || tile.getTexture().isStone() || tile.getTexture().isIron())\r\n                return false;\r\n        return true;\r\n    }\r\n\r\n    private static ArrayList<int[][]> buildCoordinates() {\r\n        ArrayList<int[][]> directions = new ArrayList<>();\r\n        directions.add(new int[][]{{4, 1}, {4, 3}});\r\n        directions.add(new int[][]{{1, 0}, {3, 0}});\r\n        directions.add(new int[][]{{0, 1}, {0, 3}});\r\n        directions.add(new int[][]{{1, 4}, {3, 4}});\r\n        return directions;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../server/src/main/java/controller/MapEditMenuController.java b/../server/src/main/java/controller/MapEditMenuController.java
+--- a/../server/src/main/java/controller/MapEditMenuController.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/../server/src/main/java/controller/MapEditMenuController.java	(date 1688120520049)
+@@ -7,6 +7,7 @@
+ import model.map.Tree;
+ 
+ import java.util.ArrayList;
++import java.util.Arrays;
+ import java.util.Random;
+ 
+ public class MapEditMenuController {
+@@ -36,7 +37,7 @@
+             return Message.INVALID_MAP_SIZE;
+ 
+         currentMap = new Map(mapName, Integer.parseInt(mapSize));
+-        ShowMapMenuController.setCurrentMap(currentMap.getName());
++        ShowMapMenuController.setCurrentMap(new ArrayList<>(Arrays.asList(currentMap.getName())));
+         Utils.updateDatabase("maps");
+         return Message.SUCCESS;
+     }
+@@ -102,7 +103,7 @@
+         int width = (Integer) parameters.get(0);
+         int height = (Integer) parameters.get(0);
+         String treeName = (String) parameters.get(0);
+-        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(selectedTileX, selectedTileY, height, width);
++        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(new ArrayList<>(Arrays.asList(selectedTileX, selectedTileY, height, width)));
+         if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;
+ 
+         for (Tile tile : tiles)
+Index: src/main/java/model/map/Map.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.map;\r\n\r\npublic class Map {\r\n    private final String name;\r\n    private final Tile[][] tiles;\r\n    private final int size;\r\n\r\n    public Map(String name, int size) {\r\n        this.name = name;\r\n        this.size = size;\r\n\r\n        this.tiles = new Tile[size][size];\r\n        for (int i = 0; i < size; i++) {\r\n            tiles[i] = new Tile[size];\r\n            for (int j = 0; j < size; j++) {\r\n                tiles[i][j] = new Tile();\r\n            }\r\n        }\r\n    }\r\n\r\n    public Map(String name, Tile[][] tiles, int size) {\r\n        this.name = name;\r\n        this.tiles = tiles;\r\n        this.size = size;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public int getSize() {\r\n        return size;\r\n    }\r\n\r\n    public Tile[][] getTiles() {\r\n        return tiles;\r\n    }\r\n\r\n    public int[] getTileLocation(Tile tile) {\r\n        for (int i = 0; i < size; i++)\r\n            for (int j = 0; j < size; j++)\r\n                if (tiles[i][j].equals(tile))\r\n                    return new int[]{j, i};\r\n        return null;\r\n    }\r\n\r\n    public Tile getTile(int x, int y) {\r\n        try {\r\n            return tiles[y][x];\r\n        }catch (Exception e){\r\n            return null;\r\n        }\r\n    }\r\n\r\n    public Tile getTile(int[] location) {\r\n        return tiles[location[1]][location[0]];\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return getName();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/map/Map.java b/src/main/java/model/map/Map.java
+--- a/src/main/java/model/map/Map.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/src/main/java/model/map/Map.java	(date 1688116234351)
+@@ -13,7 +13,7 @@
+         for (int i = 0; i < size; i++) {
+             tiles[i] = new Tile[size];
+             for (int j = 0; j < size; j++) {
+-                tiles[i][j] = new Tile();
++                tiles[i][j] = new Tile(j, i);
+             }
+         }
+     }
+Index: src/main/java/model/map/Tile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.map;\r\n\r\nimport controller.BuildingUtils;\r\nimport model.Governance;\r\nimport model.Stronghold;\r\nimport model.buildings.Building;\r\nimport model.people.Troop;\r\nimport model.people.Unit;\r\n\r\nimport java.awt.*;\r\nimport java.util.ArrayList;\r\n\r\npublic class Tile {\r\n    private Texture texture;\r\n    private Building building = null;\r\n    private ArrayList<Unit> units = new ArrayList<>();\r\n    private Tree tree;\r\n\r\n    public Tile() {\r\n        texture = Texture.SAND;\r\n        tree = null;\r\n    }\r\n\r\n    public Tile(Texture texture, Tree tree) {\r\n        this.texture = texture;\r\n        this.tree = tree;\r\n    }\r\n\r\n    public Texture getTexture() {\r\n        return texture;\r\n    }\r\n\r\n    public void setTexture(Texture texture) {\r\n        this.texture = texture;\r\n    }\r\n\r\n    public Building getBuilding() {\r\n        return building;\r\n    }\r\n\r\n    public void setBuilding(Building building) {\r\n        this.building = building;\r\n    }\r\n\r\n    public ArrayList<Unit> getUnits() {\r\n        return units;\r\n    }\r\n\r\n    public ArrayList<Unit> getUnitsByType(String unitType) {\r\n        ArrayList<Unit> selectedUnits = new ArrayList<>();\r\n        for (Unit unit : units) {\r\n            if (unit.getName().equals(unitType))\r\n                selectedUnits.add(unit);\r\n        }\r\n        return selectedUnits;\r\n    }\r\n\r\n    public String getResourceAmount() {\r\n        String result = null;\r\n        if (this.tree != null) result = \"Wood: \" + tree.getLeftWood();\r\n        else if (this.texture.equals(Texture.IRON) || this.texture.equals(Texture.STONE))\r\n            result = this.texture.getName() + \": Infinite\";\r\n        return result;\r\n    }\r\n\r\n    public Tree getTree() {\r\n        return tree;\r\n    }\r\n\r\n    public void setTree(Tree tree) {\r\n        this.tree = tree;\r\n    }\r\n\r\n    public void clear() {\r\n        this.building = null;\r\n        this.tree = null;\r\n        this.units = new ArrayList<>();\r\n    }\r\n\r\n    public boolean hasEnemy(Governance governance) {\r\n        for (Unit unit : units)\r\n            if (!unit.getOwner().equals(governance))\r\n                return true;\r\n        return false;\r\n    }\r\n\r\n    public boolean isFull() {\r\n        return building != null || units.size() != 0 || tree != null;\r\n    }\r\n\r\n    public boolean hasBuilding() {\r\n        return building != null;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        String unitsName = \"\";\r\n        String result = \"\";\r\n        int i = 1;\r\n\r\n        for (Unit unit : units)\r\n            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())\r\n                unitsName += (i++) + \". \" + unit.toString() + '\\n';\r\n\r\n        int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);\r\n        result += \"Coordinates: x=\" + location[0] + \" y=\" + location[1] + '\\n';\r\n        result += \"Texture: \" + texture.getName() + '\\n';\r\n        if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\\n';\r\n        if (units.size() > 0) result += \"Units:\\n\" + unitsName;\r\n        if (tree != null) result += \"Tree: \" + tree.getName() + '\\n';\r\n        if (getResourceAmount() != null) result += getResourceAmount() + '\\n';\r\n\r\n        return result;\r\n    }\r\n\r\n    public void clearUnitsByType(ArrayList<Unit> selectedUnits) {\r\n        this.units.removeAll(selectedUnits);\r\n    }\r\n\r\n    public Unit getLastUnitInTile() {\r\n        Unit result = null;\r\n        for (Unit unit : units)\r\n            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())\r\n                result = unit;\r\n        return result;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/map/Tile.java b/src/main/java/model/map/Tile.java
+--- a/src/main/java/model/map/Tile.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/src/main/java/model/map/Tile.java	(date 1688116561565)
+@@ -1,29 +1,33 @@
+ package model.map;
+ 
+-import controller.BuildingUtils;
+ import model.Governance;
+-import model.Stronghold;
+ import model.buildings.Building;
+ import model.people.Troop;
+ import model.people.Unit;
++import webConnection.Client;
+ 
+ import java.awt.*;
++import java.io.IOException;
+ import java.util.ArrayList;
++import java.util.Arrays;
+ 
+ public class Tile {
+     private Texture texture;
+     private Building building = null;
+     private ArrayList<Unit> units = new ArrayList<>();
+     private Tree tree;
++    private final int[] location;
+ 
+-    public Tile() {
++    public Tile(int x, int y) {
+         texture = Texture.SAND;
+         tree = null;
++        location = new int[] {x, y};
+     }
+ 
+-    public Tile(Texture texture, Tree tree) {
++    public Tile(Texture texture, Tree tree, int x, int y) {
+         this.texture = texture;
+         this.tree = tree;
++        location = new int[] {x, y};
+     }
+ 
+     public Texture getTexture() {
+@@ -67,6 +71,10 @@
+         return tree;
+     }
+ 
++    public int[] getLocation() {
++        return location;
++    }
++
+     public void setTree(Tree tree) {
+         this.tree = tree;
+     }
+@@ -102,10 +110,14 @@
+             if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
+                 unitsName += (i++) + ". " + unit.toString() + '\n';
+ 
+-        int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);
+         result += "Coordinates: x=" + location[0] + " y=" + location[1] + '\n';
+         result += "Texture: " + texture.getName() + '\n';
+-        if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
++        try {
++            if ((Boolean) Client.getConnection().getData("BuildingUtils", "isBuildingInTile", building))
++                result += building.toString() + '\n';
++        } catch (IOException e) {
++            throw new RuntimeException(e);
++        }
+         if (units.size() > 0) result += "Units:\n" + unitsName;
+         if (tree != null) result += "Tree: " + tree.getName() + '\n';
+         if (getResourceAmount() != null) result += getResourceAmount() + '\n';
+@@ -124,4 +136,11 @@
+                 result = unit;
+         return result;
+     }
++
++    @Override
++    public boolean equals(Object obj) {
++        if (obj instanceof Tile tile)
++            return Arrays.equals(this.location, tile.location);
++        return false;
++    }
+ }
+Index: ../server/src/main/java/controller/EntryMenuController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport com.google.gson.Gson;\r\nimport com.google.gson.reflect.TypeToken;\r\nimport model.Stronghold;\r\nimport model.User;\r\nimport model.map.Map;\r\nimport model.map.Texture;\r\nimport model.map.Tile;\r\nimport model.map.Tree;\r\nimport org.json.simple.JSONArray;\r\nimport org.json.simple.JSONObject;\r\nimport org.json.simple.parser.JSONParser;\r\nimport org.json.simple.parser.ParseException;\r\n\r\nimport java.io.FileReader;\r\nimport java.io.IOException;\r\nimport java.lang.reflect.Type;\r\nimport java.util.ArrayList;\r\n\r\npublic class EntryMenuController {\r\n    public static void fillAllFieldsWithPreviousData() {\r\n        parseUsers();\r\n        parseMaps();\r\n    }\r\n\r\n    private static void parseUsers() {\r\n        try (FileReader reader = new FileReader(\"src/main/resources/JSON/users.json\")) {\r\n            Type userDatabaseType = new TypeToken<ArrayList<User>>() {\r\n            }.getType();\r\n            Stronghold.getUsers().addAll(new Gson().fromJson(reader, userDatabaseType));\r\n        } catch (IOException ignored) {\r\n        }\r\n    }\r\n\r\n    public static void parseMaps() {\r\n        Stronghold.setMaps(new ArrayList<>());\r\n        JSONParser jsonParser = new JSONParser();\r\n        try (FileReader reader = new FileReader(\"src/main/resources/JSON/maps.json\")) {\r\n            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);\r\n            jsonArray.forEach(map -> parseMapObject((JSONObject) map));\r\n        } catch (ParseException | IOException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n    }\r\n\r\n\r\n    private static void parseMapObject(JSONObject map) {\r\n        String name = (String) map.get(\"name\");\r\n        long size = (Long) map.get(\"size\");\r\n        JSONArray mapTiles = (JSONArray) map.get(\"tiles\");\r\n\r\n        new Map(name, convertTo2DTileArray(mapTiles, (int) size), (int) size);\r\n    }\r\n\r\n    private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int size) {\r\n        Tile[][] result = new Tile[size][];\r\n        for (int i = 0; i < size; i++) {\r\n            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), size);\r\n        }\r\n        return result;\r\n    }\r\n\r\n    private static Tile[] convertToTileArray(JSONArray tiles, int size) {\r\n        Tile[] result = new Tile[size];\r\n        for (int i = 0; i < size; i++) {\r\n            result[i] = parseTileObject((JSONObject) tiles.get(i));\r\n        }\r\n        return result;\r\n    }\r\n\r\n    private static Tile parseTileObject(JSONObject tile) {\r\n        Texture texture = Texture.valueOf(((String) tile.get(\"texture\")));\r\n        Tree tree = null;\r\n        if (tile.get(\"tree\") != null)\r\n            tree = new Tree((String) ((JSONObject) tile.get(\"tree\")).get(\"name\"));\r\n\r\n        return new Tile(texture, tree);\r\n    }\r\n\r\n    public static User getStayLoggedIn() {\r\n        for (User user : Stronghold.getUsers())\r\n            if (user.isStayLoggedIn()) {\r\n                Stronghold.setCurrentUser(user);\r\n                return user;\r\n            }\r\n        return null;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../server/src/main/java/controller/EntryMenuController.java b/../server/src/main/java/controller/EntryMenuController.java
+--- a/../server/src/main/java/controller/EntryMenuController.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/../server/src/main/java/controller/EntryMenuController.java	(date 1688116664759)
+@@ -56,26 +56,26 @@
+     private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int size) {
+         Tile[][] result = new Tile[size][];
+         for (int i = 0; i < size; i++) {
+-            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), size);
++            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), size, i);
+         }
+         return result;
+     }
+ 
+-    private static Tile[] convertToTileArray(JSONArray tiles, int size) {
++    private static Tile[] convertToTileArray(JSONArray tiles, int size, int row) {
+         Tile[] result = new Tile[size];
+         for (int i = 0; i < size; i++) {
+-            result[i] = parseTileObject((JSONObject) tiles.get(i));
++            result[i] = parseTileObject((JSONObject) tiles.get(i), i, row);
+         }
+         return result;
+     }
+ 
+-    private static Tile parseTileObject(JSONObject tile) {
++    private static Tile parseTileObject(JSONObject tile, int column, int row) {
+         Texture texture = Texture.valueOf(((String) tile.get("texture")));
+         Tree tree = null;
+         if (tile.get("tree") != null)
+             tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
+ 
+-        return new Tile(texture, tree);
++        return new Tile(texture, tree, column, row);
+     }
+ 
+     public static User getStayLoggedIn() {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"192bc349-0887-4b4b-9e14-9589dbcc6d89\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/model/Parsers.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/model/Parsers.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/view/MapEditMenu.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/view/MapEditMenu.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../server/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../server/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Enum\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitToolBoxStore\">\r\n    <option name=\"projectConfigVersion\" value=\"5\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2RqiiPZLENSq5fb9XPPssTSSOhx\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"last_opened_file_path\": \"C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/server\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"settings.editor.selected.configurable\": \"project.propVCSSupport.DirectoryMappings\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"webConnection\" />\r\n    </key>\r\n    <key name=\"MoveMembersDialog.RECENTS_KEY\">\r\n      <recent name=\"view.enums.Message\" />\r\n      <recent name=\"view.enums.message\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Client\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"webConnection.Client\" />\r\n      <module name=\"client\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"webConnection.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Client\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"192bc349-0887-4b4b-9e14-9589dbcc6d89\" name=\"Changes\" comment=\"\" />\r\n      <created>1687984141041</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1687984141041</updated>\r\n      <workItem from=\"1687984142380\" duration=\"2000\" />\r\n      <workItem from=\"1687984326282\" duration=\"3585000\" />\r\n      <workItem from=\"1688013129333\" duration=\"33000\" />\r\n      <workItem from=\"1688013172394\" duration=\"349000\" />\r\n      <workItem from=\"1688013733596\" duration=\"23087000\" />\r\n      <workItem from=\"1688108761463\" duration=\"4025000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"add client project\">\r\n      <created>1687985025460</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1687985025460</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"very primitive implement of client\">\r\n      <created>1687989433207</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1687989433207</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Client side changing (sending packets) started\">\r\n      <created>1688020469513</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688020469513</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"edit getData methods\">\r\n      <created>1688022215795</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688022215795</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"getJsonData added\">\r\n      <created>1688024226410</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688024226410</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"MapEditing started\">\r\n      <created>1688071095673</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688071095673</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"MapEditing ended (Showing map still needs implements)\">\r\n      <created>1688112289788</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688112289788</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT\" value=\"false\" />\r\n    <option name=\"CHECK_NEW_TODO\" value=\"false\" />\r\n    <ignored-roots>\r\n      <path value=\"$PROJECT_DIR$/../..\" />\r\n    </ignored-roots>\r\n    <MESSAGE value=\"add client project\" />\r\n    <MESSAGE value=\"very primitive implement of client\" />\r\n    <MESSAGE value=\"Client side changing (sending packets) started\" />\r\n    <MESSAGE value=\"edit getData methods\" />\r\n    <MESSAGE value=\"getJsonData added\" />\r\n    <MESSAGE value=\"MapEditing started\" />\r\n    <MESSAGE value=\"MapEditing ended (Showing map still needs implements)\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"MapEditing ended (Showing map still needs implements)\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/.idea/workspace.xml	(date 1688125329008)
+@@ -7,9 +7,16 @@
+     <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/model/Parsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Parsers.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Map.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/EntryMenuController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/map/Tile.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/module-info.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -97,7 +104,7 @@
+       <workItem from="1688013129333" duration="33000" />
+       <workItem from="1688013172394" duration="349000" />
+       <workItem from="1688013733596" duration="23087000" />
+-      <workItem from="1688108761463" duration="4025000" />
++      <workItem from="1688108761463" duration="7333000" />
+     </task>
+     <task id="LOCAL-00001" summary="add client project">
+       <created>1687985025460</created>
+@@ -148,7 +155,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1688112289788</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL-00008" summary="Edit MapEditMenuController methods">
++      <created>1688113887625</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1688113887625</updated>
++    </task>
++    <option name="localTasksCounter" value="9" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -178,6 +192,7 @@
+     <MESSAGE value="getJsonData added" />
+     <MESSAGE value="MapEditing started" />
+     <MESSAGE value="MapEditing ended (Showing map still needs implements)" />
+-    <option name="LAST_COMMIT_MESSAGE" value="MapEditing ended (Showing map still needs implements)" />
++    <MESSAGE value="Edit MapEditMenuController methods" />
++    <option name="LAST_COMMIT_MESSAGE" value="Edit MapEditMenuController methods" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/main/java/model/Parsers.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\r\n\r\nimport model.map.Map;\r\nimport model.map.Texture;\r\nimport model.map.Tile;\r\nimport model.map.Tree;\r\nimport org.json.JSONArray;\r\nimport org.json.JSONObject;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Parsers {\r\n\r\n    public static ArrayList<Map> parseMapArrayList(JSONArray jsonArray) {\r\n        ArrayList<Map> maps = new ArrayList<>();\r\n        jsonArray.forEach(map -> maps.add(parseMapObject((JSONObject) map)));\r\n        return maps;\r\n    }\r\n\r\n    public static Map parseMapObject(JSONObject map) {\r\n        String name = (String) map.get(\"name\");\r\n        long size = (Long) map.get(\"size\");\r\n        JSONArray mapTiles = (JSONArray) map.get(\"tiles\");\r\n\r\n        return new Map(name, convertTo2DTileArray(mapTiles, (int) size, (int) size), (int) size);\r\n    }\r\n\r\n    private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int rowsCount, int columnCount) {\r\n        Tile[][] result = new Tile[rowsCount][];\r\n        for (int i = 0; i < rowsCount; i++) {\r\n            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), columnCount);\r\n        }\r\n        return result;\r\n    }\r\n\r\n    private static Tile[] convertToTileArray(JSONArray tiles, int columnCount) {\r\n        Tile[] result = new Tile[columnCount];\r\n        for (int i = 0; i < columnCount; i++) {\r\n            result[i] = parseTileObject((JSONObject) tiles.get(i));\r\n        }\r\n        return result;\r\n    }\r\n\r\n    private static Tile parseTileObject(JSONObject tile) {\r\n        Texture texture = Texture.valueOf(((String) tile.get(\"texture\")));\r\n        Tree tree = null;\r\n        if (tile.get(\"tree\") != null)\r\n            tree = new Tree((String) ((JSONObject) tile.get(\"tree\")).get(\"name\"));\r\n\r\n        return new Tile(texture, tree);\r\n    }\r\n\r\n    public static Tile[][] parseTiles2DArray(JSONArray jsonArrayData, int width, int height) {\r\n        return convertTo2DTileArray(jsonArrayData, height, width);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/model/Parsers.java b/src/main/java/model/Parsers.java
+--- a/src/main/java/model/Parsers.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/src/main/java/model/Parsers.java	(date 1688116234358)
+@@ -25,32 +25,28 @@
+         return new Map(name, convertTo2DTileArray(mapTiles, (int) size, (int) size), (int) size);
+     }
+ 
+-    private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int rowsCount, int columnCount) {
++    public static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int rowsCount, int columnCount) {
+         Tile[][] result = new Tile[rowsCount][];
+         for (int i = 0; i < rowsCount; i++) {
+-            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), columnCount);
++            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), columnCount, i);
+         }
+         return result;
+     }
+ 
+-    private static Tile[] convertToTileArray(JSONArray tiles, int columnCount) {
++    private static Tile[] convertToTileArray(JSONArray tiles, int columnCount, int row) {
+         Tile[] result = new Tile[columnCount];
+         for (int i = 0; i < columnCount; i++) {
+-            result[i] = parseTileObject((JSONObject) tiles.get(i));
++            result[i] = parseTileObject((JSONObject) tiles.get(i), row, i);
+         }
+         return result;
+     }
+ 
+-    private static Tile parseTileObject(JSONObject tile) {
++    public static Tile parseTileObject(JSONObject tile, int row, int column) {
+         Texture texture = Texture.valueOf(((String) tile.get("texture")));
+         Tree tree = null;
+         if (tile.get("tree") != null)
+             tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
+ 
+-        return new Tile(texture, tree);
+-    }
+-
+-    public static Tile[][] parseTiles2DArray(JSONArray jsonArrayData, int width, int height) {
+-        return convertTo2DTileArray(jsonArrayData, height, width);
++        return new Tile(texture, tree, column, row);
+     }
+ }
+Index: ../server/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"f9d213f4-9dc3-4ef9-8a52-c27f667abf74\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/../client/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../client/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../client/src/main/java/model/Parsers.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../client/src/main/java/model/Parsers.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Enum\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitToolBoxStore\">\r\n    <option name=\"projectConfigVersion\" value=\"5\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2RqieMJepUkwrEXScrrntF2MDNw\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"last_opened_file_path\": \"C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/server\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"settings.editor.selected.configurable\": \"project.propVCSSupport.DirectoryMappings\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"webConnetion\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Server\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"webConnetion.Server\" />\r\n      <module name=\"server\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"webConnetion.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Server\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"f9d213f4-9dc3-4ef9-8a52-c27f667abf74\" name=\"Changes\" comment=\"\" />\r\n      <created>1687984107030</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1687984107030</updated>\r\n      <workItem from=\"1687984108416\" duration=\"33000\" />\r\n      <workItem from=\"1687984392274\" duration=\"4327000\" />\r\n      <workItem from=\"1688013075603\" duration=\"355000\" />\r\n      <workItem from=\"1688013733866\" duration=\"19391000\" />\r\n      <workItem from=\"1688108825652\" duration=\"3509000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"add server project\">\r\n      <created>1687985072897</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1687985072897</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"start server Connection\">\r\n      <created>1687987567134</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1687987567134</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"getData minor changes\">\r\n      <created>1688027479380</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688027479380</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"add server pocket receiving and sending\">\r\n      <created>1688027991873</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688027991873</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Messages merged\">\r\n      <created>1688029577587</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688029577587</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"LoginMenu ended in both sides\">\r\n      <created>1688039564723</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1688039564723</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <ignored-roots>\r\n      <path value=\"$PROJECT_DIR$/../..\" />\r\n    </ignored-roots>\r\n    <MESSAGE value=\"add server project\" />\r\n    <MESSAGE value=\"start server Connection\" />\r\n    <MESSAGE value=\"getData minor changes\" />\r\n    <MESSAGE value=\"add server pocket receiving and sending\" />\r\n    <MESSAGE value=\"Messages merged\" />\r\n    <MESSAGE value=\"LoginMenu ended in both sides\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"LoginMenu ended in both sides\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../server/.idea/workspace.xml b/../server/.idea/workspace.xml
+--- a/../server/.idea/workspace.xml	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/../server/.idea/workspace.xml	(date 1688121735525)
+@@ -7,9 +7,16 @@
+     <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/../client/src/main/java/model/Parsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/model/Parsers.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../client/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/model/map/Map.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/../client/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/model/map/Tile.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/EntryMenuController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -92,7 +99,7 @@
+       <workItem from="1687984392274" duration="4327000" />
+       <workItem from="1688013075603" duration="355000" />
+       <workItem from="1688013733866" duration="19391000" />
+-      <workItem from="1688108825652" duration="3509000" />
++      <workItem from="1688108825652" duration="6717000" />
+     </task>
+     <task id="LOCAL-00001" summary="add server project">
+       <created>1687985072897</created>
+Index: ../server/src/main/java/controller/ShowMapMenuController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package controller;\r\n\r\nimport model.Stronghold;\r\nimport model.buildings.Building;\r\nimport model.buildings.ProductiveBuilding;\r\nimport model.map.Map;\r\nimport model.map.Tile;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Arrays;\r\n\r\npublic class ShowMapMenuController {\r\n    private static Map currentMap;\r\n\r\n    public static Tile[][] getTiles(int x, int y, int rowsCount, int columnCount) {\r\n        Tile[][] tiles = new Tile[rowsCount][columnCount];\r\n        for (int i = 0; i < rowsCount; i++) {\r\n            tiles[i] = new Tile[columnCount];\r\n            for (int j = 0; j < columnCount; j++)\r\n                tiles[i][j] = currentMap.getTile(x + j, y + i);\r\n        }\r\n        return tiles;\r\n    }\r\n\r\n    public static ArrayList<Tile> getTilesList(int x, int y, int rowsCount, int columnCount) {\r\n        Tile[][] tiles = getTiles(x, y, rowsCount, columnCount);\r\n        ArrayList<Tile> result = new ArrayList<>();\r\n\r\n        for (Tile[] tileRow : tiles)\r\n            result.addAll(Arrays.asList(tileRow));\r\n\r\n        return result;\r\n    }\r\n\r\n    public static Map getCurrentMap() {\r\n        return currentMap;\r\n    }\r\n\r\n    public static void setCurrentMap(String mapName) {\r\n        currentMap = Stronghold.getMapByName(mapName);\r\n    }\r\n\r\n    public static Tile getSelectedTile(int selectedTileX, int selectedTileY, int firstTileX, int firstTileY) {\r\n        return currentMap.getTile(selectedTileX + firstTileX, selectedTileY + firstTileY);\r\n    }\r\n\r\n    public static String getTilesData(ArrayList<Tile> selectedTiles) {\r\n        double averageProduction = 0;\r\n        int totalSoldiers = 0;\r\n        int totalProduction = 0;\r\n        int maxProduction = 0;\r\n        int minProduction = 0;\r\n        int buildingProduction;\r\n        int buildingCounts = 0;\r\n\r\n        for (Tile selectedTile : selectedTiles) {\r\n            totalSoldiers += selectedTile.getUnits().size();\r\n            Building building = selectedTile.getBuilding();\r\n            if (building instanceof ProductiveBuilding productiveBuilding) {\r\n                buildingProduction = productiveBuilding.getProductionRate();\r\n                totalProduction += buildingProduction;\r\n                maxProduction = Math.max(maxProduction, buildingProduction);\r\n                minProduction = Math.min(minProduction, buildingProduction);\r\n                buildingCounts++;\r\n            }\r\n        }\r\n\r\n        if (buildingCounts > 0) averageProduction = (double) totalProduction / buildingCounts;\r\n\r\n        return \"Total soldiers=\" + totalSoldiers +\r\n                \"\\nAverage production=\" + averageProduction +\r\n                \"\\nMaximum production=\" + maxProduction +\r\n                \"\\nMinimum production=\" + minProduction;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../server/src/main/java/controller/ShowMapMenuController.java b/../server/src/main/java/controller/ShowMapMenuController.java
+--- a/../server/src/main/java/controller/ShowMapMenuController.java	(revision 383eeefc81699431a8905a9698ea3a0705aa0f76)
++++ b/../server/src/main/java/controller/ShowMapMenuController.java	(date 1688120520041)
+@@ -12,18 +12,28 @@
+ public class ShowMapMenuController {
+     private static Map currentMap;
+ 
+-    public static Tile[][] getTiles(int x, int y, int rowsCount, int columnCount) {
++    public static Tile[][] getTiles(ArrayList<Object> parameters) {
++        int x = (Integer) parameters.get(0);
++        int y = (Integer) parameters.get(1);
++        int rowsCount = (Integer) parameters.get(2);
++        int columnCount = (Integer) parameters.get(3);
+         Tile[][] tiles = new Tile[rowsCount][columnCount];
++
+         for (int i = 0; i < rowsCount; i++) {
+             tiles[i] = new Tile[columnCount];
+             for (int j = 0; j < columnCount; j++)
+                 tiles[i][j] = currentMap.getTile(x + j, y + i);
+         }
++
+         return tiles;
+     }
+ 
+-    public static ArrayList<Tile> getTilesList(int x, int y, int rowsCount, int columnCount) {
+-        Tile[][] tiles = getTiles(x, y, rowsCount, columnCount);
++    public static ArrayList<Tile> getTilesList(ArrayList<Object> parameters) {
++        int x = (Integer) parameters.get(0);
++        int y = (Integer) parameters.get(1);
++        int rowsCount = (Integer) parameters.get(2);
++        int columnCount = (Integer) parameters.get(3);
++        Tile[][] tiles = getTiles(new ArrayList<>(Arrays.asList(x, y, rowsCount, columnCount)));
+         ArrayList<Tile> result = new ArrayList<>();
+ 
+         for (Tile[] tileRow : tiles)
+@@ -32,19 +42,26 @@
+         return result;
+     }
+ 
+-    public static Map getCurrentMap() {
++    public static Map getCurrentMap(ArrayList<Object> parameters) {
+         return currentMap;
+     }
+ 
+-    public static void setCurrentMap(String mapName) {
++    public static void setCurrentMap(ArrayList<Object> parameters) {
++        String mapName = (String) parameters.get(0);
+         currentMap = Stronghold.getMapByName(mapName);
+     }
+ 
+-    public static Tile getSelectedTile(int selectedTileX, int selectedTileY, int firstTileX, int firstTileY) {
++    public static Tile getSelectedTile(ArrayList<Object> parameters) {
++        int selectedTileX = (Integer) parameters.get(0);
++        int selectedTileY = (Integer) parameters.get(1);
++        int firstTileX = (Integer) parameters.get(2);
++        int firstTileY = (Integer) parameters.get(3);
++
+         return currentMap.getTile(selectedTileX + firstTileX, selectedTileY + firstTileY);
+     }
+ 
+-    public static String getTilesData(ArrayList<Tile> selectedTiles) {
++    public static String getTilesData(ArrayList<Object> parameters) {
++
+         double averageProduction = 0;
+         int totalSoldiers = 0;
+         int totalProduction = 0;

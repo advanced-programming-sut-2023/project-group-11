@@ -122,4 +122,8 @@ public class Utils {
 //        tableColumn.setSortable(false);
 //        tableView.getColumns().add(tableColumn);
 //    }
+
+    public static ArrayList<Map> getMaps(ArrayList<Object> parameters) {
+        return Stronghold.getMaps();
+    }
 }

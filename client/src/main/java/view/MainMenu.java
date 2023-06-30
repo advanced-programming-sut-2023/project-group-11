@@ -33,7 +33,7 @@ public class MainMenu extends Application {
     }
 
     public void mapSelection() throws Exception {
-//        new MapSelection().start(new Stage());
+        new MapSelection().start(new Stage());
     }
 
     public void logout() throws Exception {

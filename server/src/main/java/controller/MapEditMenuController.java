@@ -7,6 +7,7 @@ import model.map.Tile;
 import model.map.Tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class MapEditMenuController {
@@ -44,7 +45,7 @@ public class MapEditMenuController {
             return Message.INVALID_MAP_SIZE;
 
         currentMap = new Map(mapName, Integer.parseInt(mapSize));
-        ShowMapMenuController.setCurrentMap(currentMap.getName());
+        ShowMapMenuController.setCurrentMap(new ArrayList<>(Arrays.asList(currentMap.getName())));
         Utils.updateDatabase("maps");
         return Message.SUCCESS;
     }
@@ -110,7 +111,7 @@ public class MapEditMenuController {
         int width = (Integer) parameters.get(0);
         int height = (Integer) parameters.get(0);
         String treeName = (String) parameters.get(0);
-        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(selectedTileX, selectedTileY, height, width);
+        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(new ArrayList<>(Arrays.asList(selectedTileX, selectedTileY, height, width)));
         if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;
 
         for (Tile tile : tiles)

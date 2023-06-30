@@ -25,32 +25,30 @@ public class Parsers {
         return new Map(name, convertTo2DTileArray(mapTiles, (int) size, (int) size), (int) size);
     }
 
-    private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int rowsCount, int columnCount) {
+    public static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int rowsCount, int columnCount) {
         Tile[][] result = new Tile[rowsCount][];
         for (int i = 0; i < rowsCount; i++) {
-            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), columnCount);
+            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), columnCount, i);
         }
         return result;
     }
 
-    private static Tile[] convertToTileArray(JSONArray tiles, int columnCount) {
+    private static Tile[] convertToTileArray(JSONArray tiles, int columnCount, int row) {
         Tile[] result = new Tile[columnCount];
         for (int i = 0; i < columnCount; i++) {
-            result[i] = parseTileObject((JSONObject) tiles.get(i));
+            result[i] = parseTileObject((JSONObject) tiles.get(i), row, i);
         }
         return result;
     }
 
-    private static Tile parseTileObject(JSONObject tile) {
+    public static Tile parseTileObject(JSONObject tile, int row, int column) {
         Texture texture = Texture.valueOf(((String) tile.get("texture")));
         Tree tree = null;
-        if (tile.get("tree") != null)
-            tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
+        try {
+            if (tile.get("tree") != null)
+                tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
+        } catch (Exception e) {}
 
-        return new Tile(texture, tree);
-    }
-
-    public static Tile[][] parseTiles2DArray(JSONArray jsonArrayData, int width, int height) {
-        return convertTo2DTileArray(jsonArrayData, height, width);
+        return new Tile(texture, tree, column, row);
     }
 }
