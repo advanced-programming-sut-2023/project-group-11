@@ -7,10 +7,15 @@ import model.map.Tile;
 import model.map.Tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class MapEditMenuController {
     private static Map currentMap;
+
+    public static void saveMap(ArrayList<Object> parameters) {
+        Utils.updateDatabase("maps");
+    }
 
     public static ArrayList<String> getMapNames(ArrayList parameters){
         ArrayList<String> mapNames = new ArrayList<>();
@@ -20,19 +25,18 @@ public class MapEditMenuController {
         return mapNames;
     }
 
-    public static void saveMap() {
-        Utils.updateDatabase("maps");
-    }
-
-    public static void setCurrentMap(String mapName) {
+    public static void setCurrentMap(ArrayList<Object> parameters) {
+        String mapName = (String) parameters.get(0);
         currentMap = Stronghold.getMapByName(mapName);
     }
 
-    public static Map getCurrentMap() {
+    public static Map getCurrentMap(ArrayList<Object> parameters) {
         return currentMap;
     }
 
-    public static Message checkMakeNewMap(String mapName, String mapSize) {
+    public static Message checkMakeNewMap(ArrayList<Object> parameters) {
+        String mapName = (String) parameters.get(0);
+        String mapSize = (String) parameters.get(1);
         if (mapName.isEmpty()) return Message.MAP_NAME_FIELD_EMPTY;
         else if (mapSize.isEmpty()) return Message.MAP_SIZE_FIELD_EMPTY;
         else if (!mapSize.matches("\\d+")) return Message.INVALID_MAP_SIZE_FORMAT;
@@ -41,16 +45,18 @@ public class MapEditMenuController {
             return Message.INVALID_MAP_SIZE;
 
         currentMap = new Map(mapName, Integer.parseInt(mapSize));
-        ShowMapMenuController.setCurrentMap(currentMap.getName());
+        ShowMapMenuController.setCurrentMap(new ArrayList<>(Arrays.asList(currentMap.getName())));
         Utils.updateDatabase("maps");
         return Message.SUCCESS;
     }
 
-    public static void clear(ArrayList<Tile> tiles) {
-        for (Tile tile : tiles) tile.clear();
-    }
-
-    public static Message setTexture(int selectedTilesSize, String textureName, int selectedTileX, int selectedTileY, int height, int width) {
+    public static Message setTexture(ArrayList<Object> parameters) {
+        int selectedTilesSize = (Integer) parameters.get(0);
+        String textureName = (String) parameters.get(1);
+        int selectedTileX = (Integer) parameters.get(2);
+        int selectedTileY = (Integer) parameters.get(3);
+        int height = (Integer) parameters.get(4);
+        int width = (Integer) parameters.get(5);
         Texture texture = Texture.getTextureByName(textureName);
 
         if (selectedTilesSize == 0) return Message.EMPTY_SELECTED_TILES;
@@ -99,8 +105,13 @@ public class MapEditMenuController {
         return Message.SUCCESS;
     }
 
-    public static Message dropTree(int selectedTileX, int selectedTileY, int width, int height, String treeName) {
-        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(selectedTileX, selectedTileY, height, width);
+    public static Message dropTree(ArrayList<Object> parameters) {
+        int selectedTileX = (Integer) parameters.get(0);
+        int selectedTileY = (Integer) parameters.get(0);
+        int width = (Integer) parameters.get(0);
+        int height = (Integer) parameters.get(0);
+        String treeName = (String) parameters.get(0);
+        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(new ArrayList<>(Arrays.asList(selectedTileX, selectedTileY, height, width)));
         if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;
 
         for (Tile tile : tiles)

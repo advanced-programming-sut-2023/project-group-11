@@ -13,7 +13,7 @@ public class Map {
         for (int i = 0; i < size; i++) {
             tiles[i] = new Tile[size];
             for (int j = 0; j < size; j++) {
-                tiles[i][j] = new Tile();
+                tiles[i][j] = new Tile(j, i);
             }
         }
     }

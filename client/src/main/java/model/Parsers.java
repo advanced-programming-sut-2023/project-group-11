@@ -22,31 +22,34 @@ public class Parsers {
         long size = (Long) map.get("size");
         JSONArray mapTiles = (JSONArray) map.get("tiles");
 
-        return new Map(name, convertTo2DTileArray(mapTiles, (int) size), (int) size);
+        return new Map(name, convertTo2DTileArray(mapTiles, (int) size, (int) size), (int) size);
     }
 
-    private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int size) {
-        Tile[][] result = new Tile[size][];
-        for (int i = 0; i < size; i++) {
-            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), size);
+    public static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int rowsCount, int columnCount) {
+        Tile[][] result = new Tile[rowsCount][];
+        for (int i = 0; i < rowsCount; i++) {
+            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), columnCount);
         }
         return result;
     }
 
-    private static Tile[] convertToTileArray(JSONArray tiles, int size) {
-        Tile[] result = new Tile[size];
-        for (int i = 0; i < size; i++) {
+    private static Tile[] convertToTileArray(JSONArray tiles, int columnCount) {
+        Tile[] result = new Tile[columnCount];
+        for (int i = 0; i < columnCount; i++) {
             result[i] = parseTileObject((JSONObject) tiles.get(i));
         }
         return result;
     }
 
-    private static Tile parseTileObject(JSONObject tile) {
+    public static Tile parseTileObject(JSONObject tile) {
+        int[] location = new int[] {(Integer) ((JSONArray) tile.get("location")).get(0), (Integer) ((JSONArray) tile.get("location")).get(1)};
         Texture texture = Texture.valueOf(((String) tile.get("texture")));
         Tree tree = null;
-        if (tile.get("tree") != null)
-            tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
+        try {
+            if (tile.get("tree") != null)
+                tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
+        } catch (Exception e) {}
 
-        return new Tile(texture, tree);
+        return new Tile(texture, tree, location[0], location[1]);
     }
 }

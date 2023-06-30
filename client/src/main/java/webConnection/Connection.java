@@ -55,7 +55,7 @@ public class Connection extends Thread {
     public JSONObject getJSONData(String className, String methodName, Object... parameters) throws IOException {
         Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
         sendData(packet);
-        return receiveData();
+        return (JSONObject) receiveData().get("value");
     }
 
     public JSONArray getJSONArrayData(String className, String methodName, Object... parameters) throws IOException {

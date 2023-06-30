@@ -31,7 +31,7 @@ public class MapSelection extends Application {
     @FXML
     private TextField newMapSize;
     @FXML
-    private ChoiceBox<Map> mapsChoiceBox;
+    private ChoiceBox<String> mapsChoiceBox;
     private static Stage stage;
 
     @Override
@@ -51,17 +51,17 @@ public class MapSelection extends Application {
     }
 
     private void setMapsOnChoiceBox() throws IOException {
-        ArrayList<Map> maps = Parsers.parseMapArrayList(Client.getConnection().getJSONArrayData("Stronghold", "getMaps"));
-        mapsChoiceBox.getItems().addAll(maps);
-        mapsChoiceBox.setValue(maps.get(0));
+        ArrayList<String> mapNames = Client.getConnection().getArrayData("MapEditMenuController","getMapNames");
+        mapsChoiceBox.getItems().addAll(mapNames);
+        mapsChoiceBox.setValue(mapNames.get(0));
         Client.getConnection().doInServer("ShowMapMenuController", "setCurrentMap", "original");
         Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap", "original");
         mapsChoiceBox.setOnAction(actionEvent -> {
             try {
                 Client.getConnection().doInServer("ShowMapMenuController", "setCurrentMap",
-                        mapsChoiceBox.getValue().getName());
+                        mapsChoiceBox.getValue());
                 Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap",
-                        mapsChoiceBox.getValue().getName());
+                        mapsChoiceBox.getValue());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -70,7 +70,7 @@ public class MapSelection extends Application {
 
     public void selectMap() throws Exception {
         stage.close();
-//        new MapEditMenu().start(SignupMenu.getStage());
+        new MapEditMenu().start(SignupMenu.getStage());
     }
 
     public void makeNewMap() throws Exception {
@@ -87,7 +87,7 @@ public class MapSelection extends Application {
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION, "New Map", "New map made successfully!");
                 stage.close();
-//                new MapEditMenu().start(SignupMenu.getStage());
+                new MapEditMenu().start(SignupMenu.getStage());
             }
         }
     }

@@ -18,6 +18,7 @@ public class LoginMenuController {
         User user = Stronghold.getUserByUsername(username);
 
         if (user == null) return Message.USERNAME_NOT_EXIST;
+        else if (Stronghold.getConnectionByUser(user) != null) return Message.USER_ALREADY_LOGGED_IN;
         else if (!user.isPasswordCorrect(Utils.encryptField(password))) {
             long currentTime = System.currentTimeMillis();
             if (!Delay.hasUser(user))
