@@ -70,7 +70,7 @@ public class MapSelection extends Application {
 
     public void selectMap() throws Exception {
         stage.close();
-        new MapEditMenu().start(SignupMenu.getStage());
+//        new MapEditMenu().start(SignupMenu.getStage());
     }
 
     public void makeNewMap() throws Exception {
@@ -87,7 +87,7 @@ public class MapSelection extends Application {
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION, "New Map", "New map made successfully!");
                 stage.close();
-                new MapEditMenu().start(SignupMenu.getStage());
+//                new MapEditMenu().start(SignupMenu.getStage());
             }
         }
     }

@@ -24,7 +24,7 @@ public class User implements Comparable<User> {
         this.recoveryQuestion = recoveryQuestion;
         this.recoveryAnswer = recoveryAnswer;
         this.slogan = slogan;
-        Stronghold.addUser(this);
+//        Stronghold.addUser(this);
     }
 
     public String getNickname() {

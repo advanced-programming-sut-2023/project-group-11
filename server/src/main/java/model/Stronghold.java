@@ -10,6 +10,8 @@ public class Stronghold {
     private static ArrayList<Map> maps = new ArrayList<>();
     private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
+
+    private final static ArrayList<Game> unStartedGames = new ArrayList<>();
     private static User currentUser;
     private static Game currentGame;
 
@@ -44,6 +46,10 @@ public class Stronghold {
 
     public static void setCurrentUser(User currentUser) {
         Stronghold.currentUser = currentUser;
+    }
+
+    public static ArrayList<Game> getUnStartedGames(){
+        return unStartedGames;
     }
 
     public static int getRankByUsername(String name) {

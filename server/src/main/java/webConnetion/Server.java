@@ -1,6 +1,8 @@
 package webConnetion;
 
 import controller.EntryMenuController;
+import controller.Utils;
+import model.Stronghold;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -23,6 +25,7 @@ public class Server {
     }
 
     public static void main(String[] args) {
+        Runtime.getRuntime().addShutdownHook(new Thread(Utils::endStronghold));
         new Server(15551);
     }
 }

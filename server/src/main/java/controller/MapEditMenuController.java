@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.scene.control.ChoiceBox;
 import model.Stronghold;
 import model.map.Map;
 import model.map.Texture;
@@ -12,6 +11,14 @@ import java.util.Random;
 
 public class MapEditMenuController {
     private static Map currentMap;
+
+    public static ArrayList<String> getMapNames(ArrayList parameters){
+        ArrayList<String> mapNames = new ArrayList<>();
+        for (Map map:Stronghold.getMaps()){
+            mapNames.add(map.getName());
+        }
+        return mapNames;
+    }
 
     public static void saveMap() {
         Utils.updateDatabase("maps");

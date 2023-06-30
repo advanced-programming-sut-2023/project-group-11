@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Game;
 import model.Governance;
@@ -33,6 +34,15 @@ public class MainMenuController {
 
         ShowMapMenuController.setCurrentMap(map.getName());
 
+    }
+
+    public static void createGame(ArrayList<Object> parameters){
+        ArrayList<User> users = new ArrayList<>();
+        users.add(Stronghold.getCurrentUser());
+        String mapName = (String) parameters.get(0);
+        int playersNeeded = (Integer) parameters.get(1);
+        Map map = Stronghold.getMapByName(mapName);
+        Stronghold.getUnStartedGames().add(new Game(Stronghold.getCurrentUser(),map,playersNeeded));
     }
 
     public static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {
@@ -146,7 +156,7 @@ public class MainMenuController {
 
 
     public static ObservableList<User> removeCurrentUserFromList(ArrayList<Object> parameters) {
-        ObservableList<User> userObservableList = (ObservableList<User>) parameters.get(0);
+        ObservableList userObservableList = FXCollections.observableArrayList(Stronghold.getUsers());
         userObservableList.remove(Stronghold.getCurrentUser());//TODO: ArrayList<Object> parameters
         return userObservableList;
     }

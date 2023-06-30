@@ -4,14 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_12_02__Changes_.xml" beforeDir="false" />
+    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="Trade leftovers">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/OfflineGame.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_11_28_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_11_28_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Church.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Church.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Filler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/buildings/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/people/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/people/Unit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/BuildMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/BuildMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/CreateTradeMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/CreateTradeMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MarketMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MoveUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MoveUnit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/NewGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/NewGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/PopularityFactors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/PopularityFactors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SetUnitState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SetUnitState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/animation/AirAttackAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/animation/AirAttackAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/animation/DigAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/animation/DigAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/animation/GroundAttackAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/animation/GroundAttackAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/animation/MovingAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/animation/MovingAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/MainMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/NewGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/NewGame.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/SignupMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/SignupMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/GameMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/GameMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/SelectUnitMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/SelectUnitMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/Stronghold.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +57,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -43,20 +80,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CE/T2/AP/Projects/project-group-11-4/client&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="webConnection" />
@@ -67,24 +104,13 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Client" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="webConnection.Client" />
       <module name="client" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="webConnection.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Client" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -98,8 +124,9 @@
       <workItem from="1687984326282" duration="3585000" />
       <workItem from="1688013129333" duration="33000" />
       <workItem from="1688013172394" duration="349000" />
-      <workItem from="1688013733596" duration="23087000" />
-      <workItem from="1688108761463" duration="2242000" />
+      <workItem from="1688013733596" duration="14713000" />
+      <workItem from="1688072788648" duration="1452000" />
+      <workItem from="1688104051872" duration="12864000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>
@@ -136,12 +163,12 @@
       <option name="project" value="LOCAL" />
       <updated>1688024226410</updated>
     </task>
-    <task id="LOCAL-00006" summary="MapEditing started">
-      <created>1688071095673</created>
+    <task id="LOCAL-00006" summary="Trade leftovers">
+      <created>1688050647311</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1688071095673</updated>
+      <updated>1688050647311</updated>
     </task>
     <option name="localTasksCounter" value="7" />
     <servers />
@@ -171,7 +198,7 @@
     <MESSAGE value="Client side changing (sending packets) started" />
     <MESSAGE value="edit getData methods" />
     <MESSAGE value="getJsonData added" />
-    <MESSAGE value="MapEditing started" />
-    <option name="LAST_COMMIT_MESSAGE" value="MapEditing started" />
+    <MESSAGE value="Trade leftovers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Trade leftovers" />
   </component>
 </project>

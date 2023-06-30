@@ -1,6 +1,7 @@
 package view;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -32,11 +33,14 @@ public class MainMenu extends Application {
     }
 
     public void mapSelection() throws Exception {
-        new MapSelection().start(new Stage());
+//        new MapSelection().start(new Stage());
     }
 
     public void logout() throws Exception {
         Client.getConnection().doInServer("MainMenuController", "logout");
         new SignupMenu().start(SignupMenu.getStage());
+    }
+
+    public void lobby() {
     }
 }

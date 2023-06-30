@@ -101,16 +101,16 @@ public class Utils {
         for (int i = 0; i < users.size(); i++) users.get(i).setRank(i + 1);
     }
 
-//    public static ArrayList<User> getUsersObservable(ArrayList<Object> parameters) {
-//        ArrayList<User> users = Stronghold.getUsers();
-//        sortUsers();
-//        return users;
-//    }
-//
-//    public static ObservableList<Governance> getGovernancesObservable(ArrayList<Object> parameters) {
-//        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
-//        return FXCollections.observableArrayList(governances);
-//    }
+    public static ArrayList<User> getUsersObservable(ArrayList<Object> parameters)   {
+        ArrayList<User> users = Stronghold.getUsers();
+        sortUsers();
+        return users;
+    }
+
+    public static ObservableList<Governance> getGovernancesObservable(ArrayList<Object> parameters) {
+        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
+        return FXCollections.observableArrayList(governances);
+    }
 //
 //    public static void columnMaker(ArrayList<Object> parameters) {
 //        TableView tableView = (TableView) parameters.get(0);
