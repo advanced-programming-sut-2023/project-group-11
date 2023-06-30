@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.scene.control.ChoiceBox;
 import model.Stronghold;
 import model.map.Map;
 import model.map.Texture;
@@ -13,19 +12,22 @@ import java.util.Random;
 public class MapEditMenuController {
     private static Map currentMap;
 
-    public static void saveMap() {
+    public static void saveMap(ArrayList<Object> parameters) {
         Utils.updateDatabase("maps");
     }
 
-    public static void setCurrentMap(String mapName) {
+    public static void setCurrentMap(ArrayList<Object> parameters) {
+        String mapName = (String) parameters.get(0);
         currentMap = Stronghold.getMapByName(mapName);
     }
 
-    public static Map getCurrentMap() {
+    public static Map getCurrentMap(ArrayList<Object> parameters) {
         return currentMap;
     }
 
-    public static Message checkMakeNewMap(String mapName, String mapSize) {
+    public static Message checkMakeNewMap(ArrayList<Object> parameters) {
+        String mapName = (String) parameters.get(0);
+        String mapSize = (String) parameters.get(1);
         if (mapName.isEmpty()) return Message.MAP_NAME_FIELD_EMPTY;
         else if (mapSize.isEmpty()) return Message.MAP_SIZE_FIELD_EMPTY;
         else if (!mapSize.matches("\\d+")) return Message.INVALID_MAP_SIZE_FORMAT;
@@ -39,11 +41,13 @@ public class MapEditMenuController {
         return Message.SUCCESS;
     }
 
-    public static void clear(ArrayList<Tile> tiles) {
-        for (Tile tile : tiles) tile.clear();
-    }
-
-    public static Message setTexture(int selectedTilesSize, String textureName, int selectedTileX, int selectedTileY, int height, int width) {
+    public static Message setTexture(ArrayList<Object> parameters) {
+        int selectedTilesSize = (Integer) parameters.get(0);
+        String textureName = (String) parameters.get(1);
+        int selectedTileX = (Integer) parameters.get(2);
+        int selectedTileY = (Integer) parameters.get(3);
+        int height = (Integer) parameters.get(4);
+        int width = (Integer) parameters.get(5);
         Texture texture = Texture.getTextureByName(textureName);
 
         if (selectedTilesSize == 0) return Message.EMPTY_SELECTED_TILES;
@@ -92,7 +96,12 @@ public class MapEditMenuController {
         return Message.SUCCESS;
     }
 
-    public static Message dropTree(int selectedTileX, int selectedTileY, int width, int height, String treeName) {
+    public static Message dropTree(ArrayList<Object> parameters) {
+        int selectedTileX = (Integer) parameters.get(0);
+        int selectedTileY = (Integer) parameters.get(0);
+        int width = (Integer) parameters.get(0);
+        int height = (Integer) parameters.get(0);
+        String treeName = (String) parameters.get(0);
         ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(selectedTileX, selectedTileY, height, width);
         if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;
 

@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_12_02__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/model/Parsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/model/Parsers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/MapEditMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +92,7 @@
       <workItem from="1687984392274" duration="4327000" />
       <workItem from="1688013075603" duration="355000" />
       <workItem from="1688013733866" duration="19391000" />
-      <workItem from="1688108825652" duration="2302000" />
+      <workItem from="1688108825652" duration="3509000" />
     </task>
     <task id="LOCAL-00001" summary="add server project">
       <created>1687985072897</created>

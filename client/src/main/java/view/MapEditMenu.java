@@ -213,14 +213,19 @@ public class MapEditMenu extends Application {
     // ---------------------------------- Show map ------------------------------------------------
 
     private void showMap() {
-        mapPane.getChildren().clear();
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
-        Tile[][] mapTiles = ShowMapMenuController.getTiles(firstTileXInMap, firstTileYInMap, rowsCount, columnCount);
+        try {
+            Tile[][] mapTiles = Parsers.parseTiles2DArray(Client.getConnection().getJSONArrayData("ShowMapMenuController",
+                    "getTiles", firstTileXInMap, firstTileYInMap, rowsCount, columnCount), selectedBorderWidth, selectedBorderHeight);
 
-        setTextureTreeImages(mapTiles);
-        boldSelectedTile(mapTiles);
-        sidePane.toFront();
+            mapPane.getChildren().clear();
+            setTextureTreeImages(mapTiles);
+            boldSelectedTile(mapTiles);
+            sidePane.toFront();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setTextureTreeImages(Tile[][] mapTiles) {
@@ -243,7 +248,7 @@ public class MapEditMenu extends Application {
         for (Tile[] tiles : mapTiles) {
             for (Tile tile : tiles) {
                 if (tile.equals(selectedTile)) {
-                    javafx.scene.shape.Rectangle border = new Rectangle(xCoordinate, yCoordinate, selectedBorderWidth * tileSize, selectedBorderHeight * tileSize);
+                    Rectangle border = new Rectangle(xCoordinate, yCoordinate, selectedBorderWidth * tileSize, selectedBorderHeight * tileSize);
                     border.setStroke(Color.RED);
                     border.setStrokeWidth(2);
                     border.setFill(null);

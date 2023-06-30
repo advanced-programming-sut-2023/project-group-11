@@ -22,20 +22,20 @@ public class Parsers {
         long size = (Long) map.get("size");
         JSONArray mapTiles = (JSONArray) map.get("tiles");
 
-        return new Map(name, convertTo2DTileArray(mapTiles, (int) size), (int) size);
+        return new Map(name, convertTo2DTileArray(mapTiles, (int) size, (int) size), (int) size);
     }
 
-    private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int size) {
-        Tile[][] result = new Tile[size][];
-        for (int i = 0; i < size; i++) {
-            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), size);
+    private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int rowsCount, int columnCount) {
+        Tile[][] result = new Tile[rowsCount][];
+        for (int i = 0; i < rowsCount; i++) {
+            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), columnCount);
         }
         return result;
     }
 
-    private static Tile[] convertToTileArray(JSONArray tiles, int size) {
-        Tile[] result = new Tile[size];
-        for (int i = 0; i < size; i++) {
+    private static Tile[] convertToTileArray(JSONArray tiles, int columnCount) {
+        Tile[] result = new Tile[columnCount];
+        for (int i = 0; i < columnCount; i++) {
             result[i] = parseTileObject((JSONObject) tiles.get(i));
         }
         return result;
@@ -48,5 +48,9 @@ public class Parsers {
             tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
 
         return new Tile(texture, tree);
+    }
+
+    public static Tile[][] parseTiles2DArray(JSONArray jsonArrayData, int width, int height) {
+        return convertTo2DTileArray(jsonArrayData, height, width);
     }
 }
