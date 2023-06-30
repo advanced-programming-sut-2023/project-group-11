@@ -33,17 +33,16 @@ public class Connection extends Thread {
     public void run() {
         while (true) {
             try {
-                synchronized (Stronghold.class){
+//                synchronized (Stronghold.class){
                     ReceivingPacket receivingPacket = new ReceivingPacket(in.readUTF());
                     Class<?> controllerClass = Class.forName("controller." + receivingPacket.getClassName());
                     Method controllerMethod = controllerClass.getDeclaredMethod(receivingPacket.getMethodName(), ArrayList.class);
-                    System.out.println(controllerMethod.getName());
                     if (receivingPacket.getMethodName().equals("loginUser"))
                         currentUser = Stronghold.getUserByUsername((String) receivingPacket.getParameters().get(0));
                     if (currentUser != null)
                         Stronghold.setCurrentUser(currentUser);
                     sendRespond(receivingPacket, controllerMethod);
-                }
+//                }
             } catch (IOException e) {
                 System.out.println("Connection \"ip=" + socket.getInetAddress().getHostAddress() + " port=" + socket.getPort() + "\" lost!");
 //                throw new RuntimeException(e);

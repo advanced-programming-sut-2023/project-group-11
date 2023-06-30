@@ -1,5 +1,6 @@
 package model;
 
+import model.chat.Chat;
 import model.chat.Message;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -62,6 +63,9 @@ public class Parsers {
         String senderName = message.getString("senderName");
         String sentTime = message.getString("sentTime");
         return new Message(content, senderName, sentTime);
+    }
+    public static Chat parseChatObject(){
+        return null;
     }
 
     public static ArrayList<Game> parseGamesArrayList(String json) {

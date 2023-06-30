@@ -19,7 +19,6 @@ public class Message {
         this.senderName = senderName;
     }
 
-
     public void addEmoji(Emoji emoji) {
         emojis.add(emoji);
     }
@@ -54,13 +53,12 @@ public class Message {
         Label senderName = initLabel(getSenderName());
         HBox hBox = new HBox(senderName, sentTime);
         hBox.setSpacing(5);
-        VBox vBox = new VBox(content, hBox);
-        vBox.setSpacing(5);
-        return vBox;
+        return new VBox(content, hBox);
     }
 
     private Label initLabel(String text) {
         Label label = new Label(text);
+        label.setWrapText(true);
         label.setTextFill(Color.WHITE);
         return label;
     }

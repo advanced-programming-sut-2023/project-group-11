@@ -13,7 +13,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Parsers;
+import model.chat.Chat;
+import model.chat.GlobalChat;
 import model.chat.Message;
+import model.chat.PrivateChat;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import webConnection.Client;
@@ -23,12 +26,19 @@ import java.net.URL;
 
 public class MainMenu extends Application {
     private static Stage stage;
-    public AnchorPane chatPane;
-    public ScrollPane globalChat;
-    public ScrollPane privateChat;
-    public ScrollPane chatRoom;
-    public TextField messageContent;
-    public ImageView open;
+    private Chat currentChat;
+    @FXML
+    private AnchorPane chatPane;
+    @FXML
+    private ScrollPane globalChat;
+    @FXML
+    private ScrollPane privateChat;
+    @FXML
+    private ScrollPane chatRoom;
+    @FXML
+    private TextField messageContent;
+    @FXML
+    private ImageView open;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -73,21 +83,22 @@ public class MainMenu extends Application {
     }
 
     public void send() throws IOException {
-        Message message = null;
-        if (globalChat.isVisible())
-            message = Parsers.parseMessageObject(Client.getConnection().getJSONData("ChatController",
-                    "sendMessage", messageContent.getText(), "123"));
+        if (currentChat == null) currentChat = GlobalChat.getInstance();
+        Message message = Parsers.parseMessageObject(Client.getConnection().getJSONData("ChatController",
+                "sendMessage", messageContent.getText(), currentChat.getId(), currentChat.getChatType().name()));
+
         if (!message.getContent().isEmpty()) sendMessage(message);
     }
 
     private void sendMessage(Message message) {
         VBox vBox = message.toVBox();
-        ((VBox) globalChat.getContent()).getChildren().add(vBox);
+        if (currentChat.equals(GlobalChat.getInstance())) ((VBox) globalChat.getContent()).getChildren().add(vBox);
         ViewUtils.clearFields(messageContent);
     }
 
     public void showGlobal() {
         changeVisibility(globalChat, privateChat, chatRoom);
+        currentChat = GlobalChat.getInstance();
     }
 
     public void showPrivate() {
@@ -112,7 +123,8 @@ public class MainMenu extends Application {
     }
 
     public void refresh() throws IOException {
-        JSONArray jsonArray = Client.getConnection().getJSONArrayData("ChatController", "getChatMessages", "123");
+        if (currentChat == null) currentChat = GlobalChat.getInstance();
+        JSONArray jsonArray = Client.getConnection().getJSONArrayData("ChatController", "getChatMessages", currentChat.getId());
         ((VBox) globalChat.getContent()).getChildren().clear();
         for (Object message : jsonArray) sendMessage(Parsers.parseMessageObject((JSONObject) message));
     }

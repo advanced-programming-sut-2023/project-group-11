@@ -1,5 +1,6 @@
 package model.chat;
 
+import model.Stronghold;
 import webConnetion.Connection;
 
 import java.util.ArrayList;
@@ -8,9 +9,12 @@ public abstract class Chat {
     private final ArrayList<Message> messages = new ArrayList<>();
     private final ArrayList<Connection> connections = new ArrayList<>();
     private final String id;
+    private final ChatType chatType;
 
-    public Chat(String id) {
+    public Chat(String id, ChatType chatType) {
         this.id = id;
+        this.chatType = chatType;
+        Stronghold.addChat(this);
     }
 
     public String getId() {
@@ -34,11 +38,5 @@ public abstract class Chat {
 
     public void removeUSer(Connection user) {
         connections.remove(user);
-    }
-
-    public void sendMessage(){
-        for (Connection connection : connections) {
-
-        }
     }
 }
