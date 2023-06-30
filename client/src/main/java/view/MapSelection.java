@@ -18,6 +18,7 @@ import view.enums.Message;
 import webConnection.Client;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -41,7 +42,6 @@ public class MapSelection extends Application {
                 new URL(MainMenu.class.getResource("/FXML/MapSelection.fxml").toExternalForm()));
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 
@@ -53,24 +53,37 @@ public class MapSelection extends Application {
     private void setMapsOnChoiceBox() throws IOException {
         ArrayList<String> mapNames = Client.getConnection().getArrayData("MapEditMenuController","getMapNames");
         mapsChoiceBox.getItems().addAll(mapNames);
-        mapsChoiceBox.setValue(mapNames.get(0));
+        if(mapNames.size() > 0)
+            mapsChoiceBox.setValue(mapNames.get(0));
         Client.getConnection().doInServer("ShowMapMenuController", "setCurrentMap", "original");
         Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap", "original");
         mapsChoiceBox.setOnAction(actionEvent -> {
             try {
                 Client.getConnection().doInServer("ShowMapMenuController", "setCurrentMap",
-                        mapsChoiceBox.getValue());
+                        getMapName(mapsChoiceBox.getValue()));
                 Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap",
-                        mapsChoiceBox.getValue());
+                        getMapName(mapsChoiceBox.getValue()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
     }
 
+    private String getMapName(String value) {
+        if (value.matches("[^-]+")) return value;
+        int index = value.indexOf('-') - 1;
+        return value.substring(0, index);
+    }
+
     public void selectMap() throws Exception {
-        stage.close();
-        new MapEditMenu().start(SignupMenu.getStage());
+        if (mapsChoiceBox.getValue() != null) {
+            stage.close();
+            new MapEditMenu().start(SignupMenu.getStage());
+        }
+    }
+
+    public void shareMap() throws Exception {
+        new ShareMapMenu().start(stage);
     }
 
     public void makeNewMap() throws Exception {

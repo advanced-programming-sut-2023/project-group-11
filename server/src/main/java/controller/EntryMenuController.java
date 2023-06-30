@@ -49,8 +49,9 @@ public class EntryMenuController {
         String name = (String) map.get("name");
         long size = (Long) map.get("size");
         JSONArray mapTiles = (JSONArray) map.get("tiles");
+        ArrayList<String> owners = (ArrayList<String>) map.get("owners");
 
-        new Map(name, convertTo2DTileArray(mapTiles, (int) size), (int) size);
+        new Map(name, convertTo2DTileArray(mapTiles, (int) size), (int) size, owners);
     }
 
     private static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int size) {

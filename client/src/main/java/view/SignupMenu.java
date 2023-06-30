@@ -193,7 +193,7 @@ public class SignupMenu extends Application {
             case INCORRECT_PASSWORD -> ViewUtils.fieldError(passwordError, "Password is incorrect!");
             case USER_ALREADY_LOGGED_IN ->  ViewUtils.fieldError(usernameError, "User has logged in before!");
             case LOCKED_ACCOUNT -> {
-                long leftTime = (Long) Client.getConnection().getData("LoginMenuController", "getLeftLockedTime",
+                int leftTime = (Integer) Client.getConnection().getData("LoginMenuController", "getLeftLockedTime",
                         loginUsernameField.getText());
                 ViewUtils.fieldError(usernameError, "Your account is locked for " + leftTime / 1000.0 + " seconds more!");
             }

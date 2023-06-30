@@ -1,6 +1,7 @@
 package controller;
 
 import model.Stronghold;
+import model.map.Map;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,9 +21,15 @@ public class ProfileMenuController {
         return Message.SUCCESS;
     }
 
-    public static void changeUsername(ArrayList<Object> parameters) {
-        String username = (String) parameters.get(0);
-        Stronghold.getCurrentUser().setUsername(username);
+    public static void changeUsername(ArrayList<Object> parameters ) {
+        String newUsername = (String) parameters.get(0);
+        String oldUsername = Stronghold.getCurrentUser().getUsername();
+
+        for (Map map : Stronghold.getMaps())
+            if (map.getOwners().contains(oldUsername))
+                map.getOwners().set(map.getOwners().indexOf(oldUsername), newUsername);
+        Stronghold.getCurrentUser().setUsername(newUsername);
+        Utils.updateDatabase("maps");
     }
 
     public static void changeAvatar(ArrayList<Object> parameters) {

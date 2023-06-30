@@ -45,6 +45,12 @@ public class Connection extends Thread {
         sendData(packet);
         return receiveData().get("value");
     }
+    public String receiveJsonData(String className, String methodName, Object... parameters) throws IOException {
+        Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
+        sendData(packet);
+        String input = in.readUTF();
+        return input.substring(9,input.length()-1);
+    }
 
     public ArrayList getArrayData(String className, String methodName, Object... parameters) throws IOException {
         Packet packet = new Packet(OperationType.GET_ARRAY_DATA, className, methodName, parameters);

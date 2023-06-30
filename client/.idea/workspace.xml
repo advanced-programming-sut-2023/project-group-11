@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="MapEdit ended">
+    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_30_2023_20_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_30_2023_20_10__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_30_2023_20_56__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_30_2023_20_56__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/enums/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/enums/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShareMapMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShareMapMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/Stronghold.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/resources/JSON/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/resources/JSON/maps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +26,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -63,6 +63,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="view" />
       <recent name="webConnection" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
@@ -105,7 +106,7 @@
       <workItem from="1688013733596" duration="23087000" />
       <workItem from="1688108761463" duration="12125000" />
       <workItem from="1688136494696" duration="75000" />
-      <workItem from="1688138691747" duration="2682000" />
+      <workItem from="1688138691747" duration="10147000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>
@@ -170,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688136257157</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Connection handling added">
+      <created>1688143231827</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1688143231827</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,6 +221,7 @@
     <MESSAGE value="MapEditing ended (Showing map still needs implements)" />
     <MESSAGE value="Edit MapEditMenuController methods" />
     <MESSAGE value="MapEdit ended" />
-    <option name="LAST_COMMIT_MESSAGE" value="MapEdit ended" />
+    <MESSAGE value="Connection handling added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Connection handling added" />
   </component>
 </project>

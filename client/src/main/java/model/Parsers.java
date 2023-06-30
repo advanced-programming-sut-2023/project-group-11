@@ -1,6 +1,8 @@
 package model;
 
 import model.chat.Message;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
@@ -8,6 +10,7 @@ import model.map.Tree;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Parsers {
@@ -59,5 +62,13 @@ public class Parsers {
         String senderName = message.getString("senderName");
         String sentTime = message.getString("sentTime");
         return new Message(content, senderName, sentTime);
+    }
+
+    public static ArrayList<Game> parseGamesArrayList(String json) {
+        ArrayList<Game> arrayList = new ArrayList<>();
+        Type type = new TypeToken<ArrayList<Game>>() {
+        }.getType();
+        arrayList.addAll(new Gson().fromJson(json, type));
+        return arrayList;
     }
 }

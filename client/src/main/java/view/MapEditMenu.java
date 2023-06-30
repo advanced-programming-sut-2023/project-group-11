@@ -150,8 +150,9 @@ public class MapEditMenu extends Application {
         }
     }
 
-    public void clear() {
-        selectedTiles.forEach(Tile::clear);
+    public void clear() throws IOException {
+        Client.getConnection().doInServer("MapEditMenuController", "clear", selectedTileXInScreen + firstTileXInMap,
+                selectedTileYInScreen + firstTileYInMap, selectedBorderHeight, selectedBorderWidth);
         showMap();
     }
 

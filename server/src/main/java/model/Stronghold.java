@@ -149,7 +149,7 @@ public class Stronghold {
 
     public static Connection getConnectionByUser(User user) {
         for (Connection connection : connections)
-            if (connection.getCurrentUser().equals(user)) return connection;
+            if (user.equals(connection.getCurrentUser())) return connection;
         return null;
     }
 
