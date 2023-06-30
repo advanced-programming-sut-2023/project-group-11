@@ -1,6 +1,12 @@
 package model;
 
+import model.chat.Chat;
+import model.chat.GlobalChat;
+
+import java.util.ArrayList;
+
 public class User implements Comparable<User> {
+    private final ArrayList<Chat> chats = new ArrayList<>();
     private final String recoveryQuestion;
     private final String recoveryAnswer;
     private String username;
@@ -21,6 +27,7 @@ public class User implements Comparable<User> {
         this.recoveryQuestion = recoveryQuestion;
         this.recoveryAnswer = recoveryAnswer;
         this.slogan = slogan;
+        chats.add(GlobalChat.getInstance());
         Stronghold.addUser(this);
     }
 
