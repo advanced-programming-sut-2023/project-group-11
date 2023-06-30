@@ -130,25 +130,21 @@ public class ProfileMenu extends Application {
     }
 
     @FXML
-    private void createAvatarChooser() throws IOException {
+    private void createAvatarChooser() throws IOException, URISyntaxException {
         FileChooser avatarChooser = new FileChooser();
 
         configureFileChooser(avatarChooser);
         File selectedFile = avatarChooser.showOpenDialog(stage);
         if (selectedFile != null) {
-            connection.doInServer(profileMenuController, "changeAvatar", selectedFile);
+            connection.doInServer(profileMenuController, "changeAvatar", selectedFile.getPath());
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Avatar Successful",
                     "You have successfully changed your avatar!");
             updateAvatar();
         }
     }
 
-    private void configureFileChooser(FileChooser fileChooser) {
-        try {
-            fileChooser.setInitialDirectory(new File(getClass().getResource("/IMG/avatars").toURI()));
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+    private void configureFileChooser(FileChooser fileChooser) throws URISyntaxException {
+        fileChooser.setInitialDirectory(new File(getClass().getResource("/IMG/avatars").toURI()));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(
                 "images", "*.jpg", "*.jpeg", "*.png"));
     }
@@ -164,7 +160,7 @@ public class ProfileMenu extends Application {
         if (dragboard.hasFiles() && dragboard.getFiles().size() == 1) {
             File avatarFile = dragboard.getFiles().get(0);
             if (isImage(avatarFile.getPath())) {
-                connection.doInServer(profileMenuController, "changeAvatar", avatarFile);
+                connection.doInServer(profileMenuController, "changeAvatar", avatarFile.getPath());
                 updateAvatar();
             }
         }
@@ -187,7 +183,6 @@ public class ProfileMenu extends Application {
     private void updateAvatar() throws IOException {
         Image image = new Image(((String) connection.getData(utils, "getCurrentUserAvatarFileName")));
         avatar.setImage(image);
-//        avatar.setImage(((String) connection.getData(utils, "getCurrentUserAvatarFileName")).getImage());
     }
 
     public void generateRandomSlogan() throws IOException {
