@@ -14,7 +14,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.AllResource;
-import model.Stronghold;
 import view.enums.Message;
 import webConnection.Client;
 
@@ -61,7 +60,8 @@ public class MarketMenu extends Application {
         setMouseEvent(foodBox);
         setMouseEvent(rawMaterialBox);
         setMouseEvent(weaponBox);
-        goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+//        goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+        //TODO: handle when currentGame is done
         amountTextField.textProperty().addListener((observable, oldText, newText)-> updateBuySellLabels(newText));
     }
 
@@ -94,7 +94,8 @@ public class MarketMenu extends Application {
                 }
                 updateBuySellLabels(amountTextField.getText());
                 itemLabel.setText(itemName);
-                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+//                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+                //TODO: handle when currentGame is done
                 itemImageView.setImage(item.getImage());
             });
         }
@@ -125,8 +126,9 @@ public class MarketMenu extends Application {
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Sell Successful", "Item Sold Successfully!");
-                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
-                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+//                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+//                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+                //TODO: handle when currentGame is done
             }
         }
     }
@@ -140,8 +142,9 @@ public class MarketMenu extends Application {
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Buy Successful", "Item bought successfully!");
-                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
-                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+//                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+//                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+//                TODO: handle when currentGame is done
             }
         }
     }

@@ -7,7 +7,9 @@ import java.util.HashMap;
 
 public class Game {
     private final User owner;
-    private final ArrayList<Governance> governances;
+    private  ArrayList<Governance> governances;
+
+    private int playersNeeded;
     private final HashMap<Governance, Integer> scores = new HashMap<>();
     private final ArrayList<Trade> trades = new ArrayList<>();
     private Governance currentGovernance;
@@ -20,6 +22,12 @@ public class Game {
         this.governances = governances;
         this.currentGovernance = governances.get(0);
         this.map = map;
+    }
+
+    public Game(User owner,Map map,int playersNeeded) {
+        this.owner = owner;
+        this.map = map;
+        this.playersNeeded = playersNeeded;
     }
 
     public ArrayList<Trade> getTrades() {
@@ -38,6 +46,13 @@ public class Game {
         return map;
     }
 
+    public int getPlayersNeeded() {
+        return playersNeeded;
+    }
+
+    public void setPlayersNeeded(int playersNeeded) {
+        this.playersNeeded = playersNeeded;
+    }
     public int getTurn() {
         return turn;
     }

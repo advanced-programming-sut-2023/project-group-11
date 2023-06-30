@@ -1,8 +1,8 @@
 package model.map;
 
-import controller.BuildingUtils;
+//import controller.BuildingUtils;
 import model.Governance;
-import model.Stronghold;
+//import model.Stronghold;
 import model.buildings.Building;
 import model.people.Troop;
 import model.people.Unit;
@@ -92,36 +92,36 @@ public class Tile {
         return building != null;
     }
 
-    @Override
-    public String toString() {
-        String unitsName = "";
-        String result = "";
-        int i = 1;
-
-        for (Unit unit : units)
-            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
-                unitsName += (i++) + ". " + unit.toString() + '\n';
-
-        int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);
-        result += "Coordinates: x=" + location[0] + " y=" + location[1] + '\n';
-        result += "Texture: " + texture.getName() + '\n';
-        if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
-        if (units.size() > 0) result += "Units:\n" + unitsName;
-        if (tree != null) result += "Tree: " + tree.getName() + '\n';
-        if (getResourceAmount() != null) result += getResourceAmount() + '\n';
-
-        return result;
-    }
+//    @Override
+//    public String toString() {
+//        String unitsName = "";
+//        String result = "";
+//        int i = 1;
+//
+//        for (Unit unit : units)
+//            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
+//                unitsName += (i++) + ". " + unit.toString() + '\n';
+//
+//        int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);
+//        result += "Coordinates: x=" + location[0] + " y=" + location[1] + '\n';
+//        result += "Texture: " + texture.getName() + '\n';
+//        if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
+//        if (units.size() > 0) result += "Units:\n" + unitsName;
+//        if (tree != null) result += "Tree: " + tree.getName() + '\n';
+//        if (getResourceAmount() != null) result += getResourceAmount() + '\n';
+//
+//        return result;
+//    }
 
     public void clearUnitsByType(ArrayList<Unit> selectedUnits) {
         this.units.removeAll(selectedUnits);
     }
 
-    public Unit getLastUnitInTile() {
-        Unit result = null;
-        for (Unit unit : units)
-            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
-                result = unit;
-        return result;
-    }
+//    public Unit getLastUnitInTile() {
+//        Unit result = null;
+//        for (Unit unit : units)
+//            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
+//                result = unit;
+//        return result;
+//    }
 }

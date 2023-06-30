@@ -16,9 +16,9 @@ public class Filler extends Building {
         isActive = fillerType.isActive();
     }
 
-    @Override
-    public void removeFromGame() {
-        super.removeFromGame();
-        if (name.equals("hovel")) owner.changeMaxPopulation(-8);
-    }
+//    @Override
+//    public void removeFromGame() {
+////        super.removeFromGame();
+//        if (name.equals("hovel")) owner.changeMaxPopulation(-8);
+//    }
 }

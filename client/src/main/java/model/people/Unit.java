@@ -2,7 +2,6 @@ package model.people;
 
 import javafx.scene.image.Image;
 import model.Governance;
-import model.Stronghold;
 import model.map.Tile;
 import model.people.enums.Speed;
 import model.people.enums.UnitState;
@@ -45,14 +44,14 @@ public abstract class Unit {
         return unitState;
     }
 
-    public void initializeUnit(Tile tile) {
-        this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        this.ownerGovernance.addUnit(this);
-        this.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(tile));
-        if (!(this instanceof Machine || this instanceof Lord))
-            this.ownerGovernance.changeCurrentPopulation(-1);
-        tile.getUnits().add(this);
-    }
+//    public void initializeUnit(Tile tile) {
+//        this.ownerGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
+//        this.ownerGovernance.addUnit(this);
+//        this.setLocation(Stronghold.getCurrentGame().getMap().getTileLocation(tile));
+//        if (!(this instanceof Machine || this instanceof Lord))
+//            this.ownerGovernance.changeCurrentPopulation(-1);
+//        tile.getUnits().add(this);
+//    }
 
     public void setUnitState(UnitState unitState) {
         this.unitState = unitState;
@@ -108,9 +107,9 @@ public abstract class Unit {
         isPatrolling = patrolling;
     }
 
-    public boolean isForCurrentGovernance() {
-        return ownerGovernance.equals(Stronghold.getCurrentGame().getCurrentGovernance());
-    }
+//    public boolean isForCurrentGovernance() {
+//        return ownerGovernance.equals(Stronghold.getCurrentGame().getCurrentGovernance());
+//    }
 
     public void removeFromGame(Tile tile) {
         tile.getUnits().remove(this);

@@ -3,7 +3,6 @@ package model.buildings;
 import javafx.scene.image.Image;
 import model.AllResource;
 import model.Governance;
-import model.Stronghold;
 
 public abstract class Building {
     protected int xCoordinate, yCoordinate;
@@ -125,17 +124,17 @@ public abstract class Building {
         return image;
     }
 
-    public void removeFromGame() {
-        owner.getBuildings().remove(this);
-        owner.setUnemployedPopulation(owner.getUnemployedPopulation() + workersNumber);
-        if (owner.hasStorageForItem(resourceCostType, resourceCostNumber))
-            owner.addToStorage(resourceCostType, resourceCostNumber / 2);
-        owner.setGold(owner.getGold() + goldCost / 2);
-
-        for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-                Stronghold.getCurrentGame().getMap().getTile(xCoordinate + i, yCoordinate + j).setBuilding(null);
-    }
+//    public void removeFromGame() {
+//        owner.getBuildings().remove(this);
+//        owner.setUnemployedPopulation(owner.getUnemployedPopulation() + workersNumber);
+//        if (owner.hasStorageForItem(resourceCostType, resourceCostNumber))
+//            owner.addToStorage(resourceCostType, resourceCostNumber / 2);
+//        owner.setGold(owner.getGold() + goldCost / 2);
+//
+//        for (int i = 0; i < size; i++)
+//            for (int j = 0; j < size; j++)
+////                Stronghold.getCurrentGame().getMap().getTile(xCoordinate + i, yCoordinate + j).setBuilding(null);
+//    }
 
     @Override
     public String toString() {

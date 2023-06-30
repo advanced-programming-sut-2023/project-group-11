@@ -33,6 +33,7 @@ public class Connection extends Thread {
                 ReceivingPacket receivingPacket = new ReceivingPacket(in.readUTF());
                 Class<?> controllerClass = Class.forName("controller." + receivingPacket.getClassName());
                 Method controllerMethod = controllerClass.getDeclaredMethod(receivingPacket.getMethodName(), ArrayList.class);
+                System.out.println(controllerMethod.getName());
                 if(receivingPacket.getMethodName().equals("loginUser"))
                     currentUser = Stronghold.getUserByUsername((String) receivingPacket.getParameters().get(0));
                 SendingPacket sendingPacket;

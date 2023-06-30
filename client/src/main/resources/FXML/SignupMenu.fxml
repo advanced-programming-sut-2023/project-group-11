@@ -17,11 +17,6 @@
          <children>
             <AnchorPane layoutX="120.0" layoutY="45.0" opacity="0.85" prefHeight="630.0" prefWidth="1040.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
                <children>
-                  <CheckBox fx:id="passwordShow" layoutX="593.0" layoutY="229.0" mnemonicParsing="false" onAction="#changeVisibility" text="show password">
-                     <font>
-                        <Font name="Trebuchet MS" size="12.0" />
-                     </font>
-                  </CheckBox>
                   <Label layoutX="428.0" layoutY="22.0" text="Stronghold">
                      <font>
                         <Font size="36.0" />
@@ -43,15 +38,20 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="passwordShown" editable="false" layoutX="60.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="password" />
+                  <TextField fx:id="passwordShown" editable="false" focusTraversable="false" layoutX="60.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="password" />
                   <PasswordField fx:id="signupPassword" layoutX="60.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="password" />
                   <Label layoutX="330.0" layoutY="191.0" text="Confirmation">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="confirmationShown" layoutX="330.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="confirmation" />
+                  <TextField fx:id="confirmationShown" focusTraversable="false" layoutX="330.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="confirmation" />
                   <PasswordField fx:id="signupConfirmation" layoutX="330.0" layoutY="225.0" prefHeight="26.0" prefWidth="254.0" promptText="confirmation" />
+                  <CheckBox fx:id="passwordShow" layoutX="593.0" layoutY="229.0" mnemonicParsing="false" onAction="#changeVisibility" text="show password">
+                     <font>
+                        <Font name="Trebuchet MS" size="12.0" />
+                     </font>
+                  </CheckBox>
                   <Label layoutX="59.0" layoutY="268.0" text="Nickname">
                      <font>
                         <Font size="24.0" />
@@ -91,7 +91,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Button layoutX="714.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#generateRandomPassword" prefHeight="26.0" text="Random password" />
+                  <Button focusTraversable="false" layoutX="714.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#generateRandomPassword" prefHeight="26.0" text="Random password" />
                   <Label fx:id="signupUsernameError" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="176.0" layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="15.0" prefWidth="136.0" textFill="RED">
                      <font>
                         <Font size="14.0" />
@@ -99,12 +99,12 @@
                   </Label>
                   <TextField fx:id="loginUsernameField" alignment="TOP_LEFT" layoutX="60.0" layoutY="461.0" prefHeight="26.0" prefWidth="252.0" promptText="Username" />
                   <PasswordField fx:id="loginPasswordField" layoutX="330.0" layoutY="461.0" prefHeight="26.0" prefWidth="252.0" promptText="Password" />
-                  <Button layoutX="869.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#login" text="Login">
+                  <TextField fx:id="captchaField" alignment="TOP_LEFT" layoutX="60.0" layoutY="541.0" prefHeight="26.0" prefWidth="252.0" promptText="Captcha" />
+                  <Button focusTraversable="false" layoutX="869.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#login" text="Login">
                      <font>
                         <Font name="Andalus" size="17.0" />
                      </font>
                   </Button>
-                  <Hyperlink layoutX="839.0" layoutY="525.0" onMouseClicked="#forgotPassword" text="Forgot my password" />
                   <Label layoutX="60.0" layoutY="383.0" text="Login">
                      <font>
                         <Font name="System Bold" size="24.0" />
@@ -113,6 +113,7 @@
                   <Label fx:id="usernameError" layoutX="61.0" layoutY="487.0" prefHeight="15.0" prefWidth="252.0" />
                   <Label fx:id="passwordError" layoutX="330.0" layoutY="487.0" prefHeight="15.0" prefWidth="252.0" />
                   <CheckBox fx:id="stayLoggedInCheck" layoutX="849.0" layoutY="502.0" mnemonicParsing="false" text="Stay logged in " />
+                  <Hyperlink layoutX="839.0" layoutY="525.0" onMouseClicked="#forgotPassword" text="Forgot my password" />
                   <Label layoutX="60.0" layoutY="426.0" text="Username">
                      <font>
                         <Font size="24.0" />
@@ -124,12 +125,11 @@
                      </font>
                   </Label>
                   <CheckBox fx:id="randomSloganBox" layoutX="859.0" layoutY="275.0" mnemonicParsing="false" onAction="#randomSlogan" text="Random slogan" visible="false" />
-                  <Button layoutX="856.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#signup" text="Sign up">
+                  <Button focusTraversable="false" layoutX="856.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#signup" text="Sign up">
                      <font>
                         <Font name="Andalus" size="17.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="captchaField" alignment="TOP_LEFT" layoutX="60.0" layoutY="541.0" prefHeight="26.0" prefWidth="252.0" promptText="Captcha" />
                   <Label fx:id="captchaError" layoutX="61.0" layoutY="567.0" prefHeight="15.0" prefWidth="252.0" />
                   <Label layoutX="60.0" layoutY="506.0" text="Captcha">
                      <font>

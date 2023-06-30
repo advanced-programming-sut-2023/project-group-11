@@ -76,12 +76,12 @@ public class Storage extends Building {
         currentCapacity += amount;
     }
 
-    @Override
-    public void removeFromGame() {
-        super.removeFromGame();
-        storage.forEach(((resource, integer) -> owner.changeResourceAmount(resource, -integer)));
-        owner.removeStorage(this);
-    }
+//    @Override
+//    public void removeFromGame() {
+////        super.removeFromGame();
+//        storage.forEach(((resource, integer) -> owner.changeResourceAmount(resource, -integer)));
+//        owner.removeStorage(this);
+//    }
 
     @Override
     public String toString() {

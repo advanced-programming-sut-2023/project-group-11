@@ -1,23 +1,26 @@
 package view;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import javafx.application.Application;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.User;
 import model.map.Map;
 import webConnection.Client;
 import webConnection.Connection;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -26,7 +29,9 @@ public class NewGame extends Application {
     @FXML
     private TableView<User> users;
     @FXML
-    private ChoiceBox<Map> mapName;
+    private ChoiceBox<String> mapName;
+    @FXML
+    private TextField playersNeededField;
     private final Connection connection = Client.getConnection();
     private final String utils = "Utils";
 
@@ -44,19 +49,33 @@ public class NewGame extends Application {
     @FXML
     public void initialize() throws IOException {
         initializeMapNames();
-        initializeUsers();
+//        initializeUsers();
     }
 
     private void initializeUsers() throws IOException {
-//        users.setItems((ObservableList<User>) connection.getData("MainMenuController",
-//                "removeCurrentUserFromList", (connection.getData(utils, "getUsersObservable"))));//TODO: check this later
+        Type userDatabaseType = new TypeToken<ArrayList<User>>() {
+        }.getType();
+        ArrayList<User> userArrayList = new Gson().fromJson(new Gson().toJson(connection.getData("MainMenuController",
+                "removeCurrentUserFromList")),userDatabaseType);
+        users.setItems(FXCollections.observableArrayList(userArrayList));
+                //TODO: check this later
 //        users.setItems(MainMenuController.removeCurrentUserFromList(Utils.getUsersObservable()));
-        addColumns();
+//        addColumns();
         users.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     private void initializeMapNames() throws IOException {
-        connection.doInServer("MapEditMenuController", "setMapsOnChoiceBox", mapName);
+        ArrayList<String> mapNames =  Client.getConnection().getArrayData("MapEditMenuController","getMapNames");
+        mapName.getItems().addAll(mapNames);
+        mapName.setValue(mapNames.get(0));
+//        mapName.setValue(Stronghold.getMapByName("original"));
+//        ShowMapMenuController.setCurrentMap(Stronghold.getMapByName("original"));
+//        currentMap = Stronghold.getMapByName("original");
+//        mapName.setOnAction(actionEvent -> {
+//            ShowMapMenuController.setCurrentMap(mapName.getValue());
+//            MapEditMenuController.setCurrentMap(mapName.getValue());
+//        });
+//        connection.doInServer("MapEditMenuController", "setMapsOnChoiceBox", mapName);
     }
 
     private void addColumns() throws IOException {
@@ -67,12 +86,13 @@ public class NewGame extends Application {
     }
 
     public void startGame() throws Exception {
-        if (users.getSelectionModel().getSelectedItems().size() >= 1) {
-            connection.doInServer("MainMenuController", "startGame",
-                    new ArrayList<>(users.getSelectionModel().getSelectedItems()), mapName.getValue().getName());
-            new GameMenu().start(SignupMenu.getStage());
-            stage.close();
-        } else ViewUtils.alert(Alert.AlertType.ERROR, "Start Game", "Please choose a player!");
+        Client.getConnection().doInServer("MainMenuController","createGame",mapName.getValue(),Integer.parseInt(playersNeededField.getText()));
+//        if (users.getSelectionModel().getSelectedItems().size() >= 1) {
+//            connection.doInServer("MainMenuController", "startGame",
+////                    new ArrayList<>(users.getSelectionModel().getSelectedItems()), mapName.getValue().getName());
+////            new GameMenu().start(SignupMenu.getStage());
+////            stage.close();
+//        } else ViewUtils.alert(Alert.AlertType.ERROR, "Start Game", "Please choose a player!");
     }
 
     public void back() throws Exception {

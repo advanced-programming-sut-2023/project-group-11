@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import model.Governance;
-import model.Stronghold;
 import model.User;
 import webConnection.Client;
 

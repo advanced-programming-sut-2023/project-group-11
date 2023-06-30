@@ -16,6 +16,14 @@ public class MapEditMenuController {
         Utils.updateDatabase("maps");
     }
 
+    public static ArrayList<String> getMapNames(ArrayList parameters){
+        ArrayList<String> mapNames = new ArrayList<>();
+        for (Map map:Stronghold.getMaps()){
+            mapNames.add(map.getName());
+        }
+        return mapNames;
+    }
+
     public static void setCurrentMap(ArrayList<Object> parameters) {
         String mapName = (String) parameters.get(0);
         currentMap = Stronghold.getMapByName(mapName);
