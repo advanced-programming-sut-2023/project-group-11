@@ -21,8 +21,10 @@ public class MapEditMenuController {
     public static ArrayList<String> getMapNames(ArrayList parameters) {
         ArrayList<String> mapNames = new ArrayList<>();
         for (Map map : Stronghold.getMaps()) {
-            if (map.getOwners().contains(Stronghold.getCurrentUser().getUsername()))
-                mapNames.add(map.getName());
+            if (map.getOwners().contains(Stronghold.getCurrentUser().getUsername())) {
+                if (map.getMainOwner().equals(Stronghold.getCurrentUser())) mapNames.add(map.getName());
+                else mapNames.add(map.getName() + " -received");
+            }
         }
         return mapNames;
     }
@@ -125,6 +127,16 @@ public class MapEditMenuController {
         return Message.SUCCESS;
     }
 
+    public static void clear(ArrayList<Object> parameters) {
+        int selectedTileX = (Integer) parameters.get(0);
+        int selectedTileY = (Integer) parameters.get(1);
+        int width = (Integer) parameters.get(2);
+        int height = (Integer) parameters.get(3);
+
+        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(new ArrayList<>(Arrays.asList(selectedTileX, selectedTileY, height, width)));
+        tiles.forEach(Tile::clear);
+    }
+
     public static Message dropTree(ArrayList<Object> parameters) {
         int selectedTileX = (Integer) parameters.get(0);
         int selectedTileY = (Integer) parameters.get(1);
@@ -132,6 +144,7 @@ public class MapEditMenuController {
         int height = (Integer) parameters.get(3);
         String treeName = (String) parameters.get(4);
         ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(new ArrayList<>(Arrays.asList(selectedTileX, selectedTileY, height, width)));
+
         if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;
 
         for (Tile tile : tiles)

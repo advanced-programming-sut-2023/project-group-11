@@ -60,13 +60,19 @@ public class MapSelection extends Application {
         mapsChoiceBox.setOnAction(actionEvent -> {
             try {
                 Client.getConnection().doInServer("ShowMapMenuController", "setCurrentMap",
-                        mapsChoiceBox.getValue());
+                        getMapName(mapsChoiceBox.getValue()));
                 Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap",
-                        mapsChoiceBox.getValue());
+                        getMapName(mapsChoiceBox.getValue()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    private String getMapName(String value) {
+        if (value.matches("[^-]+")) return value;
+        int index = value.indexOf('-') - 1;
+        return value.substring(0, index);
     }
 
     public void selectMap() throws Exception {

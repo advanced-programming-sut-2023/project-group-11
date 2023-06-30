@@ -54,9 +54,15 @@ public class ShareMapMenu extends Application {
         else if (users.getValue() == null)
             ViewUtils.alert(Alert.AlertType.ERROR, "Sharing Map", "Select a user please!");
         else if (Client.getConnection().checkAction("MapEditMenuController", "checkShareMap",
-                maps.getValue(), users.getValue()).equals(Message.USER_HAS_MAP))
+                getMapName(maps.getValue()), users.getValue()).equals(Message.USER_HAS_MAP))
             ViewUtils.alert(Alert.AlertType.ERROR, "Sharing Map", "User has the map!");
         else ViewUtils.alert(Alert.AlertType.INFORMATION, "Sharing Map", "Map shared successfully");
+    }
+
+    private String getMapName(String value) {
+        if (value.matches("[^-]+")) return value;
+        int index = value.indexOf('-') - 1;
+        return value.substring(0, index);
     }
 
     public void back() throws Exception {
