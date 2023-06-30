@@ -26,6 +26,7 @@ public class Connection extends Thread {
         this.socket = socket;
         this.in = new DataInputStream(socket.getInputStream());
         this.out = new DataOutputStream(socket.getOutputStream());
+        Stronghold.addConnection(this);
     }
 
     @Override
@@ -38,19 +39,11 @@ public class Connection extends Thread {
                 System.out.println(controllerMethod.getName());
                 if(receivingPacket.getMethodName().equals("loginUser"))
                     currentUser = Stronghold.getUserByUsername((String) receivingPacket.getParameters().get(0));
-                SendingPacket sendingPacket;
-                if(currentUser != null)
-                    Stronghold.setCurrentUser(currentUser);
-                if (receivingPacket.getOperationType().equals(OperationType.VOID))
-                    controllerMethod.invoke(null, receivingPacket.getParameters());
-                else {
-                    Object result = controllerMethod.invoke(null, receivingPacket.getParameters());
-                    sendingPacket = new SendingPacket(result);
-                    out.writeUTF(new Gson().toJson(sendingPacket));
-                }
+                sendRespond(receivingPacket, controllerMethod);
             } catch (IOException e) {
                 System.out.println("Connection \"ip=" + socket.getInetAddress().getHostAddress() + " port=" + socket.getPort() + "\" lost!");
 //                throw new RuntimeException(e);
+                Stronghold.removeConnection(this);
                 break;
             } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
                      IllegalAccessException e) {
@@ -58,5 +51,22 @@ public class Connection extends Thread {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private void sendRespond(ReceivingPacket receivingPacket, Method controllerMethod) throws IllegalAccessException, InvocationTargetException, IOException {
+        SendingPacket sendingPacket;
+        if (currentUser != null)
+            Stronghold.setCurrentUser(currentUser);
+        if (receivingPacket.getOperationType().equals(OperationType.VOID))
+            controllerMethod.invoke(null, receivingPacket.getParameters());
+        else {
+            Object result = controllerMethod.invoke(null, receivingPacket.getParameters());
+            sendingPacket = new SendingPacket(result);
+            out.writeUTF(new Gson().toJson(sendingPacket));
+        }
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 }

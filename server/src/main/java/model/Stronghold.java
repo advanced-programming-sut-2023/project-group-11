@@ -1,6 +1,7 @@
 package model;
 
 import model.map.Map;
+import webConnetion.Connection;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class Stronghold {
     private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
 
+    private static ArrayList<Connection> connections = new ArrayList<>();
     private final static ArrayList<Game> unStartedGames = new ArrayList<>();
     private static User currentUser;
     private static Game currentGame;
@@ -130,4 +132,23 @@ public class Stronghold {
             if (map.getName().equals(name)) return true;
         return false;
     }
+
+    public static ArrayList<Connection> getConnections() {
+        return connections;
+    }
+
+    public static void addConnection(Connection connection) {
+        connections.add(connection);
+    }
+
+    public static void removeConnection(Connection connection) {
+        connections.remove(connection);
+    }
+
+    public static Connection getConnectionByUser(User user) {
+        for (Connection connection : connections)
+            if (connection.getCurrentUser().equals(user)) return connection;
+        return null;
+    }
+
 }

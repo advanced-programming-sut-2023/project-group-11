@@ -191,6 +191,7 @@ public class SignupMenu extends Application {
             case EMPTY_PASSWORD_FIELD -> ViewUtils.fieldError(passwordError, "Required fields must be filled in!");
             case USERNAME_NOT_EXIST -> ViewUtils.fieldError(usernameError, "Username doesn't exist!");
             case INCORRECT_PASSWORD -> ViewUtils.fieldError(passwordError, "Password is incorrect!");
+            case USER_ALREADY_LOGGED_IN ->  ViewUtils.fieldError(usernameError, "User has logged in before!");
             case LOCKED_ACCOUNT -> {
                 long leftTime = (Long) Client.getConnection().getData("LoginMenuController", "getLeftLockedTime",
                         loginUsernameField.getText());

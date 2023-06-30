@@ -6,11 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="LoginMenu ended in both sides">
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/model/Parsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/model/Parsers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/SignupMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/view/enums/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/view/enums/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/MainMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnetion/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webConnetion/ReceivingPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnetion/ReceivingPacket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/maps.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,21 +46,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/server&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="webConnetion" />
@@ -95,7 +98,8 @@
       <workItem from="1687984392274" duration="4327000" />
       <workItem from="1688013075603" duration="355000" />
       <workItem from="1688013733866" duration="19391000" />
-      <workItem from="1688108825652" duration="12919000" />
+      <workItem from="1688108825652" duration="14518000" />
+      <workItem from="1688138694746" duration="3778000" />
     </task>
     <task id="LOCAL-00001" summary="add server project">
       <created>1687985072897</created>

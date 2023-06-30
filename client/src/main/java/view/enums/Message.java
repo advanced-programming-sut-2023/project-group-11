@@ -116,5 +116,5 @@ public enum Message {
     TRADE_CLOSED,
     UNSUCCESSFUL,
     CANT_ACCEPT_YOUR_OWN_TRADE,
-    ;
+    USER_ALREADY_LOGGED_IN;
 }

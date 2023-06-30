@@ -12,6 +12,7 @@ module server {
 
     exports model.map;
     exports model;
+    exports webConnetion;
     opens model to com.google.gson, javafx.base;
     opens model.map to com.google.gson;
     opens model.buildings to com.google.gson;

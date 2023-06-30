@@ -171,6 +171,7 @@ public class MainMenuController {
     public static void logout(ArrayList<Object> parameters) {
         User currentUser = Stronghold.getCurrentUser();
         currentUser.setStayLoggedIn(false);
+        Stronghold.removeConnection(Stronghold.getConnectionByUser(currentUser));
         Stronghold.setCurrentUser(null);
     }
 }
