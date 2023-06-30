@@ -1,33 +1,27 @@
 package view;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import javafx.application.Application;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import model.User;
-import model.map.Map;
+import model.Game;
+import model.Parsers;
 import webConnection.Client;
 import webConnection.Connection;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 
 public class NewGame extends Application {
     private static Stage stage;
     @FXML
-    private TableView<User> users;
+    private TableView<Game> games;
     @FXML
     private ChoiceBox<String> mapName;
     @FXML
@@ -49,19 +43,16 @@ public class NewGame extends Application {
     @FXML
     public void initialize() throws IOException {
         initializeMapNames();
-//        initializeUsers();
+        initializeGames();
     }
 
-    private void initializeUsers() throws IOException {
-        Type userDatabaseType = new TypeToken<ArrayList<User>>() {
-        }.getType();
-        ArrayList<User> userArrayList = new Gson().fromJson(new Gson().toJson(connection.getData("MainMenuController",
-                "removeCurrentUserFromList")),userDatabaseType);
-        users.setItems(FXCollections.observableArrayList(userArrayList));
+    private void initializeGames() throws IOException {
+        String gamesJson = Client.getConnection().receiveJsonData("MainMenuController","getUnStartedGames");
+        games.getItems().addAll(Parsers.parseGamesArrayList(gamesJson));
+        addColumns();
                 //TODO: check this later
-//        users.setItems(MainMenuController.removeCurrentUserFromList(Utils.getUsersObservable()));
-//        addColumns();
-        users.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        games.setItems(MainMenuController.removeCurrentUserFromList(Utils.getUsersObservable()));
+        games.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     private void initializeMapNames() throws IOException {
@@ -79,17 +70,22 @@ public class NewGame extends Application {
     }
 
     private void addColumns() throws IOException {
-        connection.doInServer(utils, "columnMaker", users, "Avatar", "avatar");
-        connection.doInServer(utils, "columnMaker", users, "Rank", "rank");
-        connection.doInServer(utils, "columnMaker", users, "Username", "username");
-        connection.doInServer(utils, "columnMaker", users, "Score", "score");
+        columnMaker(games,"Owner","ownerName");
+        columnMaker(games,"JoinedPlayers","joinedPlayers");
+    }
+
+    private void columnMaker(TableView tableView,String header,String field){
+        TableColumn<Game, String> tableColumn = new TableColumn<>(header);
+        tableColumn.setCellValueFactory(new PropertyValueFactory<>(field));
+        tableColumn.setSortable(false);
+        tableView.getColumns().add(tableColumn);
     }
 
     public void startGame() throws Exception {
         Client.getConnection().doInServer("MainMenuController","createGame",mapName.getValue(),Integer.parseInt(playersNeededField.getText()));
-//        if (users.getSelectionModel().getSelectedItems().size() >= 1) {
+//        if (games.getSelectionModel().getSelectedItems().size() >= 1) {
 //            connection.doInServer("MainMenuController", "startGame",
-////                    new ArrayList<>(users.getSelectionModel().getSelectedItems()), mapName.getValue().getName());
+////                    new ArrayList<>(games.getSelectionModel().getSelectedItems()), mapName.getValue().getName());
 ////            new GameMenu().start(SignupMenu.getStage());
 ////            stage.close();
 //        } else ViewUtils.alert(Alert.AlertType.ERROR, "Start Game", "Please choose a player!");

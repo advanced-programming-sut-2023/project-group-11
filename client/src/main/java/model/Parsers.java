@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
@@ -7,6 +9,7 @@ import model.map.Tree;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Parsers {
@@ -51,5 +54,13 @@ public class Parsers {
         } catch (Exception e) {}
 
         return new Tile(texture, tree, location[0], location[1]);
+    }
+
+    public static ArrayList<Game> parseGamesArrayList(String json) {
+        ArrayList<Game> arrayList = new ArrayList<>();
+        Type type = new TypeToken<ArrayList<Game>>() {
+        }.getType();
+        arrayList.addAll(new Gson().fromJson(json, type));
+        return arrayList;
     }
 }

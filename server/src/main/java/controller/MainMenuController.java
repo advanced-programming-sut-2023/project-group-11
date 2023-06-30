@@ -17,7 +17,6 @@ import model.people.Lord;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class MainMenuController {
     public static void startGame(ArrayList<Object> parameters) throws Exception {
@@ -173,5 +172,9 @@ public class MainMenuController {
         currentUser.setStayLoggedIn(false);
         Stronghold.removeConnection(Stronghold.getConnectionByUser(currentUser));
         Stronghold.setCurrentUser(null);
+    }
+
+    public static ArrayList<Game> getUnStartedGames(ArrayList<Object> parameters){
+        return Stronghold.getUnStartedGames();
     }
 }
