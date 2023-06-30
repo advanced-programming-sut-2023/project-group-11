@@ -6,29 +6,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Game {
-//    private final User owner;
-    private final ArrayList<Governance> governances;
+    private  User owner;
+    private  ArrayList<Governance> governances;
+
+    private int playersNeeded;
     private final HashMap<Governance, Integer> scores = new HashMap<>();
     private final ArrayList<Trade> trades = new ArrayList<>();
     private Governance currentGovernance;
-    private final Map map;
+    private transient final Map map;
     private int turn = 1;
     private int currentTurn = 1;
 
     public Game(ArrayList<Governance> governances, Map map) {
-//        this.owner = Stronghold.getCurrentUser();
         this.governances = governances;
         this.currentGovernance = governances.get(0);
         this.map = map;
+    }
+
+    public Game(User owner,Map map,int playersNeeded) {
+        this.owner = owner;
+        this.map = map;
+        this.playersNeeded = playersNeeded;
     }
 
     public ArrayList<Trade> getTrades() {
         return trades;
     }
 
-//    public User getOwner() {
-//        return owner;
-//    }
+    public User getOwner() {
+        return owner;
+    }
+
+    public String getOwnerName() {
+        return owner.getNickname();
+    }
 
     public ArrayList<Governance> getGovernances() {
         return governances;
@@ -38,6 +49,13 @@ public class Game {
         return map;
     }
 
+    public int getPlayersNeeded() {
+        return playersNeeded;
+    }
+
+    public void setPlayersNeeded(int playersNeeded) {
+        this.playersNeeded = playersNeeded;
+    }
     public int getTurn() {
         return turn;
     }
@@ -64,6 +82,10 @@ public class Game {
 
     public void addLoserScore(Governance governance, int score) {
         scores.put(governance, score);
+    }
+
+    public String getJoinedPlayers(){
+        return "1/" + playersNeeded;
     }
 
     public Governance getCurrentGovernance() {

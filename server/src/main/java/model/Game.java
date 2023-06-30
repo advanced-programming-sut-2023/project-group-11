@@ -13,13 +13,13 @@ public class Game {
     private final HashMap<Governance, Integer> scores = new HashMap<>();
     private final ArrayList<Trade> trades = new ArrayList<>();
     private Governance currentGovernance;
-    private final Map map;
+    private transient final Map map;
     private int turn = 1;
     private int currentTurn = 1;
 
     public Game(ArrayList<Governance> governances, Map map) {
         this.owner = Stronghold.getCurrentUser();
-        this.governances = governances;
+        this.governances =  governances;
         this.currentGovernance = governances.get(0);
         this.map = map;
     }

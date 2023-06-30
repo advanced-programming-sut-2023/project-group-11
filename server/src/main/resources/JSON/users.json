@@ -36,7 +36,7 @@
     "avatarFileName": "8.png",
     "score": 7000,
     "rank": 3,
-    "stayLoggedIn": false
+    "stayLoggedIn": true
   },
   {
     "recoveryQuestion": "What is my best friend's name?",
