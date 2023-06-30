@@ -24,6 +24,7 @@ import model.Parsers;
 import model.map.Texture;
 import model.map.Tile;
 import model.map.Tree;
+import view.enums.Message;
 import view.enums.Zoom;
 import webConnection.Client;
 
@@ -151,7 +152,7 @@ public class MapEditMenu extends Application {
     }
 
     public void clear() {
-        MapEditMenuController.clear(selectedTiles);
+        selectedTiles.forEach(Tile::clear);
         showMap();
     }
 
@@ -172,13 +173,14 @@ public class MapEditMenu extends Application {
         changePaneVisibility(treeBox, sandBox, waterBox);
     }
 
-    public void setTexture(MouseEvent mouseEvent) {
+    public void setTexture(MouseEvent mouseEvent) throws IOException {
         String textureName = ((ImageView) mouseEvent.getSource()).getId();
         textureNameLabel.setVisible(true);
         textureNameLabel.setText(textureName);
 
-        MapEditMenuMessages message = MapEditMenuController.setTexture(selectedTiles, textureName,
-                selectedTileXInScreen + firstTileXInMap, selectedTileYInScreen + firstTileYInMap);
+        Message message = Client.getConnection().checkAction("MapEditMenuController", "setTexture",
+                selectedTiles.size(), textureName, selectedTileXInScreen + firstTileXInMap,
+                selectedTileYInScreen + firstTileYInMap, selectedBorderHeight, selectedBorderWidth);
 
         switch (message) {
             case SELECT_ONLY_ONE_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
@@ -190,13 +192,15 @@ public class MapEditMenu extends Application {
         showMap();
     }
 
-    public void dropTree(MouseEvent mouseEvent) {
+    public void dropTree(MouseEvent mouseEvent) throws IOException {
         String treeName = ((ImageView) mouseEvent.getSource()).getId();
 
         textureNameLabel.setVisible(true);
         textureNameLabel.setText(treeName);
 
-        MapEditMenuMessages message = MapEditMenuController.dropTree(selectedTiles, treeName);
+        Message message = Client.getConnection().checkAction("MapEditMenuController", "dropTree",
+                selectedTileXInScreen + firstTileXInMap, selectedTileYInScreen + firstTileYInMap,
+                selectedBorderWidth, selectedBorderHeight, treeName);
 
         switch (message) {
             case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, "Drop Tree Failed",

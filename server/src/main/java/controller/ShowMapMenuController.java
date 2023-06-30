@@ -7,6 +7,7 @@ import model.map.Map;
 import model.map.Tile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ShowMapMenuController {
     private static Map currentMap;
@@ -19,6 +20,16 @@ public class ShowMapMenuController {
                 tiles[i][j] = currentMap.getTile(x + j, y + i);
         }
         return tiles;
+    }
+
+    public static ArrayList<Tile> getTilesList(int x, int y, int rowsCount, int columnCount) {
+        Tile[][] tiles = getTiles(x, y, rowsCount, columnCount);
+        ArrayList<Tile> result = new ArrayList<>();
+
+        for (Tile[] tileRow : tiles)
+            result.addAll(Arrays.asList(tileRow));
+
+        return result;
     }
 
     public static Map getCurrentMap() {

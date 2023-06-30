@@ -43,12 +43,12 @@ public class MapEditMenuController {
         for (Tile tile : tiles) tile.clear();
     }
 
-    public static Message setTexture(ArrayList<Tile> tiles, String textureName, int selectedTileX, int selectedTileY) {
+    public static Message setTexture(int selectedTilesSize, String textureName, int selectedTileX, int selectedTileY, int height, int width) {
         Texture texture = Texture.getTextureByName(textureName);
 
-        if (tiles.size() == 0) return Message.EMPTY_SELECTED_TILES;
+        if (selectedTilesSize == 0) return Message.EMPTY_SELECTED_TILES;
         else if (texture.equals(Texture.BIG_LAKE) || texture.equals(Texture.SMALL_LAKE) || texture.equals(Texture.CLIFF)) {
-            if (tiles.size() > 1) return Message.SELECT_ONLY_ONE_TILE;
+            if (selectedTilesSize > 1) return Message.SELECT_ONLY_ONE_TILE;
             switch (texture) {
                 case SMALL_LAKE -> {
                     if (!isSuitableLandForLake(selectedTileX, selectedTileY, 3))
@@ -85,13 +85,15 @@ public class MapEditMenuController {
                 }
             }
         } else {
-            for (Tile tile : tiles)
-                tile.setTexture(texture);
+            for (int i = 0; i < width; i++)
+                for (int j = 0; j < height; j++)
+                    currentMap.getTile(selectedTileX + i, selectedTileY + j).setTexture(texture);
         }
         return Message.SUCCESS;
     }
 
-    public static Message dropTree(ArrayList<Tile> tiles, String treeName) {
+    public static Message dropTree(int selectedTileX, int selectedTileY, int width, int height, String treeName) {
+        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(selectedTileX, selectedTileY, height, width);
         if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;
 
         for (Tile tile : tiles)

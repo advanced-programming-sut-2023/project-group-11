@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="edit getData methods">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_11_28_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Parsers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_12_02__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_12_02__Changes_.xml" afterDir="false" />
+    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_29_2023_12_02__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,20 +43,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/client&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Sadegh/Documents/Codes/Java/Intellij/ProjectAP/server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="webConnection" />
@@ -104,7 +98,8 @@
       <workItem from="1687984326282" duration="3585000" />
       <workItem from="1688013129333" duration="33000" />
       <workItem from="1688013172394" duration="349000" />
-      <workItem from="1688013733596" duration="22783000" />
+      <workItem from="1688013733596" duration="23087000" />
+      <workItem from="1688108761463" duration="2242000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>
@@ -141,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688024226410</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="MapEditing started">
+      <created>1688071095673</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1688071095673</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,6 +171,7 @@
     <MESSAGE value="Client side changing (sending packets) started" />
     <MESSAGE value="edit getData methods" />
     <MESSAGE value="getJsonData added" />
-    <option name="LAST_COMMIT_MESSAGE" value="getJsonData added" />
+    <MESSAGE value="MapEditing started" />
+    <option name="LAST_COMMIT_MESSAGE" value="MapEditing started" />
   </component>
 </project>

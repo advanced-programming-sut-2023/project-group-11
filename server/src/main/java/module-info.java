@@ -10,6 +10,7 @@ module server {
     requires javafx.base;
     requires javafx.controls;
 
+    exports model.map;
     opens model to com.google.gson, javafx.base;
     opens model.map to com.google.gson;
     opens model.buildings to com.google.gson;
