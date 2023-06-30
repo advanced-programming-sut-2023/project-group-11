@@ -50,7 +50,7 @@ public class MapEditMenu extends Application {
     private AnchorPane sidePane;
     @FXML
     private AnchorPane mapPane;
-    private Zoom currentZoom = Zoom.NORMAL;
+    private Zoom currentZoom = Zoom.HIGH;
     private int tileSize = currentZoom.getSize();
     private int mapSize;
     private int firstTileXInMap = 0;
@@ -285,8 +285,7 @@ public class MapEditMenu extends Application {
             selectedBorderHeight = 1;
             selectedBorderWidth = 1;
             Tile tile = Parsers.parseTileObject(Client.getConnection().getJSONData("ShowMapMenuController",
-                    "getSelectedTile", pressedTileXInScreen, pressedTileYInScreen, firstTileXInMap, firstTileYInMap),
-                    pressedTileYInScreen + firstTileYInMap, pressedTileXInScreen + firstTileXInMap);
+                    "getSelectedTile", pressedTileXInScreen, pressedTileYInScreen, firstTileXInMap, firstTileYInMap));
             if (tile.equals(selectedTile)) selectedTile = null;
             else {
                 selectedTile = tile;
@@ -320,6 +319,8 @@ public class MapEditMenu extends Application {
 
         pressedTileXInScreen += deltaX;
         pressedTileYInScreen += deltaY;
+        selectedTileXInScreen += deltaX;
+        selectedTileYInScreen += deltaY;
     }
 
     private boolean outOfPane(int deltaX, int deltaY) {
@@ -364,7 +365,7 @@ public class MapEditMenu extends Application {
         if (currentZoom.getLevel() < 4 && zoomIn) {
             currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() + 1);
             tileSize = currentZoom.getSize();
-        } else if (currentZoom.getLevel() > 0 && !zoomIn &&
+        } else if (currentZoom.getLevel() > 2 && !zoomIn &&
                 (mapPaneWidth / Zoom.getZoomByLevel(currentZoom.getLevel() - 1).getSize()) < mapSize) {
             currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() - 1);
             tileSize = currentZoom.getSize();

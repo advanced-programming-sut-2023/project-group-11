@@ -4,27 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_30_2023_4_12_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_30_2023_4_12_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="Show map in map edit added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Parsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Parsers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/map/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapEditMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/EntryMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/map/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/resources/JSON/maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/resources/JSON/maps.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +162,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -202,16 +199,5 @@
     <MESSAGE value="MapEditing ended (Showing map still needs implements)" />
     <MESSAGE value="Edit MapEditMenuController methods" />
     <option name="LAST_COMMIT_MESSAGE" value="Edit MapEditMenuController methods" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/model/Parsers.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -28,20 +28,21 @@ public class Parsers {
     public static Tile[][] convertTo2DTileArray(JSONArray mapTiles, int rowsCount, int columnCount) {
         Tile[][] result = new Tile[rowsCount][];
         for (int i = 0; i < rowsCount; i++) {
-            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), columnCount, i);
+            result[i] = convertToTileArray((JSONArray) mapTiles.get(i), columnCount);
         }
         return result;
     }
 
-    private static Tile[] convertToTileArray(JSONArray tiles, int columnCount, int row) {
+    private static Tile[] convertToTileArray(JSONArray tiles, int columnCount) {
         Tile[] result = new Tile[columnCount];
         for (int i = 0; i < columnCount; i++) {
-            result[i] = parseTileObject((JSONObject) tiles.get(i), row, i);
+            result[i] = parseTileObject((JSONObject) tiles.get(i));
         }
         return result;
     }
 
-    public static Tile parseTileObject(JSONObject tile, int row, int column) {
+    public static Tile parseTileObject(JSONObject tile) {
+        int[] location = new int[] {(Integer) ((JSONArray) tile.get("location")).get(0), (Integer) ((JSONArray) tile.get("location")).get(1)};
         Texture texture = Texture.valueOf(((String) tile.get("texture")));
         Tree tree = null;
         try {
@@ -49,6 +50,6 @@ public class Parsers {
                 tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
         } catch (Exception e) {}
 
-        return new Tile(texture, tree, column, row);
+        return new Tile(texture, tree, location[0], location[1]);
     }
 }
