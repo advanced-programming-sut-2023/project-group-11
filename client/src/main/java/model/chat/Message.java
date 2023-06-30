@@ -1,8 +1,10 @@
 package model.chat;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 
 public class Message {
@@ -11,15 +13,12 @@ public class Message {
     private final String sentTime;
     private final ArrayList<Emoji> emojis = new ArrayList<>();
 
-    public Message(String content, String senderName) {
-        this.sentTime = getTime();
+    public Message(String content, String senderName, String sentTime) {
+        this.sentTime = sentTime;
         this.content = content;
         this.senderName = senderName;
     }
 
-    private static String getTime() {
-        return LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_LOCAL_TIME);
-    }
 
     public void addEmoji(Emoji emoji) {
         emojis.add(emoji);
@@ -47,6 +46,23 @@ public class Message {
 
     public ArrayList<Emoji> getEmojis() {
         return emojis;
+    }
+
+    public VBox toVBox() {
+        Label content = initLabel(getContent());
+        Label sentTime = initLabel(getSentTime());
+        Label senderName = initLabel(getSenderName());
+        HBox hBox = new HBox(senderName, sentTime);
+        hBox.setSpacing(5);
+        VBox vBox = new VBox(content, hBox);
+        vBox.setSpacing(5);
+        return vBox;
+    }
+
+    private Label initLabel(String text) {
+        Label label = new Label(text);
+        label.setTextFill(Color.WHITE);
+        return label;
     }
 
     public enum Emoji {

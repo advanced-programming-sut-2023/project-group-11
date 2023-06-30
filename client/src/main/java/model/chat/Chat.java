@@ -1,6 +1,6 @@
 package model.chat;
 
-import webConnetion.Connection;
+import webConnection.Connection;
 
 import java.util.ArrayList;
 

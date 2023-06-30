@@ -1,5 +1,6 @@
 package model;
 
+import model.chat.Chat;
 import model.map.Map;
 import webConnetion.Connection;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 public class Stronghold {
     private final static ArrayList<String> randomSlogans = new ArrayList<>();
     private final static ArrayList<User> users = new ArrayList<>();
+    private final static ArrayList<Chat> chats = new ArrayList<>();
     private static ArrayList<Map> maps = new ArrayList<>();
     private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
@@ -50,7 +52,7 @@ public class Stronghold {
         Stronghold.currentUser = currentUser;
     }
 
-    public static ArrayList<Game> getUnStartedGames(){
+    public static ArrayList<Game> getUnStartedGames() {
         return unStartedGames;
     }
 
@@ -151,4 +153,17 @@ public class Stronghold {
         return null;
     }
 
+    public static void addChat(Chat chat) {
+        chats.add(chat);
+    }
+
+    public static void removeChat(Chat chat) {
+        chats.remove(chat);
+    }
+
+    public static Chat getChatById(String id) {
+        for (Chat chat : chats)
+            if (chat.getId().equals(id)) return chat;
+        return null;
+    }
 }

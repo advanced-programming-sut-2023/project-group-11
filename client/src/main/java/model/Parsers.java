@@ -1,5 +1,6 @@
 package model;
 
+import model.chat.Message;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
@@ -51,5 +52,12 @@ public class Parsers {
         } catch (Exception e) {}
 
         return new Tile(texture, tree, location[0], location[1]);
+    }
+
+    public static Message parseMessageObject(JSONObject message) {
+        String content = message.getString("content");
+        String senderName = message.getString("senderName");
+        String sentTime = message.getString("sentTime");
+        return new Message(content, senderName, sentTime);
     }
 }
