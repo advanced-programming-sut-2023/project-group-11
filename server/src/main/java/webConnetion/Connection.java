@@ -15,6 +15,7 @@ public class Connection extends Thread {
     private Socket socket;
     private DataInputStream in;
     private DataOutputStream out;
+    private boolean isInScoreboard = false;
 
     private User currentUser;
 
@@ -59,12 +60,24 @@ public class Connection extends Thread {
             controllerMethod.invoke(null, receivingPacket.getParameters());
         else {
             Object result = controllerMethod.invoke(null, receivingPacket.getParameters());
-            sendingPacket = new SendingPacket(result);
+            sendingPacket = new SendingPacket(result, "data");
             new ObjectOutputStream(out).writeObject(new Gson().toJson(sendingPacket));
         }
     }
 
     public User getCurrentUser() {
         return currentUser;
+    }
+
+    public boolean isInScoreboard() {
+        return isInScoreboard;
+    }
+
+    public void setInScoreboard(boolean inScoreboard) {
+        isInScoreboard = inScoreboard;
+    }
+
+    public DataOutputStream getOut() {
+        return out;
     }
 }
