@@ -22,7 +22,6 @@ import org.json.JSONObject;
 import webConnection.Client;
 import webConnection.Connection;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -155,25 +154,25 @@ public class MainMenu extends Application {
         if (currentChat == null) currentChat = GlobalChat.getInstance();
         JSONArray jsonArray = connection.getJSONArrayData(chatController, "getChatMessages", currentChat.getId());
         ((VBox) globalChat.getContent()).getChildren().clear();
-//        for (int i = jsonArray.length()-1; i > jsonArray.; i++) {
-//
-//        }
         for (Object message : jsonArray) sendMessage(Parsers.parseMessageObject((JSONObject) message));
     }
 
     public void delete() {
         for (VBox selectedMessage : selectedMessages)
             connection.doInServer(chatController, "removeMessage", currentChat.getId(), getIdByVBox(selectedMessage));
+        selectedMessages.clear();
         refresh();
     }
 
     public void edit() {
+        System.out.println(selectedMessages.size());
         if (selectedMessages.size() == 1) {
             VBox vBox = selectedMessages.get(0);
             String string = ((Label) vBox.getChildren().get(0)).getText();
             messageContent.setText(string);
             sendButton.setOnMouseClicked(mouseEvent -> {
                 connection.doInServer(chatController, "editMessage", currentChat.getId(), getIdByVBox(selectedMessages.get(0)), messageContent.getText());
+                selectedMessages.clear();
                 refresh();
                 resetSendButton();
             });
