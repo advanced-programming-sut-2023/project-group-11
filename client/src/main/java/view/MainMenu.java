@@ -65,18 +65,12 @@ public class MainMenu extends Application {
     }
 
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
         initializeScrollPane(globalChat);
         initializeScrollPane(privateChat);
         initializeScrollPane(chatRoom);
 //        refresh();
-        search.textProperty().addListener((observableValue, old, newText) -> {
-            try {
-                find(newText);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        search.textProperty().addListener((observableValue, old, newText) -> find(newText));
     }
 
     private void initializeScrollPane(ScrollPane scrollPane) {
@@ -105,7 +99,7 @@ public class MainMenu extends Application {
 
     //-----------------------------------------------CHAT----------------------------------------------------//
 
-    public void send() throws IOException {
+    public void send() {
         if (currentChat == null) currentChat = GlobalChat.getInstance();
         Message message = Parsers.parseMessageObject(connection.getJSONData(chatController,
                 "sendMessage", messageContent.getText(), currentChat.getId(), currentChat.getChatType().name()));
@@ -135,7 +129,7 @@ public class MainMenu extends Application {
         currentChat = GlobalChat.getInstance();
     }
 
-    public void showPrivate() throws IOException {
+    public void showPrivate() {
         changeVisibility(privateChat, globalChat, chatRoom);
         find("");
     }
@@ -157,7 +151,7 @@ public class MainMenu extends Application {
         for (Node node1 : nodes) node1.setVisible(false);
     }
 
-    public void refresh() throws IOException {
+    public void refresh() {
         if (currentChat == null) currentChat = GlobalChat.getInstance();
         JSONArray jsonArray = connection.getJSONArrayData(chatController, "getChatMessages", currentChat.getId());
         ((VBox) globalChat.getContent()).getChildren().clear();
@@ -167,37 +161,27 @@ public class MainMenu extends Application {
         for (Object message : jsonArray) sendMessage(Parsers.parseMessageObject((JSONObject) message));
     }
 
-    public void delete() throws IOException {
+    public void delete() {
         for (VBox selectedMessage : selectedMessages)
             connection.doInServer(chatController, "removeMessage", currentChat.getId(), getIdByVBox(selectedMessage));
         refresh();
     }
 
-    public void edit() throws IOException {
+    public void edit() {
         if (selectedMessages.size() == 1) {
             VBox vBox = selectedMessages.get(0);
             String string = ((Label) vBox.getChildren().get(0)).getText();
             messageContent.setText(string);
             sendButton.setOnMouseClicked(mouseEvent -> {
-                try {
-                    connection.doInServer(chatController, "editMessage", currentChat.getId(), getIdByVBox(selectedMessages.get(0)), messageContent.getText());
-                    refresh();
-                    resetSendButton();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                connection.doInServer(chatController, "editMessage", currentChat.getId(), getIdByVBox(selectedMessages.get(0)), messageContent.getText());
+                refresh();
+                resetSendButton();
             });
         }
     }
 
     private void resetSendButton() {
-        sendButton.setOnMouseClicked(mouseEvent -> {
-            try {
-                send();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        sendButton.setOnMouseClicked(mouseEvent -> send());
     }
 
     private String getIdByVBox(VBox selectedMessage) {
@@ -205,7 +189,7 @@ public class MainMenu extends Application {
         return ((Label) hBox.getChildren().get(2)).getText();
     }
 
-    private void find(String newText) throws IOException {
+    private void find(String newText) {
         JSONArray jsonArray = connection.getJSONArrayData(chatController, "findUsername", newText);
         List<Object> objects = jsonArray.toList();
         List<String> usernames = new ArrayList<>();
