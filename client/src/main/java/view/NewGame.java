@@ -23,11 +23,15 @@ import java.util.ArrayList;
 public class NewGame extends Application {
     private static Stage stage;
     @FXML
-    private TableView<Game> games;
+    private TableView<Game> unStartedGames;
+    @FXML
+    private TableView<Game> startedGames;
     @FXML
     private ChoiceBox<String> mapName;
     @FXML
     private Button startGameButton;
+    @FXML
+    private Button publicPrivateButton;
     @FXML
     private ListView<String> joinedUsersList;
     @FXML
@@ -54,21 +58,26 @@ public class NewGame extends Application {
     }
 
     private void initializeGames() throws IOException {
-        games.getColumns().clear();
-        games.getItems().clear();
-        String gamesJson = Client.getConnection().receiveJsonData("MainMenuController","getUnStartedGames");
-        games.getItems().addAll(Parsers.parseGamesArrayList(gamesJson));
-        addColumns();
-                //TODO: check this later
-//        games.setItems(MainMenuController.removeCurrentUserFromList(Utils.getUsersObservable()));
-        games.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        games.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        fillGames(startedGames,"Started");
+        fillGames(unStartedGames,"UnStarted");
+        unStartedGames.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             selectedGame = (Game) newSelection;
             if(selectedGame != null) {
                 updateJoinedUsersList();
                 startGameButton.setVisible(selectedGame.getOwner().getUsername().equals(Client.getUsername()));
+                publicPrivateButton.setText(selectedGame.isPrivate() ? "Public" : "Private");
+                publicPrivateButton.setVisible(selectedGame.getOwner().getUsername().equals(Client.getUsername()));
             }
         });
+    }
+
+    private void fillGames(TableView table,String field) throws IOException {
+        table.getColumns().clear();
+        table.getItems().clear();
+        String gamesJson = Client.getConnection().receiveJsonData("MainMenuController","get"+field+"Games");
+        table.getItems().addAll(Parsers.parseGamesArrayList(gamesJson));
+        addColumns(table);
+        table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
     private void updateJoinedUsersList() {
@@ -95,10 +104,10 @@ public class NewGame extends Application {
 //        connection.doInServer("MapEditMenuController", "setMapsOnChoiceBox", mapName);
     }
 
-    private void addColumns() throws IOException {
-        columnMaker(games,"GameId","id");
-        columnMaker(games,"Admin","ownerName");
-        columnMaker(games,"JoinedPlayers","joinedPlayers");
+    private void addColumns(TableView table) throws IOException {
+        columnMaker(table,"GameId","id");
+        columnMaker(table,"Admin","ownerName");
+        columnMaker(table,"JoinedPlayers","joinedPlayers");
     }
 
     private void columnMaker(TableView tableView,String header,String field){
@@ -112,9 +121,9 @@ public class NewGame extends Application {
         Client.getConnection().doInServer("MainMenuController","createGame",mapName.getValue(),Integer.parseInt(playersNeededField.getText()));
         refresh();
 //        initializeGames();
-//        if (games.getSelectionModel().getSelectedItems().size() >= 1) {
+//        if (unStartedGames.getSelectionModel().getSelectedItems().size() >= 1) {
 //            connection.doInServer("MainMenuController", "startGame",
-////                    new ArrayList<>(games.getSelectionModel().getSelectedItems()), mapName.getValue().getName());
+////                    new ArrayList<>(unStartedGames.getSelectionModel().getSelectedItems()), mapName.getValue().getName());
 ////            new GameMenu().start(SignupMenu.getStage());
 ////            stage.close();
 //        } else ViewUtils.alert(Alert.AlertType.ERROR, "Start Game", "Please choose a player!");
@@ -129,7 +138,13 @@ public class NewGame extends Application {
         initializeGames();
     }
 
-    public void startGame() {
+    public void startGame() throws IOException {
+        switch (Client.getConnection().checkAction("MainMenuController","startGameByAdmin",selectedGame.getId())){
+            case ITS_JUST_YOU -> ViewUtils.alert(Alert.AlertType.ERROR,"Start Error","It's just you in game");
+            case SUCCESS -> {
+                refresh();
+            }
+        }
     }
 
     public void joinGame() throws IOException {
@@ -151,6 +166,11 @@ public class NewGame extends Application {
                 updateJoinedUsersList();
             }
         }
+        refresh();
+    }
+
+    public void changePublicity() throws IOException {
+        Client.getConnection().doInServer("MainMenuController","changePublicity",selectedGame.getId());
         refresh();
     }
 }

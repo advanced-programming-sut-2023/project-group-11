@@ -10,6 +10,10 @@ public class Game {
     private  ArrayList<Governance> governances;
     private ArrayList<User> joinedUsers = new ArrayList<>();
     private int id;
+    private boolean isPrivate = false;
+
+    private boolean isStarted = false;
+
     private int playersNeeded;
     private final HashMap<Governance, Integer> scores = new HashMap<>();
     private final ArrayList<Trade> trades = new ArrayList<>();
@@ -87,6 +91,18 @@ public class Game {
 
     public HashMap<Governance, Integer> getScores() {
         return scores;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public boolean isStarted() {
+        return isStarted;
     }
 
     public void addLoserScore(Governance governance, int score) {

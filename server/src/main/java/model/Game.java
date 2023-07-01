@@ -12,6 +12,8 @@ public class Game {
 
     private ArrayList<User> joinedUsers = new ArrayList<>();
 
+    private boolean isPrivate = false;
+
     private boolean isStarted = false;
 
     private int playersNeeded;
@@ -38,7 +40,7 @@ public class Game {
         this.id = new Random().nextInt(1000,10000);
         while (Stronghold.getGameById(id) != null)
             this.id = new Random().nextInt(1000,10000);
-        Stronghold.getAllGames().add(this);
+        Stronghold.getGames().add(this);
     }
 
     public ArrayList<Trade> getTrades() {
@@ -71,6 +73,14 @@ public class Game {
 
     public int getPlayersNeeded() {
         return playersNeeded;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
     }
 
     public void setPlayersNeeded(int playersNeeded) {

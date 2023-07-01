@@ -10,6 +10,7 @@ public abstract class Chat {
     private final ArrayList<Connection> connections = new ArrayList<>();
     private final String id;
     private final ChatType chatType;
+    private final int MAX_MESSAGE_NUMBER = 100;
 
     public Chat(String id, ChatType chatType) {
         this.id = id;
@@ -31,6 +32,7 @@ public abstract class Chat {
 //        }
         //TODO: need implementation for live chat update
         messages.add(message);
+        if (messages.size() > MAX_MESSAGE_NUMBER) messages.remove(0);
     }
 
     public void addUSer(Connection user) {
