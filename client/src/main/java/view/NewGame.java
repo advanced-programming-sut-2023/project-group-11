@@ -1,6 +1,7 @@
 package view;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Game;
 import model.Parsers;
+import model.User;
 import webConnection.Client;
 import webConnection.Connection;
 
@@ -25,9 +27,14 @@ public class NewGame extends Application {
     @FXML
     private ChoiceBox<String> mapName;
     @FXML
+    private Button startGameButton;
+    @FXML
+    private ListView<String> joinedUsersList;
+    @FXML
     private TextField playersNeededField;
     private final Connection connection = Client.getConnection();
     private final String utils = "Utils";
+    private Game selectedGame;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -47,18 +54,37 @@ public class NewGame extends Application {
     }
 
     private void initializeGames() throws IOException {
+        games.getColumns().clear();
+        games.getItems().clear();
         String gamesJson = Client.getConnection().receiveJsonData("MainMenuController","getUnStartedGames");
         games.getItems().addAll(Parsers.parseGamesArrayList(gamesJson));
         addColumns();
                 //TODO: check this later
 //        games.setItems(MainMenuController.removeCurrentUserFromList(Utils.getUsersObservable()));
-        games.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        games.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        games.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedGame = (Game) newSelection;
+            if(selectedGame != null) {
+                updateJoinedUsersList();
+                startGameButton.setVisible(selectedGame.getOwner().getUsername().equals(Client.getUsername()));
+            }
+        });
+    }
+
+    private void updateJoinedUsersList() {
+        if(selectedGame == null)
+            return;
+        ArrayList<String> joinedUsers = new ArrayList<>();
+        for (User user:selectedGame.getJoinedUsers())
+            joinedUsers.add(user.getNickname());
+        joinedUsersList.getItems().clear();
+        joinedUsersList.setItems(FXCollections.observableList(joinedUsers));
     }
 
     private void initializeMapNames() throws IOException {
         ArrayList<String> mapNames =  Client.getConnection().getArrayData("MapEditMenuController","getMapNames");
         mapName.getItems().addAll(mapNames);
-        mapName.setValue(mapNames.get(0));
+//        mapName.setValue(mapNames.get(0));
 //        mapName.setValue(Stronghold.getMapByName("original"));
 //        ShowMapMenuController.setCurrentMap(Stronghold.getMapByName("original"));
 //        currentMap = Stronghold.getMapByName("original");
@@ -70,7 +96,8 @@ public class NewGame extends Application {
     }
 
     private void addColumns() throws IOException {
-        columnMaker(games,"Owner","ownerName");
+        columnMaker(games,"GameId","id");
+        columnMaker(games,"Admin","ownerName");
         columnMaker(games,"JoinedPlayers","joinedPlayers");
     }
 
@@ -81,8 +108,10 @@ public class NewGame extends Application {
         tableView.getColumns().add(tableColumn);
     }
 
-    public void startGame() throws Exception {
+    public void createGame() throws Exception {
         Client.getConnection().doInServer("MainMenuController","createGame",mapName.getValue(),Integer.parseInt(playersNeededField.getText()));
+        refresh();
+//        initializeGames();
 //        if (games.getSelectionModel().getSelectedItems().size() >= 1) {
 //            connection.doInServer("MainMenuController", "startGame",
 ////                    new ArrayList<>(games.getSelectionModel().getSelectedItems()), mapName.getValue().getName());
@@ -94,5 +123,34 @@ public class NewGame extends Application {
     public void back() throws Exception {
         stage.close();
         new MainMenu().start(SignupMenu.getStage());
+    }
+
+    public void refresh() throws IOException {
+        initializeGames();
+    }
+
+    public void startGame() {
+    }
+
+    public void joinGame() throws IOException {
+        switch (Client.getConnection().checkAction("MainMenuController","joinGame",selectedGame.getId())){
+            case YOURE_IN_GAME ->   ViewUtils.alert(Alert.AlertType.ERROR,"Join Error","You're already in!");
+            case GAME_FULL -> ViewUtils.alert(Alert.AlertType.ERROR,"Join Error","Game is Full!");
+            case SUCCESS -> {
+                refresh();
+                updateJoinedUsersList();
+            }
+        }
+    }
+
+    public void leaveGame() throws IOException {
+        switch (Client.getConnection().checkAction("MainMenuController","leaveGame",selectedGame.getId())){
+            case YOURE_NOT_IN -> ViewUtils.alert(Alert.AlertType.ERROR,"Leave Error","You're not in the game!");
+            case SUCCESS -> {
+                refresh();
+                updateJoinedUsersList();
+            }
+        }
+        refresh();
     }
 }

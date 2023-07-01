@@ -17,6 +17,7 @@ public class Stronghold {
 
     private static ArrayList<Connection> connections = new ArrayList<>();
     private final static ArrayList<Game> unStartedGames = new ArrayList<>();
+    private final static ArrayList<Game> allGames = new ArrayList<>();
     private static User currentUser;
     private static Game currentGame;
 
@@ -55,6 +56,10 @@ public class Stronghold {
 
     public static ArrayList<Game> getUnStartedGames() {
         return unStartedGames;
+    }
+
+    public static ArrayList<Game> getAllGames() {
+        return allGames;
     }
 
     public static int getRankByUsername(String name) {
@@ -166,6 +171,13 @@ public class Stronghold {
     public static Chat getChatById(String id) {
         for (Chat chat : chats)
             if (chat.getId().equals(id)) return chat;
+        return null;
+    }
+
+    public static Game getGameById(int id){
+        for (Game game:allGames)
+            if(game.getId() == id)
+                return game;
         return null;
     }
 }

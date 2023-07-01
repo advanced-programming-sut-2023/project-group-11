@@ -6,6 +6,7 @@ import java.net.Socket;
 
 public class Client {
     private static Connection connection;
+    private static String username;
 
     public static void main(String[] args) {
         try {
@@ -18,5 +19,13 @@ public class Client {
 
     public static Connection getConnection() {
         return Client.connection;
+    }
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        Client.username = username;
     }
 }
