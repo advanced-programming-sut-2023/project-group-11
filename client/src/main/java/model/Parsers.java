@@ -76,4 +76,9 @@ public class Parsers {
         arrayList.addAll(new Gson().fromJson(json, type));
         return arrayList;
     }
+
+    public static ArrayList<User> parseUserArrayList(String json) {
+        Type userDatabaseType = new TypeToken<ArrayList<User>>() {}.getType();
+        return new Gson().fromJson(json, userDatabaseType);
+    }
 }

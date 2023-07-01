@@ -60,4 +60,8 @@ public class ChatController {
         if (usernames.size() > 0) System.out.println(usernames.get(0));
         return usernames;
     }
+
+    public static void setGlobalChat(ArrayList<Object> parameters) {
+        GlobalChat.getInstance();
+    }
 }

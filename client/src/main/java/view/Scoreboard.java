@@ -37,18 +37,19 @@ public class Scoreboard extends Application {
         stage.show();
     }
 
-//    @FXML
-//    public void initialize() throws IOException {
-//        scoreboard.setItems(ViewUtils.getUsersObservable());//TODO: may produce exception
-//        addColumns();
-//    }
-//
-//    private void addColumns() throws IOException {
-//        ViewUtils.columnMaker(scoreboard, "Avatar", "avatar");
-//        ViewUtils.columnMaker(scoreboard, "Rank", "rank");
-//        ViewUtils.columnMaker(scoreboard, "Username", "username");
-//        ViewUtils.columnMaker(scoreboard, "Score", "score");
-//    }
+    @FXML
+    public void initialize() throws IOException {
+        scoreboard.setItems(ViewUtils.getUsersObservable());//TODO: may produce exception
+        addColumns();
+    }
+
+    private void addColumns() throws IOException {
+        ViewUtils.columnMaker(scoreboard, "Avatar", "avatar");
+        ViewUtils.columnMaker(scoreboard, "Rank", "rank");
+        ViewUtils.columnMaker(scoreboard, "Username", "username");
+        ViewUtils.columnMaker(scoreboard, "Score", "score");
+        scoreboard.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
 
     public void back() throws Exception {
         stage.close();

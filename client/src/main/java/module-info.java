@@ -15,6 +15,7 @@ module client {
     requires org.json;
 
     exports view;
+    exports model;
     exports model.chat to com.google.gson;
     opens view to javafx.fxml;
     opens model to com.google.gson, javafx.base;

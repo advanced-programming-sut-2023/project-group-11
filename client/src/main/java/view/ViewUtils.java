@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import model.Governance;
+import model.Parsers;
 import model.User;
 import webConnection.Client;
 
@@ -85,23 +86,23 @@ public class ViewUtils {
         });
     }
 
-//    public static ObservableList<User> getUsersObservable() throws IOException {
-//        ArrayList<User> users = Stronghold.getUsers();
-//        Client.getConnection().doInServer("Utils", "sortUsers");
-//        return FXCollections.observableArrayList(users);
-//    }
+    public static ObservableList<User> getUsersObservable() throws IOException {
+        ArrayList<User> users = Parsers.parseUserArrayList(Client.getConnection().
+                receiveJsonData("Utils", "getUsersObservable"));
+        return FXCollections.observableArrayList(users);
+    }
 //
 //    public static ObservableList<Governance> getGovernancesObservable(ArrayList<Object> parameters) {
 //        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
 //        return FXCollections.observableArrayList(governances);
 //    }
-//
-//    public static void columnMaker(TableView tableView, String header, String userField) {
-//        TableColumn<User, String> tableColumn = new TableColumn<>(header);
-//        tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
-//        tableColumn.setSortable(false);
-//        tableView.getColumns().add(tableColumn);
-//    }
+
+    public static void columnMaker(TableView tableView, String header, String userField) {
+        TableColumn<User, String> tableColumn = new TableColumn<>(header);
+        tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
+        tableColumn.setSortable(false);
+        tableView.getColumns().add(tableColumn);
+    }
 //
 //    public static GameMenu getGameMenu() {
 //        return gameMenu;
