@@ -38,6 +38,8 @@ public class MainMenu extends Application {
     public Button createChatRoom;
     private Chat currentChat;
     private final LinkedList<VBox> selectedMessages = new LinkedList<>();
+    private static MainMenu instance;
+
     @FXML
     private AnchorPane chatPane;
     @FXML
@@ -62,6 +64,11 @@ public class MainMenu extends Application {
     @FXML
     private ListView<String> roomListView;
 
+    public MainMenu() {
+        super();
+        instance = this;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         BorderPane borderPane = FXMLLoader.load(
@@ -69,6 +76,7 @@ public class MainMenu extends Application {
         MainMenu.stage = stage;
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
+        Client.getConnection().doInServer("Utils", "setInMainMenu", true);
 
         stage.show();
     }
@@ -97,6 +105,7 @@ public class MainMenu extends Application {
     }
 
     public void profileMenu() throws Exception {
+        Client.getConnection().doInServer("Utils", "setInMainMenu", false);
         new ProfileMenu().start(SignupMenu.getStage());
     }
 
@@ -106,6 +115,7 @@ public class MainMenu extends Application {
 
     public void logout() throws Exception {
         connection.doInServer("MainMenuController", "logout");
+        Client.getConnection().doInServer("Utils", "setInMainMenu", false);
         new SignupMenu().start(SignupMenu.getStage());
     }
 
@@ -196,6 +206,10 @@ public class MainMenu extends Application {
             case CHAT_ROOM -> ((VBox) chatRoom.getContent()).getChildren().clear();
         }
         for (Object message : jsonArray) sendMessage(Parsers.parseMessageObject((JSONObject) message));
+    }
+
+    public static void updateChat() {
+        instance.refresh();
     }
 
     public void delete() {

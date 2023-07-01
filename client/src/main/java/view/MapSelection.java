@@ -65,6 +65,7 @@ public class MapSelection extends Application {
     public void selectMap() throws Exception {
         if (mapsChoiceBox.getValue() != null) {
             stage.close();
+            Client.getConnection().doInServer("Utils", "setInMainMenu", false);
             new MapEditMenu().start(SignupMenu.getStage());
         }
     }
@@ -87,6 +88,7 @@ public class MapSelection extends Application {
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION, "New Map", "New map made successfully!");
                 stage.close();
+                Client.getConnection().doInServer("Utils", "setInMainMenu", false);
                 new MapEditMenu().start(SignupMenu.getStage());
             }
         }

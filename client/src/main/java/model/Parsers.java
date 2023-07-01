@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 public class Parsers {
 
     public static ArrayList<Map> parseMapArrayList(JSONArray jsonArray) {
@@ -63,6 +65,11 @@ public class Parsers {
         String content = message.getString("content");
         String senderName = message.getString("senderName");
         String sentTime = message.getString("sentTime");
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return new Message(id, content, senderName, sentTime);
     }
 

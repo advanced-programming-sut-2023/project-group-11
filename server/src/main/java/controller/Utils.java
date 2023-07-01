@@ -134,9 +134,20 @@ public class Utils {
         Stronghold.getConnectionByUser(Stronghold.getCurrentUser()).setInScoreboard((Boolean) parameters.get(0));
     }
 
+    public static void setInMainMenu(ArrayList<Object> parameters) {
+        Stronghold.getConnectionByUser(Stronghold.getCurrentUser()).setInMainMenu((Boolean) parameters.get(0));
+    }
+
     public static void alertScoreboardUpdating() {
         for (Connection connection : Stronghold.getConnections())
             if (connection.isInScoreboard())
                 Connection.sendNotification("Scoreboard", "updateScoreboard", connection);
     }
+
+    public static void alertChatUpdating() {
+        for (Connection connection : Stronghold.getConnections())
+            if (connection.isInMainMenu())
+                Connection.sendNotification("MainMenu", "updateChat", connection);
+    }
+
 }

@@ -18,6 +18,7 @@ public class Connection extends Thread {
     private DataInputStream in;
     private DataOutputStream out;
     private boolean isInScoreboard = false;
+    private boolean isInMainMenu = false;
 
     private User currentUser;
 
@@ -94,5 +95,13 @@ public class Connection extends Thread {
 
     public DataOutputStream getOut() {
         return out;
+    }
+
+    public boolean isInMainMenu() {
+        return isInMainMenu;
+    }
+
+    public void setInMainMenu(boolean inMainMenu) {
+        isInMainMenu = inMainMenu;
     }
 }

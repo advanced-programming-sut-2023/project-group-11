@@ -18,6 +18,7 @@ public class ChatController {
         Chat chat = Stronghold.getChatByName(chatName);
 
         chat.sendMessage(message);
+        Utils.alertChatUpdating();
         return message;
     }
 
@@ -42,7 +43,10 @@ public class ChatController {
 
         Chat chat = Stronghold.getChatByName(chatId);
         Message message = chat.getMessageById(messageId);
-        if (message.getSenderName().equals(Stronghold.getCurrentUser().getUsername())) chat.removeMessage(message);
+        if (message.getSenderName().equals(Stronghold.getCurrentUser().getUsername())) {
+            chat.removeMessage(message);
+            Utils.alertChatUpdating();
+        }
     }
 
     public static void editMessage(ArrayList<Object> parameters) {
@@ -52,7 +56,10 @@ public class ChatController {
 
         Chat chat = Stronghold.getChatByName(chatId);
         Message message = chat.getMessageById(messageId);
-        if (message.getSenderName().equals(Stronghold.getCurrentUser().getUsername())) message.setContent(newContent);
+        if (message.getSenderName().equals(Stronghold.getCurrentUser().getUsername())) {
+            message.setContent(newContent);
+            Utils.alertChatUpdating();
+        }
     }
 
     public static ArrayList<String> findUsername(ArrayList<Object> parameters) {
