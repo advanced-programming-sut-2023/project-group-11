@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9d213f4-9dc3-4ef9-8a52-c27f667abf74" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_7_2_2023_12_25_AM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/.idea/mavenExecutorSetting.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Receiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/main/resources/FXML/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/resources/FXML/MainMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
@@ -102,7 +100,7 @@
       <workItem from="1688108825652" duration="14518000" />
       <workItem from="1688138694746" duration="8570000" />
       <workItem from="1688147598361" duration="4642000" />
-      <workItem from="1688190662846" duration="27528000" />
+      <workItem from="1688190662846" duration="29663000" />
     </task>
     <task id="LOCAL-00001" summary="add server project">
       <created>1687985072897</created>
