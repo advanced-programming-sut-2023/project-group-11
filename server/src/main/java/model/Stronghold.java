@@ -1,10 +1,10 @@
 package model;
 
 import model.chat.Chat;
+import model.chat.PrivateChat;
 import model.map.Map;
 import webConnetion.Connection;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Stronghold {
@@ -169,9 +169,9 @@ public class Stronghold {
         return null;
     }
 
-    public static Game getGameById(int id){
-        for (Game game: games)
-            if(game.getId() == id)
+    public static Game getGameById(int id) {
+        for (Game game : games)
+            if (game.getId() == id)
                 return game;
         return null;
     }

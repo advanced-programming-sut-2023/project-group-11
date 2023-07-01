@@ -176,7 +176,11 @@ public class MainMenu extends Application {
 
     public void refresh() {
         JSONArray jsonArray = connection.getJSONArrayData(chatController, "getChatMessages", currentChat.getName());
-        ((VBox) globalChat.getContent()).getChildren().clear();
+        switch (currentChat.getChatType()) {
+            case GLOBAL -> ((VBox) globalChat.getContent()).getChildren().clear();
+            case PRIVATE -> ((VBox) privateChat.getContent()).getChildren().clear();
+            case CHAT_ROOM -> ((VBox) chatRoom.getContent()).getChildren().clear();
+        }
         for (Object message : jsonArray) sendMessage(Parsers.parseMessageObject((JSONObject) message));
     }
 
@@ -215,8 +219,6 @@ public class MainMenu extends Application {
         JSONArray jsonArray = connection.getJSONArrayData(chatController, "findUsername", newText);
         List<Object> objects = jsonArray.toList();
         List<String> usernames = new ArrayList<>();
-        List<HBox> hBoxes = new ArrayList<>();
-
 
         for (Object object : objects) usernames.add((String) object);
 
@@ -226,16 +228,16 @@ public class MainMenu extends Application {
     public void list(MouseEvent mouseEvent) {
         ArrayList<String> selectedUsernames = new ArrayList<>(usernameListView.getSelectionModel().getSelectedItems());
         if (mouseEvent.getClickCount() == 2) {
-            if (privateChat.isVisible()) {
-                setCurrentChat(selectedUsernames, ChatType.PRIVATE);
-                ((VBox) privateChat.getContent()).getChildren().clear();
-            } else setCurrentChat(selectedUsernames, ChatType.CHAT_ROOM);
+            if (privateChat.isVisible()) setCurrentChat(privateChat, selectedUsernames, ChatType.PRIVATE);
+            else setCurrentChat(chatRoom, selectedUsernames, ChatType.CHAT_ROOM);
         }
     }
 
-    private void setCurrentChat(ArrayList<String> selectedUsernames, ChatType chatType) {
+    private void setCurrentChat(ScrollPane scrollPane, ArrayList<String> selectedUsernames, ChatType chatType) {
+        ((VBox) scrollPane.getContent()).getChildren().clear();
         currentChat = Parsers.parseChatObject(connection.getJSONData(chatController, "createChat",
                 selectedUsernames, chatType));
         sendHBox.setVisible(true);
+        refresh();
     }
 }

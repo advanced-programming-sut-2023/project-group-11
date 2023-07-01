@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public abstract class Chat {
     private transient final ArrayList<Message> messages = new ArrayList<>();
-    private transient final User owner;
+    protected transient final User owner;
     protected transient final ArrayList<Connection> connections = new ArrayList<>();
     protected transient final ArrayList<User> users;
     private final String name;

@@ -85,8 +85,10 @@ public class ChatController {
         switch (chatType) {
             case GLOBAL -> chat = GlobalChat.getInstance();
             case PRIVATE -> {
-                if ((chat = Stronghold.getChatByName(users.get(0).getUsername())) == null)
-                    chat = new PrivateChat(Stronghold.getCurrentUser(), users);
+                chat = Stronghold.getChatByName(Stronghold.getCurrentUser().getUsername() + usernames.get(0));
+                if (chat == null)
+                    chat = Stronghold.getChatByName(usernames.get(0) + Stronghold.getCurrentUser().getUsername());
+                if (chat == null) chat = new PrivateChat(Stronghold.getCurrentUser(), users);
             }
             case CHAT_ROOM -> {
                 String name = (String) parameters.get(3);
