@@ -366,7 +366,7 @@ public class MapEditMenu extends Application {
         if (currentZoom.getLevel() < 4 && zoomIn) {
             currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() + 1);
             tileSize = currentZoom.getSize();
-        } else if (currentZoom.getLevel() > 2 && !zoomIn &&
+        } else if (currentZoom.getLevel() > 0 && !zoomIn &&
                 (mapPaneWidth / Zoom.getZoomByLevel(currentZoom.getLevel() - 1).getSize()) < mapSize) {
             currentZoom = Zoom.getZoomByLevel(currentZoom.getLevel() - 1);
             tileSize = currentZoom.getSize();

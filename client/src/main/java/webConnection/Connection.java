@@ -20,6 +20,7 @@ public class Connection extends Thread {
         this.socket = socket;
         this.in = new DataInputStream(socket.getInputStream());
         this.out = new DataOutputStream(socket.getOutputStream());
+//        new Receiver(socket).start();
     }
 
     public Socket getSocket() {
@@ -44,12 +45,6 @@ public class Connection extends Thread {
         Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
         sendData(packet);
         return receiveData().get("value");
-    }
-    public String receiveJsonData(String className, String methodName, Object... parameters) throws IOException {
-        Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
-        sendData(packet);
-        String input = in.readUTF();
-        return input.substring(9,input.length()-1);
     }
 
     public ArrayList getArrayData(String className, String methodName, Object... parameters) throws IOException {
@@ -80,12 +75,23 @@ public class Connection extends Thread {
         out.writeUTF(data);
     }
 
-    private Message getRespond() throws IOException {
-        return Message.valueOf((String) receiveData().get("value"));
+    private JSONObject receiveData() throws IOException {
+        try {
+            return new JSONObject((String) new ObjectInputStream(in).readObject());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private JSONObject receiveData() throws IOException {
-        return new JSONObject(in.readUTF());
+    public String receiveJsonData(String className, String methodName, Object... parameters) throws IOException {
+        Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
+        sendData(packet);
+        String input = in.readUTF();
+        return input.substring(9,input.length()-1);
+    }
+
+    private Message getRespond() throws IOException {
+        return Message.valueOf((String) receiveData().get("value"));
     }
 
     private JSONArray receiveArrayData() throws IOException {

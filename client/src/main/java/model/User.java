@@ -12,6 +12,7 @@ public class User implements Comparable<User> {
     private String email;
     private String slogan;
     private String avatarFileName = "1.png";
+    private String lastSeen = "Online";
     private int score;
     private int rank;
     private boolean stayLoggedIn;
@@ -109,6 +110,14 @@ public class User implements Comparable<User> {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public String getLastSeen() {
+        return lastSeen;
+    }
+
+    public void setLastSeen(String lastSeen) {
+        this.lastSeen = lastSeen;
     }
 
     @Override

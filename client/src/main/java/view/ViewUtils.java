@@ -91,7 +91,7 @@ public class ViewUtils {
                 receiveJsonData("Utils", "getUsersObservable"));
         return FXCollections.observableArrayList(users);
     }
-//
+
 //    public static ObservableList<Governance> getGovernancesObservable(ArrayList<Object> parameters) {
 //        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
 //        return FXCollections.observableArrayList(governances);

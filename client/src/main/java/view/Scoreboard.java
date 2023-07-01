@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -39,7 +40,7 @@ public class Scoreboard extends Application {
 
     @FXML
     public void initialize() throws IOException {
-        scoreboard.setItems(ViewUtils.getUsersObservable());//TODO: may produce exception
+        scoreboard.setItems(ViewUtils.getUsersObservable());
         addColumns();
     }
 
@@ -48,10 +49,16 @@ public class Scoreboard extends Application {
         ViewUtils.columnMaker(scoreboard, "Rank", "rank");
         ViewUtils.columnMaker(scoreboard, "Username", "username");
         ViewUtils.columnMaker(scoreboard, "Score", "score");
+        ViewUtils.columnMaker(scoreboard, "LastSeen", "lastSeen");
         scoreboard.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public void back() throws Exception {
         stage.close();
+    }
+
+    public void refresh() throws IOException {
+        scoreboard.getItems().clear();
+        scoreboard.setItems(ViewUtils.getUsersObservable());
     }
 }

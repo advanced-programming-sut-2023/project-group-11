@@ -97,6 +97,10 @@ public class Utils {
         setRanks(users);
     }
 
+    private static void updateLastSeen() {
+        Stronghold.getUsers().forEach(User::updateLastSeen);
+    }
+
     private static void setRanks(ArrayList<User> users) {
         for (int i = 0; i < users.size(); i++) users.get(i).setRank(i + 1);
     }
@@ -104,6 +108,7 @@ public class Utils {
     public static ArrayList<User> getUsersObservable(ArrayList<Object> parameters)   {
         ArrayList<User> users = Stronghold.getUsers();
         sortUsers();
+        updateLastSeen();
         return users;
     }
 

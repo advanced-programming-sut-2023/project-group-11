@@ -4,6 +4,7 @@ import model.chat.Chat;
 import model.map.Map;
 import webConnetion.Connection;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Stronghold {
@@ -144,6 +145,7 @@ public class Stronghold {
     }
 
     public static void removeConnection(Connection connection) {
+        connection.getCurrentUser().setLastSeen(LocalTime.now().getHour() + ":" + LocalTime.now().getMinute());
         connections.remove(connection);
     }
 
