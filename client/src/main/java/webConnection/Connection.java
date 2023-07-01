@@ -13,88 +13,108 @@ import java.util.List;
 
 public class Connection extends Thread {
     private Socket socket;
-    private DataInputStream in;
+    private Receiver receiver;
     private DataOutput out;
 
     public Connection(Socket socket) throws IOException {
         this.socket = socket;
-        this.in = new DataInputStream(socket.getInputStream());
         this.out = new DataOutputStream(socket.getOutputStream());
-//        new Receiver(socket).start();
+        this.receiver = new Receiver(socket);
+        receiver.start();
     }
 
     public Socket getSocket() {
         return socket;
     }
 
-    public DataInputStream getIn() {
-        return in;
-    }
-
     public DataOutput getOut() {
         return out;
     }
 
-    public Message checkAction(String className, String methodName, Object... parameters) throws IOException {
+    public Message checkAction(String className, String methodName, Object... parameters){
         Packet packet = new Packet(OperationType.CHECK_ACTION, className, methodName, parameters);
         sendData(packet);
         return getRespond();
     }
 
-    public Object getData(String className, String methodName, Object... parameters) throws IOException {
+    public Object getData(String className, String methodName, Object... parameters){
         Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
         sendData(packet);
         return receiveData().get("value");
     }
 
-    public ArrayList getArrayData(String className, String methodName, Object... parameters) throws IOException {
+    public ArrayList getArrayData(String className, String methodName, Object... parameters){
         Packet packet = new Packet(OperationType.GET_ARRAY_DATA, className, methodName, parameters);
         sendData(packet);
         return new Gson().fromJson(receiveArrayData().toString(),new TypeToken<ArrayList>(){}.getType());
     }
 
-    public JSONObject getJSONData(String className, String methodName, Object... parameters) throws IOException {
+    public JSONObject getJSONData(String className, String methodName, Object... parameters){
         Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
         sendData(packet);
         return (JSONObject) receiveData().get("value");
     }
 
-    public JSONArray getJSONArrayData(String className, String methodName, Object... parameters) throws IOException {
+    public JSONArray getJSONArrayData(String className, String methodName, Object... parameters){
         Packet packet = new Packet(OperationType.GET_ARRAY_DATA, className, methodName, parameters);
         sendData(packet);
         return receiveArrayData();
     }
 
-    public void doInServer (String className, String methodName, Object... parameters) throws IOException {
+    public void doInServer (String className, String methodName, Object... parameters){
         Packet packet = new Packet(OperationType.VOID, className, methodName, parameters);
         sendData(packet);
     }
 
-    private void sendData (Packet packet) throws IOException {
+    private void sendData (Packet packet){
         String data = new Gson().toJson(packet);
-        out.writeUTF(data);
-    }
-
-    private JSONObject receiveData() throws IOException {
         try {
-            return new JSONObject((String) new ObjectInputStream(in).readObject());
-        } catch (ClassNotFoundException e) {
+            out.writeUTF(data);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String receiveJsonData(String className, String methodName, Object... parameters) throws IOException {
+    private JSONObject receiveData(){
+        if (receiver.isReceivedPacketAccessible()) {
+            receiver.setReceivedPacketAccessible(false);
+            return new JSONObject(receiver.getReceivedPacket());
+        }
+        else {
+            try {
+                sleep(10);
+                return receiveData();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public String receiveJsonData(String className, String methodName, Object... parameters){
         Packet packet = new Packet(OperationType.GET_DATA, className, methodName, parameters);
         sendData(packet);
-        String input = in.readUTF();
+        String input;
+        while (true) {
+            if (receiver.isReceivedPacketAccessible()) {
+                receiver.setReceivedPacketAccessible(false);
+                input = receiver.getReceivedPacket();
+                break;
+            } else {
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }//TODO: handle with regex
         return input.substring(9,input.length()-1);
     }
 
-    private Message getRespond() throws IOException {
+    private Message getRespond(){
         return Message.valueOf((String) receiveData().get("value"));
     }
 
-    private JSONArray receiveArrayData() throws IOException {
+    private JSONArray receiveArrayData(){
         return (JSONArray) receiveData().get("value");
     }
 }
