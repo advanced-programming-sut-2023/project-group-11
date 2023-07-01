@@ -30,6 +30,17 @@ public class Tile {
         location = new int[] {x, y};
     }
 
+    public static Tile[][] cloneTiles(Tile[][] tiles) throws CloneNotSupportedException {
+        Tile[][] cloned = tiles.clone();
+        for (int i = 0; i < tiles.length; i++) {
+            cloned[i] = tiles[i].clone();
+            for (int j = 0; j < tiles[i].length; j++) {
+                cloned[i][j] = (Tile) tiles[i][j].clone();
+            }
+        }
+        return cloned;
+    }
+
     public Texture getTexture() {
         return texture;
     }
@@ -137,5 +148,10 @@ public class Tile {
         if (obj instanceof Tile tile)
             return Arrays.equals(this.location, tile.location);
         return false;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new Tile(this.texture, this.tree, this.location[0], this.location[1]);
     }
 }

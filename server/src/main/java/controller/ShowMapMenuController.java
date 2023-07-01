@@ -47,8 +47,10 @@ public class ShowMapMenuController {
     }
 
     public static void setCurrentMap(ArrayList<Object> parameters) {
-        String mapName = (String) parameters.get(0);
-        currentMap = Stronghold.getMapByName(mapName);
+        if (parameters.get(0) instanceof String){
+            String mapName = (String) parameters.get(0);
+            currentMap = Stronghold.getMapByName(mapName);
+        } else currentMap = (Map) parameters.get(0);
     }
 
     public static Tile getSelectedTile(ArrayList<Object> parameters) {

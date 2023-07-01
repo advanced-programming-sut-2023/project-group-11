@@ -15,6 +15,7 @@ public class MapEditMenuController {
     private static Map currentMap;
 
     public static void saveMap(ArrayList<Object> parameters) {
+        Stronghold.getMaps().set(Stronghold.getMaps().indexOf(Stronghold.getMapByName(currentMap.getName())), currentMap);
         Utils.updateDatabase("maps");
     }
 
@@ -36,9 +37,13 @@ public class MapEditMenuController {
         return usernames;
     }
 
-    public static void setCurrentMap(ArrayList<Object> parameters) {
+    public static void setCurrentMap(ArrayList<Object> parameters) throws CloneNotSupportedException {
         String mapName = (String) parameters.get(0);
-        currentMap = Stronghold.getMapByName(mapName);
+        Map sourceMap =  Stronghold.getMapByName(mapName);
+        currentMap = new Map(mapName, Tile.cloneTiles(sourceMap.getTiles()), sourceMap.getSize(), sourceMap.getOwners(), true);
+        ArrayList<Object> parameter = new ArrayList<>();
+        parameter.add(currentMap);
+        ShowMapMenuController.setCurrentMap(parameter);
     }
 
     public static Map getCurrentMap(ArrayList<Object> parameters) {

@@ -55,12 +55,9 @@ public class MapSelection extends Application {
         mapsChoiceBox.getItems().addAll(mapNames);
         if(mapNames.size() > 0)
             mapsChoiceBox.setValue(mapNames.get(0));
-        Client.getConnection().doInServer("ShowMapMenuController", "setCurrentMap", "original");
         Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap", "original");
         mapsChoiceBox.setOnAction(actionEvent -> {
             try {
-                Client.getConnection().doInServer("ShowMapMenuController", "setCurrentMap",
-                        getMapName(mapsChoiceBox.getValue()));
                 Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap",
                         getMapName(mapsChoiceBox.getValue()));
             } catch (IOException e) {

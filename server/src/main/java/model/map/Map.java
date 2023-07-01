@@ -28,13 +28,13 @@ public class Map {
         Stronghold.addMap(this);
     }
 
-    public Map(String name, Tile[][] tiles, int size, ArrayList<String> owners) {
+    public Map(String name, Tile[][] tiles, int size, ArrayList<String> owners, boolean isClone) {
         this.name = name;
         this.tiles = tiles;
         this.size = size;
         this.owners = owners;
         this.mainOwner = Stronghold.getUserByUsername(owners.get(0));
-        Stronghold.addMap(this);
+        if (!isClone) Stronghold.addMap(this);
     }
 
     public String getName() {
