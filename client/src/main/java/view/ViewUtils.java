@@ -85,6 +85,11 @@ public class ViewUtils {
     public static ObservableList<User> getUsersObservable() throws IOException {
         ArrayList<User> users = Parsers.parseUserArrayList(Client.getConnection().
                 receiveJsonData("Utils", "getUsersObservable"));
+        try {
+            sleep(150);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return FXCollections.observableArrayList(users);
     }
 

@@ -12,6 +12,7 @@ import webConnection.Client;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 
 import static java.lang.Thread.sleep;
 
@@ -61,11 +62,11 @@ public class Scoreboard extends Application {
     }
 
     public void refresh() throws IOException {
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            sleep(new Random().nextInt(500) + 250);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         scoreboard.getItems().clear();
         scoreboard.setItems(ViewUtils.getUsersObservable());
     }

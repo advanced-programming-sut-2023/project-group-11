@@ -8,7 +8,7 @@
     "email": "Sadegh.sg.snn@gmail.com",
     "slogan": "You are clearly no match for my forces! Give in now, my friend!",
     "avatarFileName": "6.png",
-    "lastSeen": "20:9",
+    "lastSeen": "20:59",
     "score": 32000,
     "rank": 1,
     "stayLoggedIn": false
@@ -22,7 +22,7 @@
     "email": "sadegh.sg.sn@gmail.com",
     "slogan": "I shall have my revenge, in this life or the next",
     "avatarFileName": "desktop-wallpaper-diablo-3-crusader-armor-iphone-8-7-6s-crusaders-thumbnail.jpg",
-    "lastSeen": "20:9",
+    "lastSeen": "Online",
     "score": 22000,
     "rank": 2,
     "stayLoggedIn": false
@@ -56,6 +56,20 @@
     "stayLoggedIn": false
   },
   {
+    "recoveryQuestion": "What is my father's name?",
+    "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
+    "username": "Sadegh3",
+    "password": "3fe3a52eab4a7ab2e0c9bf3e07648aae93e36d01af4bf99a1bac83901476fb28",
+    "nickname": "LviperL",
+    "email": "Sadegh.Sargeran@gmail.com",
+    "slogan": "In the kingdom of the blind, the one-eyed man is king",
+    "avatarFileName": "1.png",
+    "lastSeen": "20:58",
+    "score": 0,
+    "rank": 5,
+    "stayLoggedIn": false
+  },
+  {
     "recoveryQuestion": "What is my best friend's name?",
     "recoveryAnswer": "2d73c1f6c77da314c2e3c9060ce798370cdd3bb9f5c7061b834b11784c61bd4d",
     "username": "sep",
@@ -66,7 +80,7 @@
     "avatarFileName": "1.png",
     "lastSeen": "16:17",
     "score": 0,
-    "rank": 5,
+    "rank": 6,
     "stayLoggedIn": false
   }
 ]
