@@ -6,13 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Parsers;
@@ -27,6 +25,7 @@ import webConnection.Connection;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MainMenu extends Application {
@@ -35,7 +34,7 @@ public class MainMenu extends Application {
     private final Connection connection = Client.getConnection();
     private final String chatController = "ChatController";
     private Chat currentChat;
-    private VBox selected;
+    private final LinkedList<VBox> selectedMessages = new LinkedList<>();
     @FXML
     private AnchorPane chatPane;
     @FXML
@@ -50,6 +49,9 @@ public class MainMenu extends Application {
     private TextField search;
     @FXML
     private ImageView open;
+    @FXML
+    private Button sendButton;
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -101,6 +103,8 @@ public class MainMenu extends Application {
     public void lobby() {
     }
 
+    //-----------------------------------------------CHAT----------------------------------------------------//
+
     public void send() throws IOException {
         if (currentChat == null) currentChat = GlobalChat.getInstance();
         Message message = Parsers.parseMessageObject(connection.getJSONData(chatController,
@@ -113,7 +117,8 @@ public class MainMenu extends Application {
         VBox vBox = message.toVBox();
         vBox.setOnMouseClicked(mouseEvent -> {
             changeOpacityVbox(vBox, 0.7, 1);
-            if (vBox.getOpacity() == 0.7) selected = vBox;
+            if (vBox.getOpacity() == 0.7) selectedMessages.add(vBox);
+            else selectedMessages.remove(vBox);
         });
 
         if (currentChat.equals(GlobalChat.getInstance())) ((VBox) globalChat.getContent()).getChildren().add(vBox);
@@ -163,16 +168,41 @@ public class MainMenu extends Application {
     }
 
     public void delete() throws IOException {
-        JSONArray jsonArray = connection.getJSONArrayData(chatController, "getChatMessages", currentChat.getId());
-        for (Object message : jsonArray) {
-            Message message1 = Parsers.parseMessageObject((JSONObject) message);
-            if (message1.isSelected())
-                connection.doInServer(chatController, "removeMessage", currentChat.getId(), message1.getId());
-        }
+        for (VBox selectedMessage : selectedMessages)
+            connection.doInServer(chatController, "removeMessage", currentChat.getId(), getIdByVBox(selectedMessage));
         refresh();
     }
 
-    public void edit(MouseEvent mouseEvent) {
+    public void edit() throws IOException {
+        if (selectedMessages.size() == 1) {
+            VBox vBox = selectedMessages.get(0);
+            String string = ((Label) vBox.getChildren().get(0)).getText();
+            messageContent.setText(string);
+            sendButton.setOnMouseClicked(mouseEvent -> {
+                try {
+                    connection.doInServer(chatController, "editMessage", currentChat.getId(), getIdByVBox(selectedMessages.get(0)), messageContent.getText());
+                    refresh();
+                    resetSendButton();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+    }
+
+    private void resetSendButton() {
+        sendButton.setOnMouseClicked(mouseEvent -> {
+            try {
+                send();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    private String getIdByVBox(VBox selectedMessage) {
+        HBox hBox = (HBox) selectedMessage.getChildren().get(1);
+        return ((Label) hBox.getChildren().get(2)).getText();
     }
 
     private void find(String newText) throws IOException {
