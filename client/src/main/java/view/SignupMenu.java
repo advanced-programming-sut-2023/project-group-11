@@ -203,6 +203,7 @@ public class SignupMenu extends Application {
                     reloadCaptcha();
                 } else {
                     Client.getConnection().doInServer("LoginMenuController", "loginUser", loginUsernameField.getText());
+                    Client.setUsername(loginUsernameField.getText());
                     new MainMenu().start(SignupMenu.stage);
                 }
             }

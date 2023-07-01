@@ -177,4 +177,29 @@ public class MainMenuController {
     public static ArrayList<Game> getUnStartedGames(ArrayList<Object> parameters){
         return Stronghold.getUnStartedGames();
     }
+
+    public static Message joinGame(ArrayList<Object> parameters){
+        int gameId = (int) parameters.get(0);
+        Game game = Stronghold.getGameById(gameId);
+        if(game.getJoinedUsers().size() == game.getPlayersNeeded())
+            return Message.GAME_FULL;
+        if(game.getJoinedUsers().contains(Stronghold.getCurrentUser()))
+            return Message.YOURE_IN_GAME;
+        game.getJoinedUsers().add(Stronghold.getCurrentUser());
+            return Message.SUCCESS;
+    }
+
+    public static Message leaveGame(ArrayList<Object> parameters){
+        int gameId = (int) parameters.get(0);
+        Game game = Stronghold.getGameById(gameId);
+        if(!game.getJoinedUsers().contains(Stronghold.getCurrentUser()))
+            return Message.YOURE_NOT_IN;
+        if(Stronghold.getCurrentUser().equals(game.getOwner()))
+            if(game.getJoinedUsers().size()>1)
+                game.setOwner(game.getJoinedUsers().get(1));
+            else
+                Stronghold.getUnStartedGames().remove(game);
+        game.getJoinedUsers().remove(Stronghold.getCurrentUser());
+        return Message.SUCCESS;
+    }
 }

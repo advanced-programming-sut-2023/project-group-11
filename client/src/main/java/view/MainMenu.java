@@ -67,7 +67,7 @@ public class MainMenu extends Application {
         initializeScrollPane(globalChat);
         initializeScrollPane(privateChat);
         initializeScrollPane(chatRoom);
-        refresh();
+//        refresh();
         search.textProperty().addListener((observableValue, old, newText) -> {
             try {
                 find(newText);

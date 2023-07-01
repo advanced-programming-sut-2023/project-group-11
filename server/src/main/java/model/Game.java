@@ -4,16 +4,22 @@ import model.map.Map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Game {
-    private final User owner;
+    private User owner;
     private  ArrayList<Governance> governances;
+
+    private ArrayList<User> joinedUsers = new ArrayList<>();
+
+    private boolean isStarted = false;
 
     private int playersNeeded;
     private final HashMap<Governance, Integer> scores = new HashMap<>();
     private final ArrayList<Trade> trades = new ArrayList<>();
     private Governance currentGovernance;
     private transient final Map map;
+    private int id;
     private int turn = 1;
     private int currentTurn = 1;
 
@@ -26,8 +32,13 @@ public class Game {
 
     public Game(User owner,Map map,int playersNeeded) {
         this.owner = owner;
+        joinedUsers.add(owner);
         this.map = map;
         this.playersNeeded = playersNeeded;
+        this.id = new Random().nextInt(1000,10000);
+        while (Stronghold.getGameById(id) != null)
+            this.id = new Random().nextInt(1000,10000);
+        Stronghold.getAllGames().add(this);
     }
 
     public ArrayList<Trade> getTrades() {
@@ -38,12 +49,24 @@ public class Game {
         return owner;
     }
 
+    public void setOwner(User owner){
+        this.owner = owner;
+    }
+
     public ArrayList<Governance> getGovernances() {
         return governances;
     }
 
     public Map getMap() {
         return map;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public ArrayList<User> getJoinedUsers() {
+        return joinedUsers;
     }
 
     public int getPlayersNeeded() {
@@ -83,6 +106,14 @@ public class Game {
 
     public Governance getCurrentGovernance() {
         return currentGovernance;
+    }
+
+    public boolean isStarted() {
+        return isStarted;
+    }
+
+    public void setStarted(boolean started) {
+        isStarted = started;
     }
 
     public void setCurrentGovernance(Governance currentGovernance) {

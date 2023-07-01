@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Game {
-    private  User owner;
+    private User owner;
     private  ArrayList<Governance> governances;
-
+    private ArrayList<User> joinedUsers = new ArrayList<>();
+    private int id;
     private int playersNeeded;
     private final HashMap<Governance, Integer> scores = new HashMap<>();
     private final ArrayList<Trade> trades = new ArrayList<>();
@@ -60,6 +61,14 @@ public class Game {
         return turn;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public ArrayList<User> getJoinedUsers() {
+        return joinedUsers;
+    }
+
     public void setTurn(int turn) {
         this.turn = turn;
     }
@@ -85,7 +94,7 @@ public class Game {
     }
 
     public String getJoinedPlayers(){
-        return "1/" + playersNeeded;
+        return joinedUsers.size() +  "/" + playersNeeded;
     }
 
     public Governance getCurrentGovernance() {
