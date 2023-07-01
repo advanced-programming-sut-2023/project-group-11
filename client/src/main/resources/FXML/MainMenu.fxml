@@ -86,7 +86,11 @@
                         </Button>
                     </HBox>
                     <ScrollPane fx:id="globalChat" layoutX="5.0" layoutY="35.0" prefHeight="385.0" prefWidth="280.0">
-                        <VBox prefHeight="385.0" prefWidth="280.0" spacing="5.0" styleClass="chat"/>
+                        <VBox prefHeight="385.0" prefWidth="280.0" spacing="5.0" styleClass="chat">
+                            <padding>
+                                <Insets top="20.0"/>
+                            </padding>
+                        </VBox>
                     </ScrollPane>
                     <ScrollPane fx:id="privateChat" layoutX="5.0" layoutY="35.0" prefHeight="385.0" prefWidth="280.0"
                                 visible="false">
@@ -107,7 +111,8 @@
                             <TextField fx:id="roomSearch" prefWidth="195.0" promptText="search"/>
                             <ListView fx:id="roomListView" onMouseClicked="#roomListViewClicked" prefHeight="200.0"
                                       prefWidth="200.0"/>
-                            <Button fx:id="createChatRoom" onMouseClicked="#createChat" mnemonicParsing="false" text="create new chat"/>
+                            <Button fx:id="createChatRoom" onMouseClicked="#createChat" mnemonicParsing="false"
+                                    text="create new chat"/>
                             <padding>
                                 <Insets top="20.0"/>
                             </padding>
