@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="">
+    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="Cloning the map that we want to edit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Receiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/EntryMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/EntryMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MapEditMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/ShowMapMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/map/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/map/Tile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +126,7 @@
       <workItem from="1688108761463" duration="12125000" />
       <workItem from="1688136494696" duration="75000" />
       <workItem from="1688138691747" duration="10147000" />
-      <workItem from="1688190666370" duration="8324000" />
+      <workItem from="1688190666370" duration="10197000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>
@@ -216,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688201972005</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Cloning the map that we want to edit">
+      <created>1688203841121</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1688203841121</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +265,7 @@
     <MESSAGE value="Connection handling added" />
     <MESSAGE value="Scoreboard fixed" />
     <MESSAGE value="ScoreBoard added (needs online refreshing)" />
-    <option name="LAST_COMMIT_MESSAGE" value="ScoreBoard added (needs online refreshing)" />
+    <MESSAGE value="Cloning the map that we want to edit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cloning the map that we want to edit" />
   </component>
 </project>
