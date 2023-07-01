@@ -63,7 +63,10 @@ public class Parsers {
         String content = message.getString("content");
         String senderName = message.getString("senderName");
         String sentTime = message.getString("sentTime");
-        return new Message(id, content, senderName, sentTime);
+        String avatarAddress = message.getString("avatarAddress");
+        boolean seen = message.getBoolean("seen");
+
+        return new Message(id, content, senderName, sentTime, avatarAddress, seen);
     }
 
     public static Chat parseChatObject(JSONObject jsonObject) {
@@ -79,7 +82,7 @@ public class Parsers {
     }
 
     public static ArrayList<Game> parseGamesArrayList(String json) {
-        json = json.substring(0,json.lastIndexOf("]")+1);
+        json = json.substring(0, json.lastIndexOf("]") + 1);
         System.out.println(json);
         Type type = new TypeToken<ArrayList<Game>>() {
         }.getType();

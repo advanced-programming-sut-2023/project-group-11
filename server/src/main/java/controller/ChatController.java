@@ -14,7 +14,7 @@ public class ChatController {
         String chatName = (String) parameters.get(1);
 //        ChatType chatType = ChatType.valueOf((String) parameters.get(2));
 
-        Message message = new Message(content, Stronghold.getCurrentUser().getUsername());
+        Message message = new Message(content, Stronghold.getCurrentUser());
         Chat chat = Stronghold.getChatByName(chatName);
 
         chat.sendMessage(message);
@@ -24,7 +24,10 @@ public class ChatController {
     public static ArrayList<Message> getChatMessages(ArrayList<Object> parameters) {
         String chatId = (String) parameters.get(0);
         Chat chat = Stronghold.getChatByName(chatId);
-        setSeen(chat.getMessages());
+        ArrayList<Message> messages = chat.getMessages();
+
+        if (messages.size() > 0 && !messages.get(0).getOwner().equals(Stronghold.getCurrentUser()))
+            setSeen(messages);
         return chat.getMessages();
     }
 

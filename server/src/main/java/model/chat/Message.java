@@ -1,5 +1,7 @@
 package model.chat;
 
+import model.User;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -9,24 +11,32 @@ public class Message {
     private String content;
     private final int id;
     private static int counter = 1;
+    private transient final User owner;
+    private final String avatarAddress;
     private final String senderName;
     private final String sentTime;
     private final ArrayList<Emoji> emojis = new ArrayList<>();
     private boolean seen = false;
 
-    public Message(String content, String senderName) {
+    public Message(String content, User owner) {
         this.sentTime = getTime();
         this.id = counter++;
         this.content = content;
-        this.senderName = senderName;
+        this.owner = owner;
+        this.senderName = owner.getUsername();
+        this.avatarAddress = owner.getAvatarFileName();
     }
 
     private static String getTime() {
-        return LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_LOCAL_TIME);
+        return LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public int getId() {
         return id;
+    }
+
+    public User getOwner() {
+        return owner;
     }
 
     public void addEmoji(Emoji emoji) {
