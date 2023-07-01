@@ -67,13 +67,11 @@ public class Parsers {
         String sentTime = message.getString("sentTime");
         String avatarAddress = message.getString("avatarAddress");
         boolean seen = message.getBoolean("seen");
-
         try {
             sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
         return new Message(id, content, senderName, sentTime, avatarAddress, seen);
     }
 

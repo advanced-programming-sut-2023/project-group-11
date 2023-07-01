@@ -149,5 +149,4 @@ public class Utils {
             if (connection.isInMainMenu())
                 Connection.sendNotification("MainMenu", "updateChat", connection);
     }
-
 }

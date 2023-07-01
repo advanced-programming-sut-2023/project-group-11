@@ -4,16 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="debug real-time notification">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_2_2023_12_25_AM_[Changes]/shelved.patch" afterDir="false" />
+    <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_2_2023_12_25_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Parsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Parsers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MapSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/MainMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,7 +130,7 @@
       <workItem from="1688108761463" duration="12125000" />
       <workItem from="1688136494696" duration="75000" />
       <workItem from="1688138691747" duration="10147000" />
-      <workItem from="1688190666370" duration="29008000" />
+      <workItem from="1688190666370" duration="32918000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>
@@ -252,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688232988911</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="chat notif first try">
+      <created>1688242427437</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1688242427437</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,6 +309,7 @@
     <MESSAGE value="lastSeen improved (realTime notifying need debug)" />
     <MESSAGE value="Send notification from server added successfully" />
     <MESSAGE value="debug real-time notification" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug real-time notification" />
+    <MESSAGE value="chat notif first try" />
+    <option name="LAST_COMMIT_MESSAGE" value="chat notif first try" />
   </component>
 </project>

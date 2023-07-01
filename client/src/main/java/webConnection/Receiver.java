@@ -42,6 +42,7 @@ public class Receiver extends Thread {
         while (true) {
             try {
                 receivedPacket = (String) new ObjectInputStream(in).readObject();
+                isReceivedPacketAccessible = false;
                 JSONObject packet = new JSONObject(receivedPacket);
                 if (packet.get("type").equals("command")) {
                     new serverCommander(packet).start();

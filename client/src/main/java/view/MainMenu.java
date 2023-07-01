@@ -1,6 +1,7 @@
 package view;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class MainMenu extends Application {
     private static Stage stage;
@@ -209,7 +212,7 @@ public class MainMenu extends Application {
     }
 
     public static void updateChat() {
-        instance.refresh();
+        Platform.runLater(() -> instance.refresh());
     }
 
     public void delete() {
