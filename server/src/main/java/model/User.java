@@ -1,6 +1,11 @@
 package model;
 
+import model.chat.Chat;
+
+import java.util.ArrayList;
+
 public class User implements Comparable<User> {
+    private final transient ArrayList<Chat> chats = new ArrayList<>();
     private final String recoveryQuestion;
     private final String recoveryAnswer;
     private String username;
@@ -107,6 +112,10 @@ public class User implements Comparable<User> {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public ArrayList<Chat> getChats() {
+        return chats;
     }
 
     @Override

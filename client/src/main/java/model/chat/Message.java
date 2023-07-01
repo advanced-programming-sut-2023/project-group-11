@@ -9,11 +9,14 @@ import java.util.ArrayList;
 
 public class Message {
     private String content;
+    private final int id;
     private final String senderName;
     private final String sentTime;
     private final ArrayList<Emoji> emojis = new ArrayList<>();
+    private boolean isSelected;
 
-    public Message(String content, String senderName, String sentTime) {
+    public Message(int id, String content, String senderName, String sentTime) {
+        this.id = id;
         this.sentTime = sentTime;
         this.content = content;
         this.senderName = senderName;
@@ -25,6 +28,10 @@ public class Message {
 
     public void removeEmoji(Emoji emoji) {
         emojis.remove(emoji);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getContent() {
@@ -45,6 +52,14 @@ public class Message {
 
     public ArrayList<Emoji> getEmojis() {
         return emojis;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public VBox toVBox() {

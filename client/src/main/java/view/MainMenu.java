@@ -1,13 +1,16 @@
 package view;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -16,17 +19,23 @@ import model.Parsers;
 import model.chat.Chat;
 import model.chat.GlobalChat;
 import model.chat.Message;
-import model.chat.PrivateChat;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import webConnection.Client;
+import webConnection.Connection;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainMenu extends Application {
     private static Stage stage;
+    public ListView<String> usernameListView = new ListView<>();
+    private final Connection connection = Client.getConnection();
+    private final String chatController = "ChatController";
     private Chat currentChat;
+    private VBox selected;
     @FXML
     private AnchorPane chatPane;
     @FXML
@@ -37,6 +46,8 @@ public class MainMenu extends Application {
     private ScrollPane chatRoom;
     @FXML
     private TextField messageContent;
+    @FXML
+    private TextField search;
     @FXML
     private ImageView open;
 
@@ -52,10 +63,18 @@ public class MainMenu extends Application {
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         initializeScrollPane(globalChat);
         initializeScrollPane(privateChat);
         initializeScrollPane(chatRoom);
+        refresh();
+        search.textProperty().addListener((observableValue, old, newText) -> {
+            try {
+                find(newText);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void initializeScrollPane(ScrollPane scrollPane) {
@@ -75,7 +94,7 @@ public class MainMenu extends Application {
     }
 
     public void logout() throws Exception {
-        Client.getConnection().doInServer("MainMenuController", "logout");
+        connection.doInServer("MainMenuController", "logout");
         new SignupMenu().start(SignupMenu.getStage());
     }
 
@@ -84,7 +103,7 @@ public class MainMenu extends Application {
 
     public void send() throws IOException {
         if (currentChat == null) currentChat = GlobalChat.getInstance();
-        Message message = Parsers.parseMessageObject(Client.getConnection().getJSONData("ChatController",
+        Message message = Parsers.parseMessageObject(connection.getJSONData(chatController,
                 "sendMessage", messageContent.getText(), currentChat.getId(), currentChat.getChatType().name()));
 
         if (!message.getContent().isEmpty()) sendMessage(message);
@@ -92,8 +111,18 @@ public class MainMenu extends Application {
 
     private void sendMessage(Message message) {
         VBox vBox = message.toVBox();
+        vBox.setOnMouseClicked(mouseEvent -> {
+            changeOpacityVbox(vBox, 0.7, 1);
+            if (vBox.getOpacity() == 0.7) selected = vBox;
+        });
+
         if (currentChat.equals(GlobalChat.getInstance())) ((VBox) globalChat.getContent()).getChildren().add(vBox);
         ViewUtils.clearFields(messageContent);
+    }
+
+    private void changeOpacityVbox(VBox vBox, double v, int i) {
+        if (vBox.getOpacity() == v) vBox.setOpacity(i);
+        else vBox.setOpacity(v);
     }
 
     public void showGlobal() {
@@ -101,8 +130,9 @@ public class MainMenu extends Application {
         currentChat = GlobalChat.getInstance();
     }
 
-    public void showPrivate() {
+    public void showPrivate() throws IOException {
         changeVisibility(privateChat, globalChat, chatRoom);
+        find("");
     }
 
     public void showChatRoom() {
@@ -124,8 +154,33 @@ public class MainMenu extends Application {
 
     public void refresh() throws IOException {
         if (currentChat == null) currentChat = GlobalChat.getInstance();
-        JSONArray jsonArray = Client.getConnection().getJSONArrayData("ChatController", "getChatMessages", currentChat.getId());
+        JSONArray jsonArray = connection.getJSONArrayData(chatController, "getChatMessages", currentChat.getId());
         ((VBox) globalChat.getContent()).getChildren().clear();
+//        for (int i = jsonArray.length()-1; i > jsonArray.; i++) {
+//
+//        }
         for (Object message : jsonArray) sendMessage(Parsers.parseMessageObject((JSONObject) message));
+    }
+
+    public void delete() throws IOException {
+        JSONArray jsonArray = connection.getJSONArrayData(chatController, "getChatMessages", currentChat.getId());
+        for (Object message : jsonArray) {
+            Message message1 = Parsers.parseMessageObject((JSONObject) message);
+            if (message1.isSelected())
+                connection.doInServer(chatController, "removeMessage", currentChat.getId(), message1.getId());
+        }
+        refresh();
+    }
+
+    public void edit(MouseEvent mouseEvent) {
+    }
+
+    private void find(String newText) throws IOException {
+        JSONArray jsonArray = connection.getJSONArrayData(chatController, "findUsername", newText);
+        List<Object> objects = jsonArray.toList();
+        List<String> usernames = new ArrayList<>();
+
+        for (Object object : objects) usernames.add((String) object);
+        usernameListView.setItems(FXCollections.observableList(usernames));
     }
 }

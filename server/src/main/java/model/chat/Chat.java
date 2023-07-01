@@ -26,9 +26,10 @@ public abstract class Chat {
     }
 
     public void sendMessage(Message message) {
-        for (Connection connection : connections) {
-
-        }
+//        for (Connection connection : connections) {
+//
+//        }
+        //TODO: need implementation for live chat update
         messages.add(message);
     }
 
@@ -38,5 +39,15 @@ public abstract class Chat {
 
     public void removeUSer(Connection user) {
         connections.remove(user);
+    }
+
+    public Message getMessageById(int id) {
+        for (Message message : messages)
+            if (message.getId() == id) return message;
+        return null;
+    }
+
+    public void removeMessage(Message message) {
+        messages.remove(message);
     }
 }

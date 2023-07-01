@@ -59,10 +59,11 @@ public class Parsers {
     }
 
     public static Message parseMessageObject(JSONObject message) {
+        int id = message.getInt("id");
         String content = message.getString("content");
         String senderName = message.getString("senderName");
         String sentTime = message.getString("sentTime");
-        return new Message(content, senderName, sentTime);
+        return new Message(id,content, senderName, sentTime);
     }
     public static Chat parseChatObject(){
         return null;

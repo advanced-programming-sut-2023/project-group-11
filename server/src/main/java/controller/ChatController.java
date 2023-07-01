@@ -1,10 +1,12 @@
 package controller;
 
 import model.Stronghold;
+import model.User;
 import model.chat.Message;
 import model.chat.*;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class ChatController {
     public static Message sendMessage(ArrayList<Object> parameters) {
@@ -26,6 +28,36 @@ public class ChatController {
     public static ArrayList<Message> getChatMessages(ArrayList<Object> parameters) {
         String chatId = (String) parameters.get(0);
         Chat chat = Stronghold.getChatById(chatId);
+        setSeen(chat.getMessages());
         return chat.getMessages();
+    }
+
+    private static void setSeen(ArrayList<Message> messages) {
+        messages.forEach(message -> message.setSeen(true));
+    }
+
+    public static ArrayList<Chat> getCurrentUserChats(ArrayList<Object> parameters) {
+        return Stronghold.getCurrentUser().getChats();
+    }
+
+    public static void removeMessage(ArrayList<Object> parameters) {
+        String chatId = (String) parameters.get(0);
+        int messageId = (int) parameters.get(1);
+
+        Chat chat = Stronghold.getChatById(chatId);
+        chat.removeMessage(chat.getMessageById(messageId));
+    }
+
+    public static ArrayList<String> findUsername(ArrayList<Object> parameters) {
+        String toBeFound = (String) parameters.get(0);
+        ArrayList<String> usernames = new ArrayList<>();
+        Pattern pattern = Pattern.compile(toBeFound);
+
+        for (User user : Stronghold.getUsers()) {
+            String username = user.getUsername();
+            if (pattern.matcher(username).find() && !user.equals(Stronghold.getCurrentUser())) usernames.add(username);
+        }
+        if (usernames.size() > 0) System.out.println(usernames.get(0));
+        return usernames;
     }
 }
