@@ -173,48 +173,40 @@ public class MapEditMenu extends Application {
         changePaneVisibility(treeBox, sandBox, waterBox);
     }
 
-    public void setTexture(MouseEvent mouseEvent){
+    public void setTexture(MouseEvent mouseEvent) {
         String textureName = ((ImageView) mouseEvent.getSource()).getId();
         textureNameLabel.setVisible(true);
         textureNameLabel.setText(textureName);
-        try {
-            Message message = Client.getConnection().checkAction("MapEditMenuController", "setTexture",
-                    selectedTiles.size(), textureName, selectedTileXInScreen + firstTileXInMap,
-                    selectedTileYInScreen + firstTileYInMap, selectedBorderHeight, selectedBorderWidth);
+        Message message = Client.getConnection().checkAction("MapEditMenuController", "setTexture",
+                selectedTiles.size(), textureName, selectedTileXInScreen + firstTileXInMap,
+                selectedTileYInScreen + firstTileYInMap, selectedBorderHeight, selectedBorderWidth);
 
-            switch (message) {
-                case SELECT_ONLY_ONE_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
-                        "Select only on tile for this texture!");
-                case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
-                        "Invalid place to deploy this texture!");
-            }
-
-            showMap();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        switch (message) {
+            case SELECT_ONLY_ONE_TILE -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
+                    "Select only on tile for this texture!");
+            case INVALID_PLACE_TO_DEPLOY -> ViewUtils.alert(Alert.AlertType.ERROR, "Set Texture Failed",
+                    "Invalid place to deploy this texture!");
         }
+
+        showMap();
     }
 
-    public void dropTree(MouseEvent mouseEvent){
+    public void dropTree(MouseEvent mouseEvent) {
         String treeName = ((ImageView) mouseEvent.getSource()).getId();
 
         textureNameLabel.setVisible(true);
         textureNameLabel.setText(treeName);
 
-        try {
-            Message message = Client.getConnection().checkAction("MapEditMenuController", "dropTree",
-                    selectedTileXInScreen + firstTileXInMap, selectedTileYInScreen + firstTileYInMap,
-                    selectedBorderWidth, selectedBorderHeight, treeName);
+        Message message = Client.getConnection().checkAction("MapEditMenuController", "dropTree",
+                selectedTileXInScreen + firstTileXInMap, selectedTileYInScreen + firstTileYInMap,
+                selectedBorderWidth, selectedBorderHeight, treeName);
 
-            if (message == Message.INVALID_PLACE_TO_DEPLOY) {
-                ViewUtils.alert(Alert.AlertType.ERROR, "Drop Tree Failed",
-                        "Invalid place to deploy tree!");
-            }
-
-            showMap();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (message == Message.INVALID_PLACE_TO_DEPLOY) {
+            ViewUtils.alert(Alert.AlertType.ERROR, "Drop Tree Failed",
+                    "Invalid place to deploy tree!");
         }
+
+        showMap();
     }
 
     // ---------------------------------- Show map ------------------------------------------------
@@ -222,17 +214,13 @@ public class MapEditMenu extends Application {
     private void showMap() {
         int rowsCount = mapPaneHeight / tileSize;
         int columnCount = mapPaneWidth / tileSize;
-        try {
-            Tile[][] mapTiles = Parsers.convertTo2DTileArray(Client.getConnection().getJSONArrayData("ShowMapMenuController",
-                    "getTiles", firstTileXInMap, firstTileYInMap, rowsCount, columnCount), rowsCount, columnCount);
+        Tile[][] mapTiles = Parsers.convertTo2DTileArray(Client.getConnection().getJSONArrayData("ShowMapMenuController",
+                "getTiles", firstTileXInMap, firstTileYInMap, rowsCount, columnCount), rowsCount, columnCount);
 
-            mapPane.getChildren().clear();
-            setTextureTreeImages(mapTiles);
-            boldSelectedTile(mapTiles);
-            sidePane.toFront();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        mapPane.getChildren().clear();
+        setTextureTreeImages(mapTiles);
+        boldSelectedTile(mapTiles);
+        sidePane.toFront();
     }
 
     private void setTextureTreeImages(Tile[][] mapTiles) {
@@ -337,7 +325,7 @@ public class MapEditMenu extends Application {
         if (selectedRows < 1 || selectedColumns < 1 || outOfPane(deltaX, deltaY)) return;
         Tile[][] tempArray = Parsers.convertTo2DTileArray(Client.getConnection().getJSONArrayData(
                 "ShowMapMenuController", "getTiles", selectedTileXInScreen + firstTileXInMap,
-                selectedTileYInScreen + firstTileYInMap, selectedRows, selectedColumns), selectedRows,selectedColumns);
+                selectedTileYInScreen + firstTileYInMap, selectedRows, selectedColumns), selectedRows, selectedColumns);
 
         selectedTiles.clear();
         for (Tile[] tiles : tempArray)
@@ -353,7 +341,7 @@ public class MapEditMenu extends Application {
     }
 
 
-    public void checkShortcut(KeyEvent keyEvent){
+    public void checkShortcut(KeyEvent keyEvent) {
         KeyCode keyCode = keyEvent.getCode();
 
         switch (keyCode) {

@@ -105,19 +105,15 @@ public class SignupMenu extends Application {
     }
 
     private void updateNicknameLabel() {
-        nicknameTextField.textProperty().addListener((observable, oldText, newText)-> nicknameError.setText(""));
+        nicknameTextField.textProperty().addListener((observable, oldText, newText) -> nicknameError.setText(""));
     }
 
-    private void updateEmailLabel(){
-        emailTextField.textProperty().addListener((observable, oldText, newText)->{
-            if(newText.isEmpty()){
+    private void updateEmailLabel() {
+        emailTextField.textProperty().addListener((observable, oldText, newText) -> {
+            if (newText.isEmpty()) {
                 emailError.setText("");
-            }else {
-                try {
-                    message = Client.getConnection().checkAction("SignupMenuController","checkEmail",newText);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            } else {
+                message = Client.getConnection().checkAction("SignupMenuController", "checkEmail", newText);
                 switch (message) {
                     case EMAIL_EXIST -> emailError.setText("emailTextField exists!");
                     case INVALID_EMAIL_FORMAT -> emailError.setText("invalid format!");
@@ -128,8 +124,8 @@ public class SignupMenu extends Application {
     }
 
     private void updateConfirmationLabel() {
-        signupConfirmation.textProperty().addListener((observable, oldText, newText)-> {
-            if(newText.isEmpty() || newText.equals(signupPassword.getText()))
+        signupConfirmation.textProperty().addListener((observable, oldText, newText) -> {
+            if (newText.isEmpty() || newText.equals(signupPassword.getText()))
                 signupConfirmationError.setText("");
             else
                 signupConfirmationError.setText("doesn't match!");
@@ -140,8 +136,8 @@ public class SignupMenu extends Application {
         ViewUtils.livePasswordError(signupPassword, signupPasswordError);
     }
 
-    public void changeVisibility(){
-        if(passwordShow.isSelected()){
+    public void changeVisibility() {
+        if (passwordShow.isSelected()) {
             passwordShown.setText(signupPassword.getText());
             confirmationShown.setText(signupConfirmation.getText());
             passwordShown.setVisible(true);
@@ -158,12 +154,8 @@ public class SignupMenu extends Application {
     }
 
     private void updateSignupLabel() {
-        signupUsername.textProperty().addListener((observable, oldText, newText)->{
-            try {
-                message = Client.getConnection().checkAction("SignupMenuController","checkUsername",newText);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        signupUsername.textProperty().addListener((observable, oldText, newText) -> {
+            message = Client.getConnection().checkAction("SignupMenuController", "checkUsername", newText);
             switch (message) {
                 case USERNAME_EXIST -> signupUsernameError.setText("username exists");
                 case INVALID_USERNAME_FORMAT -> signupUsernameError.setText("invalid format");
@@ -191,15 +183,15 @@ public class SignupMenu extends Application {
             case EMPTY_PASSWORD_FIELD -> ViewUtils.fieldError(passwordError, "Required fields must be filled in!");
             case USERNAME_NOT_EXIST -> ViewUtils.fieldError(usernameError, "Username doesn't exist!");
             case INCORRECT_PASSWORD -> ViewUtils.fieldError(passwordError, "Password is incorrect!");
-            case USER_ALREADY_LOGGED_IN ->  ViewUtils.fieldError(usernameError, "User has logged in before!");
+            case USER_ALREADY_LOGGED_IN -> ViewUtils.fieldError(usernameError, "User has logged in before!");
             case LOCKED_ACCOUNT -> {
                 int leftTime = (Integer) Client.getConnection().getData("LoginMenuController", "getLeftLockedTime",
                         loginUsernameField.getText());
                 ViewUtils.fieldError(usernameError, "Your account is locked for " + leftTime / 1000.0 + " seconds more!");
             }
             case SUCCESS -> {
-                if(!captchaField.getText().equals(captchaNumber)){
-                    ViewUtils.fieldError(captchaError,"Wrong captcha!");
+                if (!captchaField.getText().equals(captchaNumber)) {
+                    ViewUtils.fieldError(captchaError, "Wrong captcha!");
                     reloadCaptcha();
                 } else {
                     Client.getConnection().doInServer("LoginMenuController", "loginUser", loginUsernameField.getText());
@@ -227,7 +219,7 @@ public class SignupMenu extends Application {
 
     public void generateRandomPassword() throws IOException {
         signupConfirmation.setText("");
-        String randomPassword = (String) Client.getConnection().getData("SignupMenuController","generateRandomPassword");
+        String randomPassword = (String) Client.getConnection().getData("SignupMenuController", "generateRandomPassword");
         signupPassword.setText(randomPassword);
         passwordShown.setText(signupPassword.getText());
         passwordShow.setSelected(true);
@@ -235,11 +227,11 @@ public class SignupMenu extends Application {
     }
 
     public void chooseSlogan() {
-        if(chooseSloganBox.isSelected()){
+        if (chooseSloganBox.isSelected()) {
             sloganLabel.setVisible(true);
             sloganTextField.setVisible(true);
             randomSloganBox.setVisible(true);
-        }else{
+        } else {
             sloganLabel.setVisible(false);
             sloganTextField.setVisible(false);
             randomSloganBox.setVisible(false);
@@ -247,26 +239,26 @@ public class SignupMenu extends Application {
     }
 
     public void randomSlogan() throws IOException {
-        if(randomSloganBox.isSelected()){
-            String randomSlogan = (String) Client.getConnection().getData("SignupMenuController","generateRandomSlogan");
+        if (randomSloganBox.isSelected()) {
+            String randomSlogan = (String) Client.getConnection().getData("SignupMenuController", "generateRandomSlogan");
             sloganTextField.setText(randomSlogan);
-        }else{
+        } else {
             sloganTextField.setText("");
         }
     }
 
     public void signup() throws Exception {
-        if(ViewUtils.setEmptyError(signupUsername,signupUsernameError)&
-        ViewUtils.setEmptyError(signupPassword,signupPasswordError)&
-        ViewUtils.setEmptyError(signupConfirmation,signupConfirmationError)&
-        ViewUtils.setEmptyError(nicknameTextField,nicknameError)&
-        ViewUtils.setEmptyError(emailTextField,emailError)){
+        if (ViewUtils.setEmptyError(signupUsername, signupUsernameError) &
+                ViewUtils.setEmptyError(signupPassword, signupPasswordError) &
+                ViewUtils.setEmptyError(signupConfirmation, signupConfirmationError) &
+                ViewUtils.setEmptyError(nicknameTextField, nicknameError) &
+                ViewUtils.setEmptyError(emailTextField, emailError)) {
             Stage stage = new Stage();
             SignupCompletion signupCompletion = new SignupCompletion();
-            signupCompletion.setVariables(signupUsername.getText(),signupPassword.getText(),
-                    emailTextField.getText(),nicknameTextField.getText(),sloganTextField.getText());
+            signupCompletion.setVariables(signupUsername.getText(), signupPassword.getText(),
+                    emailTextField.getText(), nicknameTextField.getText(), sloganTextField.getText());
             signupCompletion.start(stage);
-            ViewUtils.clearFields(signupUsername,signupPassword,signupConfirmation, emailTextField,nicknameTextField,sloganTextField);
+            ViewUtils.clearFields(signupUsername, signupPassword, signupConfirmation, emailTextField, nicknameTextField, sloganTextField);
         }
 
     }
@@ -274,7 +266,7 @@ public class SignupMenu extends Application {
     public void reloadCaptcha() throws URISyntaxException {
         File[] files = new File(SignupCompletion.class.getResource("/IMG/captcha").toURI()).listFiles();
         File captcha = files[new Random().nextInt(files.length)];
-        captchaNumber = captcha.getName().substring(0,4);
+        captchaNumber = captcha.getName().substring(0, 4);
         captchaImageView.setImage(new Image(captcha.getPath()));
     }
 }

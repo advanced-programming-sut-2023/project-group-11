@@ -47,11 +47,7 @@ public class SignupCompletion extends Application {
     ObservableList<String> questions;
 
     {
-        try {
-            questions = FXCollections.observableArrayList(Client.getConnection().getArrayData("SignupMenuController","getRecoveryQuestions"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        questions = FXCollections.observableArrayList(Client.getConnection().getArrayData("SignupMenuController", "getRecoveryQuestions"));
     }
 
     public void setVariables(String username, String password, String email, String nickname, String slogan) {
@@ -92,7 +88,7 @@ public class SignupCompletion extends Application {
             reloadCaptcha();
         } else if (chosenQuestion == null) recoveryQuestionError.setText("must be chosen!");
         else {
-            Client.getConnection().doInServer("SignupMenuController","createUser",username, password, email, nickname, slogan, chosenQuestion, answerField.getText());
+            Client.getConnection().doInServer("SignupMenuController", "createUser", username, password, email, nickname, slogan, chosenQuestion, answerField.getText());
             stage.close();
             ViewUtils.alert(Alert.AlertType.INFORMATION, "Congratulation!", "User created successfully!");
         }

@@ -7,7 +7,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import model.Governance;
 import model.Parsers;
 import model.User;
 import webConnection.Client;
@@ -65,12 +64,7 @@ public class ViewUtils {
 
     static void livePasswordError(PasswordField newPassword, Label newPasswordError) {
         newPassword.textProperty().addListener((observable, oldText, newText) -> {
-            int weakness = 0;
-            try {
-                weakness = (int) Client.getConnection().getData("SignupMenuController", "findHowWeakPasswordIs", newText);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            int weakness = (int) Client.getConnection().getData("SignupMenuController", "findHowWeakPasswordIs", newText);
             if (newText.isEmpty()) {
                 newPasswordError.setText("");
             } else if (weakness == 0) {

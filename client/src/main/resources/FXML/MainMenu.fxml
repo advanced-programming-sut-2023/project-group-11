@@ -37,7 +37,7 @@
                 <AnchorPane fx:id="chatPane" layoutX="14.0" layoutY="12.0" prefHeight="470.0" prefWidth="284.0">
                     <HBox alignment="CENTER" layoutY="420.0" prefHeight="21.0" prefWidth="285.0" spacing="10.0">
                         <TextField fx:id="messageContent" prefWidth="170.0" promptText="message" />
-                        <Button mnemonicParsing="false" onMouseClicked="#send">
+                        <Button fx:id="sendButton" mnemonicParsing="false" onMouseClicked="#send">
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <Image url="@../IMG/chat/send.png" />

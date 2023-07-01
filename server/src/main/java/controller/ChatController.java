@@ -42,10 +42,21 @@ public class ChatController {
 
     public static void removeMessage(ArrayList<Object> parameters) {
         String chatId = (String) parameters.get(0);
-        int messageId = (int) parameters.get(1);
+        int messageId = Integer.parseInt((String) parameters.get(1));
 
         Chat chat = Stronghold.getChatById(chatId);
-        chat.removeMessage(chat.getMessageById(messageId));
+        Message message = chat.getMessageById(messageId);
+        if (message.getSenderName().equals(Stronghold.getCurrentUser().getUsername())) chat.removeMessage(message);
+    }
+
+    public static void editMessage(ArrayList<Object> parameters) {
+        String chatId = (String) parameters.get(0);
+        int messageId = Integer.parseInt((String) parameters.get(1));
+        String newContent = (String) parameters.get(2);
+
+        Chat chat = Stronghold.getChatById(chatId);
+        Message message = chat.getMessageById(messageId);
+        if (message.getSenderName().equals(Stronghold.getCurrentUser().getUsername())) message.setContent(newContent);
     }
 
     public static ArrayList<String> findUsername(ArrayList<Object> parameters) {
@@ -57,7 +68,6 @@ public class ChatController {
             String username = user.getUsername();
             if (pattern.matcher(username).find() && !user.equals(Stronghold.getCurrentUser())) usernames.add(username);
         }
-        if (usernames.size() > 0) System.out.println(usernames.get(0));
         return usernames;
     }
 

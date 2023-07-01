@@ -18,7 +18,6 @@ import model.Governance;
 import model.User;
 import webConnection.Client;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateTradeMenu extends Application {
@@ -56,37 +55,33 @@ public class CreateTradeMenu extends Application {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         initializeResourcePane();
         initializeUsers();
-        amountTextField.textProperty().addListener((observable, oldText, newText)->{
-            checkTextFields(amountTextField,newText);
+        amountTextField.textProperty().addListener((observable, oldText, newText) -> {
+            checkTextFields(amountTextField, newText);
         });
-        priceTextField.textProperty().addListener((observable, oldText, newText)->{
-            checkTextFields(priceTextField,newText);
+        priceTextField.textProperty().addListener((observable, oldText, newText) -> {
+            checkTextFields(priceTextField, newText);
         });
 
     }
 
-    private void checkTextFields(TextField field,String newText) {
-        if(newText.isEmpty())
+    private void checkTextFields(TextField field, String newText) {
+        if (newText.isEmpty())
             return;
-        if(newText.length()>=4)
-            field.setText(newText.substring(0,newText.length()-1));
+        if (newText.length() >= 4)
+            field.setText(newText.substring(0, newText.length() - 1));
         try {
             int amount = Integer.parseInt(newText);
-        }catch (Exception e){
-            field.setText(newText.substring(0,newText.length()-1));
+        } catch (Exception e) {
+            field.setText(newText.substring(0, newText.length() - 1));
         }
     }
 
     private void initializeUsers() {
-        try {
-            governances.setItems((ObservableList<User>) Client.getConnection().getData("MainMenuController",
-                    "removeCurrentUserFromList", (Client.getConnection().getData("Utils", "getUsersObservable"))));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        governances.setItems((ObservableList<User>) Client.getConnection().getData("MainMenuController",
+                "removeCurrentUserFromList", (Client.getConnection().getData("Utils", "getUsersObservable"))));
         //TODO: needs implementation in server
         addColumns();
         governances.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -95,6 +90,7 @@ public class CreateTradeMenu extends Application {
             tradeWithLabel.setText("Trade with: \n" + (selectedGovernance).getOwner().getNickname());
         });
     }
+
     private void addColumns() {
         TableColumn<Governance, String> tableColumn = new TableColumn<>("Avatar");
         tableColumn.setCellValueFactory(new PropertyValueFactory<>("avatar"));
@@ -106,16 +102,11 @@ public class CreateTradeMenu extends Application {
         governances.getColumns().add(tableColumn);
     }
 
-    private void initializeResourcePane(){
-        ArrayList allResources = null;
-        try {
-            allResources = Client.getConnection().getArrayData("TradeMenuController","getAllResources");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        for (int i =0;i< allResources.size()-1;i++){
+    private void initializeResourcePane() {
+        ArrayList allResources = Client.getConnection().getArrayData("TradeMenuController", "getAllResources");
+        for (int i = 0; i < allResources.size() - 1; i++) {
             AllResource resource = (AllResource) allResources.get(i);
-            ImageView item = ((ImageView)resourcePane.getChildren().get(i));
+            ImageView item = ((ImageView) resourcePane.getChildren().get(i));
             item.setImage(resource.getImage());
             item.setId(resource.getName());
             item.setOnMouseClicked(this::handle);
@@ -123,7 +114,7 @@ public class CreateTradeMenu extends Application {
     }
 
     private void handle(MouseEvent mouseEvent) {
-        selectedItem = AllResource.getAllResourceByName(((ImageView)mouseEvent.getSource()).getId());
+        selectedItem = AllResource.getAllResourceByName(((ImageView) mouseEvent.getSource()).getId());
         itemImageView.setImage(selectedItem.getImage());
         itemLabel.setText(selectedItem.getName());
 //        amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(selectedItem));
@@ -133,13 +124,13 @@ public class CreateTradeMenu extends Application {
 
     public void amountChange(MouseEvent mouseEvent) {
         int amount = Integer.parseInt(amountTextField.getText());
-        switch (((Button)mouseEvent.getSource()).getText()){
-            case "+"->{
-                if(amount<999)
+        switch (((Button) mouseEvent.getSource()).getText()) {
+            case "+" -> {
+                if (amount < 999)
                     amountTextField.setText(String.valueOf(++amount));
             }
-            case "-"->{
-                if(amount>0)
+            case "-" -> {
+                if (amount > 0)
                     amountTextField.setText(String.valueOf(--amount));
             }
         }
@@ -147,17 +138,17 @@ public class CreateTradeMenu extends Application {
 
     public void checkTrade(MouseEvent mouseEvent) {
         try {
-            if(selectedGovernance == null)
+            if (selectedGovernance == null)
                 throw new Exception();
             int amount = Integer.parseInt(String.valueOf(amountTextField.getText()));
             int price = Integer.parseInt(String.valueOf(priceTextField.getText()));
             String tradeType = ((Button) mouseEvent.getSource()).getText();
-            Client.getConnection().doInServer("TradeMenuController","checkTrade",selectedItem, amount, price, messageField.getText(), tradeType, selectedGovernance);
+            Client.getConnection().doInServer("TradeMenuController", "checkTrade", selectedItem, amount, price, messageField.getText(), tradeType, selectedGovernance);
             //TODO: need implementation in server-side
 //            TradeMenuController.checkTrade(selectedItem, amount, price, messageField.getText(), tradeType, selectedGovernance);
-            ViewUtils.alert(Alert.AlertType.INFORMATION,"Trade Successful","Trade created successfully!");
-        }catch (Exception e){
-            ViewUtils.alert(Alert.AlertType.ERROR,"Trade Error","Select governance & fill fields!");
+            ViewUtils.alert(Alert.AlertType.INFORMATION, "Trade Successful", "Trade created successfully!");
+        } catch (Exception e) {
+            ViewUtils.alert(Alert.AlertType.ERROR, "Trade Error", "Select governance & fill fields!");
         }
     }
 

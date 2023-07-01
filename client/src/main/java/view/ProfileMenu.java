@@ -98,11 +98,7 @@ public class ProfileMenu extends Application {
     public void updateNewUsernameLabel() {
         newUsername.textProperty().addListener(((observableValue, oldText, newText) -> {
 
-            try {
-                message = connection.checkAction(profileMenuController, "checkChangeUsername", newUsername.getText());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            message = connection.checkAction(profileMenuController, "checkChangeUsername", newUsername.getText());
             if (newText.isEmpty()) newUsernameError.setText("");
             else switch (message) {
                 case INVALID_USERNAME -> newUsernameError.setText("Invalid format");
@@ -205,11 +201,7 @@ public class ProfileMenu extends Application {
 
     private void updateEmailLabel() {
         newEmail.textProperty().addListener((observableValue, oldText, newText) -> {
-            try {
-                message = connection.checkAction(profileMenuController, "checkChangeEmail", newText);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            message = connection.checkAction(profileMenuController, "checkChangeEmail", newText);
 
             if (newText.isEmpty()) newEmailError.setText("");
             else switch (message) {

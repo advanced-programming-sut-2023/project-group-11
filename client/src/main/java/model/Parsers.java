@@ -63,7 +63,7 @@ public class Parsers {
         String content = message.getString("content");
         String senderName = message.getString("senderName");
         String sentTime = message.getString("sentTime");
-        return new Message(id,content, senderName, sentTime);
+        return new Message(id, content, senderName, sentTime);
     }
     public static Chat parseChatObject(){
         return null;

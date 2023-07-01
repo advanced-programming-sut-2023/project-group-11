@@ -66,7 +66,9 @@ public class Message {
         Label content = initLabel(getContent());
         Label sentTime = initLabel(getSentTime());
         Label senderName = initLabel(getSenderName());
-        HBox hBox = new HBox(senderName, sentTime);
+        Label id = initLabel(String.valueOf(getId()));
+        id.setVisible(false);
+        HBox hBox = new HBox(senderName, sentTime, id);
         hBox.setSpacing(5);
         return new VBox(content, hBox);
     }

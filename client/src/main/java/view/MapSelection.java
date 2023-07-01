@@ -1,7 +1,6 @@
 package view;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,15 +9,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Parsers;
-import model.map.Map;
 import view.enums.Message;
 import webConnection.Client;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -51,19 +46,14 @@ public class MapSelection extends Application {
     }
 
     private void setMapsOnChoiceBox() throws IOException {
-        ArrayList<String> mapNames = Client.getConnection().getArrayData("MapEditMenuController","getMapNames");
+        ArrayList<String> mapNames = Client.getConnection().getArrayData("MapEditMenuController", "getMapNames");
         mapsChoiceBox.getItems().addAll(mapNames);
-        if(mapNames.size() > 0)
+        if (mapNames.size() > 0)
             mapsChoiceBox.setValue(mapNames.get(0));
         Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap", "original");
-        mapsChoiceBox.setOnAction(actionEvent -> {
-            try {
+        mapsChoiceBox.setOnAction(actionEvent ->
                 Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap",
-                        getMapName(mapsChoiceBox.getValue()));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+                        getMapName(mapsChoiceBox.getValue())));
     }
 
     private String getMapName(String value) {
