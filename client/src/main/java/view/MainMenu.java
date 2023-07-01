@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Parsers;
 import model.chat.Chat;
@@ -25,15 +26,16 @@ import webConnection.Connection;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MainMenu extends Application {
     private static Stage stage;
-    public ListView<String> usernameListView = new ListView<>();
     private final Connection connection = Client.getConnection();
     private final String chatController = "ChatController";
     public HBox sendHBox;
+    public Button createChatRoom;
     private Chat currentChat;
     private final LinkedList<VBox> selectedMessages = new LinkedList<>();
     @FXML
@@ -47,12 +49,18 @@ public class MainMenu extends Application {
     @FXML
     private TextField messageContent;
     @FXML
-    private TextField search;
+    private TextField usernameSearch;
+    @FXML
+    private TextField roomSearch;
     @FXML
     private ImageView open;
     @FXML
     private Button sendButton;
 
+    @FXML
+    private ListView<String> usernameListView = new ListView<>();
+    @FXML
+    private ListView<String> roomListView;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -72,7 +80,8 @@ public class MainMenu extends Application {
         initializeScrollPane(chatRoom);
         currentChat = getGetGlobalChat();
         refresh();
-        search.textProperty().addListener((observableValue, old, newText) -> find(newText));
+        usernameSearch.textProperty().addListener((observableValue, old, newText) -> find("Username", newText));
+        roomSearch.textProperty().addListener((observableValue, old, newText) -> find("Room", newText));
     }
 
     private Chat getGetGlobalChat() {
@@ -142,17 +151,21 @@ public class MainMenu extends Application {
 
     public void showPrivate() {
         changeVisibility(privateChat, globalChat, chatRoom);
-        initializeChats();
-
-        VBox vBox = (VBox) privateChat.getContent();
-        vBox.getChildren().clear();
-        vBox.getChildren().addAll(search, usernameListView);
-        find("");
+        I_DONT_KNOWWW(privateChat, usernameSearch, usernameListView, "Username");
     }
 
     public void showChatRoom() {
         changeVisibility(chatRoom, globalChat, privateChat);
         initializeChats();
+    }
+
+    private void I_DONT_KNOWWW(ScrollPane scrollPane, TextField textField, ListView<String> listView, String field) {
+        initializeChats();
+
+        VBox vBox = (VBox) scrollPane.getContent();
+        vBox.getChildren().clear();
+        vBox.getChildren().addAll(textField, listView);
+        find(field, "");
     }
 
     private void initializeChats() {
@@ -215,8 +228,8 @@ public class MainMenu extends Application {
         return ((Label) hBox.getChildren().get(2)).getText();
     }
 
-    private void find(String newText) {
-        JSONArray jsonArray = connection.getJSONArrayData(chatController, "findUsername", newText);
+    private void find(String field, String newText) {
+        JSONArray jsonArray = connection.getJSONArrayData(chatController, "find" + field, newText);
         List<Object> objects = jsonArray.toList();
         List<String> usernames = new ArrayList<>();
 
@@ -225,19 +238,41 @@ public class MainMenu extends Application {
         usernameListView.setItems(FXCollections.observableList(usernames));
     }
 
-    public void list(MouseEvent mouseEvent) {
+    public void usernameListViewClicked(MouseEvent mouseEvent) {
         ArrayList<String> selectedUsernames = new ArrayList<>(usernameListView.getSelectionModel().getSelectedItems());
-        if (mouseEvent.getClickCount() == 2) {
-            if (privateChat.isVisible()) setCurrentChat(privateChat, selectedUsernames, ChatType.PRIVATE);
-            else setCurrentChat(chatRoom, selectedUsernames, ChatType.CHAT_ROOM);
-        }
+        if (mouseEvent.getClickCount() == 2) setCurrentChat(privateChat, selectedUsernames, ChatType.PRIVATE, null);
     }
 
-    private void setCurrentChat(ScrollPane scrollPane, ArrayList<String> selectedUsernames, ChatType chatType) {
+    public void roomListViewClicked(MouseEvent mouseEvent) {
+        String selected = roomListView.getSelectionModel().getSelectedItem();
+        if (mouseEvent.getClickCount() == 2) setCurrentChat(chatRoom, new ArrayList<>(Collections.singleton(selected)), ChatType.CHAT_ROOM, selected);
+    }
+
+    private void setCurrentChat(ScrollPane scrollPane, ArrayList<String> selectedUsernames, ChatType chatType, String s) {
         ((VBox) scrollPane.getContent()).getChildren().clear();
-        currentChat = Parsers.parseChatObject(connection.getJSONData(chatController, "createChat",
+        if (s == null) currentChat = Parsers.parseChatObject(connection.getJSONData(chatController, "createChat",
                 selectedUsernames, chatType));
+        else currentChat = Parsers.parseChatObject(connection.getJSONData(chatController, "createChat",
+                selectedUsernames, chatType, s));
         sendHBox.setVisible(true);
         refresh();
+    }
+
+    public void createChat() {
+        Stage stage1 = new Stage();
+        TextField textField = new TextField();
+        textField.setPromptText("groupName");
+        Button button = new Button("apply");
+        VBox vBox = new VBox(usernameSearch, usernameListView, textField, button);
+        usernameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        ArrayList<String> selectedUsernames = new ArrayList<>(usernameListView.getSelectionModel().getSelectedItems());
+        button.setOnMouseClicked(mouseEvent -> {
+            stage1.close();
+            setCurrentChat(chatRoom, selectedUsernames, ChatType.CHAT_ROOM, textField.getText());
+            usernameListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        });
+        stage1.setScene(new Scene(vBox));
+        stage1.initModality(Modality.APPLICATION_MODAL);
+        stage1.show();
     }
 }

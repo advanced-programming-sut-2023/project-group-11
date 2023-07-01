@@ -163,6 +163,10 @@ public class Stronghold {
         chats.remove(chat);
     }
 
+    public static ArrayList<Chat> getChats() {
+        return chats;
+    }
+
     public static Chat getChatByName(String name) {
         for (Chat chat : chats)
             if (chat.getName().equals(name)) return chat;

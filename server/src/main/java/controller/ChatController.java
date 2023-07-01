@@ -67,6 +67,20 @@ public class ChatController {
         return usernames;
     }
 
+    public static ArrayList<String> findRoom(ArrayList<Object> parameters) {
+        String toBeFound = (String) parameters.get(0);
+        ArrayList<String> chatNames = new ArrayList<>();
+        Pattern pattern = Pattern.compile(toBeFound);
+
+        for (Chat chat : Stronghold.getChats())
+            if (chat instanceof ChatRoom chatRoom) {
+                String chatName = chatRoom.getName();
+                if (pattern.matcher(chatName).find())
+                    chatNames.add(chatName);
+            }
+        return chatNames;
+    }
+
     public static void setGlobalChat(ArrayList<Object> parameters) {
         GlobalChat.getInstance();
     }
@@ -91,7 +105,7 @@ public class ChatController {
                 if (chat == null) chat = new PrivateChat(Stronghold.getCurrentUser(), users);
             }
             case CHAT_ROOM -> {
-                String name = (String) parameters.get(3);
+                String name = (String) parameters.get(2);
                 if ((chat = Stronghold.getChatByName(name)) == null)
                     chat = new ChatRoom(Stronghold.getCurrentUser(), name, users);
             }

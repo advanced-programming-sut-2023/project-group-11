@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
@@ -37,7 +38,8 @@
                     </cursor>
                 </ImageView>
                 <AnchorPane fx:id="chatPane" layoutX="14.0" layoutY="12.0" prefHeight="470.0" prefWidth="284.0">
-                    <HBox fx:id="sendHBox" alignment="CENTER" layoutY="420.0" prefHeight="21.0" prefWidth="285.0" spacing="10.0">
+                    <HBox fx:id="sendHBox" alignment="CENTER" layoutY="420.0" prefHeight="21.0" prefWidth="285.0"
+                          spacing="10.0">
                         <TextField fx:id="messageContent" prefWidth="170.0" promptText="message"/>
                         <Button fx:id="sendButton" mnemonicParsing="false" onMouseClicked="#send">
                             <graphic>
@@ -88,15 +90,28 @@
                     </ScrollPane>
                     <ScrollPane fx:id="privateChat" layoutX="5.0" layoutY="35.0" prefHeight="385.0" prefWidth="280.0"
                                 visible="false">
-                        <VBox prefHeight="385.0" prefWidth="280.0" spacing="5.0" styleClass="chat">
-                            <TextField fx:id="search" prefWidth="195.0" promptText="search"/>
-                            <ListView onMouseClicked="#list" fx:id="usernameListView" prefHeight="200.0"
-                                      prefWidth="200.0"/>
+                        <VBox alignment="TOP_CENTER" prefHeight="385.0" prefWidth="280.0" spacing="5.0"
+                              styleClass="chat">
+                            <TextField fx:id="usernameSearch" prefWidth="195.0" promptText="search"/>
+                            <ListView fx:id="usernameListView" onMouseClicked="#usernameListViewClicked"
+                                      prefHeight="200.0" prefWidth="200.0"/>
+                            <padding>
+                                <Insets top="20.0"/>
+                            </padding>
                         </VBox>
                     </ScrollPane>
                     <ScrollPane fx:id="chatRoom" layoutX="5.0" layoutY="35.0" prefHeight="385.0" prefWidth="280.0"
                                 visible="false">
-                        <VBox prefHeight="385.0" prefWidth="280.0" spacing="5.0" styleClass="chat"/>
+                        <VBox alignment="TOP_CENTER" prefHeight="385.0" prefWidth="280.0" spacing="5.0"
+                              styleClass="chat">
+                            <TextField fx:id="roomSearch" prefWidth="195.0" promptText="search"/>
+                            <ListView fx:id="roomListView" onMouseClicked="#roomListViewClicked" prefHeight="200.0"
+                                      prefWidth="200.0"/>
+                            <Button fx:id="createChatRoom" onMouseClicked="#createChat" mnemonicParsing="false" text="create new chat"/>
+                            <padding>
+                                <Insets top="20.0"/>
+                            </padding>
+                        </VBox>
                     </ScrollPane>
                     <HBox alignment="CENTER" layoutX="62.0" layoutY="446.0" prefHeight="25.0" prefWidth="119.0"
                           spacing="10.0">
