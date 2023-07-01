@@ -73,7 +73,7 @@ public class ChatController {
         Pattern pattern = Pattern.compile(toBeFound);
 
         for (Chat chat : Stronghold.getChats())
-            if (chat instanceof ChatRoom chatRoom) {
+            if (chat instanceof ChatRoom chatRoom && chatRoom.isInChat(Stronghold.getCurrentUser())) {
                 String chatName = chatRoom.getName();
                 if (pattern.matcher(chatName).find())
                     chatNames.add(chatName);

@@ -60,6 +60,9 @@ public abstract class Chat {
     public void removeUSer(User user) {
         users.remove(user);
     }
+    public boolean isInChat(User user){
+        return users.contains(user);
+    }
 
     public Message getMessageById(int id) {
         for (Message message : messages)

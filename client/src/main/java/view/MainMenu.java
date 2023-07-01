@@ -80,8 +80,8 @@ public class MainMenu extends Application {
         initializeScrollPane(chatRoom);
         currentChat = getGetGlobalChat();
         refresh();
-        usernameSearch.textProperty().addListener((observableValue, old, newText) -> find("Username", newText));
-        roomSearch.textProperty().addListener((observableValue, old, newText) -> find("Room", newText));
+        usernameSearch.textProperty().addListener((observableValue, old, newText) -> find(usernameListView, "Username", newText));
+        roomSearch.textProperty().addListener((observableValue, old, newText) -> find(roomListView, "Room", newText));
     }
 
     private Chat getGetGlobalChat() {
@@ -151,21 +151,22 @@ public class MainMenu extends Application {
 
     public void showPrivate() {
         changeVisibility(privateChat, globalChat, chatRoom);
-        I_DONT_KNOWWW(privateChat, usernameSearch, usernameListView, "Username");
+        I_DONT_KNOWWW(privateChat, "Username", usernameListView, usernameSearch);
     }
 
     public void showChatRoom() {
         changeVisibility(chatRoom, globalChat, privateChat);
-        initializeChats();
+        I_DONT_KNOWWW(chatRoom, "Room", roomListView, roomSearch, createChatRoom);
     }
 
-    private void I_DONT_KNOWWW(ScrollPane scrollPane, TextField textField, ListView<String> listView, String field) {
+    private void I_DONT_KNOWWW(ScrollPane scrollPane, String field, ListView<String> listView, TextField textField, Node... nodes) {
         initializeChats();
 
         VBox vBox = (VBox) scrollPane.getContent();
         vBox.getChildren().clear();
         vBox.getChildren().addAll(textField, listView);
-        find(field, "");
+        for (Node node : nodes) vBox.getChildren().add(node);
+        find(listView, field, "");
     }
 
     private void initializeChats() {
@@ -228,14 +229,14 @@ public class MainMenu extends Application {
         return ((Label) hBox.getChildren().get(2)).getText();
     }
 
-    private void find(String field, String newText) {
+    private void find(ListView<String> listView, String field, String newText) {
         JSONArray jsonArray = connection.getJSONArrayData(chatController, "find" + field, newText);
         List<Object> objects = jsonArray.toList();
         List<String> usernames = new ArrayList<>();
 
         for (Object object : objects) usernames.add((String) object);
 
-        usernameListView.setItems(FXCollections.observableList(usernames));
+        listView.setItems(FXCollections.observableList(usernames));
     }
 
     public void usernameListViewClicked(MouseEvent mouseEvent) {
@@ -245,15 +246,16 @@ public class MainMenu extends Application {
 
     public void roomListViewClicked(MouseEvent mouseEvent) {
         String selected = roomListView.getSelectionModel().getSelectedItem();
-        if (mouseEvent.getClickCount() == 2) setCurrentChat(chatRoom, new ArrayList<>(Collections.singleton(selected)), ChatType.CHAT_ROOM, selected);
+        if (mouseEvent.getClickCount() == 2)
+            setCurrentChat(chatRoom, new ArrayList<>(Collections.singleton(selected)), ChatType.CHAT_ROOM, selected);
     }
 
-    private void setCurrentChat(ScrollPane scrollPane, ArrayList<String> selectedUsernames, ChatType chatType, String s) {
+    private void setCurrentChat(ScrollPane scrollPane, ArrayList<String> selectedUsernames, ChatType chatType, String chatName) {
         ((VBox) scrollPane.getContent()).getChildren().clear();
-        if (s == null) currentChat = Parsers.parseChatObject(connection.getJSONData(chatController, "createChat",
+        if (chatName == null) currentChat = Parsers.parseChatObject(connection.getJSONData(chatController, "createChat",
                 selectedUsernames, chatType));
         else currentChat = Parsers.parseChatObject(connection.getJSONData(chatController, "createChat",
-                selectedUsernames, chatType, s));
+                selectedUsernames, chatType, chatName));
         sendHBox.setVisible(true);
         refresh();
     }
@@ -265,8 +267,8 @@ public class MainMenu extends Application {
         Button button = new Button("apply");
         VBox vBox = new VBox(usernameSearch, usernameListView, textField, button);
         usernameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        ArrayList<String> selectedUsernames = new ArrayList<>(usernameListView.getSelectionModel().getSelectedItems());
         button.setOnMouseClicked(mouseEvent -> {
+            ArrayList<String> selectedUsernames = new ArrayList<>(usernameListView.getSelectionModel().getSelectedItems());
             stage1.close();
             setCurrentChat(chatRoom, selectedUsernames, ChatType.CHAT_ROOM, textField.getText());
             usernameListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
