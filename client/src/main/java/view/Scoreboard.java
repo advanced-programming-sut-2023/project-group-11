@@ -13,6 +13,8 @@ import webConnection.Client;
 import java.io.IOException;
 import java.net.URL;
 
+import static java.lang.Thread.sleep;
+
 public class Scoreboard extends Application {
     //TODO: add lazy loading to scoreboard
     private static Stage stage;
@@ -59,6 +61,11 @@ public class Scoreboard extends Application {
     }
 
     public void refresh() throws IOException {
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         scoreboard.getItems().clear();
         scoreboard.setItems(ViewUtils.getUsersObservable());
     }

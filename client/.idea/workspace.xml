@@ -5,19 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="192bc349-0887-4b4b-9e14-9589dbcc6d89" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/webConnection/serverCommander.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_13_34__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_13_34__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_14_13__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_14_13__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_14_45__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_14_45__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ProfileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ProfileMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/Scoreboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Scoreboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SignupMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Connection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Receiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/MainMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/Stronghold.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/webConnetion/Connection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,7 +131,7 @@
       <workItem from="1688108761463" duration="12125000" />
       <workItem from="1688136494696" duration="75000" />
       <workItem from="1688138691747" duration="10147000" />
-      <workItem from="1688190666370" duration="22066000" />
+      <workItem from="1688190666370" duration="24035000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>
@@ -235,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688206623474</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="lastSeen improved (realTime notifying need debug)">
+      <created>1688225772452</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1688225772452</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -283,6 +286,18 @@
     <MESSAGE value="ScoreBoard added (needs online refreshing)" />
     <MESSAGE value="Cloning the map that we want to edit" />
     <MESSAGE value="handling exception in client in Connection.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="handling exception in client in Connection.java" />
+    <MESSAGE value="lastSeen improved (realTime notifying need debug)" />
+    <option name="LAST_COMMIT_MESSAGE" value="lastSeen improved (realTime notifying need debug)" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/view/Scoreboard.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
