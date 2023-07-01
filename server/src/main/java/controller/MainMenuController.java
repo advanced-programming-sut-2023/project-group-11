@@ -42,7 +42,7 @@ public class MainMenuController {
         String mapName = (String) parameters.get(0);
         int playersNeeded = (Integer) parameters.get(1);
         Map map = Stronghold.getMapByName(mapName);
-        Stronghold.getUnStartedGames().add(new Game(Stronghold.getCurrentUser(),map,playersNeeded));
+        new Game(Stronghold.getCurrentUser(),map,playersNeeded);
     }
 
     public static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {
@@ -175,7 +175,29 @@ public class MainMenuController {
     }
 
     public static ArrayList<Game> getUnStartedGames(ArrayList<Object> parameters){
-        return Stronghold.getUnStartedGames();
+        ArrayList<Game> games = new ArrayList<>();
+        for (Game game:Stronghold.getGames()){
+            if(game.isStarted())
+                continue;
+            if(!game.isPrivate())
+                games.add(game);
+            else if(game.getJoinedUsers().contains(Stronghold.getCurrentUser()))
+                games.add(game);
+        }
+        return games;
+    }
+
+    public static ArrayList<Game> getStartedGames(ArrayList<Object> parameters){
+        ArrayList<Game> games = new ArrayList<>();
+        for (Game game:Stronghold.getGames()){
+            if(!game.isStarted())
+                continue;
+            if(!game.isPrivate())
+                games.add(game);
+            else if(game.getJoinedUsers().contains(Stronghold.getCurrentUser()))
+                games.add(game);
+        }
+        return games;
     }
 
     public static Message joinGame(ArrayList<Object> parameters){
@@ -186,7 +208,18 @@ public class MainMenuController {
         if(game.getJoinedUsers().contains(Stronghold.getCurrentUser()))
             return Message.YOURE_IN_GAME;
         game.getJoinedUsers().add(Stronghold.getCurrentUser());
-            return Message.SUCCESS;
+        if(game.getJoinedUsers().size() == game.getPlayersNeeded())
+            game.setStarted(true);
+        return Message.SUCCESS;
+    }
+
+    public static Message startGameByAdmin(ArrayList<Object> parameters){
+        int gameId = (int) parameters.get(0);
+        Game game = Stronghold.getGameById(gameId);
+        if(game.getJoinedUsers().size() == 1)
+            return Message.ITS_JUST_YOU;
+        game.setStarted(true);
+        return Message.SUCCESS;
     }
 
     public static Message leaveGame(ArrayList<Object> parameters){
@@ -198,8 +231,14 @@ public class MainMenuController {
             if(game.getJoinedUsers().size()>1)
                 game.setOwner(game.getJoinedUsers().get(1));
             else
-                Stronghold.getUnStartedGames().remove(game);
+                Stronghold.getGames().remove(game);
         game.getJoinedUsers().remove(Stronghold.getCurrentUser());
         return Message.SUCCESS;
+    }
+
+    public static void changePublicity(ArrayList<Object> parameters){
+        int gameId = (int) parameters.get(0);
+        Game game = Stronghold.getGameById(gameId);
+        game.setPrivate(!game.isPrivate());
     }
 }

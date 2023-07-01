@@ -70,11 +70,11 @@ public class Parsers {
     }
 
     public static ArrayList<Game> parseGamesArrayList(String json) {
-        ArrayList<Game> arrayList = new ArrayList<>();
+        json = json.substring(0,json.lastIndexOf("]")+1);
+        System.out.println(json);
         Type type = new TypeToken<ArrayList<Game>>() {
         }.getType();
-        arrayList.addAll(new Gson().fromJson(json, type));
-        return arrayList;
+        return new Gson().fromJson(json, type);
     }
 
     public static ArrayList<User> parseUserArrayList(String json) {

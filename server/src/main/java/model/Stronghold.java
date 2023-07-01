@@ -20,8 +20,7 @@ public class Stronghold {
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
 
     private static ArrayList<Connection> connections = new ArrayList<>();
-    private final static ArrayList<Game> unStartedGames = new ArrayList<>();
-    private final static ArrayList<Game> allGames = new ArrayList<>();
+    private final static ArrayList<Game> games = new ArrayList<>();
     private static User currentUser;
     private static Game currentGame;
 
@@ -58,12 +57,8 @@ public class Stronghold {
         Stronghold.currentUser = currentUser;
     }
 
-    public static ArrayList<Game> getUnStartedGames() {
-        return unStartedGames;
-    }
-
-    public static ArrayList<Game> getAllGames() {
-        return allGames;
+    public static ArrayList<Game> getGames() {
+        return games;
     }
 
     public static int getRankByUsername(String name) {
@@ -189,7 +184,7 @@ public class Stronghold {
     }
 
     public static Game getGameById(int id){
-        for (Game game:allGames)
+        for (Game game: games)
             if(game.getId() == id)
                 return game;
         return null;
