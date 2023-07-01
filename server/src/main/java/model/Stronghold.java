@@ -163,9 +163,9 @@ public class Stronghold {
         chats.remove(chat);
     }
 
-    public static Chat getChatById(String id) {
+    public static Chat getChatByName(String name) {
         for (Chat chat : chats)
-            if (chat.getId().equals(id)) return chat;
+            if (chat.getName().equals(name)) return chat;
         return null;
     }
 

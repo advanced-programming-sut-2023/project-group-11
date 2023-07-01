@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -15,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Parsers;
 import model.chat.Chat;
-import model.chat.GlobalChat;
+import model.chat.ChatType;
 import model.chat.Message;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,6 +33,7 @@ public class MainMenu extends Application {
     public ListView<String> usernameListView = new ListView<>();
     private final Connection connection = Client.getConnection();
     private final String chatController = "ChatController";
+    public HBox sendHBox;
     private Chat currentChat;
     private final LinkedList<VBox> selectedMessages = new LinkedList<>();
     @FXML
@@ -68,8 +70,13 @@ public class MainMenu extends Application {
         initializeScrollPane(globalChat);
         initializeScrollPane(privateChat);
         initializeScrollPane(chatRoom);
-//        refresh();
+        currentChat = getGetGlobalChat();
+        refresh();
         search.textProperty().addListener((observableValue, old, newText) -> find(newText));
+    }
+
+    private Chat getGetGlobalChat() {
+        return Parsers.parseChatObject(connection.getJSONData(chatController, "getGlobalChat"));
     }
 
     private void initializeScrollPane(ScrollPane scrollPane) {
@@ -99,9 +106,8 @@ public class MainMenu extends Application {
     //-----------------------------------------------CHAT----------------------------------------------------//
 
     public void send() {
-        if (currentChat == null) currentChat = GlobalChat.getInstance();
         Message message = Parsers.parseMessageObject(connection.getJSONData(chatController,
-                "sendMessage", messageContent.getText(), currentChat.getId(), currentChat.getChatType().name()));
+                "sendMessage", messageContent.getText(), currentChat.getName(), currentChat.getChatType().name()));
 
         if (!message.getContent().isEmpty()) sendMessage(message);
     }
@@ -114,7 +120,12 @@ public class MainMenu extends Application {
             else selectedMessages.remove(vBox);
         });
 
-        if (currentChat.equals(GlobalChat.getInstance())) ((VBox) globalChat.getContent()).getChildren().add(vBox);
+
+        switch (currentChat.getChatType()) {
+            case GLOBAL -> ((VBox) globalChat.getContent()).getChildren().add(vBox);
+            case PRIVATE -> ((VBox) privateChat.getContent()).getChildren().add(vBox);
+            case CHAT_ROOM -> ((VBox) chatRoom.getContent()).getChildren().add(vBox);
+        }
         ViewUtils.clearFields(messageContent);
     }
 
@@ -125,16 +136,28 @@ public class MainMenu extends Application {
 
     public void showGlobal() {
         changeVisibility(globalChat, privateChat, chatRoom);
-        currentChat = GlobalChat.getInstance();
+        currentChat = getGetGlobalChat();
+        sendHBox.setVisible(true);
     }
 
     public void showPrivate() {
         changeVisibility(privateChat, globalChat, chatRoom);
+        initializeChats();
+
+        VBox vBox = (VBox) privateChat.getContent();
+        vBox.getChildren().clear();
+        vBox.getChildren().addAll(search, usernameListView);
         find("");
     }
 
     public void showChatRoom() {
         changeVisibility(chatRoom, globalChat, privateChat);
+        initializeChats();
+    }
+
+    private void initializeChats() {
+        currentChat = null;
+        sendHBox.setVisible(false);
     }
 
     public void closeChat() {
@@ -143,6 +166,7 @@ public class MainMenu extends Application {
 
     public void openChat() {
         changeVisibility(chatPane, open);
+        currentChat = getGetGlobalChat();
     }
 
     private void changeVisibility(Node node, Node... nodes) {
@@ -151,15 +175,14 @@ public class MainMenu extends Application {
     }
 
     public void refresh() {
-        if (currentChat == null) currentChat = GlobalChat.getInstance();
-        JSONArray jsonArray = connection.getJSONArrayData(chatController, "getChatMessages", currentChat.getId());
+        JSONArray jsonArray = connection.getJSONArrayData(chatController, "getChatMessages", currentChat.getName());
         ((VBox) globalChat.getContent()).getChildren().clear();
         for (Object message : jsonArray) sendMessage(Parsers.parseMessageObject((JSONObject) message));
     }
 
     public void delete() {
         for (VBox selectedMessage : selectedMessages)
-            connection.doInServer(chatController, "removeMessage", currentChat.getId(), getIdByVBox(selectedMessage));
+            connection.doInServer(chatController, "removeMessage", currentChat.getName(), getIdByVBox(selectedMessage));
         selectedMessages.clear();
         refresh();
     }
@@ -171,7 +194,7 @@ public class MainMenu extends Application {
             String string = ((Label) vBox.getChildren().get(0)).getText();
             messageContent.setText(string);
             sendButton.setOnMouseClicked(mouseEvent -> {
-                connection.doInServer(chatController, "editMessage", currentChat.getId(), getIdByVBox(selectedMessages.get(0)), messageContent.getText());
+                connection.doInServer(chatController, "editMessage", currentChat.getName(), getIdByVBox(selectedMessages.get(0)), messageContent.getText());
                 selectedMessages.clear();
                 refresh();
                 resetSendButton();
@@ -192,8 +215,27 @@ public class MainMenu extends Application {
         JSONArray jsonArray = connection.getJSONArrayData(chatController, "findUsername", newText);
         List<Object> objects = jsonArray.toList();
         List<String> usernames = new ArrayList<>();
+        List<HBox> hBoxes = new ArrayList<>();
+
 
         for (Object object : objects) usernames.add((String) object);
+
         usernameListView.setItems(FXCollections.observableList(usernames));
+    }
+
+    public void list(MouseEvent mouseEvent) {
+        ArrayList<String> selectedUsernames = new ArrayList<>(usernameListView.getSelectionModel().getSelectedItems());
+        if (mouseEvent.getClickCount() == 2) {
+            if (privateChat.isVisible()) {
+                setCurrentChat(selectedUsernames, ChatType.PRIVATE);
+                ((VBox) privateChat.getContent()).getChildren().clear();
+            } else setCurrentChat(selectedUsernames, ChatType.CHAT_ROOM);
+        }
+    }
+
+    private void setCurrentChat(ArrayList<String> selectedUsernames, ChatType chatType) {
+        currentChat = Parsers.parseChatObject(connection.getJSONData(chatController, "createChat",
+                selectedUsernames, chatType));
+        sendHBox.setVisible(true);
     }
 }

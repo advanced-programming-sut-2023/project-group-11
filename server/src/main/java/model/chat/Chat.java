@@ -1,25 +1,35 @@
 package model.chat;
 
 import model.Stronghold;
+import model.User;
 import webConnetion.Connection;
 
 import java.util.ArrayList;
 
 public abstract class Chat {
-    private final ArrayList<Message> messages = new ArrayList<>();
-    private final ArrayList<Connection> connections = new ArrayList<>();
-    private final String id;
+    private transient final ArrayList<Message> messages = new ArrayList<>();
+    private transient final User owner;
+    protected transient final ArrayList<Connection> connections = new ArrayList<>();
+    protected transient final ArrayList<User> users;
+    private final String name;
     private final ChatType chatType;
-    private final int MAX_MESSAGE_NUMBER = 100;
+    private transient final int MAX_MESSAGE_NUMBER = 100;
 
-    public Chat(String id, ChatType chatType) {
-        this.id = id;
+    public Chat(User owner, String name, ChatType chatType, ArrayList<User> users) {
+        this.owner = owner;
+        this.name = name;
         this.chatType = chatType;
+        this.users = users;
+        this.users.add(0, owner);
         Stronghold.addChat(this);
     }
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
+    }
+
+    public User getOwner() {
+        return owner;
     }
 
     public ArrayList<Message> getMessages() {
@@ -35,12 +45,20 @@ public abstract class Chat {
         if (messages.size() > MAX_MESSAGE_NUMBER) messages.remove(0);
     }
 
-    public void addUSer(Connection user) {
-        connections.add(user);
+    public void addConnection(Connection connection) {
+        connections.add(connection);
     }
 
-    public void removeUSer(Connection user) {
-        connections.remove(user);
+    public void removeConnection(Connection connection) {
+        connections.remove(connection);
+    }
+
+    public void addUSer(User user) {
+        users.add(user);
+    }
+
+    public void removeUSer(User user) {
+        users.remove(user);
     }
 
     public Message getMessageById(int id) {
