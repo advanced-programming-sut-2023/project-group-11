@@ -1,9 +1,8 @@
 package model;
 
-import model.chat.Chat;
-import model.chat.Message;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import model.chat.*;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
@@ -47,13 +46,14 @@ public class Parsers {
     }
 
     public static Tile parseTileObject(JSONObject tile) {
-        int[] location = new int[] {(Integer) ((JSONArray) tile.get("location")).get(0), (Integer) ((JSONArray) tile.get("location")).get(1)};
+        int[] location = new int[]{(Integer) ((JSONArray) tile.get("location")).get(0), (Integer) ((JSONArray) tile.get("location")).get(1)};
         Texture texture = Texture.valueOf(((String) tile.get("texture")));
         Tree tree = null;
         try {
             if (tile.get("tree") != null)
                 tree = new Tree((String) ((JSONObject) tile.get("tree")).get("name"));
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
         return new Tile(texture, tree, location[0], location[1]);
     }
@@ -65,7 +65,16 @@ public class Parsers {
         String sentTime = message.getString("sentTime");
         return new Message(id, content, senderName, sentTime);
     }
-    public static Chat parseChatObject(){
+
+    public static Chat parseChatObject(JSONObject jsonObject) {
+        String name = jsonObject.getString("name");
+        ChatType chatType = ChatType.valueOf(jsonObject.getString("chatType"));
+        if (chatType.equals(ChatType.GLOBAL))
+            return GlobalChat.getInstance();
+        if (chatType.equals(ChatType.PRIVATE))
+            return new PrivateChat(name);
+        if (chatType.equals(ChatType.CHAT_ROOM))
+            return new ChatRoom(name);
         return null;
     }
 
@@ -78,7 +87,8 @@ public class Parsers {
     }
 
     public static ArrayList<User> parseUserArrayList(String json) {
-        Type userDatabaseType = new TypeToken<ArrayList<User>>() {}.getType();
+        Type userDatabaseType = new TypeToken<ArrayList<User>>() {
+        }.getType();
         return new Gson().fromJson(json, userDatabaseType);
     }
 }

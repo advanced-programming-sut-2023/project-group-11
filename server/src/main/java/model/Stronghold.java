@@ -1,10 +1,10 @@
 package model;
 
 import model.chat.Chat;
+import model.chat.PrivateChat;
 import model.map.Map;
 import webConnetion.Connection;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Stronghold {
@@ -163,15 +163,19 @@ public class Stronghold {
         chats.remove(chat);
     }
 
-    public static Chat getChatById(String id) {
+    public static ArrayList<Chat> getChats() {
+        return chats;
+    }
+
+    public static Chat getChatByName(String name) {
         for (Chat chat : chats)
-            if (chat.getId().equals(id)) return chat;
+            if (chat.getName().equals(name)) return chat;
         return null;
     }
 
-    public static Game getGameById(int id){
-        for (Game game: games)
-            if(game.getId() == id)
+    public static Game getGameById(int id) {
+        for (Game game : games)
+            if (game.getId() == id)
                 return game;
         return null;
     }

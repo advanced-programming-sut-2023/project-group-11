@@ -1,7 +1,7 @@
 package model.chat;
 
 public class PrivateChat extends Chat {
-    public PrivateChat(String id) {
-        super(id, ChatType.PRIVATE);
+    public PrivateChat(String name) {
+        super(name, ChatType.PRIVATE);
     }
 }

@@ -5,23 +5,19 @@ import webConnection.Connection;
 import java.util.ArrayList;
 
 public abstract class Chat {
-    private final ArrayList<Message> messages = new ArrayList<>();
+//    private final ArrayList<Message> messages = new ArrayList<>();
     private final ArrayList<Connection> connections = new ArrayList<>();
-    private final String id;
+    private final String name;
     private final ChatType chatType;
 
-    public Chat(String id, ChatType chatType) {
-        this.id = id;
+    public Chat(String name, ChatType chatType) {
+        this.name = name;
         this.chatType = chatType;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public ArrayList<Message> getMessages() {
-        return messages;
-    }
+//    public ArrayList<Message> getMessages() {
+//        return messages;
+//    }
 
     public ChatType getChatType() {
         return chatType;
@@ -31,7 +27,7 @@ public abstract class Chat {
         for (Connection connection : connections) {
 
         }
-        messages.add(message);
+//        messages.add(message);
     }
 
     public void addUSer(Connection user) {
@@ -40,5 +36,9 @@ public abstract class Chat {
 
     public void removeUSer(Connection user) {
         connections.remove(user);
+    }
+
+    public String getName() {
+        return name;
     }
 }

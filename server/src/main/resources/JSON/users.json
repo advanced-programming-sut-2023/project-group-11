@@ -50,7 +50,7 @@
     "email": "amir@gma.co",
     "slogan": "I shall have my revenge, in this life or the next",
     "avatarFileName": "8.png",
-    "lastSeen": "11:12",
+    "lastSeen": "14:28",
     "score": 2000,
     "rank": 4,
     "stayLoggedIn": false
@@ -81,6 +81,20 @@
     "lastSeen": "16:17",
     "score": 0,
     "rank": 6,
+    "stayLoggedIn": false
+  },
+  {
+    "recoveryQuestion": "What is my mother's last name?",
+    "recoveryAnswer": "6bf4b01a8284fc3261e99be9d478a4eab1d9d2cc4ae1fae85cae2ea0e766b337",
+    "username": "amir2",
+    "password": "5b91ecdc23d788fc7860dc388077ad6fdd240f33ff81159d53c1031b3e57c2b5",
+    "nickname": "a",
+    "email": "a@g.c",
+    "slogan": "",
+    "avatarFileName": "1.png",
+    "lastSeen": "13:28",
+    "score": 0,
+    "rank": 0,
     "stayLoggedIn": false
   }
 ]

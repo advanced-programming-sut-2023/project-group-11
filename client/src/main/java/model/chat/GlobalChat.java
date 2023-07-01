@@ -5,8 +5,8 @@ import webConnection.Client;
 public class GlobalChat extends Chat {
     private static GlobalChat globalChat;
 
-    public GlobalChat(String id) {
-        super(id, ChatType.GLOBAL);
+    public GlobalChat(String name) {
+        super(name, ChatType.GLOBAL);
     }
 
     public static GlobalChat getInstance() {
