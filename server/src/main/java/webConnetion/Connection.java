@@ -1,11 +1,13 @@
 package webConnetion;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import model.Stronghold;
 import model.User;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.Socket;
@@ -32,14 +34,14 @@ public class Connection extends Thread {
         while (true) {
             try {
 //                synchronized (Stronghold.class){
-                    ReceivingPacket receivingPacket = new ReceivingPacket(in.readUTF());
-                    Class<?> controllerClass = Class.forName("controller." + receivingPacket.getClassName());
-                    Method controllerMethod = controllerClass.getDeclaredMethod(receivingPacket.getMethodName(), ArrayList.class);
-                    if (receivingPacket.getMethodName().equals("loginUser"))
-                        currentUser = Stronghold.getUserByUsername((String) receivingPacket.getParameters().get(0));
-                    if (currentUser != null)
-                        Stronghold.setCurrentUser(currentUser);
-                    sendRespond(receivingPacket, controllerMethod);
+                ReceivingPacket receivingPacket = new ReceivingPacket(in.readUTF());
+                Class<?> controllerClass = Class.forName("controller." + receivingPacket.getClassName());
+                Method controllerMethod = controllerClass.getDeclaredMethod(receivingPacket.getMethodName(), ArrayList.class);
+                if (receivingPacket.getMethodName().equals("loginUser"))
+                    currentUser = Stronghold.getUserByUsername((String) receivingPacket.getParameters().get(0));
+                if (currentUser != null)
+                    Stronghold.setCurrentUser(currentUser);
+                sendRespond(receivingPacket, controllerMethod);
 //                }
             } catch (IOException e) {
                 System.out.println("Connection \"ip=" + socket.getInetAddress().getHostAddress() + " port=" + socket.getPort() + "\" lost!");
@@ -65,8 +67,21 @@ public class Connection extends Thread {
         }
     }
 
+    public static void sendNotification(String menuName, String methodName, Connection connection) {
+        String packet = new Gson().toJson(new SendingPacket("command", menuName, methodName));
+        try {
+            new ObjectOutputStream(connection.getOut()).writeObject(packet);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public User getCurrentUser() {
         return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
     public boolean isInScoreboard() {

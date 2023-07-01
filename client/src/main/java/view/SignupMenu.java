@@ -84,6 +84,7 @@ public class SignupMenu extends Application {
                 new URL(SignupMenu.class.getResource("/FXML/SignupMenu.fxml").toExternalForm()));
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
+        stage.setOnCloseRequest(windowEvent -> System.exit(0));
 
         stage.show();
 

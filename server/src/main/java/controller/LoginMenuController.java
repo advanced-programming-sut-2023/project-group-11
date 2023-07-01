@@ -3,6 +3,7 @@ package controller;
 import model.Delay;
 import model.Stronghold;
 import model.User;
+import webConnetion.Connection;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,7 @@ public class LoginMenuController {
         String username = (String) parameters.get(0);
         User user = Stronghold.getUserByUsername(username);
         Stronghold.setCurrentUser(user);
+        Utils.alertScoreboardUpdating();
     }
 
     public static Message checkForgotPassword(ArrayList<Object> parameters) {

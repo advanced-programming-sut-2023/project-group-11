@@ -15,6 +15,7 @@ import model.map.Texture;
 import model.map.Tile;
 import model.people.Lord;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -170,7 +171,9 @@ public class MainMenuController {
     public static void logout(ArrayList<Object> parameters) {
         User currentUser = Stronghold.getCurrentUser();
         currentUser.setStayLoggedIn(false);
-        Stronghold.removeConnection(Stronghold.getConnectionByUser(currentUser));
+        currentUser.setLastSeen();
+        Stronghold.getConnectionByUser(currentUser).setCurrentUser(null);
+        Utils.alertScoreboardUpdating();
         Stronghold.setCurrentUser(null);
     }
 

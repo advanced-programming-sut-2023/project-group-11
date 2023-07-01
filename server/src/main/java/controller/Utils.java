@@ -6,14 +6,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import model.Governance;
 import model.Stronghold;
 import model.User;
 import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
+import webConnetion.Connection;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -98,7 +96,7 @@ public class Utils {
     }
 
     private static void updateLastSeen() {
-        Stronghold.getUsers().forEach(User::updateLastSeen);
+        Stronghold.getUsers().forEach(User::updateOnlineState);
     }
 
     private static void setRanks(ArrayList<User> users) {
@@ -130,5 +128,15 @@ public class Utils {
 
     public static ArrayList<Map> getMaps(ArrayList<Object> parameters) {
         return Stronghold.getMaps();
+    }
+
+    public static void setInScoreboard(ArrayList<Object> parameters) {
+        Stronghold.getConnectionByUser(Stronghold.getCurrentUser()).setInScoreboard((Boolean) parameters.get(0));
+    }
+
+    public static void alertScoreboardUpdating() {
+        for (Connection connection : Stronghold.getConnections())
+            if (connection.isInScoreboard())
+                Connection.sendNotification("Scoreboard", "updateScoreboard", connection);
     }
 }

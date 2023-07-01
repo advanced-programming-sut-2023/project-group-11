@@ -2,6 +2,7 @@ package model;
 
 import model.chat.Chat;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class User implements Comparable<User> {
@@ -119,17 +120,17 @@ public class User implements Comparable<User> {
         return chats;
     }
 
-    public void updateLastSeen() {
-        if (Stronghold.getConnectionByUser(this) != null) setLastSeen("Online");
+    public void updateOnlineState() {
+        if (Stronghold.getConnectionByUser(this) != null) lastSeen = "Online";
     }
 
     public String getLastSeen() {
-        updateLastSeen();
+        updateOnlineState();
         return lastSeen;
     }
 
-    public void setLastSeen(String lastSeen) {
-        this.lastSeen = lastSeen;
+    public void setLastSeen() {
+        this.lastSeen = LocalTime.now().getHour() + ":" + LocalTime.now().getMinute();
     }
 
     @Override

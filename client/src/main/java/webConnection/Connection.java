@@ -10,6 +10,8 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Connection extends Thread {
     private Socket socket;
@@ -106,8 +108,11 @@ public class Connection extends Thread {
                     throw new RuntimeException(e);
                 }
             }
-        }//TODO: handle with regex
-        return input.substring(9,input.length()-1);
+        }
+        Pattern pattern = Pattern.compile("\\{\"value\":(?<value>.+),\"type\".+");
+        Matcher matcher = pattern.matcher(input);
+        matcher.matches();
+        return matcher.group("value");
     }
 
     private Message getRespond(){

@@ -1,13 +1,9 @@
 package model;
 
-import com.google.gson.Gson;
 import model.chat.Chat;
 import model.map.Map;
 import webConnetion.Connection;
-import webConnetion.SendingPacket;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -154,18 +150,8 @@ public class Stronghold {
     }
 
     public static void removeConnection(Connection connection) {
-        connection.getCurrentUser().setLastSeen(LocalTime.now().getHour() + ":" + LocalTime.now().getMinute());
         connections.remove(connection);
-        String packet = new Gson().toJson(new SendingPacket("command", "Scoreboard", "refresh"));
-        for (Connection connection1 : connections) {
-            if (connection1.isInScoreboard()) {
-                try {
-                    new ObjectOutputStream(connection1.getOut()).writeObject(packet);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+        connection.getCurrentUser().setLastSeen();
     }
 
     public static Connection getConnectionByUser(User user) {
@@ -188,9 +174,9 @@ public class Stronghold {
         return null;
     }
 
-    public static Game getGameById(int id){
-        for (Game game:allGames)
-            if(game.getId() == id)
+    public static Game getGameById(int id) {
+        for (Game game : allGames)
+            if (game.getId() == id)
                 return game;
         return null;
     }

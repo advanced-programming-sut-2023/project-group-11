@@ -42,7 +42,6 @@ public class Receiver extends Thread {
         while (true) {
             try {
                 receivedPacket = (String) new ObjectInputStream(in).readObject();
-                System.out.println(receivedPacket);
                 JSONObject packet = new JSONObject(receivedPacket);
                 if (packet.get("type").equals("command")) {
                     Class<?> menu = Class.forName("view." + packet.get("menuName"));

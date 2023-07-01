@@ -237,6 +237,7 @@ public class ProfileMenu extends Application {
     }
 
     public void showScoreboard() throws Exception {
+        Client.getConnection().doInServer("Utils", "setInScoreboard", true);
         new Scoreboard().start(new Stage());
     }
 
