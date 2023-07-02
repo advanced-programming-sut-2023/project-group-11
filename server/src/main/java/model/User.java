@@ -1,7 +1,6 @@
 package model;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class User implements Comparable<User> {
@@ -132,10 +131,6 @@ public class User implements Comparable<User> {
         friends.add(username);
     }
 
-    public void removeFriend(String username) {
-        friends.remove(username);
-    }
-
     public HashSet<String> getFriendsRequest() {
         return friendsRequest;
     }
@@ -151,6 +146,16 @@ public class User implements Comparable<User> {
     public boolean isAlreadyFriend(User currentUser) {
         for (String friendName : friends)
             if (currentUser.getUsername().equals(friendName)) return true;
+        return false;
+    }
+
+    public boolean hasReachedFriendshipLimit() {
+        return friends.size() > 100;
+    }
+
+    public boolean hasRequest(String username) {
+        for (String s : friendsRequest)
+            if (username.equals(s)) return true;
         return false;
     }
 

@@ -19,7 +19,7 @@
                 <Button layoutX="786.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#refresh"
                         prefWidth="100.0" styleClass="menu-button" text="Refresh"/>
                 <Button fx:id="addFriendButton" layoutX="427.0" layoutY="498.0" mnemonicParsing="false"
-                        onMouseClicked="#addFriend" visible="false">
+                        onMouseClicked="#addFriendRequest" visible="false">
                     <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../IMG/add friend.png"/>

@@ -5,15 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Parsers;
 import model.User;
+import view.enums.Message;
 import webConnection.Client;
 import webConnection.Connection;
 
@@ -74,10 +72,31 @@ public class Scoreboard extends Application {
         instance.refresh();
     }
 
-    public void addFriend() {
+    public void addFriendRequest() {
         ArrayList<User> users = new ArrayList<>(scoreboard.getSelectionModel().getSelectedItems());
-        users.forEach(user -> Client.getConnection().doInServer(
-                "ProfileMenuController", "addFriendRequest", user.getUsername()));
+        Message message;
+        for (User user : users) {
+            message = Client.getConnection().checkAction(
+                    "ProfileMenuController", "addFriendRequest", user.getUsername());
+            handleFriendError(message);
+        }
+    }
+
+    private static void handleFriendError(Message message) {
+        switch (message) {
+            case ALREADY_REQUESTED -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "You have already requested friendship to this user!");
+            case ALREADY_FRIEND -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "You are already friend with this user");
+            case YOU_REACHED_FRIEND_LIMIT -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "You have 100 friends. You can't add more!");
+            case HE_REACHED_FRIEND_LIMIT -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "This user has 100 friends. He have more!");
+            case SELF_FRIENDSHIP -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "You can't make friendship with yourself!");
+            case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION, "Add Friend Successful",
+                    "Request sent!");
+        }
     }
 
     private void find(TableView tableView, String newText) {

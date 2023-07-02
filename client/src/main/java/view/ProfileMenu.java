@@ -16,7 +16,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -305,7 +304,26 @@ public class ProfileMenu extends Application {
     }
 
     private void accept(ArrayList<User> users) {
-        for (User user : users)
-            connection.doInServer(profileMenuController, "addFriend", user.getUsername());
+        for (User user : users) {
+            message = connection.checkAction(profileMenuController, "addFriend", user.getUsername());
+            handleFriendError(message);
+        }
+    }
+
+    private static void handleFriendError(Message message) {
+        switch (message) {
+            case ALREADY_REQUESTED -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "You have already requested friendship to this user!");
+            case ALREADY_FRIEND -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "You are already friend with this user");
+            case YOU_REACHED_FRIEND_LIMIT -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "You have 100 friends. You can't add more!");
+            case HE_REACHED_FRIEND_LIMIT -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "This user has 100 friends. He have more!");
+            case SELF_FRIENDSHIP -> ViewUtils.alert(Alert.AlertType.ERROR, "Add Friend Error",
+                    "You can't make friendship with yourself!");
+            case SUCCESS -> ViewUtils.alert(Alert.AlertType.INFORMATION, "Add Friend Successful",
+                    "You are now friend with this user!");
+        }
     }
 }

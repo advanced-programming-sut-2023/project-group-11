@@ -91,22 +91,33 @@ public class ProfileMenuController {
         Stronghold.getCurrentUser().setSlogan(null);
     }
 
-    public static void addFriendRequest(ArrayList<Object> parameters) {
-        String username = (String) parameters.get(0);
-        User user = Stronghold.getUserByUsername(username);
-        if (!Stronghold.getCurrentUser().equals(user) && !user.isAlreadyFriend(Stronghold.getCurrentUser()))
-            user.addFriendRequest(Stronghold.getCurrentUser().getUsername());
-    }
-
-    public static void addFriend(ArrayList<Object> parameters) {
+    public static Message addFriendRequest(ArrayList<Object> parameters) {
         String username = (String) parameters.get(0);
         User user = Stronghold.getUserByUsername(username);
         User currentUser = Stronghold.getCurrentUser();
+
+        if (currentUser.equals(user)) return Message.SELF_FRIENDSHIP;
+        if (currentUser.hasReachedFriendshipLimit()) return Message.YOU_REACHED_FRIEND_LIMIT;
+        if (user.hasReachedFriendshipLimit()) return Message.HE_REACHED_FRIEND_LIMIT;
+        if (user.hasRequest(currentUser.getUsername())) return Message.ALREADY_REQUESTED;
+        if (user.isAlreadyFriend(currentUser)) return Message.ALREADY_FRIEND;
+
+        user.addFriendRequest(Stronghold.getCurrentUser().getUsername());
+        return Message.SUCCESS;
+    }
+
+    public static Message addFriend(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
+        User user = Stronghold.getUserByUsername(username);
+        User currentUser = Stronghold.getCurrentUser();
+        if (user.hasReachedFriendshipLimit()) return Message.HE_REACHED_FRIEND_LIMIT;
+        if (currentUser.hasReachedFriendshipLimit()) return Message.YOU_REACHED_FRIEND_LIMIT;
 
         Stronghold.getCurrentUser().addFriend(user.getUsername());
         Stronghold.getCurrentUser().removeFriendRequest(user.getUsername());
         user.addFriend(currentUser.getUsername());
         user.removeFriendRequest(currentUser.getUsername());
+        return Message.SUCCESS;
     }
 
     public static ArrayList<User> getCurrentUserFriendsRequest(ArrayList<Object> parameters) {
@@ -120,6 +131,7 @@ public class ProfileMenuController {
         Stronghold.getCurrentUser().getFriends().forEach(username -> users.add(Stronghold.getUserByUsername(username)));
         return users;
     }
+
     public static ArrayList<User> findUser(ArrayList<Object> parameters) {
         String toBeFound = (String) parameters.get(0);
         ArrayList<User> users = new ArrayList<>();
