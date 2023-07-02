@@ -224,7 +224,7 @@ public class MainMenu extends Application {
         System.out.println(selectedMessages.size());
         if (selectedMessages.size() == 1) {
             VBox vBox = selectedMessages.get(0);
-            String string = ((Label) vBox.getChildren().get(0)).getText();
+            String string = getLabelText(vBox);
             messageContent.setText(string);
             sendButton.setOnMouseClicked(mouseEvent -> {
                 connection.doInServer(chatController, "editMessage", currentChat.getName(), getIdByVBox(selectedMessages.get(0)), messageContent.getText());
@@ -233,6 +233,14 @@ public class MainMenu extends Application {
                 resetSendButton();
             });
         }
+    }
+
+    private String getLabelText(VBox vBox) {
+        HBox hBox = (HBox) vBox.getChildren().get(0);
+        for (Node child : hBox.getChildren())
+            if (child instanceof Label label)
+                return label.getText();
+        return null;
     }
 
     private void resetSendButton() {
