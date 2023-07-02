@@ -115,8 +115,8 @@ public class MainMenu extends Application {
     }
 
     public void logout() throws Exception {
+        connection.doInServer("Utils", "setInMainMenu", false);
         connection.doInServer("MainMenuController", "logout");
-        Client.getConnection().doInServer("Utils", "setInMainMenu", false);
         new SignupMenu().start(SignupMenu.getStage());
     }
 
