@@ -67,12 +67,13 @@ public class Parsers {
         String sentTime = message.getString("sentTime");
         String avatarAddress = message.getString("avatarAddress");
         boolean seen = message.getBoolean("seen");
+        boolean isOwnerCurrentUser = message.getBoolean("isOwnerCurrentUser");
         try {
             sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return new Message(id, content, senderName, sentTime, avatarAddress, seen);
+        return new Message(id, content, senderName, sentTime, avatarAddress, seen, isOwnerCurrentUser);
     }
 
     public static Chat parseChatObject(JSONObject jsonObject) {

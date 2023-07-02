@@ -87,13 +87,13 @@ public class MainMenu extends Application {
         initializeScrollPane(globalChat);
         initializeScrollPane(privateChat);
         initializeScrollPane(chatRoom);
-        currentChat = getGetGlobalChat();
+        currentChat = getGlobalChat();
         refresh();
         usernameSearch.textProperty().addListener((observableValue, old, newText) -> find(usernameListView, "Username", newText));
         roomSearch.textProperty().addListener((observableValue, old, newText) -> find(roomListView, "Room", newText));
     }
 
-    private Chat getGetGlobalChat() {
+    private Chat getGlobalChat() {
         return Parsers.parseChatObject(connection.getJSONData(chatController, "getGlobalChat"));
     }
 
@@ -140,7 +140,6 @@ public class MainMenu extends Application {
             else selectedMessages.remove(vBox);
         });
 
-
         switch (currentChat.getChatType()) {
             case GLOBAL -> ((VBox) globalChat.getContent()).getChildren().add(vBox);
             case PRIVATE -> ((VBox) privateChat.getContent()).getChildren().add(vBox);
@@ -156,8 +155,9 @@ public class MainMenu extends Application {
 
     public void showGlobal() {
         changeVisibility(globalChat, privateChat, chatRoom);
-        currentChat = getGetGlobalChat();
+        currentChat = getGlobalChat();
         sendHBox.setVisible(true);
+        refresh();
     }
 
     public void showPrivate() {
@@ -191,7 +191,7 @@ public class MainMenu extends Application {
 
     public void openChat() {
         changeVisibility(chatPane, open);
-        currentChat = getGetGlobalChat();
+        currentChat = getGlobalChat();
     }
 
     private void changeVisibility(Node node, Node... nodes) {
