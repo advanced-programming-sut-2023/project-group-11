@@ -12,16 +12,16 @@
     "email": "Sadegh.sg.snn@gmail.com",
     "slogan": "You are clearly no match for my forces! Give in now, my friend!",
     "avatarFileName": "6.png",
-    "lastSeen": "20:9",
+    "lastSeen": "14:14",
     "score": 32000,
     "rank": 1,
     "stayLoggedIn": false
   },
   {
-    "friends": [],
-    "friendsRequest": [
+    "friends": [
       "amir"
     ],
+    "friendsRequest": [],
     "recoveryQuestion": "What is my father's name?",
     "recoveryAnswer": "bd7d09eb9ac8edee53f7ababfa29dad2e8458bc153e7dfe8841511f38273fe60",
     "username": "Sadegh",
@@ -30,7 +30,7 @@
     "email": "sadegh.sg.sn@gmail.com",
     "slogan": "I shall have my revenge, in this life or the next",
     "avatarFileName": "desktop-wallpaper-diablo-3-crusader-armor-iphone-8-7-6s-crusaders-thumbnail.jpg",
-    "lastSeen": "20:9",
+    "lastSeen": "14:14",
     "score": 22000,
     "rank": 2,
     "stayLoggedIn": false
@@ -53,7 +53,8 @@
   },
   {
     "friends": [
-      "amir2"
+      "amir2",
+      "Sadegh"
     ],
     "friendsRequest": [],
     "recoveryQuestion": "What is my best friend's name?",
