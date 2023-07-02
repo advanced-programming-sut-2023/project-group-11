@@ -104,6 +104,15 @@ public class ViewUtils {
         tableColumn.setSortable(false);
         tableView.getColumns().add(tableColumn);
     }
+
+    public static void addColumns(TableView scoreboard) {
+        columnMaker(scoreboard, "Avatar", "avatar");
+        columnMaker(scoreboard, "Rank", "rank");
+        columnMaker(scoreboard, "Username", "username");
+        columnMaker(scoreboard, "Score", "score");
+        columnMaker(scoreboard, "LastSeen", "lastSeen");
+        scoreboard.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
 //
 //    public static GameMenu getGameMenu() {
 //        return gameMenu;

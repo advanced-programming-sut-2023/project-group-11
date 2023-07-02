@@ -114,17 +114,6 @@ public class Utils {
         ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
         return FXCollections.observableArrayList(governances);
     }
-//
-//    public static void columnMaker(ArrayList<Object> parameters) {
-//        TableView tableView = (TableView) parameters.get(0);
-//        String header = (String) parameters.get(1);
-//        String userField = (String) parameters.get(2);
-//
-//        TableColumn<User, String> tableColumn = new TableColumn<>(header);
-//        tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
-//        tableColumn.setSortable(false);
-//        tableView.getColumns().add(tableColumn);
-//    }
 
     public static ArrayList<Map> getMaps(ArrayList<Object> parameters) {
         return Stronghold.getMaps();

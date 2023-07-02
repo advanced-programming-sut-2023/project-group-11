@@ -1,12 +1,14 @@
 package controller;
 
 import model.Stronghold;
+import model.User;
 import model.map.Map;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class ProfileMenuController {
     public static Message checkChangeUsername(ArrayList<Object> parameters) {
@@ -21,7 +23,7 @@ public class ProfileMenuController {
         return Message.SUCCESS;
     }
 
-    public static void changeUsername(ArrayList<Object> parameters ) {
+    public static void changeUsername(ArrayList<Object> parameters) {
         String newUsername = (String) parameters.get(0);
         String oldUsername = Stronghold.getCurrentUser().getUsername();
 
@@ -87,5 +89,46 @@ public class ProfileMenuController {
 
     public static void removeSlogan(ArrayList<Object> parameters) {
         Stronghold.getCurrentUser().setSlogan(null);
+    }
+
+    public static void addFriendRequest(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
+        User user = Stronghold.getUserByUsername(username);
+        if (!Stronghold.getCurrentUser().equals(user) && !user.isAlreadyFriend(Stronghold.getCurrentUser()))
+            user.addFriendRequest(Stronghold.getCurrentUser().getUsername());
+    }
+
+    public static void addFriend(ArrayList<Object> parameters) {
+        String username = (String) parameters.get(0);
+        User user = Stronghold.getUserByUsername(username);
+        User currentUser = Stronghold.getCurrentUser();
+
+        Stronghold.getCurrentUser().addFriend(user.getUsername());
+        Stronghold.getCurrentUser().removeFriendRequest(user.getUsername());
+        user.addFriend(currentUser.getUsername());
+        user.removeFriendRequest(currentUser.getUsername());
+    }
+
+    public static ArrayList<User> getCurrentUserFriendsRequest(ArrayList<Object> parameters) {
+        ArrayList<User> users = new ArrayList<>();
+        Stronghold.getCurrentUser().getFriendsRequest().forEach(username -> users.add(Stronghold.getUserByUsername(username)));
+        return users;
+    }
+
+    public static ArrayList<User> getCurrentUserFriends(ArrayList<Object> parameters) {
+        ArrayList<User> users = new ArrayList<>();
+        Stronghold.getCurrentUser().getFriends().forEach(username -> users.add(Stronghold.getUserByUsername(username)));
+        return users;
+    }
+    public static ArrayList<User> findUser(ArrayList<Object> parameters) {
+        String toBeFound = (String) parameters.get(0);
+        ArrayList<User> users = new ArrayList<>();
+        Pattern pattern = Pattern.compile(toBeFound);
+
+        for (User user : Stronghold.getUsers()) {
+            String username = user.getUsername();
+            if (pattern.matcher(username).find()) users.add(user);
+        }
+        return users;
     }
 }

@@ -1,20 +1,27 @@
 package view;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Parsers;
+import model.User;
 import org.json.JSONArray;
 import view.enums.Message;
 import webConnection.Client;
@@ -29,6 +36,7 @@ import java.util.ArrayList;
 public class ProfileMenu extends Application {
     //TODO: copy other users' avatars for current user
     private static Stage stage;
+    private final TableView<User> tableView = new TableView<>();
     @FXML
     private Label username;
     @FXML
@@ -86,7 +94,7 @@ public class ProfileMenu extends Application {
         currentSlogan = userFields[4];
     }
 
-    private void updateDefaultLabels() throws IOException {
+    private void updateDefaultLabels() {
         username.setText(currentUsername);
         email.setText(currentEmail);
         nickname.setText(currentNickname);
@@ -108,7 +116,7 @@ public class ProfileMenu extends Application {
         }));
     }
 
-    public void changeUsername() throws Exception {
+    public void changeUsername() {
         message = connection.checkAction(profileMenuController, "checkChangeUsername", newUsername.getText());
 
         switch (message) {
@@ -126,7 +134,7 @@ public class ProfileMenu extends Application {
     }
 
     @FXML
-    private void createAvatarChooser() throws IOException, URISyntaxException {
+    private void createAvatarChooser() throws URISyntaxException {
         FileChooser avatarChooser = new FileChooser();
 
         configureFileChooser(avatarChooser);
@@ -150,7 +158,7 @@ public class ProfileMenu extends Application {
         dragEvent.consume();
     }
 
-    public void changeAvatar(DragEvent dragEvent) throws IOException {
+    public void changeAvatar(DragEvent dragEvent) {
         Dragboard dragboard = dragEvent.getDragboard();
 
         if (dragboard.hasFiles() && dragboard.getFiles().size() == 1) {
@@ -176,22 +184,22 @@ public class ProfileMenu extends Application {
         return extension.equals("jpg") || extension.equals("png") || extension.equals("jpeg");
     }
 
-    private void updateAvatar() throws IOException {
+    private void updateAvatar() {
         Image image = new Image(((String) connection.getData(utils, "getCurrentUserAvatarFileName")));
         avatar.setImage(image);
     }
 
-    public void generateRandomSlogan() throws IOException {
+    public void generateRandomSlogan() {
         newSlogan.setText((String) connection.getData(signupMenuController, "generateRandomSlogan"));
     }
 
-    public void removeSlogan() throws IOException {
+    public void removeSlogan() {
         connection.doInServer(profileMenuController, "removeSlogan");
         currentSlogan = null;
         slogan.setText("empty!");
     }
 
-    public void changeSlogan() throws IOException {
+    public void changeSlogan() {
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Slogan",
                 "You have successfully changed your slogan!");
         connection.doInServer(profileMenuController, "changeSlogan", newSlogan.getText());
@@ -212,7 +220,7 @@ public class ProfileMenu extends Application {
         });
     }
 
-    public void changeEmail() throws IOException {
+    public void changeEmail() {
         message = connection.checkAction(profileMenuController, "checkChangeEmail", newEmail.getText());
 
         switch (message) {
@@ -229,7 +237,7 @@ public class ProfileMenu extends Application {
         }
     }
 
-    public void changeNickname() throws IOException {
+    public void changeNickname() {
         ViewUtils.alert(Alert.AlertType.INFORMATION, "Change Nickname Successful",
                 "You have successfully changed your nickname!");
         nickname.setText(newNickname.getText());
@@ -260,4 +268,44 @@ public class ProfileMenu extends Application {
         new ChangePassword().start(new Stage());
     }
 
+    public void showFriends() {
+        ArrayList<User> friends = Parsers.parseUserArrayList(
+                connection.receiveJsonData(profileMenuController, "getCurrentUserFriends"));
+        showTableView(new VBox(tableView), friends);
+    }
+
+    public void showRequests() {
+        ArrayList<User> friends = Parsers.parseUserArrayList(
+                connection.receiveJsonData(profileMenuController, "getCurrentUserFriendsRequest"));
+        Button accept = new Button("accept");
+        Button reject = new Button("reject");
+        HBox hBox = new HBox(10, accept, reject);
+        VBox vBox = new VBox(20, tableView, hBox);
+        hBox.setAlignment(Pos.CENTER);
+        ObservableList<User> selected = tableView.getSelectionModel().getSelectedItems();
+        accept.setOnMouseClicked(mouseEvent -> {
+            accept(new ArrayList<>(selected));
+            tableView.getItems().removeAll(selected);
+        });
+        reject.setOnMouseClicked(mouseEvent -> tableView.getItems().removeAll(selected));
+        showTableView(vBox, friends);
+    }
+
+    private void showTableView(VBox vBox, ArrayList<User> friends) {
+        tableView.getItems().clear();
+        tableView.getColumns().clear();
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        tableView.setItems(FXCollections.observableList(friends));
+        ViewUtils.addColumns(tableView);
+
+        vBox.setPadding(new Insets(10, 0, 0, 0));
+        Stage stage1 = new Stage();
+        stage1.setScene(new Scene(vBox));
+        stage1.show();
+    }
+
+    private void accept(ArrayList<User> users) {
+        for (User user : users)
+            connection.doInServer(profileMenuController, "addFriend", user.getUsername());
+    }
 }

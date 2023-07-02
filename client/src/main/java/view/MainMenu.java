@@ -31,8 +31,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static java.lang.Thread.sleep;
-
 public class MainMenu extends Application {
     private static Stage stage;
     private final Connection connection = Client.getConnection();
@@ -129,7 +127,7 @@ public class MainMenu extends Application {
 
     public void send() {
         Message message = Parsers.parseMessageObject(connection.getJSONData(chatController,
-                "sendMessage", messageContent.getText(), currentChat.getName(), currentChat.getChatType().name()));
+                "sendMessage", messageContent.getText(), currentChat.getName()));
 
         if (!message.getContent().isEmpty()) sendMessage(message);
     }

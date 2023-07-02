@@ -1,12 +1,12 @@
 package model;
 
-import model.chat.Chat;
-
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class User implements Comparable<User> {
-    private final transient ArrayList<Chat> chats = new ArrayList<>();
+    private final HashSet<String> friends = new HashSet<>();
+    private final HashSet<String> friendsRequest = new HashSet<>();
     private final String recoveryQuestion;
     private final String recoveryAnswer;
     private String username;
@@ -61,11 +61,6 @@ public class User implements Comparable<User> {
 
     public String getAvatarFileName() {
         return System.getProperty("user.dir") + "/src/main/resources/IMG/avatars/" + avatarFileName;
-//        ImageView imageView = new ImageView(new Image(
-//                System.getProperty("user.dir") + "/src/main/resources/IMG/avatars/" + avatarFileName));
-//        imageView.setFitHeight(40);
-//        imageView.setFitWidth(40);
-//        return imageView;
     }
 
     public void setAvatarFileName(String avatarFileName) {
@@ -116,10 +111,6 @@ public class User implements Comparable<User> {
         this.rank = rank;
     }
 
-    public ArrayList<Chat> getChats() {
-        return chats;
-    }
-
     public void updateOnlineState() {
         if (Stronghold.getConnectionByUser(this) != null) lastSeen = "Online";
     }
@@ -131,6 +122,36 @@ public class User implements Comparable<User> {
 
     public void setLastSeen() {
         this.lastSeen = LocalTime.now().getHour() + ":" + LocalTime.now().getMinute();
+    }
+
+    public HashSet<String> getFriends() {
+        return friends;
+    }
+
+    public void addFriend(String username) {
+        friends.add(username);
+    }
+
+    public void removeFriend(String username) {
+        friends.remove(username);
+    }
+
+    public HashSet<String> getFriendsRequest() {
+        return friendsRequest;
+    }
+
+    public void addFriendRequest(String username) {
+        friendsRequest.add(username);
+    }
+
+    public void removeFriendRequest(String username) {
+        friendsRequest.remove(username);
+    }
+
+    public boolean isAlreadyFriend(User currentUser) {
+        for (String friendName : friends)
+            if (currentUser.getUsername().equals(friendName)) return true;
+        return false;
     }
 
     @Override
