@@ -1,5 +1,6 @@
 package model.chat;
 
+import model.Stronghold;
 import model.User;
 
 import java.time.LocalTime;
@@ -17,6 +18,7 @@ public class Message {
     private final String sentTime;
     private final ArrayList<Emoji> emojis = new ArrayList<>();
     private boolean seen = false;
+    private boolean isOwnerCurrentUser = true;
 
     public Message(String content, User owner) {
         this.sentTime = getTime();
@@ -73,6 +75,14 @@ public class Message {
 
     public void setSeen(boolean seen) {
         this.seen = seen;
+    }
+
+    public boolean isOwnerCurrentUser() {
+        return isOwnerCurrentUser;
+    }
+
+    public void setOwnerCurrentUser(boolean ownerCurrentUser) {
+        isOwnerCurrentUser = ownerCurrentUser;
     }
 
     public enum Emoji {

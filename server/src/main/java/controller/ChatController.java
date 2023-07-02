@@ -26,6 +26,8 @@ public class ChatController {
         Chat chat = Stronghold.getChatByName(chatId);
         ArrayList<Message> messages = chat.getMessages();
 
+        for (Message message : messages)
+            message.setOwnerCurrentUser(message.getOwner().equals(Stronghold.getCurrentUser()));
         if (messages.size() > 0 && !messages.get(0).getOwner().equals(Stronghold.getCurrentUser()))
             setSeen(messages);
         return messages;
