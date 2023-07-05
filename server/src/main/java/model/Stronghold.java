@@ -146,7 +146,7 @@ public class Stronghold {
 
     public synchronized static void removeConnection(Connection connection) {
         connections.remove(connection);
-        connection.getCurrentUser().setLastSeen();
+        if (connection.getCurrentUser() != null) connection.getCurrentUser().setLastSeen();
     }
 
     public static Connection getConnectionByUser(User user) {

@@ -10,9 +10,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_14_13__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_14_45__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/webConnection/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webConnection/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/resources/JSON/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/main/java/model/Stronghold.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +132,9 @@
       <workItem from="1688252615285" duration="748000" />
       <workItem from="1688262450846" duration="171000" />
       <workItem from="1688294171554" duration="578000" />
+      <workItem from="1688301865404" duration="190000" />
+      <workItem from="1688377729384" duration="118000" />
+      <workItem from="1688558433108" duration="2202000" />
     </task>
     <task id="LOCAL-00001" summary="add client project">
       <created>1687985025460</created>

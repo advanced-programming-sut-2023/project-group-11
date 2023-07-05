@@ -10,9 +10,9 @@
       <change beforePath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_14_13__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/shelf/Uncommitted_changes_before_Update_at_7_1_2023_14_45__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/main/java/webConnection/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/main/java/webConnection/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LoginMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/JSON/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/JSON/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Stronghold.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +108,10 @@
       <workItem from="1688252606581" duration="759000" />
       <workItem from="1688262575392" duration="36000" />
       <workItem from="1688294175003" duration="572000" />
+      <workItem from="1688301875654" duration="177000" />
+      <workItem from="1688378286505" duration="11000" />
+      <workItem from="1688558407496" duration="2214000" />
+      <workItem from="1688573564349" duration="81000" />
     </task>
     <task id="LOCAL-00001" summary="add server project">
       <created>1687985072897</created>
@@ -165,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688207857822</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="minor changes">
+      <created>1688301929875</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1688301929875</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,7 +208,8 @@
     <MESSAGE value="LoginMenu ended in both sides" />
     <MESSAGE value="ShareMap added" />
     <MESSAGE value="autoUpdating added for scoreboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="autoUpdating added for scoreboard" />
+    <MESSAGE value="minor changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
