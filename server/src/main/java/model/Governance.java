@@ -1,6 +1,5 @@
 package model;
 
-import javafx.scene.image.ImageView;
 import model.buildings.Building;
 import model.buildings.Storage;
 import model.map.Territory;
@@ -244,8 +243,8 @@ public class Governance {
         allResources.put(allResource, allResources.get(allResource) + count);
     }
 
-    public ImageView getAvatar() {
-        return owner.getAvatar();
+    public String getAvatar() {
+        return owner.getAvatarFileName();
     }
 
     public String getNickname() {

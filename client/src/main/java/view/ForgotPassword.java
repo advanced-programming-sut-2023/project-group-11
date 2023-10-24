@@ -1,6 +1,5 @@
 package view;
 
-import controller.LoginMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,20 +12,22 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import view.enums.messages.LoginMenuMessages;
+import view.enums.Message;
+import webConnection.Client;
 
+import java.io.IOException;
 import java.net.URL;
 
 public class ForgotPassword extends Application {
     @FXML
-    private Label recoveryQuestion;
+    private Label recoveryQuestionLabel;
     @FXML
     private TextField recoveryAnswer;
     @FXML
     private Label recoveryAnswerError;
 
     private static Stage stage;
-    private LoginMenuMessages message;
+    private Message message;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -41,18 +42,20 @@ public class ForgotPassword extends Application {
     }
 
     @FXML
-    public void initialize() {
-        recoveryQuestion.setText(recoveryQuestion.getText() +
-                LoginMenuController.showRecoveryQuestion(SignupMenu.getUsername()));
+    public void initialize() throws IOException {
+        String recoveryQuestion = (String) Client.getConnection().getData("LoginMenuController",
+                "showRecoveryQuestion", SignupMenu.getUsername());
+        recoveryQuestionLabel.setText(recoveryQuestionLabel.getText() + recoveryQuestion);
     }
 
     public static Stage getStage() {
         return stage;
     }
-    public void checkForgotPasswordAction(MouseEvent mouseEvent) {
+    public void checkForgotPasswordAction(MouseEvent mouseEvent) throws IOException {
         Button submitButton = (Button) mouseEvent.getSource();
         if (submitButton.getText().equals("Check")) {
-            message = LoginMenuController.checkRecoveryAnswer(SignupMenu.getUsername(), recoveryAnswer.getText());
+            message = Client.getConnection().checkAction("LoginMenuController", "checkRecoveryAnswer",
+                    SignupMenu.getUsername(), recoveryAnswer.getText());
 
             switch (message) {
                 case EMPTY_RECOVERY_ANSWER_FIELD -> ViewUtils.fieldError(recoveryAnswerError, "Required fields must be filled in!");
@@ -60,7 +63,8 @@ public class ForgotPassword extends Application {
                 case SUCCESS -> enterNewPassword(submitButton);
             }
         } else {
-            message = LoginMenuController.checkNewPassword(SignupMenu.getUsername(), recoveryAnswer.getText());
+            message = Client.getConnection().checkAction("LoginMenuController", "checkNewPassword",
+                    SignupMenu.getUsername(), recoveryAnswer.getText());
 
             switch (message) {
                 case EMPTY_PASSWORD_FIELD ->
@@ -77,7 +81,7 @@ public class ForgotPassword extends Application {
     }
 
     private void enterNewPassword(Button submitButton) {
-        recoveryQuestion.setText("Enter your new password!");
+        recoveryQuestionLabel.setText("Enter your new password!");
         recoveryAnswer.setPromptText("New password");
         recoveryAnswer.setText("");
         recoveryAnswerError.setText("");

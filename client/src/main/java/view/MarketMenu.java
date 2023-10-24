@@ -1,6 +1,5 @@
 package view;
 
-import controller.MarketMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +14,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.AllResource;
-import model.Stronghold;
+import webConnection.Client;
+
+import java.io.IOException;
 
 public class MarketMenu extends Application {
     @FXML
@@ -43,6 +44,7 @@ public class MarketMenu extends Application {
     //TODO: update gold label & debug market in the game
     private AllResource item;
     private static Stage stage;
+
     @Override
     public void start(Stage stage) throws Exception {
         MarketMenu.stage = stage;
@@ -51,41 +53,44 @@ public class MarketMenu extends Application {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
+
     @FXML
-    public void initialize(){
+    public void initialize() {
         setMouseEvent(foodBox);
         setMouseEvent(rawMaterialBox);
         setMouseEvent(weaponBox);
-        goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
-        amountTextField.textProperty().addListener((observable, oldText, newText)-> updateBuySellLabels(newText));
+//        goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+        //TODO: handle when currentGame is done
+        amountTextField.textProperty().addListener((observable, oldText, newText) -> updateBuySellLabels(newText));
     }
 
     private void updateBuySellLabels(String newText) {
-        if(newText.length()>=4)
-            amountTextField.setText(newText.substring(0,newText.length()-1));
-        if(newText.isEmpty()){
+        if (newText.length() >= 4)
+            amountTextField.setText(newText.substring(0, newText.length() - 1));
+        if (newText.isEmpty()) {
             buyLabel.setText("");
             sellLabel.setText("");
-        }else {
+        } else {
             try {
-            int amount = Integer.parseInt(newText);
-            buyLabel.setText(String.valueOf((amount * item.getPrice())));
-            sellLabel.setText(String.valueOf((amount * item.getPrice() / 2)));
-            }catch (Exception e){
-                amountTextField.setText(newText.substring(0,newText.length()-1));
+                int amount = Integer.parseInt(newText);
+                buyLabel.setText(String.valueOf((amount * item.getPrice())));
+                sellLabel.setText(String.valueOf((amount * item.getPrice() / 2)));
+            } catch (Exception e) {
+                amountTextField.setText(newText.substring(0, newText.length() - 1));
             }
         }
     }
 
     private void setMouseEvent(HBox box) {
-        for(Node imageView:box.getChildren()){
+        for (Node imageView : box.getChildren()) {
             imageView.setOnMouseClicked(mouseEvent -> {
                 buySellPane.setVisible(true);
-                String itemName = ((ImageView)mouseEvent.getSource()).getId();
-                item = MarketMenuController.getResourceByName(itemName);
+                String itemName = ((ImageView) mouseEvent.getSource()).getId();
+                item = (AllResource) Client.getConnection().getData("MarketMenuController", "getResourceByName", itemName);
                 updateBuySellLabels(amountTextField.getText());
                 itemLabel.setText(itemName);
-                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+//                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+                //TODO: handle when currentGame is done
                 itemImageView.setImage(item.getImage());
             });
         }
@@ -102,35 +107,41 @@ public class MarketMenu extends Application {
         rawMaterialBox.setVisible(false);
         foodBox.setVisible(false);
     }
+
     public void showFoodBox() {
         foodBox.setVisible(true);
         rawMaterialBox.setVisible(false);
         weaponBox.setVisible(false);
     }
 
-    public void sell() {
-        switch (MarketMenuController.checkSellItem(item,amountTextField.getText())){
+    public void sell() throws IOException {
+        //TODO: needs to reconsider in server-side
+        switch (Client.getConnection().checkAction("MarketMenuController", "checkSellItem", item, amountTextField.getText())) {
             case NOT_ENOUGH_STORAGE -> ViewUtils.alert(Alert.AlertType.ERROR,
-                    "Sell Error","You don't have enough of this item!");
+                    "Sell Error", "You don't have enough of this item!");
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Sell Successful", "Item Sold Successfully!");
-                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
-                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+//                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+//                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+                //TODO: handle when currentGame is done
             }
         }
     }
-    public void buy() {
-        switch (MarketMenuController.checkBuyItem(item,amountTextField.getText())){
+
+    public void buy() throws IOException {
+        //TODO: need to reconsider
+        switch (Client.getConnection().checkAction("MarketMenuController", "checkBuyItem", item, amountTextField.getText())) {
             case NOT_ENOUGH_STORAGE -> ViewUtils.alert(Alert.AlertType.ERROR,
-                    "Buy Error","You don't have enough storage!");
+                    "Buy Error", "You don't have enough storage!");
             case NOT_ENOUGH_GOLD -> ViewUtils.alert(Alert.AlertType.ERROR,
-                    "Buy Error","You don't have enough gold to buy this item!");
+                    "Buy Error", "You don't have enough gold to buy this item!");
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION,
                         "Buy Successful", "Item bought successfully!");
-                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
-                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+//                goldLabel.setText(String.valueOf(Stronghold.getCurrentGame().getCurrentGovernance().getGold()));
+//                amountLabel.setText("amount: " + Stronghold.getCurrentGame().getCurrentGovernance().getResourceCount(item));
+//                TODO: handle when currentGame is done
             }
         }
     }

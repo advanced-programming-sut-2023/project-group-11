@@ -1,8 +1,6 @@
 package view;
 
-import controller.MapEditMenuController;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,11 +9,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import view.enums.messages.MapEditMenuMessages;
+import view.enums.Message;
+import webConnection.Client;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MapSelection extends Application {
     @FXML
@@ -27,7 +27,7 @@ public class MapSelection extends Application {
     @FXML
     private TextField newMapSize;
     @FXML
-    private ChoiceBox mapsChoiceBox;
+    private ChoiceBox<String> mapsChoiceBox;
     private static Stage stage;
 
     @Override
@@ -37,22 +37,46 @@ public class MapSelection extends Application {
                 new URL(MainMenu.class.getResource("/FXML/MapSelection.fxml").toExternalForm()));
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 
     @FXML
-    public void initialize() {
-        MapEditMenuController.setMapsOnChoiceBox(mapsChoiceBox);
+    public void initialize() throws IOException {
+        setMapsOnChoiceBox();
+    }
+
+    private void setMapsOnChoiceBox() throws IOException {
+        ArrayList<String> mapNames = Client.getConnection().getArrayData("MapEditMenuController", "getMapNames");
+        mapsChoiceBox.getItems().addAll(mapNames);
+        if (mapNames.size() > 0)
+            mapsChoiceBox.setValue(mapNames.get(0));
+        Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap", "original");
+        mapsChoiceBox.setOnAction(actionEvent ->
+                Client.getConnection().doInServer("MapEditMenuController", "setCurrentMap",
+                        getMapName(mapsChoiceBox.getValue())));
+    }
+
+    private String getMapName(String value) {
+        if (value.matches("[^-]+")) return value;
+        int index = value.indexOf('-') - 1;
+        return value.substring(0, index);
     }
 
     public void selectMap() throws Exception {
-        stage.close();
-        new MapEditMenu().start(SignupMenu.getStage());
+        if (mapsChoiceBox.getValue() != null) {
+            stage.close();
+            Client.getConnection().doInServer("Utils", "setInMainMenu", false);
+            new MapEditMenu().start(SignupMenu.getStage());
+        }
+    }
+
+    public void shareMap() throws Exception {
+        new ShareMapMenu().start(stage);
     }
 
     public void makeNewMap() throws Exception {
-        MapEditMenuMessages message = MapEditMenuController.checkMakeNewMap(newMapName.getText(), newMapSize.getText());
+        Message message = Client.getConnection().checkAction("MapEditMenuController", "checkMakeNewMap",
+                newMapName.getText(), newMapSize.getText());
         ViewUtils.clearLabels(mapNameError, mapSizeError);
 
         switch (message) {
@@ -64,6 +88,7 @@ public class MapSelection extends Application {
             case SUCCESS -> {
                 ViewUtils.alert(Alert.AlertType.INFORMATION, "New Map", "New map made successfully!");
                 stage.close();
+                Client.getConnection().doInServer("Utils", "setInMainMenu", false);
                 new MapEditMenu().start(SignupMenu.getStage());
             }
         }

@@ -1,70 +1,98 @@
 package controller;
 
-import javafx.scene.control.ChoiceBox;
 import model.Stronghold;
+import model.User;
 import model.map.Map;
 import model.map.Texture;
 import model.map.Tile;
 import model.map.Tree;
-import view.enums.messages.MapEditMenuMessages;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class MapEditMenuController {
     private static Map currentMap;
 
-    public static void setMapsOnChoiceBox(ChoiceBox<Map> mapsChoiceBox) {
-        mapsChoiceBox.getItems().addAll(Stronghold.getMaps());
-        mapsChoiceBox.setValue(Stronghold.getMapByName("original"));
-        ShowMapMenuController.setCurrentMap(Stronghold.getMapByName("original"));
-        currentMap = Stronghold.getMapByName("original");
-        mapsChoiceBox.setOnAction(actionEvent -> {
-            ShowMapMenuController.setCurrentMap(mapsChoiceBox.getValue());
-            MapEditMenuController.setCurrentMap(mapsChoiceBox.getValue());
-        });
-    }
-
-    public static void saveMap() {
+    public static void saveMap(ArrayList<Object> parameters) {
+        Stronghold.getMaps().set(Stronghold.getMaps().indexOf(Stronghold.getMapByName(currentMap.getName())), currentMap);
         Utils.updateDatabase("maps");
     }
 
-    public static void setCurrentMap(Map map) {
-        currentMap = map;
+    public static ArrayList<String> getMapNames(ArrayList parameters) {
+        ArrayList<String> mapNames = new ArrayList<>();
+        for (Map map : Stronghold.getMaps()) {
+            if (map.getOwners().contains(Stronghold.getCurrentUser().getUsername())) {
+                if (map.getMainOwner().equals(Stronghold.getCurrentUser())) mapNames.add(map.getName());
+                else mapNames.add(map.getName() + " -received");
+            }
+        }
+        return mapNames;
     }
 
-    public static Map getCurrentMap() {
+    public static ArrayList<String> getUserNames(ArrayList parameters) {
+        ArrayList<String> usernames = new ArrayList<>();
+        for (User user : Stronghold.getUsers())
+            usernames.add(user.getUsername());
+        return usernames;
+    }
+
+    public static void setCurrentMap(ArrayList<Object> parameters) throws CloneNotSupportedException {
+        String mapName = (String) parameters.get(0);
+        Map sourceMap =  Stronghold.getMapByName(mapName);
+        currentMap = new Map(mapName, Tile.cloneTiles(sourceMap.getTiles()), sourceMap.getSize(), sourceMap.getOwners(), true);
+        ArrayList<Object> parameter = new ArrayList<>();
+        parameter.add(currentMap);
+        ShowMapMenuController.setCurrentMap(parameter);
+    }
+
+    public static Map getCurrentMap(ArrayList<Object> parameters) {
         return currentMap;
     }
 
-    public static MapEditMenuMessages checkMakeNewMap(String mapName, String mapSize) {
-        if (mapName.isEmpty()) return MapEditMenuMessages.MAP_NAME_FIELD_EMPTY;
-        else if (mapSize.isEmpty()) return MapEditMenuMessages.MAP_SIZE_FIELD_EMPTY;
-        else if (!mapSize.matches("\\d+")) return MapEditMenuMessages.INVALID_MAP_SIZE_FORMAT;
-        else if (Stronghold.getMapByName(mapName) != null) return MapEditMenuMessages.MAP_EXIST;
+    public static Message checkMakeNewMap(ArrayList<Object> parameters) {
+        String mapName = (String) parameters.get(0);
+        String mapSize = (String) parameters.get(1);
+        if (mapName.isEmpty()) return Message.MAP_NAME_FIELD_EMPTY;
+        else if (mapSize.isEmpty()) return Message.MAP_SIZE_FIELD_EMPTY;
+        else if (!mapSize.matches("\\d+")) return Message.INVALID_MAP_SIZE_FORMAT;
+        else if (Stronghold.getMapByName(mapName) != null) return Message.MAP_EXIST;
         else if (Integer.parseInt(mapSize) < 50 || Integer.parseInt(mapSize) > 200)
-            return MapEditMenuMessages.INVALID_MAP_SIZE;
+            return Message.INVALID_MAP_SIZE;
 
         currentMap = new Map(mapName, Integer.parseInt(mapSize));
-        ShowMapMenuController.setCurrentMap(currentMap);
+        ShowMapMenuController.setCurrentMap(new ArrayList<>(Arrays.asList(currentMap.getName())));
         Utils.updateDatabase("maps");
-        return MapEditMenuMessages.SUCCESS;
+        return Message.SUCCESS;
+    }
+    public static Message checkShareMap(ArrayList<Object> parameters) {
+        String mapName = (String) parameters.get(0);
+        String username = (String) parameters.get(1);
+        Map sendingMap = Stronghold.getMapByName(mapName);
+
+        if (sendingMap.getOwners().contains(username)) return Message.USER_HAS_MAP;
+
+        sendingMap.addOwner(username);
+        Utils.updateDatabase("maps");
+        return Message.SUCCESS;
     }
 
-    public static void clear(ArrayList<Tile> tiles) {
-        for (Tile tile : tiles) tile.clear();
-    }
-
-    public static MapEditMenuMessages setTexture(ArrayList<Tile> tiles, String textureName, int selectedTileX, int selectedTileY) {
+    public static Message setTexture(ArrayList<Object> parameters) {
+        int selectedTilesSize = (Integer) parameters.get(0);
+        String textureName = (String) parameters.get(1);
+        int selectedTileX = (Integer) parameters.get(2);
+        int selectedTileY = (Integer) parameters.get(3);
+        int height = (Integer) parameters.get(4);
+        int width = (Integer) parameters.get(5);
         Texture texture = Texture.getTextureByName(textureName);
 
-        if (tiles.size() == 0) return MapEditMenuMessages.EMPTY_SELECTED_TILES;
+        if (selectedTilesSize == 0) return Message.EMPTY_SELECTED_TILES;
         else if (texture.equals(Texture.BIG_LAKE) || texture.equals(Texture.SMALL_LAKE) || texture.equals(Texture.CLIFF)) {
-            if (tiles.size() > 1) return MapEditMenuMessages.SELECT_ONLY_ONE_TILE;
+            if (selectedTilesSize > 1) return Message.SELECT_ONLY_ONE_TILE;
             switch (texture) {
                 case SMALL_LAKE -> {
                     if (!isSuitableLandForLake(selectedTileX, selectedTileY, 3))
-                        return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+                        return Message.INVALID_PLACE_TO_DEPLOY;
                     else {
                         for (int i = 0; i < 3; i++)
                             for (int j = 0; j < 3; j++)
@@ -73,7 +101,7 @@ public class MapEditMenuController {
                 }
                 case BIG_LAKE -> {
                     if (!isSuitableLandForLake(selectedTileX, selectedTileY, 5))
-                        return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+                        return Message.INVALID_PLACE_TO_DEPLOY;
                     else {
                         for (int i = 0; i < 5; i++)
                             for (int j = 0; j < 5; j++)
@@ -82,7 +110,7 @@ public class MapEditMenuController {
                 }
                 case CLIFF -> {
                     if (!isSuitableLandForCliff(selectedTileX, selectedTileY))
-                        return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+                        return Message.INVALID_PLACE_TO_DEPLOY;
                     else {
                         ArrayList<int[][]> directions = buildCoordinates();
                         int[][] direction = directions.get(new Random().nextInt(directions.size()));
@@ -97,18 +125,36 @@ public class MapEditMenuController {
                 }
             }
         } else {
-            for (Tile tile : tiles)
-                tile.setTexture(texture);
+            for (int i = 0; i < width; i++)
+                for (int j = 0; j < height; j++)
+                    currentMap.getTile(selectedTileX + i, selectedTileY + j).setTexture(texture);
         }
-        return MapEditMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
-    public static MapEditMenuMessages dropTree(ArrayList<Tile> tiles, String treeName) {
-        if (!isSuitableLandForTree(tiles)) return MapEditMenuMessages.INVALID_PLACE_TO_DEPLOY;
+    public static void clear(ArrayList<Object> parameters) {
+        int selectedTileX = (Integer) parameters.get(0);
+        int selectedTileY = (Integer) parameters.get(1);
+        int width = (Integer) parameters.get(2);
+        int height = (Integer) parameters.get(3);
+
+        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(new ArrayList<>(Arrays.asList(selectedTileX, selectedTileY, height, width)));
+        tiles.forEach(Tile::clear);
+    }
+
+    public static Message dropTree(ArrayList<Object> parameters) {
+        int selectedTileX = (Integer) parameters.get(0);
+        int selectedTileY = (Integer) parameters.get(1);
+        int width = (Integer) parameters.get(2);
+        int height = (Integer) parameters.get(3);
+        String treeName = (String) parameters.get(4);
+        ArrayList<Tile> tiles = ShowMapMenuController.getTilesList(new ArrayList<>(Arrays.asList(selectedTileX, selectedTileY, height, width)));
+
+        if (!isSuitableLandForTree(tiles)) return Message.INVALID_PLACE_TO_DEPLOY;
 
         for (Tile tile : tiles)
             tile.setTree(new Tree(treeName));
-        return MapEditMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
     private static boolean isSuitableLandForLake(int tileX, int tileY, int lakeSize) {

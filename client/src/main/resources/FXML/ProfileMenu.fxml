@@ -90,9 +90,9 @@
                     <VBox prefHeight="200.0" prefWidth="250.0" spacing="10.0">
                         <TitledPane animated="false" text="change avatar">
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="200.0">
-                                <Button layoutX="19.0" layoutY="81.0" prefHeight="25.0" prefWidth="200.0"
-                                        mnemonicParsing="false" onDragOver="#setTransferModes"
-                                        onDragDropped="#changeAvatar" onAction="#createAvatarChooser"
+                                <Button layoutX="19.0" layoutY="81.0" mnemonicParsing="false"
+                                        onAction="#createAvatarChooser" onDragDropped="#changeAvatar"
+                                        onDragOver="#setTransferModes" prefHeight="25.0" prefWidth="200.0"
                                         styleClass="menu-button" text="choose or drag avatar"/>
                             </AnchorPane>
                         </TitledPane>
@@ -122,12 +122,18 @@
                         </TitledPane>
                     </VBox>
                 </HBox>
-                <Button layoutX="61.0" layoutY="545.0" mnemonicParsing="false" onAction="#showScoreboard"
-                        prefWidth="130.0" styleClass="menu-button" text="show scoreboard"/>
                 <ImageView fx:id="avatar" fitHeight="150.0" fitWidth="200.0" layoutX="61.0" layoutY="76.0"
                            pickOnBounds="true" preserveRatio="true"/>
                 <Button layoutX="61.0" layoutY="31.0" mnemonicParsing="false" onAction="#back" prefWidth="100.0"
                         styleClass="menu-button" text="back"/>
+                <HBox alignment="CENTER" layoutX="61.0" layoutY="547.0" prefHeight="27.0" spacing="5.0">
+                    <Button mnemonicParsing="false" onAction="#showScoreboard" prefWidth="130.0"
+                            styleClass="menu-button" text="show scoreboard"/>
+                    <Button mnemonicParsing="false" onAction="#showFriends" prefWidth="80.0"
+                            styleClass="menu-button" text="friends"/>
+                    <Button mnemonicParsing="false" onAction="#showRequests" prefWidth="80.0"
+                            styleClass="menu-button" text="requests"/>
+                </HBox>
             </AnchorPane>
         </AnchorPane>
     </center>

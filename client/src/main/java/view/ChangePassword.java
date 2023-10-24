@@ -1,6 +1,5 @@
 package view;
 
-import controller.ProfileMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +12,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import view.enums.messages.ProfileMenuMessages;
+import view.enums.Message;
+import webConnection.Client;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -41,11 +42,11 @@ public class ChangePassword extends Application {
         reloadCaptcha();
     }
 
-    public void checkChangePassword() throws URISyntaxException {
-        ProfileMenuMessages message;
+    public void checkChangePassword() throws URISyntaxException, IOException {
+        Message message;
         if (checkCaptcha()) {
-            message = ProfileMenuController.checkChangePassword(oldPassword.getText(), newPassword.getText());
-
+            message = Client.getConnection().checkAction("ProfileMenuController",
+                    "checkChangePassword", oldPassword.getText(), newPassword.getText());
             switch (message) {
                 case INCORRECT_PASSWORD -> ViewUtils.alert(Alert.AlertType.ERROR, "Change Password Failed",
                         "Incorrect old password!");

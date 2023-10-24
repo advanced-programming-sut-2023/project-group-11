@@ -6,16 +6,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import model.Governance;
 import model.Stronghold;
 import model.User;
 import model.map.Map;
 import org.apache.commons.codec.digest.DigestUtils;
-import view.GameMenu;
+import webConnetion.Connection;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Utils {
-    private static GameMenu gameMenu;
-
     public static boolean isValidUsernameFormat(String username) {
         return username.matches("\"[\\w ]+\"|\\w+");
     }
@@ -85,14 +79,14 @@ public class Utils {
                 type.equals("fire ballista") || type.equals("catapults");
     }
 
-    public static String[] getCurrentUserFields() {
+    public static String[] getCurrentUserFields(ArrayList parameters) {
         User user = Stronghold.getCurrentUser();
         return new String[]{user.getUsername(), user.getEmail(), user.getRecoveryQuestion(),
                 user.getNickname(), user.getSlogan()};
     }
 
-    public static ImageView getCurrentUserAvatar() {
-        return Stronghold.getCurrentUser().getAvatar();
+    public static String getCurrentUserAvatarFileName(ArrayList<Object> parameters) {
+        return Stronghold.getCurrentUser().getAvatarFileName();
     }
 
     public static void sortUsers() {
@@ -101,32 +95,47 @@ public class Utils {
         setRanks(users);
     }
 
+    private static void updateLastSeen() {
+        Stronghold.getUsers().forEach(User::updateOnlineState);
+    }
+
     private static void setRanks(ArrayList<User> users) {
         for (int i = 0; i < users.size(); i++) users.get(i).setRank(i + 1);
     }
 
-    public static ObservableList<User> getUsersObservable() {
+    public static ArrayList<User> getUsersObservable(ArrayList<Object> parameters)   {
         ArrayList<User> users = Stronghold.getUsers();
-        return FXCollections.observableArrayList(users);
+        sortUsers();
+        updateLastSeen();
+        return users;
     }
 
-    public static ObservableList<Governance> getGovernancesObservable() {
+    public static ObservableList<Governance> getGovernancesObservable(ArrayList<Object> parameters) {
         ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
         return FXCollections.observableArrayList(governances);
     }
 
-    public static void columnMaker(TableView tableView, String header, String userField) {
-        TableColumn<User, String> tableColumn = new TableColumn<>(header);
-        tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
-        tableColumn.setSortable(false);
-        tableView.getColumns().add(tableColumn);
+    public static ArrayList<Map> getMaps(ArrayList<Object> parameters) {
+        return Stronghold.getMaps();
     }
 
-    public static GameMenu getGameMenu() {
-        return gameMenu;
+    public static void setInScoreboard(ArrayList<Object> parameters) {
+        Stronghold.getConnectionByUser(Stronghold.getCurrentUser()).setInScoreboard((Boolean) parameters.get(0));
     }
 
-    public static void setGameMenu(GameMenu gameMenu) {
-        Utils.gameMenu = gameMenu;
+    public static void setInMainMenu(ArrayList<Object> parameters) {
+        Stronghold.getConnectionByUser(Stronghold.getCurrentUser()).setInMainMenu((Boolean) parameters.get(0));
+    }
+
+    public static void alertScoreboardUpdating() {
+        for (Connection connection : Stronghold.getConnections())
+            if (connection.isInScoreboard())
+                Connection.sendNotification("Scoreboard", "updateScoreboard", connection);
+    }
+
+    public static void alertChatUpdating() {
+        for (Connection connection : Stronghold.getConnections())
+            if (connection.isInMainMenu())
+                Connection.sendNotification("MainMenu", "updateChat", connection);
     }
 }

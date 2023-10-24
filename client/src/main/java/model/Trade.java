@@ -22,19 +22,18 @@ public class Trade {
         this.tradeType = tradeType;
         this.sender = sender;
         this.receiver = receiver;
-        Stronghold.getCurrentGame().getTrades().add(this);
         sender.addToSentTrades(this);
         receiver.addToReceivedTrades(this);
-        tradeNotify(this);
+//        tradeNotify(this);
     }
 
-    private void tradeNotify(Trade trade) {
-        for (Governance governance : Stronghold.getCurrentGame().getGovernances()) {
-            if (trade.sender.equals(governance))
-                continue;
-            governance.getTradeNotification().add(trade);
-        }
-    }
+//    private void tradeNotify(Trade trade) {
+//        for (Governance governance : Stronghold.getCurrentGame().getGovernances()) {
+//            if (trade.sender.equals(governance))
+//                continue;
+//            governance.getTradeNotification().add(trade);
+//        }
+//    }
 
     public boolean isOpen() {
         return isOpen;

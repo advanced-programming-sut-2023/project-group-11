@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Game;
 import model.Governance;
@@ -13,13 +14,15 @@ import model.map.Territory;
 import model.map.Texture;
 import model.map.Tile;
 import model.people.Lord;
-import view.GameMenu;
-import view.SignupMenu;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainMenuController {
-    public static void startGame(ArrayList<User> users, String mapName) throws Exception {
+    public static void startGame(ArrayList<Object> parameters) throws Exception {
+        ArrayList<User> users = (ArrayList<User>) parameters.get(0);
+        String mapName = (String) parameters.get(1);
         String[] usernames = makeListOfPlayers(users);
         Map map = Stronghold.getMapByName(mapName);
         Stronghold.setCurrentGame(new Game(makeGovernances(usernames), map));
@@ -31,8 +34,16 @@ public class MainMenuController {
         for (int i = 0; i < usernames.length; i++)
             initializeAreas(usernames[i], areas, i + 2);
 
-        ShowMapMenuController.setCurrentMap(map);
-        new GameMenu().start(SignupMenu.getStage());
+        ShowMapMenuController.setCurrentMap(new ArrayList<>(Arrays.asList(map.getName())));
+    }
+
+    public static void createGame(ArrayList<Object> parameters){
+        ArrayList<User> users = new ArrayList<>();
+        users.add(Stronghold.getCurrentUser());
+        String mapName = (String) parameters.get(0);
+        int playersNeeded = (Integer) parameters.get(1);
+        Map map = Stronghold.getMapByName(mapName);
+        new Game(Stronghold.getCurrentUser(),map,playersNeeded);
     }
 
     public static ArrayList<Governance> makeGovernances(String[] listOfPlayers) {
@@ -145,19 +156,92 @@ public class MainMenuController {
     }
 
 
-    public static ObservableList<User> removeCurrentUserFromList(ObservableList<User> userObservableList) {
-        userObservableList.remove(Stronghold.getCurrentUser());
+    public static ObservableList<User> removeCurrentUserFromList(ArrayList<Object> parameters) {
+        ObservableList userObservableList = FXCollections.observableArrayList(Stronghold.getUsers());
+        userObservableList.remove(Stronghold.getCurrentUser());//TODO: ArrayList<Object> parameters
         return userObservableList;
     }
 
-    public static ObservableList<Governance> removeCurrentGovernanceFromList(ObservableList<Governance> governanceObservableList) {
+    public static ObservableList<Governance> removeCurrentGovernanceFromList(ArrayList<Object> parameters) {
+        ObservableList<Governance> governanceObservableList = (ObservableList<Governance>) parameters.get(0);
         governanceObservableList.remove(Stronghold.getCurrentGame().getCurrentGovernance());
         return governanceObservableList;
     }
 
-    public static void logout() {
+    public static void logout(ArrayList<Object> parameters) {
         User currentUser = Stronghold.getCurrentUser();
         currentUser.setStayLoggedIn(false);
+        currentUser.setLastSeen();
+        Stronghold.getConnectionByUser(currentUser).setCurrentUser(null);
+        Utils.alertScoreboardUpdating();
         Stronghold.setCurrentUser(null);
+    }
+
+    public static ArrayList<Game> getUnStartedGames(ArrayList<Object> parameters){
+        ArrayList<Game> games = new ArrayList<>();
+        for (Game game:Stronghold.getGames()){
+            if(game.isStarted())
+                continue;
+            if(!game.isPrivate())
+                games.add(game);
+            else if(game.getJoinedUsers().contains(Stronghold.getCurrentUser()))
+                games.add(game);
+        }
+        return games;
+    }
+
+    public static ArrayList<Game> getStartedGames(ArrayList<Object> parameters){
+        ArrayList<Game> games = new ArrayList<>();
+        for (Game game:Stronghold.getGames()){
+            if(!game.isStarted())
+                continue;
+            if(!game.isPrivate())
+                games.add(game);
+            else if(game.getJoinedUsers().contains(Stronghold.getCurrentUser()))
+                games.add(game);
+        }
+        return games;
+    }
+
+    public static Message joinGame(ArrayList<Object> parameters){
+        int gameId = (int) parameters.get(0);
+        Game game = Stronghold.getGameById(gameId);
+        if(game.getJoinedUsers().size() == game.getPlayersNeeded())
+            return Message.GAME_FULL;
+        if(game.getJoinedUsers().contains(Stronghold.getCurrentUser()))
+            return Message.YOURE_IN_GAME;
+        game.getJoinedUsers().add(Stronghold.getCurrentUser());
+        if(game.getJoinedUsers().size() == game.getPlayersNeeded())
+            game.setStarted(true);
+        return Message.SUCCESS;
+    }
+
+    public static Message startGameByAdmin(ArrayList<Object> parameters){
+        int gameId = (int) parameters.get(0);
+        Game game = Stronghold.getGameById(gameId);
+        if(game.getJoinedUsers().size() == 1)
+            return Message.ITS_JUST_YOU;
+        game.setStarted(true);
+        return Message.SUCCESS;
+    }
+
+    public static Message leaveGame(ArrayList<Object> parameters){
+        int gameId = (int) parameters.get(0);
+        Game game = Stronghold.getGameById(gameId);
+        if(!game.getJoinedUsers().contains(Stronghold.getCurrentUser()))
+            return Message.YOURE_NOT_IN;
+        if(Stronghold.getCurrentUser().equals(game.getOwner()))
+            if(game.getJoinedUsers().size()>1)
+                game.setOwner(game.getJoinedUsers().get(1));
+            else
+                Stronghold.getGames().remove(game);
+        game.getJoinedUsers().remove(Stronghold.getCurrentUser());
+        return Message.SUCCESS;
+    }
+
+    public static void changePublicity(ArrayList<Object> parameters){
+        int gameId = (int) parameters.get(0);
+        Game game = Stronghold.getGameById(gameId);
+        game.setPrivate(!game.isPrivate());
     }
 }

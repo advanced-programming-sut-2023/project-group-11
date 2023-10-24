@@ -1,29 +1,33 @@
 package model.map;
 
-import controller.BuildingUtils;
 import model.Governance;
-import model.Stronghold;
 import model.buildings.Building;
 import model.people.Troop;
 import model.people.Unit;
+import webConnection.Client;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Tile {
     private Texture texture;
     private Building building = null;
     private ArrayList<Unit> units = new ArrayList<>();
     private Tree tree;
+    private final int[] location;
 
-    public Tile() {
+    public Tile(int x, int y) {
         texture = Texture.SAND;
         tree = null;
+        location = new int[] {x, y};
     }
 
-    public Tile(Texture texture, Tree tree) {
+    public Tile(Texture texture, Tree tree, int x, int y) {
         this.texture = texture;
         this.tree = tree;
+        location = new int[] {x, y};
     }
 
     public Texture getTexture() {
@@ -67,6 +71,10 @@ public class Tile {
         return tree;
     }
 
+    public int[] getLocation() {
+        return location;
+    }
+
     public void setTree(Tree tree) {
         this.tree = tree;
     }
@@ -92,36 +100,47 @@ public class Tile {
         return building != null;
     }
 
-    @Override
-    public String toString() {
-        String unitsName = "";
-        String result = "";
-        int i = 1;
-
-        for (Unit unit : units)
-            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
-                unitsName += (i++) + ". " + unit.toString() + '\n';
-
-        int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);
-        result += "Coordinates: x=" + location[0] + " y=" + location[1] + '\n';
-        result += "Texture: " + texture.getName() + '\n';
-        if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
-        if (units.size() > 0) result += "Units:\n" + unitsName;
-        if (tree != null) result += "Tree: " + tree.getName() + '\n';
-        if (getResourceAmount() != null) result += getResourceAmount() + '\n';
-
-        return result;
-    }
+//    @Override
+//    public String toString() {
+//        String unitsName = "";
+//        String result = "";
+//        int i = 1;
+//
+//        for (Unit unit : units)
+//            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
+//                unitsName += (i++) + ". " + unit.toString() + '\n';
+//
+//        result += "Coordinates: x=" + location[0] + " y=" + location[1] + '\n';
+//        result += "Texture: " + texture.getName() + '\n';
+//        try {
+//            if ((Boolean) Client.getConnection().getData("BuildingUtils", "isBuildingInTile", building))
+//                result += building.toString() + '\n';
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        if (units.size() > 0) result += "Units:\n" + unitsName;
+//        if (tree != null) result += "Tree: " + tree.getName() + '\n';
+//        if (getResourceAmount() != null) result += getResourceAmount() + '\n';
+//
+//        return result;
+//    }
 
     public void clearUnitsByType(ArrayList<Unit> selectedUnits) {
         this.units.removeAll(selectedUnits);
     }
 
-    public Unit getLastUnitInTile() {
-        Unit result = null;
-        for (Unit unit : units)
-            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
-                result = unit;
-        return result;
+//    public Unit getLastUnitInTile() {
+//        Unit result = null;
+//        for (Unit unit : units)
+//            if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
+//                result = unit;
+//        return result;
+//    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Tile tile)
+            return Arrays.equals(this.location, tile.location);
+        return false;
     }
 }

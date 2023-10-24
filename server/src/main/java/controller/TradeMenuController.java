@@ -6,7 +6,6 @@ import model.AllResource;
 import model.Governance;
 import model.Stronghold;
 import model.Trade;
-import view.enums.messages.TradeMenuMessages;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,13 +14,19 @@ public class TradeMenuController {
 
     private static Governance currentGovernance;
 
-    public static TradeMenuMessages checkTrade(AllResource resource, int amount, int price, String message, String tradeType, Governance reciever) {
+    public static Message checkTrade(ArrayList parameters) {
+        AllResource resource = (AllResource) parameters.get(0);
+        int amount = (int) parameters.get(1);
+        int price = (int) parameters.get(2);
+        String message = (String) parameters.get(3);
+        String tradeType = (String) parameters.get(4);
+        Governance receiver = (Governance) parameters.get(5);
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
-        new Trade(resource, amount, price, message, tradeType, currentGovernance, reciever);
-        return TradeMenuMessages.SUCCESS;
+        new Trade(resource, amount, price, message, tradeType, currentGovernance, receiver);
+        return Message.SUCCESS;
     }
 
-    public static String tradeList() {
+    public static String tradeList(ArrayList parameters) {
         String output = "";
         int index = 1;
         for (Trade trade : Stronghold.getCurrentGame().getTrades()) {
@@ -30,7 +35,8 @@ public class TradeMenuController {
         return output;
     }
 
-    public static TradeMenuMessages checkAcceptTrade(Trade trade) {
+    public static Message checkAcceptTrade(ArrayList parameters) {
+        Trade trade = (Trade) parameters.get(0);
         Governance sender = trade.getSender();
         Governance receiver = trade.getReceiver();
         Governance seller = null, buyer=null;
@@ -45,21 +51,21 @@ public class TradeMenuController {
             }
         }
         if (buyer.getGold() < trade.getResourceAmount() * trade.getPrice())
-            return TradeMenuMessages.NOT_ENOUGH_GOLD;
+            return Message.NOT_ENOUGH_GOLD;
         if (!seller.hasEnoughItem(trade.getResourceType(), trade.getResourceAmount()))
-            return TradeMenuMessages.NOT_ENOUGH_AMOUNT;
+            return Message.NOT_ENOUGH_AMOUNT;
         if (!buyer.hasStorageForItem(trade.getResourceType(), trade.getResourceAmount()))
-            return TradeMenuMessages.NOT_ENOUGH_STORAGE;
+            return Message.NOT_ENOUGH_STORAGE;
         trade.accept(buyer,seller);
-        return TradeMenuMessages.SUCCESS;
+        return Message.SUCCESS;
     }
 
-    public static String tradeHistory() {
+    public static String tradeHistory(ArrayList parameters) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         return currentGovernance.tradeHistory();
     }
 
-    public static String showNotifications() {
+    public static String showNotifications(ArrayList parameters) {
         currentGovernance = Stronghold.getCurrentGame().getCurrentGovernance();
         String output = "";
         int index = 1;
@@ -72,7 +78,7 @@ public class TradeMenuController {
         return output;
     }
 
-    public static String showAllGovernance() {
+    public static String showAllGovernance(ArrayList parameters) {
         String output = "";
         int index = 1;
         for (Governance governance : Stronghold.getCurrentGame().getGovernances())
@@ -80,21 +86,21 @@ public class TradeMenuController {
         return output;
     }
 
-    public static ArrayList<AllResource> getAllResources() {
+    public static ArrayList<AllResource> getAllResources(ArrayList parameters) {
         ArrayList<AllResource> allResources = new ArrayList<>();
         Collections.addAll(allResources, AllResource.values());
         return allResources;
     }
 
-    public static ObservableList<Trade> getSentTradesObservable() {
+    public static ObservableList<Trade> getSentTradesObservable(ArrayList parameters) {
         return FXCollections.observableArrayList(Stronghold.getCurrentGame().getCurrentGovernance().getPreviousSentTrades());
     }
 
-    public static ObservableList<Trade> getReceivedTradesObservable() {
+    public static ObservableList<Trade> getReceivedTradesObservable(ArrayList parameters) {
         return FXCollections.observableArrayList(Stronghold.getCurrentGame().getCurrentGovernance().getPreviousReceivedTrades());
     }
 
-    public static void seenNewTrades() {
+    public static void seenNewTrades(ArrayList parameters) {
         for (Trade trade : Stronghold.getCurrentGame().getCurrentGovernance().getPreviousReceivedTrades())
             trade.setSeen(true);
     }

@@ -1,15 +1,22 @@
 package model;
 
+import model.chat.Chat;
+import model.chat.PrivateChat;
 import model.map.Map;
+import webConnetion.Connection;
 
 import java.util.ArrayList;
 
 public class Stronghold {
     private final static ArrayList<String> randomSlogans = new ArrayList<>();
     private final static ArrayList<User> users = new ArrayList<>();
+    private final static ArrayList<Chat> chats = new ArrayList<>();
     private static ArrayList<Map> maps = new ArrayList<>();
     private final static ArrayList<Trade> trades = new ArrayList<>();
     private final static ArrayList<String> recoveryQuestions = new ArrayList<>();
+
+    private static ArrayList<Connection> connections = new ArrayList<>();
+    private final static ArrayList<Game> games = new ArrayList<>();
     private static User currentUser;
     private static Game currentGame;
 
@@ -44,6 +51,10 @@ public class Stronghold {
 
     public static void setCurrentUser(User currentUser) {
         Stronghold.currentUser = currentUser;
+    }
+
+    public static ArrayList<Game> getGames() {
+        return games;
     }
 
     public static int getRankByUsername(String name) {
@@ -123,5 +134,49 @@ public class Stronghold {
         for (Map map : getMaps())
             if (map.getName().equals(name)) return true;
         return false;
+    }
+
+    public static ArrayList<Connection> getConnections() {
+        return connections;
+    }
+
+    public static void addConnection(Connection connection) {
+        connections.add(connection);
+    }
+
+    public synchronized static void removeConnection(Connection connection) {
+        connections.remove(connection);
+        if (connection.getCurrentUser() != null) connection.getCurrentUser().setLastSeen();
+    }
+
+    public static Connection getConnectionByUser(User user) {
+        for (Connection connection : connections)
+            if (user.equals(connection.getCurrentUser())) return connection;
+        return null;
+    }
+
+    public static void addChat(Chat chat) {
+        chats.add(chat);
+    }
+
+    public static void removeChat(Chat chat) {
+        chats.remove(chat);
+    }
+
+    public static ArrayList<Chat> getChats() {
+        return chats;
+    }
+
+    public static Chat getChatByName(String name) {
+        for (Chat chat : chats)
+            if (chat.getName().equals(name)) return chat;
+        return null;
+    }
+
+    public static Game getGameById(int id) {
+        for (Game game : games)
+            if (game.getId() == id)
+                return game;
+        return null;
     }
 }

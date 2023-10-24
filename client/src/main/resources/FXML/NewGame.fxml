@@ -3,20 +3,68 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="710.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewGame">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="body" stylesheets="@../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewGame">
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <AnchorPane layoutX="55.0" layoutY="25.0" opacity="0.85" prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
-            <Button layoutX="30.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefWidth="40.0" styleClass="menu-button" text="back" />
-                <TableView fx:id="users" layoutX="30.0" layoutY="115.0" prefHeight="200.0" prefWidth="230.0" />
-                <Button layoutX="263.0" layoutY="315.0" mnemonicParsing="false" onAction="#startGame" prefWidth="75.0" styleClass="menu-button" text="start game" />
-                <ChoiceBox fx:id="mapName" layoutX="337.0" layoutY="115.0" prefWidth="150.0" />
-            <Label layoutX="335.0" layoutY="79.0" text="choose map name from here" />
-            <Label layoutX="8.0" layoutY="79.0" text="choose players from here(ctrl for multiple selection)" />
+            <AnchorPane layoutX="51.0" layoutY="34.0" opacity="0.85" prefHeight="544.0" prefWidth="771.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+            <Button layoutX="21.0" layoutY="22.0" mnemonicParsing="false" onAction="#back" prefWidth="40.0" styleClass="menu-button" text="back" />
+                <TableView fx:id="unStartedGames" layoutX="61.0" layoutY="96.0" prefHeight="407.0" prefWidth="230.0" />
+                <Button layoutX="552.0" layoutY="238.0" mnemonicParsing="false" onAction="#createGame" prefHeight="27.0" prefWidth="99.0" styleClass="menu-button" text="create game" />
+                <ChoiceBox fx:id="mapName" layoutX="527.0" layoutY="117.0" prefWidth="150.0" />
+            <Label layoutX="526.0" layoutY="88.0" text="choose map name from here">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <Label layoutX="61.0" layoutY="66.0" text="choose a game to join">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <Label layoutX="537.0" layoutY="162.0" text="enter nubmer of players" textAlignment="CENTER">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
+            <TextField fx:id="playersNeededField" alignment="CENTER" layoutX="575.0" layoutY="193.0" prefHeight="23.0" prefWidth="54.0" promptText="2-8" />
+            <Button layoutX="304.0" layoutY="127.0" mnemonicParsing="false" onAction="#joinGame" prefHeight="27.0" prefWidth="99.0" styleClass="menu-button" text="join game" />
+            <Button layoutX="244.0" layoutY="55.0" mnemonicParsing="false" onAction="#refresh" prefHeight="18.0" prefWidth="30.0">
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../IMG/chat/refresh.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button layoutX="304.0" layoutY="163.0" mnemonicParsing="false" onAction="#leaveGame" prefHeight="27.0" prefWidth="99.0" styleClass="menu-button" text="leave game" />
+            <Label layoutX="354.0" layoutY="14.0" text="Lobby">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="startGameButton" layoutX="304.0" layoutY="198.0" mnemonicParsing="false" onAction="#startGame" prefHeight="27.0" prefWidth="99.0" styleClass="menu-button" text="start game" visible="false" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="315.0" layoutY="281.0" text="Joined users" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <ListView fx:id="joinedUsersList" layoutX="304.0" layoutY="300.0" prefHeight="200.0" prefWidth="98.0" />
+            <Button fx:id="publicPrivateButton" layoutX="304.0" layoutY="234.0" mnemonicParsing="false" onAction="#changePublicity" prefHeight="27.0" prefWidth="99.0" styleClass="menu-button" text="public/private" visible="false">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            <TableView fx:id="startedGames" layoutX="417.0" layoutY="300.0" prefHeight="200.0" prefWidth="286.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="418.0" layoutY="281.0" text="Started games" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             </AnchorPane>
         </AnchorPane>
     </center>

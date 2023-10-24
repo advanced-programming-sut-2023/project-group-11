@@ -1,17 +1,27 @@
 package view;
 
-import controller.SignupMenuController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import model.Parsers;
+import model.User;
+import webConnection.Client;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
+
 public class ViewUtils {
+//    private static GameMenu gameMenu;
 
     public static void fieldError(Label label, String error) {
         label.setText(error);
@@ -56,7 +66,7 @@ public class ViewUtils {
 
     static void livePasswordError(PasswordField newPassword, Label newPasswordError) {
         newPassword.textProperty().addListener((observable, oldText, newText) -> {
-            int weakness = SignupMenuController.findHowWeakPasswordIs(newText);
+            int weakness = (int) Client.getConnection().getData("SignupMenuController", "findHowWeakPasswordIs", newText);
             if (newText.isEmpty()) {
                 newPasswordError.setText("");
             } else if (weakness == 0) {
@@ -71,4 +81,44 @@ public class ViewUtils {
             }
         });
     }
+
+    public static ObservableList<User> getUsersObservable() throws IOException {
+        ArrayList<User> users = Parsers.parseUserArrayList(Client.getConnection().
+                receiveJsonData("Utils", "getUsersObservable"));
+        try {
+            sleep(150);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return FXCollections.observableArrayList(users);
+    }
+
+//    public static ObservableList<Governance> getGovernancesObservable(ArrayList<Object> parameters) {
+//        ArrayList<Governance> governances = Stronghold.getCurrentGame().getGovernances();
+//        return FXCollections.observableArrayList(governances);
+//    }
+
+    public static void columnMaker(TableView tableView, String header, String userField) {
+        TableColumn<User, String> tableColumn = new TableColumn<>(header);
+        tableColumn.setCellValueFactory(new PropertyValueFactory<>(userField));
+        tableColumn.setSortable(false);
+        tableView.getColumns().add(tableColumn);
+    }
+
+    public static void addColumns(TableView scoreboard) {
+        columnMaker(scoreboard, "Avatar", "avatar");
+        columnMaker(scoreboard, "Rank", "rank");
+        columnMaker(scoreboard, "Username", "username");
+        columnMaker(scoreboard, "Score", "score");
+        columnMaker(scoreboard, "LastSeen", "lastSeen");
+        scoreboard.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
+//
+//    public static GameMenu getGameMenu() {
+//        return gameMenu;
+//    }
+//
+//    public static void setGameMenu(GameMenu gameMenu) {
+//        ViewUtils.gameMenu = gameMenu;
+//    }
 }

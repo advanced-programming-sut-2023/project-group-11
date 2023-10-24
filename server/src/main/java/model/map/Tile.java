@@ -9,21 +9,36 @@ import model.people.Unit;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Tile {
     private Texture texture;
     private Building building = null;
     private ArrayList<Unit> units = new ArrayList<>();
     private Tree tree;
+    private final int[] location;
 
-    public Tile() {
+    public Tile(int x, int y) {
         texture = Texture.SAND;
         tree = null;
+        location = new int[] {x, y};
     }
 
-    public Tile(Texture texture, Tree tree) {
+    public Tile(Texture texture, Tree tree, int x, int y) {
         this.texture = texture;
         this.tree = tree;
+        location = new int[] {x, y};
+    }
+
+    public static Tile[][] cloneTiles(Tile[][] tiles) throws CloneNotSupportedException {
+        Tile[][] cloned = tiles.clone();
+        for (int i = 0; i < tiles.length; i++) {
+            cloned[i] = tiles[i].clone();
+            for (int j = 0; j < tiles[i].length; j++) {
+                cloned[i][j] = (Tile) tiles[i][j].clone();
+            }
+        }
+        return cloned;
     }
 
     public Texture getTexture() {
@@ -71,6 +86,10 @@ public class Tile {
         this.tree = tree;
     }
 
+    public int[] getLocation() {
+        return location;
+    }
+
     public void clear() {
         this.building = null;
         this.tree = null;
@@ -102,7 +121,6 @@ public class Tile {
             if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
                 unitsName += (i++) + ". " + unit.toString() + '\n';
 
-        int[] location = Stronghold.getCurrentGame().getMap().getTileLocation(this);
         result += "Coordinates: x=" + location[0] + " y=" + location[1] + '\n';
         result += "Texture: " + texture.getName() + '\n';
         if (BuildingUtils.isBuildingInTile(building)) result += building.toString() + '\n';
@@ -123,5 +141,17 @@ public class Tile {
             if (!(unit instanceof Troop troop) || troop.isRevealed() || troop.isForCurrentGovernance())
                 result = unit;
         return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Tile tile)
+            return Arrays.equals(this.location, tile.location);
+        return false;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return new Tile(this.texture, this.tree, this.location[0], this.location[1]);
     }
 }

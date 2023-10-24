@@ -6,20 +6,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Game {
-    private final User owner;
-    private final ArrayList<Governance> governances;
+    private User owner;
+    private  ArrayList<Governance> governances;
+    private ArrayList<User> joinedUsers = new ArrayList<>();
+    private int id;
+    private boolean isPrivate = false;
+
+    private boolean isStarted = false;
+
+    private int playersNeeded;
     private final HashMap<Governance, Integer> scores = new HashMap<>();
     private final ArrayList<Trade> trades = new ArrayList<>();
     private Governance currentGovernance;
-    private final Map map;
+    private transient final Map map;
     private int turn = 1;
     private int currentTurn = 1;
 
     public Game(ArrayList<Governance> governances, Map map) {
-        this.owner = Stronghold.getCurrentUser();
         this.governances = governances;
         this.currentGovernance = governances.get(0);
         this.map = map;
+    }
+
+    public Game(User owner,Map map,int playersNeeded) {
+        this.owner = owner;
+        this.map = map;
+        this.playersNeeded = playersNeeded;
     }
 
     public ArrayList<Trade> getTrades() {
@@ -30,6 +42,10 @@ public class Game {
         return owner;
     }
 
+    public String getOwnerName() {
+        return owner.getNickname();
+    }
+
     public ArrayList<Governance> getGovernances() {
         return governances;
     }
@@ -38,8 +54,23 @@ public class Game {
         return map;
     }
 
+    public int getPlayersNeeded() {
+        return playersNeeded;
+    }
+
+    public void setPlayersNeeded(int playersNeeded) {
+        this.playersNeeded = playersNeeded;
+    }
     public int getTurn() {
         return turn;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public ArrayList<User> getJoinedUsers() {
+        return joinedUsers;
     }
 
     public void setTurn(int turn) {
@@ -62,8 +93,24 @@ public class Game {
         return scores;
     }
 
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public boolean isStarted() {
+        return isStarted;
+    }
+
     public void addLoserScore(Governance governance, int score) {
         scores.put(governance, score);
+    }
+
+    public String getJoinedPlayers(){
+        return joinedUsers.size() +  "/" + playersNeeded;
     }
 
     public Governance getCurrentGovernance() {

@@ -1,9 +1,11 @@
 package model;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import java.time.LocalTime;
+import java.util.HashSet;
 
 public class User implements Comparable<User> {
+    private final HashSet<String> friends = new HashSet<>();
+    private final HashSet<String> friendsRequest = new HashSet<>();
     private final String recoveryQuestion;
     private final String recoveryAnswer;
     private String username;
@@ -12,6 +14,7 @@ public class User implements Comparable<User> {
     private String email;
     private String slogan;
     private String avatarFileName = "1.png";
+    private String lastSeen = "Online";
     private int score;
     private int rank;
     private boolean stayLoggedIn;
@@ -55,12 +58,8 @@ public class User implements Comparable<User> {
         this.email = email;
     }
 
-    public ImageView getAvatar() {
-        ImageView imageView = new ImageView(new Image(
-                System.getProperty("user.dir") + "/src/main/resources/IMG/avatars/" + avatarFileName));
-        imageView.setFitHeight(40);
-        imageView.setFitWidth(40);
-        return imageView;
+    public String getAvatarFileName() {
+        return System.getProperty("user.dir") + "/src/main/resources/IMG/avatars/" + avatarFileName;
     }
 
     public void setAvatarFileName(String avatarFileName) {
@@ -109,6 +108,55 @@ public class User implements Comparable<User> {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public void updateOnlineState() {
+        if (Stronghold.getConnectionByUser(this) != null) lastSeen = "Online";
+    }
+
+    public String getLastSeen() {
+        updateOnlineState();
+        return lastSeen;
+    }
+
+    public void setLastSeen() {
+        this.lastSeen = LocalTime.now().getHour() + ":" + LocalTime.now().getMinute();
+    }
+
+    public HashSet<String> getFriends() {
+        return friends;
+    }
+
+    public void addFriend(String username) {
+        friends.add(username);
+    }
+
+    public HashSet<String> getFriendsRequest() {
+        return friendsRequest;
+    }
+
+    public void addFriendRequest(String username) {
+        friendsRequest.add(username);
+    }
+
+    public void removeFriendRequest(String username) {
+        friendsRequest.remove(username);
+    }
+
+    public boolean isAlreadyFriend(User currentUser) {
+        for (String friendName : friends)
+            if (currentUser.getUsername().equals(friendName)) return true;
+        return false;
+    }
+
+    public boolean hasReachedFriendshipLimit() {
+        return friends.size() > 100;
+    }
+
+    public boolean hasRequest(String username) {
+        for (String s : friendsRequest)
+            if (username.equals(s)) return true;
+        return false;
     }
 
     @Override

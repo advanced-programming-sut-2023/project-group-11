@@ -1,7 +1,7 @@
 package view;
 
-import controller.TradeMenuController;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +10,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Trade;
+import webConnection.Client;
+
+import java.io.IOException;
 
 public class PreviousTradesMenu extends Application {
 
@@ -31,17 +34,17 @@ public class PreviousTradesMenu extends Application {
     }
 
     @FXML
-    public void initialize(){
-        sentTrades.setItems((TradeMenuController.getSentTradesObservable()));
+    public void initialize() throws IOException {
+        sentTrades.setItems((ObservableList) Client.getConnection().getData("TradeMenuController", "getSentTradesObservable"));
         addColumns(sentTrades);
-        receivedTrades.setItems((TradeMenuController.getReceivedTradesObservable()));
+        receivedTrades.setItems((ObservableList) Client.getConnection().getData("TradeMenuController", "getReceivedTradesObservable"));
         addColumns(receivedTrades);
         receivedTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         receivedTrades.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             selectedTrade = (Trade) newSelection;
             try {
                 acceptButton.setVisible(selectedTrade.isOpen());
-            }catch (Exception e){
+            } catch (Exception e) {
             }
         });
 //        receivedTrades.setRowFactory(tv -> new TableRow() {
@@ -54,9 +57,9 @@ public class PreviousTradesMenu extends Application {
 //        });
     }
 
-    public void reinitializeReceivedTrades(){
+    public void reinitializeReceivedTrades() {
         receivedTrades.getItems().clear();
-        receivedTrades.setItems((TradeMenuController.getReceivedTradesObservable()));
+        receivedTrades.setItems((ObservableList) Client.getConnection().getData("TradeMenuController", "getReceivedTradesObservable"));
         addColumns(receivedTrades);
         receivedTrades.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         receivedTrades.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -66,24 +69,24 @@ public class PreviousTradesMenu extends Application {
     }
 
     private void addColumns(TableView tableView) {
-        if(tableView.equals(sentTrades))
-            createColumn(tableView,"Receiver","receiverName");
+        if (tableView.equals(sentTrades))
+            createColumn(tableView, "Receiver", "receiverName");
         else {
             createColumn(tableView, "Sender", "senderName");
-            createColumn(tableView,"Checked","seenStatus");
+            createColumn(tableView, "Checked", "seenStatus");
         }
-        createColumn(tableView,"Resource","resourceName");
-        createColumn(tableView,"Amount","resourceAmount");
-        createColumn(tableView,"Price","price");
-        createColumn(tableView,"Resource","resourceName");
-        createColumn(tableView,"Message","senderMessage");
-        createColumn(tableView,"Type","tradeType");
-        createColumn(tableView,"Status","status");
+        createColumn(tableView, "Resource", "resourceName");
+        createColumn(tableView, "Amount", "resourceAmount");
+        createColumn(tableView, "Price", "price");
+        createColumn(tableView, "Resource", "resourceName");
+        createColumn(tableView, "Message", "senderMessage");
+        createColumn(tableView, "Type", "tradeType");
+        createColumn(tableView, "Status", "status");
 
     }
 
-    private void createColumn(TableView tableView,String header,String field){
-        TableColumn<Trade,String> tableColumn = new TableColumn<>(header);
+    private void createColumn(TableView tableView, String header, String field) {
+        TableColumn<Trade, String> tableColumn = new TableColumn<>(header);
         tableColumn.setCellValueFactory(new PropertyValueFactory<>(field));
         tableColumn.setSortable(false);
         tableView.getColumns().add(tableColumn);
@@ -98,19 +101,22 @@ public class PreviousTradesMenu extends Application {
         receivedTrades.setVisible(false);
     }
 
-    public void showReceivedTrades() {
-        TradeMenuController.seenNewTrades();
+    public void showReceivedTrades() throws IOException {
+        Client.getConnection().doInServer("TradeMenuController", "seenNewTrades");
         receivedTrades.setVisible(true);
         sentTrades.setVisible(false);
     }
 
-    public void acceptTrade() {
-        switch (TradeMenuController.checkAcceptTrade(selectedTrade)){
-            case NOT_ENOUGH_GOLD -> ViewUtils.alert(Alert.AlertType.ERROR,"Trade Error","Buyer doesn't have enough gold!");
-            case NOT_ENOUGH_AMOUNT -> ViewUtils.alert(Alert.AlertType.ERROR,"Trade Error","Sender doesn't have enough resource!");
-            case NOT_ENOUGH_STORAGE -> ViewUtils.alert(Alert.AlertType.ERROR,"Trade Error","Buyer doesn't have enough storage!");
+    public void acceptTrade() throws IOException {
+        switch (Client.getConnection().checkAction("TradeMenuController", "checkAcceptTrade", "selectedTrade")) {
+            case NOT_ENOUGH_GOLD ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Trade Error", "Buyer doesn't have enough gold!");
+            case NOT_ENOUGH_AMOUNT ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Trade Error", "Sender doesn't have enough resource!");
+            case NOT_ENOUGH_STORAGE ->
+                    ViewUtils.alert(Alert.AlertType.ERROR, "Trade Error", "Buyer doesn't have enough storage!");
             case SUCCESS -> {
-                ViewUtils.alert(Alert.AlertType.INFORMATION,"Trade Successful","Trade Successfully done!");
+                ViewUtils.alert(Alert.AlertType.INFORMATION, "Trade Successful", "Trade Successfully done!");
                 reinitializeReceivedTrades();
             }
         }
